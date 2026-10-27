@@ -2,14 +2,14 @@
 title: Das falsche Almosen
 date: 2026-10-20
 status: published
-summary: 'Wenn der Lohn Brot heißt und die Arbeit eine Gefälligkeit. Der Eigentümer kauft nicht deine Arbeit, er schenkt dir dein Leben: ein Mythos, der sterben muss.'
-deck: 'Auf unserem Arbeitsmarkt gibt es einen Satz, der die ganze Krise der Würde zusammenfasst: die Vorstellung, dass der Eigentümer nicht deine Arbeit kauft, sondern dir dein Leben schenkt.'
+summary: 'Wenn der Lohn Brot heißt und die Arbeit eine Gefälligkeit. Der Eigentümer kauft nicht Ihre Arbeit, er schenkt Ihnen Ihr Leben: ein Mythos, der sterben muss.'
+deck: 'Auf unserem Arbeitsmarkt gibt es einen Satz, der die ganze Krise der Würde zusammenfasst: die Vorstellung, dass der Eigentümer nicht Ihre Arbeit kauft, sondern Ihnen Ihr Leben schenkt.'
 description: 'Über den Satz „Ich gebe dir dein Brot“, den Lohn als Recht statt Almosen und warum Albaner nicht vor harter Arbeit fliehen, sondern vor Demütigung.'
 ---
 
 Es gibt einen Satz, den jeder Arbeiter in Albanien mindestens einmal gehört hat, laut mitten im Büro gesagt oder als Drohung auf den Fluren geflüstert: „Ich gebe dir dein Brot.“
 
-Es sind wenige, einfache Worte, aber in ihnen steckt die ganze verdrehte Philosophie unseres verspäteten Kapitalismus. Es ist der Satz, in dem der Vertrag stirbt, in dem das Gesetz verschwindet und in dem die Beziehung zwischen zwei freien Menschen zu einer Beziehung zwischen Herr und Knecht wird. Wenn ein albanischer Eigentümer sagt, er gebe dir dein Brot, spricht er nicht über Wirtschaft. Er verlangt Unterwerfung.
+Es sind wenige, einfache Worte, aber in ihnen steckt die ganze verdrehte Philosophie unseres verspäteten Kapitalismus. Es ist der Satz, in dem der Vertrag stirbt, in dem das Gesetz verschwindet und in dem die Beziehung zwischen zwei freien Menschen zu einer Beziehung zwischen Herr und Knecht wird. Wenn ein albanischer Eigentümer sagt, er gebe Ihnen Ihr Brot, spricht er nicht über Wirtschaft. Er verlangt Unterwerfung.
 
 Lassen Sie mich in diesem Punkt ganz deutlich sein. **Niemand gibt irgendwem sein Brot. Der Lohn ist kein Almosen, die Arbeit ist keine Gefälligkeit und der Arbeitgeber ist kein Wohltäter.**
 

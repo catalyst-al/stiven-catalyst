@@ -15,13 +15,13 @@ Lassen Sie mich das in aller Klarheit sagen. **Macht korrumpiert den Menschen ni
 
 Beobachten Sie dieses Phänomen genau. Es zeigt sich überall, wo es ein Verfahren und ein Hindernis gibt.
 
-Es ist der Pförtner am Tor, der dich absichtlich fünf Minuten im Regen stehen lässt, bevor er die Schranke öffnet, nur um dir zu zeigen, dass er den Hebel in der Hand hat. Es ist der Sachbearbeiter, der deine Akte drei Tage auf dem Tisch liegen lässt, obwohl er weiß, dass der Stempel drei Sekunden dauert, und der es genießt, dich ängstlich im Flur warten zu sehen. Es ist der neue Schichtleiter, der sich gestern noch mit dir über die Ungerechtigkeiten der Firma beschwert hat, aber kaum bekommt er eine Checkliste und ein Funkgerät an den Gürtel, vergisst er jedes Wort, ändert seinen Tonfall und behandelt seine früheren Kollegen wie geborene Schuldige.
+Es ist der Pförtner am Tor, der Sie absichtlich fünf Minuten im Regen stehen lässt, bevor er die Schranke öffnet, nur um Ihnen zu zeigen, dass er den Hebel in der Hand hat. Es ist der Sachbearbeiter, der Ihre Akte drei Tage auf dem Tisch liegen lässt, obwohl er weiß, dass der Stempel drei Sekunden dauert, und der es genießt, Sie ängstlich im Flur warten zu sehen. Es ist der neue Schichtleiter, der sich gestern noch mit Ihnen über die Ungerechtigkeiten der Firma beschwert hat, aber kaum bekommt er eine Checkliste und ein Funkgerät an den Gürtel, vergisst er jedes Wort, ändert seinen Tonfall und behandelt seine früheren Kollegen wie geborene Schuldige.
 
 Warum geschieht diese Verwandlung so schnell und so hässlich?
 
 Sie geschieht, weil ein Mensch ohne inneren Charakter Macht nicht als Verantwortung zu dienen begreift, sondern als historische Gelegenheit zur Rache. Sein ganzes Leben lang hat er sich unwichtig, unsichtbar und von anderen mit Füßen getreten gefühlt. Und in der ersten Sekunde, in der ihm das System die kleinste Autorität über das Schicksal eines anderen Menschen gibt, nutzt er sie nicht, um den Ablauf zu erleichtern. Er nutzt sie, um all seine alten Unsicherheiten auszugleichen.
 
-Für ihn ist jedes Hindernis, das er dir in den Weg legen kann, ein Beweis seiner Stärke. Jedes „Nein“, das er dir gleichgültig sagt, ist eine Art, sich selbst zu beweisen, dass er heute nicht mehr der ist, der hinten im Raum sitzt, sondern der Mensch, der entscheiden kann, ob du weiterkommst oder stehen bleibst.
+Für ihn ist jedes Hindernis, das er Ihnen in den Weg legen kann, ein Beweis seiner Stärke. Jedes „Nein“, das er Ihnen gleichgültig sagt, ist eine Art, sich selbst zu beweisen, dass er heute nicht mehr der ist, der hinten im Raum sitzt, sondern der Mensch, der entscheiden kann, ob Sie weiterkommen oder stehen bleiben.
 
 Das ist der Kern der Tyrannei des kleinen Mannes: Er hat keine Vision, um etwas aufzubauen, deshalb kann er seine Autorität nur über die Fähigkeit spüren, zu blockieren.
 
@@ -29,10 +29,10 @@ Im täglichen Betrieb eines Unternehmens ist diese Art Mensch ein stilles Gift, 
 
 Eine echte Führungskraft unterscheidet sich sofort von dieser Parodie der Macht.
 
-Eine Führungskraft mit Charakter weiß, dass ihre Stärke daran gemessen wird, wie viele Türen sie für andere öffnet, nicht daran, wie viele sie verschlossen hält. Sie muss dich nicht an ihren Titel erinnern, denn ihre Autorität entspringt der Ruhe, dem Wissen und der Gerechtigkeit, mit der sie entscheidet. Sie versteht, dass das Amt, das sie hat, vorübergehend ist, die Art aber, wie sie Menschen behandelt, für immer in deren Erinnerung bleibt.
+Eine Führungskraft mit Charakter weiß, dass ihre Stärke daran gemessen wird, wie viele Türen sie für andere öffnet, nicht daran, wie viele sie verschlossen hält. Sie muss niemanden an ihren Titel erinnern, denn ihre Autorität entspringt der Ruhe, dem Wissen und der Gerechtigkeit, mit der sie entscheidet. Sie versteht, dass das Amt, das sie hat, vorübergehend ist, die Art aber, wie sie Menschen behandelt, für immer in deren Erinnerung bleibt.
 
 Deshalb findet die wahre moralische Prüfung eines Menschen nicht statt, wenn er nichts in der Hand hat und Gerechtigkeit für sich selbst verlangt. Die Prüfung beginnt in dem Moment, in dem man ihm auch nur ein winziges Körnchen Macht über einen anderen gibt.
 
-Wenn du in diesem Moment wählst, Mauern zu errichten, die Lösung hinauszuzögern und dein Ego mit dem Leid des anderen zu füttern, bist du nicht stark geworden. Du hast nur bewiesen, dass du unter dem Mantel des Amtes oder der Uniform, die man dir gegeben hat, dieselbe arme Seele geblieben bist, die du immer warst.
+Wenn Sie in diesem Moment wählen, Mauern zu errichten, die Lösung hinauszuzögern und Ihr Ego mit dem Leid des anderen zu füttern, sind Sie nicht stark geworden. Sie haben nur bewiesen, dass Sie unter dem Mantel des Amtes oder der Uniform, die man Ihnen gegeben hat, dieselbe arme Seele geblieben sind, die Sie immer waren.
 
-Und eine Organisation, die eine Zukunft will, muss diese Lektion lernen: Gib niemals den Schlüssel zu einer Tür jemandem, dessen einzige Freude im Leben es ist, das Geräusch des Schlosses zu hören, das vor dem Gesicht eines anderen Menschen zuschnappt.
+Und eine Organisation, die eine Zukunft will, muss diese Lektion lernen: Den Schlüssel zu einer Tür gibt man niemals jemandem, dessen einzige Freude im Leben es ist, das Geräusch des Schlosses zu hören, das vor dem Gesicht eines anderen Menschen zuschnappt.

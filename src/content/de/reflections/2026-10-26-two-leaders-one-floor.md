@@ -3,7 +3,7 @@ title: 'Zwei Vorgesetzte auf demselben Boden: Die Ruhe der Regel gegen das Theat
 date: 2026-10-26
 status: published
 summary: 'Dasselbe Team, dasselbe Lager, zwei völlig verschiedene Schichten. Wer Lärm macht, wirkt leidenschaftlich; wer dem Prozess folgt, hält die Schicht auf den Beinen.'
-deck: 'Der Erfolg einer Schicht misst sich nicht daran, wie viel Lärm du beim Löschen der Brände machst, sondern daran, wie ruhig du ein System baust, in dem die Brände gar nicht erst entstehen.'
+deck: 'Der Erfolg einer Schicht misst sich nicht daran, wie viel Lärm man beim Löschen der Brände macht, sondern daran, wie ruhig man ein System baut, in dem die Brände gar nicht erst entstehen.'
 description: 'Über den Schichtleiter, der dem Prozess folgt, und den Improvisierer, der Brände löscht, und warum der Standard Erfolg wiederholbar macht.'
 ---
 

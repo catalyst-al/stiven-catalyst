@@ -13,7 +13,7 @@ In den meisten unserer Betriebe wird in dieser entscheidenden Sekunde nie die we
 
 Innerhalb weniger Minuten verwandelt sich das Büro in einen improvisierten Gerichtssaal. Der Vorgesetzte verlangt beharrlich einen Namen, ein konkretes Gesicht, an dem er seinen ganzen Zorn, seine Gereiztheit und seine betriebliche Unsicherheit abladen kann. Ein Sündenbock muss her. Jemand muss sich in die Mitte des Raumes setzen, die Beleidigungen einstecken, einen Lohnabzug hinnehmen und vor aller Augen für vollkommen schuldig erklärt werden. Und sobald dieser Kopf gefunden und die Strafe mit großem Getöse verhängt ist, atmen alle erleichtert auf, der Vorgesetzte kehrt ruhig auf seinen Stuhl zurück, und die Sache gilt als erledigt.
 
-Lassen Sie mich das mit aller Klarheit sagen, die die Wahrheit verlangt. **Die Jagd auf den Schuldigen ist keine Gerechtigkeit; sie ist nur ein Theater der Rache, das das Problem völlig unberührt lässt. Wenn persönliche Strafe die Analyse der Grundursache ersetzt, hast du nichts behoben; du hast nur dafür gesorgt, dass derselbe Fehler morgen wieder passiert.**
+Lassen Sie mich das mit aller Klarheit sagen, die die Wahrheit verlangt. **Die Jagd auf den Schuldigen ist keine Gerechtigkeit; sie ist nur ein Theater der Rache, das das Problem völlig unberührt lässt. Wenn persönliche Strafe die Analyse der Grundursache ersetzt, ist nichts behoben; es ist nur dafür gesorgt, dass derselbe Fehler morgen wieder passiert.**
 
 Sehen Sie sich an, wie die Branchen arbeiten, die Menschenleben auf ihren Schultern tragen und in denen Fehler nicht verziehen werden.
 

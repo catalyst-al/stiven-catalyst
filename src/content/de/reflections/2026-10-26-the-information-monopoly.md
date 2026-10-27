@@ -31,7 +31,7 @@ Der schwerste Schaden ist nicht nur finanziell; der schwerste Schaden ist das Gi
 
 Wenn das Zurückhalten von Informationen von oben geduldet wird, stirbt die Zusammenarbeit. Die Mitarbeiter sehen einander nicht mehr als Mitstreiter mit einer gemeinsamen Aufgabe, sondern als gefährliche Rivalen, vor denen man jede Notiz, jede Datei und jede gelernte Erfahrung hüten muss. Der Arbeitsplatz wird zu einem Markt der Intrigen, auf dem jeder ein Stück der Wahrheit im Kopf behält und darauf wartet, dass der andere stürzt, um den eigenen Wert zu beweisen.
 
-Echte Führung, die Spuren hinterlässt und beständige Institutionen baut, beruht auf dem genau entgegengesetzten Grundsatz: **Dein wahrer Wert bemisst sich nicht daran, wie unersetzlich du dich gibst, indem du Wissen verbirgst, sondern daran, wie unabhängig du die Menschen um dich herum machst.**
+Echte Führung, die Spuren hinterlässt und beständige Institutionen baut, beruht auf dem genau entgegengesetzten Grundsatz: **Ihr wahrer Wert bemisst sich nicht daran, wie unersetzlich Sie sich geben, indem Sie Wissen verbergen, sondern daran, wie unabhängig Sie die Menschen um sich herum machen.**
 
 Ein Profi mit Würde hat keine Angst vor Transparenz. Er schreibt das Verfahren sorgfältig auf. Er dokumentiert jeden Schritt der Schicht, hinterlässt das System sauber, bringt anderen alles bei, ohne ein Detail zurückzuhalten, und sorgt dafür, dass die Arbeit reibungslos läuft, auch wenn er Hunderte Kilometer entfernt ist. Er weiß genau, dass seine berufliche Sicherheit nicht aus geheimen Codes in der Tasche kommt, sondern aus der Qualität seines Charakters, aus der Fähigkeit, neue Probleme zu lösen, und aus der Demut, andere aufzubauen.
 

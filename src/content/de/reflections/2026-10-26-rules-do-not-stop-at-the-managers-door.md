@@ -339,11 +339,11 @@ Eine Führungskraft, die Autorität ernst nimmt, muss die Möglichkeit schaffen,
 
 Ohne eine fachliche Bemerkung in einen persönlichen Zusammenstoß zu verwandeln.
 
-Denn wer dich an eine Grenze erinnert, schützt dich vielleicht vor einem Fehler.
+Denn wer Sie an eine Grenze erinnert, schützt Sie vielleicht vor einem Fehler.
 
-Und macht dein Titel es den Menschen unmöglich, das zu sagen, dann hat deine Macht begonnen, dich von einer der wertvollsten Quellen der Sicherheit abzuschneiden.
+Und macht Ihr Titel es den Menschen unmöglich, das zu sagen, dann hat Ihre Macht begonnen, Sie von einer der wertvollsten Quellen der Sicherheit abzuschneiden.
 
-Vom Urteil der Menschen, die mit dir arbeiten.
+Vom Urteil der Menschen, die mit Ihnen arbeiten.
 
 ***
 
@@ -413,9 +413,9 @@ Und genau dort lässt sich erkennen, ob eine Führungskraft Disziplin aufgebaut 
 
 ***
 
-Am Ende erweist sich Macht nicht nur an der Fähigkeit, Menschen deine Entscheidungen ausführen zu lassen.
+Am Ende erweist sich Macht nicht nur an der Fähigkeit, Menschen die eigenen Entscheidungen ausführen zu lassen.
 
-Sie erweist sich auch an der Fähigkeit, Grenzen anzunehmen, die du nicht nur für sie gesetzt hast.
+Sie erweist sich auch an der Fähigkeit, Grenzen anzunehmen, die man nicht nur für sie gesetzt hat.
 
 Eine Führungskraft muss Autorität haben.
 

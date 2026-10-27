@@ -43,8 +43,8 @@ Eine Führungskraft mit Integrität und Selbstvertrauen weiß, dass ihr Erfolg a
 
 Sie legt klare Kommunikationswege fest, baut transparente Übergabeprotokolle auf und schafft ein Umfeld, in dem das Ergebnis jedes Einzelnen vom Erfolg aller abhängt.
 
-Wenn du heute an einem Ort arbeitest, an dem die Luft schwer ist vor Eifersucht und Kollegen als Rivalen ums Überleben gelten, lass dich nicht von der Fassade täuschen. Such die Schuld nicht beim Kollegen neben dir, der dieselbe schwere Last auf den Schultern trägt.
+Wenn Sie heute an einem Ort arbeiten, an dem die Luft schwer ist vor Eifersucht und Kollegen als Rivalen ums Überleben gelten, lassen Sie sich nicht von der Fassade täuschen. Suchen Sie die Schuld nicht beim Kollegen neben Ihnen, der dieselbe schwere Last auf den Schultern trägt.
 
-Öffne die Augen und sieh, wer von diesem sinnlosen Krieg profitiert. Sieh, wer seine eigene Schwäche hinter dem Lärm eurer Zusammenstöße versteckt.
+Öffnen Sie die Augen und sehen Sie, wer von diesem sinnlosen Krieg profitiert. Sehen Sie, wer seine eigene Schwäche hinter dem Lärm Ihrer Zusammenstöße versteckt.
 
 Denn die Wahrheit bleibt immer einfach: Kleine Menschen spalten, um über Trümmer herrschen zu können, große Führungskräfte aber einen, weil sie genau wissen, dass keine echte Burg stehen bleiben kann, wenn die Steine ihres Fundaments einander zerreiben.
