@@ -40,3 +40,24 @@ for (const lang of ['en', 'de', 'sq']) {
     assert.equal(line.period, 'month');
   });
 }
+
+// The Daily Board reads the 5S Audit's audits and must score each one as the 5S Audit does: the mean of the shares of
+// the S that have an answer, each S weighing 1 (audit finding T-16: the board pooled every question, 80 % where the
+// tool said 50 %). Every audit of the 5S Audit's example, saved by its own page, is scored by both.
+test('Daily Board scores a 5S audit exactly as the 5S Audit does', async () => {
+  const five = openTool('five-s-audit', { now: NOW });
+  click(five, five.document.querySelector('[data-example]') || five.document.body);
+  const saved = keep(five)['sc-five-s-audit'] || { rows: [] };
+  const rows = saved.rows.length ? saved.rows : five.eval('JSON.parse(JSON.stringify(window.__fiveRows || []))');
+  const cfg = JSON.parse(five.document.getElementById('five-s-audit-data').textContent);
+  const board = openTool('daily-board', { now: NOW });
+  // A lopsided audit: Sort fully answered at 4, the other S with a single 0. Pooled: 80 %; per S: 4/4, 0, 0, 0, 0 → 20 %.
+  const lopsided = { date: '2026-10-24', area: 'Packing', scope: '5S', scores: { sort: [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4], set: [0], shine: [0], standardize: [0], sustain: [0] } };
+  for (const row of [...rows, lopsided]) {
+    const M = five.FiveSMath;
+    const tool = M.score(row.scores, M.pillarsFor(row.scope, cfg.scopes)).overall;
+    const daily = board.DailyBoardMath.fivesScore(row);
+    assert.ok(Math.abs(tool - daily) < 1e-9, `${row.date} ${row.area}: 5S Audit ${tool}, Daily Board ${daily}`);
+  }
+  assert.ok(rows.length > 0, 'the 5S Audit\'s own audits were scored too');
+});

@@ -32,14 +32,19 @@
     return value;
   };
 
-  // A 5S audit row ({ scores: { S: [0-4, ...], ... } }): the mean of every score over 4, as a share. A question left
-  // unscored (null) is no zero.
+  // A 5S audit row ({ scores: { S: [0-4, ...], ... } }) scored as the 5S Audit scores it (FiveSMath.score): each S the
+  // average of its answered questions over 4, the audit the mean of the S that have an answer, each S weighing 1. A
+  // question left unscored (null) is no zero. (Until 27 October 2026 the board pooled every question, so a fully
+  // answered S outweighed the others: 80 % where the 5S Audit said 20 %, audit finding T-16.)
   const fivesScore = (row) => {
-    const scores = row && row.scores && typeof row.scores === "object" && !Array.isArray(row.scores)
-      ? Object.values(row.scores).filter(Array.isArray).flat().filter((v) => v !== null && v !== "" && typeof v !== "boolean").map(Number).filter((v) => Number.isFinite(v) && v >= 0 && v <= 4)
-      : [];
-    return scores.length ? scores.reduce((sum, value) => sum + value, 0) / (4 * scores.length) : null;
+    const scores = row && row.scores && typeof row.scores === "object" && !Array.isArray(row.scores) ? row.scores : {};
+    const shares = Object.values(scores).filter(Array.isArray).map((list) => list
+      .filter((v) => v !== null && v !== "" && typeof v !== "boolean").map(Number).filter((v) => Number.isFinite(v) && v >= 0 && v <= 4))
+      .filter((values) => values.length)
+      .map((values) => values.reduce((sum, value) => sum + value, 0) / (4 * values.length));
+    return shares.length ? shares.reduce((sum, share) => sum + share, 0) / shares.length : null;
   };
+
 
   const rowsOf = (log) => (log && Array.isArray(log.rows) ? log.rows.filter((row) => row && typeof row === "object" && isIso(row.date)) : []);
   const firstDate = (rows) => rows.reduce((min, row) => (!min || row.date < min ? row.date : min), "");
@@ -334,7 +339,6 @@
   const CHART_STATE = { green: "ok", amber: "warn", red: "danger", none: "none", future: "future" };
   // A sign in every coloured day, so the colour is never the only signal (and a print in black and white still reads).
   const SIGN = { green: "✓", amber: "!", red: "✕" };
-  const DEFAULTS = Object.fromEntries(data.targets.filter((item) => Number.isFinite(item.default)).map((item) => [item.key, item.default / 100]));
 
   // The manual entries, rebuilt field by field so damaged data cannot break the page.
   const cleanRow = (row) => {
@@ -342,7 +346,15 @@
     if (!date || !LETTERS.includes(row.letter) || !STATES.includes(row.state)) return null;
     return { date, shift: str(row.shift).trim(), letter: row.letter, state: row.state, note: str(row.note).trim() };
   };
+  const blankProfile = () => ({ site: "", shifts: [], areas: [], teams: [], targets: {} });
   const state = loadState(KEY, { rows: [], example: {}, demoProfile: false });
+  // Before 27 October 2026 the example wrote its profile into the shared one (demoProfile). Left exactly as the example
+  // wrote it, it goes; changed by the visitor since, it is theirs and stays.
+  if (state.demoProfile && Workplace) {
+    if (JSON.stringify(Workplace.get()) === JSON.stringify(Workplace.clean(data.example.profile))) Workplace.set(blankProfile());
+    state.demoProfile = false;
+    write(KEY, state);
+  }
   state.rows = state.rows.filter(isObject).map(cleanRow).filter(Boolean);
   const save = () => write(KEY, state);
 
@@ -369,10 +381,18 @@
   };
 
   // The workplace profile: shifts for the form, areas with their owners for the agenda, the targets for the colours.
-  const shifts = () => (Workplace?.shifts().length ? Workplace.shifts() : data.shifts);
+  // While the example is shown and the visitor has no profile, the example's own profile is used on this page only: it
+  // is never written to the shared profile (sc-workplace), so no other tool takes its site or its targets for the
+  // visitor's (audit of 27 October 2026, T-04).
+  const profile = () => {
+    const own = Workplace ? Workplace.get() : blankProfile();
+    return kit.exampleMatches?.(state) && (!Workplace || Workplace.isEmpty(own)) ? (Workplace ? Workplace.clean(data.example.profile) : data.example.profile) : own;
+  };
+  const shifts = () => (profile().shifts.length ? profile().shifts : data.shifts);
   const fillShifts = () => Workplace ? Workplace.fillSelect(shiftSelect, shifts(), shiftSelect.value) : null;
+  // A target only when one is set: an empty box means no colour from that figure, never a default nobody chose.
   const targetShare = (key) => {
-    const value = Workplace?.target(key);
+    const value = profile().targets[key];
     return Number.isFinite(value) && value > 0 ? value / 100 : null;
   };
   const targets = () => ({ damage: targetShare("damage"), incomplete: targetShare("incomplete"), ontime: targetShare("ontime"), fives: targetShare("fives") });
@@ -543,7 +563,7 @@
     const yesterday = shiftDay(day, -1);
     const manual = manualMap(state.rows);
     const alerts = LETTERS.map((letter) => ({ letter, ...dayState(letter, yesterday, f, { today: day, manual: manual.get(`${yesterday}|${letter}`) || null }) })).filter((item) => item.state === "red" || item.state === "amber");
-    const areas = Workplace ? Workplace.areas() : [];
+    const areas = profile().areas;
     const message = data.safetyMessages[safetyIndex(day, data.safetyMessages.length)];
     return {
       alerts,
@@ -557,7 +577,7 @@
     };
   };
   const agendaText = (agenda) => {
-    const site = Workplace?.get().site;
+    const site = profile().site;
     const lines = [`${data.title} | Stiven Catalyst`, `${site ? `${site} · ` : ""}${showDate(today())} · ${tx("10 minutes, standing")}`, ""];
     agenda.items.forEach((item, i) => {
       lines.push(`${i + 1}. ${item.title} (${item.minutes} min)`);
@@ -602,14 +622,14 @@
     const empty = !state.rows.length && !logsInUse(all) && !acts.open.length && !issues.length;
     results.hidden = empty;
     if (empty) return;
-    const options = { today: today(), targets: targets(), defaults: DEFAULTS, extra: { rooms: roomCfg, rules: data.rules } };
+    const options = { today: today(), targets: targets(), defaults: {}, extra: { rooms: roomCfg, rules: data.rules } };
     const f = facts(all, options.targets, options.defaults, options.extra);
     const model = board(view, all, state.rows, { ...options, facts: f });
     const previous = board(addMonths(view, -1), all, state.rows, { ...options, facts: f });
     const day = today();
 
     const head = el("div", "result-head");
-    head.append(el("p", "kicker", `${tx("Result")} · ${Workplace?.get().site || data.title}`));
+    head.append(el("p", "kicker", `${tx("Result")} · ${profile().site || data.title}`));
     const title = el("h2");
     title.append(tx("The board today"), el("span", null, ` ${dayLabel(day)}`));
     head.append(title);
@@ -634,7 +654,7 @@
     const first = agenda.alerts[0];
     const problem = first ? `${letterOf[first.letter].name} ${lower(stateName(first.state))} ${tx("on {date}", { date: showDate(shiftDay(day, -1)) })}: ${dayText(first)}` : "";
     if (Actions) {
-      actions.append(Actions.linkButton(tx("Add to actions"), () => (first ? { title: problem.split(": ")[0], detail: dayText(first), owner: Workplace?.areas()[0]?.owner || "", due: day, source: "daily-board", priority: first.state === "red" ? "High" : "Medium", check: tx("A green day on the board for a week.") } : null)));
+      actions.append(Actions.linkButton(tx("Add to actions"), () => (first ? { title: problem.split(": ")[0], detail: dayText(first), owner: profile().areas[0]?.owner || "", due: day, source: "daily-board", priority: first.state === "red" ? "High" : "Medium", check: tx("A green day on the board for a week.") } : null)));
     }
     if (first) {
       const whys = el("a", "button-secondary", tx("Take it to 5 Whys"));
@@ -664,21 +684,8 @@
       });
     }
     state.rows = rows;
-    if (Workplace && Workplace.isEmpty()) {
-      Workplace.set(ex.profile);
-      state.demoProfile = true;
-      renderSetup();
-      fillShifts();
-    }
   };
-  const clearExample = () => {
-    if (state.demoProfile && Workplace && Workplace.get().site === data.example.profile.site) {
-      Workplace.set({ site: "", shifts: [], areas: [], teams: [], targets: {} });
-      renderSetup();
-      fillShifts();
-    }
-    state.demoProfile = false;
-  };
+  const clearExample = () => { fillShifts(); };
 
   const book = logBook({
     root,
@@ -702,6 +709,8 @@
       done: (added, skipped) => `${tx("Imported {rows}", { rows: plural(added, tx("row"), tx("rows")) })}${skipped ? tx(", skipped {n} without a date, letter or state", { n: skipped }) : ""}.`,
     },
     loadExample,
+    // The visitor's own logs come first: the example opens only when no other tool holds anything yet.
+    firstExample: !logsInUse(logs()),
     clearText: tx("Clear all manual entries of the board?"),
     csv: () => ({
       name: "daily-board",

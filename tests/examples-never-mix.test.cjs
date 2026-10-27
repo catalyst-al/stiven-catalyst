@@ -142,3 +142,54 @@ test('an own volume typed while the example is shown is kept: the example leaves
   assert.deepEqual(log.rows.map((row) => row.units), [2]);
   assert.ok(!log.rows.some((row) => row.example));
 });
+
+// Damage Control with one own day: 4 damaged units of 1,000 on 24 October (0.40 %), typed into its real forms.
+const ownDamageDay = async (storage = {}) => {
+  const w = openTool('damage-control', { storage, now: NOW });
+  const volume = w.document.querySelector('[data-volume-form]');
+  volume.elements.vdate.value = '2026-10-24';
+  volume.elements.vvolume.value = '1000';
+  submit(w, volume);
+  const form = w.document.querySelector('[data-entry]');
+  form.elements.date.value = '2026-10-24';
+  form.elements.units.value = '4';
+  submit(w, form);
+  await settle(w);
+  return keep(w);
+};
+
+test('the Daily Board example writes no workplace profile: other tools never get its targets', async () => {
+  const board = openTool('daily-board', { now: NOW });
+  await settle(board);
+  const storage = keep(board);
+  const profile = storage['sc-workplace'];
+  assert.ok(!profile || (!profile.site && !Object.keys(profile.targets || {}).length), `no demo profile stored (${JSON.stringify(profile)})`);
+});
+
+test('the Daily Board judges a day only against targets the visitor set', async () => {
+  const storage = await ownDamageDay();
+  const board = openTool('daily-board', { storage, now: NOW });
+  await settle(board, 60);
+  const text = board.document.querySelector('[data-results]').textContent;
+  assert.match(text, /4 damaged units/, 'the board shows the own day, not its example');
+  assert.doesNotMatch(text, /target 0[.,]30/, 'no hidden 0.30 % target');
+  assert.doesNotMatch(text, /\(target/, 'no target the visitor did not set');
+  // With a target set in the workplace profile, it is used.
+  const withTarget = { ...storage, 'sc-workplace': { site: '', shifts: [], areas: [], teams: [], targets: { damage: 0.3 } } };
+  const set = openTool('daily-board', { storage: withTarget, now: NOW });
+  await settle(set, 60);
+  assert.match(set.document.querySelector('[data-results]').textContent, /\(target 0[.,]30\s*%\)/);
+});
+
+test('a demo profile the old Daily Board left behind is removed when unchanged, and kept when the visitor changed it', async () => {
+  const profile = JSON.parse(require('node:fs').readFileSync('src/_data/dailyBoard.json', 'utf8')).example.profile;
+  const left = { 'sc-workplace': profile, 'sc-daily-board': { rows: [], example: {}, demoProfile: true } };
+  const w = openTool('daily-board', { storage: left, now: NOW });
+  await settle(w);
+  const after = keep(w)['sc-workplace'];
+  assert.ok(!after || !after.site, `the untouched demo profile is gone (${after?.site})`);
+  const changed = { 'sc-workplace': { ...profile, targets: { ...profile.targets, damage: 0.2 } }, 'sc-daily-board': { rows: [], example: {}, demoProfile: true } };
+  const v = openTool('daily-board', { storage: changed, now: NOW });
+  await settle(v);
+  assert.equal(keep(v)['sc-workplace'].targets.damage, 0.2, 'a profile the visitor changed stays');
+});

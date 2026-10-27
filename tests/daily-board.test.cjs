@@ -169,7 +169,7 @@ test('an entry by hand wins over the logs, the worst entry of a day wins, and a 
   assert.notEqual(M.safetyIndex('2026-10-23', 12), M.safetyIndex('2026-10-24', 12));
 });
 
-test('the page: the example opens on a first visit with a demo profile, and leaves with it', () => {
+test('the page: the example opens on a first visit with its demo profile on this page only, and leaves with it', () => {
   const w = load({ page: true });
   const doc = w.document;
   const results = doc.querySelector('[data-results]');
@@ -178,7 +178,10 @@ test('the page: the example opens on a first visit with a demo profile, and leav
   assert.equal(doc.querySelectorAll('.db-cal').length, 5, 'five calendars');
   assert.equal(doc.querySelectorAll('.db-chip').length, 5, 'one chip per letter today');
   assert.match(doc.querySelector('.db-chip').textContent, /Siguria/);
-  assert.equal(w.Workplace.get().site, data.sq.example.profile.site, 'the demo profile');
+  // The example's profile is used on this page, never written to the shared profile (audit of 27 October 2026, T-04).
+  assert.match(doc.querySelector('.db-results .kicker, [data-results] .kicker').textContent, new RegExp(data.sq.example.profile.site.split(' ')[0]), 'the demo profile on the page');
+  assert.equal(w.Workplace.get().site, '', 'and not in the shared profile');
+  assert.equal(w.localStorage.getItem('sc-workplace'), null);
   assert.equal(doc.querySelectorAll('.db-agenda > li').length, 5, 'five agenda steps');
   assert.match(doc.querySelector('.db-agenda').textContent, /Tabela e djeshme/);
   assert.match(results.textContent, /Kostoja e kuqe|Cilësia/, 'yesterday’s red is on the agenda');

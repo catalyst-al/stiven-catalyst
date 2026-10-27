@@ -126,5 +126,5 @@ window.Workplace = (() => {
     select.replaceChildren(...list.map((value) => { const option = document.createElement("option"); option.value = value; option.textContent = value; option.selected = value === current; return option; }));
   };
 
-  return { KEY, get, set, areas, shifts, teams, target, isEmpty, renderSetup, fillSelect };
+  return { KEY, clean, get, set, areas, shifts, teams, target, isEmpty, renderSetup, fillSelect };
 })();

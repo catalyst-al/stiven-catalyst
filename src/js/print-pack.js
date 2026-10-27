@@ -590,7 +590,8 @@
     const targetShare = (key) => { const value = Workplace?.target(key); return Number.isFinite(value) && value > 0 ? value / 100 : null; };
     return {
       targets: { damage: targetShare("damage"), incomplete: targetShare("incomplete"), ontime: targetShare("ontime"), fives: targetShare("fives") },
-      defaults: Object.fromEntries(list(src.board.targets).filter((t) => Number.isFinite(t.default)).map((t) => [t.key, t.default / 100])),
+      // No default targets: a figure without a target the visitor set gives no colour (as on the Daily Board itself).
+      defaults: {},
       extra: { rooms: src.roomInspection, rules: src.board.rules },
     };
   };

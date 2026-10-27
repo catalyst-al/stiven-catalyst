@@ -991,7 +991,9 @@ window.ToolKit = (() => {
 
   // filter, when given, returns null or { label, test(row), clear() }: the table then shows only the rows that pass,
   // under a chip that clears it (the result is not filtered here: the tool decides what it filters).
-  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearExample, clearText, csv, renderResults, results, filter = null }) => {
+  // firstExample: false when the page should not open on its example even on a first visit (the Daily Board, when other
+  // tools already hold the visitor's data).
+  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearExample, clearText, csv, renderResults, results, filter = null, firstExample = true }) => {
     const logBody = root.querySelector("[data-log]");
     const logWrap = root.querySelector("[data-log-wrap]");
     const logEmpty = root.querySelector("[data-log-empty]");
@@ -1175,7 +1177,7 @@ window.ToolKit = (() => {
     });
 
     // A first visit opens on the example, so the result is visible at once; the note says so.
-    if (key && !state.rows.length && firstVisit(key)) {
+    if (key && firstExample && !state.rows.length && firstVisit(key)) {
       loadExample();
       state.example = exampleStamp(state.rows);
       state.from = "";
