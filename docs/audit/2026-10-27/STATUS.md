@@ -36,9 +36,9 @@ Status values:
 | T-06 | Process Lab (EN) misreads decimal commas | fixed | `756b433f` · tests/process-lab*.test.cjs |
 | T-07 | ATS match rewards filler, misses skills | fixed | `0f80fffa` · tests/ats-match.test.cjs (9 real ads, 3 languages). The 60 % "pass" claim is removed. |
 | T-08 | CV import corrupts the CV Builder's own PDF | fixed | `9a72c2de` · tests/cv-import-pdf.test.cjs (PDFs printed by the real CV Builder, ATS PDF, JSON Resume, Word) |
-| E-01 | Management Review: undisclosed changes, "64 issues, each says so" | pending (phase 2) | |
-| E-02 | German reflections mix Sie and du | pending (phase 2) | |
-| E-03 | Career timeline contradicts itself | needs author approval (phase 2) | |
+| E-01 | Management Review: undisclosed changes, "64 issues, each says so" | fixed (phase 2) | `becd3901` · tests/corrections-register.test.cjs. The history shows Nos. 73–80 were checked before they went online (`7b43e7c3`, 11 Oct), so 74–77 and 79 need no note; 11 issues whose figure, year or base changed got a dated note; a public register at the foot of the archive. |
+| E-02 | German reflections mix Sie and du | fixed (phase 2) | `593cb4f3` · tests/register.test.cjs (Sie to the reader, man for a generic ti, du only in speech; 8 listed exceptions) |
+| E-03 | Career timeline contradicts itself | needs author approval | Listed, not changed: phase2/timeline-contradictions.md (7 contradictions, 6 questions) |
 | M-01 | Home planets saturate the main thread | pending (phase 3) | |
 
 ## P2 findings
@@ -59,10 +59,10 @@ Status values:
 | T-20 | Heijunka freezes the tab | fixed | `b9da1c6e`, `094b9c97`, `70fab809` · tests/heijunka.test.cjs |
 | T-21 | Room Inspection passes after 1 of 34 items | fixed | `fb3cdb26` · tests/room-inspection.test.cjs. **Author:** a failed critical item still fails a room while other items are open, as before. |
 | T-22 | Excel turns "00123" into 123 | fixed | `285c7af8` · tests/log-integrity.test.cjs, verification/phase1-exports-chromium.cjs |
-| T-23 | Time Study's "standard time" has no rating or allowance | fixed | `bf3e2c51` · tests/time-study-standard.test.cjs (rating and allowance inputs; the real Time Study → Shift Capacity hand-off; an old study made by the pre-phase-1 script). The printed Tools Guide still says the old thing: phase 2. |
+| T-23 | Time Study's "standard time" has no rating or allowance | fixed | `bf3e2c51` · tests/time-study-standard.test.cjs (rating and allowance inputs; the real Time Study → Shift Capacity hand-off; an old study made by the pre-phase-1 script). The Tools Guide, edition 8 (phase 2), says it: tests/tools-guide-describes-tools.test.cjs. |
 | T-24 | CV and ATS PDFs cut long blocks | ATS CV: fixed by the PDF writer of `605d0df` (70 bullets checked, `822faca1`); CV Builder print: pending (phase 3, print) | |
 | T-25 | Team sync never propagates deletions | fixed | `4e69750f` · tests/team-sync-deletions.test.cjs |
-| T-26 | Sync ids by plain SHA-256; no limits on the Worker | fixed in code | `697cbf95`, `9e64b36c` · tests/team-sync-keys.test.cjs, tests/sync-worker.test.cjs. **Needs author approval to deploy the Worker.** Read-only codes made before the move stop working once a team's copy moves. |
+| T-26 | Sync ids by plain SHA-256; no limits on the Worker | fixed in code | `697cbf95`, `9e64b36c` · tests/team-sync-keys.test.cjs, tests/sync-worker.test.cjs. **Not deployed, by the author's decision.** Migration plan, compatibility test against the code in production and the way back: docs/SYNC-WORKER-MIGRATION.md, tests/sync-compat.test.cjs (`83b770ba`). |
 | T-27 | Backup file leaves out photos | fixed | `e8ea5a8f` · tests/work-backup-photos.test.cjs and a browser journey |
 | T-28 | ATS matching not Unicode-normalised | fixed | `0f80fffa` · tests/ats-match.test.cjs |
 | P-01 | Privacy page incomplete | needs author approval (legal text) | The facts to add are listed in phases/p2c-career-platform.md |
@@ -70,7 +70,7 @@ Status values:
 | P-03 | Narration skips the case box content | pending (phase 3) | |
 | P-04 | Narration privacy note and online voices | pending (phase 3) | |
 | P-05 | Albanian podcast No. 1 has no correction | needs author approval (phase 2) | |
-| E-04 – E-12 | Management Review dating and method, PDF disclosure, chart labels, reflections | pending (phase 2) | E-09 and E-10 contain facts only the author can confirm |
+| E-04 – E-12 | Management Review dating and method, PDF disclosure, chart labels, reflections | E-04 to E-06 fixed (phase 2): dates from online.json, method statement, colophon, PDF metadata (`becd3901`, `d475c40e`, `d0954fa0` · tests/publication-dates.test.cjs, tests/publication-colophon.test.cjs). Reflections' factual points (E-09, E-10): proposals for the author, phase2/albanian-proposals.md | |
 | B-01 | Back-cover line translated in opposite directions | needs author approval | |
 | M-02 – M-06 | Pause, motion control, Zenith radar, blank printed charts, wheel glide | pending (phase 3) | |
 | A-01 | Cloudflare Web Analytics collects nothing | needs author approval (account setting) | |
@@ -78,7 +78,7 @@ Status values:
 | CI-01 | Search journey fails on current Chrome | pending (phase 3) | still 6 of 32 browser tests |
 | CI-02 | CI's Chromium is a year old | pending (phase 3) | |
 | CI-03 | Contract tests used invented fixtures | partly fixed | tests/helpers/tool-page.cjs opens the real built page; new hand-off tests use it. The cosmos-pause and chart-note tests: phase 3. |
-| CI-04 | No check that PDFs match their sources | pending (phase 3) | |
+| CI-04 | No check that PDFs match their sources | fixed (phase 2) | tests/pdf-matches-html.test.cjs: 294 PDFs against their pages, 0 mismatches |
 
 ## P3 findings (tools and data, phase 1)
 
@@ -130,3 +130,15 @@ Status values:
 6. Hoshin Kanri has two download buttons that write the same file; keep or remove one.
 7. Coaching: a backup project with the same id but other content is added as a copy (no data lost).
 8. Search: a lone "a" lists the pages that contain the word "a".
+
+The author's answers of 27 October 2026, carried out in phase 2: 1 the Worker stays undeployed until the migration
+plan is approved (`83b770ba`); 2 new PINs need 6 characters, older ones still open (`e6617ab1`); 3 the thresholds are
+documented in docs/THRESHOLDS.md and Site Compare's minimums set in its data file (`576834c4`); 4 kept, and tested
+(`82bf4eaa`); 5 edition 8 printed; 6 one set of buttons in Hoshin Kanri (`de7fa091`); 7 the copy is labelled with its
+backup's date (`68bd1260`).
+
+## Phase 2 (state at the end of phase 2)
+
+The report, in Albanian, with every before → after and the decisions left: `phase2/RAPORTI-FAZA-2.md`. The review
+files: `phase2/management-review.md`, `phase2/tools-guide-and-pdf-check.md`, `phase2/german-english-edits.md`,
+`phase2/albanian-proposals.md`, `phase2/timeline-contradictions.md`.
