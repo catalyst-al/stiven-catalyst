@@ -1010,6 +1010,16 @@ a.essay-series-next:hover em { translate: 5px 0; }
 /* The tightening is a horizontal scale, not letter-spacing: spacing changes the width of the words, and a title near the
    width of its column re-wrapped while it came into focus, moving everything under it (the book, 16 October 2026). */
 @keyframes lost-focus { from { opacity: 0; filter: blur(8px); scale: .98 1; } }
+/* Paper, on every page: nothing on it waits for a scroll. A reveal that follows the scroll shows its end (printing is
+   not scrolling, so its timeline would keep the start: the treatise's "How every chapter is built" printed as an
+   empty box); a title that comes into focus is simply there (a blur held at 0 turns it into a picture in the PDF,
+   neither sharp nor selectable); no glow or shadow around text (the tool pages' intro printed with a grey smear);
+   and the sheet around the page is white in the dark theme too. */
+@media print {
+  :root { color-scheme: light !important; }
+  *, *::before, *::after { animation-timeline: auto !important; text-shadow: none !important; }
+  .lost-hero h1, .book-hero h1 { animation: none !important; }
+}
 @keyframes lost-drift {
   0% { rotate: 0deg; translate: 0 0; }
   50% { rotate: 180deg; translate: 14px -10px; }

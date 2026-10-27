@@ -1,0 +1,340 @@
+[
+ {
+  "lang": "en",
+  "page": "guides/tools-guide.html",
+  "pages": 3,
+  "blocks": 20,
+  "lost": 1,
+  "lostSample": [
+   "The Tools Guide"
+  ],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "en",
+  "page": "magazine/management-review-nr-80.html",
+  "pages": 4,
+  "blocks": 17,
+  "lost": 7,
+  "lostSample": [
+   "PDCA: the cycle that does not end",
+   "THE NUMBERS The 47 reports that described their cycles (2014)",
+   "Published reports may describe the work less fully than it was done. The bars co",
+   "Source: Michael J. Taylor et al., BMJ Quality & Safety 23(4), 2014"
+  ],
+  "clipped": [],
+  "hiddenChart": 14
+ },
+ {
+  "lang": "en",
+  "page": "magazine/management-review-nr-01.html",
+  "pages": 5,
+  "blocks": 27,
+  "lost": 16,
+  "lostSample": [
+   "What the best managers do",
+   "70% at least, of the variance in engagement between business units is explained ",
+   "From Gallup's 2015 report on managers in the United States. A share of the varia",
+   "Source: Gallup, 2015"
+  ],
+  "clipped": [],
+  "hiddenChart": 35
+ },
+ {
+  "lang": "en",
+  "page": "magazine/management-review-2026-09.html",
+  "pages": 2,
+  "blocks": 7,
+  "lost": 1,
+  "lostSample": [
+   "The manager in the age of AI"
+  ],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "en",
+  "page": "magazine/operational-treatise-vol-01.html",
+  "pages": 4,
+  "blocks": 18,
+  "lost": 8,
+  "lostSample": [
+   "Gemba: management where the work happens",
+   "A shift, a ramp, a desk at 03:00: one piece of work followed as it actually happ",
+   "The mechanism behind the scene, named with the model that explains it, and the r",
+   "What a working team can try on Monday: fields, questions, a cadence and a count,"
+  ],
+  "clipped": [],
+  "hiddenChart": 10
+ },
+ {
+  "lang": "en",
+  "page": "magazine/from-the-floor.html",
+  "pages": 1,
+  "blocks": 5,
+  "lost": 1,
+  "lostSample": [
+   "ISSUE 2 When the load rises OCTOBER 2026 November opens the busiest season in lo"
+  ],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "en",
+  "page": "insights/pareto-and-5-why-in-practice/",
+  "pages": 5,
+  "blocks": 38,
+  "lost": 0,
+  "lostSample": [],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "en",
+  "page": "reflections/who-owns-the-hour-the-machine-saves/",
+  "pages": 22,
+  "blocks": 276,
+  "lost": 0,
+  "lostSample": [],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "en",
+  "page": "reflections/the-courage-not-to-continue/",
+  "pages": 24,
+  "blocks": 311,
+  "lost": 0,
+  "lostSample": [],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "de",
+  "page": "guides/tools-guide.html",
+  "pages": 3,
+  "blocks": 20,
+  "lost": 1,
+  "lostSample": [
+   "Der Werkzeug-Leitfaden"
+  ],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "de",
+  "page": "magazine/management-review-nr-80.html",
+  "pages": 4,
+  "blocks": 16,
+  "lost": 7,
+  "lostSample": [
+   "PDCA: der Zyklus, der nicht endet",
+   "DIE ZAHLEN Die 47 Berichte, die ihre Zyklen beschrieben (2014)",
+   "Veröffentlichte Berichte beschreiben die Arbeit womöglich knapper, als sie getan",
+   "Quelle: Michael J. Taylor et al., BMJ Quality & Safety 23(4), 2014"
+  ],
+  "clipped": [],
+  "hiddenChart": 14
+ },
+ {
+  "lang": "de",
+  "page": "magazine/management-review-nr-01.html",
+  "pages": 5,
+  "blocks": 26,
+  "lost": 16,
+  "lostSample": [
+   "Was die besten Führungskräfte tun",
+   "70 % mindestens, der Unterschiede im Engagement zwischen Geschäftseinheiten erkl",
+   "Aus dem Gallup-Bericht von 2015 über Führungskräfte in den USA. Ein Anteil an de",
+   "Quelle: Gallup, 2015"
+  ],
+  "clipped": [],
+  "hiddenChart": 35
+ },
+ {
+  "lang": "de",
+  "page": "magazine/management-review-2026-09.html",
+  "pages": 2,
+  "blocks": 6,
+  "lost": 1,
+  "lostSample": [
+   "Die Führungskraft im Zeitalter der KI"
+  ],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "de",
+  "page": "magazine/operational-treatise-vol-01.html",
+  "pages": 4,
+  "blocks": 17,
+  "lost": 8,
+  "lostSample": [
+   "Gemba: führen, wo die Arbeit geschieht",
+   "Eine Schicht, eine Rampe, eine Rezeption um 03:00: ein Stück Arbeit, verfolgt, w",
+   "Der Mechanismus hinter der Szene, benannt mit dem Modell, das ihn erklärt, und d",
+   "Was ein Team am Montag ausprobieren kann: Felder, Fragen, einen Takt und eine Zä"
+  ],
+  "clipped": [],
+  "hiddenChart": 10
+ },
+ {
+  "lang": "de",
+  "page": "magazine/from-the-floor.html",
+  "pages": 1,
+  "blocks": 5,
+  "lost": 1,
+  "lostSample": [
+   "AUSGABE 2 Wenn die Last steigt OKTOBER 2026 Der November eröffnet die arbeitsrei"
+  ],
+  "clipped": [
+   "span.weekly-card-line 584x74>584x50"
+  ],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "de",
+  "page": "insights/pareto-and-5-why-in-practice/",
+  "pages": 6,
+  "blocks": 40,
+  "lost": 0,
+  "lostSample": [],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "de",
+  "page": "reflections/who-owns-the-hour-the-machine-saves/",
+  "pages": 24,
+  "blocks": 276,
+  "lost": 0,
+  "lostSample": [],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "de",
+  "page": "reflections/the-courage-not-to-continue/",
+  "pages": 26,
+  "blocks": 316,
+  "lost": 0,
+  "lostSample": [],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "sq",
+  "page": "guides/tools-guide.html",
+  "pages": 3,
+  "blocks": 20,
+  "lost": 1,
+  "lostSample": [
+   "Udhëzuesi i mjeteve"
+  ],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "sq",
+  "page": "magazine/management-review-nr-80.html",
+  "pages": 4,
+  "blocks": 17,
+  "lost": 7,
+  "lostSample": [
+   "PDCA: cikli që nuk mbaron",
+   "SHIFRAT 47 raportet që i përshkruan ciklet (2014)",
+   "Raportet e botuara mund ta përshkruajnë punën më pak plotësisht se si u bë. Shir",
+   "Burimi: Michael J. Taylor et al., BMJ Quality & Safety 23(4), 2014"
+  ],
+  "clipped": [],
+  "hiddenChart": 14
+ },
+ {
+  "lang": "sq",
+  "page": "magazine/management-review-nr-01.html",
+  "pages": 5,
+  "blocks": 28,
+  "lost": 17,
+  "lostSample": [
+   "Çfarë bëjnë menaxherët më të mirë",
+   "TEMA KRYESORE",
+   "70% të paktën, e ndryshimit në angazhim mes njësive të biznesit shpjegohet nga m",
+   "Nga raporti i Gallup-it i vitit 2015 për menaxherët në Shtetet e Bashkuara. Pjes"
+  ],
+  "clipped": [],
+  "hiddenChart": 35
+ },
+ {
+  "lang": "sq",
+  "page": "magazine/management-review-2026-09.html",
+  "pages": 2,
+  "blocks": 7,
+  "lost": 1,
+  "lostSample": [
+   "Menaxheri në epokën e AI-së"
+  ],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "sq",
+  "page": "magazine/operational-treatise-vol-01.html",
+  "pages": 4,
+  "blocks": 18,
+  "lost": 8,
+  "lostSample": [
+   "Gemba: menaxhimi aty ku ndodh puna",
+   "Një turn, një rampë, një sportel në 03:00: një punë e ndjekur ashtu si ndodh vër",
+   "Mekanizmi pas skenës, i emërtuar me modelin që e shpjegon, dhe kërkimi që e prov",
+   "Çfarë mund të provojë një ekip të hënën: fusha, pyetje, një ritëm dhe një numëri"
+  ],
+  "clipped": [],
+  "hiddenChart": 10
+ },
+ {
+  "lang": "sq",
+  "page": "magazine/from-the-floor.html",
+  "pages": 1,
+  "blocks": 4,
+  "lost": 2,
+  "lostSample": [
+   "NUMRI 2 Kur ngarkesa rritet TETOR 2026 Nëntori hap sezonin më të ngarkuar në log",
+   "NUMRI 1 Menaxheri në mes TETOR 2026 Të dhënat e fundit tregojnë diçka që shumë n"
+  ],
+  "clipped": [
+   "span.weekly-card-line 584x74>584x50"
+  ],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "sq",
+  "page": "insights/pareto-and-5-why-in-practice/",
+  "pages": 5,
+  "blocks": 38,
+  "lost": 0,
+  "lostSample": [],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "sq",
+  "page": "reflections/who-owns-the-hour-the-machine-saves/",
+  "pages": 23,
+  "blocks": 276,
+  "lost": 0,
+  "lostSample": [],
+  "clipped": [],
+  "hiddenChart": 0
+ },
+ {
+  "lang": "sq",
+  "page": "reflections/the-courage-not-to-continue/",
+  "pages": 24,
+  "blocks": 314,
+  "lost": 0,
+  "lostSample": [],
+  "clipped": [],
+  "hiddenChart": 0
+ }
+]

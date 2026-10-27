@@ -5686,6 +5686,16 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .wk-anim.is-in .wk-arc { stroke-dasharray: var(--v) 100; transition: stroke-dasharray 1.4s cubic-bezier(.3, .7, .2, 1) .15s; }
 .wk-anim.is-in .wk-legend li { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease; }
 .wk-anim.is-in .wk-legend li:nth-child(2) { transition-delay: .9s; }
+/* On paper every chart is drawn, whether or not the reader scrolled to it on screen (audit PM-5), and without the
+   movement: a print is not taken halfway through it. */
+@media print {
+  .wk-anim .wk-path { stroke-dashoffset: 0; }
+  .wk-anim .wk-area { opacity: .14; }
+  .wk-anim .wk-pop, .wk-anim .wk-legend li { opacity: 1; transform: none; }
+  .wk-anim .wk-grow, .wk-anim .wk-rise { transform: none; }
+  .wk-anim .wk-arc { stroke-dasharray: var(--v) 100; }
+  .wk-anim :is(.wk-path, .wk-area, .wk-pop, .wk-grow, .wk-rise, .wk-arc, .wk-legend li) { transition: none !important; }
+}
 .wk-anim.is-in .wk-legend li:nth-child(3) { transition-delay: 1.3s; }
 .wk-anim.is-in .wk-legend li:first-child { transition-delay: .5s; }
 
@@ -8726,6 +8736,16 @@ a.essay-series-next:hover em { translate: 5px 0; }
 /* The tightening is a horizontal scale, not letter-spacing: spacing changes the width of the words, and a title near the
    width of its column re-wrapped while it came into focus, moving everything under it (the book, 16 October 2026). */
 @keyframes lost-focus { from { opacity: 0; filter: blur(8px); scale: .98 1; } }
+/* Paper, on every page: nothing on it waits for a scroll. A reveal that follows the scroll shows its end (printing is
+   not scrolling, so its timeline would keep the start: the treatise's "How every chapter is built" printed as an
+   empty box); a title that comes into focus is simply there (a blur held at 0 turns it into a picture in the PDF,
+   neither sharp nor selectable); no glow or shadow around text (the tool pages' intro printed with a grey smear);
+   and the sheet around the page is white in the dark theme too. */
+@media print {
+  :root { color-scheme: light !important; }
+  *, *::before, *::after { animation-timeline: auto !important; text-shadow: none !important; }
+  .lost-hero h1, .book-hero h1 { animation: none !important; }
+}
 @keyframes lost-drift {
   0% { rotate: 0deg; translate: 0 0; }
   50% { rotate: 180deg; translate: 14px -10px; }

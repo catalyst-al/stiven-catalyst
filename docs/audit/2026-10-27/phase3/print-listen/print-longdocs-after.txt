@@ -1,0 +1,27 @@
+ok   en guides/tools-guide.html pages=3 blocks=20
+ok   en magazine/management-review-nr-80.html pages=4 blocks=18
+ok   en magazine/management-review-nr-01.html pages=5 blocks=31
+ok   en magazine/management-review-2026-09.html pages=2 blocks=7
+ok   en magazine/operational-treatise-vol-01.html pages=4 blocks=18
+ok   en magazine/from-the-floor.html pages=1 blocks=5
+ok   en insights/pareto-and-5-why-in-practice/ pages=5 blocks=39
+ok   en reflections/who-owns-the-hour-the-machine-saves/ pages=22 blocks=277
+ok   en reflections/the-courage-not-to-continue/ pages=24 blocks=314
+ok   de guides/tools-guide.html pages=3 blocks=20
+ok   de magazine/management-review-nr-80.html pages=4 blocks=17
+ok   de magazine/management-review-nr-01.html pages=5 blocks=31
+ok   de magazine/management-review-2026-09.html pages=2 blocks=7
+ok   de magazine/operational-treatise-vol-01.html pages=4 blocks=18
+FAIL de magazine/from-the-floor.html pages=1 blocks=5 lost=1 ["AUSGABE 2 Wenn die Last steigt OKTOBER 2026 Der November eröffnet die arbeitsrei"] clipped=["span.weekly-card-line 584x74>584x50"]
+ok   de insights/pareto-and-5-why-in-practice/ pages=6 blocks=41
+ok   de reflections/who-owns-the-hour-the-machine-saves/ pages=24 blocks=276
+ok   de reflections/the-courage-not-to-continue/ pages=26 blocks=316
+ok   sq guides/tools-guide.html pages=3 blocks=20
+ok   sq magazine/management-review-nr-80.html pages=4 blocks=18
+ok   sq magazine/management-review-nr-01.html pages=5 blocks=31
+ok   sq magazine/management-review-2026-09.html pages=2 blocks=7
+ok   sq magazine/operational-treatise-vol-01.html pages=4 blocks=18
+FAIL sq magazine/from-the-floor.html pages=1 blocks=5 lost=1 ["NUMRI 2 Kur ngarkesa rritet TETOR 2026 Nëntori hap sezonin më të ngarkuar në log"] clipped=["span.weekly-card-line 584x74>584x50"]
+ok   sq insights/pareto-and-5-why-in-practice/ pages=5 blocks=38
+ok   sq reflections/who-owns-the-hour-the-machine-saves/ pages=23 blocks=276
+ok   sq reflections/the-courage-not-to-continue/ pages=24 blocks=314

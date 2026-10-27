@@ -15,8 +15,14 @@
     const decimals = (match[0].split(/[.,]/)[1] || "").length;
     const comma = match[0].includes(",");
     const start = performance.now();
+    // A print taken while the figure counts shows the figure itself, not a step on the way to it.
+    let printing = false;
+    const settle = () => { printing = true; el.textContent = text; };
+    window.addEventListener("beforeprint", settle);
     const step = (now) => {
+      if (printing) return;
       const t = Math.min(1, (now - start) / 1100);
+      if (t >= 1) window.removeEventListener("beforeprint", settle);
       const value = (target * (1 - (1 - t) ** 3)).toFixed(decimals);
       el.textContent = text.replace(match[0], comma ? value.replace(".", ",") : value);
       if (t < 1) requestAnimationFrame(step);
