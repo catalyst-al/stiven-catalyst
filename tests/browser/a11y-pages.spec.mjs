@@ -25,8 +25,8 @@ const WIDTHS = [{ width: 1440, height: 900 }, { width: 390, height: 844 }];
 // so this list is kept true. See docs/audit/2026-10-27/phase3/ci-a11y.md.
 const KNOWN = [
   // The 8D report in the light theme: the "hand off" and "remove" buttons of the D7 rows are the Lumen family's gold
-  // accent (#9c824a, 3.18:1) on the row's grey. A colour decision for the author (the separate commit
-  // "8D report, light theme: ..." proposes one).
+  // accent (#9c824a, 3.18:1) on the row's grey. A colour decision for the author (the separate commit "Lumen tools,
+  // light theme: the gold accent reads at 4.5:1 or more" proposes one).
   { theme: "light", path: "/tools/eight-d/", nodes: [1440, 390].flatMap((width) => Array(10).fill(`${width} color-contrast #9c824a on #eceff0`)) },
 ];
 
