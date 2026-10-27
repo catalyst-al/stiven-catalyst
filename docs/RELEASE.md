@@ -43,7 +43,9 @@ squash and not rebase:
 - `online-dates.mjs` follows the first parent, so with a merge commit every changed essay and publication is dated by
   the day of the merge, which is the day readers see the change.
 
-The pull request runs CI (build, unit tests, browser journeys) without deploying. Do not merge while it is red.
+The pull request runs CI (build, unit tests, browser journeys) without deploying. Do not merge while it is red. Since
+phase 3 CI installs the Chromium of Playwright 1.64.1 (Chrome 156), which could not be installed in the development
+container (the suite passed there on Chrome 153, 164 / 164): this pull request's run is the first on it.
 
 ## 3. The dates, right after the merge (author's approval)
 
@@ -101,5 +103,8 @@ In a current Chrome, EN, DE and SQ:
 
 - The Team Sync Worker (`workers/sync/worker.js`): only after its own approval, by `docs/SYNC-WORKER-MIGRATION.md`.
   The site of this release works with the Worker deployed today (tests/sync-compat.test.cjs).
+- The four changes in `docs/audit/2026-10-27/phase3/proposals/` (the planets' pixel ratio on touch screens, Zenith's
+  radar keyframes, the native mouse wheel, the Lumen gold): each applies on the branch with `git am` once approved;
+  then build and test again before the merge.
 - The decisions that wait for the author (career timeline, Albanian proposals, the book's edition line and back
   cover, editorial choices of the Management Review): listed in `docs/audit/2026-10-27/STATUS.md`.

@@ -142,3 +142,10 @@ backup's date (`68bd1260`).
 The report, in Albanian, with every before → after and the decisions left: `phase2/RAPORTI-FAZA-2.md`. The review
 files: `phase2/management-review.md`, `phase2/tools-guide-and-pdf-check.md`, `phase2/german-english-edits.md`,
 `phase2/albanian-proposals.md`, `phase2/timeline-contradictions.md`.
+
+## Phase 3 and the consolidated status
+
+Every finding of the audit, with its status after phases 1 to 3 (fixed, partly fixed, pending, needs author approval,
+not verified, no change needed), its commit and its test: `RAPORTI-I-KONSOLIDUAR.md`. Where a row above differs, the
+consolidated report is the later one. Phase 3 reviews: `phase3/ci-a11y.md`, `phase3/motion.md`,
+`phase3/print-listen.md`, `phase3/charts.md`; the changes waiting for the author as patches: `phase3/proposals/`.
