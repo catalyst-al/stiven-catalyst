@@ -1,0 +1,183 @@
+Running 30 tests using 2 workers
+  ✓   2 [390px dark] › tests/browser/journeys.spec.mjs:11:1 › homepage → an essay, read to the end (6.7s)
+  ✘   1 [390px dark] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only (7.2s)
+  ✓   3 [390px dark] › tests/browser/journeys.spec.mjs:76:1 › a Management Review issue → its text version → the next page in the reader (6.6s)
+  ✓   4 [390px dark] › tests/browser/journeys.spec.mjs:122:1 › a tool opens on its example, and the example comes back after it is cleared (5.3s)
+  ✓   5 [390px dark] › tests/browser/journeys.spec.mjs:150:1 › save an essay to My shelf → save all work to a file → restore it in an empty browser (6.1s)
+  ✓   6 [390px light] › tests/browser/journeys.spec.mjs:11:1 › homepage → an essay, read to the end (4.7s)
+  ✓   8 [390px light] › tests/browser/journeys.spec.mjs:76:1 › a Management Review issue → its text version → the next page in the reader (9.8s)
+  ✘   7 [390px light] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only (9.8s)
+  ✓   9 [390px light] › tests/browser/journeys.spec.mjs:122:1 › a tool opens on its example, and the example comes back after it is cleared (13.0s)
+  ✓  10 [390px light] › tests/browser/journeys.spec.mjs:150:1 › save an essay to My shelf → save all work to a file → restore it in an empty browser (16.3s)
+  ✓  11 [768px dark] › tests/browser/journeys.spec.mjs:11:1 › homepage → an essay, read to the end (19.7s)
+  ✓  12 [768px dark] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only (23.7s)
+  ✓  13 [768px dark] › tests/browser/journeys.spec.mjs:76:1 › a Management Review issue → its text version → the next page in the reader (15.6s)
+  ✓  14 [768px dark] › tests/browser/journeys.spec.mjs:122:1 › a tool opens on its example, and the example comes back after it is cleared (27.7s)
+  ✘  15 [768px dark] › tests/browser/journeys.spec.mjs:150:1 › save an essay to My shelf → save all work to a file → restore it in an empty browser (32.6s)
+  ✓  16 [768px light] › tests/browser/journeys.spec.mjs:11:1 › homepage → an essay, read to the end (25.2s)
+  ✘  17 [768px light] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only (23.3s)
+  ✓  18 [768px light] › tests/browser/journeys.spec.mjs:76:1 › a Management Review issue → its text version → the next page in the reader (12.9s)
+  ✓  19 [768px light] › tests/browser/journeys.spec.mjs:150:1 › save an essay to My shelf → save all work to a file → restore it in an empty browser (10.4s)
+  ✓  20 [768px light] › tests/browser/journeys.spec.mjs:122:1 › a tool opens on its example, and the example comes back after it is cleared (10.1s)
+  ✓  21 [1440px dark] › tests/browser/journeys.spec.mjs:11:1 › homepage → an essay, read to the end (10.8s)
+  ✓  23 [1440px dark] › tests/browser/journeys.spec.mjs:76:1 › a Management Review issue → its text version → the next page in the reader (9.9s)
+  ✘  22 [1440px dark] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only (19.4s)
+  ✓  24 [1440px dark] › tests/browser/journeys.spec.mjs:122:1 › a tool opens on its example, and the example comes back after it is cleared (8.5s)
+  ✓  25 [1440px dark] › tests/browser/journeys.spec.mjs:150:1 › save an essay to My shelf → save all work to a file → restore it in an empty browser (14.3s)
+  ✓  26 [1440px light] › tests/browser/journeys.spec.mjs:11:1 › homepage → an essay, read to the end (11.0s)
+  ✓  28 [1440px light] › tests/browser/journeys.spec.mjs:76:1 › a Management Review issue → its text version → the next page in the reader (12.5s)
+  ✘  27 [1440px light] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only (22.4s)
+  ✓  29 [1440px light] › tests/browser/journeys.spec.mjs:122:1 › a tool opens on its example, and the example comes back after it is cleared (17.4s)
+  ✓  30 [1440px light] › tests/browser/journeys.spec.mjs:150:1 › save an essay to My shelf → save all work to a file → restore it in an empty browser (12.6s)
+  1) [390px dark] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only ─────
+    Error: no script error on any page of the journey
+    expect(received).toEqual(expected) // deep equality
+    - Expected  - 1
+    + Received  + 3
+    - Array []
+    + Array [
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    + ]
+       at fixtures.mjs:21
+      19 |     page.on("pageerror", (error) => errors.push(error.message));
+      20 |     await use(page);
+    > 21 |     expect(errors, "no script error on any page of the journey").toEqual([]);
+         |                                                                  ^
+      22 |   },
+      23 | });
+      24 | export { expect };
+        at Object.page ($SRC/tests/browser/fixtures.mjs:21:66)
+    Error Context: test-results/browser/journeys-search-→-a-result-by-keyboard-only-390px-dark/error-context.md
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/journeys-search-→-a-result-by-keyboard-only-390px-dark/trace.zip
+    Usage:
+        npx playwright show-trace test-results/browser/journeys-search-→-a-result-by-keyboard-only-390px-dark/trace.zip
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+  2) [390px light] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only ────
+    Error: no script error on any page of the journey
+    expect(received).toEqual(expected) // deep equality
+    - Expected  - 1
+    + Received  + 3
+    - Array []
+    + Array [
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    + ]
+       at fixtures.mjs:21
+      19 |     page.on("pageerror", (error) => errors.push(error.message));
+      20 |     await use(page);
+    > 21 |     expect(errors, "no script error on any page of the journey").toEqual([]);
+         |                                                                  ^
+      22 |   },
+      23 | });
+      24 | export { expect };
+        at Object.page ($SRC/tests/browser/fixtures.mjs:21:66)
+    Error Context: test-results/browser/journeys-search-→-a-result-by-keyboard-only-390px-light/error-context.md
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/journeys-search-→-a-result-by-keyboard-only-390px-light/trace.zip
+    Usage:
+        npx playwright show-trace test-results/browser/journeys-search-→-a-result-by-keyboard-only-390px-light/trace.zip
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+  3) [768px dark] › tests/browser/journeys.spec.mjs:150:1 › save an essay to My shelf → save all work to a file → restore it in an empty browser 
+    Test timeout of 30000ms exceeded.
+    Error: page.waitForEvent: Test timeout of 30000ms exceeded.
+    =========================== logs ===========================
+    waiting for event "load"
+    ============================================================
+      185 |   await page.goto("/tools.html");
+      186 |   page.once("dialog", (dialog) => dialog.accept());
+    > 187 |   const reloaded = page.waitForEvent("load");
+          |                         ^
+      188 |   await page.locator("[data-work-open]").setInputFiles(file);
+      189 |   await reloaded;
+      190 |   await page.goto("/shelf.html");
+        at $SRC/tests/browser/journeys.spec.mjs:187:25
+    Error Context: test-results/browser/journeys-save-an-essay-to--eed03-tore-it-in-an-empty-browser-768px-dark/error-context.md
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/journeys-save-an-essay-to--eed03-tore-it-in-an-empty-browser-768px-dark/trace.zip
+    Usage:
+        npx playwright show-trace test-results/browser/journeys-save-an-essay-to--eed03-tore-it-in-an-empty-browser-768px-dark/trace.zip
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+  4) [768px light] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only ────
+    Error: no script error on any page of the journey
+    expect(received).toEqual(expected) // deep equality
+    - Expected  - 1
+    + Received  + 3
+    - Array []
+    + Array [
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    + ]
+       at fixtures.mjs:21
+      19 |     page.on("pageerror", (error) => errors.push(error.message));
+      20 |     await use(page);
+    > 21 |     expect(errors, "no script error on any page of the journey").toEqual([]);
+         |                                                                  ^
+      22 |   },
+      23 | });
+      24 | export { expect };
+        at Object.page ($SRC/tests/browser/fixtures.mjs:21:66)
+    Error Context: test-results/browser/journeys-search-→-a-result-by-keyboard-only-768px-light/error-context.md
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/journeys-search-→-a-result-by-keyboard-only-768px-light/trace.zip
+    Usage:
+        npx playwright show-trace test-results/browser/journeys-search-→-a-result-by-keyboard-only-768px-light/trace.zip
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+  5) [1440px dark] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only ────
+    Error: no script error on any page of the journey
+    expect(received).toEqual(expected) // deep equality
+    - Expected  - 1
+    + Received  + 3
+    - Array []
+    + Array [
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    + ]
+       at fixtures.mjs:21
+      19 |     page.on("pageerror", (error) => errors.push(error.message));
+      20 |     await use(page);
+    > 21 |     expect(errors, "no script error on any page of the journey").toEqual([]);
+         |                                                                  ^
+      22 |   },
+      23 | });
+      24 | export { expect };
+        at Object.page ($SRC/tests/browser/fixtures.mjs:21:66)
+    Error Context: test-results/browser/journeys-search-→-a-result-by-keyboard-only-1440px-dark/error-context.md
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/journeys-search-→-a-result-by-keyboard-only-1440px-dark/trace.zip
+    Usage:
+        npx playwright show-trace test-results/browser/journeys-search-→-a-result-by-keyboard-only-1440px-dark/trace.zip
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+  6) [1440px light] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only ───
+    Error: no script error on any page of the journey
+    expect(received).toEqual(expected) // deep equality
+    - Expected  - 1
+    + Received  + 3
+    - Array []
+    + Array [
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    + ]
+       at fixtures.mjs:21
+      19 |     page.on("pageerror", (error) => errors.push(error.message));
+      20 |     await use(page);
+    > 21 |     expect(errors, "no script error on any page of the journey").toEqual([]);
+         |                                                                  ^
+      22 |   },
+      23 | });
+      24 | export { expect };
+        at Object.page ($SRC/tests/browser/fixtures.mjs:21:66)
+    Error Context: test-results/browser/journeys-search-→-a-result-by-keyboard-only-1440px-light/error-context.md
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/journeys-search-→-a-result-by-keyboard-only-1440px-light/trace.zip
+    Usage:
+        npx playwright show-trace test-results/browser/journeys-search-→-a-result-by-keyboard-only-1440px-light/trace.zip
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+  6 failed
+    [390px dark] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only ──────
+    [390px light] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only ─────
+    [768px dark] › tests/browser/journeys.spec.mjs:150:1 › save an essay to My shelf → save all work to a file → restore it in an empty browser 
+    [768px light] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only ─────
+    [1440px dark] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only ─────
+    [1440px light] › tests/browser/journeys.spec.mjs:38:1 › search → a result, by keyboard only ────
+  24 passed (4.1m)
+real	4m8.696s
+user	1m57.814s
+sys	0m37.315s
+exit=1

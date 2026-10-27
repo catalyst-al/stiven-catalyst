@@ -1,0 +1,35 @@
+const { launch } = require('./pw.cjs');
+const B='http://localhost:8104';
+(async () => {
+  const b = await launch(); const p = await b.newPage();
+  let dialogs=0; p.on('dialog', d=>{dialogs++; d.dismiss();});
+  const errs=[]; p.on('pageerror', e=>errs.push(e.message));
+  const q = async (path, query) => {
+    await p.goto(`${B}${path}?q=${encodeURIComponent(query)}`); await p.waitForTimeout(700);
+    const count = await p.locator('[data-search-count]').innerText().catch(()=> '');
+    const first = await p.locator('[data-search-results] li a').evaluateAll(a=>a.slice(0,3).map(x=>x.getAttribute('href')));
+    const injected = await p.evaluate(()=>({img:document.querySelectorAll('[data-search-results] img, img[src="x"]').length, xss: window.__xss||0}));
+    console.log(path.padEnd(16), JSON.stringify(query).slice(0,50).padEnd(52), '|', count, '|', first.join(' '), JSON.stringify(injected));
+  };
+  await q('/search.html','information monopoly');
+  await q('/de/search.html','Informationsmonopol');
+  await q('/sq/search.html','monopoli');
+  await q('/de/search.html','fuhrung');
+  await q('/de/search.html','fuehrung');
+  await q('/de/search.html','Führung');
+  await q('/de/search.html','Führung');
+  await q('/sq/search.html','eshte');
+  await q('/sq/search.html','përgjegjësi');
+  await q('/sq/search.html','pergjegjesi');
+  await q('/search.html','');
+  await q('/search.html','a');
+  await q('/search.html','<img src=x onerror="window.__xss=1">');
+  await q('/search.html','"><svg onload=window.__xss=2>');
+  await q('/search.html','javascript:alert(1)');
+  await q('/search.html','x'.repeat(5000));
+  await q('/search.html','OEE');
+  await q('/search.html','5S');
+  await q('/search.html','C#');
+  console.log('dialogs',dialogs,'errors',errs);
+  await b.close();
+})();
