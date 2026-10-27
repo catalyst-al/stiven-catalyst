@@ -20,6 +20,17 @@
       </div>
       <p class="form-note ts-takt" data-takt aria-live="polite"></p>
       <p class="form-note">{{ "Available time is the shift minus breaks, meetings and planned stops. Takt is that time divided by the demand: the customer's clock." | t(lang) }}</p>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="ts-rating">{{ "Performance rating (%)" | t(lang) }} <span class="optional">{{ "100 = normal pace" | t(lang) }}</span></label>
+          <input id="ts-rating" name="rating" type="text" inputmode="decimal" placeholder="100" autocomplete="off" data-setting>
+        </div>
+        <div class="field">
+          <label for="ts-allowance">{{ "Allowance (%)" | t(lang) }} <span class="optional">{{ "personal needs, fatigue, unavoidable delay" | t(lang) }}</span></label>
+          <input id="ts-allowance" name="allowance" type="text" inputmode="decimal" placeholder="0" autocomplete="off" data-setting>
+        </div>
+      </div>
+      <p class="form-note">{{ "Standard time = observed median × rating × (1 + allowance). Rate the observed pace against a normal pace (above 100 % when the operator works faster) and add the allowance, often 10 to 15 %. Left at 100 % and 0 %, the standard time is the observed median." | t(lang) }}</p>
     </fieldset>
 
     <div class="dl-box">
