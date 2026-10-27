@@ -134,3 +134,27 @@ for (const [url, width] of [["/tools/a3-report/", 1440], ["/tools/eight-d/", 390
     expect(stuck).toEqual([]);
   });
 }
+
+// PM-10 at the end of a page: there the page cannot scroll any further, so a footer link or button on the last line
+// stays where it is, and whether it lands under the share planet depends on how the footer's line breaks, that is on
+// the fonts of the device (GitHub's runner put "Kontakt" there, this container did not). The footer's last control
+// must clear the planet whatever the font: its lowest edge, with the focus ring, above the planet's top.
+for (const url of ["/sq/insights/the-tools-you-build-yourself/", "/de/magazine/management-review-nr-80.html", "/tools/damage-control/"]) {
+  test(`phone: the end of ${url} leaves the footer clear of the share planet`, async ({ page }) => {
+    await page.setViewportSize({ width: 412, height: 800 });
+    await page.goto(url);
+    // To the very end, at once (the page glides to anchors by default), until the height stops growing (parts drawn
+    // only near the view take their real size as they come).
+    await expect.poll(() => page.evaluate(() => {
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" });
+      return Math.ceil(window.scrollY + innerHeight) >= document.documentElement.scrollHeight - 1;
+    })).toBe(true);
+    await expect(page.locator(".share-orbit")).not.toHaveClass(/is-resting/);
+    const gap = await page.evaluate(() => {
+      const controls = [...document.querySelectorAll(".site-footer a, .site-footer button")].filter((el) => el.getBoundingClientRect().height > 0);
+      const lowest = Math.max(...controls.map((el) => el.getBoundingClientRect().bottom));
+      return document.querySelector(".share-orbit-button").getBoundingClientRect().top - (lowest + 2);
+    });
+    expect(gap, "space between the footer's lowest control and the share planet").toBeGreaterThanOrEqual(0);
+  });
+}

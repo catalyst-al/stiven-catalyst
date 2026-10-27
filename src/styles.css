@@ -7952,6 +7952,9 @@ body:has([data-article]) :is(.essay-tools, .essay-notes, .essay-feedback) { back
   /* A control reached with Tab, or a link followed to an anchor, stops above the planet (18 px + 44 px + its focus
      ring), never under it (audit PM-10). */
   html { scroll-padding-bottom: 72px; }
+  /* At the end of the page nothing scrolls any more: the footer's last line ends above the planet too, wherever the
+     device's fonts break it (tests/browser/a11y-pages.spec.mjs). */
+  .site-footer { padding-bottom: 72px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .share-orbit-ring,
