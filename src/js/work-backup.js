@@ -1,10 +1,24 @@
 // "Save all your work": every tool keeps its work only in this browser (localStorage keys that
-// start with "sc-"). This writes them all to one file, and opens such a file on another phone,
-// computer or browser. Nothing is sent anywhere; the file stays with the visitor.
+// start with "sc-", and the photos of IndexedDB "sc-media", js/media-store.js). This writes them all to one file, and
+// opens such a file on another phone, computer or browser. Nothing is sent anywhere; the file stays with the visitor.
+//
+// The file: { format, version: 1, exported, items: { key: text }, media?: [{ id, created, tool, ref, width, height,
+// type, data (base64) }] }. The photos go in newest first, up to photoLimit (20 MB before base64); the box names how
+// many were left out. A file from before photos, or one opened by a version of the site from before them, simply has
+// none. Opening adds the photos this browser does not have and never replaces one it has; the work itself is
+// replaced after a restore point, as before. Restore points stay on the device.
 (() => {
   const FORMAT = "stiven-catalyst-work";
   const VERSION = 1;
-  const MAX_BYTES = 20 * 1024 * 1024;
+  // A file with its photos: 20 MB of them are about 27 MB in base64.
+  const MAX_BYTES = 40 * 1024 * 1024;
+  const PHOTO_LIMIT = 20 * 1024 * 1024;
+  const PHOTO_TYPE = /^image\/(jpeg|png|webp)$/;
+  const PHOTO_ID = /^[A-Za-z0-9-]{1,80}$/;
+  const PHOTO_TOOL = /^[a-z0-9-]{1,60}$/;
+  const MAX_PHOTOS = 2000;
+  // Where this script came from: media-store.js is next to it, loaded when a page without photos saves or opens.
+  const SELF = document.currentScript?.src || "";
   // Settings of the page itself, not work; the team code and what team sync last saw (js/team-sync.js) stay on this
   // device too, so a saved file never carries the code.
   const SKIP = new Set(["sc-theme", "sc-floor-mode-ui", "sc-print-guide-hidden", "sc-team", "sc-team-state", "sc-locked", "sc-lock-idle"]);
@@ -30,6 +44,24 @@
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return false;
     return !LOG.test(key) || Array.isArray(parsed.rows);
   };
+  const toBase64 = (bytes) => {
+    let binary = "";
+    for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    return btoa(binary);
+  };
+  // A photo of the file as MediaStore keeps it, or null when anything in it is not as this site writes it.
+  const photoIn = (entry) => {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) return null;
+    const { id, created, tool, ref, width, height, type, data } = entry;
+    if (typeof id !== "string" || !PHOTO_ID.test(id) || typeof tool !== "string" || !PHOTO_TOOL.test(tool) || typeof ref !== "string" || ref.length > 200) return null;
+    if (typeof created !== "string" || Number.isNaN(Date.parse(created)) || typeof type !== "string" || !PHOTO_TYPE.test(type)) return null;
+    if (!Number.isFinite(width) || !Number.isFinite(height) || width < 0 || height < 0 || typeof data !== "string" || !/^[A-Za-z0-9+/]*={0,2}$/.test(data)) return null;
+    let raw;
+    try { raw = atob(data); } catch { return null; }
+    const bytes = new Uint8Array(raw.length);
+    for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+    return { id, created, tool, ref, width, height, blob: new Blob([bytes], { type }) };
+  };
   // A saved file, checked before anything in this browser is replaced.
   const readBackup = (text) => {
     let file;
@@ -37,9 +69,12 @@
     if (!file || typeof file !== "object" || file.format !== FORMAT || file.version !== VERSION) return null;
     const items = file.items;
     if (!items || typeof items !== "object" || Array.isArray(items)) return null;
+    if (file.media !== undefined && !Array.isArray(file.media)) return null;
+    // A photo that is not as this site writes it is left out; the work around it still opens.
+    const media = (file.media || []).slice(0, MAX_PHOTOS).map(photoIn).filter(Boolean);
     const entries = Object.entries(items);
-    if (!entries.length || entries.some(([key, value]) => !isWork(key) || typeof value !== "string") || !entries.every(sound)) return null;
-    return { exported: typeof file.exported === "string" ? file.exported : "", items: Object.fromEntries(entries) };
+    if ((!entries.length && !media.length) || entries.some(([key, value]) => !isWork(key) || typeof value !== "string") || !entries.every(sound)) return null;
+    return { exported: typeof file.exported === "string" ? file.exported : "", items: Object.fromEntries(entries), media };
   };
   const makeBackup = (storage, now = new Date()) => {
     const items = {};
@@ -49,7 +84,43 @@
     }
     return { format: FORMAT, version: VERSION, exported: now.toISOString(), items };
   };
-  window.WorkBackup = { isWork, toolSlug, readBackup, makeBackup, sound };
+  // The photos for a file: newest first while they fit `limit` bytes. { media, left }.
+  const photosFor = async (records, limit = PHOTO_LIMIT) => {
+    const media = [];
+    let used = 0;
+    let left = 0;
+    const newest = [...records].sort((a, b) => String(b.created).localeCompare(String(a.created)));
+    for (const record of newest) {
+      const blob = record?.blob;
+      if (!blob || typeof blob.arrayBuffer !== "function" || !PHOTO_ID.test(String(record.id)) || media.length >= MAX_PHOTOS) { left += 1; continue; }
+      if (used + blob.size > limit) { left += 1; continue; }
+      used += blob.size;
+      media.push({
+        id: String(record.id), created: String(record.created), tool: String(record.tool), ref: String(record.ref ?? ""),
+        width: Number(record.width) || 0, height: Number(record.height) || 0, type: PHOTO_TYPE.test(blob.type) ? blob.type : "image/jpeg",
+        data: toBase64(new Uint8Array(await blob.arrayBuffer())),
+      });
+    }
+    return { media, left };
+  };
+  // MediaStore, loaded from next to this script on a page that has no photos of its own; null without IndexedDB.
+  let loading = null;
+  const mediaStore = () => {
+    if (window.MediaStore) return Promise.resolve(window.MediaStore.supported() ? window.MediaStore : null);
+    if (!loading) {
+      loading = new Promise((resolve) => {
+        if (!SELF || typeof window.indexedDB === "undefined" || window.indexedDB === null) { resolve(null); return; }
+        const script = document.createElement("script");
+        script.src = new URL("media-store.js", SELF).href;
+        script.onload = () => resolve(window.MediaStore?.supported() ? window.MediaStore : null);
+        script.onerror = () => resolve(null);
+        document.head.append(script);
+      });
+    }
+    return loading;
+  };
+  const api = { isWork, toolSlug, readBackup, makeBackup, sound, photosFor, photoLimit: PHOTO_LIMIT };
+  window.WorkBackup = api;
 
   const root = document.querySelector("[data-work-backup]");
   if (!root) return;
@@ -88,12 +159,20 @@
     status.textContent = message;
   };
 
-  root.querySelector("[data-work-save]").addEventListener("click", () => {
+  root.querySelector("[data-work-save]").addEventListener("click", async () => {
     const backup = makeBackup(storage);
-    if (!Object.keys(backup.items).length) {
+    // The photos: all of them up to the limit; when the photo store cannot be read, the work without them.
+    let photos = { media: [], left: 0 };
+    let unread = false;
+    try {
+      const store = await mediaStore();
+      if (store) photos = await photosFor(await store.all(), api.photoLimit);
+    } catch { unread = true; }
+    if (!Object.keys(backup.items).length && !photos.media.length) {
       say(text.nothing);
       return;
     }
+    if (photos.media.length) backup.media = photos.media;
     const now = new Date();
     const day = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
     const link = document.createElement("a");
@@ -103,7 +182,12 @@
     link.click();
     link.remove();
     setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-    say(fill(text.saved, { file: link.download }));
+    say([
+      fill(text.saved, { file: link.download }),
+      photos.media.length ? fill(text.savedPhotos, { n: photos.media.length }) : "",
+      photos.left ? fill(text.photosLeft, { n: photos.left }) : "",
+      unread ? text.photosUnread : "",
+    ].filter(Boolean).join(" "));
   });
 
   const picker = root.querySelector("[data-work-open]");
@@ -155,7 +239,17 @@
     }
     // Rows the file lacks were not deleted: team sync (js/team-sync.js) does not delete them on the team's devices.
     try { window.TeamSync?.rebase?.(storage, keys); } catch { /* no team here */ }
-    say(text.opened);
+    // The photos: added where this browser does not have them, never in place of one it has.
+    let photoNote = "";
+    if (backup.media.length) {
+      let added = null;
+      try {
+        const store = await mediaStore();
+        if (store) added = await store.keepAll(backup.media);
+      } catch { added = null; }
+      photoNote = added === null ? text.photosFailed : fill(text.openedPhotos, { n: added });
+    }
+    say([text.opened, photoNote].filter(Boolean).join(" "));
     setTimeout(() => window.location.reload(), 900);
   });
 

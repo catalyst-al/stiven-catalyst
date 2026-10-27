@@ -1,7 +1,8 @@
 // Photos as evidence, kept on this device only: IndexedDB database "sc-media", store "photos", one record per photo
 // { id, created, tool, ref, blob, width, height }. A photo is made smaller on the device before it is kept (at most
 // 1280 px on its long side, JPEG at quality 0.7), so a phone full of findings stays a few hundred kilobytes each.
-// Nothing is sent anywhere, and the photos are not part of the Work Backup file (that one holds localStorage only).
+// Nothing is sent anywhere. "Save all my work" (work-backup.js) puts them in the saved file (all, keepAll), up to
+// a limit; opening that file adds the photos this browser does not have yet and never replaces one it has.
 window.MediaStore = (() => {
   const DB = "sc-media";
   const STORE = "photos";
@@ -128,6 +129,19 @@ window.MediaStore = (() => {
     await done(store.put(record));
     return record;
   });
+  // Every photo of every tool, oldest first (for the saved file).
+  const all = () => transact("readonly", (store) => done(store.getAll())).then((records) => (records || []).sort(byCreated));
+  // Photos from a saved file: each one this browser does not have yet (by id) is added, one it has stays as it is.
+  // Resolves with how many were added.
+  const keepAll = (records) => transact("readwrite", async (store) => {
+    let added = 0;
+    for (const record of records) {
+      if (await done(store.get(record.id))) continue;
+      await done(store.put(record));
+      added += 1;
+    }
+    return added;
+  });
   // How many photos each entry of a tool has: { ref: n }.
   const counts = async (tool) => {
     const out = {};
@@ -144,5 +158,5 @@ window.MediaStore = (() => {
     }
   };
 
-  return { DB, STORE, MAX_SIDE, QUALITY, fitSize, supported, compress, add, restore, get, list, remove, update, counts, estimate };
+  return { DB, STORE, MAX_SIDE, QUALITY, fitSize, supported, compress, add, restore, get, list, all, keepAll, remove, update, counts, estimate };
 })();

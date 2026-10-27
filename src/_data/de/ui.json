@@ -7657,5 +7657,11 @@
   "{n} pitch columns a day ({t} each) are too many for a box to read or print. Use a larger pack-out, so that one card stands for more units; the sequence and the CSV hold every container.": "{n} Pitch-Spalten am Tag (je {t}) sind zu viele, um eine Box zu lesen oder zu drucken. Nehmen Sie eine größere Packmenge, damit eine Karte für mehr Einheiten steht; die Reihenfolge und die CSV enthalten jeden Behälter.",
   "The first {n} of {total} runs. The CSV and the Excel file hold every run and container.": "Die ersten {n} von {total} Läufen. Die CSV- und die Excel-Datei enthalten jeden Lauf und jeden Behälter.",
   "A guide to how many of the ad's skills and terms your CV uses, not a prediction of what application software or a recruiter will decide.": "Ein Anhaltspunkt dafür, wie viele Fähigkeiten und Begriffe der Anzeige Ihr Lebenslauf verwendet, keine Vorhersage darüber, wie eine Bewerbungssoftware oder eine Personalerin oder ein Personaler entscheidet.",
-  "A row deleted on one device is deleted on every device of the team at the next sync, and does not come back.": "Eine Zeile, die auf einem Gerät gelöscht wird, wird bei der nächsten Synchronisierung auf allen Geräten des Teams gelöscht und kommt nicht zurück."
+  "A row deleted on one device is deleted on every device of the team at the next sync, and does not come back.": "Eine Zeile, die auf einem Gerät gelöscht wird, wird bei der nächsten Synchronisierung auf allen Geräten des Teams gelöscht und kommt nicht zurück.",
+  "The file holds the tools' photos too, up to 20 MB of them; restore points stay on this device.": "Die Datei enthält auch die Fotos der Tools, bis zu 20 MB davon; die Wiederherstellungspunkte bleiben auf diesem Gerät.",
+  "Photos in the file: {n}.": "Fotos in der Datei: {n}.",
+  "Left out so that the file stays under 20 MB: {n} older photos. They stay on this device.": "Damit die Datei unter 20 MB bleibt, weggelassen: {n} ältere Fotos. Sie bleiben auf diesem Gerät.",
+  "The photos could not be read here, so the file holds the work without them.": "Die Fotos konnten hier nicht gelesen werden; die Datei enthält die Arbeit ohne sie.",
+  "Photos from the file: {n}.": "Fotos aus der Datei: {n}.",
+  "The photos in the file could not be kept in this browser; the rest of the work is opened.": "Die Fotos aus der Datei konnten in diesem Browser nicht gespeichert werden; die übrige Arbeit ist geöffnet."
 }
