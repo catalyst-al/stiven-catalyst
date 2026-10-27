@@ -28,6 +28,8 @@ const PATH = arg("path", "/");
 const KEEP = Number(arg("keep", 3));
 const WIDTHS = (arg("widths", "390,768,1440")).split(",").map(Number);
 const THEMES = (arg("themes", "dark,light")).split(",");
+// For a diagnosis: side b gets this file in place of its js/cosmos.js (one change at a time).
+const B_COSMOS = arg("b-cosmos");
 
 const FREEZE = () => {
   let seed = 20261027;
@@ -62,6 +64,7 @@ const capture = async (browser, base, width, theme, plan) => {
   await context.route((url) => !/^http:\/\/127\.0\.0\.1/.test(url.href), (route) => route.abort());
   await context.addInitScript(`try{localStorage.setItem("sc-theme",${JSON.stringify(theme)})}catch(e){}`);
   await context.addInitScript(FREEZE);
+  if (B_COSMOS && base === B) await context.route(/\/js\/cosmos\.js/, (route) => route.fulfill({ contentType: "text/javascript", body: fs.readFileSync(B_COSMOS, "utf8") }));
   const page = await context.newPage();
   await page.goto(base + PATH, { waitUntil: "load" });
   await page.evaluate(() => document.fonts.ready);
