@@ -23,7 +23,9 @@
   const write = (value) => {
     // Locked with a PIN (js/work-lock.js): nothing of the visitor's work is written in plain text.
     if (window.WorkLock?.locked) return;
-    try { localStorage.setItem(KEY, JSON.stringify(value)); } catch { /* storage unavailable */ }
+    // Storage full, blocked or private: the worksheet stays on the page only, and ToolKit says so once, as in the
+    // other tools.
+    try { localStorage.setItem(KEY, JSON.stringify(value)); } catch { window.ToolKit?.warnNotSaved?.(); }
   };
   const forget = () => {
     try { localStorage.removeItem(KEY); } catch { /* storage unavailable */ }
