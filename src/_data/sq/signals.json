@@ -110,8 +110,8 @@
   },
   "rules": {
     "safety": "Çdo aksident (me ose pa ditë pune të humbura) dhe çdo ndihmë e parë e 7 ditëve të fundit është sinjal dhe qëndron gjithmonë në krye.",
-    "beyond": "Jashtë kufirit: pika e fundit është më shumë se tri sigma larg vijës qendrore. Atë ditë ndryshoi diçka; kërkoje sa njerëzit ende e mbajnë mend.",
-    "run": "Seri: pika e fundit mbyll 8 ose më shumë pika radhazi në të njëjtën anë të vijës qendrore (Western Electric). Niveli ka lëvizur.",
+    "beyond": "Jashtë kufirit: pika e fundit është më shumë se tri sigma larg vijës qendrore. Atë ditë ndryshoi diçka; kërkoje sa njerëzit ende e mbajnë mend. Me më pak se 5 të pritura në ditë, numri duhet të jetë po aq i rrallë edhe sipas shpërndarjes së vet (Poisson ose binomiale), dhe një pikë në anën e mirë ka nevojë për një kufi të poshtëm mbi 0.",
+    "run": "Seri: pika e fundit mbyll 8 ose më shumë pika radhazi në të njëjtën anë të vijës qendrore (Western Electric). Niveli ka lëvizur. Me më pak se 5 të pritura në ditë, seria duhet të jetë aq e pagjasë sa 8 hedhje monedhe njësoj radhazi: me 0,2 në ditë, tetë ditë pa asnjë rast janë normale, jo sinjal.",
     "trend": "Prirje: pika e fundit mbyll 6 pika radhazi, secila më e lartë (ose secila më e ulët) se e mëparshmja (rregulli 3 i Nelson). Diçka po rrëshqet.",
     "minPoints": "Një kartë kontrolli kërkon të paktën 8 pika. Me më pak nuk ka sinjal statistikor: kufijtë do të përshkruanin disa ditë, jo procesin.",
     "charts": "Çdo seri ditore merr kartën e kontrollit që i duhet: një shkallë me sasinë e çdo dite kartën p (ditët me shumë punë marrin kufij më të ngushtë), një numër pa sasi kartën c, ankesat për dhomë të shitur kartën u, një vlerë e matur (OEE, rezultati 5S, minutat e vonesës, zënia, ADR) kartën e vlerave të veçanta (I-MR). Kufijtë dalin nga pikat e periudhës dhe gjykohet vetëm pika e fundit.",

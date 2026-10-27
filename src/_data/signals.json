@@ -110,8 +110,8 @@
   },
   "rules": {
     "safety": "Every accident (with or without lost time) and every first aid of the last 7 days is a signal, and always on top.",
-    "beyond": "Beyond a limit: the latest point lies more than three sigma from the centre line. Something changed that day; look for it while people still remember.",
-    "run": "Run: the latest point ends 8 or more points in a row on the same side of the centre line (Western Electric). The level has moved.",
+    "beyond": "Beyond a limit: the latest point lies more than three sigma from the centre line. Something changed that day; look for it while people still remember. With fewer than 5 expected per day, the count must also be that rare by its own odds (Poisson or binomial), and a point on the good side needs a lower limit above 0.",
+    "run": "Run: the latest point ends 8 or more points in a row on the same side of the centre line (Western Electric). The level has moved. With fewer than 5 expected per day, the run must be as unlikely as 8 in a row of a coin: at 0.2 a day, eight days without any are normal, not a signal.",
     "trend": "Trend: the latest point ends 6 points in a row, each higher (or each lower) than the one before (Nelson rule 3). Something is drifting.",
     "minPoints": "A control chart needs at least 8 points. With fewer, there is no statistical signal: the limits would describe a few days, not the process.",
     "charts": "Each daily series gets the control chart it needs: a rate with the volume of each day a p-chart (busy days get narrower limits), a count without a volume a c-chart, complaints per room sold a u-chart, a measured value (OEE, 5S score, minutes late, occupancy, ADR) an individuals chart (I-MR). The limits come from the points of the period, and only the latest point is judged.",

@@ -93,8 +93,50 @@
     for (let i = zs.length - 1; i >= 0 && Math.sign(zs[i]) === side; i--) n++;
     return { n, dir: side > 0 ? "up" : "down" };
   };
+  // Low counts. The 3σ line and the run of 8 assume that a point beyond 3σ is rare (0.135 % on each side) and that a
+  // point is as likely above the centre line as below it. A count of a few a day is neither: at c̄ = 0.2 four days in
+  // five are 0, below the centre line, so 8 in a row below it comes on one day in five; and 2 on a day is beyond
+  // c̄ + 3√c̄ on 1.8 % of days. Under LOW_COUNT expected per point, a count chart's rules use the count's own law
+  // instead: Poisson (c- and u-charts) or binomial (p-chart), with the chart's centre line as its mean.
+  const LOW_COUNT = 5;
+  const TAIL = 0.00135;
+  const RUN_CHANCE = 0.5 ** RUN;
+  // Each point of a count chart as { k (its count), e (the count its centre line expects), cdf (P(X ≤ x)) }; null for
+  // an individuals chart, or without StatsKit's counts.
+  const countModel = (chart, Stats = window.StatsKit) => {
+    if (!chart || !["c", "u", "p"].includes(chart.kind) || !Stats?.poissonCdf || !Stats?.binomialCdf) return null;
+    return chart.points.map((point) => {
+      if (chart.kind === "p") {
+        const n = Math.round(Number(point.n));
+        return { k: Number(point.d), e: n * chart.center, cdf: (x) => Stats.binomialCdf(x, n, chart.center) };
+      }
+      const e = chart.kind === "u" ? chart.center * Number(point.n) : chart.center;
+      return { k: Number(point.c), e, cdf: (x) => Stats.poissonCdf(x, e) };
+    });
+  };
+  // A point beyond a limit that is rare by the count's own law too: on the high side P(X ≥ k) at most TAIL. A point on
+  // the low side needs a lower limit above 0: with none, no count is low enough to be beyond it.
+  const rareBeyond = (chart, model, i, dir) => {
+    if (dir === "down" && chart.kind !== "imr" && !(chart.points[i].lcl > 0)) return false;
+    const m = model?.[i];
+    if (!m || m.e >= LOW_COUNT) return true;
+    return dir === "up" ? 1 - m.cdf(m.k - 1) <= TAIL : m.cdf(m.k) <= TAIL;
+  };
+  // A run ending at the latest point that is as unlikely as 8 in a row on one side of a fair coin (0.5⁸): the chance
+  // of each point on its side of the centre line by the count's law (0.5 from LOW_COUNT up), multiplied over the run.
+  // At c̄ = 0.2 a day below the centre line has a chance of 0.82, so 8 zero days are no signal; at c̄ = 3.4, 10 are.
+  const rareRun = (model, last, run) => {
+    if (!model) return true;
+    let chance = 1;
+    for (let i = last; i > last - run.n; i--) {
+      const m = model[i];
+      chance *= m.e >= LOW_COUNT ? 0.5 : run.dir === "up" ? 1 - m.cdf(Math.floor(m.e)) : m.cdf(Math.ceil(m.e) - 1);
+    }
+    return chance <= RUN_CHANCE;
+  };
   // The rules on the latest point of a chart. beyond: StatsKit's rule 1 on the standardized point (more than 3σ from
-  // the centre, so a p-chart's own limits of the day count). run: 8 or more in a row on one side, ending with it. trend:
+  // the centre, so a p-chart's own limits of the day count), and for a low count rare by its own law (rareBeyond).
+  // run: 8 or more in a row on one side, ending with it, and for a low count as rare as 8 would be (rareRun). trend:
   // StatsKit's Nelson rule 3 (6 in a row, each higher or each lower than the one before) on the plotted values, ending
   // with it. Each rule says its direction; `better` ("up" or "down") says which direction is good news.
   const rulesAt = (chart, better, Stats = window.StatsKit) => {
@@ -102,9 +144,11 @@
     const last = chart.points.length - 1;
     const out = [];
     const zs = chart.points.map((p) => p.z);
-    if ((chart.signals[last] || []).includes(1)) out.push({ rule: "beyond", dir: zs[last] > 0 ? "up" : "down", points: 1 });
+    const model = countModel(chart, Stats);
+    const beyond = zs[last] > 0 ? "up" : "down";
+    if ((chart.signals[last] || []).includes(1) && rareBeyond(chart, model, last, beyond)) out.push({ rule: "beyond", dir: beyond, points: 1 });
     const run = runLength(zs);
-    if (run.n >= RUN) out.push({ rule: "run", dir: run.dir, points: run.n });
+    if (run.n >= RUN && rareRun(model, last, run)) out.push({ rule: "run", dir: run.dir, points: run.n });
     const values = chart.points.map((p) => p.y);
     const trend = Stats.nelson(values, chart.center, chart.sigma);
     if (last >= TREND - 1 && (trend[last] || []).includes(3)) {

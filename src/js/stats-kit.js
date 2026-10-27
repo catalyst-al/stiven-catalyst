@@ -1,7 +1,7 @@
 // The statistics behind Process Lab (window.StatsKit): plain functions on arrays of numbers, no page and no library,
 // so a test can call each one with a textbook value. Distributions: the normal (West's algorithm, 1e-14), its inverse
 // (Acklam with one Newton step), Student's t through the regularized incomplete beta (continued fraction), chi-square
-// through the regularized gamma. Tests: Anderson–Darling for normality, two proportions, Welch's t, sample sizes,
+// through the regularized gamma, and the Poisson and binomial counts through the same two. Tests: Anderson–Darling for normality, two proportions, Welch's t, sample sizes,
 // a straight-line fit with its t test, chi-square of a table. Charts: the I-MR limits, the subgroup constants (A2 … D4),
 // Xbar-R, Xbar-S, c, u and np charts with phases, and the eight Nelson rules. Measurement systems: Fleiss' and Cohen's
 // kappa, attribute agreement, Gage R&R by ANOVA. Everything that cannot be computed is null, never NaN, so a page can
@@ -184,6 +184,22 @@ window.StatsKit = (() => {
     return (low + high) / 2;
   };
   const chi2Cdf = (x, k) => (Number.isFinite(x) && k > 0 ? (x <= 0 ? 0 : gammaInc(k / 2, x / 2)) : null);
+  // Counts. P(X ≤ k) for a Poisson count of mean `mean` (1 − P(k + 1, mean), the regularized gamma), and for a binomial
+  // count of n trials with chance p (I₁₋ₚ(n − k, k + 1), the regularized beta). k is rounded down; null when the
+  // arguments make no sense.
+  const poissonCdf = (k, mean) => {
+    if (!Number.isFinite(k) || !(mean >= 0)) return null;
+    const x = Math.floor(k);
+    if (x < 0) return 0;
+    return mean === 0 ? 1 : 1 - gammaInc(x + 1, mean);
+  };
+  const binomialCdf = (k, n, p) => {
+    if (!Number.isFinite(k) || !Number.isInteger(n) || n < 0 || !(p >= 0 && p <= 1)) return null;
+    const x = Math.floor(k);
+    if (x < 0) return 0;
+    if (x >= n || p === 0) return 1;
+    return p === 1 ? 0 : betaInc(n - x, x + 1, 1 - p);
+  };
 
   // Anderson–Darling test of normality, mean and sd from the sample (Stephens' correction and D'Agostino's p). Eight
   // values are the least that say anything; below that the result is given but `enough` is false.
@@ -730,7 +746,7 @@ window.StatsKit = (() => {
   const gageBand = (share) => (!Number.isFinite(share) ? "none" : share < 0.1 ? "good" : share <= 0.3 ? "depends" : "bad");
 
   return {
-    mean, sd, median, quantile, normalCdf, normalPdf, normInv, lgamma, betaInc, gammaInc, tCdf, tInv, chi2Cdf, andersonDarling, imr, nelson, nelsonEvents, capability, twoProportion, welch, sampleSizeProportion, sampleSizeMean, regression,
+    mean, sd, median, quantile, normalCdf, normalPdf, normInv, lgamma, betaInc, gammaInc, tCdf, tInv, chi2Cdf, poissonCdf, binomialCdf, andersonDarling, imr, nelson, nelsonEvents, capability, twoProportion, welch, sampleSizeProportion, sampleSizeMean, regression,
     spcConstants, spreadFor, controlChart, fCdf, betaInv, binomialCi, chiSquare, linearFit, fleissKappa, cohenKappa, attributeAgreement, kappaBand, gageRR, gageBand,
   };
 })();
