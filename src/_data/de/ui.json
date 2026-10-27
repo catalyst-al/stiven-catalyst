@@ -3702,7 +3702,7 @@
   "Saving the photo…": "Foto wird gespeichert…",
   "The photo could not be removed.": "Das Foto konnte nicht entfernt werden.",
   "This browser cannot keep photos.": "Dieser Browser kann keine Fotos speichern.",
-  "Photos stay on this device and are not in the saved file.": "Fotos bleiben auf diesem Gerät und sind nicht in der gespeicherten Datei.",
+  "Photos stay on this device. The file with all your work takes them along, up to 20 MB.": "Fotos bleiben auf diesem Gerät. Die Datei mit Ihrer ganzen Arbeit nimmt sie mit, bis 20 MB.",
   "Taken {date}": "Aufgenommen am {date}",
   "Start a new audit? Its {n} photos are removed from this device.": "Ein neues Audit beginnen? Seine {n} Fotos werden von diesem Gerät gelöscht.",
   "nothing in the period": "nichts im Zeitraum",
