@@ -440,6 +440,8 @@
   // The sheet: the customary 8D layout ---------------------------------------------------------------------------------
   const table = (headers, rows, className = "") => {
     const wrap = el("div", "dl-table-wrap ed-table-wrap");
+    // On a phone the table scrolls sideways: it takes the focus, so the keyboard can scroll it too.
+    wrap.tabIndex = 0;
     const t = el("table", `dl-table ed-table ${className}`.trim());
     const thead = el("thead");
     const hr = el("tr");
