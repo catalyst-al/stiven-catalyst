@@ -4,7 +4,7 @@
 process.env.TZ = 'Europe/Berlin';
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { execFileSync } = require('node:child_process');
+const fs = require('node:fs');
 const { openTool, keep, click, submit, settle } = require('./helpers/tool-page.cjs');
 
 const NOW = '2026-10-25T11:00:00Z';
@@ -46,8 +46,9 @@ test('the Action Tracker example is replaced, not joined, by an action another t
 });
 
 test('a list mixed by the old code (example ids remembered, an own action added) is told apart again', async () => {
-  const oldTracker = execFileSync('git', ['show', 'checkpoint/pre-phase1-605d0df:src/js/action-tracker.js'], { encoding: 'utf8' });
-  const oldStore = execFileSync('git', ['show', 'checkpoint/pre-phase1-605d0df:src/js/actions-store.js'], { encoding: 'utf8' });
+  // The code before phase 1 (tests/fixtures/pre-phase1, frozen copies of 605d0df: a shallow clone has no history).
+  const oldTracker = fs.readFileSync('tests/fixtures/pre-phase1/action-tracker.js', 'utf8');
+  const oldStore = fs.readFileSync('tests/fixtures/pre-phase1/actions-store.js', 'utf8');
   const old = openTool('action-tracker', { now: NOW, code: { 'action-tracker': oldTracker, 'actions-store': oldStore } });
   old.ActionsStore.add({ title: 'Fix the dock door sensor', source: 'manual', owner: 'Ana' });
   const storage = keep(old);

@@ -7,7 +7,6 @@ process.env.TZ = 'Europe/Berlin';
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const { execFileSync } = require('node:child_process');
 const { openTool, keep, type, click, settle } = require('./helpers/tool-page.cjs');
 
 const near = (a, b, eps = 1e-9) => assert.ok(Math.abs(a - b) < eps, `${a} ≈ ${b}`);
@@ -66,7 +65,8 @@ for (const lang of ['en', 'de', 'sq']) {
 }
 
 // A study saved by the Time Study before the rating existed: its own old script, at the checkpoint before Phase 1.
-const OLD_STUDY = execFileSync('git', ['show', 'checkpoint/pre-phase1-605d0df:src/js/time-study.js'], { encoding: 'utf8' });
+// The Time Study before phase 1 (tests/fixtures/pre-phase1, a frozen copy of 605d0df: a shallow clone has no history).
+const OLD_STUDY = fs.readFileSync('tests/fixtures/pre-phase1/time-study.js', 'utf8');
 const oldSaved = async () => {
   const old = openTool('time-study', { code: { 'time-study': OLD_STUDY } });
   type(old, old.document.querySelector('[data-setting][name="process"]'), 'Packing');
