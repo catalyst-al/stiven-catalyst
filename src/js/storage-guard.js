@@ -18,7 +18,8 @@
   // Most browsers give a site about 5 MB of localStorage (counted in characters); past 4 MB a tool may soon fail to save.
   const MB = 1024 * 1024;
   const NEARLY_FULL = 4 * MB;
-  const REASONS = ["daily", "before-open", "before-restore", "manual", "before-sync", "recent"];
+  // "before-unlock" is made by js/work-lock.js, not here: work written while the tools were locked.
+  const REASONS = ["daily", "before-open", "before-restore", "manual", "before-sync", "recent", "before-unlock"];
 
   // ---- Pure logic (tests/storage-guard.test.cjs) ----
   const pad = (n) => String(n).padStart(2, "0");

@@ -187,3 +187,45 @@ test('the texts of the longer PIN are translated', () => {
     assert.ok(!('Choose a PIN of at least 4 characters. It is kept nowhere: without it the work cannot be read, by anyone.' in ui), `${lang}: the old text is gone`);
   }
 });
+
+// A rollback while the tools are locked (the author's decision of 27 October 2026, rollback proof risk 2): the live
+// site has no lock, so its tools open empty and what the visitor types there is saved in plain text under the same
+// keys. At the unlock, back on this version, that work is kept as a restore point before the locked work returns:
+// nothing is overwritten without a way back. The navigation stamps (sc-seen-*) are not work and do not count.
+test('rollback while locked: what a page without the lock wrote is kept as a restore point at the unlock, and comes back from it', async () => {
+  const idb = fakeIndexedDB();
+  const lockedRow = '{"rows":[{"units":3,"note":"before the lock"}]}';
+  const typedRow = '{"rows":[{"units":5,"note":"typed during the rollback"}]}';
+  const w = page({ idb, storage: { 'sc-damage-control': lockedRow } });
+  assert.equal(await w.WorkLock.lock('246810'), 'locked');
+  // The live site, without a lock: it writes its rows and a navigation stamp, and leaves the lock's flag alone.
+  const during = { ...kept(w), 'sc-damage-control': typedRow, 'sc-pareto': '{"rows":[{"cause":"late"}]}', 'sc-seen-writing': 'x1' };
+  const back = page({ idb, storage: during, body: lockSection() });
+  assert.equal(back.WorkLock.locked, true);
+  assert.equal(await back.WorkLock.unlock('246810'), 'unlocked');
+  assert.equal(back.localStorage.getItem('sc-damage-control'), lockedRow, 'the locked work is back');
+  const points = idb.rowsOf('sc-restore', 'points').filter((p) => p.reason === 'before-unlock');
+  assert.equal(points.length, 1, 'one restore point of what was written while locked');
+  assert.deepEqual(plain(points[0].items), { 'sc-damage-control': typedRow, 'sc-pareto': '{"rows":[{"cause":"late"}]}' }, 'the rollback\'s work, without the navigation stamp');
+  assert.equal(back.sessionStorage.getItem('sc-lock-kept'), '1', 'the page says so after the reload');
+  // After the reload: the note, and the rollback's work restored from its point.
+  const after = page({ idb, storage: kept(back), body: lockSection(), scripts: [] });
+  after.sessionStorage.setItem('sc-lock-kept', '1');
+  for (const file of ['work-lock', 'media-store', 'storage-guard', 'work-backup']) after.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+  await new Promise((r) => setTimeout(r, 20));
+  assert.match(after.document.querySelector('[data-wl-status]').textContent, /restore point/);
+  await after.StorageGuard.ready;
+  assert.equal(await after.StorageGuard.restorePoint(points[0].id), 'restored');
+  assert.equal(after.localStorage.getItem('sc-damage-control'), typedRow, 'the rollback\'s work comes back from the point');
+  assert.ok(idb.rowsOf('sc-restore', 'points').some((p) => p.reason === 'before-restore' && p.items['sc-damage-control'] === lockedRow), 'and the locked work is kept in turn');
+});
+
+test('an unlock with nothing written while locked makes no restore point (a navigation stamp is not work)', async () => {
+  const idb = fakeIndexedDB();
+  const w = page({ idb, storage: { 'sc-damage-control': '{"rows":[]}' } });
+  assert.equal(await w.WorkLock.lock('246810'), 'locked');
+  const back = page({ idb, storage: { ...kept(w), 'sc-seen-writing': 'x2' } });
+  assert.equal(await back.WorkLock.unlock('246810'), 'unlocked');
+  assert.deepEqual(idb.rowsOf('sc-restore', 'points').filter((p) => p.reason === 'before-unlock'), []);
+  assert.equal(back.sessionStorage.getItem('sc-lock-kept'), null);
+});

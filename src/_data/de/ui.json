@@ -4403,6 +4403,8 @@
   "Daily": "Täglich",
   "Before a file was opened": "Vor dem Öffnen einer Datei",
   "Before a restore": "Vor einer Wiederherstellung",
+  "Before the unlock": "Vor dem Entsperren",
+  "Work written while the tools were locked, on a page without the lock, is kept as a restore point (Before the unlock) under All your work in one file.": "Arbeit, die geschrieben wurde, während die Werkzeuge gesperrt waren (auf einer Seite ohne Sperre), ist als Wiederherstellungspunkt (Vor dem Entsperren) unter „Ihre ganze Arbeit in einer Datei“ aufbewahrt.",
   "Made by hand": "Von Hand erstellt",
   "Restore point made: {tools}.": "Wiederherstellungspunkt erstellt: {tools}.",
   "The browser did not keep the restore point, so nothing was changed. Save a file instead.": "Der Browser hat den Wiederherstellungspunkt nicht gespeichert, daher wurde nichts geändert. Sichern Sie stattdessen eine Datei.",

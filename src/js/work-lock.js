@@ -27,6 +27,8 @@
   const SESSION_KEY = "sc-lock-key";
   // Set for the tab after a device locked with a PIN shorter than MIN_PIN was opened: the next lock needs a new PIN.
   const RENEW_KEY = "sc-lock-renew";
+  // Set for the tab after an unlock kept, as a restore point, work written while the tools were locked.
+  const KEPT_KEY = "sc-lock-kept";
   const DB = "sc-lock";
   const STORE = "blob";
   const RECORD = "work";
@@ -236,6 +238,17 @@
     try { key = await deriveKey(pin, record.salt); } catch { return "failed"; }
     const payload = await unseal(key, record);
     if (!payload) return "wrong";
+    // Work written while the tools were locked can only come from a page without the lock: the site as it was before,
+    // after a rollback (its tools open empty and save under the same keys). It is kept as a restore point before the
+    // locked work comes back, so nothing is overwritten without a way back; if the point cannot be kept, nothing is
+    // overwritten. The navigation stamps (sc-seen-*) are not work.
+    const written = Object.fromEntries(Object.entries(gather(storage)).filter(([k]) => !k.startsWith("sc-seen-")));
+    const kept = Object.entries(written).some(([k, v]) => payload.items[k] !== v);
+    if (kept) {
+      const created = new Date().toISOString();
+      const point = { id: `${created} before-unlock`, created, reason: "before-unlock", items: written, bytes: Object.entries(written).reduce((sum, [k, v]) => sum + k.length + v.length, 0) };
+      try { await transact(RESTORE_DB, RESTORE_STORE, "readwrite", (store) => done(store.put(point))); } catch { return "failed"; }
+    }
     try {
       Object.entries(payload.items).forEach(([k, v]) => storage.setItem(k, v));
     } catch {
@@ -245,6 +258,7 @@
     if (payload.media.length) await transact(MEDIA_DB, MEDIA_STORE, "readwrite", async (store) => { for (const p of payload.media) await done(store.put(p)); }).catch(() => null);
     await transact(DB, STORE, "readwrite", (store) => done(store.delete(RECORD))).catch(() => null);
     storage.removeItem(FLAG);
+    if (kept) { try { session?.setItem(KEPT_KEY, "1"); } catch { /* the restore point is there all the same */ } }
     if (goodPin(pin)) {
       await rememberKey(key, record.salt);
     } else {
@@ -317,6 +331,10 @@
     let renew = false;
     try { renew = session?.getItem(RENEW_KEY) === "1"; } catch { /* no note */ }
     if (renew) { setup.hidden = false; say(fill(text.renew, { n: MIN_PIN })); }
+    // After an unlock that kept work written while the tools were locked: where it is.
+    let keptNote = false;
+    try { keptNote = session?.getItem(KEPT_KEY) === "1"; session?.removeItem(KEPT_KEY); } catch { /* no note */ }
+    if (keptNote) say(renew ? `${fill(text.renew, { n: MIN_PIN })} ${text.kept}` : text.kept);
     const showIdle = () => {
       const minutes = idleMinutes(storage.getItem(IDLE_KEY));
       idleSelect.value = String(minutes);

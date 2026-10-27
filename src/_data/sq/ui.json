@@ -4403,6 +4403,8 @@
   "Daily": "Ditore",
   "Before a file was opened": "Para hapjes së një skedari",
   "Before a restore": "Para një rikthimi",
+  "Before the unlock": "Para hapjes",
+  "Work written while the tools were locked, on a page without the lock, is kept as a restore point (Before the unlock) under All your work in one file.": "Puna e shkruar ndërsa mjetet ishin të kyçura, në një faqe pa kyçje, ruhet si pikë rikthimi (Para hapjes) te „Gjithë puna jote në një skedar“.",
   "Made by hand": "E krijuar me dorë",
   "Restore point made: {tools}.": "U krijua pika e rikthimit: {tools}.",
   "The browser did not keep the restore point, so nothing was changed. Save a file instead.": "Shfletuesi nuk e ruajti pikën e rikthimit, prandaj nuk u ndryshua asgjë. Ruaj një skedar në vend të saj.",
