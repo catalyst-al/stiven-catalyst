@@ -68,8 +68,11 @@
 {%- set socialImage = ogImage or ((card | assetUrl) if card else "/social.png") -%}
 {#- The two inline scripts, kept in variables so the Content Security Policy can name their hashes. The first also
     turns floor mode on before the first paint on a tool page (js/floor-mode.js keeps the choice), so the page never
-    jumps from small to large. -#}
-{%- set themeScript -%}document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark";if(location.pathname.indexOf("/tools/")>-1&&localStorage.getItem("sc-floor-mode-ui")==="on")document.documentElement.dataset.floor="on"}catch(e){document.documentElement.dataset.theme="dark"}{%- endset -%}
+    jumps from small to large. It also keeps a page transition the browser gives up from showing as an error: a key
+    pressed while the page is still arriving makes Chrome show it at once, and the transition it had prepared (which
+    no script was handed yet) is rejected with "Page already revealed" or a similar InvalidStateError; the page simply
+    appears without the movement (tests/browser/transitions.spec.mjs). -#}
+{%- set themeScript -%}document.documentElement.classList.add("js");addEventListener("unhandledrejection",function(e){var r=e.reason;if(r&&/^(InvalidStateError|AbortError|TimeoutError)$/.test(r.name)&&/transition/i.test(r.message))e.preventDefault()});try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark";if(location.pathname.indexOf("/tools/")>-1&&localStorage.getItem("sc-floor-mode-ui")==="on")document.documentElement.dataset.floor="on"}catch(e){document.documentElement.dataset.theme="dark"}{%- endset -%}
 {%- set toolPage = "/tools/" in (page.url or "") -%}
 {%- set coachingLoader -%}{% include "partials/coaching-loader.njk" %}{%- endset -%}
 {#- Links on this site are fetched while the pointer rests on them (or on touch), so the next page is usually there
