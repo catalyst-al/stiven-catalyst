@@ -1,7 +1,7 @@
 # Team sync as it runs in production on 27 October 2026
 
 The two files the sync-compat test (`tests/sync-compat.test.cjs`) runs the new code against. Both are copied
-unchanged from `main` at 1644e434:
+unchanged from `main` at 1644e434 (still identical at f34b1c4b, the head of `main` on 27 October 2026):
 
 - `worker.js` = `workers/sync/worker.js` on `main`, the Worker deployed on Cloudflare as `stiven-catalyst-sync`
   (version cc107fc4, 24 October 2026). The deployed script was read back through the Cloudflare API on 27 October
