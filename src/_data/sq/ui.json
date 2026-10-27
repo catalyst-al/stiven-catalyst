@@ -7614,5 +7614,16 @@
   "Download as JSON Resume (.json)": "Shkarko si JSON Resume (.json)",
   "JSON Resume file saved: the open CV format that other CV tools read, and this one opens again.": "Skedari JSON Resume u ruajt: formati i hapur i CV-së që lexojnë mjetet e tjera të CV-ve, dhe që ky e hap përsëri.",
   "This file is not a JSON Resume (jsonresume.org). Nothing was changed.": "Ky skedar nuk është JSON Resume (jsonresume.org). Asgjë nuk ndryshoi.",
-  "Use a PDF, a Word file (.docx), a text file or a JSON Resume file.": "Përdor një PDF, një Word (.docx), një skedar teksti ose një skedar JSON Resume."
+  "Use a PDF, a Word file (.docx), a text file or a JSON Resume file.": "Përdor një PDF, një Word (.docx), një skedar teksti ose një skedar JSON Resume.",
+  "Leading hypothesis": "Hipoteza kryesore",
+  "Leading hypotheses": "Hipotezat kryesore",
+  "Your answers lean towards {cause} ({score}/{max}), but not by enough to name it: one notch on one statement would change the picture.": "Përgjigjet e tua anojnë nga {cause} ({score}/{max}), por jo aq sa ta emërtojmë: një shkallë më shumë ose më pak te një pohim do ta ndryshonte pamjen.",
+  "{cause} scores {score}/{max}, {gap} points ahead of the next cause ({next}, {nextScore}/{max}).": "{cause} merr {score}/{max}, {gap} pikë përpara shkakut të radhës ({next}, {nextScore}/{max}).",
+  "{causes} are within one point of each other: your answers do not separate them.": "{causes} janë brenda një pike nga njëri-tjetri: përgjigjet e tua nuk i ndajnë.",
+  "Together they are {gap} points ahead of the next cause ({next}, {nextScore}/{max}).": "Së bashku janë {gap} pikë përpara shkakut të radhës ({next}, {nextScore}/{max}).",
+  "These are your own ratings, two statements per cause. They show where to look first, not the cause itself. Before you act, check it: watch the work for a shift, ask two or three people who do it to rate the same statements, and look at the data behind the KPI.": "Këto janë vlerësimet e tua, dy pohime për çdo shkak. Ato tregojnë ku të shohësh së pari, jo vetë shkakun. Para se të veprosh, verifikoje: shiko punën gjatë një turni, kërkoju dy a tre vetëve që e bëjnë atë punë të vlerësojnë të njëjtat pohime dhe shiko të dhënat pas KPI-së.",
+  "How sure is this?": "Sa i sigurt është ky përfundim?",
+  "{kpi} is red; the self-assessment points to {cause}, a hypothesis to check.": "{kpi} është në të kuqe; vetëvlerësimi tregon nga {cause}, një hipotezë për t'u verifikuar.",
+  "Check on the floor: {cause} behind {kpi}": "Verifiko në terren: {cause} pas {kpi}",
+  "The result shows which cause your answers point to most, as a hypothesis to check on the floor, with three first moves and one question to ask there.": "Rezultati tregon nga cili shkak anojnë më shumë përgjigjet e tua, si hipotezë për ta verifikuar në terren, me tre hapa të parë dhe një pyetje për të bërë atje."
 }
