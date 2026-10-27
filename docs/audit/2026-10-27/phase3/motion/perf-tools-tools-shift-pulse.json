@@ -1,0 +1,255 @@
+{
+ "date": "2026-10-27T12:46:52.220Z",
+ "path": "/tools/shift-pulse/",
+ "runs": 5,
+ "a": "http://127.0.0.1:8321",
+ "b": "http://127.0.0.1:8322",
+ "tap": "h1",
+ "windowMs": 5000,
+ "init": null,
+ "machine": {
+  "cpus": 4,
+  "model": "Intel(R) Xeon(R) Processor @ 2.30GHz",
+  "load": [
+   7.37,
+   13.31,
+   11.47
+  ]
+ },
+ "summary": {
+  "phone4x": {
+   "a": {
+    "busy": 1.607,
+    "fps": 0,
+    "p95": null,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 32,
+    "tap": 80
+   },
+   "b": {
+    "busy": 2.534,
+    "fps": 0,
+    "p95": null,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 61,
+    "tap": 128
+   }
+  },
+  "desktop": {
+   "a": {
+    "busy": 1.169,
+    "fps": 0,
+    "p95": null,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 1,
+    "tap": 56
+   },
+   "b": {
+    "busy": 1.223,
+    "fps": 0,
+    "p95": null,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 2,
+    "tap": 64
+   }
+  }
+ },
+ "raw": {
+  "phone4x": {
+   "a": [
+    {
+     "busy": 1.607,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 45,
+     "tap": 88
+    },
+    {
+     "busy": 2.614,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 34,
+     "tap": 112
+    },
+    {
+     "busy": 3.007,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 28,
+     "tap": 80
+    },
+    {
+     "busy": 1.379,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 32,
+     "tap": 80
+    },
+    {
+     "busy": 1.35,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 31,
+     "tap": 80
+    }
+   ],
+   "b": [
+    {
+     "busy": 2.517,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 78,
+     "tap": 144
+    },
+    {
+     "busy": 2.586,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 66,
+     "tap": 128
+    },
+    {
+     "busy": 2.967,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 42,
+     "tap": 104
+    },
+    {
+     "busy": 2.534,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 61,
+     "tap": 184
+    },
+    {
+     "busy": 1.209,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 30,
+     "tap": 80
+    }
+   ]
+  },
+  "desktop": {
+   "a": [
+    {
+     "busy": 1.169,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 1,
+     "tap": 56
+    },
+    {
+     "busy": 1.379,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 56
+    },
+    {
+     "busy": 1.998,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 72
+    },
+    {
+     "busy": 0.299,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 1,
+     "tap": 48
+    },
+    {
+     "busy": 0.312,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 1,
+     "tap": 64
+    }
+   ],
+   "b": [
+    {
+     "busy": 1.223,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 18,
+     "tap": 80
+    },
+    {
+     "busy": 1.445,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 72
+    },
+    {
+     "busy": 1.365,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 4,
+     "tap": 64
+    },
+    {
+     "busy": 0.264,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 48
+    },
+    {
+     "busy": 0.267,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 1,
+     "tap": 48
+    }
+   ]
+  }
+ }
+}

@@ -59,7 +59,7 @@
 :root[data-motion="paused"] .in-family .chip[aria-pressed="true"]::before,
 :root[data-motion="paused"] .in-family .cv-theme:has(input:checked)::before,
 :root[data-motion="paused"] .family-badge > span,
-:root[data-motion="paused"] .family-badge > span::after,
+:root[data-motion="paused"] .family-badge::before,
 :root[data-motion="paused"] .share-orbit-ring,
 :root[data-motion="paused"] .share-orbit-mini,
 :root[data-motion="paused"] .new-badge::before,

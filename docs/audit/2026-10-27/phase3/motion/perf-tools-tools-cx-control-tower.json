@@ -1,0 +1,255 @@
+{
+ "date": "2026-10-27T12:43:12.046Z",
+ "path": "/tools/cx-control-tower/",
+ "runs": 5,
+ "a": "http://127.0.0.1:8321",
+ "b": "http://127.0.0.1:8322",
+ "tap": "h1",
+ "windowMs": 5000,
+ "init": null,
+ "machine": {
+  "cpus": 4,
+  "model": "Intel(R) Xeon(R) Processor @ 2.30GHz",
+  "load": [
+   17.57,
+   14.61,
+   11.08
+  ]
+ },
+ "summary": {
+  "phone4x": {
+   "a": {
+    "busy": 2.565,
+    "fps": 0,
+    "p95": null,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 40,
+    "tap": 88
+   },
+   "b": {
+    "busy": 0.122,
+    "fps": 0,
+    "p95": null,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 38,
+    "tap": 64
+   }
+  },
+  "desktop": {
+   "a": {
+    "busy": 0.884,
+    "fps": 0,
+    "p95": null,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 3,
+    "tap": 80
+   },
+   "b": {
+    "busy": 0.042,
+    "fps": 0,
+    "p95": null,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 2,
+    "tap": 8
+   }
+  }
+ },
+ "raw": {
+  "phone4x": {
+   "a": [
+    {
+     "busy": 2.803,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 71,
+     "tap": 128
+    },
+    {
+     "busy": 1.621,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 30,
+     "tap": 80
+    },
+    {
+     "busy": 2.623,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 40,
+     "tap": 80
+    },
+    {
+     "busy": 2.565,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 37,
+     "tap": 136
+    },
+    {
+     "busy": 2.378,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 48,
+     "tap": 88
+    }
+   ],
+   "b": [
+    {
+     "busy": 0.144,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 38,
+     "tap": 64
+    },
+    {
+     "busy": 0.105,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 15,
+     "tap": 40
+    },
+    {
+     "busy": 0.135,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 68,
+     "tap": 104
+    },
+    {
+     "busy": 0.11,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 20,
+     "tap": 32
+    },
+    {
+     "busy": 0.122,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 115,
+     "tap": 152
+    }
+   ]
+  },
+  "desktop": {
+   "a": [
+    {
+     "busy": 0.821,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 80
+    },
+    {
+     "busy": 0.868,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 3,
+     "tap": 64
+    },
+    {
+     "busy": 0.884,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 4,
+     "tap": 80
+    },
+    {
+     "busy": 1.423,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 248
+    },
+    {
+     "busy": 1.071,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 14,
+     "tap": 104
+    }
+   ],
+   "b": [
+    {
+     "busy": 0.068,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 64
+    },
+    {
+     "busy": 0.03,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 8
+    },
+    {
+     "busy": 0.038,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 80
+    },
+    {
+     "busy": 0.042,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 3,
+     "tap": 8
+    },
+    {
+     "busy": 0.101,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 8,
+     "tap": 8
+    }
+   ]
+  }
+ }
+}

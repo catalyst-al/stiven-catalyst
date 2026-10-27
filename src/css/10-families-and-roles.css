@@ -564,19 +564,27 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 }
 @keyframes badge-breathe { 50% { scale: 1.15; } }
 .family-badge > span { position: relative; }
-.family-badge > span::after {
+/* The glow of the beating dot lies over the dot (left 10 px in the padding, centred), on the badge itself and not inside
+   the dot: an animation inside an element that is animated too cannot run on the compositor, and kept the main thread
+   drawing every frame on every tool page (audit PM-8). It swells with the dot, so it looks as before. */
+.family-badge { position: relative; }
+.family-badge::before {
   content: "";
   position: absolute;
-  inset: 0;
+  left: 10px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin-top: -4.5px;
   border-radius: 50%;
   box-shadow: 0 0 16px 2px var(--family);
   opacity: 0;
   pointer-events: none;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .family-badge > span::after { animation: badge-glow 3.2s ease-in-out infinite; }
+  .family-badge::before { animation: badge-glow 3.2s ease-in-out infinite; }
 }
-@keyframes badge-glow { 50% { opacity: 1; } }
+@keyframes badge-glow { 50% { opacity: 1; scale: 1.15; } }
 
 /* A role page (/roles/x/): the planet's sky over the title, then its rings: use, routine, learn, grow. */
 .role-hero .eyebrow { color: var(--sky-ink); }
