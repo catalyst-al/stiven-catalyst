@@ -72,7 +72,9 @@
     if (file.media !== undefined && !Array.isArray(file.media)) return null;
     // A photo that is not as this site writes it is left out; the work around it still opens.
     const media = (file.media || []).slice(0, MAX_PHOTOS).map(photoIn).filter(Boolean);
-    const entries = Object.entries(items);
+    // A setting of the page (the theme, the paused motion, the lock's flag) is left out rather than refused: a file
+    // saved by an older version of the site, which did not know to leave out a newer setting, still opens.
+    const entries = Object.entries(items).filter(([key]) => !SKIP.has(key));
     if ((!entries.length && !media.length) || entries.some(([key, value]) => !isWork(key) || typeof value !== "string") || !entries.every(sound)) return null;
     return { exported: typeof file.exported === "string" ? file.exported : "", items: Object.fromEntries(entries), media };
   };

@@ -89,3 +89,23 @@ test('handover numbers the logs fill exist in every language, in the same places
     assert.deepEqual(JSON.parse(fs.readFileSync(`src/_data/${lang}/delayAnalyzer.json`, 'utf8')).shifts, other.shifts);
   }
 });
+
+// Files saved by the site as it is live today (origin/main), in a browser that had used this version first: they
+// carry this version's page settings ("sc-motion"; "sc-locked" when saved while the tools were locked), which the
+// old site does not know to leave out. They open, without those settings, instead of being refused whole (rollback
+// proof of 27 October 2026, docs/audit/2026-10-27/phase3/rollback.md; the files are the ones it saved).
+test('a file saved by the old site opens; the page settings in it are left out, not a reason to refuse it', () => {
+  const { WorkBackup } = load();
+  for (const name of ['work-saved-by-old.json', 'work-saved-by-old-while-locked.json']) {
+    const text = fs.readFileSync(`tests/fixtures/old-site-backups/${name}`, 'utf8');
+    const saved = JSON.parse(text).items;
+    const settings = Object.keys(saved).filter((key) => !WorkBackup.isWork(key));
+    assert.ok(settings.length > 0, `${name} holds a page setting`);
+    const opened = WorkBackup.readBackup(text);
+    assert.ok(opened, `${name} opens`);
+    assert.deepEqual(Object.keys(plain(opened.items)).sort(), Object.keys(saved).filter((key) => WorkBackup.isWork(key)).sort(), name);
+    for (const key of settings) assert.ok(!(key in opened.items), `${name}: ${key} is not restored`);
+  }
+  // A key that is not this site's still makes the file foreign.
+  assert.equal(WorkBackup.readBackup(JSON.stringify({ format: 'stiven-catalyst-work', version: 1, items: { 'sc-pareto': '{}', 'evil-key': '1' } })), null);
+});

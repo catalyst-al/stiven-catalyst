@@ -145,7 +145,7 @@ The six failed checks of `results.json`, and the three changes found by reading 
 
 ## Proposals (not applied)
 
-**P1, the file refused (risk 1). Small, recommended before the merge.** In `readBackup`
+**P1, the file refused (risk 1). Applied by the coordinator on 27 October 2026** (the commit after this review; test: tests/work-backup.test.cjs with the two files below as fixtures in tests/fixtures/old-site-backups/). As proposed: In `readBackup`
 (`src/js/work-backup.js:75`), leave the page's settings out instead of refusing the file:
 `const entries = Object.entries(items).filter(([key]) => !SKIP.has(key));` (`SKIP` already lists `sc-motion`,
 `sc-locked`, `sc-lock-idle`, `sc-theme`, the team keys). A key that is not `sc-` at all still refuses the file.

@@ -95,9 +95,9 @@ In a current Chrome, EN, DE and SQ:
   site and neither lost nor doubled when the new one returns: the Action Tracker (with a hand-off), Damage Control,
   the 5S Audit with its photo, Room Inspection, Coaching with a labelled copy (`copyOf` survives the old site), CV
   Builder, ATS CV, the Daily Board's profile, the theme; a file saved by the new site opens on the old one (its
-  photos stay in the file). Three exceptions, with proposals in the review:
-  - a file saved by the **old** site after the visitor used the new one holds `sc-motion` and is refused whole by
-    the new site;
+  photos stay in the file). A file saved by the **old** site after the visitor used the new one holds `sc-motion`
+  and was refused whole by the new site: fixed before the merge (the settings in it are left out; test with the files
+  the old site saved, tests/work-backup.test.cjs). Two exceptions remain, with proposals in the review:
   - the old site has **no work lock** (origin/main has no `work-lock.js`): a browser locked at the moment of the
     revert shows its tools empty, and what is typed there is overwritten by the locked work at the unlock;
   - an Action Tracker holding only the new site's example: the old site takes the example for real actions, and they
