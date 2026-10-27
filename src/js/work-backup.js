@@ -153,6 +153,8 @@
       say(text.full);
       return;
     }
+    // Rows the file lacks were not deleted: team sync (js/team-sync.js) does not delete them on the team's devices.
+    try { window.TeamSync?.rebase?.(storage, keys); } catch { /* no team here */ }
     say(text.opened);
     setTimeout(() => window.location.reload(), 900);
   });

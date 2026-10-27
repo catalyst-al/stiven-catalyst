@@ -210,7 +210,10 @@
     } catch {
       return "failed";
     }
-    return replaceItems(storage, items) ? "restored" : "full";
+    if (!replaceItems(storage, items)) return "full";
+    // Rows the point lacks were not deleted: team sync (js/team-sync.js) does not delete them on the team's devices.
+    try { window.TeamSync?.rebase?.(storage, Object.keys(items)); } catch { /* no team here */ }
+    return "restored";
   };
 
   // Ask once a session that the browser keeps the data; true, false, or null where the browser does not say.

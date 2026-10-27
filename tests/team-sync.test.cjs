@@ -233,7 +233,9 @@ test('merge: an unchanged text stays the very same string, and merging again cha
   const once = M.merge(a, b);
   const base = M.baseOf(once);
   assert.deepEqual(plain(M.merge(once, once, base)), plain(once));
-  assert.deepEqual(plain(M.merge(once, b, base)), plain(once), 'an older team copy takes nothing back');
+  // A team copy without rows this device holds as they were last synced: they were deleted on the team, and go here
+  // too (team-sync-deletions.test.cjs); the fields of the plain object stay.
+  assert.deepEqual(plain(M.merge(once, b, base)), { ...plain(once), 'sc-actions': b['sc-actions'] }, 'rows the team deleted go here too');
   assert.deepEqual(plain(M.changedSince(once, base)), []);
   assert.deepEqual(plain(M.changedSince({ ...once, 'sc-workplace': '{}' }, base)), ['sc-workplace']);
 });
@@ -267,7 +269,7 @@ test('the payload never holds a skipped or personal key, and a team copy cannot 
   assert.equal(result.status, 'synced');
   const copy = await teamCopy(server, dev);
   assert.equal(copy.format, 'stiven-catalyst-team');
-  assert.equal(copy.version, 1);
+  assert.equal(copy.version, 2, 'version 2: with tombstones');
   assert.deepEqual(Object.keys(copy.items).sort(), ['sc-actions', 'sc-night-audit', 'sc-pareto']);
   assert.ok(!JSON.stringify(copy).includes(CODE), 'the code is not in the payload');
   // A copy that carries personal or skipped keys (made by hand): they are dropped on reading, never written here.
@@ -672,7 +674,7 @@ test('change the team code: the whole merged copy goes to the new space, then th
   // B shares the Pareto data, which A does not tick, and has an action A has not seen yet.
   const b = await device(load({ storage: { 'sc-pareto': { from: 'B' }, 'sc-actions': { rows: [{ id: 'b1', title: 'Order gloves' }] } } }));
   await run(b, server, { selected: () => true });
-  b.w.localStorage.setItem('sc-actions', JSON.stringify({ rows: [{ id: 'b1', title: 'Order gloves' }, { id: 'b2', title: 'Label racks' }] }));
+  b.w.localStorage.setItem('sc-actions', JSON.stringify({ rows: [...stored(b.w, 'sc-actions').rows, { id: 'b2', title: 'Label racks' }] }));
   await run(b, server, { selected: () => true });
   const oldViewer = await vwKeys(b.w, CODE);
   const result = await aw.TeamSync.rotate(rotateCtx(a, server));
