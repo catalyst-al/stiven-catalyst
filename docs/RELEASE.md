@@ -44,8 +44,11 @@ squash and not rebase:
   the day of the merge, which is the day readers see the change.
 
 The pull request runs CI (build, unit tests, browser journeys) without deploying. Do not merge while it is red. Since
-phase 3 CI installs the Chromium of Playwright 1.64.1 (Chrome 156), which could not be installed in the development
-container (the suite passed there on Chrome 153, 164 / 164): this pull request's run is the first on it.
+phase 3 CI installs the Chromium of Playwright 1.64.1 (Chrome 156). Verified on catalyst-al/stiven-catalyst#363 on
+27 October 2026 (`c7343fbf`): 1332 / 1332 unit tests, 176 / 176 browser tests on Chrome 156.0.8078.4, 0 skipped.
+The runs before it found two test-environment faults (a test reading a local git tag; the footer under the share
+planet with the runner's fonts), both fixed with a test; one run timed out while apt was installing the browser's
+system libraries, before any test.
 
 ## 3. The dates, right after the merge (author's approval)
 

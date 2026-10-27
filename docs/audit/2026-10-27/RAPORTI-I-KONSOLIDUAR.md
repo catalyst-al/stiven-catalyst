@@ -16,7 +16,7 @@ poshtë është vetëm në degë dhe pret shqyrtimin tënd përfundimtar.
 | `npm audit` | 0 dobësi (markdown-it 14.3.3) |
 | `main` | `f34b1c4b` (më i fundit më 27 tetor) është i bashkuar në degë; një merge provë i degës në `main` kalon pa konflikt |
 | Publikimi | procedura e saktë, përfshirë `online-dates.mjs`, e provuar "në thatë": `docs/RELEASE.md` |
-| Nuk u verifikua | Firefox dhe Safari; pajisje reale me GPU; Chrome 156 i CI-së (instalohet vetëm atje: ekzekutimi i parë i PR-së është prova) |
+| Nuk u verifikua | Firefox dhe Safari; pajisje reale me GPU; (Chrome 156 i CI-së **u verifikua** më 27 tetor në PR #363, `c7343fbf`: 1332/1332 unit, 176/176 në shfletues, 0 të anashkaluara) |
 
 ## 2. Çfarë u bë, me pak fjalë
 
@@ -149,7 +149,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | B-01 | Back-cover line translated in opposite directions | P6-01 | needs author approval | albanian-proposals.md §8.1 (options A/B); book files unchanged | "brenda tij": the man or the city (RAPORTI §9.3) |
 | SEO-02 | Reflections linked from one page only | SEO-02 | pending | Deferred by the author on 27 Oct to a separate editorial change: navigation between essays is useful, but recommended links must be meaningful. `src/_includes/layouts/article.njk` unchanged | The editorial change itself, later |
 | CI-01 | Search journey fails on current Chrome | — | fixed | `be86a306`, `e40c5fe2` · tests/browser/transitions.spec.mjs (failed 6/6 before). Cause: a key pressed between the new page's commit and its first frame, not `replaceState` as the audit suspected | — |
-| CI-02 | CI's Chromium is a year old | — | fixed | `d0ad3889` (@playwright/test 1.56.1 → 1.64.1; CI prints the browser and fails on skipped, flaky or not-run tests; markdown-it 14.3.3, `npm audit` 0), `00976354` (25 min). Not verified: the run on Chrome 156 itself (not installable here); the first PR run is the check | — |
+| CI-02 | CI's Chromium is a year old | — | fixed | `d0ad3889` (@playwright/test 1.56.1 → 1.64.1; CI prints the browser and fails on skipped, flaky or not-run tests; markdown-it 14.3.3, `npm audit` 0), `00976354` (25 min). Verified on Chrome 156.0.8078.4 in CI of catalyst-al/stiven-catalyst#363 (`c7343fbf`): 176 / 176 browser tests | — |
 | CI-03 | Contract tests used invented fixtures | P5-10 (chart-note test part) | partly fixed | Real built pages: tests/helpers/tool-page.cjs (`285c7af8`), `779e05b4` · tests/handoffs-real.test.cjs; the pause is tested by behaviour (`972b58e7` · tests/browser/motion.spec.mjs, tests/cosmos-pause.test.cjs rewritten). Remains: tests/weekly.test.cjs still checks only `note.length > 20` (P5-10) | — |
 | CI-04 | No check that PDFs match their sources | — | fixed | `7537b295` · tests/pdf-matches-html.test.cjs (294 PDFs + 21 archived guide editions, 0 mismatches) | — |
 
