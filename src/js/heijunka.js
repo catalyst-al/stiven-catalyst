@@ -10,6 +10,11 @@
   const parseNumber = kit.parseNumber || ((value) => Number(String(value ?? "").replace(",", ".")));
   const EPS = 1e-9;
   const MAX_PRODUCTS = 12;
+  // The most containers a day the plan takes, all products together, and the most minutes a day can have. Beyond them the
+  // box and the sequence would be hundreds of thousands of cards (or a tab that hangs), so the page asks for a larger
+  // pack-out or a real day instead: 10,000 cards is a unit-level plan of 50,000 units a week on five days.
+  const MAX_CONTAINERS = 10000;
+  const MAX_DAY = 1440;
   const finite = (value) => typeof value === "number" && Number.isFinite(value);
   const isObject = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   const str = (value) => (typeof value === "string" ? value : "");
@@ -42,11 +47,13 @@
     if (!(free > EPS)) return null;
     return Math.max(0, changeoverMin) / free;
   };
-  // The day's containers of one product: full ones, the last one carrying what is left of the demand.
+  // The day's containers of one product: full ones, the last one carrying what is left of the demand. containerCount
+  // is their number, without making them.
+  const containerCount = (dailyQty, packout) => (dailyQty > EPS && packout > 0 ? Math.ceil(dailyQty / packout - EPS) : 0);
+  const containerSize = (dailyQty, packout, n, i) => (i < n - 1 ? packout : dailyQty - (n - 1) * packout);
   const containers = (dailyQty, packout) => {
-    if (!(dailyQty > EPS) || !(packout > 0)) return [];
-    const n = Math.ceil(dailyQty / packout - EPS);
-    return Array.from({ length: n }, (_, i) => (i < n - 1 ? packout : dailyQty - (n - 1) * packout));
+    const n = containerCount(dailyQty, packout);
+    return Array.from({ length: n }, (_, i) => containerSize(dailyQty, packout, n, i));
   };
   // n containers in r runs as evenly as possible: the first runs take the one left over (largest remainder).
   const splitRuns = (n, r) => {
@@ -62,22 +69,29 @@
   // 1983): next comes the run that keeps the work done so far closest to the day's average rate (run time ÷ time),
   // so long and short cycle times alternate; a tie there goes to the product listed first. The order is fixed.
   // Every container lasts its pitch (units × takt), so the day adds up to the available time. Times in productive
-  // minutes from the start of the first shift.
-  const sequence = (items, runsPerDay, taktSec) => {
-    if (!finite(taktSec)) return [];
-    const runs = [];
-    items.forEach((p, index) => {
-      const boxes = containers(p.daily, p.packout);
-      const sizes = splitRuns(boxes.length, Math.max(1, Math.floor(runsPerDay) || 1));
+  // minutes from the start of the first shift. order() is the same day without its containers, for maxRuns.
+  const order = (items, runsPerDay, taktSec) => {
+    const lists = items.map((p, index) => {
+      const n = containerCount(p.daily, p.packout);
+      const sizes = splitRuns(n, Math.max(1, Math.floor(runsPerDay) || 1));
       let at = 0;
-      sizes.forEach((size, k) => {
-        const qty = boxes.slice(at, at + size);
+      return sizes.map((size, k) => {
+        let units = 0;
+        for (let c = at; c < at + size; c += 1) units += containerSize(p.daily, p.packout, n, c);
         at += size;
-        const units = qty.reduce((s, q) => s + q, 0);
-        runs.push({ index, k, of: sizes.length, pos: (k + 0.5) / sizes.length, boxes: qty, units, minutes: (units * taktSec) / 60, work: (units * (p.cycle || 0)) / 60 });
+        return { index, k, of: sizes.length, pos: (k + 0.5) / sizes.length, from: at - size, count: size, units, minutes: (units * taktSec) / 60, work: (units * (p.cycle || 0)) / 60 };
       });
     });
-    runs.sort((a, b) => a.pos - b.pos || a.index - b.index || a.k - b.k);
+    // Each product's runs are already in the order of their position, so merging the lists gives the day sorted by
+    // position, then product, then run, without sorting it (maxRuns builds many days).
+    const runs = [];
+    const next = lists.map(() => 0);
+    for (let left = lists.reduce((s, list) => s + list.length, 0); left > 0; left -= 1) {
+      let pick = -1;
+      lists.forEach((list, i) => { if (next[i] < list.length && (pick < 0 || list[next[i]].pos < lists[pick][next[pick]].pos)) pick = i; });
+      runs.push(lists[pick][next[pick]]);
+      next[pick] += 1;
+    }
     const time = runs.reduce((s, run) => s + run.minutes, 0);
     const rate = time > 0 ? runs.reduce((s, run) => s + run.work, 0) / time : 0;
     const ordered = [];
@@ -98,12 +112,19 @@
       }
       i = j;
     }
+    return ordered;
+  };
+  const sequence = (items, runsPerDay, taktSec) => {
+    if (!finite(taktSec)) return [];
     let t = 0;
-    return ordered.map((run, i) => {
+    return order(items, runsPerDay, taktSec).map((run, i) => {
+      const p = items[run.index];
+      const n = containerCount(p.daily, p.packout);
+      const boxes = Array.from({ length: run.count }, (_, j) => containerSize(p.daily, p.packout, n, run.from + j));
       const start = t;
       const minutes = (run.units * taktSec) / 60;
       t += minutes;
-      return { no: i + 1, index: run.index, k: run.k, of: run.of, containers: run.boxes.length, boxes: run.boxes, units: run.units, start, end: t, minutes };
+      return { no: i + 1, index: run.index, k: run.k, of: run.of, containers: boxes.length, boxes, units: run.units, start, end: t, minutes };
     });
   };
   // Changeovers of a day: every switch from one product to another, the last run of the day to the first of the next
@@ -117,14 +138,88 @@
     });
     return { count: at.length, minutes: at.reduce((s, i) => s + Math.max(0, items[seq[i].index].changeover || 0), 0), at };
   };
-  // The most runs per day whose changeovers still fit the time the run leaves free; 0 when not even one run fits.
-  const maxRuns = (items, taktSec, availableMin, runMin) => {
-    const most = Math.max(0, ...items.map((p) => containers(p.daily, p.packout).length));
-    let best = 0;
-    for (let m = 1; m <= most; m += 1) {
-      if (runMin + changeovers(sequence(items, m, taktSec), items).minutes <= availableMin + EPS) best = m;
+  // The changeover minutes of the day sequence() builds with `runsPerDay` runs, worked out the same way step by step,
+  // in flat arrays and without the containers: maxRuns asks it for many days, and the tests hold it to sequence().
+  // (Math is read once: a page script in a test's virtual machine pays for every look-up of a global.)
+  const { abs, floor, max, min } = Math;
+  const INF = Number.POSITIVE_INFINITY;
+  const dayChangeovers = (items, runsPerDay, taktSec) => {
+    const want = max(1, floor(runsPerDay) || 1);
+    const n = items.map((p) => containerCount(p.daily, p.packout));
+    const r = n.map((count) => (count ? min(count, want) : 0));
+    const total = r.reduce((s, x) => s + x, 0);
+    if (total < 2) return 0;
+    const idx = new Int32Array(total), pos = new Float64Array(total), minutes = new Float64Array(total), work = new Float64Array(total);
+    const next = new Int32Array(items.length), from = new Int32Array(items.length);
+    let time = 0, done = 0;
+    for (let at = 0; at < total; at += 1) {
+      let pick = -1, best = INF;
+      for (let i = 0; i < items.length; i += 1) {
+        if (next[i] < r[i] && (next[i] + 0.5) / r[i] < best) { best = (next[i] + 0.5) / r[i]; pick = i; }
+      }
+      const p = items[pick], k = next[pick];
+      const size = floor(n[pick] / r[pick]) + (k < n[pick] % r[pick] ? 1 : 0);
+      let units = 0;
+      for (let c = from[pick]; c < from[pick] + size; c += 1) units += containerSize(p.daily, p.packout, n[pick], c);
+      from[pick] += size;
+      next[pick] += 1;
+      idx[at] = pick; pos[at] = best; minutes[at] = (units * taktSec) / 60; work[at] = (units * (p.cycle || 0)) / 60;
+      time += minutes[at];
+      done += work[at];
     }
-    return best;
+    const rate = time > 0 ? done / time : 0;
+    const ordered = new Int32Array(total);
+    let balance = 0, o = 0;
+    for (let i = 0; i < total;) {
+      let j = i;
+      while (j < total && abs(pos[j] - pos[i]) < EPS) j += 1;
+      const group = [];
+      for (let g = i; g < j; g += 1) group.push(g);
+      while (group.length) {
+        let pickAt = 0;
+        for (let g = 0; g < group.length; g += 1) {
+          const a = group[g], b = group[pickAt];
+          if (abs(balance + work[a] - rate * minutes[a]) < abs(balance + work[b] - rate * minutes[b]) - EPS) pickAt = g;
+        }
+        const [run] = group.splice(pickAt, 1);
+        balance += work[run] - rate * minutes[run];
+        ordered[o] = idx[run];
+        o += 1;
+      }
+      i = j;
+    }
+    let sum = 0;
+    for (let i = 0; i < total; i += 1) if (ordered[(i - 1 + total) % total] !== ordered[i]) sum += max(0, items[ordered[i]].changeover || 0);
+    return sum;
+  };
+  // The most runs per day whose changeovers still fit the time the run leaves free; 0 when not even one run fits. More
+  // runs do not always mean more changeovers (the order of the day can join two runs of a product), so every count is
+  // tried, from the most down, but without working out its day where two bounds already decide: a product with r runs
+  // has at most r changeovers into it and, beside a product with as many runs, at least ⌈r ÷ 2⌉ (of any three of its
+  // runs in a row, one is apart); the product with the most runs, alone at the top, has at least as many as the next.
+  // Building every day in full took seconds at a pack-out of 1 (audit 27 Oct 2026, P2B-04).
+  const maxRuns = (items, taktSec, availableMin, runMin) => {
+    const live = items.map((p) => ({ n: containerCount(p.daily, p.packout), c: Math.max(0, p.changeover || 0) })).filter((p) => p.n > 0);
+    const most = Math.max(0, ...live.map((p) => p.n));
+    const fits = (minutes) => runMin + minutes <= availableMin + EPS;
+    if (!fits(0)) return 0;
+    if (live.length < 2) return most;
+    for (let m = most; m >= 1; m -= 1) {
+      const r = live.map((p) => Math.min(m, p.n));
+      const top = Math.max(...r);
+      const atTop = r.filter((x) => x === top).length;
+      const next = Math.max(0, ...r.filter((x) => x < top));
+      let upper = 0, lower = 0;
+      live.forEach((p, i) => {
+        upper += r[i] * p.c;
+        lower += (r[i] === top && atTop === 1 ? Math.max(1, next) : Math.ceil(r[i] / 2)) * p.c;
+      });
+      // A margin far above rounding keeps the bounds on the safe side; between them the day is worked out.
+      if (fits(upper + 1e-6)) return m;
+      if (!fits(lower - 1e-6) && lower > 0) continue;
+      if (fits(dayChangeovers(items, m, taktSec))) return m;
+    }
+    return 0;
   };
   // Finished stock to cover the cycle. In batches each product is made once per batch interval, so its run must cover
   // that many days of demand: about daily demand × interval (what is used during the run is left out). Levelled, a run
@@ -219,20 +314,30 @@
       name: p.name, demand: p.demand > 0 ? p.demand : 0, daily: daily(p.demand, line.days),
       cycle: p.cycle > 0 ? p.cycle : 0, packout: p.packout > 0 ? p.packout : 0, changeover: p.changeover > 0 ? p.changeover : 0,
     }));
-    const active = items.map((p, i) => ({ ...p, i })).filter((p) => p.daily > 0 && p.packout > 0);
-    const totalDaily = active.reduce((s, p) => s + p.daily, 0);
+    // Every product with demand takes its share of the takt, the load and the changeovers; only those with a pack-out
+    // have containers, so only they are sequenced and get cards in the box (`unpacked` names the others for the page).
+    const demanded = items.map((p, i) => ({ ...p, i })).filter((p) => p.daily > 0);
+    const active = demanded.filter((p) => p.packout > 0);
+    const unpacked = demanded.filter((p) => !(p.packout > 0));
+    const totalDaily = demanded.reduce((s, p) => s + p.daily, 0);
     const t = takt(availableSec, totalDaily);
-    const load = utilisation(active, availableSec);
+    const load = utilisation(demanded, availableSec);
     const runMin = load.runSec / 60;
-    const changeoverSum = active.reduce((s, p) => s + p.changeover, 0);
-    const e = active.length ? epei(changeoverSum, availableMin, runMin) : null;
-    const most = Math.max(0, ...active.map((p) => containers(p.daily, p.packout).length));
-    const fits = finite(t) ? maxRuns(active, t, availableMin, runMin) : 0;
+    const changeoverSum = demanded.reduce((s, p) => s + p.changeover, 0);
+    const e = demanded.length ? epei(changeoverSum, availableMin, runMin) : null;
+    const counts = active.map((p) => containerCount(p.daily, p.packout));
+    const most = Math.max(0, ...counts);
+    // A day longer than 24 hours or more cards than the plan holds: the takt and the load are still worked out, the
+    // sequence and the box are not (a demand of a billion would hang the page).
+    const cards = counts.reduce((s, n) => s + n, 0);
+    const too = availableMin > MAX_DAY ? { what: "day", value: availableMin, max: MAX_DAY } : cards > MAX_CONTAINERS ? { what: "containers", value: cards, max: MAX_CONTAINERS } : null;
+    const planned = finite(t) && !too;
+    const fits = planned ? maxRuns(active, t, availableMin, runMin) : 0;
     const asked = line.runs > 0 ? Math.floor(line.runs) : null;
     const runs = Math.max(1, Math.min(most || 1, asked ?? (fits || 1)));
-    const seq = finite(t) ? sequence(active, runs, t) : [];
+    const seq = planned ? sequence(active, runs, t) : [];
     const switches = changeovers(seq, active);
-    const blocks = finite(t) ? sequence(active, 1, t) : [];
+    const blocks = planned ? sequence(active, 1, t) : [];
     const blockSwitches = changeovers(blocks, active);
     // The batch interval of today's schedule; when it is not known, the EPEI rounded up to whole days.
     const batchDays = line.batchDays > 0 ? line.batchDays : e !== null ? Math.max(1, Math.ceil(e - EPS)) : null;
@@ -241,7 +346,7 @@
     const levelStock = stock.reduce((s, x) => s + x.levelled, 0);
     const levelMin = runMin + switches.minutes;
     return {
-      availableMin, availableSec, totalDaily, takt: t, items, active,
+      availableMin, availableSec, totalDaily, takt: t, items, active, unpacked, too,
       pitches: active.map((p) => pitch(t, p.packout)),
       load, runMin, freeMin: availableMin - runMin, changeoverSum,
       epei: e, epeiShifts: e !== null ? e * shifts : null, epeiMinutes: e !== null ? e * availableMin : null,
@@ -250,8 +355,8 @@
       batch: batchDays ? { days: batchDays, assumed: !(line.batchDays > 0), perDay: active.length > 1 ? active.length / batchDays : 0, minutesPerDay: active.length > 1 ? changeoverSum / batchDays : 0 } : null,
       stock, batchStock, levelStock, stockCut: batchStock > 0 ? 1 - levelStock / batchStock : null,
       blocks, blockSwitches,
-      hourly: { levelled: hourlyLoad(seq, active, availableMin, switches), blocks: hourlyLoad(blocks, active, availableMin, blockSwitches) },
-      box: finite(t) ? box(seq, active, t, availableMin) : { interval: 0, columns: 0, cells: [] },
+      hourly: planned ? { levelled: hourlyLoad(seq, active, availableMin, switches), blocks: hourlyLoad(blocks, active, availableMin, blockSwitches) } : { levelled: [], blocks: [] },
+      box: planned ? box(seq, active, t, availableMin) : { interval: 0, columns: 0, cells: [] },
     };
   };
 
@@ -274,7 +379,7 @@
     products: products.map((p) => ({ name: p.name, demand: parseNumber(p.demand), cycle: parseNumber(p.cycle), packout: parseNumber(p.packout), changeover: parseNumber(p.changeover) })),
   });
 
-  window.HeijunkaMath = { MAX_PRODUCTS, available, daily, takt, pitch, utilisation, epei, containers, splitRuns, sequence, changeovers, maxRuns, inventory, clockAt, hhmm, parseClock, hourlyLoad, backlog, box, analyse, cleanProduct, cleanLine, numbers };
+  window.HeijunkaMath = { MAX_PRODUCTS, MAX_CONTAINERS, MAX_DAY, available, daily, takt, pitch, utilisation, epei, containers, splitRuns, sequence, changeovers, dayChangeovers, maxRuns, inventory, clockAt, hhmm, parseClock, hourlyLoad, backlog, box, analyse, cleanProduct, cleanLine, numbers };
 
   // The page ---------------------------------------------------------------------------------------------------------
   const root = document.querySelector("[data-heijunka]");
@@ -309,7 +414,13 @@
   const save = () => write(KEY, state);
   // The visitor's own first change ends the example: the data stays, the note goes.
   const own = () => { state.example = false; };
-  const plan = () => { const n = numbers(state.line, state.products); return { n, r: analyse(n.line, n.products) }; };
+  // One analysis per change of the text: the line and the result both ask for it on every keystroke.
+  let planned = { key: null, value: null };
+  const plan = () => {
+    const key = JSON.stringify([state.line, state.products]);
+    if (planned.key !== key) { const n = numbers(state.line, state.products); planned = { key, value: { n, r: analyse(n.line, n.products) } }; }
+    return planned.value;
+  };
   const nameOf = (p, i) => p?.name?.trim() || tx("Product {n}", { n: i + 1 });
   const shiftOf = (n) => ({ start: n.line.start, shiftMin: n.line.shiftMin, breakMin: n.line.breakMin || 0, shifts: n.line.shifts > 0 ? Math.floor(n.line.shifts) : 1 });
   const minutes = (value) => `${num(value, Math.abs(value - Math.round(value)) < 0.05 ? 0 : 1)} min`;
@@ -455,6 +566,7 @@
   const sequenceRows = (n, r) => {
     const shift = shiftOf(n);
     const rows = [[tx("No."), tx("Run"), tx("Product"), tx("Units"), tx("Pitch (min)"), tx("From"), tx("To"), tx("Changeover before (min)")]];
+    const switchAt = new Set(r.switches.at);
     let no = 0;
     r.seq.forEach((run, ri) => {
       const p = r.active[run.index];
@@ -462,7 +574,7 @@
       run.boxes.forEach((qty, j) => {
         const span = (qty * r.takt) / 60;
         no += 1;
-        rows.push([no, run.no, nameOf(p, p.i), Math.round(qty * 100) / 100, Math.round(span * 100) / 100, hhmm(clockAt(t, shift)), hhmm(clockAt(t + span, shift, true)), j === 0 && r.switches.at.includes(ri) ? p.changeover : 0]);
+        rows.push([no, run.no, nameOf(p, p.i), Math.round(qty * 100) / 100, Math.round(span * 100) / 100, hhmm(clockAt(t, shift)), hhmm(clockAt(t + span, shift, true)), j === 0 && switchAt.has(ri) ? p.changeover : 0]);
         t += span;
       });
     });
@@ -583,6 +695,13 @@
     note.hidden = !state.example;
     results.replaceChildren();
     const { n, r } = plan();
+    if (r.too && r.active.length) {
+      results.hidden = false;
+      results.append(el("p", "dl-warning", r.too.what === "day"
+        ? tx("{t} of available time a day is more than the plan can hold: a day has {max} minutes. Check the shifts per day and the shift length.", { t: minutes(r.too.value), max: int.format(r.too.max) })
+        : tx("{n} containers a day is more than the plan can hold (at most {max}). Use a larger pack-out, a box, a tote or a pallet, so that one card stands for more units.", { n: int.format(r.too.value), max: int.format(r.too.max) })));
+      return;
+    }
     const ready = r.availableMin > 0 && r.active.length > 0 && r.takt;
     results.hidden = !ready;
     if (!ready) return;
@@ -618,8 +737,9 @@
     if (r.batch?.assumed) notes.push(el("p", "dl-panel-note", tx("Batch interval left empty: the comparison assumes {d}, the EPEI rounded up to whole days.", { d: days(r.batch.days) })));
     const noCycle = r.active.filter((p) => !(p.cycle > 0));
     if (noCycle.length) notes.push(el("p", "dl-warning", tx("{n} products have no cycle time yet and count as no work.", { n: noCycle.length })));
-    const skipped = r.items.length - r.active.length;
-    if (skipped) notes.push(el("p", "dl-panel-note", tx("{n} products without demand or pack-out are left out.", { n: skipped })));
+    if (r.unpacked.length) notes.push(el("p", "dl-warning", tx("{names}: no pack-out yet. The demand counts in the takt and the load, but without a pack-out there are no cards in the box and no runs in the sequence.", { names: r.unpacked.map((p) => nameOf(p, p.i)).join(", ") })));
+    const skipped = r.items.length - r.active.length - r.unpacked.length;
+    if (skipped) notes.push(el("p", "dl-panel-note", tx("{n} products without demand are left out.", { n: skipped })));
 
     const advice = data.advice[situation];
     const lp = longestChangeover(r);

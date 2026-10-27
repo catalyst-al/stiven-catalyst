@@ -7640,5 +7640,9 @@
   "no verdict until every item is pass, fail or n.a.": "pa rezultat derisa çdo pikë të jetë në rregull, defekt ose s'aplikohet",
   "1 incomplete inspection, not counted": "1 inspektim i paplotë, nuk llogaritet",
   "{n} incomplete inspections, not counted": "{n} inspektime të paplota, nuk llogariten",
-  "Saved: room {room}, incomplete: {n} items were not checked. It counts in neither the first-time pass rate nor the average score.": "U ruajt: dhoma {room}, inspektim i paplotë: {n} pika nuk u kontrolluan. Nuk llogaritet as te kalimi herën e parë, as te vlerësimi mesatar."
+  "Saved: room {room}, incomplete: {n} items were not checked. It counts in neither the first-time pass rate nor the average score.": "U ruajt: dhoma {room}, inspektim i paplotë: {n} pika nuk u kontrolluan. Nuk llogaritet as te kalimi herën e parë, as te vlerësimi mesatar.",
+  "{t} of available time a day is more than the plan can hold: a day has {max} minutes. Check the shifts per day and the shift length.": "{t} kohë e disponueshme në ditë janë më shumë se sa mban plani: një ditë ka {max} minuta. Kontrollo turnet në ditë dhe gjatësinë e turnit.",
+  "{n} containers a day is more than the plan can hold (at most {max}). Use a larger pack-out, a box, a tote or a pallet, so that one card stands for more units.": "{n} kontejnerë në ditë janë më shumë se sa mban plani (më së shumti {max}). Përdor një sasi paketimi më të madhe, një kuti, një arkë ose një paletë, që një kartë të vlejë për më shumë njësi.",
+  "{names}: no pack-out yet. The demand counts in the takt and the load, but without a pack-out there are no cards in the box and no runs in the sequence.": "{names}: ende pa sasi paketimi. Kërkesa llogaritet te koha e taktit dhe te ngarkesa, por pa sasi paketimi nuk ka karta në kuti dhe as prodhime në radhë.",
+  "{n} products without demand are left out.": "{n} produkte pa kërkesë lihen jashtë."
 }

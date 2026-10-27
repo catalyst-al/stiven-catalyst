@@ -277,6 +277,73 @@ test('edge cases: overloaded, EPEI not possible, EPEI above a day, no changeover
   assert.equal(partial.takt, 45);
 });
 
+// Audit 27 Oct 2026, P2B-04: 20,000 units a week at a pack-out of 1 took 4.6 s per keystroke (maxRuns built the whole
+// sequence for every run count up to the number of containers), and a demand of 1,000,000,000 hung the tab.
+const LINE3 = { shifts: 3, shiftMin: 480, breakMin: 30, days: 5, runs: NaN, batchDays: NaN };
+const timed = (fn) => { const t = process.hrtime.bigint(); const value = fn(); return { value, ms: Number(process.hrtime.bigint() - t) / 1e6 }; };
+test('large volumes stay fast: 20,000 units a week at a pack-out of 1 in under 300 ms', () => {
+  const M = math();
+  const { value: r, ms } = timed(() => M.analyse(LINE3, [{ name: 'A', demand: 20000, cycle: 1, packout: 1, changeover: 1 }, { name: 'B', demand: 10000, cycle: 1, packout: 1, changeover: 1 }]));
+  assert.ok(ms < 300, `analyse took ${Math.round(ms)} ms`);
+  assert.equal(r.too, null);
+  assert.ok(r.fits > 0 && r.seq.length > 0, 'a plan');
+  assert.equal(r.seq.reduce((s, run) => s + run.units, 0), 6000, 'the whole day is in the sequence');
+  // The quick search finds the same most runs as trying every count, including where more runs fit after fewer did not.
+  const brute = (items, t, availableMin, runMin) => {
+    let best = 0;
+    for (let m = 1; m <= Math.max(0, ...items.map((p) => M.containers(p.daily, p.packout).length)); m += 1) {
+      if (runMin + M.changeovers(M.sequence(items, m, t), items).minutes <= availableMin + 1e-9) best = m;
+    }
+    return best;
+  };
+  let seed = 7;
+  const rand = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+  for (let trial = 0; trial < 1500; trial += 1) {
+    const items = Array.from({ length: 1 + Math.floor(rand() * 6) }, () => ({ daily: 1 + Math.floor(rand() * 200), packout: 1 + Math.floor(rand() * 20), cycle: rand() * 60, changeover: Math.floor(rand() * 30) }));
+    const availableMin = 400 + rand() * 1000;
+    const t = (availableMin * 60) / items.reduce((s, p) => s + p.daily, 0);
+    const runMin = items.reduce((s, p) => s + p.daily * p.cycle, 0) / 60;
+    assert.equal(M.maxRuns(items, t, availableMin, runMin), brute(items, t, availableMin, runMin), `trial ${trial}`);
+  }
+});
+
+test('input caps: a demand of a billion or a day longer than 24 hours is refused quickly, with a message', () => {
+  const M = math();
+  const { value: huge, ms } = timed(() => M.analyse(LINE3, [{ name: 'A', demand: 1e9, cycle: 1, packout: 1, changeover: 1 }]));
+  assert.ok(ms < 300, `analyse took ${Math.round(ms)} ms`);
+  assert.deepEqual(plain(huge.too), { what: 'containers', value: 2e8, max: M.MAX_CONTAINERS });
+  assert.deepEqual(plain([huge.seq, huge.blocks, huge.box.cells]), [[], [], []]);
+  assert.ok(huge.takt > 0, 'takt and load are still worked out');
+  const day = M.analyse({ ...LINE3, shifts: 1e9 }, [{ name: 'A', demand: 100, cycle: 1, packout: 1, changeover: 1 }]);
+  assert.deepEqual(plain(day.too), { what: 'day', value: 1e9 * 450, max: 1440 });
+  assert.deepEqual(plain(day.seq), []);
+  const texts = { en: /more than the plan can hold/, de: /mehr, als der Plan fassen kann/, sq: /më shumë se sa mban plani/ };
+  for (const lang of ['en', 'de', 'sq']) {
+    const w = load({ lang });
+    const d = w.document;
+    type(w, d.querySelector('#hj-demand-0'), '1000000000');
+    const results = d.querySelector('[data-results]');
+    assert.equal(results.hidden, false, `${lang}: the result says why`);
+    assert.match(results.textContent, texts[lang], `${lang}: the cap is said`);
+    assert.equal(results.querySelector('.hj-box'), null, `${lang}: no box`);
+  }
+});
+
+// Audit 27 Oct 2026, P2B-13: a product with demand but no pack-out dropped out of the takt without a word.
+test('a product without pack-out counts in the takt and the load, and the page names it', () => {
+  const M = math();
+  const d = read(DATA.en).example;
+  const products = [...d.products, { name: 'E · Sample pack', demand: 6000, cycle: 30, packout: '', changeover: 5 }];
+  const n = M.numbers(M.cleanLine(d.line), products.map(M.cleanProduct));
+  const r = M.analyse(n.line, n.products);
+  close(r.takt, (900 * 60) / 1500, 'takt from all 1,500 units a day, not 1,200');
+  close(r.load.runSec, 600 * 27 + 300 * 36 + 200 * 45 + 100 * 60 + 300 * 30, 'its work is in the load');
+  assert.equal(r.active.length, 4, 'it has no place in the sequence');
+  assert.deepEqual(plain(r.unpacked.map((p) => p.name)), ['E · Sample pack']);
+  const w = load({ storage: { 'sc-heijunka': { line: d.line, products, example: false } } });
+  assert.match(w.document.querySelector('[data-results]').textContent, /E · Sample pack: no pack-out yet\. The demand counts in the takt and the load/);
+});
+
 test('the three data files share one shape, the same numbers, and their own storage key', () => {
   const shape = (value) => (Array.isArray(value) ? value.map(shape) : value && typeof value === 'object'
     ? Object.fromEntries(Object.keys(value).sort().map((key) => [key, shape(value[key])])) : typeof value);
