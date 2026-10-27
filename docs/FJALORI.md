@@ -37,5 +37,7 @@ ndërfaqja. Kolona e fundit thotë kur termi anglisht mbetet.
 
 - **Shqip:** lexuesit i drejtohemi me "ti". Përjashtim bën letra e motivimit, që i drejtohet një kompanie. Datat
   shkruhen "më 1969", "në vitin 1969", "i vitit 2019".
-- **Gjermanisht:** "Sie". "Du" përdoret vetëm në fjalë të cituara dhe te motoja.
+- **Gjermanisht:** "Sie". "Du" përdoret vetëm në fjalë të cituara dhe te motoja. Fjalë të cituara janë edhe ato me
+  italik ose pa thonjëza, kur flet dikush tjetër (shefi, një zë, autori me veten); `tests/register.test.cjs` i
+  rendit një nga një. Kur origjinali shqip ka "ti" të përgjithshëm, jo drejtuar lexuesit, gjermanishtja thotë "man".
 - **Emrat e huaj në shqip** lakohen me vizë: Mann-it, Deming-ut, Gallup-it.
