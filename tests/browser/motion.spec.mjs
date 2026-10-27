@@ -49,8 +49,10 @@ test("the motion switch stops every loop and the planets, and the browser keeps 
     await expect(toggle).toHaveAccessibleName("Play the motion");
     expect(await runningLoops(page)).toEqual([]);
     expect(await drawsDuring(page, 600)).toBe(0);
-    // The reader may still choose the motion: the planets turn, and the choice is kept.
-    await toggle.click();
+    // The reader may still choose the motion: the planets turn, and the choice is kept. (With the switch beside the
+    // planets, the same switch: the one at the foot of the page would scroll the planets out of view, where they are
+    // rightly not drawn.)
+    await page.locator("[data-cosmos] [data-motion-toggle]").click();
     await expect(page.locator("html")).not.toHaveAttribute("data-motion", "paused");
     await expect(toggle).toHaveAccessibleName("Pause the motion");
     expect(await drawsDuring(page, 600)).toBeGreaterThan(0);
