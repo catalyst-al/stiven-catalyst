@@ -29,7 +29,7 @@ Die Menschen arbeiteten weiter. Die Manager berichteten weiter. Die Direktion gl
 
 Bis zu dem Tag, an dem jemand eine einfache Frage stellte:
 
-„Und wenn wir ihn schließen?"
+„Und wenn wir ihn schließen?“
 
 Im Raum wurde es still.
 
@@ -39,7 +39,7 @@ Sondern weil es zum ersten Mal jemand gewagt hatte, es auszusprechen.
 
 Die Führungskraft, die die Investition unterstützt hatte, lehnte sich im Stuhl zurück.
 
-„Wir haben zu viel ausgegeben, um uns jetzt zurückzuziehen."
+„Wir haben zu viel ausgegeben, um uns jetzt zurückzuziehen.“
 
 Und in diesem Satz lag das ganze Problem.
 
@@ -159,7 +159,7 @@ Und wie viele Ressourcen sind wir bereit einzusetzen, um diesen Beleg zu bekomme
 
 Gibt es eine klare Antwort, kann Weitermachen eine vernünftige Entscheidung sein.
 
-Lautet die Antwort ständig „wir brauchen noch ein bisschen Zeit", ohne festzulegen, was sich in dieser Zeit ändern muss, dann haben wir nicht mehr unbedingt eine Strategie.
+Lautet die Antwort ständig „wir brauchen noch ein bisschen Zeit“, ohne festzulegen, was sich in dieser Zeit ändern muss, dann haben wir nicht mehr unbedingt eine Strategie.
 
 Wir haben eine Hoffnung.
 
@@ -319,7 +319,7 @@ Und das verlangt eine Form von Mut, die weit seltener ist als die Begeisterung d
 
 Vor die Menschen zu treten und zu sagen:
 
-„Ich habe an dieses Projekt geglaubt. Wir hatten Gründe, es zu versuchen. Aber die Ergebnisse und die Informationen, die wir heute haben, stützen das Weitermachen in dieser Form nicht mehr."
+„Ich habe an dieses Projekt geglaubt. Wir hatten Gründe, es zu versuchen. Aber die Ergebnisse und die Informationen, die wir heute haben, stützen das Weitermachen in dieser Form nicht mehr.“
 
 Das ist nicht unbedingt das Eingeständnis von Unfähigkeit.
 
@@ -393,7 +393,7 @@ Es kann der beste Weg sein, ihn zu schützen.
 
 Aber auch die Änderung der Richtung braucht Belege.
 
-Es genügt nicht, ein gescheitertes Projekt „Transformation" zu nennen und es weiter zu finanzieren, ohne es wirklich zu ändern.
+Es genügt nicht, ein gescheitertes Projekt „Transformation“ zu nennen und es weiter zu finanzieren, ohne es wirklich zu ändern.
 
 Eine neue Strategie muss eine neue Begründung haben.
 

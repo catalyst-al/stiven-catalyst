@@ -17,7 +17,7 @@ Fehler wurden analysiert. Mangelnde Kommunikation wurde erwähnt. Verfahren wurd
 
 Am Ende klappte der Direktor den Laptop zu.
 
-„Sehr gut. Ich denke, wir hatten eine produktive Diskussion."
+„Sehr gut. Ich denke, wir hatten eine produktive Diskussion.“
 
 Alle nickten.
 
@@ -89,7 +89,7 @@ Nur ist es meist die Wahl, die niemand unterschreiben will.
 
 In vielen Besprechungen gibt es einen Satz, der wie eine Lösung klingt:
 
-„Wir müssen die Kommunikation verbessern."
+„Wir müssen die Kommunikation verbessern.“
 
 Ein bequemer Satz. Für alle annehmbar. Er ruft selten Widerspruch hervor.
 
@@ -103,7 +103,7 @@ Ohne diese Antworten ist Kommunikation verbessern kein Plan.
 
 Es ist ein Wunsch in Fachsprache.
 
-Dasselbe gilt für Wendungen wie „wir müssen proaktiver sein", „wir müssen die Zusammenarbeit stärken" oder „wir müssen das Bewusstsein schärfen".
+Dasselbe gilt für Wendungen wie „wir müssen proaktiver sein“, „wir müssen die Zusammenarbeit stärken“ oder „wir müssen das Bewusstsein schärfen“.
 
 Richtige Worte. Worte, die in jede Präsentation passen.
 
@@ -277,7 +277,7 @@ Die Diskussion ist vorbei. Die Argumente sind gehört. Alle haben ihre Meinung g
 
 In diesem Moment kann die Führungskraft eine Frage stellen, die mehr wert ist als viele Seiten Protokoll:
 
-„Wer übernimmt das?"
+„Wer übernimmt das?“
 
 Es kann Schweigen geben.
 

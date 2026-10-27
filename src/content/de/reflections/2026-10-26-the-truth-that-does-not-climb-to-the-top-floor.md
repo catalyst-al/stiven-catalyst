@@ -2,7 +2,7 @@
 title: 'Die Wahrheit, die nicht in die Chefetage steigt: Anatomie einer Organisation, die lernte, ihre Wunden hinter schönen Berichten zu verbergen'
 date: 2026-10-26
 status: published
-summary: 'Der Bericht wird Wort für Wort geändert, bis aus einer harten Nacht „Betrieb normal abgeschlossen" wird. Niemand lügt, doch alle haben gelernt, dass Wahrheit ihren Preis hat, und die Führung entscheidet über eine von anderen gewählte Wirklichkeit.'
+summary: 'Der Bericht wird Wort für Wort geändert, bis aus einer harten Nacht „Betrieb normal abgeschlossen“ wird. Niemand lügt, doch alle haben gelernt, dass Wahrheit ihren Preis hat, und die Führung entscheidet über eine von anderen gewählte Wirklichkeit.'
 deck: 'Macht kann Menschen zwingen, dir Antworten zu geben, aber nicht, dir die Wahrheit zu sagen, wenn du sie gelehrt hast, sie zu fürchten.'
 description: 'Über Information, die auf dem Weg zur Führung verzerrt wird, Selbstzensur, schöne Kennzahlen und die Frage, die sich eine Führungskraft stellen muss.'
 ---
@@ -13,19 +13,19 @@ Die Nachtschicht hatte Stunden damit verbracht, Fehler zu korrigieren, die nie h
 
 Im ersten Bericht stand:
 
-„Wiederholte Probleme im Prozess. Eingreifen erforderlich."
+„Wiederholte Probleme im Prozess. Eingreifen erforderlich.“
 
 Der Abteilungsleiter las ihn. Das Problem war real, aber er wollte nicht, dass der Bericht den Eindruck erweckte, die Lage sei außer Kontrolle geraten. Er änderte die Formulierung:
 
-„Operative Schwierigkeiten erkannt und gesteuert."
+„Operative Schwierigkeiten erkannt und gesteuert.“
 
 Der Manager der nächsten Ebene kürzte noch weiter. Schließlich war die Arbeit erledigt und die Kunden waren gegangen.
 
-„Operative Herausforderungen wurden erfolgreich bewältigt."
+„Operative Herausforderungen wurden erfolgreich bewältigt.“
 
 Als der Bericht die Direktion erreichte, hatte der Satz seine endgültige Form:
 
-„Der Betrieb verlief normal."
+„Der Betrieb verlief normal.“
 
 Keiner der Menschen, die das Dokument angefasst hatten, hielt sich für einen Lügner.
 
@@ -69,7 +69,7 @@ Es genügt, dass die Menschen verstehen, was mit dem geschieht, der sie überbri
 
 Dann beginnt die Selbstzensur.
 
-Zuerst wird ein Detail gestrichen, das als zu negativ gilt. Später wird ein direktes Wort durch eine diplomatischere Wendung ersetzt. Ein wiederholter Fehler wird zu „einer Situation, die beobachtet wird". Ein gravierender Personalmangel wird als „Ressourcenoptimierung" beschrieben. Ein Prozess, der nur dank außerordentlicher Anstrengung der Mitarbeiter überlebt, wird als Beweis für die Effizienz der Struktur dargestellt.
+Zuerst wird ein Detail gestrichen, das als zu negativ gilt. Später wird ein direktes Wort durch eine diplomatischere Wendung ersetzt. Ein wiederholter Fehler wird zu „einer Situation, die beobachtet wird“. Ein gravierender Personalmangel wird als „Ressourcenoptimierung“ beschrieben. Ein Prozess, der nur dank außerordentlicher Anstrengung der Mitarbeiter überlebt, wird als Beweis für die Effizienz der Struktur dargestellt.
 
 Die Information zirkuliert weiter.
 
@@ -91,7 +91,7 @@ Oft beginnt sie in dem Büro, in dem die Information ankommen soll.
 
 Es gibt Führungskräfte, die ständig erklären, sie wollten Transparenz.
 
-„Ich will alles wissen. Verbergt mir kein Problem."
+„Ich will alles wissen. Verbergt mir kein Problem.“
 
 Bewundernswerte Worte.
 
@@ -209,7 +209,7 @@ Wann hat mir zuletzt jemand etwas gesagt, das ich nicht hören wollte?
 
 Nicht triviale Kritik, nicht eine gewöhnliche Beschwerde, sondern eine Wahrheit, die eine Entscheidung von mir, eine Überzeugung von mir oder die Art, wie ich die Lage verstanden hatte, in Frage stellte.
 
-Lautet die Antwort „Ich erinnere mich nicht", ist das nicht unbedingt der Beweis, dass alles gut läuft.
+Lautet die Antwort „Ich erinnere mich nicht“, ist das nicht unbedingt der Beweis, dass alles gut läuft.
 
 Es kann ein Zeichen sein, dass die Menschen aufgehört haben, es zu versuchen.
 
@@ -243,7 +243,7 @@ Dann geht ein wichtiger Kunde. Ein Fehler wird öffentlich. Ein guter Profi kün
 
 Die Direktion fragt:
 
-„Wie ist es möglich, dass uns niemand informiert hat?"
+„Wie ist es möglich, dass uns niemand informiert hat?“
 
 Manchmal lautet die Antwort, dass jemand es getan hatte.
 

@@ -13,7 +13,7 @@ Seine Folgen zu korrigieren, konnte eine ganze Schicht dauern.
 
 Ein Prozess lief verspätet. Der Druck stieg. Die Führungskraft hatte mehrere Alternativen vor sich, aber keine sah perfekt aus. Eine Entscheidung musste getroffen werden, und die Zeit für Diskussion ging zu Ende.
 
-„Machen wir so weiter. Die Verantwortung übernehme ich."
+„Machen wir so weiter. Die Verantwortung übernehme ich.“
 
 Die Mitarbeiter gehorchten.
 
@@ -25,7 +25,7 @@ Sie konnte erklären, die Lage sei schwierig gewesen, die Zeit begrenzt, und die
 
 Oder sie konnte einen viel kürzeren Satz sagen.
 
-„Ich gab den falschen Befehl."
+„Ich gab den falschen Befehl.“
 
 Fünf Wörter.
 
@@ -141,7 +141,7 @@ Es gibt einen Moment im Verhältnis von Führungskraft und Mitarbeiter, der viel
 
 Es ist der Augenblick, in dem der Mitarbeiter sagt:
 
-„Ich glaube nicht, dass das funktioniert."
+„Ich glaube nicht, dass das funktioniert.“
 
 Dieser Satz kann ein unbegründeter Einwand sein. Er kann aus Angst vor Veränderung kommen, aus mangelnder Erfahrung oder aus unvollständigem Verständnis der Lage.
 
@@ -173,7 +173,7 @@ Sondern weil er begonnen hat, sein eigenes Bild zu verteidigen, selbst wenn ein 
 
 Besonders beunruhigt mich eine Art von Satz, die man oft in Umfeldern hört, in denen Autorität stärker ist als Verantwortung.
 
-„Ich habe dir gesagt, was du tun sollst. Wie du es gemacht hast, ist dein Problem."
+„Ich habe dir gesagt, was du tun sollst. Wie du es gemacht hast, ist dein Problem.“
 
 Manchmal kann das richtig sein.
 
@@ -223,7 +223,7 @@ Sie tut es öffentlich.
 
 Vielleicht in einer Besprechung, vor dem ganzen Team.
 
-„Ja, es war meine Entscheidung. Ich übernehme Verantwortung."
+„Ja, es war meine Entscheidung. Ich übernehme Verantwortung.“
 
 Die Worte klingen gut.
 
@@ -485,7 +485,7 @@ Sie kann einen vorsichtigen Satz wählen, in dem alle ein bisschen geirrt haben 
 
 Oder sie kann vor die Menschen treten und sagen:
 
-„Die Entscheidung habe ich getroffen. Meine Überlegung war falsch. Jetzt müssen wir die Folgen korrigieren und verstehen, wie wir es nicht wiederholen."
+„Die Entscheidung habe ich getroffen. Meine Überlegung war falsch. Jetzt müssen wir die Folgen korrigieren und verstehen, wie wir es nicht wiederholen.“
 
 Dieser Satz löst das Problem nicht von selbst.
 

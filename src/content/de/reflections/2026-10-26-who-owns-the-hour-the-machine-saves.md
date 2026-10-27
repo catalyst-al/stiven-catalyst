@@ -261,7 +261,7 @@ Aber wie seine Folgen verteilt werden, bleibt eine menschliche Entscheidung.
 
 An dieser Stelle kann eine Führungskraft einwenden:
 
-„Wenn mir die Technologie erlaubt, das Doppelte an Arbeit zu verarbeiten, warum sollte ich es nicht tun?"
+„Wenn mir die Technologie erlaubt, das Doppelte an Arbeit zu verarbeiten, warum sollte ich es nicht tun?“
 
 Das ist eine berechtigte Frage.
 

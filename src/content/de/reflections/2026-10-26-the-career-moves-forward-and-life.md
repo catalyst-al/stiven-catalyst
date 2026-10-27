@@ -2,7 +2,7 @@
 title: 'Die Karriere kommt voran. Und das Leben? Ehrgeiz, Zeit und der Preis, der nicht im Arbeitsvertrag steht'
 date: 2026-10-26
 status: published
-summary: 'Eine Karriere kann Fortschritt zeigen, das Privatleben nicht, deshalb gewinnt die erste immer den Vorrang. Opfer haben nur mit Zweck und Grenze Sinn, sonst wird „später" zur Lebensweise.'
+summary: 'Eine Karriere kann Fortschritt zeigen, das Privatleben nicht, deshalb gewinnt die erste immer den Vorrang. Opfer haben nur mit Zweck und Grenze Sinn, sonst wird „später“ zur Lebensweise.'
 deck: 'Der traurigste Erfolg ist nicht der, den wir nicht aufbauen konnten, sondern der, den wir mit so viel Hingabe aufbauten, dass ein Teil des Lebens, das er füllen sollte, ohne uns verging.'
 description: 'Über Ehrgeiz und Zeit, Opfer mit Grenze, die Verantwortung der Organisation und die Frage, was ich nicht verlieren will.'
 ---
@@ -13,7 +13,7 @@ Die Morgenbesprechung. Die Frist eines Projekts. Ein Telefonat mit dem Vorgesetz
 
 Irgendwo dazwischen stand auch eine kleine Erinnerung.
 
-„Rechtzeitig zu Hause sein."
+„Rechtzeitig zu Hause sein.“
 
 Keine Uhrzeit war von der Geschäftsleitung festgelegt. Sie verlangte keine Bestätigung per E-Mail. Sie beeinflusste keine Leistungskennzahlen.
 

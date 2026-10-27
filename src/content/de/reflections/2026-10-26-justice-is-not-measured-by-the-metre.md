@@ -175,7 +175,7 @@ Wenn sein Einsatz als selbstverständlich gilt, während jeder mangelnde Einsatz
 
 Sie nutzt sie aus.
 
-Und wenn die Führungskraft jedem Einwand mit dem Satz „Die Regeln gelten für alle gleich" begegnet, verteidigt sie vielleicht ein wichtiges Prinzip.
+Und wenn die Führungskraft jedem Einwand mit dem Satz „Die Regeln gelten für alle gleich“ begegnet, verteidigt sie vielleicht ein wichtiges Prinzip.
 
 Sie kann sich aber auch dahinter verstecken.
 

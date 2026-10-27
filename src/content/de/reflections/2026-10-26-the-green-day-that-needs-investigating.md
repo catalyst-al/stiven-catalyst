@@ -369,11 +369,11 @@ Und nutzt eine Führungskraft ihn nur, um Erfolg zu belegen, riskiert sie, die w
 
 Am Ende ist die wichtigste Frage eines grünen Tages nicht immer:
 
-„Haben wir das Ziel erreicht?"
+„Haben wir das Ziel erreicht?“
 
 Manchmal lautet sie:
 
-**„Was mussten wir übersehen, damit alles in Ordnung aussah?"**
+**„Was mussten wir übersehen, damit alles in Ordnung aussah?“**
 
 Denn die Zahlen können stimmen.
 

@@ -203,7 +203,7 @@ Ein anderer, er brauche sich nicht um jedes Detail zu sorgen.
 
 Er hört vielleicht auch den gefährlichsten Satz einer Organisation, die begonnen hat, Glück mit Kompetenz zu verwechseln:
 
-„Wir haben immer so gearbeitet, und es ist nie etwas passiert."
+„Wir haben immer so gearbeitet, und es ist nie etwas passiert.“
 
 Aber das Fehlen eines früheren Vorfalls ist keine Garantie für die Sicherheit eines Prozesses.
 
