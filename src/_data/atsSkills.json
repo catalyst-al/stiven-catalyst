@@ -1,7 +1,7 @@
 {
-  "_comment": "ATS CV, the job ad match (js/ats-cv.js): words that mean the same skill in English, German and Albanian. A key word of the ad counts as found when the CV has any word of its group; the match then says which. The headings open the part of an ad that lists what is required (weighs double), what is only welcome, or something else (tasks, benefits, contact), each running until the next heading.",
+  "_comment": "ATS CV, the job ad match (js/ats-cv.js): words that mean the same skill in English, German and Albanian. A word of a group in the ad is a key word (the group once), and it counts as found when the CV has any word of its group; the match then says which. The headings open the part of an ad that lists what is required (weighs double), what is only welcome, the tasks (otherHeadings), or what the company offers, who it is and how to apply (offerHeadings: no key words come from there), each running until the next heading. notKeywords: abbreviations in capitals that are never key words (legal forms, documents, laws). names: group words that are also common words, counted only where the ad writes them with a capital.",
   "groups": [
-    ["forklift", "forklift licence", "forklift license", "forklift truck", "staplerschein", "staplerführerschein", "gabelstapler", "gabelstaplerschein", "flurförderzeug", "flurförderzeugschein", "flurfördermittel", "pirun", "motokar", "leje piruni"],
+    ["forklift", "forklift licence", "forklift license", "forklift truck", "staplerschein", "staplerführerschein", "gabelstapler", "gabelstaplerschein", "flurförderzeug", "flurförderzeugschein", "flurfördermittel", "pirun", "motokar", "leje piruni", "leje drejtimi për pirun"],
     ["warehouse", "warehousing", "lager", "lagerhaltung", "lagerlogistik", "lagerwirtschaft", "magazinë", "magazina", "depo"],
     ["logistics", "logistik", "logjistikë", "logjistika"],
     ["supply chain", "supply chain management", "lieferkette", "zinxhir furnizimi", "zinxhiri i furnizimit"],
@@ -22,7 +22,7 @@
     ["root cause", "root cause analysis", "rca", "5 whys", "5 why", "ursachenanalyse", "fehlerursache", "ishikawa", "analiza e shkakut", "shkaku rrënjësor", "5 pse"],
     ["pareto", "80/20", "pareto analysis", "pareto-analyse", "analiza pareto"],
     ["quality", "quality management", "quality assurance", "qualität", "qualitätsmanagement", "qualitätssicherung", "qm", "qs", "cilësi", "cilësia", "menaxhim cilësie", "sigurim cilësie"],
-    ["health and safety", "safety", "occupational safety", "arbeitssicherheit", "arbeitsschutz", "unfallverhütung", "sicherheit", "siguria në punë", "siguri", "mbrojtje në punë"],
+    ["health and safety", "safety", "occupational safety", "arbeitssicherheit", "arbeitsschutz", "unfallverhütung", "sicherheit", "siguria në punë", "siguri", "mbrojtje në punë", "siguri në punë"],
     ["hazard assessment", "risk assessment", "gefährdungsbeurteilung", "risikobewertung", "vlerësim rreziku", "vlerësimi i rrezikut"],
     ["team leader", "team lead", "teamleiter", "teamleitung", "teamleiterin", "gruppenleiter", "drejtues ekipi", "udhëheqës ekipi", "përgjegjës ekipi"],
     ["shift leader", "shift lead", "shift supervisor", "schichtleiter", "schichtleitung", "schichtführer", "përgjegjës turni", "drejtues turni"],
@@ -44,7 +44,7 @@
     ["customer satisfaction", "csat", "nps", "kundenzufriedenheit", "kënaqësi e klientit", "kënaqësia e klientit"],
     ["complaints", "complaint handling", "reklamation", "reklamationen", "reklamationsbearbeitung", "beschwerdemanagement", "ankesa", "trajtim ankesash"],
     ["front office", "front desk", "reception", "rezeption", "empfang", "front-office", "recepsion", "pritje"],
-    ["night audit", "night auditor", "nachtportier", "night-audit", "auditim nate", "auditimi i natës"],
+    ["night audit", "night auditor", "nachtportier", "night-audit", "auditim nate", "auditimi i natës", "auditimin e natës"],
     ["check-in", "check-out", "check in", "check out", "an- und abreise", "anreise", "abreise", "regjistrim", "çregjistrim"],
     ["pms", "property management system", "opera", "opera pms", "opera cloud", "protel", "mews", "sihot", "fidelio", "hotelsoftware"],
     ["housekeeping", "hauswirtschaft", "zimmerreinigung", "etage", "pastrim dhomash", "mirëmbajtje dhomash"],
@@ -57,7 +57,7 @@
     ["ms office", "microsoft office", "office 365", "m365", "word", "powerpoint", "outlook", "paketa office"],
     ["google workspace", "google sheets", "g suite", "google docs"],
     ["power bi", "powerbi", "tableau", "looker", "data visualisation", "data visualization", "datenvisualisierung", "dashboard", "dashboards", "reporting", "berichtswesen", "raportim"],
-    ["data analysis", "data analytics", "analytics", "datenanalyse", "auswertung", "auswertungen", "analizë e të dhënave", "analiza e të dhënave"],
+    ["data analysis", "data analytics", "analytics", "datenanalyse", "auswertung", "auswertungen", "analizë e të dhënave", "analiza e të dhënave", "analizë të të dhënave", "analiza të dhënave"],
     ["sql", "database", "databases", "datenbank", "datenbanken", "bazë të dhënash"],
     ["python", "python3"],
     ["project management", "projektmanagement", "projektleitung", "pmp", "prince2", "menaxhim projekti", "menaxhim projektesh"],
@@ -67,8 +67,8 @@
     ["audit", "audits", "auditing", "internal audit", "interne audits", "auditim", "auditime"],
     ["budget", "budgeting", "cost control", "budgetverantwortung", "kostenkontrolle", "buxhet", "kontroll kostosh"],
     ["driving licence", "driving license", "driver's license", "class b", "führerschein", "führerschein klasse b", "fahrerlaubnis", "patentë", "patentë shoferi", "leje drejtimi"],
-    ["english", "englisch", "anglisht", "english fluent", "verhandlungssicher englisch"],
-    ["german", "deutsch", "gjermanisht", "deutschkenntnisse", "german fluent"],
+    ["english", "englisch", "anglisht", "english fluent", "verhandlungssicher englisch", "englischkenntnisse", "gjuha angleze", "angleze"],
+    ["german", "deutsch", "gjermanisht", "deutschkenntnisse", "german fluent", "gjuha gjermane", "gjermane"],
     ["albanian", "albanisch", "shqip"],
     ["italian", "italienisch", "italisht"],
     ["bachelor", "bachelor's degree", "bsc", "ba", "bakalaureat", "bachelorabschluss"],
@@ -78,7 +78,12 @@
     ["dispatcher", "disponent", "disposition", "dispatching", "tourenplanung", "route planning", "planifikim rrugësh", "planifikim linjash"],
     ["truck", "hgv", "lkw", "trucks", "kamion", "kamionë"],
     ["dangerous goods", "hazmat", "adr", "gefahrgut", "mallra të rrezikshme"],
-    ["cold chain", "temperature control", "kühlkette", "temperaturkontrolle", "zinxhir ftohës", "kontroll temperature"]
+    ["cold chain", "temperature control", "kühlkette", "temperaturkontrolle", "zinxhir ftohës", "kontroll temperature"],
+    ["no-show", "no-shows", "no show", "nichtanreise", "nichtanreisen", "mosparaqitje", "rezervime pa paraqitje"],
+    ["daily close", "end of day", "end-of-day", "day close", "tagesabschluss", "tagesabschlüsse", "mbyllja ditore", "mbyllje ditore", "mbyllja e ditës"],
+    ["forecasting", "forecast", "forecasts", "demand planning", "prognose", "prognosen", "bedarfsprognose", "bedarfsplanung", "parashikim", "parashikime"],
+    ["haccp", "food safety", "food hygiene", "lebensmittelhygiene", "lebensmittelsicherheit", "siguria ushqimore", "higjiena e ushqimit"],
+    ["tms", "transport management system", "transportmanagementsystem", "sistem menaxhimi transporti"]
   ],
   "requirementHeadings": [
     "requirements", "your profile", "what you bring", "what you'll bring", "what we expect", "what we are looking for", "qualifications", "skills and experience", "about you", "who you are", "must have", "must-have", "essential",
@@ -86,13 +91,20 @@
     "kërkesat", "kërkesa", "profili juaj", "profili yt", "çfarë kërkojmë", "kualifikimet", "kualifikime", "aftësitë e kërkuara", "çfarë sillni ju", "çfarë sjell ti"
   ],
   "otherHeadings": [
-    "your tasks", "your role", "responsibilities", "your responsibilities", "the role", "about the role", "what you will do", "what you'll do", "we offer", "what we offer", "benefits", "about us", "who we are", "the company", "how to apply", "contact", "application",
-    "ihre aufgaben", "deine aufgaben", "aufgaben", "aufgabengebiet", "das erwartet sie", "das erwartet dich", "ihre rolle", "deine rolle", "wir bieten", "das bieten wir", "unser angebot", "ihre vorteile", "deine vorteile", "benefits", "über uns", "wer wir sind", "das unternehmen", "bewerbung", "kontakt", "ansprechpartner",
-    "detyrat", "detyrat tuaja", "përgjegjësitë", "çfarë ofrojmë", "ne ofrojmë", "përfitimet", "rreth nesh", "kush jemi", "aplikimi", "kontakti"
+    "your tasks", "your role", "responsibilities", "your responsibilities", "the role", "about the role", "what you will do", "what you'll do",
+    "ihre aufgaben", "deine aufgaben", "aufgaben", "aufgabengebiet", "das erwartet sie", "das erwartet dich", "ihre rolle", "deine rolle",
+    "detyrat", "detyrat tuaja", "përgjegjësitë"
+  ],
+  "offerHeadings": [
+    "we offer", "what we offer", "our offer", "benefits", "about us", "who we are", "the company", "why join us", "how to apply", "contact", "application",
+    "wir bieten", "was wir bieten", "das bieten wir", "unser angebot", "ihre vorteile", "deine vorteile", "über uns", "wer wir sind", "das unternehmen", "bewerbung", "kontakt", "ansprechpartner",
+    "çfarë ofrojmë", "ne ofrojmë", "ofrojmë", "përfitimet", "rreth nesh", "kush jemi", "aplikimi", "si të aplikoni", "kontakti"
   ],
   "optionalHeadings": [
     "nice to have", "nice-to-have", "preferred", "desirable", "a plus", "bonus", "ideally", "optional",
     "wünschenswert", "von vorteil", "idealerweise", "ein plus", "optional", "nice to have",
     "e preferuar", "e dëshirueshme", "avantazh", "plus"
-  ]
+  ],
+  "notKeywords": ["cv", "pdf", "gdpr", "dsgvo", "hr", "gmbh", "ag", "kg", "ug", "se", "ohg", "llc", "ltd", "plc", "inc", "shpk", "m/w/d", "w/m/d", "m/f/d", "faq", "url", "www", "ok", "id", "ca", "usw", "etc", "tel", "fax", "nr"],
+  "names": ["word", "excel", "opera", "outlook", "access", "teams", "office"]
 }

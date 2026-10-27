@@ -79,13 +79,219 @@
   };
 
   // ---------- Job ad keywords ----------
-  const tokens = (text) => String(text ?? "").toLowerCase().match(/[\p{L}\p{N}][\p{L}\p{N}+#&./-]*[\p{L}\p{N}+#]|[\p{L}]/gu) || [];
-  const keywords = (ad, stopwords, limit = 24) => {
-    const stop = new Set(stopwords);
-    const seq = tokens(ad);
-    // Addresses (www.hotel.de, jobs@hotel.de), domains and abbreviations such as z.B. or e.g. are not key words.
+  // Text for matching only: one form of every letter (NFC, so a "ü" typed as "u" and a dot above is one letter), lower
+  // case, and the letters people write two ways folded. "ä", "ö", "ü" become "ae", "oe", "ue" (Fuehrung), or with strip
+  // "a", "o", "u" (Fuhrung), "ß" becomes "ss", and "ë", "ç", "é" and the rest lose their marks (pergjegjes). A term is
+  // found when either way finds it. What the visitor sees keeps the text as written.
+  const UMLAUT = { ä: ["ae", "a"], ö: ["oe", "o"], ü: ["ue", "u"] };
+  const fold = (text, strip = false) => String(text ?? "").normalize("NFC").toLowerCase()
+    .replace(/ß/g, "ss").replace(/[äöü]/g, (ch) => UMLAUT[ch][strip ? 1 : 0])
+    .normalize("NFD").replace(/\p{M}+/gu, "").normalize("NFC");
+  const tokens = (text) => String(text ?? "").normalize("NFC").toLowerCase().match(/[\p{L}\p{N}][\p{L}\p{N}+#&./-]*[\p{L}\p{N}+#]|[\p{L}]/gu) || [];
+  // Hyphens and slashes count as spaces, so "Front-Office" in the ad is found in a CV that writes
+  // "Front Office" (and the other way round), and "Check-in" in "Checkin".
+  const simple = (text, strip = false) => fold(text, strip).replace(/[-‐‑–/]+/g, " ").replace(/\s+/g, " ");
+  const escapeTerm = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // A term counts where a word starts: "lean" is not in "cleaning", "sap" not in "disappear". A short term, or one of
+  // several words, must also end with its word, where an ending may follow: a plural ("audits", "Kennzahlen") and, after
+  // five letters or more, the endings of Albanian ("piruni", "ankesat", "sigurinë"). "excel" is not in "excellent",
+  // "java" not in "javascript". One long word may run on, as German compounds do, and "kommunikation" also counts when
+  // the CV says "kommunikativ". "front office" also matches "frontoffice", and "email" matches "e-mail".
+  const ENDINGS = "s|es|e|en|n";
+  const ENDINGS_LONG = `${ENDINGS}|a|ja|ne|te|se|ve|it|in|i|u|t`;
+  const ending = (word) => (word.length >= 5 ? ENDINGS_LONG : ENDINGS);
+  // The patterns of a term in a folded text; the term itself is group 1. stems: false leaves out the shortened stem
+  // ("kommunikativ" for "kommunikation"), which the ad side does not use: there "report" is not "reporting".
+  const patternCache = new Map();
+  const patterns = (term, strip, { stems = true, flags = "u" } = {}) => {
+    const key = `${strip ? 1 : 0}${stems ? 1 : 0}${flags}${term}`;
+    if (!patternCache.has(key)) {
+      if (patternCache.size > 5000) patternCache.clear();
+      patternCache.set(key, buildPatterns(term, strip, stems, flags));
+    }
+    return patternCache.get(key);
+  };
+  const buildPatterns = (term, strip, stems, flags) => {
+    const k = simple(term, strip).trim();
+    if (!k) return [];
+    const words = k.split(" ");
+    const longWord = k.length >= 8 && words.length === 1;
+    const pattern = (body, runOn) => new RegExp(`(?:^|[^\\p{L}\\p{N}])(${body}${runOn ? "" : `(?:${ending(words[words.length - 1])})?(?![\\p{L}\\p{N}])`})`, flags);
+    // An Albanian joining word changes with the case of the words around it: "zinxhiri i furnizimit" is also
+    // "zinxhirin e furnizimit".
+    const word = (text, n) => (words.length > 1 && /^(?:i|e|te|se)$/.test(text) ? "(?:i|e|te|se)"
+      : escapeTerm(text) + (n < words.length - 1 && text.length >= 5 ? `(?:${ENDINGS_LONG})?` : ""));
+    const out = [pattern(words.map(word).join(" ?"), longWord)];
+    if (stems && longWord && /^\p{L}+$/u.test(k)) out.push(pattern(escapeTerm(k.slice(0, -3)), true));
+    // Every place a pattern matches holds the first four letters of the term: a quick look for them comes first.
+    out.head = words[0].slice(0, 4);
+    return out;
+  };
+  // finder(text) folds the text once and gives a test for terms; hasTerm(text, term) is the same for one term.
+  const finder = (text, options = {}) => {
+    const forms = [false, true].map((strip) => [simple(text, strip), simple(fold(text, strip).replace(/(\p{L})[-‐‑](?=\p{L})/gu, "$1"), strip)]);
+    return (term) => [false, true].some((strip, i) => {
+      const tests = patterns(term, strip, options);
+      return forms[i].some((t) => t.includes(tests.head) && tests.some((re) => re.test(t)));
+    });
+  };
+  const hasTerm = (text, term) => finder(text)(term);
+  // Where a term stands in a text as typed ("SQL", "Power BI", "KPI" for "kpis"): each place, in the text's own letters.
+  const spellings = (text, term) => {
+    const words = String(term).normalize("NFC").split(/[\s‐‑–/-]+/).filter(Boolean);
+    if (!words.length || !String(text ?? "").normalize("NFC").toLowerCase().includes(words[0].toLowerCase())) return [];
+    const re = new RegExp(`(?<![\\p{L}\\p{N}])(${words.map(escapeTerm).join("[\\s‐‑–/-]*")})(?:s|es|e|en|n)?(?![\\p{L}\\p{N}])`, "giu");
+    return [...String(text ?? "").normalize("NFC").matchAll(re)].map((m) => m[1]);
+  };
+  // A short abbreviation the ad writes in capitals ("IT", "HR", "MS") is also a common word in lower case ("it", "ms"),
+  // so it counts in the CV only in capitals too.
+  const capitals = (label) => /^[\p{Lu}\p{N}&+#]+$/u.test(label) && label.replace(/[^\p{L}]/gu, "").length <= 3;
+  // Words that mean the same skill (src/_data/atsSkills.json: "Staplerschein", "forklift licence" and "pirun" are one
+  // group). A key word of the ad counts as found when the CV has it, or any other word of its group; the match says
+  // which word it found, so the visitor can decide whether to write it as the ad does.
+  const groupIndex = new WeakMap();
+  const groupOf = (term, groups = []) => {
+    let index = groupIndex.get(groups);
+    if (!index) {
+      index = new Map();
+      groups.forEach((group) => group.forEach((word) => { if (!index.has(simple(word).trim())) index.set(simple(word).trim(), group); }));
+      groupIndex.set(groups, index);
+    }
+    return index.get(simple(term).trim()) || null;
+  };
+  const findTerm = (text, term, groups = [], has = finder(text), label = "") => {
+    const own = capitals(label)
+      ? new RegExp(`(?<![\\p{L}\\p{N}])${escapeTerm(label)}s?(?![\\p{L}\\p{N}])`, "u").test(String(text ?? "").normalize("NFC"))
+      : has(term);
+    if (own) return { found: true, via: null };
+    const via = (groupOf(term, groups) || []).find((word) => simple(word).trim() !== simple(term).trim() && has(word));
+    return { found: Boolean(via), via: via || null };
+  };
+  // The parts of an ad: a short line that reads like "Ihr Profil" or "Requirements" opens what is required, one like
+  // "Nice to have" what is only welcome, and one like "Ihre Aufgaben" or "We offer" closes them; the text before any
+  // such line (the company, the tasks) is neither. A key word found in the required part weighs double in the score.
+  // What the company offers, who it is and how to apply (offerHeadings) is also kept apart as offer: no key words come
+  // from there. job is the ad without it.
+  const adParts = (ad, skills = {}) => {
+    const headingLike = (line, list) => {
+      const plain = simple(line).replace(/[:.!?()\-–—*#]+/g, " ").replace(/\s+/g, " ").trim();
+      return plain.split(" ").length <= 7 && (list || []).some((heading) => plain === simple(heading).trim() || plain.startsWith(`${simple(heading).trim()} `) || plain.endsWith(` ${simple(heading).trim()}`));
+    };
+    const parts = { required: [], optional: [], other: [], offer: [], job: [] };
+    const kindOf = (text) => (headingLike(text, skills.requirementHeadings) ? "required" : headingLike(text, skills.optionalHeadings) ? "optional"
+      : headingLike(text, skills.otherHeadings) ? "other" : headingLike(text, skills.offerHeadings) ? "offer" : null);
+    let current = "other";
+    let offer = false;
+    String(ad ?? "").split(/\r?\n/).forEach((line) => {
+      if (!line.trim()) return;
+      // "Requirements: SQL and Excel" opens the part and is its first line.
+      const colon = /^([^:]{2,60}):\s*(\S.*)$/.exec(line);
+      const kind = kindOf(colon ? colon[1] : line);
+      if (kind) {
+        current = kind === "offer" ? "other" : kind;
+        offer = kind === "offer";
+        if (!colon) return;
+      }
+      const text = kind ? colon[2] : line;
+      parts[current].push(text);
+      parts[offer ? "offer" : "job"].push(text);
+    });
+    return Object.fromEntries(Object.entries(parts).map(([key, list]) => [key, list.join("\n")]));
+  };
+
+  // The key words of an ad, most telling first:
+  // 1. skills: a word of a skills group the ad uses (each group once), an abbreviation the ad writes in capitals
+  //    ("SQL", "WMS", "IT", "B2B", "KPIs", "5S", "C#"), and a name of capitalised words with one ("Power BI",
+  //    "SAP EWM", "MS Office"). The longest group word is looked for first and a shorter one does not count inside it:
+  //    "audit" in "night audit", "leje drejtimi" in "leje drejtimi për pirun". A word of three letters or less, or one
+  //    that is also a common word (names: "Word", "Excel", "Opera"), counts only where the ad writes it with a capital;
+  // 2. two words the ad uses together twice or more ("night audit");
+  // 3. other words the ad uses twice, or once in its required part.
+  // Filler, legal and application words are stop words; abbreviations such as "GDPR" or "CV" are notKeywords. Only
+  // a short ad, with fewer than MIN_TERMS such terms, is filled up with its other words in the order they come; how
+  // long a word is, or a single use, no longer makes it a key word.
+  const MIN_TERMS = 10;
+  const ACRONYM = /(?<![\p{L}\p{N}&+#])(\p{Lu}[\p{Lu}\p{N}&]*[\p{Lu}\p{N}]|\p{N}+\p{Lu}[\p{Lu}\p{N}]*|\p{Lu}(?:#|\+\+))(?:s)?(?![\p{L}\p{N}#+])/gu;
+  const ACRONYM_WORD = new RegExp(`^${ACRONYM.source}$`, "u");
+  const NAME = /(?<![\p{L}\p{N}])(?:\p{Lu}[\p{L}\p{N}&]*)(?: \p{Lu}[\p{L}\p{N}&]*){1,2}(?![\p{L}\p{N}])/gu;
+  const keywords = (ad, stopwords, skills = {}, limit = 24) => {
+    const stop = new Set(stopwords.map((word) => fold(word)));
+    const notKeywords = new Set((skills.notKeywords || []).map((word) => fold(word)));
+    const names = new Set((skills.names || []).map((word) => fold(word)));
+    const groups = skills.groups || [];
+    const parts = adParts(ad, skills);
+    const job = String(parts.job).normalize("NFC");
+    const has = finder(job, { stems: false });
+    const required = finder(parts.required, { stems: false });
+    const plain = simple(job);
+    const at = (term) => { const i = plain.indexOf(simple(term).trim()); return i < 0 ? Infinity : i; };
+    const terms = new Map();
+    const add = (term, key, kind, count) => {
+      const old = terms.get(key);
+      if (old) { old.count += count; return; }
+      terms.set(key, { term: term.normalize("NFC").toLowerCase(), kind, count, at: at(term), required: required(term) });
+    };
+    const keyOf = (term) => { const group = groupOf(term, groups); return group ? `group:${groups.indexOf(group)}` : `term:${simple(term).trim()}`; };
+    // The words of the skills found, without a plural ending, so "scanners" is not a key word next to "handheld scanner".
+    const base = (word) => (word.length > 4 ? word.replace(/(?:es|s|en|n|e)$/, "") : word);
+    const skillWords = new Set();
+    const mark = (term) => simple(term).trim().split(" ").forEach((word) => skillWords.add(base(word)));
+    const inSkill = (word) => skillWords.has(base(simple(word).trim()));
+
+    // 1. Skills. The group words, longest first, each where no longer one stands already.
+    let masked = plain;
+    const hits = new Map();
+    groups.flatMap((group, g) => group.map((word) => ({ word, g, length: simple(word).trim().length })))
+      .sort((a, b) => b.length - a.length)
+      .forEach(({ word, g }) => {
+        if (!has(word)) return;
+        const seen = spellings(job, word);
+        const named = seen.some((spelling) => /\p{Lu}/u.test(spelling));
+        if (!named && (fold(word).replace(/[^\p{L}\p{N}]/gu, "").length <= 3 || names.has(fold(word)))) return;
+        const [re] = patterns(word, false, { stems: false, flags: "gu" });
+        const free = [...masked.matchAll(re)];
+        if (!free.length && patterns(word, false, { stems: false })[0].test(plain)) return;
+        free.forEach((m) => { const from = m.index + m[0].length - m[1].length; masked = masked.slice(0, from) + " ".repeat(m[1].length) + masked.slice(from + m[1].length); });
+        const capital = seen.some((spelling) => spelling.split(/[\s‐‑–/-]+/).some((part) => ACRONYM_WORD.test(part)));
+        hits.set(g, [...(hits.get(g) || []), { word, capital, named, at: at(word), count: Math.max(1, seen.length) }]);
+        mark(word);
+      });
+    hits.forEach((list, g) => {
+      // The ad's own product or abbreviation first ("Power BI", not "dashboards"), then the first used, then the longest.
+      const best = [...list].sort((a, b) => b.capital - a.capital || b.named - a.named || a.at - b.at || b.word.length - a.word.length)[0];
+      add(best.word, `group:${g}`, "skill", list.reduce((sum, hit) => sum + hit.count, 0));
+    });
+    // Names and abbreviations, in the lines that are not all capitals. A capital at the start of a sentence makes no
+    // name ("Write SQL queries"); stop words at either end are not part of one ("mit SAP").
+    job.split("\n").forEach((line) => {
+      const letters = line.replace(/[^\p{L}]/gu, "");
+      if (letters.length > 8 && letters.replace(/[^\p{Lu}]/gu, "").length / letters.length > 0.6) return;
+      const taken = [];
+      for (const m of line.matchAll(NAME)) {
+        const words = m[0].split(" ");
+        if (/^[\s\-–•*·(]*$|[.!?:;]\s*$/.test(line.slice(0, m.index)) && !ACRONYM_WORD.test(words[0])) words.shift();
+        while (words.length && stop.has(fold(words[0])) && !ACRONYM_WORD.test(words[0])) words.shift();
+        while (words.length && stop.has(fold(words[words.length - 1])) && !ACRONYM_WORD.test(words[words.length - 1])) words.pop();
+        if (words.length < 2 || !words.some((word) => ACRONYM_WORD.test(word))) continue;
+        const name = words.join(" ");
+        taken.push([m.index, m.index + m[0].length]);
+        if (words.every(inSkill)) continue;
+        add(name, keyOf(name), "skill", 1);
+        mark(name);
+      }
+      for (const m of line.matchAll(ACRONYM)) {
+        if (taken.some(([from, to]) => m.index >= from && m.index < to) || notKeywords.has(fold(m[1]))) continue;
+        if (inSkill(m[1]) && !groupOf(m[1], groups)) continue;
+        add(m[1], keyOf(m[1]), "skill", 1);
+        mark(m[1]);
+      }
+    });
+
+    // 2. and 3. Pairs and words, leaving out the words of a skill found ("it-systemen" for "IT").
     const address = (word) => /@/.test(word) || /^(?:www\.|https?[:/])/.test(word) || /\.(?:de|at|ch|com|net|org|eu|al|it|fr|uk|io|info|biz|co)(?:\/|$)/.test(word) || /^\p{L}\.\p{L}\.?$/u.test(word);
-    const useful = (word) => word.length >= 3 && !stop.has(word) && !/^\d+$/.test(word) && !/^\d/.test(word) && !address(word);
+    const useful = (word) => word.length >= 3 && !stop.has(fold(word)) && !notKeywords.has(fold(word)) && !/^\d/.test(word) && !address(word)
+      && !simple(word).trim().split(" ").some(inSkill) && !terms.has(keyOf(word));
+    const seq = tokens(job);
     const uni = new Map();
     const bi = new Map();
     seq.forEach((word, i) => {
@@ -94,66 +300,29 @@
       const next = seq[i + 1];
       if (next && useful(next)) bi.set(`${word} ${next}`, (bi.get(`${word} ${next}`) || 0) + 1);
     });
-    const pairs = [...bi].filter(([, n]) => n >= 2).sort((a, b) => b[1] - a[1] || b[0].length - a[0].length).slice(0, 8).map(([term]) => term);
-    const inPair = new Set(pairs.flatMap((pair) => pair.split(" ")));
-    const singles = [...uni].filter(([word]) => !inPair.has(word)).sort((a, b) => b[1] - a[1] || b[0].length - a[0].length).map(([word]) => word);
-    return [...pairs, ...singles].slice(0, limit);
-  };
-  // Hyphens and slashes count as spaces, so "Front-Office" in the ad is found in a CV that writes
-  // "Front Office" (and the other way round), and "Check-in" in "Checkin".
-  const simple = (text) => String(text).toLowerCase().replace(/[-‐‑–/]+/g, " ").replace(/\s+/g, " ");
-  const escapeTerm = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  // A term counts where a word starts: "lean" is not in "cleaning", "sap" not in "disappear". A short term, or one of
-  // several words, must also end with its word (a plural ending may follow): "excel" is not in "excellent", "java" not
-  // in "javascript". One long word may run on, as German compounds do, and "kommunikation" also counts when the CV
-  // says "kommunikativ". "front office" also matches "frontoffice".
-  const hasTerm = (text, term) => {
-    const t = simple(text);
-    const k = simple(term).trim();
-    if (!k) return false;
-    const found = (pattern, runOn) => new RegExp(`(?:^|[^\\p{L}\\p{N}])${pattern}${runOn ? "" : "(?:s|es|e|en|n)?(?![\\p{L}\\p{N}])"}`, "u").test(t);
-    const longWord = k.length >= 8 && !k.includes(" ");
-    if (found(k.split(" ").map(escapeTerm).join(" ?"), longWord)) return true;
-    return longWord && /^\p{L}+$/u.test(k) && found(escapeTerm(k.slice(0, -3)), true);
-  };
-  // Words that mean the same skill (src/_data/atsSkills.json: "Staplerschein", "forklift licence" and "pirun" are one
-  // group). A key word of the ad counts as found when the CV has it, or any other word of its group; the match says
-  // which word it found, so the visitor can decide whether to write it as the ad does.
-  const groupOf = (term, groups = []) => {
-    const k = simple(term).trim();
-    return groups.find((group) => group.some((word) => simple(word).trim() === k)) || null;
-  };
-  const findTerm = (text, term, groups = []) => {
-    if (hasTerm(text, term)) return { found: true, via: null };
-    const via = (groupOf(term, groups) || []).find((word) => simple(word).trim() !== simple(term).trim() && hasTerm(text, word));
-    return { found: Boolean(via), via: via || null };
-  };
-  // The parts of an ad: a short line that reads like "Ihr Profil" or "Requirements" opens what is required, one like
-  // "Nice to have" what is only welcome, and one like "Ihre Aufgaben" or "We offer" closes them; the text before any
-  // such line (the company, the tasks) is neither. A key word found in the required part weighs double in the score.
-  const adParts = (ad, skills = {}) => {
-    const headingLike = (line, list) => {
-      const plain = simple(line).replace(/[:.!?()\-–—*#]+/g, " ").replace(/\s+/g, " ").trim();
-      return plain.split(" ").length <= 7 && (list || []).some((heading) => plain === simple(heading).trim() || plain.startsWith(`${simple(heading).trim()} `) || plain.endsWith(` ${simple(heading).trim()}`));
-    };
-    const parts = { required: [], optional: [], other: [] };
-    let current = "other";
-    String(ad ?? "").split(/\r?\n/).forEach((line) => {
-      if (!line.trim()) return;
-      if (headingLike(line, skills.requirementHeadings)) { current = "required"; return; }
-      if (headingLike(line, skills.optionalHeadings)) { current = "optional"; return; }
-      if (headingLike(line, skills.otherHeadings)) { current = "other"; return; }
-      parts[current].push(line);
-    });
-    return Object.fromEntries(Object.entries(parts).map(([key, list]) => [key, list.join("\n")]));
+    [...bi].filter(([, n]) => n >= 2).forEach(([pair, n]) => add(pair, keyOf(pair), "pair", n));
+    const inPair = new Set([...terms.values()].filter((item) => item.kind === "pair").flatMap((item) => item.term.split(" ")));
+    const words = [...uni].filter(([word]) => !inPair.has(word));
+    words.forEach(([word, n]) => { if (n + (required(word) ? 1 : 0) >= 2) add(word, keyOf(word), "word", n); });
+    if (terms.size < MIN_TERMS) words.forEach(([word, n]) => { if (terms.size < MIN_TERMS) add(word, keyOf(word), "fill", n); });
+
+    const rank = { skill: 0, pair: 1, word: 2, fill: 3 };
+    return [...terms.values()]
+      .sort((a, b) => rank[a.kind] - rank[b.kind] || (a.kind === "fill" ? 0 : b.required - a.required || b.count - a.count) || a.at - b.at)
+      .slice(0, limit).map((item) => item.term);
   };
   // A term's weight in the score: 2 when the ad requires it, 1 otherwise (also when the ad has no such part).
   const weightOf = (term, parts) => (parts.required && hasTerm(parts.required, term) ? 2 : 1);
-  // The match of a CV text to the key words of an ad: each term with found, via (the group word that counted) and
-  // weight, and the score as the weighted share found.
+  // The match of a CV text to the key words of an ad: each term with its label (as the ad writes it), found, via (the
+  // group word that counted) and weight, and the score as the weighted share found. The score says how many of the
+  // ad's terms the CV uses; it does not say how any software or recruiter will rank the CV.
   const match = (text, terms, skills = {}, ad = "") => {
     const parts = adParts(ad, skills);
-    const items = terms.map((term) => ({ term, ...findTerm(text, term, skills.groups), weight: weightOf(term, parts) }));
+    const has = finder(text);
+    const items = terms.map((term) => {
+      const label = spellings(ad, term)[0] || term;
+      return { term, label, ...findTerm(text, term, skills.groups, has, label), weight: weightOf(term, parts) };
+    });
     const total = items.reduce((sum, item) => sum + item.weight, 0);
     const got = items.filter((item) => item.found).reduce((sum, item) => sum + item.weight, 0);
     return { items, score: total ? got / total : 0, required: items.filter((item) => item.weight > 1).length };
@@ -445,7 +614,7 @@
     return pages;
   };
 
-  window.AtsCv = { fit, clean, fromBuilder, keywords, hasTerm, groupOf, findTerm, adParts, match, plainText, docx, pdf, paginate, toJsonResume, fromJsonResume, looksJsonResume, SHAPE };
+  window.AtsCv = { fit, clean, fromBuilder, fold, keywords, hasTerm, finder, groupOf, findTerm, adParts, match, plainText, docx, pdf, paginate, toJsonResume, fromJsonResume, looksJsonResume, SHAPE };
 
   // ======================================================================
   const app = document.querySelector("[data-ats]");
@@ -710,12 +879,17 @@
   });
 
   // ---------- Job ad and checks ----------
-  const cvText = () => plainText(cv, doc(), { headings: false }).toLowerCase();
-  let matchScore = null;
+  // The CV as it is written: the match folds case and letters itself, and needs the capitals of "IT" or "MS".
+  const cvText = () => plainText(cv, doc(), { headings: false });
+  // The key words change only with the ad, not with every letter typed in the CV.
+  let adTerms = { ad: null, terms: [] };
+  const termsOf = (ad) => {
+    if (adTerms.ad !== ad) adTerms = { ad, terms: keywords(ad, STOP, SKILLS) };
+    return adTerms.terms;
+  };
   const renderMatch = () => {
-    const terms = keywords(cv.jobAd, STOP);
+    const terms = termsOf(cv.jobAd);
     matchBox.replaceChildren();
-    matchScore = null;
     if (!terms.length) {
       matchBox.append(el("p", "cv-hint", tx("Paste a job ad to see which of its words your CV already uses.")));
       return;
@@ -724,15 +898,15 @@
     const result = match(text, terms, SKILLS, cv.jobAd);
     const found = result.items.filter((item) => item.found);
     const missing = result.items.filter((item) => !item.found);
-    matchScore = result.score;
     const meter = el("div", "ats-meter");
     const bar = el("span");
-    bar.style.width = `${Math.round(matchScore * 100)}%`;
+    bar.style.width = `${Math.round(result.score * 100)}%`;
     meter.append(bar);
-    meter.classList.toggle("is-good", matchScore >= 0.6);
+    // A share of the ad's words, not a pass mark: no threshold is known that software or recruiters use.
     matchBox.append(
-      el("p", "ats-score", tx("{a} of {b} key words from the ad are in your CV ({p}%).", { a: found.length, b: terms.length, p: Math.round(matchScore * 100) })),
+      el("p", "ats-score", tx("{a} of {b} key words from the ad are in your CV ({p}%).", { a: found.length, b: terms.length, p: Math.round(result.score * 100) })),
       meter,
+      el("p", "cv-hint", tx("A guide to how many of the ad's skills and terms your CV uses, not a prediction of what application software or a recruiter will decide.")),
     );
     const notes = [];
     if (result.required) notes.push(tx(result.required === 1 ? "{n} word comes from the part of the ad that lists what is required; it weighs double." : "{n} words come from the part of the ad that lists what is required; they weigh double.", { n: result.required }));
@@ -744,7 +918,7 @@
       matchBox.append(el("p", "ats-chips-title", title));
       const box = el("div", "ats-chips");
       items.forEach((item) => {
-        const chip = el("span", `ats-chip ${className}${item.weight > 1 ? " is-required" : ""}`, item.via ? `${item.term} ≈ ${item.via}` : item.term);
+        const chip = el("span", `ats-chip ${className}${item.weight > 1 ? " is-required" : ""}`, item.via ? `${item.label} ≈ ${item.via}` : item.label);
         if (item.weight > 1) chip.title = tx("Required by the ad");
         if (item.via) chip.title = [chip.title, tx("Found in your CV as “{word}”", { word: item.via })].filter(Boolean).join(" · ");
         box.append(chip);
@@ -774,7 +948,6 @@
         ? tx("One block is longer than a page. Shorten it so nothing is cut off.")
         : tx("{n} pages. One or two pages read best.", { n: pageCount })],
     ];
-    if (matchScore !== null) checks.push([matchScore >= 0.6, tx("At least 60% of the job ad's key words are in the CV.")]);
     const passed = checks.filter(([ok]) => ok).length;
     const listEl = el("ul", "cv-checks");
     checks.forEach(([ok, text]) => {

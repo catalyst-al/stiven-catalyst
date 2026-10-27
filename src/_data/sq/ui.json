@@ -7652,5 +7652,6 @@
   ", left out {n} with more rooms sold than available": ", u lanë jashtë {n} me më shumë dhoma të shitura se në dispozicion",
   "Rooms sold ({sold}) cannot be more than rooms available ({available}). Check the figures of the night, or the room total in the settings.": "Dhomat e shitura ({sold}) nuk mund të jenë më shumë se dhomat në dispozicion ({available}). Kontrollo shifrat e natës, ose numrin e dhomave në cilësimet.",
   "{n} pitch columns a day ({t} each) are too many for a box to read or print. Use a larger pack-out, so that one card stands for more units; the sequence and the CSV hold every container.": "{n} kolona pitch-i në ditë (nga {t}) janë shumë për një kuti që të lexohet ose të printohet. Përdor një sasi paketimi më të madhe, që një kartë të vlejë për më shumë njësi; radha dhe CSV-ja i mbajnë të gjithë kontejnerët.",
-  "The first {n} of {total} runs. The CSV and the Excel file hold every run and container.": "{n} prodhimet e para nga {total}. Skedari CSV dhe ai Excel mbajnë çdo prodhim dhe çdo kontejner."
+  "The first {n} of {total} runs. The CSV and the Excel file hold every run and container.": "{n} prodhimet e para nga {total}. Skedari CSV dhe ai Excel mbajnë çdo prodhim dhe çdo kontejner.",
+  "A guide to how many of the ad's skills and terms your CV uses, not a prediction of what application software or a recruiter will decide.": "Një tregues se sa nga aftësitë dhe termat e njoftimit përdor CV-ja jote, jo një parashikim se çfarë do të vendosë programi i aplikimeve apo rekrutuesi."
 }
