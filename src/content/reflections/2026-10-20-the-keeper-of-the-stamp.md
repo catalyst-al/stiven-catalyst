@@ -17,7 +17,7 @@ In a healthy organisation, this department is the conscience of the company. It 
 
 Look at how this mechanism works every day. When an employee has a concern, when the system crushes them, when their overtime is not paid or their manager behaves with arrogance, they know very well that the Human Resources door is the last place to knock. Because in that office there is no confidentiality, there is reporting. There is no solution, there is a warning. Every word said in there risks becoming a note in their personal file.
 
-And what happens on the surface meanwhile? On the surface the corporate comedy is played. Photos with forced smiles are posted on social media, people talk about "the big company family", year-end parties are organised and certificates of appreciation are handed out that are not worth the paper they are printed on. It is a nicely painted façade, while behind it employees are treated as replaceable numbers in an Excel sheet.
+And what happens on the surface meanwhile? On the surface the corporate comedy is played. Photos with forced smiles are posted on social media, people talk about “the big company family”, year-end parties are organised and certificates of appreciation are handed out that are not worth the paper they are printed on. It is a nicely painted façade, while behind it employees are treated as replaceable numbers in an Excel sheet.
 
 I have seen excellent professionals who gave years of their lives to a company and were in the end sent off with a cold piece of paper, without a single question about why they were leaving. In Albania there are no exit interviews, because to ask why a capable person is leaving, you need the courage to hear the truth. And the truth is that people do not leave hard work. **People leave places where they feel invisible, unprotected and deceived.**
 
@@ -25,6 +25,6 @@ When Human Resources are reduced to the role of a gendarme who checks the clock-
 
 This is not how the future is built. This is the model of the old workshop, dressed up in English terms.
 
-Real change in our businesses will begin the day those who sit in that office understand that loyalty to the owner is not shown by saying "yes" to every injustice. The greatest loyalty to a business is to tell the manager the truth when they are wrong, to protect talent from mediocrity and to build a system where the rule applies equally to everyone, from the guard at the door to the director on the top floor.
+Real change in our businesses will begin the day those who sit in that office understand that loyalty to the owner is not shown by saying “yes” to every injustice. The greatest loyalty to a business is to tell the manager the truth when they are wrong, to protect talent from mediocrity and to build a system where the rule applies equally to everyone, from the guard at the door to the director on the top floor.
 
 Until that day comes, do not be surprised that the doors of your companies stand open for recruitment and no one knocks any more. Because **a stamp on paper can close a file, but it can never hold on by force to people who have understood their own worth.**

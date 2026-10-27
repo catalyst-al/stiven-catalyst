@@ -37,7 +37,7 @@ Look at how carefully machines are treated in a business. When a truck or a fork
 
 The professionals who sit in those chairs should ask themselves one simple moral question: What are you really protecting?
 
-Loyalty to a business is not shown by notarising its mistakes. Saying "yes" to every whim of the owner is not professionalism; it is submission on a monthly salary. By becoming a shield for arrogance and silencing the voice of what is right, Human Resources is helping to create ghost companies, which look complete in the papers of the archive, but are entirely empty of spirit, commitment and future.
+Loyalty to a business is not shown by notarising its mistakes. Saying “yes” to every whim of the owner is not professionalism; it is submission on a monthly salary. By becoming a shield for arrogance and silencing the voice of what is right, Human Resources is helping to create ghost companies, which look complete in the papers of the archive, but are entirely empty of spirit, commitment and future.
 
 A great company is not built with stamps that justify insult. It is built with internal institutions that have the courage to protect people even when it spoils the owner's mood.
 

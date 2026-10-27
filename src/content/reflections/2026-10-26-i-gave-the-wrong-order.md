@@ -13,7 +13,7 @@ Its consequences could take a whole shift to correct.
 
 A process was running late. Pressure was rising. The manager had several alternatives in front of him, but none looked perfect. A decision had to be taken and the time for discussion was running out.
 
-"Carry on like this. I take the responsibility."
+“Carry on like this. I take the responsibility.”
 
 The employees obeyed.
 
@@ -25,7 +25,7 @@ He could explain that the situation had been difficult, that time was limited an
 
 Or he could say a much shorter sentence.
 
-"I gave the wrong order."
+“I gave the wrong order.”
 
 Five words.
 
@@ -141,7 +141,7 @@ There is a moment in the relationship between manager and employee that says a l
 
 It is the instant when the employee says:
 
-"I don't think this will work."
+“I don't think this will work.”
 
 This sentence may be an unfounded objection. It may come from fear of change, lack of experience or an incomplete understanding of the situation.
 
@@ -173,7 +173,7 @@ But because he has begun to defend his own image even when a reason to review th
 
 I am particularly troubled by one kind of sentence often heard in workplaces where authority is stronger than responsibility.
 
-"I told you what to do. How you did it is your problem."
+“I told you what to do. How you did it is your problem.”
 
 Sometimes this may be right.
 
@@ -223,7 +223,7 @@ He does it publicly.
 
 Perhaps in a meeting, in front of the whole team.
 
-"Yes, it was my decision. I take responsibility."
+“Yes, it was my decision. I take responsibility.”
 
 The words sound good.
 
@@ -485,7 +485,7 @@ He can choose a careful sentence in which everyone has erred a little and nobody
 
 Or he can stand in front of the people and say:
 
-"I took the decision. My reasoning was wrong. Now we must correct the consequences and understand how not to repeat it."
+“I took the decision. My reasoning was wrong. Now we must correct the consequences and understand how not to repeat it.”
 
 This sentence does not solve the problem by itself.
 

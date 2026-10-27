@@ -29,9 +29,9 @@ This is the universal lie used every time a worker's sweat has to be paid for. S
 
 This kind of treatment does damage far deeper than mere financial disappointment. It kills trust. Because in that moment every employee understands that the promises of a career, of recognition and of growing together were just fairy tales to buy time. They are asked for total commitment, flexibility without set hours and love for the company, but when it comes to rewarding them, the company behaves like a petty trader counting the last coins at the bottom of a pocket.
 
-I know well what that employee thinks as they leave that office with the letter of the rise in hand. They do not feel valued; they feel robbed. They feel as though someone has taken a whole year of their life, their youth and their energy, and in return has thrown a few crumbs on the table, even asking them to say "thank you".
+I know well what that employee thinks as they leave that office with the letter announcing the pay rise in hand. They do not feel valued; they feel robbed. They feel as though someone has taken a whole year of their life, their youth and their energy, and in return has thrown a few crumbs on the table, even asking them to say “thank you”.
 
-And then, six months later, when this employee finds another opportunity and leaves the job empty, these same managers act surprised. They gather in their offices again and ask with feigned naivety: *Why did they leave? We just gave them a rise.*
+And then, six months later, when this employee finds another opportunity and leaves the post vacant, these same managers act surprised. They gather in their offices again and ask with feigned naivety: *Why did they leave? We just gave them a rise.*
 
 They do not understand, or pretend not to understand, that people do not live on illusions, nor on crumbs conditional on the mercy of a hidden budget.
 

@@ -17,7 +17,7 @@ Mistakes were analysed. A lack of communication was mentioned. Procedures were d
 
 In the end, the director closed his laptop.
 
-"Very good. I think we had a productive discussion."
+“Very good. I think we had a productive discussion.”
 
 Everyone nodded.
 
@@ -89,7 +89,7 @@ Only it is usually the choice nobody wants to sign.
 
 In many meetings there is a sentence that sounds like a solution:
 
-"We need to improve communication."
+“We need to improve communication.”
 
 It is a convenient sentence. Acceptable to everyone. It rarely causes objections.
 
@@ -103,7 +103,7 @@ Without these answers, improving communication is not a plan.
 
 It is a wish phrased in professional language.
 
-The same goes for expressions like "we need to be more proactive", "we must strengthen cooperation" or "we must raise awareness".
+The same goes for expressions like “we need to be more proactive”, “we must strengthen cooperation” or “we must raise awareness”.
 
 Proper words. Words that fit into any presentation.
 
@@ -277,7 +277,7 @@ The discussion is over. The arguments have been heard. Everyone has said their p
 
 At that moment the manager can ask a question that is worth more than many pages of minutes:
 
-"Who takes this on?"
+“Who takes this on?”
 
 There may be silence.
 

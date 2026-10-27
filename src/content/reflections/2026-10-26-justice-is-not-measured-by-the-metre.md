@@ -175,7 +175,7 @@ When his dedication is taken for granted, while every lack of dedication in othe
 
 It is exploiting it.
 
-And when a manager answers every objection with the sentence "The rules are the same for everyone", he may be defending an important principle.
+And when a manager answers every objection with the sentence “The rules are the same for everyone”, he may be defending an important principle.
 
 But he may also be hiding behind it.
 

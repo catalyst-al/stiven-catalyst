@@ -7,7 +7,7 @@ deck: 'In the mindset of a caste of entrepreneurs who never admit a mistake, it 
 description: 'A reflection on the myth of the lazy Albanian, on workers who excel abroad, and why the problems of an organisation always flow from the top down.'
 ---
 
-There is an old refrain, repeated so often in offices, business cafés and television studios that for many managers it has become a kind of sacred dogma: "It's not the firm's fault. It's the worker's fault, he doesn't want to work."
+There is an old refrain, repeated so often in offices, business cafés and television studios that for many managers it has become a kind of sacred dogma: “It's not the firm's fault. It's the worker's fault, he doesn't want to work.”
 
 It is the most comfortable sentence Albanian management has ever invented.
 
@@ -19,7 +19,7 @@ Let us set this myth against one simple fact that no one can deny.
 
 Look at what happens the second these young men and women cross the border. In Germany, in Italy, in England and everywhere around the world, they take on long shifts in logistics, on building sites, in hotels and in hospitals. They wake before dawn, work with iron discipline, carry loads, keep to the hours and earn the respect of foreign employers as some of the most hard-working people there are.
 
-How is it possible that the same person who in Durrës or Tirana is declared "a lazy one who doesn't want to work" becomes a model employee the moment he walks into a warehouse in Munich or London?
+How is it possible that the same person who in Durrës or Tirana is declared “a lazy one who doesn't want to work” becomes a model employee the moment he walks into a warehouse in Munich or London?
 
 Does his blood change on the way? Does his DNA change at the airport?
 
@@ -29,7 +29,7 @@ Abroad, that person faces a contract that is respected, a clear operating proces
 
 When one employee leaves your company, it may be an isolated case. But when dozens of people leave your company every year, when the recruitment doors stay open without end and no one turns their head to come, this is not a crisis in the morals of the young. **It is an open indictment of the way you lead.**
 
-To say that "people don't want to work" when you offer survival conditions is like throwing seed on dry rock and then cursing nature because nothing grows. Work is not born of pressure, nor of complaints on television screens. Committed work is born when you create an environment where a person sees that their effort has meaning and an honest reward.
+To say that “people don't want to work” when you offer survival conditions is like throwing seed on dry rock and then cursing nature because nothing grows. Work is not born of pressure, nor of complaints on television screens. Committed work is born when you create an environment where a person sees that their effort has meaning and an honest reward.
 
 True leadership is measured by the courage to take responsibility. It is very easy to sit in the big chair and take the credit for every success while billing every failure to those at the base. But the history of management teaches us one unshakeable rule: the problems of an organisation always flow from the top down, not from the bottom up.
 

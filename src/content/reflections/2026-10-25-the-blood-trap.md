@@ -17,7 +17,7 @@ And for a long time, he believes it. He gives his energy, his youth and his heal
 
 But the months pass, the years go by, and reality collides with the sweet façade of words.
 
-When the time comes to close the month, to pay the rent, to start a family of his own or to ask for a life with dignity, the answer from above is always the same, said with a chilling ease: "The family has no budget right now. You have to hold on a little longer. We are all in the same boat."
+When the time comes to close the month, to pay the rent, to start a family of his own or to ask for a life with dignity, the answer from above is always the same, said with a chilling ease: “The family has no budget right now. You have to hold on a little longer. We are all in the same boat.”
 
 Let me be direct. **When a family company cannot give one of its own a life with dignity, while the shared wealth shows up everywhere else, it is not building a future. It is consuming its own children.**
 

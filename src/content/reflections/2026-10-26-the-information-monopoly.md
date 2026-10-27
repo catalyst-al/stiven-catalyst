@@ -9,11 +9,11 @@ description: 'A reflection on the person who hides the process to become irrepla
 
 There is a very familiar figure in our offices, hotels and warehouses, a character you find in almost every sector where written rules are missing. It is the person who keeps all the keys in his own pocket.
 
-He is the only one who knows where the system passwords are kept. He is the only one who has the key supplier's personal number. He is the only one who knows how to print that special report at five in the morning and what magic move on the keyboard has to be made when the computer freezes. If you politely ask him how a procedure is done, he answers in half-words, with murky instructions, or tells you with a mysterious smile: "Leave it there, I'll do it later, it's complicated."
+He is the only one who knows where the system passwords are kept. He is the only one who has the key supplier's personal number. He is the only one who knows how to print that special report at five in the morning and what magic move on the keyboard has to be made when the computer freezes. If you politely ask him how a procedure is done, he answers in half-words, with murky instructions, or tells you with a mysterious smile: “Leave it there, I'll do it later, it's complicated.”
 
 At first sight, this person looks like the unshakeable pillar of the company. He seems a tireless worker, the one who never takes a full holiday, who phones in from his time off to give an urgent code, and without whom the work seems unable to move forward.
 
-But let us look at this behaviour without naivety and with professional courage. **Hiding information is not dedication; it is the silent hostage-taking of the organisation. And the person who refuses to document his process is not protecting the company; he is building an artificial monopoly to protect the insecurity of his own chair.**
+But let us look at this behaviour without naivety and with professional courage. **Hiding information is not dedication; it is the silent hostage-taking of the organisation. And the person who refuses to document his process is not protecting the company; he is building an artificial monopoly to make his own shaky position secure.**
 
 Why does a person do this?
 

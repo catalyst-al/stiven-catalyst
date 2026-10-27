@@ -21,7 +21,7 @@ Why does this transformation happen so quickly and so ugly?
 
 It happens because a person without inner character perceives power not as a responsibility to serve, but as a historic chance for revenge. All his life he has felt unimportant, invisible and trampled on by others. And the first second the system gives him the smallest authority over another person's fate, he does not use it to make the process easier. He uses it to make up for all his old insecurities.
 
-For him, every obstacle he can put in your way is proof of his strength. Every "no" he gives you with indifference is a way of proving to himself that today he is no longer the one sitting at the back of the room, but the person who can decide whether you move forward or stay where you are.
+For him, every obstacle he can put in your way is proof of his strength. Every “no” he gives you with indifference is a way of proving to himself that today he is no longer the one sitting at the back of the room, but the person who can decide whether you move forward or stay where you are.
 
 This is the core of the tyranny of the small man: he has no vision to build, so he can feel his authority only through the ability to block.
 

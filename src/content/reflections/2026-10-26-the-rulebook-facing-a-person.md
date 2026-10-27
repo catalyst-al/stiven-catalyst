@@ -19,7 +19,7 @@ The receptionist checked the system.
 
 The booking was correct. The payment was in order. And yet the check-in time was clearly set out in the hotel's terms.
 
-"I'm sorry, but check-in starts at three."
+“I'm sorry, but check-in starts at three.”
 
 The woman did not object.
 
@@ -27,7 +27,7 @@ She did not ask to speak to the manager. She did not threaten a bad review. She 
 
 She only looked at the child and asked:
 
-"Is there somewhere we can wait?"
+“Is there somewhere we can wait?”
 
 The receptionist had given the correct answer.
 
@@ -75,7 +75,7 @@ He asks whether he has respected what is written.
 
 And if the answer is yes, his responsibility is considered finished.
 
-"I can't do anything. That's the rule."
+“I can't do anything. That's the rule.”
 
 This sentence can be entirely right in a situation where the law, safety or the employee's authority do not allow another action.
 
@@ -411,7 +411,7 @@ Nobody is necessarily committed to finding the solution.
 
 There is a sentence often heard in the world of service:
 
-"I only followed the rules."
+“I only followed the rules.”
 
 Sometimes it is the right explanation.
 
@@ -419,7 +419,7 @@ Sometimes it is the only answer the employee had the authority to give.
 
 But there are cases where that sentence hides a question that was never asked:
 
-"Was there a fair and permitted way to help more?"
+“Was there a fair and permitted way to help more?”
 
 This question does not demand heroism.
 

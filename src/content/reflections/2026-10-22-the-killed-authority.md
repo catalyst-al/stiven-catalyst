@@ -17,11 +17,11 @@ Let me be blunt about this absurdity. **When an owner humiliates their manager t
 
 Let us look at this mechanism with a cool head.
 
-Why does an employer do this? Because many of them have a twisted idea of power. They do not want a functioning structure, because a structure demands rules that limit even their own momentary will. They want every thread of the business to pass through their finger. By letting the employee go over the manager's head and come to cry their troubles or spread gossip straight in the head office, the owner feeds their ego as supreme judge, as the great father of the house who hands out justice as mercy.
+Why does an employer do this? Because many of them have a twisted idea of power. They do not want a functioning structure, because a structure demands rules that limit even their own momentary will. They want every thread of the business to pass through their fingers. By letting the employee go over the manager's head and come to cry their troubles or spread gossip straight to the head office, the owner feeds their ego as supreme judge, as the great father of the house who hands out justice as mercy.
 
 They think they are protecting the weak. In truth, they are rewarding mediocrity.
 
-When the least capable understands that escaping accountability takes no result, only a quiet line to the office upstairs, their working day changes focus. They no longer try to learn the trade, cut mistakes or help colleagues. They become a master of victimhood and intrigue. They know that two words against the manager are enough to win immunity.
+When the least capable understand that escaping accountability takes no result, only a quiet line to the office upstairs, their working day changes focus. They no longer try to learn the trade, cut mistakes or help colleagues. They become masters of victimhood and intrigue. They know that two words against the manager are enough to win immunity.
 
 And what happens to the manager meanwhile?
 

@@ -13,7 +13,7 @@ The morning meeting. A project deadline. A call with the manager. A report to fi
 
 Somewhere among them, a small reminder had also been written.
 
-"Be home on time."
+“Be home on time.”
 
 No hour had been set by the management. It needed no confirmation by email. It did not affect the performance indicators.
 

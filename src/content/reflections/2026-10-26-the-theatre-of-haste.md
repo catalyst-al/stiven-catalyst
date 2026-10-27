@@ -9,7 +9,7 @@ description: 'A reflection on the culture where everything is urgent, on calm th
 
 There is a common and very costly illusion in today's world of work, where the value of a day is no longer measured by what is actually built, but by the amount of noise created around the process.
 
-Watch closely how this theatre works in many of our offices, warehouses and operational settings. Doors fly open, people walk with quickened steps as if putting out an imaginary fire, phones shake without pause on the desks, and in every corner the same word is heard, repeated like a prayer: "urgent". Everything is declared urgent. Every request should have been closed yesterday. Every message arrives with red alarm signs and every conversation begins out of breath, as if the company were on the edge of the abyss every second.
+Watch closely how this theatre works in many of our offices, warehouses and operational settings. Doors fly open, people walk with quickened steps as if putting out an imaginary fire, phones shake without pause on the desks, and in every corner the same word is heard, repeated like a prayer: “urgent”. Everything is declared urgent. Every request should have been closed yesterday. Every message arrives with red alarm signs and every conversation begins out of breath, as if the company were on the edge of the abyss every second.
 
 At first sight, to a superficial observer, this looks like a business with a high tempo, full of committed people giving everything they have.
 
@@ -27,7 +27,7 @@ And here the greatest injustice of this culture shows itself: the way it treats 
 
 Picture a manager or an employee who believes in order. He starts the shift calmly, opens his notes, works out the priorities and refuses to take part in the general hysteria. He knows that before you start running, you need to know which way you are running.
 
-In the eyes of a shallow manager, this person is at once viewed with suspicion. "Why is he so calm? Why isn't he worried like the others? His mind isn't on the job."
+In the eyes of a shallow manager, this person is at once viewed with suspicion. “Why is he so calm? Why isn't he worried like the others? His mind isn't on the job.”
 
 In the mindset of those who mistake noise for results, calm is felt as an insult, because it exposes the futility of their panic. They do not understand that a professional's calm does not come from indifference, but from the strength of preparation.
 
@@ -35,7 +35,7 @@ A skilled surgeon does not walk into the operating theatre shouting nervously; h
 
 The culture of blind hurry is not only ridiculous; it is deeply destructive to the health of people and of the organisation.
 
-It produces dangerous shortcuts. To close the next "urgency", people skip the quality check, break the safety rules and leave essential details half done. And the result is well known: today's shortcut becomes tomorrow's big crisis. People burn out from chronic stress, mistakes multiply and the company enters a vicious circle in which hurry itself produces the need for more hurry.
+It produces dangerous shortcuts. To close the next “urgency”, people skip the quality check, break the safety rules and leave essential details half done. And the result is well known: today's shortcut becomes tomorrow's big crisis. People burn out from chronic stress, mistakes multiply and the company enters a vicious circle in which hurry itself produces the need for more hurry.
 
 True leadership stands out precisely by its ability to break this illusion.
 

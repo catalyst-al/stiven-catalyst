@@ -11,7 +11,7 @@ On the shift plan there are ten names. On the crisis plan there is only one.
 
 A system may go down, a delivery may run late, an employee may be missing, or a problem may appear that nobody foresaw. At first there is some confusion, a few phone calls and people passing responsibility from one to another. Then someone says the sentence that ends the whole discussion:
 
-"Call him. He'll sort it out."
+“Call him. He'll sort it out.”
 
 And he comes.
 

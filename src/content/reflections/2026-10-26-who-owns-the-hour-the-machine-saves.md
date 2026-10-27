@@ -261,7 +261,7 @@ But how its consequences are distributed remains a human choice.
 
 At this point, a manager may object:
 
-"If technology lets me process twice the work, why shouldn't I?"
+“If technology lets me process twice the work, why shouldn't I?”
 
 It is a legitimate question.
 

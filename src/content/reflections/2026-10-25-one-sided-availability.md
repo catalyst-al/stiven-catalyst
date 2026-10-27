@@ -13,7 +13,7 @@ In that second, you are not simply expected to answer. You are expected to be on
 
 But let us do a simple exercise in honesty. What happens when this arrow points the other way?
 
-Try, even just once, to ask for an answer outside office hours. Try calling the owner or the manager in the evening about something unclear in your pay, about an injustice done during the day, or about a small personal emergency where you need the support of those who call you part of the "family".
+Try, even just once, to ask for an answer outside office hours. Try calling the owner or the manager in the evening about something unclear in your pay, about an injustice done during the day, or about a small personal emergency where you need the support of those who call you part of the “family”.
 
 In that moment, the world changes at dizzying speed. The phone rings out without an answer, or goes to voicemail. And the next morning, when you ask what happened, the answer comes with a bureaucrat's coldness: *There are office hours. Why are you bothering me at home? Why don't you come to the office at the set times?*
 

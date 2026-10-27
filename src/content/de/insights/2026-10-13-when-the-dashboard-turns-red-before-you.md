@@ -94,6 +94,6 @@ Eine Schwelle, die ohne Daten angehoben wird, nur damit der Bildschirm besser au
 
 ## Meine rote Zahl
 
-Füllen Sie die Karte unten für jede Zahl, die Sie auf einem Bildschirm verfolgen, einmal aus, und zwar vor der Schicht. [Shift Pulse](/de/tools/shift-pulse/) zeigt die Zahlen der Woche nebeneinander, damit ein roter Tag zehn Tage Vorgeschichte neben sich hat, bevor Sie entscheiden, was er bedeutet.
+Füllen Sie die Karte unten für jede Zahl, die Sie auf einem Bildschirm verfolgen, einmal aus, und zwar vor der Schicht. [Shift Pulse](/de/tools/shift-pulse/) zeigt die Zahlen der letzten Tage nebeneinander, damit ein roter Tag zehn Tage Vorgeschichte neben sich hat, bevor Sie entscheiden, was er bedeutet.
 
 **Eine rote Zahl sagt Ihnen, wohin Sie schauen müssen. Sie sagt Ihnen nicht, was jetzt dort ist. Der Abstand zwischen beidem ist das Alter der Zahl, und es zu kennen ist Ihre Aufgabe.**

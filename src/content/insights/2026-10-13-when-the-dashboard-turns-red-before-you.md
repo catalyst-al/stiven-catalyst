@@ -55,7 +55,7 @@ Three sources feed this essay: that remote role; my earlier work in last mile, w
 
 Imagine a van that should have left the ramp ten minutes ago. On the dashboard its tour is red. What had to happen for it to turn red?
 
-Someone had to see that the van was still there, or a scan had to be missing by a certain time. Someone or something had to report it. The system had to compare it with the target, at its own rhythm. Then your screen had to draw it. That is four steps, each with its own delay. How long that delay is varies from one system to the next, and for the system I work with now I do not know whether the data is updated in seconds, in minutes or later. That is exactly why it is the first question.
+Someone had to see that the van was still there, or a scan had to be missing by a certain time. Someone or something had to report it. The system had to compare it with the target, at its own rhythm. Then your screen had to draw it. Those are four steps, each with its own delay. How long that delay is varies from one system to the next, and for the system I work with now I do not know whether the data is updated in seconds, in minutes or later. That is exactly why it is the first question.
 
 {diagram}
 
@@ -100,6 +100,6 @@ A threshold raised without data, just to make the screen look better, hides the 
 
 ## My red number
 
-Fill in the card below once for each number you follow on a screen, before the shift. [Shift Pulse](/tools/shift-pulse/) shows the week's numbers side by side, so that a red day has ten days of history next to it before you decide what it means.
+Fill in the card below once for each number you follow on a screen, before the shift. [Shift Pulse](/tools/shift-pulse/) shows the numbers of recent days side by side, so that a red day has ten days of history next to it before you decide what it means.
 
 **A red number tells you where to look. It does not tell you what is there now. The distance between the two is the age of the number, and knowing it is your job.**

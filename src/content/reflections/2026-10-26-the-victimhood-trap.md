@@ -11,7 +11,7 @@ There is an undeniable truth that must be said without the slightest hesitation:
 
 But precisely here, at this station where the bitter truth becomes clear, an invisible psychological abyss opens up. It is the sweet and insidious trap of victimhood.
 
-Picture an ordinary conversation in a café after an exhausting day at work. People sit around the table, meticulously count every injustice of the owner, every incompetence of the state, every flaw of this country, and in the end, with a heavy sigh, they reach the familiar conclusion: "Nothing ever gets done here. What can we do? We are just small people."
+Picture an ordinary conversation in a café after an exhausting day at work. People sit around the table, meticulously count every injustice of the owner, every incompetence of the state, every flaw of this country, and in the end, with a heavy sigh, they reach the familiar conclusion: “Nothing ever gets done here. What can we do? We are just small people.”
 
 Let me say this with all the weight of human care. **There is a dangerous comfort in the role of the victim. Because if everything is someone else's fault, then you are excused from any obligation to act.**
 

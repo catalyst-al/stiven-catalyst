@@ -9,13 +9,13 @@ description: 'A reflection on hunting for a culprit after every mistake, on the 
 
 When something goes wrong in an operation, when a load is late in the warehouse, when an invoice gets stuck or a piece of equipment is damaged, the first reaction reveals the true level of civilisation of that organisation.
 
-In most of our businesses, in that critical second, the essential question is never asked: "Why did the process fail?". Instead, another question is asked at once, loaded with resentment and a primitive thirst for punishment: "Who did it? Whose fault is it?".
+In most of our businesses, in that critical second, the essential question is never asked: “Why did the process fail?”. Instead, another question is asked at once, loaded with resentment and a primitive thirst for punishment: “Who did it? Whose fault is it?”.
 
 Within a few minutes the office turns into an improvised courtroom. The manager insists on a name, a concrete face on which he can unload all his anger, his irritation and his operational insecurity. A scapegoat must be found. Someone has to sit in the middle of the room, take the insults, have money docked from their pay and be declared absolutely guilty in front of everyone. And as soon as this head is found and the punishment handed down with a flourish, everyone breathes a sigh of relief, the manager goes calmly back to his chair and the matter is declared solved.
 
 Let me say this with all the clarity the truth demands. **Hunting for the culprit is not justice; it is simply a theatre of revenge that leaves the problem completely untouched. When personal punishment replaces root-cause analysis, you have fixed nothing; you have simply guaranteed that the same failure will happen again tomorrow.**
 
-Look at how the industries work that carry human lives on their shoulders and where mistakes are not forgiven.
+Look at the industries that carry human lives on their shoulders, where mistakes are not forgiven, and see how they work.
 
 In modern aviation or in surgery, when an incident happens, no one wastes precious seconds insulting or humiliating the technician. The first question the investigating board asks is a completely different one: What in the design of the instruments led the person into confusion? Why did the checklist fail to catch the defect before departure? How can we change the standard operating procedure so that no other professional falls into the same trap?
 
@@ -25,7 +25,7 @@ But what happens in an Albanian company that feeds on the fear of personal punis
 
 There, the operational truth is destroyed completely. Employees are not naive. The second they understand that admitting a small mistake will cost them their livelihood or their dignity in front of their colleagues, they give up on transparency and learn the dark art of survival: hiding.
 
-The mistake is not corrected; it is pushed deep under the carpet. The flaw is masked with quick patches, the figures in the system are quietly altered and the defect is left like a time bomb, with everyone praying it goes off on someone else's shift. And so the company begins to rot from within without anyone noticing, because the culture of terror has killed the one tool that saves a business: the courage to say "we have a problem here".
+The mistake is not corrected; it is pushed deep under the carpet. The flaw is masked with quick patches, the figures in the system are quietly altered and the defect is left like a time bomb, with everyone praying it goes off on someone else's shift. And so the company begins to rot from within without anyone noticing, because the culture of terror has killed the one tool that saves a business: the courage to say “we have a problem here”.
 
 True leadership draws a sharp line between two worlds. It knows how to separate, cleanly, a process error from a deliberate breach of ethics.
 
