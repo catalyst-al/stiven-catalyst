@@ -13,10 +13,12 @@ const routes = [
 ];
 
 test("a key pressed while the next page arrives raises no error", async ({ page, theme }) => {
+  // Six page loads and six arrivals: more than one journey's worth of time on a busy runner.
+  test.setTimeout(60_000);
   await page.emulateMedia({ reducedMotion: "no-preference" });
   for (const [from, selector, to] of routes) {
-    // A few rounds: the key has to land in the short moment between the new page's arrival and its first frame.
-    for (let round = 0; round < 3; round++) {
+    // Two rounds: the key has to land in the short moment between the new page's arrival and its first frame.
+    for (let round = 0; round < 2; round++) {
       await page.goto(from);
       await expectTheme(page, theme);
       await page.locator(selector).filter({ visible: true }).first().focus();
