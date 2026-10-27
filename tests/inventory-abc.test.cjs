@@ -67,10 +67,11 @@ test('ABC: sorted by value, the SKU that crosses a threshold keeps the class it 
   assert.deepEqual(plain(M.abc([{ key: 'a', value: 70 }, { key: 'b', value: 20 }, { key: 'c', value: 6 }, { key: 'd', value: 4 }], { a: 0.7, b: 0.9 })).map((i) => i.cls), ['A', 'B', 'C', 'C']);
 });
 
-test('ABC: equal values share a class and are listed by SKU code; zero value is C', () => {
-  // 50, 30, 10, 5, 5: the first 5 starts at 90 % (B), the second at 95 % (C by itself) but ties with the first, so B.
+test('ABC: equal values are taken in SKU code order, each by the share before it; zero value is C', () => {
+  // 50, 30, 10, 5, 5: d starts at 90 % (B), e at 95 % (C). Equal values no longer take the class of the first of them,
+  // which could put a whole tail into A (audit P2B-15, tests/inventory-abc-ties.test.cjs).
   const out = plain(M.abc([{ key: 'e', value: 5 }, { key: 'd', value: 5 }, { key: 'a', value: 50 }, { key: 'b', value: 30 }, { key: 'c', value: 10 }]));
-  assert.deepEqual(out.map((item) => [item.key, item.cls]), [['a', 'A'], ['b', 'A'], ['c', 'B'], ['d', 'B'], ['e', 'B']]);
+  assert.deepEqual(out.map((item) => [item.key, item.cls]), [['a', 'A'], ['b', 'A'], ['c', 'B'], ['d', 'B'], ['e', 'C']]);
   const zero = plain(M.abc([{ key: 'a', value: 10 }, { key: 'b', value: 0 }]));
   assert.deepEqual(zero.map((item) => item.cls), ['A', 'C']);
   assert.deepEqual(plain(M.abc([{ key: 'a', value: 0 }, { key: 'b', value: 0 }])).map((item) => item.cls), ['C', 'C'], 'no value at all');

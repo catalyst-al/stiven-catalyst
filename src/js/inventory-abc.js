@@ -33,26 +33,31 @@
   const xyzClass = (value, cut = { x: 0.5, y: 1 }) => (value === null || !finite(value) ? null : value <= cut.x + EPS ? "X" : value <= cut.y + EPS ? "Y" : "Z");
 
   // ABC by annual consumption value (annual demand × unit cost), sorted from the largest down, with the cumulative share
-  // of the total. The SKU that crosses a threshold belongs to the class it starts in: with a = 80 %, a SKU that takes the
-  // running share from 78 % to 83 % is still A (the Pareto rule as js/pareto.js applies it). SKUs with the same value
-  // get the same class, the class of the first of them, so the order of equal rows never decides a class. Equal values
-  // are listed by SKU code. items: [{ key, value }]; a and b are shares (0.8, 0.95).
+  // of the total. Every SKU belongs to the class its cumulative share starts in: with a = 80 %, a SKU that takes the
+  // running share from 78 % to 83 % is still A (the Pareto rule as js/pareto.js applies it). Equal values are taken in
+  // SKU code order, each by the share before it, so the order of the rows never decides a class. A run of equal values
+  // can therefore span two classes: 70/10/10/10 is A, A, B, C (class A 80 % of the value). Giving the whole run the
+  // class of its first SKU made it A, A, A, A, with the whole tail in A (audit of 27 October 2026, P2B-15); splitTies
+  // names the SKUs of such a run, so the page can say so. items: [{ key, value }]; a and b are shares (0.8, 0.95).
   const abc = (items, { a = 0.8, b = 0.95 } = {}) => {
     const total = sum(items.map((item) => Math.max(0, item.value || 0)));
     const sorted = items.map((item, index) => ({ ...item, value: Math.max(0, item.value || 0), index }))
       .sort((p, q) => q.value - p.value || String(p.key).localeCompare(String(q.key)) || p.index - q.index);
     let running = 0;
-    let previous = null;
     return sorted.map((item, i) => {
       const share = total > 0 ? item.value / total : 0;
       const before = running;
       running += share;
-      let cls = total <= 0 ? "C" : before < a - EPS ? "A" : before < b - EPS ? "B" : "C";
-      if (previous && Math.abs(previous.value - item.value) <= EPS * Math.max(1, item.value)) cls = previous.cls;
-      const out = { ...item, rank: i + 1, share, before, cumulative: Math.min(1, running), cls };
-      previous = out;
-      return out;
+      const cls = total <= 0 ? "C" : before < a - EPS ? "A" : before < b - EPS ? "B" : "C";
+      return { ...item, rank: i + 1, share, before, cumulative: Math.min(1, running), cls };
     });
+  };
+  // The SKUs of the runs of equal values (above 0) that abc() put into more than one class, in its order.
+  const splitTies = (ranked) => {
+    const same = (p, q) => Math.abs(p.value - q.value) <= EPS * Math.max(1, q.value);
+    const runs = [];
+    ranked.forEach((item, i) => { if (i > 0 && same(ranked[i - 1], item)) runs.at(-1).push(item); else runs.push([item]); });
+    return runs.filter((run) => run.length > 1 && run[0].value > 0 && new Set(run.map((item) => item.cls)).size > 1).flat();
   };
 
   // Inverse of the standard normal distribution, z = Φ⁻¹(p), by Acklam's rational approximation (relative error below
@@ -208,6 +213,7 @@
     }]));
     return {
       items, total, counts, shares, matrix, noDemand, xyz, golden, picksKnown, stockKnown, belowRop,
+      splitTies: splitTies(items),
       cycle: cycleCounts(counts, s.freq),
       deadValue: sum(noDemand.map((item) => (item.stock > 0 ? item.stock * item.cost : 0))),
       periods: Math.max(0, ...skus.map((sku) => sku.demand.length)),
@@ -356,7 +362,7 @@
   };
 
   window.InventoryAbcMath = {
-    FIELDS, PERIODS, CELLS, mean, sampleSd, cv, xyzClass, abc, normInv, perDay, safetyStock, reorderPoint, eoq, orderQuantity, cycleCounts,
+    FIELDS, PERIODS, CELLS, mean, sampleSd, cv, xyzClass, abc, splitTies, normInv, perDay, safetyStock, reorderPoint, eoq, orderQuantity, cycleCounts,
     settingsOf, workOut, analyse, lorenz, amount, guessColumns, isHeaderRow, guessDemand, readTable, periodLabels, paretoTable, exampleMonths, exampleSkus, fold,
   };
 
@@ -793,6 +799,12 @@
       { label: tx("Share of value"), parts: ["A", "B", "C"].map((cls) => ({ key: cls, value: result.shares[cls].valueShare })) },
     ], { keys: ["A", "B", "C"], colors, yMax: 1, title: tx("Share of SKUs against share of value"), format: (v) => pct(v, 0) });
     box.append(Chart.figure(svg, { fileName: "abc-shares" }));
+    // Equal values on both sides of a limit: said here, so a reader does not take the split for an error.
+    if (result.splitTies.length) {
+      box.append(el("p", "dl-panel-note", tx("{n} SKUs of equal value fall on both sides of a class limit: {skus}. Each keeps the class its cumulative share starts in, in SKU code order.", {
+        n: int.format(result.splitTies.length), skus: result.splitTies.map((item) => `${item.sku} ${item.cls}`).join(", "),
+      })));
+    }
     return box;
   };
 
@@ -922,7 +934,7 @@
     const list = el("ul", "ia-method");
     [
       tx("Annual demand D = mean demand per period × {n} periods per year; annual consumption value = D × unit cost.", { n: int.format(s.perYear) }),
-      tx("ABC: SKUs sorted by value; A up to {a} of the cumulative value, B up to {b}, C the rest. The SKU that crosses a threshold keeps the class it starts in; equal values share a class.", { a: pct(s.a, 0), b: pct(s.b, 0) }),
+      tx("ABC: SKUs sorted by value; A up to {a} of the cumulative value, B up to {b}, C the rest. Each SKU keeps the class its cumulative share starts in, so the SKU that crosses a threshold stays in the class before it; equal values are taken in SKU code order.", { a: pct(s.a, 0), b: pct(s.b, 0) }),
       tx("XYZ: CV = σ ÷ μ of the demand per period, σ as the sample standard deviation (n − 1). X up to {x}, Y up to {y}, Z above. A period without demand counts as 0; a SKU with a mean of 0 is listed as no demand.", { x: num(s.x, 2), y: num(s.y, 2) }),
       tx("Per day: d̄ = μ ÷ {days} days, σ_d = σ ÷ √{days}.", { days: num(s.days, s.days % 1 ? 2 : 0) }),
       tx("Safety stock SS = z × √(LT × σ_d² + d̄² × σ_LT²), which is z × σ_d × √LT when the lead time is fixed; z = {z} for a {service} cycle service level (inverse normal).", { z: num(s.z, 4), service: level(s.service) }),

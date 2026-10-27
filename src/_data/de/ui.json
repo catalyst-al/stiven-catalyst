@@ -7674,5 +7674,7 @@
   "partial audit": "unvollständiges Audit",
   "{n} partial audit is left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} unvollständiges Audit ist nicht im Trend und nicht in der Rangliste: Ein Audit zählt ab 80 % bewerteten Fragen, mit einer Bewertung in jedem S.",
   "{n} partial audits are left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} unvollständige Audits sind nicht im Trend und nicht in der Rangliste: Ein Audit zählt ab 80 % bewerteten Fragen, mit einer Bewertung in jedem S.",
-  "{t} per piece with uptime and changeovers": "{t} pro Teil mit Verfügbarkeit und Rüsten"
+  "{t} per piece with uptime and changeovers": "{t} pro Teil mit Verfügbarkeit und Rüsten",
+  "{n} SKUs of equal value fall on both sides of a class limit: {skus}. Each keeps the class its cumulative share starts in, in SKU code order.": "{n} Artikel mit gleichem Wert liegen beiderseits einer Klassengrenze: {skus}. Jeder behält die Klasse, in der sein kumulierter Anteil beginnt, in der Reihenfolge der Artikelnummern.",
+  "ABC: SKUs sorted by value; A up to {a} of the cumulative value, B up to {b}, C the rest. Each SKU keeps the class its cumulative share starts in, so the SKU that crosses a threshold stays in the class before it; equal values are taken in SKU code order.": "ABC: Artikel nach Wert sortiert; A bis {a} des kumulierten Werts, B bis {b}, C der Rest. Jeder Artikel behält die Klasse, in der sein kumulierter Anteil beginnt, der Artikel, der eine Grenze überschreitet, bleibt also in der Klasse davor; gleiche Werte werden in der Reihenfolge der Artikelnummern genommen."
 }

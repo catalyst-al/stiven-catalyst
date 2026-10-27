@@ -7674,5 +7674,7 @@
   "partial audit": "auditim i pjesshëm",
   "{n} partial audit is left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} auditim i pjesshëm nuk hyn në trend dhe në renditje: një auditim numërohet kur ke vlerësuar të paktën 80 % të pyetjeve, me një vlerësim në çdo S.",
   "{n} partial audits are left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} auditime të pjesshme nuk hyjnë në trend dhe në renditje: një auditim numërohet kur ke vlerësuar të paktën 80 % të pyetjeve, me një vlerësim në çdo S.",
-  "{t} per piece with uptime and changeovers": "{t} për copë me disponueshmërinë dhe ndërrimet"
+  "{t} per piece with uptime and changeovers": "{t} për copë me disponueshmërinë dhe ndërrimet",
+  "{n} SKUs of equal value fall on both sides of a class limit: {skus}. Each keeps the class its cumulative share starts in, in SKU code order.": "{n} artikuj me vlerë të njëjtë bien në të dy anët e një kufiri klase: {skus}. Secili mbetet në klasën ku fillon pjesa e tij kumulative, sipas radhës së kodeve të artikujve.",
+  "ABC: SKUs sorted by value; A up to {a} of the cumulative value, B up to {b}, C the rest. Each SKU keeps the class its cumulative share starts in, so the SKU that crosses a threshold stays in the class before it; equal values are taken in SKU code order.": "ABC: artikujt renditen sipas vlerës; A deri në {a} të vlerës kumulative, B deri në {b}, C pjesa tjetër. Çdo artikull mbetet në klasën ku fillon pjesa e tij kumulative, kështu artikulli që kalon një kufi mbetet në klasën para tij; vlerat e barabarta merren sipas radhës së kodeve të artikujve."
 }
