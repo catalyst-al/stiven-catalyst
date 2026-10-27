@@ -57,6 +57,8 @@ const runHead = (stored, reduce, path = '/') => {
     localStorage: { getItem: (k) => (k === 'sc-motion' ? stored : null) },
     matchMedia: (q) => ({ matches: q === '(prefers-reduced-motion: reduce)' && reduce }),
     location: { pathname: path },
+    // The same script quiets a page transition the browser gives up (audit CI-01, tests/browser/transitions.spec.mjs).
+    addEventListener: () => {},
   };
   vm.runInNewContext(headScript(), context);
   return html.dataset.motion;
@@ -70,7 +72,7 @@ test('the head script pauses before the first paint: by choice, or by reduced mo
   assert.equal(runHead('paused', true), 'paused');
   // Storage refused (private mode): the page still works, with motion unless the system asks for less.
   const html = { dataset: {}, classList: { add: () => {} } };
-  vm.runInNewContext(headScript(), { document: { documentElement: html }, localStorage: { getItem: () => { throw new Error('denied'); } }, matchMedia: () => ({ matches: true }), location: { pathname: '/' } });
+  vm.runInNewContext(headScript(), { document: { documentElement: html }, localStorage: { getItem: () => { throw new Error('denied'); } }, matchMedia: () => ({ matches: true }), location: { pathname: '/' }, addEventListener: () => {} });
   assert.equal(html.dataset.theme, 'dark');
   assert.equal(html.dataset.motion, 'paused');
 });
