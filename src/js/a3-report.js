@@ -600,6 +600,8 @@
     let table = el("p", "a3-empty", tx("Not filled in yet."));
     if (measures.length) {
       table = el("div", "dl-table-wrap a3-table-wrap");
+      // The table can scroll: it takes the focus, so the keyboard can scroll it too.
+      table.tabIndex = 0;
       const t = el("table", "dl-table a3-table");
       const thead = el("thead");
       const hr = el("tr");
