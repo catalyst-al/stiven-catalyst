@@ -11,7 +11,7 @@ Im Schichtplan stehen zehn Namen. Im Krisenplan steht nur einer.
 
 Ein System kann ausfallen, eine Lieferung sich verspäten, ein Mitarbeiter fehlen, oder es taucht ein Problem auf, das niemand vorhergesehen hat. Zuerst herrscht etwas Durcheinander, es gibt ein paar Anrufe, und die Verantwortung wird von einem zum anderen geschoben. Dann spricht jemand den Satz aus, der die ganze Diskussion beendet:
 
-„Ruft ihn an. Er löst das."
+„Ruft ihn an. Er löst das.“
 
 Und er kommt.
 
