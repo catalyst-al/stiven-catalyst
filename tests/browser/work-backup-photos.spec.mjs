@@ -6,7 +6,6 @@ import { readFile } from "node:fs/promises";
 import { test, expect } from "./fixtures.mjs";
 
 test("a 5S photo goes into the saved file and comes back in an empty browser", async ({ page, browser }, testInfo) => {
-  test.skip(testInfo.project.name !== "1440px light", "one width is enough");
   await page.goto("/tools/five-s-audit/");
   // A small PNG made on a canvas, kept the way the audit keeps a photo.
   const kept = await page.evaluate(async () => {
@@ -49,7 +48,6 @@ test("a 5S photo goes into the saved file and comes back in an empty browser", a
 });
 
 test("the PIN of a shared computer locks the photos away and brings them back", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== "1440px light", "one width is enough");
   await page.goto("/tools/five-s-audit/");
   const id = await page.evaluate(async () => {
     const canvas = document.createElement("canvas");
