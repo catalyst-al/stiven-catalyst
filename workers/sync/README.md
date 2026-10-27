@@ -21,3 +21,6 @@ IPv6 address by its /64) and 1000 a day from everyone, counted with the same Dur
 paid). The Worker variables `CREATE_LIMIT_IP` and `CREATE_LIMIT_ALL` change the two numbers. Only the site's origins
 may call from a browser; for a local `wrangler dev`, set `DEV_ORIGINS=http://localhost:8080` there, never in
 production (`deploy.mjs` sets no variables).
+
+Before deploying a change: `docs/SYNC-WORKER-MIGRATION.md` (the order, the checks after each step, the way back;
+`tests/sync-compat.test.cjs` runs the code in production against the new).
