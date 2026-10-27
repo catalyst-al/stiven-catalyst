@@ -68,6 +68,8 @@ for (const lang of review.langs) {
   await page.evaluate(() => document.fonts.ready);
   const target = path.join(out, `${review.slug}-${lang}.pdf`);
   await page.pdf({ path: target, preferCSSPageSize: true, printBackground: true });
+  // The author and the language of the edition, which Chromium does not write (scripts/pdf-meta.py).
+  execFileSync("python3", [path.join(ROOT, "scripts", "pdf-meta.py"), target, lang], { cwd: ROOT, stdio: "inherit" });
   console.log(`Printed ${path.relative(ROOT, target)}`);
   await page.close();
 }
