@@ -19,13 +19,13 @@ Wenig später kam der Manager ins Büro. Er hatte eine ähnliche Angelegenheit, 
 
 Der Mitarbeiter verlangte die Genehmigung und die nötige Dokumentation.
 
-„Nicht nötig. Ich sage es dir."
+„Nicht nötig. Ich sage es dir.“
 
-„Soll ich den Grund erfassen?"
+„Soll ich den Grund erfassen?“
 
 Der Manager blickte vom Bildschirm auf.
 
-„Mach es nicht unnötig kompliziert. Es ist ein Sonderfall."
+„Mach es nicht unnötig kompliziert. Es ist ein Sonderfall.“
 
 Und da, innerhalb weniger Sekunden, geschah etwas, das gewöhnlich nicht in Leistungsberichten auftaucht.
 
@@ -59,13 +59,13 @@ Und diese Versuchung zeigt sich nicht immer in Form offenen Missbrauchs.
 
 Manchmal kommt sie in der Sprache der Verantwortung daher.
 
-„Wir müssen praktisch sein."
+„Wir müssen praktisch sein.“
 
-„Die Lage verlangt Flexibilität."
+„Die Lage verlangt Flexibilität.“
 
-„Wir haben keine Zeit für Bürokratie."
+„Wir haben keine Zeit für Bürokratie.“
 
-„Ich nehme es auf mich."
+„Ich nehme es auf mich.“
 
 Sätze, die unter bestimmten Umständen vollkommen vernünftig sein können.
 
@@ -315,7 +315,7 @@ In vielen Arbeitsumfeldern kann sich ein Mitarbeiter unsicher fühlen, wenn er d
 
 Besonders wenn die Bitte in einem Ton vorgebracht wird, der wenig Raum für Diskussion lässt.
 
-„Mach es, ich übernehme die Verantwortung."
+„Mach es, ich übernehme die Verantwortung.“
 
 Dieser Satz kann angemessen sein, wenn die Führungskraft die Befugnis und Kompetenz hat, eine rechtmäßige Handlung zu genehmigen.
 
@@ -331,11 +331,11 @@ Und er darf ihn nicht vor die Wahl stellen zwischen beruflicher Integrität und 
 
 Eine Führungskraft, die Autorität ernst nimmt, muss die Möglichkeit schaffen, dass ein Mitarbeiter ihr sagen kann:
 
-„Das braucht eine Genehmigung."
+„Das braucht eine Genehmigung.“
 
-„Diese Handlung muss dokumentiert werden."
+„Diese Handlung muss dokumentiert werden.“
 
-„Dieses Verfahren erlaubt uns nicht, so weiterzumachen."
+„Dieses Verfahren erlaubt uns nicht, so weiterzumachen.“
 
 Ohne eine fachliche Bemerkung in einen persönlichen Zusammenstoß zu verwandeln.
 
@@ -451,7 +451,7 @@ Jede Disziplinarmaßnahme läuft Gefahr, als Machtausübung gesehen zu werden, n
 
 In jenem Büro am Anfang hatte der Mitarbeiter eine einfache Frage gestellt.
 
-„Soll ich den Grund erfassen?"
+„Soll ich den Grund erfassen?“
 
 Er hatte die Autorität nicht bekämpft.
 
@@ -469,7 +469,7 @@ Oder sie als Beweis verstehen, dass der Standard, den die Organisation aufgebaut
 
 Sie hätte sagen können:
 
-„Ja. Erfasse es. Wenn meine Genehmigung nötig ist, gebe ich sie nach dem Verfahren."
+„Ja. Erfasse es. Wenn meine Genehmigung nötig ist, gebe ich sie nach dem Verfahren.“
 
 Eine gewöhnliche Antwort.
 

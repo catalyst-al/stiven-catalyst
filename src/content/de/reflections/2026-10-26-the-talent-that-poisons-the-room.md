@@ -49,7 +49,7 @@ Hier müssen wir jedoch vorsichtig sein.
 
 Nicht jeder schwierige Mensch schadet dem Team. Nicht jeder Profi, der der Führung widerspricht, ist arrogant. Es gibt direkte Menschen, die die Wahrheit nicht zu verpacken wissen. Es gibt Mitarbeiter, die unangenehme Probleme ansprechen und deshalb den Ruf bekommen, den Frieden zu stören.
 
-In manchen Organisationen wird das Etikett „kann nicht im Team arbeiten" gerade gegen den benutzt, der sich weigert, an einem Schweigepakt teilzunehmen.
+In manchen Organisationen wird das Etikett „kann nicht im Team arbeiten“ gerade gegen den benutzt, der sich weigert, an einem Schweigepakt teilzunehmen.
 
 Deshalb ist die Unterscheidung wesentlich.
 
@@ -77,11 +77,11 @@ Das größte Problem beginnt, wenn die Führungskraft all das weiß und trotzdem
 
 Ihr Schweigen kann sie mit Dutzenden Gründen rechtfertigen.
 
-„Er ist ein bisschen schwierig, aber er kennt die Arbeit."
+„Er ist ein bisschen schwierig, aber er kennt die Arbeit.“
 
-„Die anderen müssen lernen, härter zu sein."
+„Die anderen müssen lernen, härter zu sein.“
 
-„Einen solchen Mann können wir nicht verlieren."
+„Einen solchen Mann können wir nicht verlieren.“
 
 Der letzte Satz ist vielleicht der aufschlussreichste.
 

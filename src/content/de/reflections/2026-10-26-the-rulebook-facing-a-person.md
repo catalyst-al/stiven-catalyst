@@ -19,7 +19,7 @@ Der Rezeptionist prüfte das System.
 
 Die Buchung war korrekt. Die Zahlung war in Ordnung. Dennoch war die Check-in-Zeit in den Bedingungen des Hotels klar festgelegt.
 
-„Es tut mir leid, aber der Check-in beginnt um drei."
+„Es tut mir leid, aber der Check-in beginnt um drei.“
 
 Die Frau widersprach nicht.
 
@@ -27,7 +27,7 @@ Sie verlangte nicht, mit dem Direktor zu sprechen. Sie drohte nicht mit einer sc
 
 Sie sah nur das Kind an und fragte:
 
-„Gibt es einen Ort, an dem wir warten können?"
+„Gibt es einen Ort, an dem wir warten können?“
 
 Der Rezeptionist hatte die richtige Antwort gegeben.
 
@@ -75,7 +75,7 @@ Er fragt, ob er eingehalten hat, was geschrieben steht.
 
 Und lautet die Antwort ja, gilt seine Verantwortung als erledigt.
 
-„Ich kann nichts tun. So ist die Vorschrift."
+„Ich kann nichts tun. So ist die Vorschrift.“
 
 Dieser Satz kann völlig richtig sein in einer Lage, in der Gesetz, Sicherheit oder die Befugnis des Mitarbeiters keine andere Handlung erlauben.
 
@@ -411,7 +411,7 @@ Niemand ist unbedingt dafür engagiert, die Lösung zu finden.
 
 Es gibt einen Satz, der in der Welt des Service oft zu hören ist:
 
-„Ich habe nur die Regeln befolgt."
+„Ich habe nur die Regeln befolgt.“
 
 Manchmal ist das die richtige Erklärung.
 
@@ -419,7 +419,7 @@ Manchmal ist es die einzige Antwort, die der Mitarbeiter zu geben befugt war.
 
 Aber es gibt Fälle, in denen dieser Satz eine Frage verbirgt, die nie gestellt wurde:
 
-„Gab es einen fairen und erlaubten Weg, mehr zu helfen?"
+„Gab es einen fairen und erlaubten Weg, mehr zu helfen?“
 
 Diese Frage verlangt keinen Heldenmut.
 
