@@ -7,11 +7,11 @@ The Albanian texts were not touched; everything about them is in `albanian-propo
 
 | Commit | What |
 |---|---|
-| `720a2773` | DE: the closing quotation mark „…" → „…“ in 13 of the 14 reflections added by `4471adc0` (57 marks, mechanical) |
-| `6815aa42` | DE: narrator register (P4-01) in 36 reflections; `tests/register.test.cjs`; three P4-09 items met on the way (rows 12, 95, 151 below) |
-| `12cb2247` | DE: P4-09 grammar slips, "Fläche", four calques |
-| `d4e2ae19` | EN: P4-10 calques and slips, P4-11 curly quotes in reflection bodies (222 marks, mechanical), note 173; EN/DE Shift Pulse sentence; note cards 173 (EN) and 226 (DE) remade |
-| `2ad8d150` | DE: 11 reflection link previews remade, because their titles or summaries now say "Sie" |
+| `722b7324` | DE: the closing quotation mark „…" → „…“ in 13 of the 14 reflections added by `4471adc0` (57 marks, mechanical) |
+| `593cb4f3` | DE: narrator register (P4-01) in 36 reflections; `tests/register.test.cjs`; three P4-09 items met on the way (rows 12, 95, 151 below) |
+| `c010f2ea` | DE: P4-09 grammar slips, "Fläche", four calques |
+| `04674954` | EN: P4-10 calques and slips, P4-11 curly quotes in reflection bodies (222 marks, mechanical), note 173; EN/DE Shift Pulse sentence; note cards 173 (EN) and 226 (DE) remade |
+| `ed88fc6f` | DE: 11 reflection link previews remade, because their titles or summaries now say "Sie" |
 | (last) | `docs/FJALORI.md` (one sentence documenting the rule the edits follow), this file, `albanian-proposals.md` |
 
 
@@ -86,8 +86,8 @@ given because they do not change; search the file for the "after" text.
 **Evidence.** For every row the evidence is the Albanian original of the same text, at the same line number in
 `src/content/sq/…` (the three languages are paragraph-aligned; checked file by file, same line counts), plus
 `docs/FJALORI.md` for register and terms. Where a row needed more, the reason column names it. The mechanical
-quotation-mark changes (57 German, 222 English) are not listed row by row; they are the commits `720a2773` and
-`d4e2ae19`, and `git diff --word-diff` shows nothing but the marks.
+quotation-mark changes (57 German, 222 English) are not listed row by row; they are the commits `722b7324` and
+`04674954`, and `git diff --word-diff` shows nothing but the marks.
 
 | # | File (src/content/…) | Lang | Before | After | Reason |
 |---|---|---|---|---|---|

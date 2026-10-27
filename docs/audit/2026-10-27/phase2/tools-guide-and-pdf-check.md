@@ -4,9 +4,9 @@ Branch `phase2-guide-pdf`, from `80ec8052`. Commits:
 
 | Commit | Subject |
 |---|---|
-| `0bfe2d35` | KPI Diagnostic: the lede and the card promise a hypothesis to check, not where the process became unstable |
-| `e5b770f9` | Tools Guide, edition 8: Time Study, KPI Diagnostic and ATS CV as they work now |
-| `a6dd7142` | Tests: every publication PDF says what its page says (audit CI-04) |
+| `f43ca211` | KPI Diagnostic: the lede and the card promise a hypothesis to check, not where the process became unstable |
+| `ab49d9ce` | Tools Guide, edition 8: Time Study, KPI Diagnostic and ATS CV as they work now |
+| `7537b295` | Tests: every publication PDF says what its page says (audit CI-04) |
 
 Tests: `npm run build`, then `npm test`: 1,283 tests, `# fail 0`, `# skipped 0` (before this review file; the final
 run is in the report).

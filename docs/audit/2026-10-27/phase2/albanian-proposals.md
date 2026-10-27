@@ -50,7 +50,7 @@ generic "ti" (*Kur ti punëson…*, *ti nuk ke ndrequr asgjë*), and in the same
   avoid addressing anyone, "Po e them hapur…", "Do të jem i qartë…" (this also answers P4-03, the repeated formula).
 
 **What follows in EN and DE.** Nothing, under either option. English has one "you". The German versions now use "Sie"
-throughout, by FJALORI's rule for German (commit `6815aa42`), and keep "Lassen Sie mich…" for the formula, which is
+throughout, by FJALORI's rule for German (commit `593cb4f3`), and keep "Lassen Sie mich…" for the formula, which is
 right for both options. Only if the author takes the "Po e them hapur" variant of Option B would "Let me be clear" /
 "Lassen Sie mich …" become "I will say it plainly" / „Ich sage es offen“; that is a stylistic choice, not a fix.
 
@@ -227,7 +227,7 @@ File: `src/content/sq/reflections/2026-10-20-five-questions.md`.
 | `sq/notes/2026-10-25-276-fixing-fast-learning.md` | "Ndreqja e shpejtë nuk është të mësuar i shpejtë." | the substantivised infinitive needs the article and an adverb | "Ndreqja e shpejtë nuk është të mësuarit e shpejtë." or "Të ndreqësh shpejt nuk do të thotë të mësosh shpejt." | grammar | none; card image as above (`276-fixing-fast-learning`) |
 | `sq/notes/2026-10-13-191-where-to-look.md` vs `sq/insights/2026-10-13-when-the-dashboard-turns-red-before-you.md:99` | note: "Largësia mes të dyjave … dhe ta dish atë është detyra jote." essay: "Distanca mes të dyjave … dhe ta njohësh atë është puna jote." | the note quotes the essay but words it differently | note = essay: "Distanca mes të dyjave është vjetërsia e numrit, dhe ta njohësh atë është puna jote." | a quotation should be the quoted words | none (EN/DE notes match their essays) |
 | `sq/reflections/2026-10-20-five-questions.md:44` | `Pronari të thotë: "Duhet të jesh i/e gatshëm të qëndrosh edhe pak më gjatë kur ka ngarkesë."` | "i/e" is a form convention, not speech | `"Duhet të jesh gati të qëndrosh edhe pak më gjatë kur ka ngarkesë."` | spoken Albanian; "gati" has no gender | none |
-| `sq/insights/2026-10-13-when-the-dashboard-turns-red-before-you.md` (Shift Pulse sentence, before the card) | "[Shift Pulse] i vendos numrat e javës krah njëri-tjetrit, që një ditë e kuqe të ketë pranë dhjetë ditë histori…" | a week against ten days; the tool shows the last 7, 14 or 30 days or 8/12 weeks (`src/_includes/partials/shift-pulse.njk:9-14`) | "…i vendos krah njëri-tjetrit numrat e ditëve të fundit, që një ditë e kuqe të ketë pranë dhjetë ditë histori…" | internal consistency (P4-10) | already applied in EN and DE (commit `d4e2ae19`): "the numbers of recent days" / „die Zahlen der letzten Tage“ |
+| `sq/insights/2026-10-13-when-the-dashboard-turns-red-before-you.md` (Shift Pulse sentence, before the card) | "[Shift Pulse] i vendos numrat e javës krah njëri-tjetrit, që një ditë e kuqe të ketë pranë dhjetë ditë histori…" | a week against ten days; the tool shows the last 7, 14 or 30 days or 8/12 weeks (`src/_includes/partials/shift-pulse.njk:9-14`) | "…i vendos krah njëri-tjetrit numrat e ditëve të fundit, që një ditë e kuqe të ketë pranë dhjetë ditë histori…" | internal consistency (P4-10) | already applied in EN and DE (commit `04674954`): "the numbers of recent days" / „die Zahlen der letzten Tage“ |
 
 ---
 

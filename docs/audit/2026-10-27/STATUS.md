@@ -36,7 +36,7 @@ Status values:
 | T-06 | Process Lab (EN) misreads decimal commas | fixed | `756b433f` · tests/process-lab*.test.cjs |
 | T-07 | ATS match rewards filler, misses skills | fixed | `0f80fffa` · tests/ats-match.test.cjs (9 real ads, 3 languages). The 60 % "pass" claim is removed. |
 | T-08 | CV import corrupts the CV Builder's own PDF | fixed | `9a72c2de` · tests/cv-import-pdf.test.cjs (PDFs printed by the real CV Builder, ATS PDF, JSON Resume, Word) |
-| E-01 | Management Review: undisclosed changes, "64 issues, each says so" | fixed (phase 2) | `becd3901` · tests/corrections-register.test.cjs. The history shows Nos. 73–80 were checked before they went online (`7b43e7c3`, 11 Oct), so 74–77 and 79 need no note; 11 issues whose figure, year or base changed got a dated note; a public register at the foot of the archive. |
+| E-01 | Management Review: undisclosed changes, "64 issues, each says so" | fixed (phase 2) | `c9a75002` · tests/corrections-register.test.cjs. The history shows Nos. 73–80 were checked before they went online (`7b43e7c3`, 11 Oct), so 74–77 and 79 need no note; 11 issues whose figure, year or base changed got a dated note; a public register at the foot of the archive. |
 | E-02 | German reflections mix Sie and du | fixed (phase 2) | `593cb4f3` · tests/register.test.cjs (Sie to the reader, man for a generic ti, du only in speech; 8 listed exceptions) |
 | E-03 | Career timeline contradicts itself | needs author approval | Listed, not changed: phase2/timeline-contradictions.md (7 contradictions, 6 questions) |
 | M-01 | Home planets saturate the main thread | pending (phase 3) | |
@@ -70,7 +70,7 @@ Status values:
 | P-03 | Narration skips the case box content | pending (phase 3) | |
 | P-04 | Narration privacy note and online voices | pending (phase 3) | |
 | P-05 | Albanian podcast No. 1 has no correction | needs author approval (phase 2) | |
-| E-04 – E-12 | Management Review dating and method, PDF disclosure, chart labels, reflections | E-04 to E-06 fixed (phase 2): dates from online.json, method statement, colophon, PDF metadata (`becd3901`, `d475c40e`, `d0954fa0` · tests/publication-dates.test.cjs, tests/publication-colophon.test.cjs). Reflections' factual points (E-09, E-10): proposals for the author, phase2/albanian-proposals.md | |
+| E-04 – E-12 | Management Review dating and method, PDF disclosure, chart labels, reflections | E-04 to E-06 fixed (phase 2): dates from online.json, method statement, colophon, PDF metadata (`c9a75002`, `39666489`, `a1517ed5` · tests/publication-dates.test.cjs, tests/publication-colophon.test.cjs). Reflections' factual points (E-09, E-10): proposals for the author, phase2/albanian-proposals.md | |
 | B-01 | Back-cover line translated in opposite directions | needs author approval | |
 | M-02 – M-06 | Pause, motion control, Zenith radar, blank printed charts, wheel glide | pending (phase 3) | |
 | A-01 | Cloudflare Web Analytics collects nothing | needs author approval (account setting) | |
