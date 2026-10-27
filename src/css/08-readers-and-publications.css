@@ -896,6 +896,8 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 @keyframes scroll-rise { from { opacity: 0; translate: 0 26px; } }
 .weekly-n { margin-left: 8px; font-weight: 600; opacity: .7; font-variant-numeric: tabular-nums; }
 .weekly-n:empty { display: none; }
+/* The count in the chosen month, light theme: white at .7 on the blue read 3.6:1; at .85 it reads 4.57:1 (audit PM-11). */
+[data-theme="light"] .weekly-months button[aria-pressed="true"] .weekly-n { opacity: .85; }
 .weekly-filter { display: flex; flex-wrap: wrap; gap: 10px; }
 .weekly-filter button {
   transition: color .25s ease, background .25s ease, border-color .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
