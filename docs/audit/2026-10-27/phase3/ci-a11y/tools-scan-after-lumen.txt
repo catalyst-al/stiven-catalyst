@@ -1,0 +1,10 @@
+ 104  dark label-content-name-mismatch  -- energy-tracker [zenith], guest-complaints [pulse], kaizen-board [zenith], lost-found [pulse], room-status [pulse], shift-capacity [zenith], standard-work [lumen]
+ 104  light label-content-name-mismatch  -- energy-tracker [zenith], guest-complaints [pulse], kaizen-board [zenith], lost-found [pulse], room-status [pulse], shift-capacity [zenith], standard-work [lumen]
+   9  light color-contrast #3276a1 on #eceff0 (4.28:1, 9.8pt (13px) bold)  -- a3-report [zenith]
+   7  dark heading-order  -- cost-of-quality [lumen], five-s-audit [pulse], housekeeping-planner [zenith], kaizen-event [lumen], lean-assessment [lumen], room-status [pulse], standard-work [lumen]
+   7  light heading-order  -- cost-of-quality [lumen], five-s-audit [pulse], housekeeping-planner [zenith], kaizen-event [lumen], lean-assessment [lumen], room-status [pulse], standard-work [lumen]
+   4  dark color-contrast #ffffff on #f5c86a (1.57:1, 9.8pt (13px) bold)  -- smed [lumen]
+   3  light color-contrast #3276a1 on #eceff0 (4.28:1, 12.0pt (16px) bold)  -- energy-tracker [zenith]
+   1  dark color-contrast #f6f7f4 on #f8d794 (1.28:1, 9.0pt (12px) bold)  -- cost-of-quality [lumen]
+   1  dark color-contrast #ffffff on #a5b0b8 (2.21:1, 9.0pt (12px) bold)  -- cost-of-quality [lumen]
+118 runs (59 tools x 2 themes), 240 failing nodes

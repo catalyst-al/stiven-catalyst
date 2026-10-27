@@ -17,6 +17,9 @@ body.in-family {
   --sky-glow: .55;
 }
 [data-theme="light"] body.in-family[data-family="atlas"] { --sky-ink: #56606b; --sky-star: #56606b; }
+/* Lumen's gold at 62% with near black (#9c824a) read 3.18:1 on a grey row and 3.68:1 on white in small text; at 48%
+   (#7b683e) it reads 4.67:1 and 5.40:1. Needs the author's approval: docs/audit/2026-10-27/phase3/ci-a11y.md. */
+[data-theme="light"] body.in-family[data-family="lumen"] { --sky-ink: color-mix(in srgb, var(--family) 48%, #0b1015); }
 .in-family main { position: relative; }
 
 .family-sky {
