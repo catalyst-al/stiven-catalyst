@@ -32,11 +32,14 @@ export default defineConfig({
     launchOptions,
     trace: "retain-on-failure",
   },
-  // The photo backup journey needs one width only: the other projects leave it out (rather than skipping it), so a
-  // run reports no skipped tests.
+  // The photo backup journey needs one width only, and the phone charts the phone width only: the other projects
+  // leave them out (rather than skipping them), so a run reports no skipped tests.
   projects: widths.flatMap((width) => themes.map((theme) => ({
     name: `${width}px ${theme}`,
-    ...(width === 1440 && theme === "light" ? {} : { testIgnore: /work-backup-photos\.spec\.mjs$/ }),
+    testIgnore: [
+      ...(width === 1440 && theme === "light" ? [] : [/work-backup-photos\.spec\.mjs$/]),
+      ...(width === 390 ? [] : [/chart-labels\.spec\.mjs$/]),
+    ],
     use: {
       viewport: { width, height: width < 600 ? 844 : 900 },
       theme,
