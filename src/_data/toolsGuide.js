@@ -16,8 +16,8 @@ const read = (file) => JSON.parse(fs.readFileSync(new URL(file, import.meta.url)
 // on the cover, on the reader and on every tool page that shows its page of the guide; the day it came out dates it in
 // the site's feeds. Every earlier edition stays on the site as it was printed (editions below, and
 // src/media/guides/tools-guide/editions/).
-const EDITION = 7;
-const EDITION_DATE = "2026-10-25";
+const EDITION = 8;
+const EDITION_DATE = "2026-10-27";
 const families = read("./families.json");
 const toolLists = { en: read("./tools.json"), sq: read("./sq/tools.json"), de: read("./de/tools.json") };
 
@@ -183,7 +183,7 @@ const en = {
       ],
     },
     next: {
-      kicker: "Edition 7",
+      kicker: `Edition ${EDITION}`,
       title: "What could come next",
       body: [
         "Ideas under consideration, not promises with dates. Tell me which one would help you most.",
@@ -270,8 +270,8 @@ const en = {
         "List the open issues, each with an owner and a time. Add heads-ups, safety and people.",
         "Run the handover check.",
       ],
-      get: "A [[Ready to hand over]] view to copy, print or save as PDF, and send through your own channel. [[Close shift, start the next]] carries the open issues forward and counts how often they were carried; an open issue goes on to 5 Whys or the Action Tracker. Earlier handovers stay in a history.",
-      data: "The handover stays in this browser. Nothing is sent.",
+      get: "A [[Ready to hand over]] view to copy, print or save as PDF, and send through your own channel or with [[Send to the next shift]], as a link or a QR code. [[Close shift, start the next]] carries the open issues forward and counts how often they were carried; an open issue goes on to 5 Whys or the Action Tracker. Earlier handovers stay in a history.",
+      data: "The handover stays in this browser and goes only where you send it: a link holds it after the #, which no server receives.",
     },
     "/tools/action-tracker/": {
       when: "Whenever a tool gives you something to do, and once a week to close the loop: one list for every countermeasure, finding and signal.",
@@ -303,7 +303,7 @@ const en = {
         "[[Save audit]], then [[Add findings to actions]] to give each finding an owner in the Action Tracker.",
         "Tag what may not belong there in the [[Red tag register]], with a reason, a decision and an owner.",
       ],
-      get: "A radar of each S against the last walk of the area, the trend and a league table of the areas, the weakest questions, the open red tags by age, and the photos before and after, side by side. The [[Audit plan]] shares the areas among the auditors in turn and downloads as a calendar file. [[Print scorecard]], or download as CSV or Excel.",
+      get: "A radar of each S against the last walk of the area, the trend and a league table of the areas without partial audits, the weakest questions, the open red tags by age, and the photos before and after, side by side. The [[Audit plan]] shares the areas among the auditors in turn and downloads as a calendar file. [[Print scorecard]], or download as CSV or Excel.",
       data: "The audits, the red tags and the photos stay in this browser. Nothing is sent or uploaded.",
     },
     "/tools/safety-cross/": {
@@ -341,13 +341,14 @@ const en = {
       data: "Your files are read in the browser. Nothing is uploaded.",
     },
     "/tools/kpi-diagnostic/": {
-      when: "A number turned red. Before you push harder on it, find out where the cause sits.",
+      when: "A number turned red. Before you push harder on it, see where the cause may sit.",
       how: [
         "Name the KPI, if you like.",
         "Rate ten statements.",
         "Press [[See the result]].",
+        "Check it on the floor before you act: watch the work, ask the people who do it, look at the data.",
       ],
-      get: "The cause that fits best (clarity, skill, capacity, process design or ownership), with three first moves and a [[Question for the floor]]; when no single cause stands out, the advice to go and see the work. A score for each cause either way, to take on to 5 Whys or the Action Tracker.",
+      get: "A leading hypothesis to check, not a verdict: the cause your answers point to (clarity, skill, capacity, process design or ownership), named only at 4 of 6 or more and 2 points ahead of the rest, with its margin, three first moves and a [[Question for the floor]]. Causes one point apart are named together; when no single cause stands out, the advice to go and see the work. Every result says how sure it can be, with a score for each cause, to take on to 5 Whys or to the Action Tracker as a check on the floor.",
       data: "Nothing you enter is stored or sent.",
     },
     "/tools/pareto/": {
@@ -446,7 +447,7 @@ const en = {
         "Mark the faults, then [[Mark the rest as pass]]. Add a photo of a fault and say whether it needs a re-clean or maintenance.",
         "[[Save inspection]]: maintenance items go to the Action Tracker, re-cleans back to the room attendant.",
       ],
-      get: "The first-time pass rate by attendant, floor and room type, the weekly trend, the faults that fail most and a heat map of zones by floor, to coach rather than blame. [[Print inspection sheet]] or [[Print daily summary]], and download the inspections as CSV or Excel.",
+      get: "The first-time pass rate by attendant, floor and room type, the weekly trend, the faults that fail most and a heat map of zones by floor, to coach rather than blame; an inspection with items still open has no verdict and stays out of the pass rate. [[Print inspection sheet]] or [[Print daily summary]], and download the inspections as CSV or Excel.",
       data: "The inspections and photos stay in this browser. A checklist of your own can be saved as a template file for the other hotels of the group.",
     },
     "/tools/maintenance-planner/": {
@@ -518,12 +519,12 @@ const en = {
     "/tools/time-study/": {
       when: "At the line, with a stopwatch, before you balance the work again or write the standard.",
       how: [
-        "Enter the demand and the available minutes per shift: the tool gives the takt.",
+        "Enter the demand and the available minutes per shift: the tool gives the takt. Fill in [[Performance rating (%)]] and [[Allowance (%)]] too.",
         "Add the stations in the order of the flow, each with its elements, marked VA, NVA or W.",
         "[[Start timing]] and press [[Lap]], or the space bar, at the end of each element. Time at least three cycles per station; five is better.",
         "Read the Yamazumi against the takt, and the balance moves.",
       ],
-      get: "The standard time of each element with its spread, a Yamazumi of every station against the takt, how much of the time is waste, the bottleneck and the first element to move. [[Add the balance moves as actions]], or download the standard times as CSV or Excel.",
+      get: "The observed median of each element with its spread, and its standard time: the median × the rating × (1 + the allowance), the median itself at 100\u00a0% and 0\u00a0%. A Yamazumi of every station against the takt, how much of the time is waste, the bottleneck and the first element to move. [[Add the balance moves as actions]], or download the standard times as CSV or Excel.",
       data: "The stations and the timings stay in this browser. Timings can also be typed or pasted.",
     },
     "/tools/value-stream-map/": {
@@ -709,7 +710,7 @@ const en = {
         "Every Monday, [[Update all sites]] and choose the period: the last 7 or 30 days, this month or last month. Each period ends on the day of the site's update.",
         "Read the best and the worst on each rate, then [[Plan a Gemba Walk]] at the best site, or add what to learn from it to the actions.",
       ],
-      get: "Damage and incomplete rates, routes on time, OEE, PM compliance, 5S, safety, actions and the hotel rates side by side, best and worst named in each cell, a score per site by a rule you can see, and the widest gap to learn from. Copy the summary, print it, or download CSV or Excel.",
+      get: "Damage and incomplete rates, routes on time, OEE, PM compliance, 5S, safety, actions and the hotel rates side by side, best and worst named in each cell, a score per site by a rule you can see, with the number behind each rate, for the sites with enough data, and the widest gap to learn from. Copy the summary, print it, or download CSV or Excel.",
       data: "The codes stay in this browser and Team sync never shares them. Only each site's figures and update time are kept; nothing of yours is sent.",
     },
     "/tools/print-pack/": {
@@ -836,12 +837,12 @@ const en = {
     "/tools/ats-cv/": {
       when: "When software reads your CV before a person does.",
       how: [
-        "Start from a PDF or Word file, from the CV Builder, or from pasted text, and [[Sort it into the fields]].",
+        "Start from a PDF, Word or JSON Resume file, from the CV Builder, or from pasted text, and [[Sort it into the fields]].",
         "Choose the language, font and heading colour.",
         "Check contact, summary, experience and the other sections.",
-        "[[Match a job ad]]: paste the ad and read the ATS check.",
+        "[[Match a job ad]]: paste the ad. Its skills and terms are found in any spelling (ä or ae, ë or e) and under other words for the same skill (marked ≈); those from the part that lists what is required weigh double.",
       ],
-      get: "Your CV as PDF, Word (.docx) and plain text.",
+      get: "Your CV as PDF, Word (.docx), plain text and JSON Resume (.json); the ATS check; and how many of the ad's key words your CV uses, with the missing ones: a guide, not a prediction of what software or a recruiter will decide.",
       data: "Kept in this browser. The PDF reader loads from this site, only when you open a PDF.",
     },
     "/tools/cover-letter/": {
@@ -997,7 +998,7 @@ const sq = {
       ],
     },
     next: {
-      kicker: "Botimi 7",
+      kicker: `Botimi ${EDITION}`,
       title: "Çfarë mund të vijë më pas",
       body: [
         "Ide në shqyrtim, jo premtime me data. Më thuaj cila do të të ndihmonte më shumë.",
@@ -1084,8 +1085,8 @@ const sq = {
         "Rendit çështjet e hapura, secilën me përgjegjës dhe orë. Shto paralajmërimet, sigurinë dhe njerëzit.",
         "Bëj kontrollin e dorëzimit.",
       ],
-      get: "Një pamje [[Ready to hand over]] për ta kopjuar, printuar ose ruajtur si PDF dhe për ta dërguar në kanalin tënd. [[Close shift, start the next]] i kalon çështjet e hapura më tej dhe numëron sa herë janë kaluar; një çështje e hapur vazhdon te 5 Whys ose te Lista e veprimeve. Dorëzimet e mëparshme mbeten në një histori.",
-      data: "Dorëzimi mbetet në këtë shfletues. Asgjë nuk dërgohet.",
+      get: "Një pamje [[Ready to hand over]] për ta kopjuar, printuar ose ruajtur si PDF dhe për ta dërguar në kanalin tënd ose me [[Send to the next shift]], si link ose kod QR. [[Close shift, start the next]] i kalon çështjet e hapura më tej dhe numëron sa herë janë kaluar; një çështje e hapur vazhdon te 5 Whys ose te Lista e veprimeve. Dorëzimet e mëparshme mbeten në një histori.",
+      data: "Dorëzimi mbetet në këtë shfletues dhe shkon vetëm aty ku e dërgon ti: një link e mban pas shenjës #, që nuk e merr asnjë server.",
     },
     "/tools/action-tracker/": {
       when: "Sa herë që një mjet të jep diçka për të bërë, dhe një herë në javë për ta mbyllur ciklin: një listë e vetme për çdo kundërmasë, gjetje dhe sinjal.",
@@ -1117,7 +1118,7 @@ const sq = {
         "[[Save audit]], pastaj [[Add findings to actions]] që çdo gjetje të ketë një përgjegjës te Lista e veprimeve.",
         "Shëno te [[Red tag register]] çdo send që mund të mos i përkasë zonës, me arsye, vendim dhe përgjegjës.",
       ],
-      get: "Një radar i çdo S-je kundrejt auditit të fundit të zonës, trendi dhe renditja e zonave, pyetjet më të dobëta, etiketat e kuqe të hapura sipas vjetërsisë dhe fotot para e pas, krah për krah. [[Audit plan]] i ndan zonat mes audituesve me radhë dhe shkarkohet si skedar kalendari. [[Print scorecard]], ose shkarko si CSV ose Excel.",
+      get: "Një radar i çdo S-je kundrejt auditit të fundit të zonës, trendi dhe renditja e zonave pa auditet e pjesshme, pyetjet më të dobëta, etiketat e kuqe të hapura sipas vjetërsisë dhe fotot para e pas, krah për krah. [[Audit plan]] i ndan zonat mes audituesve me radhë dhe shkarkohet si skedar kalendari. [[Print scorecard]], ose shkarko si CSV ose Excel.",
       data: "Auditet, etiketat e kuqe dhe fotot mbeten në këtë shfletues. Asgjë nuk dërgohet e nuk ngarkohet.",
     },
     "/tools/safety-cross/": {
@@ -1155,13 +1156,14 @@ const sq = {
       data: "Skedarët lexohen në shfletues. Asgjë nuk ngarkohet.",
     },
     "/tools/kpi-diagnostic/": {
-      when: "Një shifër u bë e kuqe. Para se të shtosh presionin, gjej ku është shkaku.",
+      when: "Një shifër u bë e kuqe. Para se të shtosh presionin, shiko ku mund të jetë shkaku.",
       how: [
         "Shkruaj KPI-në, nëse do.",
         "Vlerëso dhjetë pohime.",
         "Shtyp [[See the result]].",
+        "Verifikoje në terren para se të veprosh: shiko punën, pyet ata që e bëjnë, shiko të dhënat.",
       ],
-      get: "Shkaku që përputhet më mirë (qartësia, aftësia, kapaciteti, procesi apo përgjegjësia), me tre hapa të parë dhe një [[Question for the floor]]; kur asnjë shkak i vetëm nuk del në pah, këshilla për të shkuar e për të parë punën. Në çdo rast, një pikë për çdo shkak, për ta çuar më tej te 5 Whys ose te Lista e veprimeve.",
+      get: "Një hipotezë kryesore për ta verifikuar, jo një vendim: shkaku nga i cili anojnë përgjigjet e tua (qartësia, aftësia, kapaciteti, procesi apo përgjegjësia), i emërtuar vetëm me 4 nga 6 pikë ose më shumë dhe 2 pikë para të tjerëve, me diferencën e vet, tre hapa të parë dhe një [[Question for the floor]]. Shkaqet që ndahen nga një pikë emërtohen bashkë; kur asnjë shkak i vetëm nuk del në pah, këshilla për të shkuar e për të parë punën. Çdo rezultat thotë sa i sigurt është, me një pikë për çdo shkak, për ta çuar te 5 Whys ose te Lista e veprimeve si një verifikim në terren.",
       data: "Asgjë që shkruan nuk ruhet e nuk dërgohet.",
     },
     "/tools/pareto/": {
@@ -1260,7 +1262,7 @@ const sq = {
         "Shëno defektet, pastaj [[Mark the rest as pass]]. Shto një foto të defektit dhe thuaj nëse do ripastrim apo mirëmbajtje.",
         "[[Save inspection]]: pikat e mirëmbajtjes shkojnë te Lista e veprimeve, ripastrimet kthehen te personi që e pastroi dhomën.",
       ],
-      get: "Sa dhoma kalojnë herën e parë sipas personit të pastrimit, katit dhe llojit të dhomës, trendi i javës, defektet që rrëzojnë më shpesh dhe një hartë nxehtësie e zonave sipas katit, për coaching, jo për faj. [[Print inspection sheet]] ose [[Print daily summary]], dhe shkarko inspektimet si CSV ose Excel.",
+      get: "Sa dhoma kalojnë herën e parë sipas personit të pastrimit, katit dhe llojit të dhomës, trendi i javës, defektet që rrëzojnë më shpesh dhe një hartë nxehtësie e zonave sipas katit, për coaching, jo për faj; një inspektim me pika ende të pagjykuara nuk ka verdikt dhe mbetet jashtë kësaj përqindjeje. [[Print inspection sheet]] ose [[Print daily summary]], dhe shkarko inspektimet si CSV ose Excel.",
       data: "Inspektimet dhe fotot mbeten në këtë shfletues. Një listë kontrolli e jotja ruhet si skedar modeli për hotelet e tjera të grupit.",
     },
     "/tools/maintenance-planner/": {
@@ -1332,12 +1334,12 @@ const sq = {
     "/tools/time-study/": {
       when: "Te linja, me kronometër, para se ta balancosh punën përsëri ose ta shkruash standardin.",
       how: [
-        "Shkruaj kërkesën dhe minutat në dispozicion për turn: mjeti jep taktin.",
+        "Shkruaj kërkesën dhe minutat në dispozicion për turn: mjeti jep taktin. Plotëso edhe fushat [[Performance rating (%)]] dhe [[Allowance (%)]].",
         "Shto stacionet sipas rrjedhës, secilin me elementet e veta, të shënuara VA, NVA ose W.",
         "Shtyp [[Start timing]] dhe [[Lap]], ose tastin e hapësirës, në fund të çdo elementi. Mat të paktën tre cikle për stacion; pesë është më mirë.",
         "Lexo Yamazumi-n kundrejt taktit dhe lëvizjet për balancim.",
       ],
-      get: "Koha standarde e çdo elementi me shpërndarjen e saj, një Yamazumi i çdo stacioni kundrejt taktit, sa nga koha është humbje, pengesa dhe elementi i parë për t'u zhvendosur. [[Add the balance moves as actions]], ose shkarko kohët standarde si CSV ose Excel.",
+      get: "Mediana e vëzhguar e çdo elementi me shpërndarjen e saj, dhe koha e tij standarde: mediana × vlerësimi i ritmit × (1 + shtesa), vetë mediana me 100\u00a0% dhe 0\u00a0%. Një Yamazumi i çdo stacioni kundrejt taktit, sa nga koha është humbje, pengesa dhe elementi i parë për t'u zhvendosur. [[Add the balance moves as actions]], ose shkarko kohët standarde si CSV ose Excel.",
       data: "Stacionet dhe matjet mbeten në këtë shfletues. Matjet mund edhe të shkruhen ose të ngjiten.",
     },
     "/tools/value-stream-map/": {
@@ -1523,7 +1525,7 @@ const sq = {
         "Çdo të hënë, [[Update all sites]] dhe zgjidh periudhën: 7 ose 30 ditët e fundit, ky muaj ose muaji i kaluar. Çdo periudhë mbaron në ditën e përditësimit të objektit.",
         "Lexo më të mirin dhe më të dobëtin në çdo tregues, pastaj [[Plan a Gemba Walk]] te objekti më i mirë, ose shto te veprimet çfarë duhet mësuar prej tij.",
       ],
-      get: "Përqindja e dëmeve dhe e porosive të paplota, linjat në kohë, OEE, mirëmbajtja parandaluese, 5S, siguria, veprimet dhe treguesit e hotelit krah për krah, më i miri dhe më i dobëti në çdo qelizë, pikët e çdo objekti sipas një rregulli të dukshëm dhe diferenca më e madhe për të mësuar. Kopjo përmbledhjen, printoje ose shkarko CSV ose Excel.",
+      get: "Përqindja e dëmeve dhe e porosive të paplota, linjat në kohë, OEE, mirëmbajtja parandaluese, 5S, siguria, veprimet dhe treguesit e hotelit krah për krah, më i miri dhe më i dobëti në çdo qelizë, pikët e çdo objekti sipas një rregulli të dukshëm, me numrin pas çdo treguesi, për objektet me të dhëna të mjaftueshme, dhe diferenca më e madhe për të mësuar. Kopjo përmbledhjen, printoje ose shkarko CSV ose Excel.",
       data: "Kodet mbeten në këtë shfletues dhe sinkronizimi i ekipit nuk i ndan kurrë. Ruhen vetëm treguesit e çdo objekti dhe koha e përditësimit; nga ti nuk dërgohet asgjë.",
     },
     "/tools/print-pack/": {
@@ -1650,12 +1652,12 @@ const sq = {
     "/tools/ats-cv/": {
       when: "Kur një softuer e lexon CV-në tënde para një njeriu.",
       how: [
-        "Nis nga një skedar PDF ose Word, nga Krijuesi i CV-së ose nga tekst i ngjitur, dhe shtyp [[Sort it into the fields]].",
+        "Nis nga një skedar PDF, Word ose JSON Resume, nga Krijuesi i CV-së ose nga tekst i ngjitur, dhe shtyp [[Sort it into the fields]].",
         "Zgjidh gjuhën, shkronjat dhe ngjyrën e titujve.",
         "Kontrollo kontaktin, përmbledhjen, përvojën dhe seksionet e tjera.",
-        "[[Match a job ad]]: ngjit njoftimin dhe lexo kontrollin ATS.",
+        "[[Match a job ad]]: ngjit njoftimin. Aftësitë dhe termat e tij gjenden në çdo shkrim (ë ose e, ä ose ae) dhe edhe me një fjalë tjetër për të njëjtën aftësi (shënuar me ≈); ato nga pjesa që rendit kërkesat peshojnë dyfish.",
       ],
-      get: "CV-ja jote si PDF, Word (.docx) dhe tekst i thjeshtë.",
+      get: "CV-ja jote si PDF, Word (.docx), tekst i thjeshtë dhe JSON Resume (.json); kontrolli ATS; dhe sa nga fjalët kyçe të njoftimit përdor CV-ja jote, me ato që mungojnë: një tregues, jo një parashikim se çfarë do të vendosë programi apo rekrutuesi.",
       data: "Ruhet në këtë shfletues. Lexuesi i PDF-ve ngarkohet nga kjo faqe, vetëm kur hap një PDF.",
     },
     "/tools/cover-letter/": {
@@ -1811,7 +1813,7 @@ const de = {
       ],
     },
     next: {
-      kicker: "Ausgabe 7",
+      kicker: `Ausgabe ${EDITION}`,
       title: "Was als Nächstes kommen könnte",
       body: [
         "Ideen, über die ich nachdenke, keine Versprechen mit Datum. Sagen Sie mir, welche Ihnen am meisten helfen würde.",
@@ -1898,8 +1900,8 @@ const de = {
         "Listen Sie die offenen Punkte auf, jeden mit Verantwortlichem und Uhrzeit. Ergänzen Sie Hinweise, Sicherheit und Personal.",
         "Machen Sie den Übergabe-Check.",
       ],
-      get: "Eine Ansicht [[Ready to hand over]] zum Kopieren, Drucken oder als PDF, die Sie über Ihren eigenen Kanal verschicken. [[Close shift, start the next]] nimmt die offenen Punkte mit und zählt, wie oft sie übergeben wurden; ein offener Punkt geht weiter an 5 Whys oder die Maßnahmenliste. Frühere Übergaben bleiben in einem Verlauf.",
-      data: "Die Übergabe bleibt in diesem Browser. Nichts wird gesendet.",
+      get: "Eine Ansicht [[Ready to hand over]] zum Kopieren, Drucken oder als PDF, die Sie über Ihren eigenen Kanal verschicken oder mit [[Send to the next shift]] als Link oder QR-Code weitergeben. [[Close shift, start the next]] nimmt die offenen Punkte mit und zählt, wie oft sie übergeben wurden; ein offener Punkt geht weiter an 5 Whys oder die Maßnahmenliste. Frühere Übergaben bleiben in einem Verlauf.",
+      data: "Die Übergabe bleibt in diesem Browser und geht nur dorthin, wohin Sie sie schicken: Ein Link trägt sie hinter dem Zeichen #, das kein Server erhält.",
     },
     "/tools/action-tracker/": {
       when: "Wenn ein Tool Ihnen etwas zu tun gibt, und einmal pro Woche: eine Liste für jede Gegenmaßnahme, jeden Befund und jedes Signal.",
@@ -1931,7 +1933,7 @@ const de = {
         "Klicken Sie auf [[Save audit]] und geben Sie dann mit [[Add findings to actions]] jedem Befund einen Verantwortlichen in der Maßnahmenliste.",
         "Erfassen Sie im [[Red tag register]], was dort vielleicht nicht hingehört, mit Grund, Entscheidung und Verantwortlichem.",
       ],
-      get: "Ein Radar jedes S gegenüber dem letzten Audit des Bereichs, der Trend und eine Rangliste der Bereiche, die schwächsten Fragen, die offenen Roten Karten nach Alter und die Fotos vorher und nachher nebeneinander. Der [[Audit plan]] verteilt die Bereiche reihum auf die Auditoren und lässt sich als Kalenderdatei herunterladen. Drucken Sie mit [[Print scorecard]], oder laden Sie alles als CSV oder Excel herunter.",
+      get: "Ein Radar jedes S gegenüber dem letzten Audit des Bereichs, der Trend und eine Rangliste der Bereiche ohne unvollständige Audits, die schwächsten Fragen, die offenen Roten Karten nach Alter und die Fotos vorher und nachher nebeneinander. Der [[Audit plan]] verteilt die Bereiche reihum auf die Auditoren und lässt sich als Kalenderdatei herunterladen. Drucken Sie mit [[Print scorecard]], oder laden Sie alles als CSV oder Excel herunter.",
       data: "Die Audits, die Roten Karten und die Fotos bleiben in diesem Browser. Nichts wird gesendet oder hochgeladen.",
     },
     "/tools/safety-cross/": {
@@ -1969,13 +1971,14 @@ const de = {
       data: "Ihre Dateien werden im Browser gelesen. Nichts wird hochgeladen.",
     },
     "/tools/kpi-diagnostic/": {
-      when: "Eine Zahl ist rot geworden. Bevor Sie mehr Druck machen, finden Sie heraus, wo die Ursache liegt.",
+      when: "Eine Zahl ist rot geworden. Bevor Sie mehr Druck machen, sehen Sie nach, wo die Ursache liegen könnte.",
       how: [
         "Nennen Sie die Kennzahl, wenn Sie möchten.",
         "Bewerten Sie zehn Aussagen.",
         "Klicken Sie auf [[See the result]].",
+        "Prüfen Sie das Ergebnis vor Ort, bevor Sie handeln: Sehen Sie sich die Arbeit an, fragen Sie die Menschen, die sie tun, und schauen Sie in die Daten.",
       ],
-      get: "Die Ursache, die am besten passt (Klarheit, Können, Kapazität, Prozessgestaltung oder Verantwortung), mit drei ersten Schritten und einer [[Question for the floor]]; wenn keine einzelne Ursache heraussticht, der Rat, sich die Arbeit vor Ort anzusehen. In jedem Fall ein Wert für jede Ursache, den Sie an 5 Whys oder die Maßnahmenliste weitergeben können.",
+      get: "Eine führende Hypothese zum Prüfen, kein Urteil: die Ursache, auf die Ihre Antworten deuten (Klarheit, Können, Kapazität, Prozessgestaltung oder Verantwortung), benannt nur ab 4 von 6 Punkten und mit 2 Punkten Vorsprung vor den übrigen, mit ihrem Abstand, drei ersten Schritten und einer [[Question for the floor]]. Ursachen, die einen Punkt auseinanderliegen, werden zusammen genannt; wenn keine einzelne Ursache heraussticht, der Rat, sich die Arbeit vor Ort anzusehen. Jedes Ergebnis sagt, wie sicher es sein kann, mit einem Wert für jede Ursache, den Sie an 5 Whys oder als Prüfung vor Ort an die Maßnahmenliste weitergeben können.",
       data: "Nichts, was Sie eingeben, wird gespeichert oder gesendet.",
     },
     "/tools/pareto/": {
@@ -2074,7 +2077,7 @@ const de = {
         "Markieren Sie die Mängel, dann [[Mark the rest as pass]]. Fügen Sie ein Foto des Mangels hinzu und sagen Sie, ob er eine Nachreinigung oder die Technik braucht.",
         "[[Save inspection]]: Technik-Punkte gehen in die Maßnahmenliste, Nachreinigungen zurück an die Reinigungskraft.",
       ],
-      get: "Die Quote der Zimmer, die beim ersten Mal bestehen, je Reinigungskraft, Etage und Zimmertyp, der Wochentrend, die häufigsten Mängel und eine Heatmap der Zonen nach Etage, zum Coachen, nicht zum Beschuldigen. [[Print inspection sheet]] oder [[Print daily summary]], und die Kontrollen als CSV oder Excel herunterladen.",
+      get: "Die Quote der Zimmer, die beim ersten Mal bestehen, je Reinigungskraft, Etage und Zimmertyp, der Wochentrend, die häufigsten Mängel und eine Heatmap der Zonen nach Etage, zum Coachen, nicht zum Beschuldigen; eine Kontrolle mit noch offenen Punkten hat kein Ergebnis und zählt in der Quote nicht mit. [[Print inspection sheet]] oder [[Print daily summary]], und die Kontrollen als CSV oder Excel herunterladen.",
       data: "Die Kontrollen und Fotos bleiben in diesem Browser. Eine eigene Checkliste lässt sich als Vorlagendatei für die anderen Hotels der Gruppe speichern.",
     },
     "/tools/maintenance-planner/": {
@@ -2146,12 +2149,12 @@ const de = {
     "/tools/time-study/": {
       when: "An der Linie, mit der Stoppuhr, bevor Sie die Arbeit neu austakten oder den Standard schreiben.",
       how: [
-        "Tragen Sie den Bedarf und die verfügbaren Minuten pro Schicht ein: Das Tool errechnet den Takt.",
+        "Tragen Sie den Bedarf und die verfügbaren Minuten pro Schicht ein: Das Tool errechnet den Takt. Füllen Sie auch [[Performance rating (%)]] und [[Allowance (%)]] aus.",
         "Legen Sie die Stationen in der Reihenfolge des Flusses an, jede mit ihren Elementen, markiert als VA, NVA oder W.",
         "Klicken Sie auf [[Start timing]] und am Ende jedes Elements auf [[Lap]] oder die Leertaste. Messen Sie mindestens drei Zyklen pro Station, besser fünf.",
         "Lesen Sie den Yamazumi gegen den Takt und die Verlagerungen zur Austaktung.",
       ],
-      get: "Die Standardzeit jedes Elements mit ihrer Streuung, ein Yamazumi jeder Station gegen den Takt, wie viel der Zeit Verschwendung ist, der Engpass und das erste Element, das Sie verlagern. [[Add the balance moves as actions]], oder die Standardzeiten als CSV oder Excel herunterladen.",
+      get: "Der beobachtete Median jedes Elements mit seiner Streuung und seine Standardzeit: Median × Leistungsgrad × (1 + Zuschlag), bei 100\u00a0% und 0\u00a0% der Median selbst. Ein Yamazumi jeder Station gegen den Takt, wie viel der Zeit Verschwendung ist, der Engpass und das erste Element, das Sie verlagern. [[Add the balance moves as actions]], oder die Standardzeiten als CSV oder Excel herunterladen.",
       data: "Die Stationen und die Zeiten bleiben in diesem Browser. Zeiten lassen sich auch eintippen oder einfügen.",
     },
     "/tools/value-stream-map/": {
@@ -2337,7 +2340,7 @@ const de = {
         "Jeden Montag [[Update all sites]] und den Zeitraum wählen: die letzten 7 oder 30 Tage, diesen oder letzten Monat.",
         "Lesen Sie bei jeder Quote den besten und den schwächsten Wert, dann [[Plan a Gemba Walk]] am besten Standort, oder nehmen Sie das Lernen von ihm in die Maßnahmen auf.",
       ],
-      get: "Schadens- und Unvollständigkeitsquote, pünktliche Touren, OEE, Wartung, 5S, Sicherheit, Maßnahmen und Hotelkennzahlen nebeneinander, bester und schwächster Wert benannt, Punkte je Standort nach sichtbarer Regel und die größte Lücke. Kopieren, drucken, CSV oder Excel.",
+      get: "Schadens- und Unvollständigkeitsquote, pünktliche Touren, OEE, Wartung, 5S, Sicherheit, Maßnahmen und Hotelkennzahlen nebeneinander, bester und schwächster Wert benannt, Punkte je Standort nach sichtbarer Regel, mit der Zahl hinter jeder Quote, für Standorte mit genug Daten, und die größte Lücke. Kopieren, drucken, CSV oder Excel.",
       data: "Die Codes bleiben in diesem Browser und werden nie geteilt; von jedem Standort bleiben nur die Kennzahlen.",
     },
     "/tools/print-pack/": {
@@ -2464,12 +2467,12 @@ const de = {
     "/tools/ats-cv/": {
       when: "Wenn eine Software Ihren Lebenslauf vor einem Menschen liest.",
       how: [
-        "Beginnen Sie mit einer PDF- oder Word-Datei, mit dem Lebenslauf-Generator oder mit eingefügtem Text, und klicken Sie auf [[Sort it into the fields]].",
+        "Beginnen Sie mit einer PDF-, Word- oder JSON-Resume-Datei, mit dem Lebenslauf-Generator oder mit eingefügtem Text, und klicken Sie auf [[Sort it into the fields]].",
         "Wählen Sie Sprache, Schrift und Farbe der Überschriften.",
         "Prüfen Sie Kontakt, Zusammenfassung, Erfahrung und die übrigen Abschnitte.",
-        "[[Match a job ad]]: Fügen Sie die Anzeige ein und lesen Sie den ATS-Check.",
+        "[[Match a job ad]]: Fügen Sie die Anzeige ein. Ihre Fähigkeiten und Begriffe werden in jeder Schreibweise gefunden (ä oder ae, ß oder ss) und auch unter einem anderen Wort für dieselbe Fähigkeit (mit ≈ markiert); Begriffe aus dem Teil mit den Anforderungen zählen doppelt.",
       ],
-      get: "Ihr Lebenslauf als PDF, Word (.docx) und reiner Text.",
+      get: "Ihr Lebenslauf als PDF, Word (.docx), reiner Text und JSON Resume (.json); der ATS-Check; und wie viele Schlüsselwörter der Anzeige Ihr Lebenslauf verwendet, mit den fehlenden: ein Anhaltspunkt, keine Vorhersage darüber, wie eine Software oder eine Personalerin oder ein Personaler entscheidet.",
       data: "Gespeichert in diesem Browser. Der PDF-Leser wird von dieser Website geladen, nur wenn Sie ein PDF öffnen.",
     },
     "/tools/cover-letter/": {
@@ -2517,8 +2520,42 @@ const system = families.map((item) => {
 // What changed in each edition, newest first; an earlier edition is kept as its printed PDF.
 const editions = [
   {
+    number: 8,
+    date: { en: "27 October 2026", sq: "27 tetor 2026", de: "27. Oktober 2026" },
+    changes: {
+      en: [
+        "Time Study: the standard time is the observed median × a performance rating × (1 + an allowance), both entered in step 1; left at 100\u00a0% and 0\u00a0% it is the observed median, and the tool says so.",
+        "KPI Diagnostic: a leading hypothesis to check on the floor, named only when it stands clearly apart, with its margin and how sure it can be, in place of the cause that fits best.",
+        "ATS CV: a PDF of its own and JSON Resume files; the job ad match looks for the ad's skills and terms in any spelling and under other words for the same skill, weighs the required ones double, and is a guide, not a pass mark.",
+        "Shift Handover: “Send to the next shift” as a link or a QR code. On a shared computer, a PIN locks the work of every tool.",
+        "Results that rest on too little are no longer given as results: Room Inspection gives no verdict until every item is judged, the 5S Audit leaves partial audits out of its trend and league table, and Site Compare ranks only the sites with enough data behind their rates.",
+        "Value Stream Map names as the bottleneck the step with the least capacity, uptime and changeovers counted; Signals judge low counts by their own odds, and on the control chart one better point is a signal to investigate, not yet a lasting improvement.",
+        "An example stays an example: it is never mixed into your own logs, the action list or the workplace profile.",
+      ],
+      sq: [
+        "Studimi i kohës: koha standarde është mediana e vëzhguar × vlerësimi i ritmit × (1 + shtesa), që të dyja shkruhen në hapin 1; me 100\u00a0% dhe 0\u00a0% ajo është mediana e vëzhguar, dhe mjeti e thotë.",
+        "Diagnostikimi i KPI-së: një hipotezë kryesore për ta verifikuar në terren, e emërtuar vetëm kur dallohet qartë, me diferencën e saj dhe sa i sigurt mund të jetë përfundimi, në vend të shkakut që përputhet më mirë.",
+        "CV për ATS: shkruan vetë PDF-në dhe hap e ruan skedarë JSON Resume; krahasimi me njoftimin kërkon aftësitë dhe termat e tij në çdo shkrim dhe edhe me fjalë të tjera për të njëjtën aftësi, u jep peshë dyfish atyre të kërkuara dhe është një tregues, jo një prag kalimi.",
+        "Dorëzimi i turnit: “Dërgoja turnit tjetër” si link ose kod QR. Në një kompjuter të përbashkët, një PIN e kyç punën e çdo mjeti.",
+        "Rezultatet që mbështeten në shumë pak nuk jepen më si rezultate: Inspektimi i dhomës nuk jep verdikt derisa të gjykohet çdo pikë, Auditi 5S i lë jashtë trendit dhe renditjes auditet e pjesshme, dhe Krahasimi i objekteve rendit vetëm objektet me të dhëna të mjaftueshme pas treguesve të tyre.",
+        "Harta e rrjedhës së vlerës e quan pengesë hapin me kapacitetin më të vogël, me disponueshmërinë dhe ndërrimet; Sinjalet i gjykojnë numërimet e ulëta sipas probabilitetit të tyre, dhe në kartën e kontrollit një pikë e vetme më e mirë është një sinjal për t'u hetuar, jo ende një përmirësim i qëndrueshëm.",
+        "Një shembull mbetet shembull: nuk përzihet kurrë me regjistrat e tu, me listën e veprimeve ose me profilin e vendit të punës.",
+      ],
+      de: [
+        "Zeitstudie: Die Standardzeit ist der beobachtete Median × Leistungsgrad × (1 + Zuschlag), beide in Schritt 1 eingetragen; bei 100\u00a0% und 0\u00a0% ist sie der beobachtete Median, und das Tool sagt es.",
+        "KPI-Diagnose: eine führende Hypothese, die Sie vor Ort prüfen, nur benannt, wenn sie sich deutlich abhebt, mit ihrem Abstand und mit dem Hinweis, wie sicher sie sein kann, statt der Ursache, die am besten passt.",
+        "ATS-Lebenslauf: ein eigenes PDF und JSON-Resume-Dateien; der Abgleich mit der Stellenanzeige sucht ihre Fähigkeiten und Begriffe in jeder Schreibweise und unter anderen Wörtern für dieselbe Fähigkeit, gewichtet die geforderten doppelt und ist ein Anhaltspunkt, keine Bestehensgrenze.",
+        "Schichtübergabe: „An die nächste Schicht senden“ als Link oder QR-Code. Auf einem gemeinsam genutzten Computer sperrt eine PIN die Arbeit aller Tools.",
+        "Ergebnisse, hinter denen zu wenig steht, werden nicht mehr als Ergebnisse gezeigt: Die Zimmerkontrolle gibt kein Ergebnis, bevor jeder Punkt beurteilt ist, das 5S-Audit lässt unvollständige Audits aus Trend und Rangliste, und der Standortvergleich reiht nur Standorte mit genug Daten hinter ihren Quoten.",
+        "Die Wertstromanalyse nennt als Engpass den Schritt mit der geringsten Kapazität, Verfügbarkeit und Rüsten eingerechnet; Die Signale beurteilen kleine Zählwerte nach ihrer eigenen Wahrscheinlichkeit, und auf der Regelkarte ist ein einzelner besserer Punkt ein Signal zum Prüfen, noch keine dauerhafte Verbesserung.",
+        "Ein Beispiel bleibt ein Beispiel: Es wird nie mit Ihren eigenen Protokollen, der Maßnahmenliste oder dem Arbeitsplatzprofil vermischt.",
+      ],
+    },
+  },
+  {
     number: 7,
     date: { en: "25 October 2026", sq: "25 tetor 2026", de: "25. Oktober 2026" },
+    pdf: (lang) => `/media/guides/tools-guide/editions/tools-guide-7-${lang}.pdf`,
     changes: {
       en: [
         "Eight new tools, each with its page in this guide: Waste Log, Andon Log, Energy & Water, Cost of Quality, Heijunka, Kanban Sizing, Poka-Yoke Register and Lean Assessment.",
