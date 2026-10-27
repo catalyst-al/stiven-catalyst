@@ -372,12 +372,15 @@ test('the huddle hears the overdue tasks on A assets, by the planner\'s own due 
 });
 
 test('the page: Room Inspection colours Quality, the planner Delivery, and the agenda reads the overdue A tasks', () => {
+  // The tool's real checklist has more items than the four answered here; the rest are n.a., so each inspection is
+  // complete (an inspection with items left open has no verdict and does not count) and is judged on the same four.
+  const restNa = Object.fromEntries(Object.entries(read('src/_data/de/roomInspection.json').templates.standard.questions).flatMap(([zone, items]) => items.map((item, i) => [`${zone}-${i}`, 'na'])));
   const w = load({
     lang: 'de',
     page: true,
     storage: {
       'sc-workplace': { site: 'Hotel Nord', areas: [], targets: {} },
-      'sc-room-inspection-de': { threshold: 0.9, rows: roomsOn('2026-10-22', 4, 2).map((row) => ({ ...row, template: 'standard' })) },
+      'sc-room-inspection-de': { threshold: 0.9, rows: roomsOn('2026-10-22', 4, 2).map((row) => ({ ...row, template: 'standard', answers: { ...restNa, ...row.answers } })) },
       'sc-maintenance-planner-de': {
         assets: [{ id: 'a1', tag: 'AUF-1', name: 'Aufzug', crit: 'A', tasks: [{ id: 't1', text: 'Seilprüfung', every: 1, unit: 'months', hours: 0, last: '2026-09-01', lastHours: null, start: '' }] }],
         rows: [{ kind: 'breakdown', asset: 'a1', date: '2026-10-22', minutes: 90, cause: 'other' }],

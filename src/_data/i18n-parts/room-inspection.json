@@ -127,7 +127,13 @@
     "Removed the inspection of room {room} on {date}.": "Kontrolle von Zimmer {room} am {date} entfernt.",
     "Clear every saved inspection? The rooms and the team stay.": "Alle gespeicherten Kontrollen löschen? Zimmer und Team bleiben.",
     "Answer": "Antwort",
-    "Re-check": "Nachkontrolle"
+    "Re-check": "Nachkontrolle",
+    "Score so far": "Bewertung bisher",
+    "Incomplete": "Unvollständig",
+    "no verdict until every item is pass, fail or n.a.": "kein Ergebnis, bis jeder Punkt OK, Mangel oder entfällt ist",
+    "1 incomplete inspection, not counted": "1 unvollständige Kontrolle, nicht gezählt",
+    "{n} incomplete inspections, not counted": "{n} unvollständige Kontrollen, nicht gezählt",
+    "Saved: room {room}, incomplete: {n} items were not checked. It counts in neither the first-time pass rate nor the average score.": "Gespeichert: Zimmer {room}, unvollständig: {n} Punkte wurden nicht geprüft. Die Kontrolle zählt weder in der Erstabnahmequote noch in der durchschnittlichen Bewertung."
   },
   "sq": {
     "Rooms, team and checklists": "Dhomat, ekipi dhe listat e kontrollit",
@@ -257,6 +263,12 @@
     "Removed the inspection of room {room} on {date}.": "U hoq inspektimi i dhomës {room} më {date}.",
     "Clear every saved inspection? The rooms and the team stay.": "Të fshihen të gjitha inspektimet e ruajtura? Dhomat dhe ekipi mbeten.",
     "Answer": "Përgjigjja",
-    "Re-check": "Rikontroll"
+    "Re-check": "Rikontroll",
+    "Score so far": "Vlerësimi deri tani",
+    "Incomplete": "I paplotë",
+    "no verdict until every item is pass, fail or n.a.": "pa rezultat derisa çdo pikë të jetë në rregull, defekt ose s'aplikohet",
+    "1 incomplete inspection, not counted": "1 inspektim i paplotë, nuk llogaritet",
+    "{n} incomplete inspections, not counted": "{n} inspektime të paplota, nuk llogariten",
+    "Saved: room {room}, incomplete: {n} items were not checked. It counts in neither the first-time pass rate nor the average score.": "U ruajt: dhoma {room}, inspektim i paplotë: {n} pika nuk u kontrolluan. Nuk llogaritet as te kalimi herën e parë, as te vlerësimi mesatar."
   }
 }

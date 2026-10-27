@@ -48,9 +48,12 @@
     });
     return { pct: passW + failW ? passW / (passW + failW) : null, passW, failW, pass, fail, na, answered: pass + fail, open: items.length - pass - fail - na, total: items.length, critical, failed };
   };
+  // The verdict needs every item judged (pass, fail or n.a.): with items still open the inspection is incomplete and has
+  // none, so one item checked is not a pass. A failed critical item is the exception: it fails the room on its own.
   const verdict = (scored, threshold) => {
     if (!scored || scored.pct === null) return { pass: null, reason: "" };
     if (scored.critical.length) return { pass: false, reason: "critical" };
+    if (scored.open > 0) return { pass: null, reason: "incomplete" };
     if (scored.pct < threshold - 1e-9) return { pass: false, reason: "score" };
     return { pass: true, reason: "" };
   };
@@ -58,7 +61,8 @@
   const byTime = (a, b) => `${a.date} ${a.time || ""}`.localeCompare(`${b.date} ${b.time || ""}`);
 
   // Every inspection with its score and verdict; a room inspected again on the day it failed is a re-check, so it does
-  // not count for the first-time pass rate (the rate the attendant can be coached on).
+  // not count for the first-time pass rate (the rate the attendant can be coached on). An incomplete inspection (items
+  // left open, also one saved before the verdict waited for them) counts in neither the rate nor the average score.
   const annotate = (rows, itemsFor, threshold) => {
     const failedRooms = new Set();
     return [...rows].sort(byTime).map((row) => {
@@ -70,24 +74,26 @@
       const flags = row.flags || {};
       const recleans = s.failed.filter((qid) => flags[qid] !== "maintenance").length;
       const maintenance = s.failed.filter((qid) => flags[qid] === "maintenance").length;
-      return { ...row, s, pass: v.pass, reason: v.reason, recheck, recleans, maintenance };
+      return { ...row, s, pass: v.pass, reason: v.reason, incomplete: v.reason === "incomplete", recheck, recleans, maintenance };
     });
   };
-  // Per group (attendant, floor, room type): inspections, first inspections, how many of those passed, the average score.
+  // Per group (attendant, floor, room type): inspections, first inspections, how many of those passed, the average score
+  // (of the inspections with every item judged), and the incomplete ones, which count in neither.
   const rateBy = (list, keyOf) => {
     const groups = new Map();
     list.forEach((row) => {
       const key = keyOf(row);
       if (key === null || key === undefined || key === "") return;
-      if (!groups.has(key)) groups.set(key, { key, n: 0, first: 0, firstPass: 0, sum: 0, scored: 0 });
+      if (!groups.has(key)) groups.set(key, { key, n: 0, first: 0, firstPass: 0, sum: 0, scored: 0, incomplete: 0 });
       const g = groups.get(key);
       g.n++;
-      if (row.s.pct !== null) { g.sum += row.s.pct; g.scored++; }
+      if (row.incomplete) g.incomplete++;
+      if (row.s.pct !== null && !row.s.open) { g.sum += row.s.pct; g.scored++; }
       if (!row.recheck && row.pass !== null) { g.first++; if (row.pass) g.firstPass++; }
     });
-    return [...groups.values()].map((g) => ({ key: g.key, n: g.n, first: g.first, firstPass: g.firstPass, rate: g.first ? g.firstPass / g.first : null, avg: g.scored ? g.sum / g.scored : null }));
+    return [...groups.values()].map((g) => ({ key: g.key, n: g.n, first: g.first, firstPass: g.firstPass, rate: g.first ? g.firstPass / g.first : null, avg: g.scored ? g.sum / g.scored : null, incomplete: g.incomplete }));
   };
-  const overall = (list) => rateBy(list, () => "all")[0] || { n: 0, first: 0, firstPass: 0, rate: null, avg: null };
+  const overall = (list) => rateBy(list, () => "all")[0] || { n: 0, first: 0, firstPass: 0, rate: null, avg: null, incomplete: 0 };
   const weekly = (list) => rateBy(list, (row) => mondayOf(row.date)).sort((a, b) => a.key.localeCompare(b.key)).map((g) => ({ week: g.key, ...g }));
   // The failed items, most often first, with their share and the cumulative share; the vital few are the items that
   // make up the first 80 % (the item that crosses 80 % is one of them).
@@ -482,7 +488,8 @@
     const v = verdict(s, state.threshold);
     live.classList.toggle("is-pass", v.pass === true);
     live.classList.toggle("is-fail", v.pass === false);
-    if (v.pass === null) live.textContent = tx("{n} items to check. A failed critical item fails the room on its own.", { n: int.format(items.length) });
+    if (v.reason === "incomplete") live.textContent = [`${tx("Score so far")} ${pct(s.pct, 0)}`, tx("Incomplete"), tx("{a} of {b} checked", { a: int.format(s.pass + s.fail + s.na), b: int.format(items.length) }), tx("no verdict until every item is pass, fail or n.a.")].join(" · ");
+    else if (v.pass === null) live.textContent = tx("{n} items to check. A failed critical item fails the room on its own.", { n: int.format(items.length) });
     else {
       const parts = [`${tx("Score")} ${pct(s.pct, 0)}`, v.pass ? `✓ ${tx("Pass")}` : `✗ ${tx("Fail")}`, tx("{a} of {b} checked", { a: int.format(s.pass + s.fail + s.na), b: int.format(items.length) })];
       if (v.reason === "critical") parts.push(tx("critical item failed: {item}", { item: items.find((item) => item.qid === s.critical[0])?.text || "" }));
@@ -503,7 +510,9 @@
   const inPeriod = (rows) => (state.period === "all" ? rows : rows.filter((row) => row.date > addDays(today(), -Number(state.period))));
   const periodText = () => (state.period === "7" ? tx("Last 7 days") : state.period === "30" ? tx("Last 30 days") : tx("All"));
   const itemText = (template, qid) => itemByKey(template, qid)?.text || qid;
-  const resultText = (row) => (row.pass === null ? "–" : row.pass ? tx("Pass") : tx("Fail"));
+  const resultText = (row) => (row.incomplete ? tx("Incomplete") : row.pass === null ? "–" : row.pass ? tx("Pass") : tx("Fail"));
+  // "1 incomplete inspection, not counted" / "3 incomplete inspections, not counted": they are in neither rate.
+  const incompleteText = (n) => (n === 1 ? tx("1 incomplete inspection, not counted") : tx("{n} incomplete inspections, not counted", { n: int.format(n) }));
   const typeLabel = (row) => typeName(row.roomType) || templateOf(row.template).name;
   const floorLabel = (floor) => tx("Floor {n}", { n: floor });
   // Open maintenance: the tracker's open actions from this tool, and the maintenance faults not yet sent there.
@@ -536,7 +545,7 @@
   const summaryText = (r) => {
     const lines = [`${cfg.text.tool} · ${periodText()} · ${showDate(r.now)}`, ""];
     lines.push(`${tx("Inspections")}: ${int.format(r.list.length)} (${tx("today")}: ${int.format(r.today)}, ${tx("this week")}: ${int.format(r.week)})`);
-    lines.push(`${tx("First-time pass rate")}: ${r.total.rate === null ? "–" : pct(r.total.rate, 0)} (${tx("{a} of {b} rooms", { a: int.format(r.total.firstPass), b: int.format(r.total.first) })})`);
+    lines.push(`${tx("First-time pass rate")}: ${r.total.rate === null ? "–" : pct(r.total.rate, 0)} (${tx("{a} of {b} rooms", { a: int.format(r.total.firstPass), b: int.format(r.total.first) })})${r.total.incomplete ? ` · ${incompleteText(r.total.incomplete)}` : ""}`);
     lines.push(`${tx("Average score")}: ${r.total.avg === null ? "–" : pct(r.total.avg, 0)} · ${tx("pass mark {p}", { p: thresholdText() })}`);
     lines.push(`${tx("Re-cleans")}: ${int.format(r.recleans)} · ${tx("Open maintenance")}: ${int.format(r.tracker + r.unsent.length)}`);
     if (r.byAttendant.length) {
@@ -649,7 +658,7 @@
     });
     const foot = el("p", "ri-print-foot", s.pct === null
       ? tx("Score: ______ %   Pass mark {p}. C = critical: a failed critical item fails the room on its own.", { p: thresholdText() })
-      : `${tx("Score")} ${pct(s.pct, 0)} · ${v.pass ? tx("Pass") : tx("Fail")} · ${tx("pass mark {p}", { p: thresholdText() })}`);
+      : `${tx("Score")} ${pct(s.pct, 0)} · ${v.reason === "incomplete" ? tx("Incomplete") : v.pass ? tx("Pass") : tx("Fail")} · ${tx("pass mark {p}", { p: thresholdText() })}`);
     const sign = el("p", "ri-print-sign", `${tx("Signature")}: ____________________`);
     return [head, fields, table, foot, sign];
   };
@@ -658,7 +667,7 @@
     const t = overall(rows);
     const head = el("div", "ri-print-head");
     head.append(el("p", "kicker", cfg.text.tool), el("h2", null, tx("Daily summary · {date}", { date: showDate(day) })));
-    head.append(el("p", "ri-print-meta", [tx("{n} inspections", { n: int.format(rows.length) }), `${tx("First-time pass rate")} ${t.rate === null ? "–" : pct(t.rate, 0)}`, `${tx("Average score")} ${t.avg === null ? "–" : pct(t.avg, 0)}`, `${tx("Re-cleans")} ${int.format(rows.filter((row) => row.recleans > 0).length)}`].join(" · ")));
+    head.append(el("p", "ri-print-meta", [tx("{n} inspections", { n: int.format(rows.length) }), `${tx("First-time pass rate")} ${t.rate === null ? "–" : pct(t.rate, 0)}`, `${tx("Average score")} ${t.avg === null ? "–" : pct(t.avg, 0)}`, `${tx("Re-cleans")} ${int.format(rows.filter((row) => row.recleans > 0).length)}`, t.incomplete ? incompleteText(t.incomplete) : ""].filter(Boolean).join(" · ")));
     const table = el("table", "ri-print-table");
     const thead = el("thead");
     const htr = el("tr");
@@ -702,7 +711,7 @@
 
     const stats = el("div", "dl-stats ri-stats");
     stats.append(stat(tx("Inspections today"), int.format(r.today), tx("{n} this week", { n: int.format(r.week) })));
-    stats.append(stat(tx("First-time pass"), r.total.rate === null ? "–" : pct(r.total.rate, 0), tx("{a} of {b} rooms passed at the first inspection", { a: int.format(r.total.firstPass), b: int.format(r.total.first) })));
+    stats.append(stat(tx("First-time pass"), r.total.rate === null ? "–" : pct(r.total.rate, 0), [tx("{a} of {b} rooms passed at the first inspection", { a: int.format(r.total.firstPass), b: int.format(r.total.first) }), r.total.incomplete ? incompleteText(r.total.incomplete) : ""].filter(Boolean).join(" · ")));
     stats.append(stat(tx("Average score"), r.total.avg === null ? "–" : pct(r.total.avg, 0), tx("pass mark {p}", { p: thresholdText() })));
     stats.append(stat(tx("Re-cleans"), int.format(r.recleans), tx("{n} items cleaned again", { n: int.format(r.recleanItems) })));
     stats.append(stat(tx("Open maintenance"), int.format(r.tracker + r.unsent.length), r.unsent.length ? tx("{n} not in the Action Tracker yet", { n: int.format(r.unsent.length) }) : tx("all in the Action Tracker")));
@@ -813,7 +822,7 @@
       roomCell.append(el("strong", null, row.room), row.floor ? ` · ${floorLabel(row.floor)}` : "");
       const scoreCell = el("td", "num", row.s.pct === null ? "–" : pct(row.s.pct, 0));
       const resultCell = el("td");
-      resultCell.append(el("span", row.pass === false ? "ri-result is-fail" : row.pass ? "ri-result is-pass" : "ri-result", row.pass === false ? `✗ ${tx("Fail")}` : row.pass ? `✓ ${tx("Pass")}` : "–"));
+      resultCell.append(el("span", row.pass === false ? "ri-result is-fail" : row.pass ? "ri-result is-pass" : "ri-result", row.pass === false ? `✗ ${tx("Fail")}` : row.pass ? `✓ ${tx("Pass")}` : row.incomplete ? `… ${tx("Incomplete")}` : "–"));
       if (row.recheck) resultCell.append(" ", el("span", "dl-tag", tx("re-check")));
       const tools = el("td", "ri-row-tools");
       const print = el("button", "button-ghost ri-row-print", tx("Sheet"));
@@ -1066,7 +1075,10 @@
     renderDraftFields();
     renderZones();
     changed();
-    const message = [tx("Saved: room {room}, {score}, {result}.", { room: row.room, score: s.pct === null ? "–" : pct(s.pct, 0), result: v.pass ? tx("Pass") : tx("Fail") }), open ? tx("{n} items were not checked.", { n: int.format(open) }) : "", sent ? tx("{n} maintenance items added to actions.", { n: int.format(sent) }) : ""].filter(Boolean).join(" ");
+    const summary = v.reason === "incomplete" || v.pass === null
+      ? tx("Saved: room {room}, incomplete: {n} items were not checked. It counts in neither the first-time pass rate nor the average score.", { room: row.room, n: int.format(open) })
+      : [tx("Saved: room {room}, {score}, {result}.", { room: row.room, score: s.pct === null ? "–" : pct(s.pct, 0), result: v.pass ? tx("Pass") : tx("Fail") }), open ? tx("{n} items were not checked.", { n: int.format(open) }) : ""].filter(Boolean).join(" ");
+    const message = [summary, sent ? tx("{n} maintenance items added to actions.", { n: int.format(sent) }) : ""].filter(Boolean).join(" ");
     if (sent && Actions) trackerNote(walkStatus, message); else flash(walkStatus, message);
     await movePhotos(row.id);
     dropControls();
