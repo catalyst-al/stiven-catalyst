@@ -178,9 +178,12 @@
     }
     if (kind === 'import') {
       const file = values.backup;
-      if (!file || file.size > 5 * 1024 * 1024) { notice('invalidBackup'); return; }
+      if (!file) { notice('invalidBackup'); return; }
+      // Refused before it is read: a file of hundreds of megabytes would hold the tab while it is read whole.
+      if (file.size > C.BACKUP_BYTES) { notice('backupTooLarge'); return; }
       try {
         const next = C.importBackup(state, await file.text());
+        if (blocked !== 'corrupt' && next.projects.length === state.projects.length) { notice('alreadyImported'); return; }
         if (blocked === 'corrupt') {
           if (!window.confirm(tx('recover'))) return;
           const old = storage.getItem(C.KEY);
@@ -192,7 +195,7 @@
         } else if (blocked) { notice(blocked === 'conflict' ? 'conflict' : 'unavailable'); return; }
         else if (!update(s => { s.projects = next.projects; s.active = next.active; })) return;
         notice('imported'); dirty = false; render();
-      } catch { notice('invalidBackup'); }
+      } catch (error) { notice(['backupTooLarge', 'tooManyProjects'].includes(error?.message) ? error.message : 'invalidBackup'); }
       return;
     }
     const ok = update(s => {

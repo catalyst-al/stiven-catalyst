@@ -123,14 +123,35 @@ window.CoachingCore = (() => {
     } catch { return 'notSaved'; }
   };
   const exportBackup = state => JSON.stringify({ format: 'stiven-catalyst-coaching', version: 2, exported: new Date().toISOString(), state: migrate(state) }, null, 2);
+  // A project's content without its ids, keys sorted: the same project whatever ids an earlier import gave it.
+  const IDS = new Set(['id', 'actionId', 'previousId']);
+  const canonical = v => Array.isArray(v) ? `[${v.map(canonical).join(',')}]`
+    : object(v) ? `{${Object.keys(v).filter(k => !IDS.has(k)).sort().map(k => `${JSON.stringify(k)}:${canonical(v[k])}`).join(',')}}`
+      : JSON.stringify(v);
+  const fingerprint = p => canonical(known(clone(p)));
+  const BACKUP_BYTES = 5 * 1024 * 1024;
+  const MAX_PROJECTS = 100;
+  // Opening a backup never overwrites current work (a backup may be older): each of its projects is added as a copy
+  // with fresh ids. A project the workspace already holds, ids aside, is not added again, so opening the same file
+  // twice, or a backup of this very workspace, changes nothing. A project changed since the backup stays as it is,
+  // and the backup's version is added once beside it. Errors: backupTooLarge (over 5 MB), tooManyProjects (the new
+  // projects would pass 100) and invalidBackup (anything else).
   const importBackup = (state, raw) => {
-    if (!validState(state) || typeof raw !== 'string' || raw.length > 5 * 1024 * 1024) throw new Error('invalidBackup');
+    if (typeof raw === 'string' && raw.length > BACKUP_BYTES) throw new Error('backupTooLarge');
+    if (!validState(state) || typeof raw !== 'string') throw new Error('invalidBackup');
     let backup;
     try { backup = JSON.parse(raw); } catch { throw new Error('invalidBackup'); }
-    if (!object(backup) || backup.format !== 'stiven-catalyst-coaching' || ![1, 2].includes(backup.version) || !validState(backup.state) || backup.version !== backup.state.version || state.projects.length + backup.state.projects.length > 100) throw new Error('invalidBackup');
+    if (!object(backup) || backup.format !== 'stiven-catalyst-coaching' || ![1, 2].includes(backup.version) || !validState(backup.state) || backup.version !== backup.state.version) throw new Error('invalidBackup');
     const next = migrate(state);
-    // Always copy: a backup may be older than current work. Do not overwrite it.
-    for (const original of migrate(backup.state).projects) {
+    const here = new Set(next.projects.map(fingerprint));
+    const incoming = migrate(backup.state).projects.filter(p => {
+      const print = fingerprint(p);
+      if (here.has(print)) return false;
+      here.add(print);
+      return true;
+    });
+    if (next.projects.length + incoming.length > MAX_PROJECTS) throw new Error('tooManyProjects');
+    for (const original of incoming) {
       const p = known(clone(original));
       p.id = id();
       const actionIds = new Map();
@@ -212,5 +233,5 @@ window.CoachingCore = (() => {
     if (!scenario.nodes[node]) throw new Error('invalidSimulation');
     return node;
   };
-  return { KEY, ROLES, MODULES, FIELDS, WORKFLOW, id, date, today, empty, createProject, validState, migrate, load, save, exportBackup, importBackup, addMeasurement, compare, comparable, progress, nextStep, validSnapshot, addResult, simulationNode, actionStatus };
+  return { KEY, ROLES, MODULES, FIELDS, WORKFLOW, id, date, today, empty, createProject, validState, migrate, load, save, BACKUP_BYTES, exportBackup, importBackup, addMeasurement, compare, comparable, progress, nextStep, validSnapshot, addResult, simulationNode, actionStatus };
 })();
