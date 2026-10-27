@@ -142,17 +142,20 @@ test('bring in: the Waste Log and guest compensation of the last 30 days, read d
   assert.equal(M.inLast(addDays(TODAY, -29), TODAY), true, 'today and the 29 days before');
   assert.equal(M.inLast(addDays(TODAY, -30), TODAY), false);
   assert.equal(M.inLast(addDays(TODAY, 1), TODAY), false, 'not the future');
+  // Rows in the Waste Log's own format (waste-log.js: qty and cost per unit). Until 27 October 2026 this reader looked
+  // for quantity and unitCost, which the Waste Log never wrote, and brought in nothing (audit finding T-05); the
+  // hand-off itself is followed through both pages in tests/handoffs-real.test.cjs.
   const waste = { rows: [
-    { date: TODAY, quantity: 10, unitCost: 2.5 },
-    { date: addDays(TODAY, -29), quantity: '4', unitCost: '10' },
-    { date: addDays(TODAY, -30), quantity: 100, unitCost: 100 },
-    { date: TODAY, qty: 5, cost: 5 },
+    { date: TODAY, qty: 10, cost: 2.5 },
+    { date: addDays(TODAY, -29), qty: '4', cost: '10' },
+    { date: addDays(TODAY, -30), qty: 100, cost: 100 },
+    { date: TODAY, quantity: 5, unitCost: 5 },
     'not a row',
   ] };
-  assert.deepEqual(plain(M.wasteTotal(waste, TODAY)), { total: 65, count: 2, rows: 5 });
+  assert.deepEqual(plain(M.wasteTotal(waste, TODAY)), { total: 65, count: 2, rows: 5 }, 'a row in another shape counts nothing');
   assert.equal(M.wasteTotal(null, TODAY), null, 'no log');
   assert.equal(M.wasteTotal({ entries: [] }, TODAY), null, 'a different shape');
-  assert.deepEqual(plain(M.wasteTotal([{ date: TODAY, quantity: 2, unitCost: 3 }], TODAY)), { total: 6, count: 1, rows: 1 }, 'a bare array of rows');
+  assert.deepEqual(plain(M.wasteTotal([{ date: TODAY, qty: 2, cost: 3 }], TODAY)), { total: 6, count: 1, rows: 1 }, 'a bare array of rows');
   const complaints = { rows: [
     { date: TODAY, comp: 'refund', value: 129 },
     { date: addDays(TODAY, -3), comp: 'apology', value: 0 },
@@ -295,7 +298,7 @@ test('adding and removing lines, with undo, and a preset bringing its basis', ()
 });
 
 test('bring in from this browser adds one line each, replaces it the second time and never writes the other keys', () => {
-  const waste = { rows: [{ date: TODAY, quantity: 10, unitCost: 2.5 }, { date: addDays(TODAY, -5), quantity: 4, unitCost: 10 }] };
+  const waste = { rows: [{ date: TODAY, qty: 10, cost: 2.5 }, { date: addDays(TODAY, -5), qty: 4, cost: 10 }] };
   const complaints = { rows: [{ date: TODAY, comp: 'refund', value: 129 }, { date: addDays(TODAY, -60), comp: 'refund', value: 129 }] };
   const w = load({ storage: { 'sc-waste-log': waste, 'sc-guest-complaints': complaints } });
   const d = w.document;
@@ -316,7 +319,7 @@ test('bring in from this browser adds one line each, replaces it the second time
   assert.equal(empty.document.querySelectorAll('.cq-line').length, 13);
   assert.match(empty.document.querySelector('[data-status]').textContent, /Nothing to bring in/);
   // The German page reads the German keys only.
-  const de = load({ lang: 'de', storage: { 'sc-waste-log': waste, 'sc-waste-log-de': { rows: [{ date: TODAY, quantity: 1, unitCost: 7 }] } } });
+  const de = load({ lang: 'de', storage: { 'sc-waste-log': waste, 'sc-waste-log-de': { rows: [{ date: TODAY, qty: 1, cost: 7 }] } } });
   click(de, de.document.querySelector('[data-import]'));
   assert.deepEqual(JSON.parse(de.localStorage.getItem('sc-cost-of-quality-de')).lines.filter((l) => l.source).map((l) => l.amount), ['7']);
 });

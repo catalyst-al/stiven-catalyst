@@ -160,14 +160,15 @@
   const inLast = (date, todayIso, days = 30) => isDate(date) && date <= todayIso && date > addDaysIso(todayIso, -days);
   const rowsOf = (saved) => (isObject(saved) && Array.isArray(saved.rows) ? saved.rows : Array.isArray(saved) ? saved : null);
   const dateOf = (row) => str(row.date).slice(0, 10);
-  // The Waste Log: rows with date, quantity and unitCost; the € of a row is quantity × unitCost.
+  // The Waste Log: rows as waste-log.js saves them, { date, qty, cost (€ per unit), … }; the € of a row is qty × cost,
+  // as the Waste Log itself counts it. A row without a cost is worth nothing here, as there.
   const wasteTotal = (saved, todayIso, days = 30) => {
     const rows = rowsOf(saved);
     if (!rows) return null;
     let total = 0, count = 0;
     rows.forEach((row) => {
       if (!isObject(row) || !inLast(dateOf(row), todayIso, days)) return;
-      const q = amount(row.quantity), u = amount(row.unitCost);
+      const q = amount(row.qty), u = amount(row.cost);
       if (!finite(q) || !finite(u)) return;
       total += q * u;
       count += 1;
