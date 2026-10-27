@@ -35,7 +35,7 @@ test('the photos are locked away with the work, encrypted, and come back with th
   const idb = fakeIndexedDB();
   const w = page({ idb, storage: { 'sc-five-s-audit': { audits: [{ id: 'audit-1', area: 'Room 512, guest Mrs Weber' }] } } });
   await w.MediaStore.restore(photo);
-  assert.equal(await w.WorkLock.lock('2468'), 'locked');
+  assert.equal(await w.WorkLock.lock('246810'), 'locked');
   assert.equal(w.localStorage.getItem('sc-five-s-audit'), null, 'the work is gone from localStorage');
   assert.deepEqual(idb.rowsOf('sc-media', 'photos'), [], 'and the photo from the photo store');
   const [record] = idb.rowsOf('sc-lock', 'blob');
@@ -44,8 +44,8 @@ test('the photos are locked away with the work, encrypted, and come back with th
   const locked = page({ idb, storage: kept(w) });
   assert.equal(locked.WorkLock.locked, true);
   assert.deepEqual(plain(await locked.MediaStore.list('five-s-audit')), []);
-  assert.equal(await locked.WorkLock.unlock('1357'), 'wrong');
-  assert.equal(await locked.WorkLock.unlock('2468'), 'unlocked');
+  assert.equal(await locked.WorkLock.unlock('135790'), 'wrong');
+  assert.equal(await locked.WorkLock.unlock('246810'), 'unlocked');
   const back = await locked.MediaStore.get('p-1');
   assert.deepEqual(plain({ ...back, blob: null }), plain({ ...photo, blob: null }));
   assert.equal(back.blob.type, 'image/jpeg');
@@ -67,7 +67,7 @@ test('a record locked before photos were locked away still opens', async () => {
 test('while locked nothing is written in plain text: no photo, no restore point, no file opened, no team sync', async () => {
   const idb = fakeIndexedDB();
   const w = page({ idb, storage: { 'sc-pareto': { rows: [] } } });
-  assert.equal(await w.WorkLock.lock('2468'), 'locked');
+  assert.equal(await w.WorkLock.lock('246810'), 'locked');
   const locked = page({ idb, body: BOX(TEXT), storage: kept(w) });
   await assert.rejects(() => locked.MediaStore.restore(photo), /locked/);
   await assert.rejects(() => locked.MediaStore.keepAll([photo]), /locked/);
@@ -89,7 +89,7 @@ test('while locked nothing is written in plain text: no photo, no restore point,
 test('team sync stays off on a locked page: no start, no join, nothing fetched', async () => {
   const idb = fakeIndexedDB();
   const w = page({ idb, storage: { 'sc-pareto': { rows: [] }, 'sc-team': { code: 'acid-acorn-acre-acts-afar-affix' } } });
-  assert.equal(await w.WorkLock.lock('2468'), 'locked');
+  assert.equal(await w.WorkLock.lock('246810'), 'locked');
   assert.equal(w.localStorage.getItem('sc-team'), null, 'the team code is locked away too');
   // The section as the site renders it.
   const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(['src/_includes']), { autoescape: true });
@@ -120,5 +120,70 @@ test('the lock texts are translated', () => {
   for (const lang of ['de', 'sq']) {
     const ui = JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'));
     for (const key of keys) assert.ok(ui[key], `${lang}: ${key}`);
+  }
+});
+
+// The author's decision of 27 October 2026: new PINs need 6 characters. A device locked earlier with a shorter PIN
+// still opens with it; that PIN is then not kept for the tab, so the next lock asks for a new one, and the page says so.
+const lockSection = (lang = 'en') => {
+  const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(['src/_includes']), { autoescape: true });
+  env.addFilter('t', (text) => text);
+  return env.render('partials/work-lock.njk', { lang });
+};
+// A record as an earlier version sealed it with a 4-digit PIN, written where work-lock.js keeps it.
+const oldRecord = async (w, idb, pin, items) => {
+  const M = w.WorkLockMath;
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const record = await M.seal(await M.deriveKey(pin, salt), { items, points: [], media: [] }, salt);
+  await new Promise((resolve, reject) => {
+    const open = idb.open('sc-lock', 1);
+    open.onupgradeneeded = () => open.result.createObjectStore('blob', { keyPath: 'id' });
+    open.onsuccess = () => {
+      const tx = open.result.transaction('blob', 'readwrite');
+      tx.objectStore('blob').put(record);
+      tx.oncomplete = resolve; tx.onerror = reject;
+    };
+    open.onerror = reject;
+  });
+};
+
+test('a new PIN needs 6 characters; a device locked with a 4-digit PIN still opens, and the next lock asks for a new PIN', async () => {
+  const idb = fakeIndexedDB();
+  const w = page({ idb, storage: { 'sc-pareto': { rows: [] } } });
+  assert.equal(w.WorkLockMath.MIN_PIN, 6);
+  assert.equal(await w.WorkLock.lock('24680'), 'failed', 'five characters are too few for a new PIN');
+  assert.equal(w.localStorage.getItem('sc-pareto'), '{"rows":[]}', 'nothing was locked away');
+
+  const before = page({ idb });
+  await oldRecord(before, idb, '2468', { 'sc-pareto': '{"rows":[{"cause":"late"}]}' });
+  const locked = page({ idb, body: lockSection(), storage: { 'sc-locked': '1' } });
+  assert.equal(locked.WorkLock.locked, true);
+  assert.equal(await locked.WorkLock.unlock('2468'), 'unlocked', 'the old PIN still opens the old record');
+  assert.equal(locked.localStorage.getItem('sc-pareto'), '{"rows":[{"cause":"late"}]}');
+  assert.equal(await locked.WorkLock.sessionKey(), null, 'the short PIN is not kept for this tab');
+  assert.equal(await locked.WorkLock.lock(), 'failed', 'locking again needs a new PIN');
+
+  // The page after the reload, in the same tab: the PIN form is open and says why.
+  const open = page({ idb, body: lockSection(), storage: kept(locked), scripts: [] });
+  for (const key of Object.keys(locked.sessionStorage)) open.sessionStorage.setItem(key, locked.sessionStorage.getItem(key));
+  open.eval(fs.readFileSync('src/js/work-lock.js', 'utf8'));
+  await new Promise((r) => setTimeout(r, 20));
+  assert.equal(open.document.querySelector('[data-wl-setup]').hidden, false, 'the form for a new PIN is open');
+  assert.match(open.document.querySelector('[data-wl-status]').textContent, /fewer than 6 characters.*at least 6/);
+  for (const input of open.document.querySelectorAll('[data-wl-setup] input')) assert.equal(input.getAttribute('minlength'), '6');
+
+  // A new PIN of 6 characters locks, and the note is gone for good.
+  assert.equal(await open.WorkLock.lock('246810'), 'locked');
+  assert.equal(open.sessionStorage.getItem('sc-lock-renew'), null);
+  const again = page({ idb, storage: kept(open) });
+  assert.equal(await again.WorkLock.unlock('246810'), 'unlocked');
+});
+
+test('the texts of the longer PIN are translated', () => {
+  const keys = ['Choose a PIN of at least 6 characters. It is kept nowhere: without it the work cannot be read, by anyone.', 'Your PIN has fewer than {n} characters. Your work is open; to lock again, choose a new PIN of at least {n} characters.'];
+  for (const lang of ['de', 'sq']) {
+    const ui = JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'));
+    for (const key of keys) assert.ok(ui[key], `${lang}: ${key}`);
+    assert.ok(!('Choose a PIN of at least 4 characters. It is kept nowhere: without it the work cannot be read, by anyone.' in ui), `${lang}: the old text is gone`);
   }
 });

@@ -35,7 +35,8 @@ test('the work and the team code are locked away; the theme, the floor mode and 
   assert.deepEqual(Object.keys(M.gather(storage)).sort(), ['sc-ats-cv', 'sc-damage-control', 'sc-team', 'sc-team-state']);
   assert.ok(M.lockable('sc-five-whys') && !M.lockable('sc-theme') && !M.lockable('sc-locked') && !M.lockable('other'));
   assert.equal(WorkLock.locked, false, 'the flag "0" is not locked');
-  assert.ok(M.goodPin('1234') && M.goodPin(' 12345 ') && !M.goodPin('123') && !M.goodPin('') && !M.goodPin(null));
+  // 6 characters since 27 October 2026 (it was 4); an older, shorter PIN still opens its record (work-lock-storage.test.cjs).
+  assert.ok(M.goodPin('123456') && M.goodPin(' 1234567 ') && !M.goodPin('12345') && !M.goodPin('  12345  ') && !M.goodPin('') && !M.goodPin(null));
   assert.deepEqual([5, 15, 30, 60, 0, 7, 'x', undefined].map(M.idleMinutes), [5, 15, 30, 60, 0, 0, 0, 0]);
   assert.deepEqual(plain([...M.fromBase64(M.toBase64(Uint8Array.from([0, 1, 254, 255])))]), [0, 1, 254, 255]);
 });

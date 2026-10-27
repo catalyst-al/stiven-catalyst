@@ -10,6 +10,7 @@
   working: "Locking…" | t(lang),
   unlocked: "Unlocked. The page reloads with your work." | t(lang),
   wrong: "Wrong PIN. Nothing was changed." | t(lang),
+  renew: "Your PIN has fewer than {n} characters. Your work is open; to lock again, choose a new PIN of at least {n} characters." | t(lang),
   idleOn: "This tab locks itself after {n} minutes without a touch." | t(lang),
   idleNeedsKey: "This tab locks itself once you have locked or unlocked here once; until then it does not hold the key." | t(lang),
   forgetConfirm: "Forget everything on this device? Every tool's work, the restore points, the reminders and the lock are removed from this browser. A saved file is not touched. This cannot be undone." | t(lang)
@@ -32,10 +33,10 @@
   </div>
   <p class="form-note" data-wl-idle-note></p>
   <form class="wl-setup" data-wl-setup data-wl-pin-form hidden>
-    <p class="form-note">{{ "Choose a PIN of at least 4 characters. It is kept nowhere: without it the work cannot be read, by anyone." | t(lang) }}</p>
+    <p class="form-note">{{ "Choose a PIN of at least 6 characters. It is kept nowhere: without it the work cannot be read, by anyone." | t(lang) }}</p>
     <div class="wl-fields">
-      <label class="field"><span>{{ "PIN" | t(lang) }}</span><input name="pin" type="password" inputmode="numeric" autocomplete="off" minlength="4" required></label>
-      <label class="field"><span>{{ "PIN again" | t(lang) }}</span><input name="again" type="password" inputmode="numeric" autocomplete="off" minlength="4" required></label>
+      <label class="field"><span>{{ "PIN" | t(lang) }}</span><input name="pin" type="password" inputmode="numeric" autocomplete="off" minlength="6" required></label>
+      <label class="field"><span>{{ "PIN again" | t(lang) }}</span><input name="again" type="password" inputmode="numeric" autocomplete="off" minlength="6" required></label>
       <button class="button-primary" type="submit">{{ "Lock now" | t(lang) }}</button>
     </div>
   </form>

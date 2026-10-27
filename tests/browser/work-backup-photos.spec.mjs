@@ -57,11 +57,11 @@ test("the PIN of a shared computer locks the photos away and brings them back", 
     const file = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
     return (await window.MediaStore.add(file, { tool: "five-s-audit", ref: "audit-1" })).id;
   });
-  expect(await page.evaluate(() => window.WorkLock.lock("2468"))).toBe("locked");
+  expect(await page.evaluate(() => window.WorkLock.lock("246810"))).toBe("locked");
   await page.reload();
   await expect(page.locator("[data-work-lock-dialog]")).toBeVisible();
   expect(await page.evaluate(async () => (await window.MediaStore.list("five-s-audit")).length)).toBe(0);
-  expect(await page.evaluate(() => window.WorkLock.unlock("2468"))).toBe("unlocked");
+  expect(await page.evaluate(() => window.WorkLock.unlock("246810"))).toBe("unlocked");
   await page.reload();
   expect(await page.evaluate(async () => (await window.MediaStore.list("five-s-audit")).map((record) => record.id))).toEqual([id]);
 });

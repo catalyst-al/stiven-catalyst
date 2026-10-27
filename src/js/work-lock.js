@@ -25,6 +25,8 @@
   const FLAG = "sc-locked";
   const IDLE_KEY = "sc-lock-idle";
   const SESSION_KEY = "sc-lock-key";
+  // Set for the tab after a device locked with a PIN shorter than MIN_PIN was opened: the next lock needs a new PIN.
+  const RENEW_KEY = "sc-lock-renew";
   const DB = "sc-lock";
   const STORE = "blob";
   const RECORD = "work";
@@ -36,7 +38,9 @@
   const MEDIA_STORE = "photos";
   const PHOTO_TYPE = /^image\/(jpeg|png|webp)$/;
   const ITERATIONS = 310000;
-  const MIN_PIN = 4;
+  // 6 since 27 October 2026 (it was 4). It applies to a new PIN only: a device locked earlier with a shorter one still
+  // opens with it, and the page then asks for a new PIN at the next lock (unlock(), and the section below).
+  const MIN_PIN = 6;
   // Settings of the page itself: readable without the PIN, never locked away.
   const OPEN = new Set(["sc-theme", "sc-floor-mode-ui", "sc-print-guide-hidden", FLAG, IDLE_KEY]);
 
@@ -118,7 +122,7 @@
     const n = Number(value);
     return [5, 15, 30, 60].includes(n) ? n : 0;
   };
-  window.WorkLockMath = { FORMAT, VERSION, FLAG, IDLE_KEY, SESSION_KEY, MIN_PIN, OPEN, lockable, gather, toBase64, fromBase64, deriveKey, exportKey, importKey, seal, unseal, photoOut, photoIn, goodPin, idleMinutes };
+  window.WorkLockMath = { FORMAT, VERSION, FLAG, IDLE_KEY, SESSION_KEY, RENEW_KEY, MIN_PIN, OPEN, lockable, gather, toBase64, fromBase64, deriveKey, exportKey, importKey, seal, unseal, photoOut, photoIn, goodPin, idleMinutes };
 
   // ---- The browser ----
   const storage = (() => {
@@ -219,10 +223,12 @@
     if (photos.length) await transact(MEDIA_DB, MEDIA_STORE, "readwrite", (store) => done(store.clear())).catch(() => null);
     storage.setItem(FLAG, "1");
     await rememberKey(key, salt);
+    try { session?.removeItem(RENEW_KEY); } catch { /* nothing kept */ }
     window.WorkLock.locked = true;
     return "locked";
   };
-  // Unlock with the PIN: "unlocked", "wrong", "gone" (no record: the flag alone is cleared) or "failed".
+  // Unlock with the PIN: "unlocked", "wrong", "gone" (no record: the flag alone is cleared) or "failed". A PIN shorter
+  // than MIN_PIN (set before the minimum rose) still opens its record, but its key is not kept for the tab.
   const unlock = async (pin) => {
     const record = await readRecord();
     if (!record) { storage.removeItem(FLAG); window.WorkLock.locked = false; return "gone"; }
@@ -239,7 +245,11 @@
     if (payload.media.length) await transact(MEDIA_DB, MEDIA_STORE, "readwrite", async (store) => { for (const p of payload.media) await done(store.put(p)); }).catch(() => null);
     await transact(DB, STORE, "readwrite", (store) => done(store.delete(RECORD))).catch(() => null);
     storage.removeItem(FLAG);
-    await rememberKey(key, record.salt);
+    if (goodPin(pin)) {
+      await rememberKey(key, record.salt);
+    } else {
+      try { session?.removeItem(SESSION_KEY); session?.setItem(RENEW_KEY, "1"); } catch { /* the next lock asks for a PIN anyway */ }
+    }
     window.WorkLock.locked = false;
     return "unlocked";
   };
@@ -303,6 +313,10 @@
     const pinForm = root.querySelector("[data-wl-pin-form]");
     let hasKey = false;
     sessionKey().then((kept) => { hasKey = Boolean(kept); showIdle(); });
+    // Opened with a PIN shorter than the minimum: the form for a new one is open, and says why.
+    let renew = false;
+    try { renew = session?.getItem(RENEW_KEY) === "1"; } catch { /* no note */ }
+    if (renew) { setup.hidden = false; say(fill(text.renew, { n: MIN_PIN })); }
     const showIdle = () => {
       const minutes = idleMinutes(storage.getItem(IDLE_KEY));
       idleSelect.value = String(minutes);
