@@ -58,7 +58,8 @@
   rotated: "The team code is changed. Give the new code to your team now: it is shown only this once. Every other device must leave the team and join again with it; the old code and the old read-only codes no longer work." | t(lang),
   rotateFailed: "The team code was not changed, and the team keeps the old one. {reason}" | t(lang),
   retireFailed: "The old copy could not be deleted yet, so devices with the old code can still read it. This device tries again at every sync." | t(lang),
-  retired: "The old copy of the team is now deleted." | t(lang)
+  retired: "The old copy of the team is now deleted." | t(lang),
+  locked: "Team sync is paused while the tools are locked." | t(lang)
 } %}
 <details class="tm" data-team-sync data-endpoint="{{ site.sync.endpoint }}" data-text="{{ tmText | dump }}">
   <summary class="tm-summary"><strong>{{ "Team sync" | t(lang) }}</strong> <span class="tm-state" data-tm-summary>{{ "Off" | t(lang) }}</span></summary>

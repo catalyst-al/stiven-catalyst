@@ -50,8 +50,10 @@ window.MediaStore = (() => {
     }
     return opening;
   };
-  // One transaction; resolves with what `run` returns once the transaction has finished.
+  // One transaction; resolves with what `run` returns once the transaction has finished. Locked for a shared computer
+  // (js/work-lock.js): the photos are in the locked record, and nothing new is kept in plain text until the PIN.
   const transact = async (mode, run) => {
+    if (mode === "readwrite" && window.WorkLock?.locked) throw new Error("The tools are locked");
     const db = await open();
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE, mode);

@@ -61,7 +61,7 @@ test('the record opens with the PIN that sealed it and with no other; what comes
   assert.ok(!text.includes('damage') && !text.includes('acorn'), 'nothing readable in the record');
   // The same PIN, a key derived again: the work and the points, the theme (not lockable) left out.
   const back = await M.unseal(await M.deriveKey('2468', salt), record);
-  assert.deepEqual(plain(back), { locked: '2026-10-26T14:00:00.000Z', items: { 'sc-damage-control': items['sc-damage-control'], 'sc-team': items['sc-team'] }, points });
+  assert.deepEqual(plain(back), { locked: '2026-10-26T14:00:00.000Z', items: { 'sc-damage-control': items['sc-damage-control'], 'sc-team': items['sc-team'] }, points, media: [] });
   // A wrong PIN, a wrong salt, a changed byte, a foreign record: null, never an exception.
   assert.equal(await M.unseal(await M.deriveKey('2469', salt), record), null);
   assert.equal(await M.unseal(await M.deriveKey('2468', crypto.getRandomValues(new Uint8Array(16))), record), null);

@@ -181,8 +181,9 @@
   const get = (id) => transact("readonly", (store) => done(store.get(id))).then((record) => record || null);
   // A point of the work as it is now; null when there is no work to keep. Older points beyond the limits go in the
   // same transaction, so the store never grows past them.
+  // None while the tools are locked (js/work-lock.js): whatever a page writes then would be kept in plain text.
   const makePoint = async (reason, items = work(), now = new Date()) => {
-    if (!REASONS.includes(reason) || !Object.keys(items).length) return null;
+    if (window.WorkLock?.locked || !REASONS.includes(reason) || !Object.keys(items).length) return null;
     const created = now.toISOString();
     return transact("readwrite", async (store) => {
       const ids = new Set(await allIds(store));
@@ -200,7 +201,7 @@
   // Back to a point: first a point of the work as it is now (so the restore can be undone), then exactly the keys
   // of the point are replaced, all or nothing. "restored", "full", "gone" or "failed".
   const restorePoint = async (id) => {
-    if (!storage) return "failed";
+    if (!storage || window.WorkLock?.locked) return "failed";
     const point = await get(id).catch(() => null);
     if (!point || !point.items || typeof point.items !== "object") return "gone";
     const items = Object.fromEntries(Object.entries(point.items).filter(([key, value]) => isWork(key) && typeof value === "string"));

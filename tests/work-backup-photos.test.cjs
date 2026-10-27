@@ -2,76 +2,14 @@
 // keep in IndexedDB "sc-media" go into the saved file (newest first, up to 20 MB of them, the rest named as left
 // out), and opening the file in another browser puts them back without replacing a photo that is already there. The
 // photos are written and read by MediaStore itself, against a small IndexedDB like the one storage-guard.test.cjs
-// uses; the Save and Open buttons of the box are the real ones.
+// uses (tests/fake-indexeddb.cjs); the Save and Open buttons of the box are the real ones.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
-const fakeIndexedDB = () => {
-  const dbs = new Map();
-  const later = (fn) => setTimeout(fn, 0);
-  const request = (tx, work) => {
-    const req = { result: undefined, error: null, onsuccess: null, onerror: null };
-    if (tx) tx.pending += 1;
-    later(() => {
-      try { req.result = work(); req.onsuccess?.({ target: req }); } catch (error) { req.error = error; req.onerror?.({ target: req }); if (tx) tx.failed = error; }
-      if (tx) { tx.pending -= 1; tx.check(); }
-    });
-    return req;
-  };
-  return {
-    dbs,
-    open(name) {
-      const req = { result: null, onupgradeneeded: null, onsuccess: null, onerror: null, onblocked: null };
-      later(() => {
-        let db = dbs.get(name);
-        const fresh = !db;
-        if (fresh) {
-          const stores = new Map();
-          db = {
-            stores,
-            objectStoreNames: { contains: (store) => stores.has(store) },
-            createObjectStore: (store, { keyPath }) => {
-              const data = { keyPath, rows: new Map(), indexes: new Map() };
-              stores.set(store, data);
-              return { createIndex: (index, path) => data.indexes.set(index, path) };
-            },
-            close() {},
-            transaction(store) {
-              const data = stores.get(store);
-              const tx = {
-                pending: 0, failed: null, finished: false, oncomplete: null, onerror: null, onabort: null,
-                check() { later(() => { if (!tx.finished && tx.pending === 0) { tx.finished = true; if (tx.failed) { tx.error = tx.failed; tx.onabort?.(); } else tx.oncomplete?.(); } }); },
-                objectStore: () => ({
-                  put: (value) => request(tx, () => { data.rows.set(value[data.keyPath], structuredClone(value)); return value[data.keyPath]; }),
-                  get: (key) => request(tx, () => (data.rows.has(key) ? structuredClone(data.rows.get(key)) : undefined)),
-                  getAll: () => request(tx, () => [...data.rows.values()].map((v) => structuredClone(v))),
-                  delete: (key) => request(tx, () => { data.rows.delete(key); }),
-                  index: (index) => ({
-                    getAll: (match) => request(tx, () => {
-                      const path = data.indexes.get(index);
-                      const keyOf = (row) => (Array.isArray(path) ? path.map((p) => row[p]) : row[path]);
-                      return [...data.rows.values()].filter((row) => JSON.stringify(keyOf(row)) === JSON.stringify(match)).map((v) => structuredClone(v));
-                    }),
-                  }),
-                }),
-              };
-              tx.check();
-              return tx;
-            },
-          };
-          dbs.set(name, db);
-        }
-        req.result = db;
-        if (fresh) req.onupgradeneeded?.();
-        req.onsuccess?.();
-      });
-      return req;
-    },
-  };
-};
+const { fakeIndexedDB } = require('./fake-indexeddb.cjs');
 
 const TEXT = { inBrowser: '{tools}', nothing: 'nothing', saved: 'Saved as {file}.', savedPhotos: 'Photos in the file: {n}.', photosLeft: 'Left out: {n}.', photosUnread: 'unread', invalid: 'invalid', confirm: '{date} {tools}', full: 'full', opened: 'Opened.', openedPhotos: 'Photos from the file: {n}.', photosFailed: 'photos failed', blocked: '' };
 const BOX = `<div data-work-backup data-text='${JSON.stringify(TEXT)}'><p data-work-summary></p><p data-work-status></p><button data-work-save></button><input type="file" data-work-open></div>`;

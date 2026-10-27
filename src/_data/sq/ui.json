@@ -7663,5 +7663,7 @@
   "Left out so that the file stays under 20 MB: {n} older photos. They stay on this device.": "Që skedari të mbetet nën 20 MB, u lanë jashtë {n} foto më të vjetra. Ato mbeten në këtë pajisje.",
   "The photos could not be read here, so the file holds the work without them.": "Fotot nuk u lexuan dot këtu, prandaj skedari mban punën pa to.",
   "Photos from the file: {n}.": "Foto nga skedari: {n}.",
-  "The photos in the file could not be kept in this browser; the rest of the work is opened.": "Fotot e skedarit nuk u ruajtën dot në këtë shfletues; pjesa tjetër e punës u hap."
+  "The photos in the file could not be kept in this browser; the rest of the work is opened.": "Fotot e skedarit nuk u ruajtën dot në këtë shfletues; pjesa tjetër e punës u hap.",
+  "The tools are locked. Unlock them with the PIN first; nothing was changed.": "Mjetet janë të kyçura. Hapi së pari me PIN-in; asgjë nuk u ndryshua.",
+  "Team sync is paused while the tools are locked.": "Sinkronizimi i ekipit pushon sa kohë që mjetet janë të kyçura."
 }

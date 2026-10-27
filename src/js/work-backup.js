@@ -159,7 +159,11 @@
     status.textContent = message;
   };
 
+  // Locked for a shared computer (js/work-lock.js): the work is in the locked record. A file saved now would hold only
+  // what pages wrote since, and one opened now would sit in plain text beside the record.
+  const locked = () => Boolean(window.WorkLock?.locked);
   root.querySelector("[data-work-save]").addEventListener("click", async () => {
+    if (locked()) { say(text.locked); return; }
     const backup = makeBackup(storage);
     // The photos: all of them up to the limit; when the photo store cannot be read, the work without them.
     let photos = { media: [], left: 0 };
@@ -195,6 +199,7 @@
     const file = picker.files[0];
     picker.value = "";
     if (!file) return;
+    if (locked()) { say(text.locked); return; }
     if (file.size > MAX_BYTES) {
       say(text.invalid);
       return;

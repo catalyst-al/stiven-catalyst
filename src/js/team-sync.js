@@ -1152,6 +1152,14 @@
     $("[data-tm-message]").textContent = storage ? text.noCrypto : "";
     return;
   }
+  // Locked for a shared computer (js/work-lock.js): the team code is in the locked record, and starting or joining a
+  // team now would bring the team's work here in plain text. Nothing until the PIN.
+  if (window.WorkLock?.locked) {
+    $("[data-tm-summary]").textContent = text.off || "";
+    $("[data-tm-off]").hidden = true;
+    $("[data-tm-message]").textContent = text.locked || "";
+    return;
+  }
 
   // { code, since, retire? } for a member, { viewer, since } for a read-only device.
   const team = () => {

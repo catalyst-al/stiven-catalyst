@@ -1,11 +1,13 @@
 // A PIN for a shared computer (partials/work-lock.njk, inside "All your work in one file"). A reception or a shift
 // office often has one browser for everyone; the tools keep their work in it in plain text. "Lock the tools" takes
-// every tool's work (the "sc-" keys of localStorage, the team code with them so team sync pauses, and the restore
-// points of js/storage-guard.js), encrypts it all with a key from the PIN (PBKDF2-SHA-256, 310 000 rounds, a random
+// every tool's work (the "sc-" keys of localStorage, the team code with them so team sync pauses, the restore
+// points of js/storage-guard.js and the photos of js/media-store.js), encrypts it all with a key from the PIN (PBKDF2-SHA-256, 310 000 rounds, a random
 // salt → AES-GCM 256, a fresh IV) into one record in IndexedDB "sc-lock", removes the plain copies and reloads: the
 // tools then open empty behind a dialog that asks for the PIN, and nothing is written while they are locked
-// (tool-kit.js checks WorkLock.locked). The PIN unlocks: the record is decrypted, the work and the restore points are
-// written back, the record is deleted, the page reloads with the work in place.
+// (tool-kit.js, media-store.js, storage-guard.js, work-backup.js and team-sync.js check WorkLock.locked). The PIN
+// unlocks: the record is decrypted, the work, the restore points and the photos are written back, the record is
+// deleted, the page reloads with the work in place. The photos travel in the record as base64, so a device with
+// many of them makes a large record for a moment; a record from before photos were locked simply has none.
 //
 // After an unlock (or a lock with the PIN typed) the derived key stays in this tab's sessionStorage, so the tab can
 // lock again without the PIN: at a click, or by itself after the minutes chosen without a touch (localStorage
@@ -13,7 +15,8 @@
 // nowhere; a wrong one fails to decrypt and nothing changes. The lock is for the colleague at the same desk: someone
 // who can read the browser's storage while the tools are open can read the work.
 //
-// "Forget everything on this device" removes every tool's work, the restore points, the reminders and the lock.
+// "Forget everything on this device" removes every tool's work, the photos, the restore points, the reminders and the
+// lock.
 // This file loads in the head of the tool pages, before the tool scripts, so a locked page is known before any tool
 // reads its storage. Without IndexedDB or WebCrypto the section stays hidden and nothing changes.
 (() => {
@@ -28,6 +31,10 @@
   const RESTORE_DB = "sc-restore";
   const RESTORE_STORE = "points";
   const REMINDERS_DB = "sc-reminders";
+  // The photos, in the schema media-store.js gives them (this file may be the first to open the database).
+  const MEDIA_DB = "sc-media";
+  const MEDIA_STORE = "photos";
+  const PHOTO_TYPE = /^image\/(jpeg|png|webp)$/;
   const ITERATIONS = 310000;
   const MIN_PIN = 4;
   // Settings of the page itself: readable without the PIN, never locked away.
@@ -45,7 +52,7 @@
   };
   const toBase64 = (bytes) => {
     let binary = "";
-    bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+    for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
     return btoa(binary);
   };
   const fromBase64 = (text) => Uint8Array.from(atob(text), (ch) => ch.charCodeAt(0));
@@ -60,8 +67,8 @@
   const pipe = async (bytes, stream) => new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer());
   const canZip = () => typeof CompressionStream === "function" && typeof DecompressionStream === "function";
   // The work and the restore points as one encrypted record: a first byte says whether the JSON is gzipped.
-  const seal = async (key, { items, points = [] }, salt, now = new Date()) => {
-    const json = new TextEncoder().encode(JSON.stringify({ format: FORMAT, version: VERSION, locked: now.toISOString(), items, points }));
+  const seal = async (key, { items, points = [], media = [] }, salt, now = new Date()) => {
+    const json = new TextEncoder().encode(JSON.stringify({ format: FORMAT, version: VERSION, locked: now.toISOString(), items, points, media }));
     let body;
     if (canZip()) {
       try { body = await pipe(json, new CompressionStream("gzip")); } catch { body = null; }
@@ -85,7 +92,23 @@
       if (!payload || payload.format !== FORMAT || !payload.items || typeof payload.items !== "object") return null;
       const items = Object.fromEntries(Object.entries(payload.items).filter(([k, v]) => lockable(k) && typeof v === "string"));
       const points = Array.isArray(payload.points) ? payload.points.filter((p) => p && typeof p === "object" && typeof p.id === "string") : [];
-      return { locked: typeof payload.locked === "string" ? payload.locked : "", items, points };
+      const media = (Array.isArray(payload.media) ? payload.media : []).map(photoIn).filter(Boolean);
+      return { locked: typeof payload.locked === "string" ? payload.locked : "", items, points, media };
+    } catch {
+      return null;
+    }
+  };
+  // A photo as it goes into the record, and back as media-store.js keeps it.
+  const photoOut = async (record) => ({
+    id: String(record.id), created: String(record.created || ""), tool: String(record.tool || ""), ref: String(record.ref ?? ""),
+    width: Number(record.width) || 0, height: Number(record.height) || 0, type: PHOTO_TYPE.test(record.blob?.type) ? record.blob.type : "image/jpeg",
+    data: toBase64(new Uint8Array(await record.blob.arrayBuffer())),
+  });
+  const photoIn = (entry) => {
+    if (!entry || typeof entry !== "object" || typeof entry.id !== "string" || typeof entry.data !== "string" || !PHOTO_TYPE.test(entry.type)) return null;
+    try {
+      const { data, type, ...rest } = entry;
+      return { ...rest, blob: new Blob([fromBase64(data)], { type }) };
     } catch {
       return null;
     }
@@ -95,7 +118,7 @@
     const n = Number(value);
     return [5, 15, 30, 60].includes(n) ? n : 0;
   };
-  window.WorkLockMath = { FORMAT, VERSION, FLAG, IDLE_KEY, SESSION_KEY, MIN_PIN, OPEN, lockable, gather, toBase64, fromBase64, deriveKey, exportKey, importKey, seal, unseal, goodPin, idleMinutes };
+  window.WorkLockMath = { FORMAT, VERSION, FLAG, IDLE_KEY, SESSION_KEY, MIN_PIN, OPEN, lockable, gather, toBase64, fromBase64, deriveKey, exportKey, importKey, seal, unseal, photoOut, photoIn, goodPin, idleMinutes };
 
   // ---- The browser ----
   const storage = (() => {
@@ -115,7 +138,15 @@
   });
   const openDb = (name, store) => new Promise((resolve, reject) => {
     const request = window.indexedDB.open(name, 1);
-    request.onupgradeneeded = () => { if (!request.result.objectStoreNames.contains(store)) request.result.createObjectStore(store, { keyPath: "id" }); };
+    request.onupgradeneeded = () => {
+      if (request.result.objectStoreNames.contains(store)) return;
+      const created = request.result.createObjectStore(store, { keyPath: "id" });
+      // The photo store with the indexes media-store.js reads it by.
+      if (name === MEDIA_DB) {
+        created.createIndex("tool", "tool");
+        created.createIndex("toolRef", ["tool", "ref"]);
+      }
+    };
     request.onsuccess = () => { request.result.onversionchange = () => request.result.close(); resolve(request.result); };
     request.onerror = () => reject(request.error);
     request.onblocked = () => reject(new Error("busy"));
@@ -141,6 +172,7 @@
   });
   const readRecord = () => transact(DB, STORE, "readonly", (store) => done(store.get(RECORD))).catch(() => null);
   const readPoints = () => transact(RESTORE_DB, RESTORE_STORE, "readonly", (store) => done(store.getAll())).catch(() => []);
+  const readPhotos = () => transact(MEDIA_DB, MEDIA_STORE, "readonly", (store) => done(store.getAll())).catch(() => []);
 
   const sessionKey = async () => {
     const raw = session?.getItem(SESSION_KEY);
@@ -160,7 +192,8 @@
   const lock = async (pin = null) => {
     const items = gather(storage);
     const points = await readPoints();
-    if (!Object.keys(items).length && !points.length) return "nothing";
+    const photos = (await readPhotos()).filter((record) => record && typeof record.id === "string" && typeof record.blob?.arrayBuffer === "function");
+    if (!Object.keys(items).length && !points.length && !photos.length) return "nothing";
     let key;
     let salt;
     if (pin !== null) {
@@ -173,7 +206,9 @@
       ({ key, salt } = kept);
     }
     try {
-      const record = await seal(key, { items, points }, salt);
+      const media = [];
+      for (const photo of photos) media.push(await photoOut(photo));
+      const record = await seal(key, { items, points, media }, salt);
       await transact(DB, STORE, "readwrite", (store) => done(store.put(record)));
     } catch {
       return "failed";
@@ -181,6 +216,7 @@
     // Only now, with the record in place, the plain copies go.
     Object.keys(items).forEach((k) => storage.removeItem(k));
     await transact(RESTORE_DB, RESTORE_STORE, "readwrite", (store) => done(store.clear())).catch(() => null);
+    if (photos.length) await transact(MEDIA_DB, MEDIA_STORE, "readwrite", (store) => done(store.clear())).catch(() => null);
     storage.setItem(FLAG, "1");
     await rememberKey(key, salt);
     window.WorkLock.locked = true;
@@ -200,19 +236,20 @@
       return "failed";
     }
     if (payload.points.length) await transact(RESTORE_DB, RESTORE_STORE, "readwrite", async (store) => { for (const p of payload.points) await done(store.put(p)); }).catch(() => null);
+    if (payload.media.length) await transact(MEDIA_DB, MEDIA_STORE, "readwrite", async (store) => { for (const p of payload.media) await done(store.put(p)); }).catch(() => null);
     await transact(DB, STORE, "readwrite", (store) => done(store.delete(RECORD))).catch(() => null);
     storage.removeItem(FLAG);
     await rememberKey(key, record.salt);
     window.WorkLock.locked = false;
     return "unlocked";
   };
-  // Everything of the tools on this device: the work, the lock, the restore points and the reminders.
+  // Everything of the tools on this device: the work, the photos, the lock, the restore points and the reminders.
   const forget = async () => {
     for (const key of Object.keys(gather(storage))) storage.removeItem(key);
     storage.removeItem(FLAG);
     storage.removeItem(IDLE_KEY);
     try { session?.removeItem(SESSION_KEY); } catch { /* nothing kept */ }
-    await Promise.all([deleteDb(DB), deleteDb(RESTORE_DB), deleteDb(REMINDERS_DB)]);
+    await Promise.all([deleteDb(DB), deleteDb(RESTORE_DB), deleteDb(REMINDERS_DB), deleteDb(MEDIA_DB)]);
     window.WorkLock.locked = false;
   };
   Object.assign(window.WorkLock, { lock, unlock, forget, sessionKey, readRecord });

@@ -7663,5 +7663,7 @@
   "Left out so that the file stays under 20 MB: {n} older photos. They stay on this device.": "Damit die Datei unter 20 MB bleibt, weggelassen: {n} ältere Fotos. Sie bleiben auf diesem Gerät.",
   "The photos could not be read here, so the file holds the work without them.": "Die Fotos konnten hier nicht gelesen werden; die Datei enthält die Arbeit ohne sie.",
   "Photos from the file: {n}.": "Fotos aus der Datei: {n}.",
-  "The photos in the file could not be kept in this browser; the rest of the work is opened.": "Die Fotos aus der Datei konnten in diesem Browser nicht gespeichert werden; die übrige Arbeit ist geöffnet."
+  "The photos in the file could not be kept in this browser; the rest of the work is opened.": "Die Fotos aus der Datei konnten in diesem Browser nicht gespeichert werden; die übrige Arbeit ist geöffnet.",
+  "The tools are locked. Unlock them with the PIN first; nothing was changed.": "Die Werkzeuge sind gesperrt. Entsperren Sie sie zuerst mit der PIN; nichts wurde geändert.",
+  "Team sync is paused while the tools are locked.": "Die Team-Synchronisierung ruht, solange die Werkzeuge gesperrt sind."
 }

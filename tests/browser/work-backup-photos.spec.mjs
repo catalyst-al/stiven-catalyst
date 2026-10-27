@@ -47,3 +47,23 @@ test("a 5S photo goes into the saved file and comes back in an empty browser", a
   expect(back).toEqual(kept);
   await context.close();
 });
+
+test("the PIN of a shared computer locks the photos away and brings them back", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "1440px light", "one width is enough");
+  await page.goto("/tools/five-s-audit/");
+  const id = await page.evaluate(async () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 32;
+    canvas.height = 32;
+    canvas.getContext("2d").fillRect(0, 0, 16, 16);
+    const file = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+    return (await window.MediaStore.add(file, { tool: "five-s-audit", ref: "audit-1" })).id;
+  });
+  expect(await page.evaluate(() => window.WorkLock.lock("2468"))).toBe("locked");
+  await page.reload();
+  await expect(page.locator("[data-work-lock-dialog]")).toBeVisible();
+  expect(await page.evaluate(async () => (await window.MediaStore.list("five-s-audit")).length)).toBe(0);
+  expect(await page.evaluate(() => window.WorkLock.unlock("2468"))).toBe("unlocked");
+  await page.reload();
+  expect(await page.evaluate(async () => (await window.MediaStore.list("five-s-audit")).map((record) => record.id))).toEqual([id]);
+});
