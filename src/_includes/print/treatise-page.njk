@@ -46,7 +46,7 @@
   <p class="block-label">{{ W.intro.how }}</p>
   <ol class="tr-layers-box">{% for layer in W.layers %}<li><b>{{ loop.index }}</b><h4>{{ layer.h }}</h4><p>{{ layer.p }}</p></li>{% endfor %}</ol>
   <p class="block-label">{{ W.intro.contract }}</p>
-  <div class="wk-legend-box">{% for item in V.contract %}<div><h4>{{ item.h }}</h4><p>{{ item.p }}</p></div>{% endfor %}</div>
+  <div class="wk-legend-box">{% for item in V.contract %}<div><h3>{{ item.h }}</h3><p>{{ item.p }}</p></div>{% endfor %}</div>
 </section>
 {%- elif page.type == "contents" %}
 <section class="pg tr-toc{{ fitClass }}">
