@@ -5,8 +5,8 @@
 import { defineConfig } from "@playwright/test";
 import { existsSync } from "node:fs";
 
-// PW_PORT: another port for a second checkout's run on the same machine.
-const PORT = Number(process.env.PW_PORT) || 4173;
+// BROWSER_TEST_PORT (or PW_PORT): another port, for a second checkout running on the same machine.
+const PORT = Number(process.env.BROWSER_TEST_PORT || process.env.PW_PORT) || 4173;
 // In the development container Chromium is already installed here; in CI `npx playwright install` puts it where
 // Playwright looks by itself.
 const LOCAL_CHROMIUM = "/opt/pw-browsers/chromium";
@@ -46,7 +46,9 @@ export default defineConfig({
     use: {
       viewport: { width, height: width < 600 ? 844 : 900 },
       theme,
-      reducedMotion: theme === "light" ? "reduce" : "no-preference",
+      // A context option, not a test option: written directly under `use` Playwright ignores it, and every project
+      // ran with motion.
+      contextOptions: { reducedMotion: theme === "light" ? "reduce" : "no-preference" },
     },
   }))),
   webServer: {
