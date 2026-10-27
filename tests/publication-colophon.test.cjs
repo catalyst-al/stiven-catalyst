@@ -55,5 +55,5 @@ test('No. 1 says where the 70% and 77% come from; No. 21 no longer dates the lay
 test('treatise Vol 4 in German keeps the caveat on the 30, 60 and 90 days', () => {
   const src = fs.readFileSync('lib/treatise/volumes/04.js', 'utf8');
   assert.doesNotMatch(src, /kein Studienintervall/);
-  assert.match(src, /keine Studie belegt 30, 60 und 90 Tage als richtigen Abstand/);
+  assert.match(src, /Doyle et al. \(2013\); von keiner Studie belegt\."/);
 });
