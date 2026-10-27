@@ -329,6 +329,25 @@ test('input caps: a demand of a billion or a day longer than 24 hours is refused
   }
 });
 
+// The page at that volume: 6,000 pitch columns and 1,250 runs took a second to draw per keystroke in Chromium. The
+// box is left out with a message above 300 columns, and the screen shows the first 300 runs; the CSV keeps them all.
+test('the page at unit-level volume: no box of thousands of columns, the first 300 runs, every container in the CSV', () => {
+  const products = [{ id: 'a', name: 'A', demand: '20000', cycle: '1', packout: '1', changeover: '1' }, { id: 'b', name: 'B', demand: '10000', cycle: '1', packout: '1', changeover: '1' }];
+  const w = load({ storage: { 'sc-heijunka': { line: { name: 'L', shifts: '3', shiftMin: '480', breakMin: '30', start: '06:00', days: '5', runs: '', batchDays: '' }, products, example: false } } });
+  const results = w.document.querySelector('[data-results]');
+  assert.equal(results.hidden, false);
+  assert.equal(results.querySelector('.hj-box'), null, 'no box table');
+  assert.match(results.querySelector('.hj-box-panel').textContent, /6,000 pitch columns a day \(0\.2 min each\) are too many/);
+  assert.equal(results.querySelectorAll('.hj-seq tbody tr').length, 300);
+  assert.match(results.textContent, /The first 300 of 1,250 runs/);
+  const print = [...results.querySelectorAll('button')].find((b) => b.textContent === 'Print the heijunka box');
+  assert.equal(print.disabled, true);
+  let csv = '';
+  w.Blob = class { constructor(parts) { csv = parts.join(''); } };
+  click(w, [...results.querySelectorAll('button')].find((b) => b.textContent === 'Download CSV'));
+  assert.equal(csv.trim().split('\r\n').length, 6001, 'a header and 6,000 containers');
+});
+
 // Audit 27 Oct 2026, P2B-13: a product with demand but no pack-out dropped out of the takt without a word.
 test('a product without pack-out counts in the takt and the load, and the page names it', () => {
   const M = math();

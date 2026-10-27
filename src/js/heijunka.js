@@ -388,6 +388,11 @@
   const { tx, num, pct, int, el, write, loadState, firstVisit, panel, stat, focusCard, resultActions, resultLayout, flash, undoNote, downloadCsv, downloadXlsx, copy } = window.ToolKit;
   const CK = window.ChartKit;
   const AS = window.ActionsStore;
+  // On screen and on paper the box shows at most this many pitch columns, and the sequence this many runs: a unit-level
+  // plan has thousands of each, which no one reads and which took a second to draw per keystroke. The CSV has them all.
+  const SCREEN_COLUMNS = 300;
+  const SCREEN_RUNS = 300;
+  const boxFits = (r) => r.box.columns <= SCREEN_COLUMNS;
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
 
@@ -636,7 +641,7 @@
   ].filter(Boolean).join(" · ");
   const printTheBox = () => {
     const { n, r } = plan();
-    if (!r.seq.length) return;
+    if (!r.seq.length || !boxFits(r)) return;
     printBox.replaceChildren(...boxTable(n, r, true), el("p", "hj-print-sign", `${tx("Prepared")}: ____________________   ${tx("Approved")}: ____________________`));
     printBox.hidden = false;
     document.documentElement.classList.add("hj-printing");
@@ -758,6 +763,7 @@
     const printButton = el("button", "button-secondary", tx("Print the heijunka box"));
     printButton.type = "button";
     printButton.addEventListener("click", printTheBox);
+    printButton.disabled = !boxFits(r);
     const csv = el("button", "button-secondary", tx("Download CSV"));
     csv.type = "button";
     csv.addEventListener("click", () => downloadCsv(fileName(), sequenceRows(n, r)));
@@ -776,7 +782,8 @@
     // 1. The box.
     const boxPanel = panel(tx("Heijunka box"), tx("Load the cards in this order and pull one column at each pitch: the line makes what the card says, in the order the customer takes it."));
     boxPanel.classList.add("hj-box-panel");
-    boxPanel.append(...boxTable(n, r, false));
+    if (boxFits(r)) boxPanel.append(...boxTable(n, r, false));
+    else boxPanel.append(el("p", "dl-warning", tx("{n} pitch columns a day ({t} each) are too many for a box to read or print. Use a larger pack-out, so that one card stands for more units; the sequence and the CSV hold every container.", { n: int.format(r.box.columns), t: minutes(r.box.interval) })));
     panels.push(boxPanel);
 
     // 2. The load per hour, levelled against one block per product.
@@ -848,15 +855,17 @@
     const sthead = el("thead");
     sthead.append(shr);
     const sbody = el("tbody");
-    r.seq.forEach((run, ri) => {
+    const switchAt = new Set(r.switches.at);
+    r.seq.slice(0, SCREEN_RUNS).forEach((run, ri) => {
       const p = r.active[run.index];
       const tr = el("tr");
-      tr.append(el("td", "num", String(run.no)), el("td", null, hhmm(clockAt(run.start, shift))), el("td", null, hhmm(clockAt(run.end, shift, true))), el("td", null, nameOf(p, p.i)), el("td", "num", int.format(run.containers)), el("td", "num", units(run.units)), el("td", "num", r.switches.at.includes(ri) ? minutes(p.changeover) : "–"));
+      tr.append(el("td", "num", String(run.no)), el("td", null, hhmm(clockAt(run.start, shift))), el("td", null, hhmm(clockAt(run.end, shift, true))), el("td", null, nameOf(p, p.i)), el("td", "num", int.format(run.containers)), el("td", "num", units(run.units)), el("td", "num", switchAt.has(ri) ? minutes(p.changeover) : "–"));
       sbody.append(tr);
     });
     stable.append(sthead, sbody);
     swrap.append(stable);
     seqPanel.append(swrap);
+    if (r.seq.length > SCREEN_RUNS) seqPanel.append(el("p", "dl-panel-note", tx("The first {n} of {total} runs. The CSV and the Excel file hold every run and container.", { n: int.format(SCREEN_RUNS), total: int.format(r.seq.length) })));
     panels.push(seqPanel);
 
     // 5. How the numbers are worked out, and where to go next.

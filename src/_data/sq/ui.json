@@ -7650,5 +7650,7 @@
   "More rooms sold than available: not counted": "Më shumë dhoma të shitura se në dispozicion: nuk llogaritet",
   "No rows imported: {n} rows have more rooms sold than available. Check the rooms available, or the room total in the settings.": "Nuk u importua asnjë rresht: {n} rreshta kanë më shumë dhoma të shitura se në dispozicion. Kontrollo dhomat në dispozicion, ose numrin e dhomave në cilësimet.",
   ", left out {n} with more rooms sold than available": ", u lanë jashtë {n} me më shumë dhoma të shitura se në dispozicion",
-  "Rooms sold ({sold}) cannot be more than rooms available ({available}). Check the figures of the night, or the room total in the settings.": "Dhomat e shitura ({sold}) nuk mund të jenë më shumë se dhomat në dispozicion ({available}). Kontrollo shifrat e natës, ose numrin e dhomave në cilësimet."
+  "Rooms sold ({sold}) cannot be more than rooms available ({available}). Check the figures of the night, or the room total in the settings.": "Dhomat e shitura ({sold}) nuk mund të jenë më shumë se dhomat në dispozicion ({available}). Kontrollo shifrat e natës, ose numrin e dhomave në cilësimet.",
+  "{n} pitch columns a day ({t} each) are too many for a box to read or print. Use a larger pack-out, so that one card stands for more units; the sequence and the CSV hold every container.": "{n} kolona pitch-i në ditë (nga {t}) janë shumë për një kuti që të lexohet ose të printohet. Përdor një sasi paketimi më të madhe, që një kartë të vlejë për më shumë njësi; radha dhe CSV-ja i mbajnë të gjithë kontejnerët.",
+  "The first {n} of {total} runs. The CSV and the Excel file hold every run and container.": "{n} prodhimet e para nga {total}. Skedari CSV dhe ai Excel mbajnë çdo prodhim dhe çdo kontejner."
 }
