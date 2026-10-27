@@ -874,8 +874,10 @@
           Object.assign(state.targets, targets);
           report.push(tx("Targets taken from {sheet}.", { sheet: targetSheet || file.name }));
         }
-      } catch {
-        report.push(tx("{name} could not be read. Save it as CSV or .xlsx and try again.", { name: file.name }));
+      } catch (error) {
+        report.push(error?.message === "zip-size"
+          ? tx("{name}: would unpack to far more than any table holds, so it was not read.", { name: file.name })
+          : tx("{name} could not be read. Save it as CSV or .xlsx and try again.", { name: file.name }));
       }
     }
     if (got && state.example) {

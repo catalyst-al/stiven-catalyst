@@ -231,7 +231,18 @@ window.CvImport = (() => {
   };
 
   // ---------- Lines from a Word file ----------
-  // A .docx file is a zip; word/document.xml holds the text.
+  // A .docx file is a zip; word/document.xml holds the text. The Pareto, Inventory ABC and CX Control Tower pages
+  // read .xlsx files with this same function.
+  //
+  // A zip can unpack to far more than it weighs: 195 KB of deflate hold 200 MB of spaces, which the page would then
+  // read as one text and freeze on for minutes. So a zip with more entries than an Office file has, an entry that
+  // states or turns out to be larger than ZIP_ENTRY, or reads from one file that add up past ZIP_TOTAL (a workbook
+  // can list one sheet a thousand times) are refused with "zip-size", and the unpacking stops at the limit. A CV's
+  // document.xml is well under 1 MB and an exported sheet of 100,000 rows about 15 MB; no real file comes near.
+  const ZIP_ENTRIES = 5000;
+  const ZIP_ENTRY = 50e6;
+  const ZIP_TOTAL = 100e6;
+  const unpacked = new WeakMap();
   const unzip = async (buffer, wanted) => {
     const bytes = new Uint8Array(buffer);
     const view = new DataView(buffer);
@@ -242,22 +253,46 @@ window.CvImport = (() => {
     if (end < 0) throw new Error("zip");
     let at = view.getUint32(end + 16, true);
     const count = view.getUint16(end + 10, true);
+    if (count > ZIP_ENTRIES) throw new Error("zip-size");
     for (let n = 0; n < count; n++) {
       if (view.getUint32(at, true) !== 0x02014b50) break;
       const method = view.getUint16(at + 10, true);
       const size = view.getUint32(at + 20, true);
+      const declared = view.getUint32(at + 24, true);
       const nameLength = view.getUint16(at + 28, true);
       const extra = view.getUint16(at + 30, true);
       const comment = view.getUint16(at + 32, true);
       const local = view.getUint32(at + 42, true);
       const name = new TextDecoder().decode(bytes.subarray(at + 46, at + 46 + nameLength));
       if (name === wanted) {
+        const before = unpacked.get(buffer) || 0;
+        if (declared > ZIP_ENTRY || before + declared > ZIP_TOTAL) throw new Error("zip-size");
         const start = local + 30 + view.getUint16(local + 26, true) + view.getUint16(local + 28, true);
         const data = bytes.subarray(start, start + size);
-        if (method === 0) return new TextDecoder().decode(data);
-        if (method !== 8) throw new Error("zip");
-        const stream = new Blob([data]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
-        return new Response(stream).text();
+        if (method !== 0 && method !== 8) throw new Error("zip");
+        let out = data;
+        if (method === 8) {
+          // The stated size may be a lie; the bytes are counted as they come.
+          const reader = new Blob([data]).stream().pipeThrough(new DecompressionStream("deflate-raw")).getReader();
+          const chunks = [];
+          let total = 0;
+          for (;;) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            total += value.length;
+            if (total > ZIP_ENTRY || before + total > ZIP_TOTAL) {
+              reader.cancel().catch(() => {});
+              unpacked.set(buffer, ZIP_TOTAL + 1);
+              throw new Error("zip-size");
+            }
+            chunks.push(value);
+          }
+          out = new Uint8Array(total);
+          let put = 0;
+          chunks.forEach((chunk) => { out.set(chunk, put); put += chunk.length; });
+        }
+        unpacked.set(buffer, before + out.length);
+        return new TextDecoder().decode(out);
       }
       at += 46 + nameLength + extra + comment;
     }

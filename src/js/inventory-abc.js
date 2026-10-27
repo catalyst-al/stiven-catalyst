@@ -552,6 +552,7 @@
     } catch (error) {
       importStatus.textContent = error.message === "xls" ? tx("Old Excel files (.xls) cannot be read here. In Excel, choose Save as and pick .xlsx or CSV.")
         : error.message === "size" ? tx("This file is larger than 30 MB. Export only the columns and weeks you need.")
+        : error.message === "zip-size" ? tx("This file would unpack to far more than any CV or table holds, so it was not read. It may be damaged; nothing was changed.")
         : tx("This file could not be read. Save it as CSV or .xlsx and try again, or paste the cells.");
     }
     fileInput.value = "";

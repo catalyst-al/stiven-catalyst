@@ -7665,5 +7665,7 @@
   "Photos from the file: {n}.": "Fotos aus der Datei: {n}.",
   "The photos in the file could not be kept in this browser; the rest of the work is opened.": "Die Fotos aus der Datei konnten in diesem Browser nicht gespeichert werden; die übrige Arbeit ist geöffnet.",
   "The tools are locked. Unlock them with the PIN first; nothing was changed.": "Die Werkzeuge sind gesperrt. Entsperren Sie sie zuerst mit der PIN; nichts wurde geändert.",
-  "Team sync is paused while the tools are locked.": "Die Team-Synchronisierung ruht, solange die Werkzeuge gesperrt sind."
+  "Team sync is paused while the tools are locked.": "Die Team-Synchronisierung ruht, solange die Werkzeuge gesperrt sind.",
+  "This file would unpack to far more than any CV or table holds, so it was not read. It may be damaged; nothing was changed.": "Diese Datei würde beim Entpacken weit mehr ergeben, als ein Lebenslauf oder eine Tabelle je enthält; sie wurde daher nicht gelesen. Sie ist vielleicht beschädigt; nichts wurde geändert.",
+  "{name}: would unpack to far more than any table holds, so it was not read.": "{name}: würde beim Entpacken weit mehr ergeben, als eine Tabelle je enthält; nicht gelesen."
 }

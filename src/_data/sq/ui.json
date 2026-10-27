@@ -7665,5 +7665,7 @@
   "Photos from the file: {n}.": "Foto nga skedari: {n}.",
   "The photos in the file could not be kept in this browser; the rest of the work is opened.": "Fotot e skedarit nuk u ruajtën dot në këtë shfletues; pjesa tjetër e punës u hap.",
   "The tools are locked. Unlock them with the PIN first; nothing was changed.": "Mjetet janë të kyçura. Hapi së pari me PIN-in; asgjë nuk u ndryshua.",
-  "Team sync is paused while the tools are locked.": "Sinkronizimi i ekipit pushon sa kohë që mjetet janë të kyçura."
+  "Team sync is paused while the tools are locked.": "Sinkronizimi i ekipit pushon sa kohë që mjetet janë të kyçura.",
+  "This file would unpack to far more than any CV or table holds, so it was not read. It may be damaged; nothing was changed.": "Ky skedar do të hapej në shumë më tepër të dhëna nga sa mban çdo CV apo tabelë, prandaj nuk u lexua. Mund të jetë i dëmtuar; asgjë nuk ndryshoi.",
+  "{name}: would unpack to far more than any table holds, so it was not read.": "{name}: do të hapej në shumë më tepër të dhëna nga sa mban çdo tabelë, prandaj nuk u lexua."
 }

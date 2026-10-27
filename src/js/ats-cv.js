@@ -1145,6 +1145,8 @@
         ? tx("Old Word files (.doc) cannot be read here. In Word, choose Save as and pick .docx or PDF.")
         : error.message === "json"
           ? tx("This file is not a JSON Resume (jsonresume.org). Nothing was changed.")
+        : error.message === "zip-size"
+          ? tx("This file would unpack to far more than any CV or table holds, so it was not read. It may be damaged; nothing was changed.")
         : error.message === "empty"
           ? tx("This file has no readable text; it is probably a scan or a photo. Use the Word file, or paste the text below.")
           : error.message === "type"
