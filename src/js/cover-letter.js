@@ -25,7 +25,9 @@
   const image = (src) => (/^data:image\/(?:png|jpeg|webp|gif);base64,[a-z0-9+/=]+$/i.test(src) ? src : "");
   const clean = (saved, data, lang) => {
     const letter = fit(saved, SHAPE);
-    if (!data.letter.docLangs[letter.docLang]) letter.docLang = data.letter.docLangs[lang] ? lang : "en";
+    // "constructor" or "__proto__" (from a backup) is a key of every object, not a language.
+    const own = (key) => Object.prototype.hasOwnProperty.call(data.letter.docLangs, key);
+    if (!own(letter.docLang)) letter.docLang = own(lang) ? lang : "en";
     if (!["modern", "classic"].includes(letter.design)) letter.design = "modern";
     if (!data.themes.some((theme) => theme.id === letter.theme)) letter.theme = data.themes[0].id;
     if (!data.fonts.some((font) => font.id === letter.font)) letter.font = data.fonts[0].id;

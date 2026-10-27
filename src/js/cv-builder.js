@@ -49,7 +49,9 @@
   // A saved, imported or example CV, made safe to use.
   const clean = (saved, data, lang) => {
     const cv = fit(saved, SHAPE);
-    if (!data.docLangs[cv.docLang]) cv.docLang = data.docLangs[lang] ? lang : "en";
+    // "constructor" or "__proto__" (from a backup) is a key of every object, not a language.
+    const own = (key) => Object.prototype.hasOwnProperty.call(data.docLangs, key);
+    if (!own(cv.docLang)) cv.docLang = own(lang) ? lang : "en";
     if (!data.themes.some((theme) => theme.id === cv.theme)) cv.theme = data.themes[0].id;
     if (!PHOTO_SHAPES.includes(cv.photoShape)) cv.photoShape = PHOTO_SHAPES[0];
     if (!DENSITIES.includes(cv.density)) cv.density = DENSITIES[0];

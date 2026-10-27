@@ -6,7 +6,8 @@
 //
 // Text is written in WinAnsi (Windows-1252): English, German, Albanian, French, Italian, Spanish and the Nordic
 // languages fit, with the euro sign, bullets, dashes and curly quotes. A letter outside it loses its accent when it
-// has one (ő → o) and is otherwise written as "?".
+// has one (ő → o), takes a stand-in when it has one (Ł → L, → becomes ->, a narrow space a space) and is otherwise
+// written as "?".
 window.PdfKit = (() => {
   // ---- Fonts: advance widths per 1000 units of the standard fonts, for the characters 32 to 126 ----
   const W = {
@@ -44,6 +45,17 @@ window.PdfKit = (() => {
   const COLUMN = { Helvetica: 1, "Helvetica-Bold": 2, "Times-Roman": 3, "Times-Bold": 4 };
   const familyOf = (name) => FAMILIES[String(name || "").toLowerCase()] || FAMILIES.helvetica;
 
+  // Characters WinAnsi lacks that have a plain stand-in, by code point: the spaces and hyphens Word and web pages put
+  // in text (narrow and thin spaces, the non-breaking hyphen, the minus), zero-width marks (dropped), Latin letters
+  // that keep no letter when their accent goes (Ł, đ, ı) and a few arrows and signs.
+  const STAND_IN = new Map([
+    ...Array.from({ length: 11 }, (_, i) => [0x2000 + i, " "]), [0x202f, " "], [0x205f, " "], [0x3000, " "],
+    [0x200b, ""], [0x200c, ""], [0x200d, ""], [0x2060, ""], [0xfeff, ""],
+    [0x2010, "-"], [0x2011, "-"], [0x2212, "-"], [0x2012, "–"], [0x2015, "—"], [0x2032, "'"], [0x2033, "\""],
+    [0x0141, "L"], [0x0142, "l"], [0x0110, "Ð"], [0x0111, "dj"], [0x0131, "i"], [0x0126, "H"], [0x0127, "h"], [0x0166, "T"], [0x0167, "t"],
+    [0x2192, "->"], [0x2190, "<-"], [0x2194, "<->"], [0x21d2, "=>"], [0x2264, "<="], [0x2265, ">="], [0x2260, "!="], [0x2248, "~"],
+  ]);
+  const standIn = (text) => [...String(text ?? "")].map((ch) => STAND_IN.get(ch.codePointAt(0)) ?? ch).join("");
   // A character as its WinAnsi byte: the letter without its accent when WinAnsi lacks it, "?" when there is no letter.
   const strip = (ch) => ch.normalize("NFD").replace(/[̀-ͯ]/g, "");
   const byteOf = (ch) => {
@@ -56,15 +68,15 @@ window.PdfKit = (() => {
     if (plain && plain !== ch && plain.length === 1) return byteOf(plain);
     return 63;
   };
-  const encode = (text) => Uint8Array.from([...String(text ?? "")].map(byteOf));
+  const encode = (text) => Uint8Array.from([...standIn(text)].map(byteOf));
 
   // The width of a text in points, in a font (a standard font name) at a size.
   const width = (text, font, size) => {
-    if (font.startsWith("Courier")) return [...String(text ?? "")].length * 600 * size / 1000;
+    if (font.startsWith("Courier")) return [...standIn(text)].length * 600 * size / 1000;
     const table = W[font] || W.Helvetica;
     const column = COLUMN[font] || 1;
     let total = 0;
-    for (const ch of String(text ?? "")) {
+    for (const ch of standIn(text)) {
       const code = ch.codePointAt(0);
       if (code >= 32 && code < 127) total += table[code - 32];
       else if (HIGH[ch]) total += HIGH[ch][column];
@@ -254,13 +266,16 @@ window.PdfKit = (() => {
         const rightText = String(block.right ?? "").trim();
         const rightWidth = rightText ? Math.min(width(rightText, font, size), colWidth * 0.42) : 0;
         const gap = rightText ? 12 : 0;
-        const lines = wrap([{ text: String(block.left ?? ""), bold: true }], family, size, colWidth - rightWidth - gap);
-        return { ...block, lines: lines.map((line, i) => ({
+        const lefts = wrap([{ text: String(block.left ?? ""), bold: true }], family, size, colWidth - rightWidth - gap);
+        // A date longer than its column wraps there, set right, instead of running into the title.
+        const rights = rightText ? wrap([{ text: rightText, bold: true }], family, size, rightWidth) : [];
+        return { ...block, lines: Array.from({ length: Math.max(lefts.length, rights.length) }, (_, i) => ({
           height: leading,
           draw: (x, y) => {
             let at = x;
-            line.segments.forEach((seg) => { doc.text(at, y + size, seg.text, { font: seg.font, size, color }); at += seg.width; });
-            if (!i && rightText) doc.text(x + colWidth - width(rightText, font, size), y + size, rightText, { font, size, color: block.rightColor ?? color });
+            (lefts[i]?.segments || []).forEach((seg) => { doc.text(at, y + size, seg.text, { font: seg.font, size, color }); at += seg.width; });
+            let right = x + colWidth - (rights[i]?.width || 0);
+            (rights[i]?.segments || []).forEach((seg) => { doc.text(right, y + size, seg.text, { font: seg.font, size, color: block.rightColor ?? color }); right += seg.width; });
           },
         })) };
       }
@@ -322,7 +337,15 @@ window.PdfKit = (() => {
       if (footer) {
         const [l, r] = footer(n + 1, placed.length);
         const yFoot = doc.height - footerAt;
-        if (l) doc.text(left, yFoot, l, { font: fam.regular, size: footerSize, color: footerColor });
+        // The left text is cut with "…" where it would reach the right one.
+        const room = colWidth - (r ? width(r, fam.regular, footerSize) + 12 : 0);
+        const cut = (text) => {
+          if (width(text, fam.regular, footerSize) <= room) return text;
+          let short = [...text];
+          while (short.length && width(`${short.join("")}…`, fam.regular, footerSize) > room) short.pop();
+          return `${short.join("").trimEnd()}…`;
+        };
+        if (l) doc.text(left, yFoot, cut(l), { font: fam.regular, size: footerSize, color: footerColor });
         if (r) doc.text(doc.width - right - width(r, fam.regular, footerSize), yFoot, r, { font: fam.regular, size: footerSize, color: footerColor });
       }
     });

@@ -32,9 +32,12 @@
     }
     return typeof value === "string" ? value : shape;
   };
+  // A language of the document is one of its own keys: "constructor" or "__proto__" (from a file or a backup) is in
+  // every object and is none.
+  const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
   const clean = (saved, data, lang) => {
     const cv = fit(saved, SHAPE);
-    if (!data.docLangs[cv.docLang]) cv.docLang = data.docLangs[lang] ? lang : "en";
+    if (!own(data.docLangs, cv.docLang)) cv.docLang = own(data.docLangs, lang) ? lang : "en";
     if (!data.fonts.some((font) => font.id === cv.font)) cv.font = data.fonts[0].id;
     if (!data.accents.some((accent) => accent.id === cv.accent)) cv.accent = data.accents[0].id;
     return cv;
@@ -397,7 +400,9 @@
         startDate: dateOut(job.from), endDate: dateOut(job.to), highlights: lines(job.bullets).map(unbold),
       })),
       education: cv.education.filter(hasText).map((item) => {
-        const [start = "", end = ""] = str(item.date).split(/\s*[–—-]\s*/);
+        // "09.2012 – 06.2016 (part-time)" splits at its spaced dash only; "2019-2021" and "2019–2021" at theirs.
+        const date = str(item.date);
+        const [, start = date, end = ""] = /^(.+?)\s+[–—-]\s+(.+)$/.exec(date) || /^(\d{4})-(\d{4})$/.exec(date) || /^([^–—]+)[–—]([^–—]+)$/.exec(date) || [];
         return { institution: str(item.school), area: str(item.title), startDate: dateOut(start), endDate: dateOut(end), score: str(item.detail) };
       }),
       skills: cv.skills.filter(hasText).map((item) => ({ name: str(item.title), keywords: str(item.text).split(/\s*[,;]\s*/).filter(Boolean) })),
