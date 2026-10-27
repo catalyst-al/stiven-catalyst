@@ -11,7 +11,7 @@ The existing light, planets, homepage, navigation and visual language remain in 
 5. Use the project brief, accountable action plan, evidence journal and before/after observations to run the work.
 6. Reflect using GROW. Each session creates a linked action with owner and due date.
 7. Print a project report for a conversation with a human coach, or contact Stiven through the existing contact page. No project data is automatically sent.
-8. Export a coaching backup for safekeeping or transfer to another browser. Import creates independent project copies instead of replacing newer work.
+8. Export a coaching backup for safekeeping or transfer to another browser. Import creates independent project copies instead of replacing newer work, and skips projects the workspace already holds.
 
 All interface and original module content is available in English, German and Albanian. Project IDs and storage keys are independent of the language; visitor-entered text is not automatically translated.
 
@@ -30,7 +30,7 @@ The Eleventy architecture is a sound foundation for this release: role ownership
 
 Before this release the role pages mainly organized links to tools, routines and reading. There was no shared role workspace connecting goals, practical training, projects, evidence and review. This release adds that workflow and retains the original tools and their storage.
 
-The current site is a static application. It has no server, account system, shared team database, coach inbox or automatic cross-device synchronization. This release is therefore a working individual coaching platform, not a multi-user company management system. Workspace copy and privacy text describe this explicitly.
+The site is static, with one small server: the team-sync Worker (`workers/sync/worker.js`, a Cloudflare Worker at the `site.json` `sync.endpoint`). A team that shares a six-word code keeps the tools it ticks the same on every device through one end-to-end encrypted copy there (`js/team-sync.js`); the Worker stores only ciphertext and never sees the code or the key. **Coaching is not part of it:** `sc-coaching-v1` is a personal key that team sync never offers (`PERSONAL` in `js/team-sync.js`), like the career tools and the shelf. There is no account system, coach inbox or shared coaching database. Coaching work moves between browsers only through files: the coaching backup (below) or "All your work in one file", which includes `sc-coaching-v1`. This release is therefore a working individual coaching platform, not a multi-user company management system. Workspace copy and privacy text describe this explicitly.
 
 ## Implementation
 
@@ -41,7 +41,7 @@ The current site is a static application. It has no server, account system, shar
 - `partials/coaching-bridge.njk` / `js/coaching-bridge.js`: optional project panel on an existing tool page. Opening a tool from a project carries only a random project ID. Pareto, 5 Whys and KPI Diagnostic expose explicit read-only result providers. The visitor reviews the current result, writes a conclusion and optionally adds an accountable action. Submission reloads the latest project state first. Other tools retain manual summary/source capture (for Shift Pulse that is its “Copy summary” text: the period, the three numbers, what needs attention and the open issues). Tool inputs and logs are not overwritten.
 - `js/coaching-results.js`: safe display of validated, dated result snapshots in the tool panel, project journal and printable report. Pareto keeps the complete category distribution, totals, filter, period and skipped-row count; 5 Whys keeps the reasoning chain as a hypothesis; KPI Diagnostic keeps the ten ratings and their consistent cause scores. Raw imported Pareto rows are not copied into coaching backups.
 - `src/coaching.css`: scoped additions using existing colors, buttons, form controls and typography; supports the existing dark/light themes, narrow screens and a dedicated printable report.
-- `tests/coaching.test.cjs`: state, backup, weighted rate, curriculum and DOM workflow tests.
+- `tests/coaching.test.cjs`: state, backup, weighted rate, curriculum and DOM workflow tests; `tests/coaching-import.test.cjs`: the restore rule and its messages.
 - `scripts/check-coaching-build.mjs`: generated-page integration checks across all 12 role pages and 42 tool pages.
 
 No homepage or planet asset was edited. The English, German and Albanian built homepages and `src/styles.css` were compared with the baseline and remained byte-for-byte identical.
@@ -54,6 +54,7 @@ No homepage or planet asset was edited. The English, German and Albanian built h
 - Unreadable stored data is never silently overwritten. Explicit recovery requires a valid backup and confirmation; the unreadable original is downloaded first.
 - Revision checks prevent common stale-tab overwrites. These are not a distributed or transactional database; use one editing tab for a project.
 - Restore validates the whole backup before changing state, copies project/action/evidence/session IDs and preserves current context and active projects. Maximum backup size is 5 MiB, 100 projects and 2,000 items per project collection.
+- Restore is idempotent: a project the workspace already holds with the same content (IDs aside) is skipped, so opening the same backup twice, or a backup of this workspace, adds nothing ("already in your workspace"). A project changed since the backup keeps its current version, and the backup's version is added once beside it as a copy. Only projects actually added count toward the 100-project limit; going over it, and a file over 5 MiB, each have their own message instead of "invalid backup".
 - User text is escaped when displayed. Embedded configuration escapes HTML script terminators.
 - Failed-unit observations require valid dates, whole nonnegative counts, a positive denominator and failed units no greater than total. Duplicate date/period entries are rejected. Rates use summed failed units divided by summed units, not an average of daily percentages.
 - Before/after changes are descriptive, in percentage points. They are not presented as proof of causation or significance. The visitor must keep definitions and conditions comparable and check a guardrail.
