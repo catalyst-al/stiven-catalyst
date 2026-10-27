@@ -1,0 +1,371 @@
+{
+ "date": "2026-10-27T12:53:20.672Z",
+ "path": "/",
+ "runs": 5,
+ "a": "http://127.0.0.1:8321",
+ "b": "http://127.0.0.1:8322",
+ "tap": ".cosmos-chip",
+ "windowMs": 5000,
+ "init": null,
+ "machine": {
+  "cpus": 4,
+  "model": "Intel(R) Xeon(R) Processor @ 2.30GHz",
+  "load": [
+   12.45,
+   8.81,
+   9.6
+  ]
+ },
+ "summary": {
+  "desktop": {
+   "a": {
+    "busy": 3.441,
+    "fps": 58.8,
+    "p95": 16.8,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 2,
+    "tap": 256
+   },
+   "b": {
+    "busy": 3.23,
+    "fps": 59.8,
+    "p95": 16.7,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 3,
+    "tap": 240
+   }
+  },
+  "desktop4x": {
+   "a": {
+    "busy": 5.021,
+    "fps": 22.8,
+    "p95": 66.6,
+    "longTasks": 20,
+    "blocking": 142,
+    "delay": 59,
+    "tap": 496
+   },
+   "b": {
+    "busy": 5.025,
+    "fps": 21.8,
+    "p95": 66.7,
+    "longTasks": 30,
+    "blocking": 364,
+    "delay": 50,
+    "tap": 432
+   }
+  },
+  "phone4x": {
+   "a": {
+    "busy": 5.079,
+    "fps": 22.2,
+    "p95": 66.6,
+    "longTasks": 27,
+    "blocking": 124,
+    "delay": 106,
+    "tap": 400
+   },
+   "b": {
+    "busy": 5.055,
+    "fps": 32,
+    "p95": 50,
+    "longTasks": 2,
+    "blocking": 13,
+    "delay": 132,
+    "tap": 424
+   }
+  }
+ },
+ "raw": {
+  "desktop": {
+   "a": [
+    {
+     "busy": 3.077,
+     "fps": 60.2,
+     "p95": 16.7,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 224
+    },
+    {
+     "busy": 3.16,
+     "fps": 60,
+     "p95": 16.8,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 3,
+     "tap": 264
+    },
+    {
+     "busy": 3.441,
+     "fps": 58.8,
+     "p95": 16.8,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 2,
+     "tap": 256
+    },
+    {
+     "busy": 3.833,
+     "fps": 48.8,
+     "p95": 33.4,
+     "longTasks": 5,
+     "blocking": 41,
+     "delay": 2,
+     "tap": 200
+    },
+    {
+     "busy": 3.825,
+     "fps": 57.8,
+     "p95": 16.8,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 4,
+     "tap": 288
+    }
+   ],
+   "b": [
+    {
+     "busy": 2.848,
+     "fps": 60,
+     "p95": 16.7,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 3,
+     "tap": 240
+    },
+    {
+     "busy": 3.169,
+     "fps": 60,
+     "p95": 16.7,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 8,
+     "tap": 240
+    },
+    {
+     "busy": 3.23,
+     "fps": 59.8,
+     "p95": 16.7,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 3,
+     "tap": 224
+    },
+    {
+     "busy": 3.678,
+     "fps": 55.8,
+     "p95": 33.3,
+     "longTasks": 2,
+     "blocking": 13,
+     "delay": 2,
+     "tap": 256
+    },
+    {
+     "busy": 3.561,
+     "fps": 56.2,
+     "p95": 33.3,
+     "longTasks": 1,
+     "blocking": 15,
+     "delay": 3,
+     "tap": 440
+    }
+   ]
+  },
+  "desktop4x": {
+   "a": [
+    {
+     "busy": 5.096,
+     "fps": 22.8,
+     "p95": 50.1,
+     "longTasks": 7,
+     "blocking": 62,
+     "delay": 54,
+     "tap": 424
+    },
+    {
+     "busy": 5.021,
+     "fps": 24.4,
+     "p95": 66.6,
+     "longTasks": 15,
+     "blocking": 142,
+     "delay": 10,
+     "tap": 576
+    },
+    {
+     "busy": 5.052,
+     "fps": 22.2,
+     "p95": 66.6,
+     "longTasks": 25,
+     "blocking": 200,
+     "delay": 59,
+     "tap": 480
+    },
+    {
+     "busy": 4.971,
+     "fps": 24.8,
+     "p95": 66.6,
+     "longTasks": 20,
+     "blocking": 142,
+     "delay": 66,
+     "tap": 496
+    },
+    {
+     "busy": 4.805,
+     "fps": 13.2,
+     "p95": 133.4,
+     "longTasks": 49,
+     "blocking": 1441,
+     "delay": 143,
+     "tap": 696
+    }
+   ],
+   "b": [
+    {
+     "busy": 5.072,
+     "fps": 22,
+     "p95": 50.1,
+     "longTasks": 7,
+     "blocking": 88,
+     "delay": 50,
+     "tap": 432
+    },
+    {
+     "busy": 5.019,
+     "fps": 25.4,
+     "p95": 66.6,
+     "longTasks": 11,
+     "blocking": 98,
+     "delay": 8,
+     "tap": 336
+    },
+    {
+     "busy": 5.025,
+     "fps": 21.8,
+     "p95": 66.7,
+     "longTasks": 30,
+     "blocking": 364,
+     "delay": 60,
+     "tap": 440
+    },
+    {
+     "busy": 5.076,
+     "fps": 19,
+     "p95": 83.3,
+     "longTasks": 42,
+     "blocking": 661,
+     "delay": 52,
+     "tap": 408
+    },
+    {
+     "busy": 4.906,
+     "fps": 13,
+     "p95": 150.1,
+     "longTasks": 41,
+     "blocking": 1738,
+     "delay": 39,
+     "tap": 448
+    }
+   ]
+  },
+  "phone4x": {
+   "a": [
+    {
+     "busy": 5.076,
+     "fps": 22.2,
+     "p95": 66.6,
+     "longTasks": 27,
+     "blocking": 124,
+     "delay": 121,
+     "tap": 424
+    },
+    {
+     "busy": 5.092,
+     "fps": 25.2,
+     "p95": 50.1,
+     "longTasks": 16,
+     "blocking": 54,
+     "delay": 106,
+     "tap": 440
+    },
+    {
+     "busy": 5.14,
+     "fps": 28.4,
+     "p95": 50.1,
+     "longTasks": 13,
+     "blocking": 79,
+     "delay": 62,
+     "tap": 320
+    },
+    {
+     "busy": 5.079,
+     "fps": 21,
+     "p95": 66.7,
+     "longTasks": 28,
+     "blocking": 156,
+     "delay": 128,
+     "tap": 400
+    },
+    {
+     "busy": 4.987,
+     "fps": 18.8,
+     "p95": 100,
+     "longTasks": 51,
+     "blocking": 775,
+     "delay": 65,
+     "tap": 344
+    }
+   ],
+   "b": [
+    {
+     "busy": 5.055,
+     "fps": 29.6,
+     "p95": 50,
+     "longTasks": 4,
+     "blocking": 22,
+     "delay": 132,
+     "tap": 368
+    },
+    {
+     "busy": 5.061,
+     "fps": 33.2,
+     "p95": 50,
+     "longTasks": 2,
+     "blocking": 13,
+     "delay": 163,
+     "tap": 440
+    },
+    {
+     "busy": 5.078,
+     "fps": 32,
+     "p95": 50,
+     "longTasks": 1,
+     "blocking": 2,
+     "delay": 116,
+     "tap": 424
+    },
+    {
+     "busy": 5.047,
+     "fps": 34.2,
+     "p95": 33.4,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 92,
+     "tap": 312
+    },
+    {
+     "busy": 4.783,
+     "fps": 25,
+     "p95": 66.7,
+     "longTasks": 21,
+     "blocking": 248,
+     "delay": 185,
+     "tap": 424
+    }
+   ]
+  }
+ }
+}
