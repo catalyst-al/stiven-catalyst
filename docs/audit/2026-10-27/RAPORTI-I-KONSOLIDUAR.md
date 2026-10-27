@@ -32,7 +32,11 @@ poshtë është vetëm në degë dhe pret shqyrtimin tënd përfundimtar.
   - **Lëvizja e reduktuar:** kur emulohet vërtet, `scrollIntoView` i butë rrëshqiste ende. Tani është i menjëhershëm (PM-16).
   - Rishikimet: `phase3/*.md`, me skripte, matje dhe imazhe para/pas.
 
-## 3. Presin miratimin tënd
+## 3. Vendimet e 27 tetorit dhe ato që presin
+
+**Vendosur më 27 tetor** (shih `VENDIMET-E-HAPURA.md`): patch-et 2, 3 dhe 4 janë aplikuar në degë (`22edfaff`, `2d9f9906`, `5dd8dfc5`); Pause në fund të faqes dhe pranë planetëve, me ruajtjen e zgjedhjes, miratuar; SEO-02 shtyhet për një ndryshim editorial më vete; patch-i i planetëve në celular mbetet veçmas, me krahasim vizual.
+
+### Gjendja para vendimeve (për histori)
 
 Ndryshimet që prekin pamjen ose ndjesinë **nuk janë në degë**: secili është një patch që aplikohet pastër me
 `git am`, në `phase3/proposals/` (README aty):
@@ -76,10 +80,10 @@ Të gjitha janë në tabelat më poshtë, me arsyen.
 
 | Status | Table A (58 consolidated findings) | Table B (122 phase-level IDs, 123 rows) |
 |---|---|---|
-| fixed | 42 | 67 |
+| fixed | 44 | 69 |
 | partly fixed | 3 | 10 |
-| needs author approval | 13 | 22 |
-| pending | 0 | 16 |
+| needs author approval | 10 | 19 |
+| pending | 1 | 17 |
 | not verified | 0 | 0 |
 | no change needed | 0 | 8 |
 | **total** | **58** | **123** |
@@ -130,12 +134,12 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | E-10 | *Five questions*: "fourteen days … as the law says"; old lek not glossed | P4-05 | needs author approval | albanian-proposals.md §3: the legal point is now checked (Labour Code Art. 92(2) as amended by Law 91/2024: at least 22 working days); nothing changed | The wording, and the EN/DE gloss (RAPORTI §9.2) |
 | E-11 | Opinion presented as fact in reflections | P4-06 | needs author approval | albanian-proposals.md §6 (five proposals) | Accept or reject each |
 | E-12 | *The night the system went down* disowns its title | P4-07 | needs author approval | Not taken up as a retitle; the facts of that night are question C2 of timeline-contradictions.md | Retitle or merge (audit), after the timeline answers |
-| M-01 | Home planets saturate the main thread | PM-1 | partly fixed | Same look: `ba1c7ee0` (three canvases, each drawn only near the view; canvas pixels identical at 1440 px, ≤ 5/255 at 390 px); paused motion: main thread 0.006 s per 5 s (desktop), 0.015 s (phone 4×) against 0.85–3.9 s (`972b58e7`). With motion on, the gain under software raster is small (desktop busy 3.44 → 3.23 s). The large gain (phone 4×: 22 → 32 fps, long tasks 27 → 2) needs `phase3/proposals/planets-touch-dpr-1.5.patch` | Approve or drop the touch-screen pixel ratio patch |
+| M-01 | Home planets saturate the main thread | PM-1 | partly fixed | Same look: `ba1c7ee0` (three canvases, each drawn only near the view; canvas pixels identical at 1440 px, ≤ 5/255 at 390 px); paused motion: main thread 0.006 s per 5 s (desktop), 0.015 s (phone 4×) against 0.85–3.9 s (`972b58e7`). With motion on, the gain under software raster is small (desktop busy 3.44 → 3.23 s). The large gain (phone 4×: 22 → 32 fps, long tasks 27 → 2) needs `phase3/proposals/planets-touch-dpr-1.5.patch` | Decided 27 Oct: the patch stays separate; visual comparison and a phone test first (phase3/planets-touch.md) |
 | M-02 | Pause leaves glows/spins running | PM-2 | fixed | `972b58e7` · tests/browser/motion.spec.mjs (0 running endless animations, 0 canvas draws when paused), tests/motion-css.test.cjs | — |
-| M-03 | Pause only on the home hero, not remembered (WCAG 2.2.2) | PM-3 | fixed | `972b58e7` · tests/browser/motion.spec.mjs, tests/cosmos-pause.test.cjs (kept in `sc-motion`, applied before first paint, on every page; reduced motion starts paused; readable while the tools are locked) | Confirm the place of the switch (foot of every page, and beside the planets) |
-| M-04 | Zenith radar broken (duplicate keyframes) | PM-4 | needs author approval | `phase3/proposals/zenith-radar-keyframes.patch` (applies on the branch; restores the turning radar and the podcast steps' blue; test: no two @keyframes share a name). Not on the branch because it changes what readers see | Approve or drop the patch |
+| M-03 | Pause only on the home hero, not remembered (WCAG 2.2.2) | PM-3 | fixed | `972b58e7` · tests/browser/motion.spec.mjs, tests/cosmos-pause.test.cjs (kept in `sc-motion`, applied before first paint, on every page; reduced motion starts paused; readable while the tools are locked) | Decided 27 Oct: the place (foot of every page, beside the planets) and keeping the reader's choice approved |
+| M-04 | Zenith radar broken (duplicate keyframes) | PM-4 | fixed | `22edfaff` (approved by the author on 27 Oct) · tests/motion-css.test.cjs (no two @keyframes share a name), tests/page-transitions.test.cjs; frames in phase3/motion/radar/ | — |
 | M-05 | Printed issue before scrolling: blank charts | PM-5 | fixed | `eb4b4b8c` · tests/browser/print.spec.mjs (hidden chart parts 14/35/10 → 0; also scroll reveals, hero titles, dark margins on paper) | — |
-| M-06 | Desktop wheel glide slows scrolling | PM-6 | needs author approval | `phase3/proposals/wheel-native-scroll.patch` (a notch 393 → 54 ms on home, 1067 → 183 ms at 4×; links to a place on the page still glide). A change of feel, so not on the branch | Approve or drop the patch |
+| M-06 | Desktop wheel glide slows scrolling | PM-6 | fixed | `2d9f9906` (approved by the author on 27 Oct, on condition that the other smooth motion stays: only the wheel handler of script.js is removed; links to a place on the page still glide, every animation and transition unchanged) · tests/browser/motion.spec.mjs (a notch 393 → 54 ms on home) | — |
 | P-01 | Privacy page incomplete | P2C-07 | needs author approval | Legal text; the facts to add are in phases/p2c-career-platform.md (P2C-07). No commit | The privacy text |
 | P-02 | Narration reads the feedback form | P7-01 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs (built pages, 3 languages; reading stops at the end of the text on 261 narrated pages) | — |
 | P-03 | Narration skips the case-box content | P7-02 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs ("What cannot be confirmed" read) | — |
@@ -143,7 +147,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P-05 | Albanian podcast No. 1 has no correction | P7-04 | needs author approval | STATUS.md only ("needs author approval (phase 2)"); no phase 2 file mentions it; `src/_data/audio.json` unchanged since `605d0df` | Check the SQ recording against the issue, then record the result either way |
 | A-01 | Cloudflare Web Analytics collects nothing | PM-7 | needs author approval | Account setting (STATUS.md); `src/_data/site.json` token unchanged | Add a manual Web Analytics site in Cloudflare and give the new token |
 | B-01 | Back-cover line translated in opposite directions | P6-01 | needs author approval | albanian-proposals.md §8.1 (options A/B); book files unchanged | "brenda tij": the man or the city (RAPORTI §9.3) |
-| SEO-02 | Reflections linked from one page only | SEO-02 | needs author approval | Not changed: the fix is a new block on every reflection page (next/previous and two or three related reflections, and a "latest reflections" block on the home or writing page), a design and editorial choice outside the author's phase 3 list. `src/_includes/layouts/article.njk` has the essays' series navigation to reuse | Whether to add it, and which reflections count as related |
+| SEO-02 | Reflections linked from one page only | SEO-02 | pending | Deferred by the author on 27 Oct to a separate editorial change: navigation between essays is useful, but recommended links must be meaningful. `src/_includes/layouts/article.njk` unchanged | The editorial change itself, later |
 | CI-01 | Search journey fails on current Chrome | — | fixed | `be86a306`, `e40c5fe2` · tests/browser/transitions.spec.mjs (failed 6/6 before). Cause: a key pressed between the new page's commit and its first frame, not `replaceState` as the audit suspected | — |
 | CI-02 | CI's Chromium is a year old | — | fixed | `d0ad3889` (@playwright/test 1.56.1 → 1.64.1; CI prints the browser and fails on skipped, flaky or not-run tests; markdown-it 14.3.3, `npm audit` 0), `00976354` (25 min). Not verified: the run on Chrome 156 itself (not installable here); the first PR run is the check | — |
 | CI-03 | Contract tests used invented fixtures | P5-10 (chart-note test part) | partly fixed | Real built pages: tests/helpers/tool-page.cjs (`285c7af8`), `779e05b4` · tests/handoffs-real.test.cjs; the pause is tested by behaviour (`972b58e7` · tests/browser/motion.spec.mjs, tests/cosmos-pause.test.cjs rewritten). Remains: tests/weekly.test.cjs still checks only `note.length > 20` (P5-10) | — |
@@ -156,7 +160,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | ID | Finding (short) | Maps to | Status | Evidence |
 |---|---|---|---|---|
 | SEO-01 | MR 41–80 dated "November 2026" | E-04 | fixed | `c9a75002` · tests/publication-dates.test.cjs |
-| SEO-02 | Reflections linked from one page | SEO-02 | needs author approval | see Table A |
+| SEO-02 | Reflections linked from one page | SEO-02 | pending | Deferred by the author (see Table A) |
 | SEO-03 | Tool pages ~70 % template text | — | pending | Optional in the audit; not assigned to any phase; no commit |
 | SEO-04 | Publications as HTML + 3 indexable PDFs | — | no change needed | The audit's own correction: "none mandatory; keep HTML as primary" (it is the only one in the sitemap) |
 | SEO-05 | 543 sitemap URLs without lastmod | (P5-09) | partly fixed | `e204acc5` · tests/publication-dates.test.cjs (issue, volume and edition pages take `lastmod` from online.json). Remains: tool and hub pages still have none (the sitemap gives `lastmod` only to dated content, by design) |
@@ -221,9 +225,9 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | PM-1 | Home canvas saturates the main thread | M-01 | partly fixed | `ba1c7ee0`; the larger gain is the approval patch (see M-01) |
 | PM-2 | Pause leaves box-shadow motion running | M-02 | fixed | `972b58e7` · tests/browser/motion.spec.mjs |
 | PM-3 | Pause only on home, not remembered | M-03 | fixed | `972b58e7` · tests/browser/motion.spec.mjs |
-| PM-4 | Zenith radar duplicate keyframes | M-04 | needs author approval | `phase3/proposals/zenith-radar-keyframes.patch` |
+| PM-4 | Zenith radar duplicate keyframes | M-04 | fixed | `22edfaff` · tests/motion-css.test.cjs |
 | PM-5 | Issue charts print blank | M-05 | fixed | `eb4b4b8c` · tests/browser/print.spec.mjs |
-| PM-6 | Wheel glide on the main thread | M-06 | needs author approval | `phase3/proposals/wheel-native-scroll.patch` |
+| PM-6 | Wheel glide on the main thread | M-06 | fixed | `2d9f9906` · tests/browser/motion.spec.mjs |
 | PM-7 | Cloudflare RUM POST answered 404 | A-01 | needs author approval | see A-01 |
 | PM-8 | Tool pages: decorative CSS animations 28–50 % of main thread | (P3) | partly fixed | `d8b9192f` (family badge glow: CX Control Tower 2.57 → 0.12 s per 5 s at 4×, ≤ 5.5 % of the badge's pixels differ by ≤ 21/255); Shift Pulse's ECG trace unchanged (stroke-dashoffset runs on the main thread); everything stops when paused |
 | PM-9 | CX Tower: 32 tabbable chart dots | (P3) | fixed | `bfff4bbc` · tests/browser/a11y-pages.spec.mjs (tab stops 114 → 82 at 390 px) |

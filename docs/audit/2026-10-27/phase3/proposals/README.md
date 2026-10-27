@@ -1,6 +1,11 @@
 # Phase 3 changes that wait for the author
 
-Each file is one change (or two commits that go together) as `git format-patch` output. None is on the work branch.
+Each file is one change (or two commits that go together) as `git format-patch` output.
+
+**27 October 2026, the author's decisions:** `zenith-radar-keyframes.patch`, `wheel-native-scroll.patch` and
+`lumen-gold-light-theme.patch` are approved and applied on the work branch (`22edfaff`, `2d9f9906`, `5dd8dfc5`); the
+files stay here as the record. `planets-touch-dpr-1.5.patch` stays separate: visual comparison first
+(`../planets-touch.md`).
 Each was checked on 27 October 2026 to apply on it (`git am --3way <file>`); after applying, run `npm run build`,
 `npm test` and `npm run test:browser`.
 
