@@ -9,6 +9,10 @@
   const BAND_LIMITS = [0.5, 0.75, 0.9];
   const OLD_TAG_DAYS = 30;
   const MAX_TREND_AREAS = 6;
+  // An audit counts in the trend and the league table only when it covers the area: at least 80 % of its questions
+  // scored and every S with a score. A few answers are a partial audit: a single "4" would read as 100 % (audit of
+  // 27 October 2026, P2B-11). Partial audits stay in the log, marked, and keep their own result.
+  const COMPLETE_SHARE = 0.8;
 
   const addDays = (iso, days) => {
     const date = new Date(`${iso}T00:00:00Z`);
@@ -34,16 +38,20 @@
     });
     const rated = keys.filter((key) => perS[key].n > 0);
     const overall = rated.length ? rated.reduce((sum, key) => sum + perS[key].pct, 0) / rated.length : 0;
-    return { perS, overall, answered, total, rated: rated.length };
+    const complete = answered > 0 && answered / total >= COMPLETE_SHARE && keys.every((key) => perS[key].n > 0 || perS[key].total === 0);
+    return { perS, overall, answered, total, rated: rated.length, complete };
   };
   const bandIndex = (pct) => BAND_LIMITS.filter((limit) => pct >= limit).length;
   const overallOf = (row, scopes) => score(row.scores, pillarsFor(row.scope, scopes)).overall;
+  const isComplete = (row, scopes) => score(row.scores, pillarsFor(row.scope, scopes)).complete;
+  const partialCount = (rows, scopes) => rows.filter((row) => !isComplete(row, scopes)).length;
   const byDate = (a, b) => String(a.date).localeCompare(String(b.date));
-  // One series per area (the given area alone, or the most recently audited areas, up to six), oldest first.
+  // One series per area (the given area alone, or the most recently audited areas, up to six), oldest first; complete
+  // audits only.
   const trend = (rows, scopes, area = "") => {
     const groups = new Map();
     [...rows].sort(byDate).forEach((row) => {
-      if (area && row.area !== area) return;
+      if ((area && row.area !== area) || !isComplete(row, scopes)) return;
       if (!groups.has(row.area)) groups.set(row.area, []);
       groups.get(row.area).push({ date: row.date, pct: overallOf(row, scopes), id: row.id });
     });
@@ -51,10 +59,10 @@
       .sort((a, b) => String(b.points.at(-1).date).localeCompare(String(a.points.at(-1).date)))
       .slice(0, MAX_TREND_AREAS);
   };
-  // The latest audit of each area, best first: the league table.
+  // The latest complete audit of each area, best first: the league table.
   const latestByArea = (rows, scopes) => {
     const latest = new Map();
-    [...rows].sort(byDate).forEach((row) => latest.set(row.area, row));
+    [...rows].sort(byDate).forEach((row) => { if (isComplete(row, scopes)) latest.set(row.area, row); });
     return [...latest.values()].map((row) => ({ area: row.area, date: row.date, pct: overallOf(row, scopes), id: row.id })).sort((a, b) => b.pct - a.pct);
   };
   // The audit of the same area before this one (by date, then by position), for the dashed line of the radar.
@@ -188,7 +196,7 @@
     const after = sorted.filter((record) => record.ref === `${tagId}${TAG_AFTER}`);
     return before.length && after.length ? { before: before[0], after: after.at(-1) } : null;
   };
-  window.FiveSMath = { SCORE_MAX, FINDING_AT, BAND_LIMITS, OLD_TAG_DAYS, addDays, pillarsFor, score, bandIndex, trend, latestByArea, previous, weakest, redTagStats,
+  window.FiveSMath = { SCORE_MAX, FINDING_AT, BAND_LIMITS, OLD_TAG_DAYS, COMPLETE_SHARE, addDays, pillarsFor, score, isComplete, partialCount, bandIndex, trend, latestByArea, previous, weakest, redTagStats,
     CADENCES, addMonths, stepDate, nextAuditor, rotation, nextAudit, schedule, uidOf, ics, photoPairs, TAG_AFTER, tagPair };
 
   const dataEl = document.getElementById("five-s-audit-data");
@@ -450,7 +458,8 @@
     head.append(h2, el("p", "fs-meta", metaLine(audit)), el("p", "fs-band-note", band.note));
 
     const stats = el("div", "dl-stats fs-stats");
-    stats.append(stat(tx("Overall"), pct(total.overall, 0), tx("{a} of {b} questions scored", { a: int.format(total.answered), b: int.format(total.total) })));
+    const scored = tx("{a} of {b} questions scored", { a: int.format(total.answered), b: int.format(total.total) });
+    stats.append(stat(tx("Overall"), pct(total.overall, 0), total.complete ? scored : `${scored} · ${tx("partial audit")}`));
     auditKeys.forEach((key) => { const s = total.perS[key]; stats.append(stat(pillarName(key), s.n ? `${num(s.avg, 1)} / ${SCORE_MAX}` : "–", s.n ? pct(s.pct, 0) : tx("not scored yet"))); });
     const findings = findingsOf(audit);
     stats.append(stat(tx("Findings"), int.format(findings.length), tx("questions at {n} or below", { n: FINDING_AT })));
@@ -497,13 +506,16 @@
       radarPanel.append(ChartKit.figure(ChartKit.radar(axes, { title: tx("Radar of the S"), levels: SCORE_MAX, compare, format: (v) => num(v, 1) }), { fileName: "5s-radar" }));
       panels.push(radarPanel);
 
-      // Trend of the overall share per audit, one line per area.
+      // Trend of the overall share per audit, one line per area; partial audits are left out, and the page says so.
+      const partials = partialCount(state.rows, cfg.scopes);
+      const partialNote = partials ? el("p", "fs-partial-note", tx(partials === 1 ? "{n} partial audit is left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S." : "{n} partial audits are left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.", { n: int.format(partials) })) : null;
       const series = trend(state.rows, cfg.scopes).sort((a, b) => (a.area === audit.area ? -1 : b.area === audit.area ? 1 : 0));
       if (series.length && series.some((s) => s.points.length > 1)) {
         const trendPanel = panel(tx("Trend by area"), tx("Overall share of the full standard, audit by audit. {n} areas at most.", { n: MAX_TREND_AREAS }));
         trendPanel.classList.add("fs-panel-trend");
         const lines = series.map((s) => ({ label: s.area, points: s.points.map((p) => ({ x: label(p.date), y: p.pct, tip: `${s.area} · ${showDate(p.date)}: ${pct(p.pct, 0)}`, state: stateOf(p.pct) })) }));
         trendPanel.append(ChartKit.figure(ChartKit.line(lines, { title: tx("Trend by area"), yMin: 0, yMax: 1, target: BAND_LIMITS[2], format: (v) => pct(v, 0) }), { fileName: "5s-trend" }));
+        if (partialNote) trendPanel.append(partialNote);
         panels.push(trendPanel);
       }
 
@@ -513,6 +525,7 @@
         const leaguePanel = panel(tx("League table"), tx("The latest audit of each area. Green from 75 %, amber from 50 %, red below."));
         leaguePanel.classList.add("fs-panel-league");
         leaguePanel.append(ChartKit.figure(ChartKit.bars(league.map((item) => ({ label: item.area, value: item.pct, state: stateOf(item.pct), tip: `${item.area} · ${showDate(item.date)}: ${pct(item.pct, 0)}` })), { title: tx("League table"), yMax: 1, format: (v) => pct(v, 0) }), { fileName: "5s-league" }));
+        if (partialNote && !partialNote.parentNode) leaguePanel.append(partialNote);
         panels.push(leaguePanel);
       }
     }
@@ -569,6 +582,7 @@
       dateCell.append(show);
       const pctCell = el("td", "num");
       pctCell.append(el("strong", null, pct(total.overall, 0)), ` · ${verdict(total.overall).name}`);
+      if (!total.complete) pctCell.append(` · ${tx("partial audit")}`);
       const remove = el("button", "dl-remove", "×");
       remove.type = "button";
       remove.dataset.remove = row.id;

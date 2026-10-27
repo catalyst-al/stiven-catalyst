@@ -7670,5 +7670,8 @@
   "{name}: would unpack to far more than any table holds, so it was not read.": "{name}: würde beim Entpacken weit mehr ergeben, als eine Tabelle je enthält; nicht gelesen.",
   "This file is larger than 5 MB, far larger than any CV. Nothing was changed.": "Diese Datei ist größer als 5 MB, weit größer als jeder Lebenslauf. Nichts wurde geändert.",
   "This file is larger than 40 MB; a work file from this site is never that large. Nothing was changed.": "Diese Datei ist größer als 40 MB; eine Arbeitsdatei dieser Website ist nie so groß. Nichts wurde geändert.",
-  "The first {shown} of {n} results": "Die ersten {shown} von {n} Ergebnissen"
+  "The first {shown} of {n} results": "Die ersten {shown} von {n} Ergebnissen",
+  "partial audit": "unvollständiges Audit",
+  "{n} partial audit is left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} unvollständiges Audit ist nicht im Trend und nicht in der Rangliste: Ein Audit zählt ab 80 % bewerteten Fragen, mit einer Bewertung in jedem S.",
+  "{n} partial audits are left out of the trend and the league table: an audit counts from 80 % of its questions scored, with a score in every S.": "{n} unvollständige Audits sind nicht im Trend und nicht in der Rangliste: Ein Audit zählt ab 80 % bewerteten Fragen, mit einer Bewertung in jedem S."
 }
