@@ -64,3 +64,44 @@ test('the link of the example shift and of a full handover fit a QR code', async
   const link = await Link.handoverLink(long, 'https://stivencatalyst.com/tools/shift-handover/', new Date());
   assert.ok(M.qrEncode(link), `${link.length} bytes still fit`);
 });
+
+test('a link that unpacks to more than a handover can hold is refused without unpacking it all', async () => {
+  const zlib = require('node:zlib');
+  const fragment = (json) => `#h=${Link.toBase64Url(zlib.gzipSync(Buffer.from(JSON.stringify(json))))}`;
+  const wrap = (h) => ({ format: Link.LINK_FORMAT, version: 1, sent: 'x', handover: h });
+  // A real handover with many long issues still opens.
+  const many = { ...handover, issues: Array.from({ length: 40 }, (_, i) => ({ text: `Issue ${i}: ${'described in full with its context '.repeat(8)}`, priority: 'High', owner: 'Team lead', due: '2026-10-30', done: false, carried: 0 })) };
+  assert.ok(await Link.unpackHandover(fragment(wrap(many))), 'a large real handover');
+  // 50 MB of spaces gzip to about 50 KB: the link is short, what it unpacks to is not.
+  const bomb = `#h=${Link.toBase64Url(zlib.gzipSync(Buffer.concat([Buffer.from(`{"format":"${Link.LINK_FORMAT}","version":1,"handover":{"headsUp":"`), Buffer.alloc(50 * 1024 * 1024, 32), Buffer.from('"}}')])))}`;
+  const started = Date.now();
+  assert.equal(await Link.unpackHandover(bomb), null);
+  assert.ok(Date.now() - started < 2000, `refused in ${Date.now() - started} ms`);
+  assert.ok(Link.MAX_UNPACKED <= 512 * 1024, 'a cap far above any handover and far below a bomb');
+  assert.equal(await Link.unpackHandover(fragment(wrap({ ...handover, headsUp: 'x'.repeat(Link.MAX_UNPACKED) }))), null);
+  // A fragment longer than any link a chat app or a QR code carries is not even decoded.
+  assert.equal(await Link.unpackHandover(`#h0=${'A'.repeat(Link.MAX_FRAGMENT + 4)}`), null);
+});
+
+test('a handover from a link is shown as text: markup in its fields never becomes part of the page', { skip: !fs.existsSync('_site/tools/shift-handover/index.html') }, async () => {
+  const { JSDOM } = require('jsdom');
+  const evil = '<img src=x onerror="window.pwned=1"><script>window.pwned=2</script>';
+  const h = { ...handover, from: evil, shift: evil, area: evil, headsUp: evil, safety: evil, metrics: [[evil, evil, evil]], issues: [{ text: evil, priority: evil, owner: evil, due: evil, done: false, carried: 0 }] };
+  const fragmentText = await Link.packHandover(h, new Date('2026-10-26T14:00:00Z'));
+  const html = fs.readFileSync('_site/tools/shift-handover/index.html', 'utf8').replace(/<script\b[^>]*\bsrc=[^>]*><\/script>/g, '');
+  const dom = new JSDOM(html, { url: `https://example.test/tools/shift-handover/#${fragmentText}`, runScripts: 'outside-only', pretendToBeVisual: true });
+  const w = dom.window;
+  Object.assign(w, { CompressionStream, DecompressionStream, Blob, Response, TextEncoder, TextDecoder });
+  w.HTMLElement.prototype.scrollIntoView = () => {};
+  w.confirm = () => true;
+  for (const file of ['tool-kit', 'shift-handover']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+  const box = w.document.querySelector('[data-incoming]');
+  for (let i = 0; i < 100 && box.hidden; i++) await new Promise((r) => setTimeout(r, 10));
+  assert.equal(box.hidden, false, 'the handover is offered');
+  box.querySelector('[data-incoming-open]').click();
+  await new Promise((r) => setTimeout(r, 20));
+  assert.equal(w.pwned, undefined);
+  assert.equal(w.document.querySelectorAll('img[src="x"]').length + [...w.document.querySelectorAll('script')].filter((s) => s.textContent.includes('pwned')).length, 0, 'no element from the link');
+  assert.match(w.document.querySelector('[data-handover]').textContent + [...w.document.querySelectorAll('input, textarea')].map((field) => field.value).join(' '), /<img src=x onerror=/, 'the markup is there as text');
+  assert.equal(w.location.hash, '', 'the handover leaves the address once opened');
+});

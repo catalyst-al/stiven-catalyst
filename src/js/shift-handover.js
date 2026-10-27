@@ -26,16 +26,42 @@
     }
     return `h0=${toBase64Url(bytes)}`;
   };
+  // A link anyone can send: a fragment longer than any handover makes, or one that unpacks past MAX_UNPACKED (a few
+  // kilobytes of gzip can hold gigabytes of spaces), is refused, and the unpacking stops at the cap.
+  const MAX_FRAGMENT = 64 * 1024;
+  const MAX_UNPACKED = 256 * 1024;
+  const inflate = async (bytes) => {
+    const reader = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip")).getReader();
+    const chunks = [];
+    let total = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.length;
+      if (total > MAX_UNPACKED) {
+        reader.cancel().catch(() => {});
+        return null;
+      }
+      chunks.push(value);
+    }
+    const out = new Uint8Array(total);
+    let at = 0;
+    chunks.forEach((chunk) => { out.set(chunk, at); at += chunk.length; });
+    return out;
+  };
   // The handover a fragment carries (as saved, to be cleaned by the page), or null when it carries none.
   const unpackHandover = async (fragment) => {
-    const m = /^#?(h0?)=([A-Za-z0-9_-]+)$/.exec(String(fragment ?? "").trim());
+    const text = String(fragment ?? "").trim();
+    if (text.length > MAX_FRAGMENT + 4) return null;
+    const m = /^#?(h0?)=([A-Za-z0-9_-]+)$/.exec(text);
     if (!m) return null;
     try {
       let bytes = fromBase64Url(m[2]);
       if (m[1] === "h") {
         if (!canZip()) return null;
-        bytes = await pipe(bytes, new DecompressionStream("gzip"));
+        bytes = await inflate(bytes);
       }
+      if (!bytes || bytes.length > MAX_UNPACKED) return null;
       const payload = JSON.parse(new TextDecoder().decode(bytes));
       if (!payload || payload.format !== LINK_FORMAT || payload.version !== LINK_VERSION || !payload.handover || typeof payload.handover !== "object" || Array.isArray(payload.handover)) return null;
       return { sent: typeof payload.sent === "string" ? payload.sent : "", handover: payload.handover };
@@ -44,7 +70,7 @@
     }
   };
   const handoverLink = async (handover, href, now) => `${String(href).split("#")[0]}#${await packHandover(handover, now)}`;
-  window.ShiftHandoverLink = { LINK_FORMAT, LINK_VERSION, toBase64Url, fromBase64Url, packHandover, unpackHandover, handoverLink };
+  window.ShiftHandoverLink = { LINK_FORMAT, LINK_VERSION, MAX_FRAGMENT, MAX_UNPACKED, toBase64Url, fromBase64Url, packHandover, unpackHandover, handoverLink };
 
   const form = document.querySelector("[data-handover]");
   const dataEl = document.getElementById("shift-handover-data");
