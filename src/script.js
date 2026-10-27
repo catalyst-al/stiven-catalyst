@@ -25,6 +25,36 @@
     setThemeLabel();
   });
 
+  // The motion of the whole site: "Pause the motion" at the foot of every page and beside the planets on the homepage.
+  // Paused, <html data-motion="paused"> stops every endless animation (65-motion.css) and the planets' drawing
+  // (js/cosmos.js). The choice is kept in this browser ("sc-motion": "paused" or "on") and applied by the inline script
+  // in the head before the first paint; without a choice, reduced motion asked of the system starts paused. Another tab
+  // that changes it, or a change of the system setting while no choice was made, is followed here.
+  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+  const readMotion = () => {
+    try { return localStorage.getItem("sc-motion"); } catch { return null; }
+  };
+  // The switches say "Pause" or "Play" by themselves, from the attribute (65-motion.css).
+  const motionToggles = document.querySelectorAll("[data-motion-toggle]");
+  const setMotion = (paused) => {
+    if (paused) root.dataset.motion = "paused";
+    else delete root.dataset.motion;
+  };
+  const choiceOrSystem = () => {
+    const choice = readMotion();
+    return choice === "paused" || (choice !== "on" && Boolean(reduceMotion?.matches));
+  };
+  setMotion(choiceOrSystem());
+  for (const toggle of motionToggles) {
+    toggle.addEventListener("click", () => {
+      const paused = root.dataset.motion !== "paused";
+      setMotion(paused);
+      try { localStorage.setItem("sc-motion", paused ? "paused" : "on"); } catch { /* storage unavailable: this page only */ }
+    });
+  }
+  window.addEventListener("storage", (event) => { if (event.key === "sc-motion") setMotion(choiceOrSystem()); });
+  reduceMotion?.addEventListener?.("change", () => setMotion(choiceOrSystem()));
+
   const menuButton = document.querySelector("[data-menu-toggle]");
   const panel = document.querySelector("[data-mobile-panel]");
 

@@ -1,0 +1,89 @@
+
+/* One switch for the motion of the whole site: "Pause the motion" at the foot of every page (and beside the planets on
+   the homepage), script.js. The choice is kept in this browser ("sc-motion") and set on <html data-motion="paused"> by
+   the inline script in the head of every page (layouts/base.njk), before the first paint; with reduced motion asked
+   of the system and no choice made, the page starts paused. Paused, every endless animation of the site stops in the
+   still state reduced motion gives it, and the planets' drawing stops (js/cosmos.js); what plays once (a heading
+   rising, a card appearing as it is scrolled to) is left as it is. Each endless animation of this stylesheet is listed
+   here (tests/motion-css.test.cjs), and none runs while paused (tests/browser/motion.spec.mjs). */
+.motion-toggle {
+  display: block;
+  margin: 14px 0 0;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 72%, transparent);
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+.motion-toggle:hover, .motion-toggle:focus-visible { color: var(--ink); border-color: var(--muted); }
+/* The switches need scripts: shown with the "js" class the head script sets before the first paint, so the footer
+   never grows under the reader. Each says what it will do, from the first paint too. */
+.motion-toggle, .cosmos-pause { display: none; }
+.js .motion-toggle, .js .cosmos-pause { display: block; }
+.motion-play { display: none; }
+:root[data-motion="paused"] .motion-pause { display: none; }
+:root[data-motion="paused"] .motion-play { display: inline; }
+
+:root[data-motion="paused"] .nav-menu-link:is(:hover, :focus-visible) i.is-planet::after,
+:root[data-motion="paused"] .main-nav a.has-news,
+:root[data-motion="paused"] .main-nav a.has-news .nav-orb,
+:root[data-motion="paused"] .main-nav a.has-news::after,
+:root[data-motion="paused"] .mobile-panel a.has-news .nav-orb,
+:root[data-motion="paused"] .menu-button.has-news::after,
+:root[data-motion="paused"] .cosmos-chip,
+:root[data-motion="paused"] .cosmos-chip::after,
+:root[data-motion="paused"] .cosmos-chip-dot,
+:root[data-motion="paused"] .book-shelf-item .book-object,
+:root[data-motion="paused"] .book-shelf-item .book-object-cover,
+:root[data-motion="paused"] .hero-go,
+:root[data-motion="paused"] .hero-go::after,
+:root[data-motion="paused"] .hero-bulb,
+:root[data-motion="paused"] .pulse-cracks,
+:root[data-motion="paused"] .zenith-radar,
+:root[data-motion="paused"] .lumen-ring ellipse,
+:root[data-motion="paused"] .reflection-hero::before,
+:root[data-motion="paused"] .about-portrait,
+:root[data-motion="paused"] .about-timeline li:first-child .about-when::before,
+:root[data-motion="paused"] .about-brand-poster .brand-bulb::after,
+:root[data-motion="paused"] .book-onward.is-shown,
+:root[data-motion="paused"] .book-onward.is-shown .book-onward-arrow svg,
+:root[data-motion="paused"] .family-sky *,
+:root[data-motion="paused"] .family-sky *::before,
+:root[data-motion="paused"] .family-sky *::after,
+:root[data-motion="paused"] .atlas-stars i,
+:root[data-motion="paused"] .in-family .scale-option input:checked + span::before,
+:root[data-motion="paused"] .in-family .chip[aria-pressed="true"]::before,
+:root[data-motion="paused"] .in-family .cv-theme:has(input:checked)::before,
+:root[data-motion="paused"] .family-badge > span,
+:root[data-motion="paused"] .family-badge > span::after,
+:root[data-motion="paused"] .share-orbit-ring,
+:root[data-motion="paused"] .share-orbit-mini,
+:root[data-motion="paused"] .new-badge::before,
+:root[data-motion="paused"] .series-panel .series-dots a.is-next::after,
+:root[data-motion="paused"] .series-track .series-dots a.is-next::after,
+:root[data-motion="paused"] .book-object-cover,
+:root[data-motion="paused"] .book-object::before,
+:root[data-motion="paused"] .project-card .tag.is-live::before,
+:root[data-motion="paused"] .project-card .tag.is-live::after,
+:root[data-motion="paused"] .start-intro img,
+:root[data-motion="paused"] .podcast-cover,
+:root[data-motion="paused"] .audio-player.is-playing .audio-player-play::after,
+:root[data-motion="paused"] .lost-orbit i,
+:root[data-motion="paused"] .lost-orbit b,
+:root[data-motion="paused"] .weekly-archive .weekly-card-cover,
+:root[data-motion="paused"] .contact-card-orb::after { animation: none !important; }
+/* Where reduced motion puts a still light in place of a moving one, so does the pause. */
+:root[data-motion="paused"] .main-nav a.has-news .nav-orb,
+:root[data-motion="paused"] .mobile-panel a.has-news .nav-orb,
+:root[data-motion="paused"] .menu-button.has-news::after { box-shadow: 0 0 10px var(--blue); }
+:root[data-motion="paused"] .sky-lumen .lumen-dust i { opacity: .6; }
+:root[data-motion="paused"] .sky-atlas .atlas-line { stroke-dashoffset: 0; }
+:root[data-motion="paused"] .sky-atlas .atlas-star { opacity: 1; }
+:root[data-motion="paused"] .sky-pulse .pulse-trace { stroke-dashoffset: 700; }
+:root[data-motion="paused"] .in-family .scale-option input:checked + span::before,
+:root[data-motion="paused"] .in-family .chip[aria-pressed="true"]::before,
+:root[data-motion="paused"] .in-family .cv-theme:has(input:checked)::before { opacity: .85; }

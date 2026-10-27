@@ -19,9 +19,11 @@
   const chips = [...root.querySelectorAll("[data-family]")];
   const panels = [...root.querySelectorAll("[data-family-panel]")];
   const hint = root.querySelector("[data-cosmos-hint]");
-  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Stopped by the visitor ("Pause the motion"): then, as with reduced motion, the scene is drawn only when it changes.
-  let paused = false;
+  // Still: the motion of the site is paused (<html data-motion="paused">: the switch "Pause the motion" at the foot of
+  // the page and beside the planets, script.js; and, until the reader chooses, reduced motion). Then the scene is
+  // drawn only when it changes, with the light already on.
+  const page = document.documentElement;
+  let still = page.dataset.motion === "paused";
 
   const rgbOf = (hex) => {
     const n = parseInt(hex.replace("#", ""), 16);
@@ -1006,7 +1008,7 @@
     frameId = requestAnimationFrame(step);
   };
   const start = () => {
-    if (running || still || paused || !visible || document.hidden) return;
+    if (running || still || !visible || document.hidden) return;
     running = true;
     last = performance.now();
     frameId = requestAnimationFrame(step);
@@ -1022,7 +1024,7 @@
   const select = (id) => {
     selected = planets.find((planet) => planet.id === id && planet !== selected) || null;
     follow = Boolean(selected);
-    if (still || paused) {
+    if (still) {
       if (selected) view.yaw = Math.PI / 2 - (selected.phase + selected.speed * time);
       zoom = selected ? 1 : 0;
       S = S0 * (1 + ZOOM * zoom);
@@ -1152,18 +1154,20 @@
     }).observe(root);
   }
   document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
-  const pause = root.querySelector("[data-cosmos-pause]");
-  if (pause && !still) {
-    const pauseLabel = pause.textContent;
-    pause.hidden = false;
-    pause.addEventListener("click", () => {
-      paused = !paused;
-      pause.textContent = paused ? pause.dataset.playLabel : pauseLabel;
-      // The beating dots and rings of the planet buttons stop with the planets (styles.css, .cosmos.is-paused).
-      root.classList.toggle("is-paused", paused);
-      if (paused) stop(); else start();
-    });
-  }
+  // Paused or played again, here or in another tab: the loop stops, the scene settles where it is (the light on, the
+  // opened planet at the front), or the loop starts again from there.
+  new MutationObserver(() => {
+    const now = page.dataset.motion === "paused";
+    if (now === still) return;
+    still = now;
+    if (still) {
+      stop();
+      warm = 1;
+      zoom = selected ? 1 : 0;
+      S = S0 * (1 + ZOOM * zoom);
+      refresh();
+    } else start();
+  }).observe(page, { attributes: true, attributeFilter: ["data-motion"] });
   root.classList.add("is-live");
   resize();
   start();

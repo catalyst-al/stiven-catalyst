@@ -68,11 +68,13 @@
 {%- set socialImage = ogImage or ((card | assetUrl) if card else "/social.png") -%}
 {#- The two inline scripts, kept in variables so the Content Security Policy can name their hashes. The first also
     turns floor mode on before the first paint on a tool page (js/floor-mode.js keeps the choice), so the page never
-    jumps from small to large. It also keeps a page transition the browser gives up from showing as an error: a key
+    jumps from small to large, and pauses the motion of the site when the reader paused it ("sc-motion", the switch at
+    the foot of the page, script.js) or, without a choice, asks the system for reduced motion, so nothing moves for a
+    frame (65-motion.css). It also keeps a page transition the browser gives up from showing as an error: a key
     pressed while the page is still arriving makes Chrome show it at once, and the transition it had prepared (which
     no script was handed yet) is rejected with "Page already revealed" or a similar InvalidStateError; the page simply
     appears without the movement (tests/browser/transitions.spec.mjs). -#}
-{%- set themeScript -%}document.documentElement.classList.add("js");addEventListener("unhandledrejection",function(e){var r=e.reason;if(r&&/^(InvalidStateError|AbortError|TimeoutError)$/.test(r.name)&&/transition/i.test(r.message))e.preventDefault()});try{document.documentElement.dataset.theme=localStorage.getItem("sc-theme")||"dark";if(location.pathname.indexOf("/tools/")>-1&&localStorage.getItem("sc-floor-mode-ui")==="on")document.documentElement.dataset.floor="on"}catch(e){document.documentElement.dataset.theme="dark"}{%- endset -%}
+{%- set themeScript -%}(function(){var d=document.documentElement,m=null;d.classList.add("js");addEventListener("unhandledrejection",function(e){var r=e.reason;if(r&&/^(InvalidStateError|AbortError|TimeoutError)$/.test(r.name)&&/transition/i.test(r.message))e.preventDefault()});try{d.dataset.theme=localStorage.getItem("sc-theme")||"dark";if(location.pathname.indexOf("/tools/")>-1&&localStorage.getItem("sc-floor-mode-ui")==="on")d.dataset.floor="on";m=localStorage.getItem("sc-motion")}catch(e){d.dataset.theme="dark"}if(m==="paused"||(m!=="on"&&typeof matchMedia=="function"&&matchMedia("(prefers-reduced-motion: reduce)").matches))d.dataset.motion="paused"})(){%- endset -%}
 {%- set toolPage = "/tools/" in (page.url or "") -%}
 {%- set coachingLoader -%}{% include "partials/coaching-loader.njk" %}{%- endset -%}
 {#- Links on this site are fetched while the pointer rests on them (or on touch), so the next page is usually there
@@ -236,6 +238,10 @@
         <a href="{{ feedUrl }}">RSS</a>
         {%- if podcastFeed %}<a href="{{ '/podcast.html' | local(lang) }}">Podcast</a>{% endif %}
       </p>
+      {#- One switch for every animation of the site (WCAG 2.2.2), the same as beside the planets on the homepage (script.js
+          keeps the choice). It needs scripts, so it shows only with them (the "js" class of the head script), and it
+          says what it will do from the first paint (65-motion.css), so nothing moves or changes its words later. -#}
+      <button class="motion-toggle" type="button" data-motion-toggle><span class="motion-pause">{{ "Pause the motion" | t(lang) }}</span><span class="motion-play">{{ "Play the motion" | t(lang) }}</span></button>
     </div>
     <nav class="footer-links" aria-label="{{ 'Footer' | t(lang) }}">
       {%- for path, label in [["/start.html", "Start here"], ["/insights.html", "Insights"], ["/reflections.html", "Reflections"], ["/publications.html", "Publications"], ["/downloads.html", "Downloads"], ["/field-notes.html", "Field Notes"], ["/projects.html", "Projects"], ["/tools.html", "Tools"], ["/about.html", "About"], ["/contact.html", "Contact"]] %}

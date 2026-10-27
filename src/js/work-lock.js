@@ -42,7 +42,7 @@
   // opens with it, and the page then asks for a new PIN at the next lock (unlock(), and the section below).
   const MIN_PIN = 6;
   // Settings of the page itself: readable without the PIN, never locked away.
-  const OPEN = new Set(["sc-theme", "sc-floor-mode-ui", "sc-print-guide-hidden", FLAG, IDLE_KEY]);
+  const OPEN = new Set(["sc-theme", "sc-motion", "sc-floor-mode-ui", "sc-print-guide-hidden", FLAG, IDLE_KEY]);
 
   // ---- Pure logic (tests/work-lock.test.cjs) ----
   const lockable = (key) => typeof key === "string" && key.startsWith("sc-") && !OPEN.has(key);

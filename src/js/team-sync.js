@@ -299,7 +299,7 @@
   };
 
   // ---- What may be shared ----
-  const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && !["sc-theme", "sc-print-guide-hidden", TEAM_KEY, STATE_KEY].includes(key));
+  const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && !["sc-theme", "sc-motion", "sc-print-guide-hidden", TEAM_KEY, STATE_KEY].includes(key));
   const toolSlug = (key) => (window.WorkBackup ? window.WorkBackup.toolSlug(key) : String(key).replace(/^sc-/, "").replace(/-(check|calc|ui)$/, "").replace(/-(de|sq)$/, ""));
   // Personal, never offered: the career tools, the reader's own shelf, reading and cards, coaching, and Site Compare,
   // which holds other teams' read-only codes (secrets of those teams, not work of this one).

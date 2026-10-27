@@ -202,12 +202,7 @@
   .cosmos-chip-dot { animation: none; }
   .cosmos-chip:hover { transform: none; }
 }
-/* Stopped with "Pause the motion" (js/cosmos.js), as with reduced motion; so are the books of the open planet. */
-.cosmos.is-paused .cosmos-chip,
-.cosmos.is-paused .cosmos-chip::after,
-.cosmos.is-paused .cosmos-chip-dot,
-.cosmos.is-paused .book-shelf-item .book-object,
-.cosmos.is-paused .book-shelf-item .book-object-cover { animation: none; }
+/* Stopped with "Pause the motion" as with reduced motion, with every other endless animation of the site (65-motion.css). */
 
 /* Small books, as on Publications: the shelf under the homepage hero and the guide at the end of a tool page. */
 .book-shelf {

@@ -1,0 +1,30 @@
+[1A[2K[1/4] [390px dark] › tests/browser/motion.spec.mjs:38:1 › the motion switch stops every loop and the planets, and the browser keeps the choice
+[1A[2K[2/4] [390px dark] › tests/browser/motion.spec.mjs:99:1 › the switch is in every language
+[1A[2K  1) [390px dark] › tests/browser/motion.spec.mjs:38:1 › the motion switch stops every loop and the planets, and the browser keeps the choice 
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+    Error: element(s) not found
+    > 43 |   await expect(toggle).toBeVisible();
+    Error: no script error on any page of the journey
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+    > 21 |     expect(errors, "no script error on any page of the journey").toEqual([]);
+      24 | export { expect };
+    Error Context: test-results/browser-motion/motion-the-motion-switch-s-c5bd9-he-browser-keeps-the-choice-390px-dark/error-context.md
+[1A[2K  2) [390px dark] › tests/browser/motion.spec.mjs:99:1 › the switch is in every language ───────────
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+    Error: element(s) not found
+    > 103 |     await expect(toggle).toHaveText((await reduced(page)) ? play : pause);
+      105 |     await expect(toggle).toHaveText((await reduced(page)) ? pause : play);
+    Error Context: test-results/browser-motion/motion-the-switch-is-in-every-language-390px-dark/error-context.md
+[1A[2K[3/4] [1440px light] › tests/browser/motion.spec.mjs:38:1 › the motion switch stops every loop and the planets, and the browser keeps the choice
+[1A[2K[4/4] [1440px light] › tests/browser/motion.spec.mjs:99:1 › the switch is in every language
+[1A[2K  3) [1440px light] › tests/browser/motion.spec.mjs:38:1 › the motion switch stops every loop and the planets, and the browser keeps the choice 
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+    Error: element(s) not found
+    > 43 |   await expect(toggle).toBeVisible();
+    Error: no script error on any page of the journey
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+    > 21 |     expect(errors, "no script error on any page of the journey").toEqual([]);
+      24 | export { expect };
+    Error Context: test-results/browser-motion/motion-the-motion-switch-s-c5bd9-he-browser-keeps-the-choice-1440px-light/error-context.md
+[1A[2K  4) [1440px light] › tests/browser/motion.spec.mjs:99:1 › the switch is in every language ─────────
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
