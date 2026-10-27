@@ -3,7 +3,7 @@
     "name": "KPI Diagnostic",
     "type": "Diagnostic",
     "time": "2 min",
-    "summary": "A number turned red. Ten statements show whether the cause is clarity, skill, capacity, process design or ownership, with first moves for each.",
+    "summary": "A number turned red. Ten statements show which cause your answers point to, clarity, skill, capacity, process design or ownership, as a hypothesis to check on the floor, with first moves.",
     "url": "/tools/kpi-diagnostic/",
     "cta": "Start the diagnostic"
   },

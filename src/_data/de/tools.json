@@ -3,7 +3,7 @@
     "name": "KPI-Diagnose",
     "type": "Diagnose",
     "time": "2 min",
-    "summary": "Eine Kennzahl ist rot. Zehn Aussagen zeigen, ob die Ursache bei Klarheit, Können, Kapazität, Prozess oder Verantwortung liegt, mit ersten Schritten für jede.",
+    "summary": "Eine Kennzahl ist rot. Zehn Aussagen zeigen, auf welche Ursache Ihre Antworten deuten, Klarheit, Können, Kapazität, Prozess oder Verantwortung, als Hypothese zum Prüfen vor Ort, mit ersten Schritten.",
     "url": "/de/tools/kpi-diagnostic/",
     "cta": "Diagnose starten"
   },
