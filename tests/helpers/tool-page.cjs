@@ -45,6 +45,8 @@ const openTool = (slug, { lang = 'en', storage = {}, now = '2026-10-25T11:00:00Z
   w.HTMLElement.prototype.scrollIntoView = () => {};
   w.URL.createObjectURL = () => 'blob:test';
   w.URL.revokeObjectURL = () => {};
+  // jsdom has no TextEncoder/TextDecoder; the files the tools write (Excel, Word, PDF) need them.
+  if (!w.TextEncoder) { w.TextEncoder = TextEncoder; w.TextDecoder = TextDecoder; }
   Object.entries(storage).forEach(([key, value]) => w.localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value)));
   // A last word before the scripts run, e.g. a full storage: before(w).
   if (before) before(w);

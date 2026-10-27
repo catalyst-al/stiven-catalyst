@@ -67,7 +67,32 @@ window.ToolKit = (() => {
   // Load only what has the expected shape, so a tool never breaks on load.
   const isObject = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   const str = (value) => (typeof value === "string" ? value : "");
+  // Saved text the browser cannot parse any more is never thrown away: it is kept, as it is, under key + ".unreadable"
+  // (it goes into the backup file with the rest), the page says so once, and the tool starts empty instead of opening
+  // on its example over it (audit of 27 October 2026, P2A-10 and P2B-08).
+  let warnedDamaged = false;
+  const keepDamaged = (key) => {
+    let raw = null;
+    try { raw = localStorage.getItem(key); } catch { return; }
+    if (raw === null) return;
+    try { JSON.parse(raw); return; } catch { /* damaged: kept below */ }
+    try { if (localStorage.getItem(`${key}.unreadable`) === null) localStorage.setItem(`${key}.unreadable`, raw); } catch { /* storage full: the text stays under its own key until the next save */ }
+    if (warnedDamaged || !document.body) return;
+    warnedDamaged = true;
+    const box = document.createElement("div");
+    box.className = "tk-save-warning";
+    box.setAttribute("role", "alert");
+    const text = document.createElement("p");
+    text.textContent = tx("The saved data of this tool could not be read: it is damaged. It is kept aside unchanged, so nothing is lost, and the tool starts empty. A backup file or a restore point can bring your work back.");
+    const close = document.createElement("button");
+    close.type = "button";
+    close.textContent = "OK";
+    close.addEventListener("click", () => box.remove());
+    box.append(text, close);
+    document.body.append(box);
+  };
   const loadState = (key, defaults) => {
+    keepDamaged(key);
     const saved = read(key, {});
     const state = { ...defaults };
     if (!isObject(saved)) return state;
@@ -945,7 +970,9 @@ window.ToolKit = (() => {
   // example and marked. A log whose shape changed under the old rule cannot be told apart any more and stays as it is.
   // A tool opens on its example only when nothing is stored yet and no coaching project sent the visitor here:
   // someone arriving with ?coaching= works on their own case, and the example must not become its evidence.
-  const firstVisit = (key) => read(key, null) === null && !new URLSearchParams(location.search).has("coaching");
+  // Anything stored counts, even text that cannot be read any more (it is kept aside, see keepDamaged).
+  const stored = (key) => { try { return localStorage.getItem(key) !== null; } catch { return false; } };
+  const firstVisit = (key) => !stored(key) && !new URLSearchParams(location.search).has("coaching");
   const isExampleRow = (row) => isObject(row) && row.example === true;
   const markExample = (rows) => {
     if (Array.isArray(rows)) rows.forEach((row) => { if (isObject(row)) row.example = true; });
@@ -989,6 +1016,20 @@ window.ToolKit = (() => {
     return { sync: (state) => { note.hidden = !exampleMatches(state); } };
   };
 
+  // The rows of a paste that are not in the log yet: a row equal to one already there, field for field (its example
+  // mark aside), is left out once for each such row, so a paste of two identical events adds two.
+  const rowKey = (row) => JSON.stringify(Object.keys(row).filter((name) => name !== "example").sort().map((name) => [name, row[name] ?? ""]));
+  const newRows = (rows, added) => {
+    const left = new Map();
+    ownRows(rows).forEach((row) => { const k = rowKey(row); left.set(k, (left.get(k) || 0) + 1); });
+    const fresh = [];
+    let already = 0;
+    added.forEach((row) => {
+      const k = rowKey(row);
+      if (left.get(k) > 0) { left.set(k, left.get(k) - 1); already += 1; } else fresh.push(row);
+    });
+    return { fresh, already };
+  };
   // filter, when given, returns null or { label, test(row), clear() }: the table then shows only the rows that pass,
   // under a chip that clears it (the result is not filtered here: the tool decides what it filters).
   // firstExample: false when the page should not open on its example even on a first visit (the Daily Board, when other
@@ -1121,10 +1162,17 @@ window.ToolKit = (() => {
         return;
       }
       if (exampleMatches(state)) dropExample();
-      state.rows.push(...added);
+      // The same rows pasted again (the same export twice, or after a reload) are not counted twice: a pasted row that
+      // matches a row already in the log, field for field, is left out, once per matching row (audit T-17).
+      const { fresh, already } = newRows(state.rows, added);
+      if (!fresh.length) {
+        flash(importStatus, tx("All {n} rows are already in the log: nothing was added.", { n: int.format(already) }));
+        return;
+      }
+      state.rows.push(...fresh);
       changed();
       paste.value = "";
-      flash(importStatus, importText.done(added.length, skipped));
+      flash(importStatus, `${importText.done(fresh.length, skipped)}${already ? ` ${tx("{n} rows were already in the log and were not added again.", { n: int.format(already) })}` : ""}`);
     });
 
     logBody.addEventListener("click", (event) => {
@@ -1345,7 +1393,8 @@ window.ToolKit = (() => {
     if (text === "") return "";
     const serial = excelDate(text);
     if (serial) return `<c r="${ref}" s="2"><v>${serial}</v></c>`;
-    if (/^-?\d+(?:\.\d+)?$/.test(text) && text.length < 16) return `<c r="${ref}"><v>${Number(text)}</v></c>`;
+    // A number only when it reads back the same: "00123" (a code, an article number) stays text (audit T-22).
+    if (/^-?(?:0|[1-9]\d*)(?:\.\d+)?$/.test(text) && text.length < 16) return `<c r="${ref}"><v>${Number(text)}</v></c>`;
     return `<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${xmlText(text)}</t></is></c>`;
   };
   const xlsxFile = (rows, { sheet = "Sheet1", title = "" } = {}) => {
@@ -1420,7 +1469,7 @@ window.ToolKit = (() => {
 
   return {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
-    read, write, warnNotSaved, actionsNote, actionRefused, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
+    read, write, warnNotSaved, actionsNote, actionRefused, newRows, keepDamaged, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseDateTime, parseRows, canon, sigma, sigmaText,
     inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, isExampleRow, isExampleState, markExample, ownRows, readOwn, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
