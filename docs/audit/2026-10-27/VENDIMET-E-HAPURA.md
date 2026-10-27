@@ -18,6 +18,8 @@ skedarët e treguar; numrat e gjetjeve janë ato të `RAPORTI-I-KONSOLIDUAR.md`.
 | SEO-02, lidhjet mes reflektimeve | Shtyhet për një ndryshim editorial më vete; lidhjet e rekomanduara duhet të jenë kuptimplota | asgjë e ndryshuar |
 | Team Sync Worker, Cloudflare | Mos publiko; mos ndrysho konfigurimin | asgjë e publikuar; plani: `docs/SYNC-WORKER-MIGRATION.md` |
 | Publikimi | Draft PR për shqyrtim; asnjë merge pa miratimin përfundimtar | `docs/RELEASE.md` |
+| Kufizimet e njohura | Pranohen siç janë | `RAPORTI-I-PUBLIKIMIT.md` §3 |
+| Teksti i privatësisë (P-01) | Shtesë faktike nga kodi, në tri gjuhët, para merge-it; pa vlerësim ligjor | `f5701ab4`; teksti pret leximin dhe miratimin tënd (B.5) |
 
 ## B. Të hapura: kërkojnë fakte ose miratim
 
@@ -55,14 +57,16 @@ Burimi: `phase2/management-review.md` §9 dhe `phase2/tools-guide-and-pdf-check.
 - emri "Monthly edition", kur 80 numra dolën online brenda katër ditëve;
 - shtyllat mbi shkallë të shkurtuar pa bosht (P5-06): ndryshimi prek grafikët e publikuar dhe PDF-të.
 
-### 5. Teksti i privatësisë (P-01)
-Faqja e privatësisë në Fazën 3 mori vetëm dy përditësime faktike që burojnë nga kodi: zgjedhja e Pause-s dhe zërat
-online të leximit me zë. Pjesa tjetër pret ty, sepse është tekst ligjor:
-- fotot në IndexedDB (`sc-media`) për 5S, kryqin e sigurisë, Room Inspection, mirëmbajtjen dhe kapjen në terren;
-- lista e mjeteve që ruajnë të dhëna personale (emra dhe telefona mysafirësh te Lost & Found dhe Guest Complaints, emra punonjësish te Skills Matrix dhe Shift Capacity, etj.);
-- çelësat `sc-seen-*` që shkruhen në vizitën e parë pa veprim të lexuesit;
-- vendndodhja e analytics.
-Faktet: `phases/p2c-career-platform.md` (P2C-07).
+### 5. Teksti i privatësisë (P-01): shtesa faktike pret leximin tënd
+Shtesa është në degë (`f5701ab4`, `src/datenschutz.njk`, EN/DE/SQ), e shkruar vetëm nga kodi: kyçja me PIN; çdo lloj
+pike rikthimi; fotot në IndexedDB; emrat e mysafirëve dhe të punonjësve në katër mjete; shenjat "e re" të menysë
+(`sc-seen-*`) që shkruhen në vizitën e parë; kopjet e service worker-it; analytics në çdo faqe përveç mjeteve dhe
+faqeve të roleve; lista e Local Storage si shembuj, jo si listë e plotë. Para merge-it:
+- lexoje dhe miratoje, ose më thuaj çfarë të ndryshoj;
+- fjalia e bazës ligjore ("e domosdoshme për funksionin që kërkoni ju", § 25(2) nr. 2 TDDDG) nuk u prek. Për
+  `sc-seen-*` dhe progresin e leximit, që shkruhen pa kërkesë të lexuesit, ajo mund të mos mjaftojë: kjo është
+  pyetje ligjore për ty ose për një jurist, jo për mua.
+Faktet e auditimit: `phases/p2c-career-platform.md` (P2C-07).
 
 ### 6. Të tjera
 - Përshkrimet e KPI Diagnostic (titulli SEO) dhe ATS CV ("fehlerfrei", "shumica e punëdhënësve…" pa burim).

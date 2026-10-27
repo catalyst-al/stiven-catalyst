@@ -9,6 +9,8 @@ miratimin tënd përfundimtar.
 - Fazat 1–3 të auditimit (mjetet, publikimet, shfletuesi), siç i përshkruan `RAPORTI-I-KONSOLIDUAR.md`.
 - Tre ndryshimet e miratuara më 27 tetor: radari i Zenith-it, rrota natyrale e mausit (lëvizjet e tjera të buta
   mbeten), kontrasti i arit të Lumen-it në temën e çelët.
+- Teksti i privatësisë, shtesë faktike nga kodi në tri gjuhët (`f5701ab4`): kyçja me PIN, pikat e rikthimit, fotot,
+  emrat në katër mjete, shenjat "e re" të menysë, service worker-i, fusha e saktë e analytics.
 - Tre korrigjimet e rollback-ut: skedari i faqes së vjetër hapet; puna e shkruar gjatë kyçjes ruhet si pikë rikthimi
   para hapjes; shembulli i Action Tracker mbetet shembull mes versioneve.
 
@@ -20,7 +22,7 @@ asnjë fakt karriere, origjinal shqip, tekst libri apo vendim editorial që pret
 | Kontroll | Rezultati |
 | --- | --- |
 | Build | pa gabim |
-| Testet unit (lokalisht dhe në CI) | 1336 / 1336, 0 të anashkaluara |
+| Testet unit (lokalisht dhe në CI) | 1337 / 1337, 0 të anashkaluara |
 | Coaching | 54 faqe, 9 udhëtime |
 | CI e GitHub-it në PR, Chrome 156.0.8078.4 | `152bd4f5` (kodi përfundimtar): unit 1336 / 1336, shfletuesi 176 / 176, 0 të anashkaluara. Commit-i i dokumenteve pas tij kontrollohet edhe ai në PR |
 | Rollback në shfletues real (version i ri → i vjetër → i ri, me ruajtje dhe rikthim) | 90 kontrolle, 2 dështime që janë kufizime të faqes live (shih §3), 0 gabime faqeje |
@@ -29,7 +31,7 @@ asnjë fakt karriere, origjinal shqip, tekst libri apo vendim editorial që pret
 | `main` | `f34b1c4b`, i bashkuar në degë; asnjë commit i ri; bashkim provë pa konflikt |
 | Datat (`online-dates.mjs`, provë) | 48 ese/reflektime dhe 54 botime marrin ditën e bashkimit; asnjë datë e parë publikimi nuk lëviz |
 
-## 3. Rreziqet që mbeten
+## 3. Rreziqet që mbeten (të pranuara nga ti më 27 tetor)
 
 1. **Gjatë një rollback-u, faqja live:**
    - nuk lexon fotot brenda një skedari të ruajtur nga versioni i ri (fotot mbeten në skedar);
@@ -50,8 +52,9 @@ asnjë fakt karriere, origjinal shqip, tekst libri apo vendim editorial që pret
 
 ## 4. Hapat e publikimit, kur t'i miratosh
 
-1. PR #363 nga Draft në "Ready", pastaj **"Create a merge commit"**, jo squash e as rebase.
-2. Menjëherë pas tij: `node scripts/online-dates.mjs` në `main`, commit i dy skedarëve të datave.
-3. Kontrollet në faqen live dhe, nëse duhet, kthimi mbrapsht: `docs/RELEASE.md` §4–5.
+1. Lexo dhe mirato shtesën e privatësisë (`VENDIMET-E-HAPURA.md` B.5).
+2. PR #363 nga Draft në "Ready", pastaj **"Create a merge commit"**, jo squash e as rebase.
+3. Menjëherë pas tij: `node scripts/online-dates.mjs` në `main`, commit i dy skedarëve të datave.
+4. Kontrollet në faqen live dhe, nëse duhet, kthimi mbrapsht: `docs/RELEASE.md` §4–5.
 
 Vendimet që presin faktet ose miratimin tënd janë në `VENDIMET-E-HAPURA.md`.

@@ -10,7 +10,7 @@ për publikimin: `RAPORTI-I-PUBLIKIMIT.md`.
 | Kontroll | Rezultati (27 tetor 2026) |
 | --- | --- |
 | Build | `npx eleventy`: pa gabim |
-| Testet unit | `npm test`: **1336 / 1336**, 0 të anashkaluara, lokalisht dhe në CI (checkpoint: 1092; fundi i Fazës 1: 1269; i Fazës 2: 1318; i Fazës 3: 1330) |
+| Testet unit | `npm test`: **1337 / 1337**, 0 të anashkaluara, lokalisht dhe në CI (checkpoint: 1092; fundi i Fazës 1: 1269; i Fazës 2: 1318; i Fazës 3: 1330) |
 | Testet në shfletues | CI e PR #363, Chrome 156.0.8078.4: **176 / 176**, 0 të dështuara, 0 të anashkaluara, te `152bd4f5` (kodi përfundimtar) dhe `6fc1823b` (commit-i i fundit). Në fund të Fazës 3, lokalisht me Chrome 153: 164 / 164; në auditim dhe në Fazat 1–2: 26 / 32. Përfshijnë axe (13 faqe × 3 gjuhë × 2 tema), printimin, grafikët në celular, lëvizjen dhe Pause-n |
 | Coaching | `scripts/check-coaching-build.mjs`: 54 faqe, 9 udhëtime |
 | PDF ↔ HTML | 294 PDF kundrejt faqeve të tyre: 0 mospërputhje |
@@ -57,7 +57,7 @@ Edhe:
    - Libri: rreshti i botimit dhe kopertina e pasme (B-01).
    - Management Review: muaji i edicionit special, "redaksia", shënimi i 12 tetorit në PDF, emri "Monthly edition".
    - Përshkrimet e KPI Diagnostic dhe ATS CV.
-   - Faqja e privatësisë (P-01).
+   - Faqja e privatësisë (P-01): shtesa faktike është në degë (`f5701ab4`), pret leximin tënd.
    - Analytics e Cloudflare (A-01, cilësim llogarie).
    - Podcast-i shqip nr. 1 (P-05).
    - Publikimi i Team Sync Worker (hapi 1 i planit).
@@ -141,7 +141,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | M-04 | Zenith radar broken (duplicate keyframes) | PM-4 | fixed | `22edfaff` (approved by the author on 27 Oct) · tests/motion-css.test.cjs (no two @keyframes share a name), tests/page-transitions.test.cjs; frames in phase3/motion/radar/ | — |
 | M-05 | Printed issue before scrolling: blank charts | PM-5 | fixed | `eb4b4b8c` · tests/browser/print.spec.mjs (hidden chart parts 14/35/10 → 0; also scroll reveals, hero titles, dark margins on paper) | — |
 | M-06 | Desktop wheel glide slows scrolling | PM-6 | fixed | `2d9f9906` (approved by the author on 27 Oct, on condition that the other smooth motion stays: only the wheel handler of script.js is removed; links to a place on the page still glide, every animation and transition unchanged) · tests/browser/motion.spec.mjs (a notch 393 → 54 ms on home) | — |
-| P-01 | Privacy page incomplete | P2C-07 | needs author approval | Legal text; the facts to add are in phases/p2c-career-platform.md (P2C-07). No commit | The privacy text |
+| P-01 | Privacy page incomplete | P2C-07 | needs author approval | Factual addition from the code in EN/DE/SQ, decided 27 Oct (`f5701ab4`, test in tests/work-lock-storage.test.cjs); no legal assessment, the legal-basis sentence unchanged | The author reads and approves the text (VENDIMET-E-HAPURA.md B.5) |
 | P-02 | Narration reads the feedback form | P7-01 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs (built pages, 3 languages; reading stops at the end of the text on 261 narrated pages) | — |
 | P-03 | Narration skips the case-box content | P7-02 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs ("What cannot be confirmed" read) | — |
 | P-04 | Narration privacy note and online voices | P7-03 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs (local voice first; the note names an online voice and says the text goes to its maker; Edge no longer recommended; privacy page in 3 languages) | — |
