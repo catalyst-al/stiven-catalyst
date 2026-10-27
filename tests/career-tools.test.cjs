@@ -280,3 +280,49 @@ test('the ATS CV saves as a PDF of its own: the pages of the preview in points, 
   assert.equal(one.pages, 1);
   assert.match(Buffer.from(one.bytes).toString('latin1'), /\/BaseFont \/Helvetica\b/);
 });
+
+test('the ATS CV saves as a JSON Resume and opens one again, its own whole and another tool\'s sections in place', () => {
+  const cv = AtsCv.clean(AtsCv.fromBuilder(builderData.examples.en), atsData, 'en');
+  cv.experience[0].from = '03.2022';
+  cv.experience[0].to = '';
+  cv.extras = [{ title: 'Volunteering', text: 'Red Cross first aider\nSchool mentor' }];
+  const file = plain(AtsCv.toJsonResume(cv));
+  assert.equal(file.basics.name, 'Elena Marku');
+  assert.equal(file.basics.label, cv.person.headline);
+  assert.equal(file.basics.location.city, cv.person.location);
+  assert.equal(file.work[0].position, cv.experience[0].title);
+  assert.equal(file.work[0].name, cv.experience[0].company);
+  assert.equal(file.work[0].startDate, '2022-03', 'the date as the standard writes it');
+  assert.equal(file.work[0].endDate, '');
+  assert.ok(file.work[0].highlights.length >= 2 && file.work[0].highlights.every((line) => !line.includes('**')), 'bullets as plain highlights');
+  assert.deepEqual(file.skills[0].keywords, cv.skills[0].text.split(/\s*,\s*/));
+  assert.equal(file.languages[0].language, cv.languages[0].name);
+  assert.equal(file.meta.stivenCatalyst.highlights, cv.highlights);
+  assert.deepEqual(file.meta.stivenCatalyst.extras, cv.extras);
+  // Opened again: the same CV (the bold marks of the bullets and the summary are the one thing the standard drops).
+  const back = AtsCv.clean(AtsCv.fromJsonResume(file), atsData, 'en');
+  const strip = (value) => JSON.parse(JSON.stringify(value).replace(/\*\*/g, ''));
+  const same = (c) => ({ ...strip({ ...c, jobAd: '', font: '', accent: '' }) });
+  assert.deepEqual(plain(same(back)), plain(same(cv)));
+  // A file from another tool: ISO dates become the CV's, certificates join education, volunteer work becomes a section.
+  const other = {
+    basics: { name: 'Nora Hoxha', label: 'Dispatcher', email: 'nora@example.com', phone: '+355 69 000 0000', location: { city: 'Tirana', region: 'AL' }, summary: 'Plans 80 routes a day.' },
+    work: [{ company: 'Fast Parcels', position: 'Dispatcher', startDate: '2021-06-01', endDate: '2024-02', summary: 'Route planning for 80 vehicles.' }],
+    education: [{ institution: 'University of Tirana', area: 'Economics', studyType: 'Bachelor', startDate: '2014', endDate: '2017', score: '9.1' }],
+    certificates: [{ name: 'ADR', issuer: 'DEKRA', date: '2023-05' }],
+    skills: [{ name: 'Systems', keywords: ['Excel', 'SAP'] }, { name: 'Lean', level: 'Green Belt' }],
+    languages: [{ language: 'Albanian', fluency: 'Native' }],
+    volunteer: [{ organization: 'Red Cross', position: 'First aider', startDate: '2019', summary: 'Weekend shifts.' }],
+  };
+  const nora = AtsCv.clean(AtsCv.fromJsonResume(other), atsData, 'sq');
+  assert.equal(nora.docLang, 'sq', 'no language in the file: the page\'s');
+  assert.equal(nora.person.location, 'Tirana, AL');
+  assert.deepEqual(plain(nora.experience[0]), { title: 'Dispatcher', company: 'Fast Parcels', location: '', from: '06.2021', to: '02.2024', bullets: 'Route planning for 80 vehicles.' });
+  assert.deepEqual(plain(nora.education.map((e) => [e.title, e.school, e.date, e.detail])), [['Bachelor Economics', 'University of Tirana', '2014 – 2017', '9.1'], ['ADR', 'DEKRA', '05.2023', '']]);
+  assert.deepEqual(plain(nora.skills), [{ title: 'Systems', text: 'Excel, SAP' }, { title: 'Lean', text: 'Green Belt' }]);
+  assert.equal(nora.extras[0].title, 'Volunteering');
+  assert.match(nora.extras[0].text, /First aider, Red Cross \| 2019: Weekend shifts\./);
+  assert.equal(AtsCv.fromJsonResume({ hello: 1 }), null);
+  assert.equal(AtsCv.fromJsonResume([]), null);
+  assert.ok(AtsCv.looksJsonResume({ basics: {} }) && !AtsCv.looksJsonResume({ format: 'stiven-catalyst-work' }));
+});

@@ -142,6 +142,11 @@
 {%- if lang and lang != "en" and page.url and ("/" + lang + "/tools/") in page.url %}
   <script src="{{ lang | uiStringsUrl }}" defer></script>
 {%- endif %}
+{#- The PIN of a shared computer (js/work-lock.js): before the tool scripts, so a locked page is known before any tool
+    reads its storage. #}
+{%- if toolFamily or page.url | enPath == "/tools.html" %}
+  <script src="{{ '/js/work-lock.js' | assetUrl }}" defer></script>
+{%- endif %}
 </head>
 <body{% if toolFamily %} class="in-family" data-family="{{ toolFamily.id }}" style="--family: {{ toolFamily.color }}"{% endif %}>
 <a class="skip-link" href="#main">{{ "Skip to content" | t(lang) }}</a>

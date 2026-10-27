@@ -27,7 +27,8 @@
     daily: "Daily" | t(lang),
     "before-open": "Before a file was opened" | t(lang),
     "before-restore": "Before a restore" | t(lang),
-    manual: "Made by hand" | t(lang)
+    manual: "Made by hand" | t(lang),
+    recent: "While working, every 15 minutes" | t(lang)
   },
   made: "Restore point made: {tools}." | t(lang),
   failed: "The browser did not keep the restore point, so nothing was changed. Save a file instead." | t(lang),
@@ -70,6 +71,7 @@
 {%- if site.sync.endpoint %}
     {% include "partials/team-sync.njk" %}
 {%- endif %}
+    {% include "partials/work-lock.njk" %}
   </div>
 </section>
 <script type="application/json" id="work-backup-names">{

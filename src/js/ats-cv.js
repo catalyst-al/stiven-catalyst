@@ -197,6 +197,82 @@
     return `${out.join("\n").trim()}\n`;
   };
 
+  // ---------- JSON Resume (jsonresume.org, schema 1.0.0) ----------
+  // The open CV format other CV tools read and write. The sections of this CV map onto basics, work, education,
+  // skills and languages; what the standard has no place for (key achievements, extra sections, the headings, the
+  // language of the document) travels under meta.stivenCatalyst, so a file saved here opens here again whole.
+  const JSON_RESUME_SCHEMA = "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json";
+  const looksJsonResume = (value) => isObject(value) && (isObject(value.basics) || Array.isArray(value.work));
+  // "2022-03" or "2022-03-15" in a file becomes "03.2022" in the CV; a year stays a year; anything else as it is.
+  const dateIn = (value) => {
+    const m = /^(\d{4})-(\d{2})(?:-\d{2})?$/.exec(String(value ?? "").trim());
+    return m ? `${m[2]}.${m[1]}` : String(value ?? "").trim();
+  };
+  // "03.2022" in the CV becomes "2022-03" in the file; a year stays a year; other spellings are left as typed.
+  const dateOut = (value) => {
+    const m = /^(\d{1,2})[./](\d{4})$/.exec(String(value ?? "").trim());
+    return m ? `${m[2]}-${m[1].padStart(2, "0")}` : String(value ?? "").trim();
+  };
+  const toJsonResume = (cv) => {
+    const p = cv.person;
+    const str = (value) => String(value ?? "").trim();
+    return {
+      $schema: JSON_RESUME_SCHEMA,
+      basics: {
+        name: str(p.name), label: str(p.headline), email: str(p.email), phone: str(p.phone), url: str(p.website),
+        summary: unbold(str(cv.summary)),
+        location: { city: str(p.location) },
+      },
+      work: cv.experience.filter(hasText).map((job) => ({
+        name: str(job.company), position: str(job.title), location: str(job.location),
+        startDate: dateOut(job.from), endDate: dateOut(job.to), highlights: lines(job.bullets).map(unbold),
+      })),
+      education: cv.education.filter(hasText).map((item) => {
+        const [start = "", end = ""] = str(item.date).split(/\s*[–—-]\s*/);
+        return { institution: str(item.school), area: str(item.title), startDate: dateOut(start), endDate: dateOut(end), score: str(item.detail) };
+      }),
+      skills: cv.skills.filter(hasText).map((item) => ({ name: str(item.title), keywords: str(item.text).split(/\s*[,;]\s*/).filter(Boolean) })),
+      languages: cv.languages.filter(hasText).map((item) => ({ language: str(item.name), fluency: str(item.level) })),
+      meta: { stivenCatalyst: { docLang: cv.docLang, extra: str(p.extra), highlights: str(cv.highlights), extras: cv.extras.filter(hasText).map((e) => ({ title: str(e.title), text: str(e.text) })), headings: cv.headings } },
+    };
+  };
+  // A CV from a JSON Resume file (any tool's), in the shape of fromBuilder; null when it is not one.
+  const fromJsonResume = (file) => {
+    if (!looksJsonResume(file)) return null;
+    const str = (value) => (typeof value === "string" ? value.trim() : typeof value === "number" ? String(value) : "");
+    const list = (value) => (Array.isArray(value) ? value.filter(isObject) : []);
+    const b = isObject(file.basics) ? file.basics : {};
+    const own = isObject(file.meta) && isObject(file.meta.stivenCatalyst) ? file.meta.stivenCatalyst : {};
+    const place = isObject(b.location) ? [str(b.location.city), str(b.location.region)].filter(Boolean).join(", ") || str(b.location.address) : "";
+    const span = (item) => [dateIn(item.startDate), dateIn(item.endDate)].filter(Boolean).join(" – ");
+    const education = [
+      ...list(file.education).map((item) => ({ title: [str(item.studyType), str(item.area)].filter(Boolean).join(" "), school: str(item.institution), date: span(item), detail: str(item.score) })),
+      ...list(file.certificates).map((item) => ({ title: str(item.name), school: str(item.issuer), date: dateIn(item.date), detail: str(item.url) })),
+    ];
+    const extras = Array.isArray(own.extras) ? own.extras.filter(isObject).map((e) => ({ title: str(e.title), text: str(e.text) })) : [];
+    const section = (items, title, line) => { if (items.length) extras.push({ title, text: items.map(line).filter(Boolean).join("\n") }); };
+    if (!Array.isArray(own.extras)) {
+      section(list(file.volunteer), "Volunteering", (item) => [[str(item.position), str(item.organization)].filter(Boolean).join(", "), span(item)].filter(Boolean).join(" | ") + (str(item.summary) ? `: ${str(item.summary)}` : ""));
+      section(list(file.projects), "Projects", (item) => [str(item.name), str(item.description)].filter(Boolean).join(": "));
+      section(list(file.awards), "Awards", (item) => [str(item.title), str(item.awarder), dateIn(item.date)].filter(Boolean).join(", "));
+    }
+    return {
+      docLang: str(own.docLang),
+      person: { name: str(b.name), headline: str(b.label), location: place, phone: str(b.phone), email: str(b.email), website: str(b.url), extra: str(own.extra) },
+      summary: str(b.summary),
+      highlights: str(own.highlights),
+      experience: list(file.work).map((job) => ({
+        title: str(job.position), company: str(job.name) || str(job.company), location: str(job.location), from: dateIn(job.startDate), to: dateIn(job.endDate),
+        bullets: [...(Array.isArray(job.highlights) ? job.highlights.map(str) : []), ...(!Array.isArray(job.highlights) || !job.highlights.length ? [str(job.summary)] : [])].filter(Boolean).join("\n"),
+      })),
+      education,
+      skills: list(file.skills).map((item) => ({ title: str(item.name), text: Array.isArray(item.keywords) ? item.keywords.map(str).filter(Boolean).join(", ") : str(item.level) })),
+      languages: list(file.languages).map((item) => ({ name: str(item.language), level: str(item.fluency) })),
+      extras,
+      headings: isObject(own.headings) ? own.headings : undefined,
+    };
+  };
+
   // ---------- Word file (docx-kit.js writes the file) ----------
   const docx = (cv, data) => {
     const doc = data.docLangs[cv.docLang];
@@ -369,7 +445,7 @@
     return pages;
   };
 
-  window.AtsCv = { fit, clean, fromBuilder, keywords, hasTerm, groupOf, findTerm, adParts, match, plainText, docx, pdf, paginate, SHAPE };
+  window.AtsCv = { fit, clean, fromBuilder, keywords, hasTerm, groupOf, findTerm, adParts, match, plainText, docx, pdf, paginate, toJsonResume, fromJsonResume, looksJsonResume, SHAPE };
 
   // ======================================================================
   const app = document.querySelector("[data-ats]");
@@ -871,7 +947,15 @@
       if (name.endsWith(".pdf") || file.type === "application/pdf") parsedLines = await window.CvImport.readPdf(file, PDFJS, PDFJS_WORKER);
       else if (name.endsWith(".docx")) parsedLines = await window.CvImport.readDocx(file);
       else if (name.endsWith(".doc")) throw new Error("doc");
-      else if (name.endsWith(".txt") || file.type.startsWith("text/")) parsedLines = window.CvImport.textLines(await file.text());
+      else if (name.endsWith(".json") || file.type === "application/json") {
+        let parsed = null;
+        try { parsed = JSON.parse(await file.text()); } catch { throw new Error("json"); }
+        const resume = fromJsonResume(parsed);
+        if (!resume) throw new Error("json");
+        if (!confirmReplace()) { importNote.textContent = ""; return; }
+        useImported(resume);
+        return;
+      } else if (name.endsWith(".txt") || file.type.startsWith("text/")) parsedLines = window.CvImport.textLines(await file.text());
       else throw new Error("type");
       if (!parsedLines.length) throw new Error("empty");
       if (!confirmReplace()) { importNote.textContent = ""; return; }
@@ -879,10 +963,12 @@
     } catch (error) {
       importNote.textContent = error.message === "doc"
         ? tx("Old Word files (.doc) cannot be read here. In Word, choose Save as and pick .docx or PDF.")
+        : error.message === "json"
+          ? tx("This file is not a JSON Resume (jsonresume.org). Nothing was changed.")
         : error.message === "empty"
           ? tx("This file has no readable text; it is probably a scan or a photo. Use the Word file, or paste the text below.")
           : error.message === "type"
-            ? tx("Use a PDF, a Word file (.docx) or a text file.")
+            ? tx("Use a PDF, a Word file (.docx), a text file or a JSON Resume file.")
             : tx("This file could not be read. Try the other format (PDF or Word), or paste the text below.");
     } finally {
       dropZone.classList.remove("is-busy");
@@ -994,6 +1080,10 @@
     },
     text: () => {
       download(`${fileName()}.txt`, plainText(cv, doc()), "text/plain;charset=utf-8");
+    },
+    jsonResume: () => {
+      download(`${fileName()}.json`, `${JSON.stringify(toJsonResume(cv), null, 2)}\n`, "application/json");
+      say(tx("JSON Resume file saved: the open CV format that other CV tools read, and this one opens again."));
     },
     copy: async (path, node) => {
       const text = plainText(cv, doc());

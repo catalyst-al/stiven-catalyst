@@ -52,6 +52,8 @@ window.ToolKit = (() => {
     document.body.append(box);
   };
   const write = (key, value) => {
+    // Locked for a shared computer (js/work-lock.js): the tools show nothing and keep nothing until the PIN.
+    if (window.WorkLock?.locked) return false;
     try {
       localStorage.setItem(key, JSON.stringify(value));
       return true;

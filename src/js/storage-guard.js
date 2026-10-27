@@ -12,11 +12,13 @@
 (() => {
   const DB = "sc-restore";
   const STORE = "points";
-  const KEEP = { daily: 14, sync: 5, other: 5 };
+  const KEEP = { daily: 14, sync: 5, recent: 6, other: 5 };
+  // A point while working, every so often when the work changed: a slip of the hand is at most that far back.
+  const RECENT_MS = 15 * 60 * 1000;
   // Most browsers give a site about 5 MB of localStorage (counted in characters); past 4 MB a tool may soon fail to save.
   const MB = 1024 * 1024;
   const NEARLY_FULL = 4 * MB;
-  const REASONS = ["daily", "before-open", "before-restore", "manual", "before-sync"];
+  const REASONS = ["daily", "before-open", "before-restore", "manual", "before-sync", "recent"];
 
   // ---- Pure logic (tests/storage-guard.test.cjs) ----
   const pad = (n) => String(n).padStart(2, "0");
@@ -29,14 +31,16 @@
     return { id: String(id), created, reason };
   };
   const newestFirst = (a, b) => String(b.id).localeCompare(String(a.id));
-  // The ids to drop: all but the newest `daily` daily points, the newest `sync` before a team sync (which may come
-  // often, so they never push out a point made by hand) and the newest `other` of the rest.
+  // The ids to drop: all but the newest `daily` daily points, the newest `sync` before a team sync and the newest
+  // `recent` made while working (both may come often, so they never push out a point made by hand) and the newest
+  // `other` of the rest.
   const prune = (points, keep = KEEP) => {
     const sorted = [...points].sort(newestFirst);
     const daily = sorted.filter((p) => p.reason === "daily");
     const sync = sorted.filter((p) => p.reason === "before-sync");
-    const other = sorted.filter((p) => p.reason !== "daily" && p.reason !== "before-sync");
-    return [...daily.slice(keep.daily), ...sync.slice(keep.sync ?? keep.other), ...other.slice(keep.other)].map((p) => p.id);
+    const recent = sorted.filter((p) => p.reason === "recent");
+    const other = sorted.filter((p) => !["daily", "before-sync", "recent"].includes(p.reason));
+    return [...daily.slice(keep.daily), ...sync.slice(keep.sync ?? keep.other), ...recent.slice(keep.recent ?? keep.other), ...other.slice(keep.other)].map((p) => p.id);
   };
   // A daily point is due when there is none from today (the visitor's own calendar day).
   const needsDaily = (points, now = new Date()) => !points.some((p) => p.reason === "daily" && !Number.isNaN(new Date(p.created).getTime()) && localDay(new Date(p.created)) === localDay(now));
@@ -113,7 +117,7 @@
     const keys = Object.keys(items);
     return { length: keys.length, key: (i) => keys[i] ?? null, getItem: (key) => (key in items ? items[key] : null) };
   };
-  window.StorageGuardMath = { KEEP, NEARLY_FULL, REASONS, localDay, pointId, parseId, prune, needsDaily, snapshot, sizeOf, itemsBytes, storageBytes, byTool, largest, nearlyFull, formatBytes, replaceItems, asStorage };
+  window.StorageGuardMath = { KEEP, RECENT_MS, NEARLY_FULL, REASONS, localDay, pointId, parseId, prune, needsDaily, snapshot, sizeOf, itemsBytes, storageBytes, byTool, largest, nearlyFull, formatBytes, replaceItems, asStorage };
 
   // ---- The store ----
   const storage = (() => {
@@ -125,7 +129,7 @@
       return null;
     }
   })();
-  const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && !["sc-theme", "sc-print-guide-hidden", "sc-team", "sc-team-state"].includes(key));
+  const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && !["sc-theme", "sc-print-guide-hidden", "sc-team", "sc-team-state", "sc-locked", "sc-lock-idle"].includes(key));
   const toolSlug = (key) => (window.WorkBackup ? window.WorkBackup.toolSlug(key) : String(key).replace(/^sc-/, ""));
   const work = () => snapshot(storage, isWork);
 
@@ -402,6 +406,23 @@
     }
     await refresh();
     window.addEventListener("storage", () => { refresh(); });
+    // While the page stays open: typing or a change arms one timer, and when it runs a "recent" point is made if the
+    // work changed since the last look (a timer only after a touch, so an idle page keeps none running).
+    let lastSeen = JSON.stringify(items);
+    let pending = null;
+    const recentSoon = () => {
+      if (pending || !supported()) return;
+      pending = setTimeout(async () => {
+        pending = null;
+        const now = work();
+        const seen = JSON.stringify(now);
+        if (seen === lastSeen || !Object.keys(now).length) return;
+        lastSeen = seen;
+        await makePoint("recent", now).catch(() => null);
+        refresh();
+      }, RECENT_MS);
+    };
+    ["input", "change"].forEach((type) => document.addEventListener(type, recentSoon, { capture: true, passive: true }));
   };
   let refresh = () => {};
   // After work-backup.js, which is loaded after this file and makes window.WorkBackup.

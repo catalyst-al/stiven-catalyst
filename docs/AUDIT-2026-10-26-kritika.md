@@ -121,3 +121,59 @@ thellësi metodike dhe me këtë politikë të dhënash.
   teksti i tyre është zgjedhje editoriale.
 - Testet në shfletues (`tests/browser/`) nuk kanë ende një rrugë për dialogun e dërgimit; testet Node e mbulojnë
   logjikën, jo klikimin.
+
+---
+
+# Shtesa e 27 tetorit 2026: pesë kritika të tjera
+
+Autori solli një listë të dytë: analiza kohore, enkriptimi lokal, Undo/versionimi, ndërveprimi me programet, validimi.
+Udhëzimi: zbato ato që qëndrojnë, injoro të tjerat. Çdo pikë u kontrolluar kundrejt kodit.
+
+| # | Kritika | Qëndron? | Prova në kod dhe vendimi |
+| --- | --- | --- | --- |
+| 1 | S'ka analizë tendencash; duhen DuckDB-Wasm dhe Chart.js | **Jo.** | Signals (`js/signals.js`) lexon çdo mjet dhe nxjerr grafikë p, c, u dhe I-MR me rregullat e sinjalit (`StatsKit`); logjet e defekteve japin trend ditor/javor me objektivin si vijë; Delay Analyzer ndan vonesat sipas orës së planifikuar; Sigma & Control Chart lexon sipas ditës ose javës. Një bazë SQL në RAM për disa qindra rreshta nuk sjell gjë. Injorohet. |
+| 2 | Rrezik privatësie në kompjuter të përbashkët; duhet AES me PIN dhe pastrim me një klik | **Po.** | Puna ishte në tekst të hapur në `localStorage`; team sync enkriptonte vetëm atë që dilte nga pajisja. Asnjë PIN, asnjë "harro gjithçka". **U bë** (më poshtë). |
+| 3 | S'ka Undo/versionim; duhen CRDT (Yjs) ose 5–10 pika kthimi | **Pjesërisht.** | Pikat e rikthimit ekzistonin (ditore, para importit, para sync-ut, me dorë) dhe mbi dhjetë mjete kanë "Undo" për fshirjen e një rreshti. Mungonte pika automatike gjatë punës. **U bë**: një pikë çdo 15 minuta kur puna ka ndryshuar, gjashtë të fundit ruhen, pa shtyrë kurrë jashtë një pikë të bërë me dorë. CRDT nuk duhet për një përdorues të vetëm. |
+| 4 | Ndërveprim i dobët; duhen SheetJS/PapaParse dhe JSON Resume | **Pjesërisht.** | CSV dhe XLSX lexohen në shfletues prej kohësh (`cv-import.js` zbërthen .xlsx, Pareto pranon CSV/Excel/qeliza të ngjitura, `ImportMap.PRESETS` njeh kolonat e PMS/WMS, volumet ngjiten nga Excel), pa librari. JSON Resume mungonte. **U bë** te ATS CV: eksport dhe import. |
+| 5 | Validim i dobët; duhet Zod/Valibot | **Jo.** | `parseNumber` lexon "1.234,50 EUR" dhe "12,5-" (SAP); fushat numerike kanë `min="0"` (67 fusha); logjet refuzojnë sasi nën 1 ("Enter at least one…"); çdo gjendje e ruajtur rindërtohet fushë më fushë (`clean`) që një skedar i dëmtuar të mos prishë faqen; oraret kontrollohen ("Help arrived must be between the call and the solution"). Një librari skeme nuk shton rregull që s'është. Injorohet. |
+
+## Çfarë u bë
+
+### PIN për kompjuterin e përbashkët (`src/js/work-lock.js`, `partials/work-lock.njk`)
+
+- "Kyç mjetet" merr punën e çdo mjeti (çelësat `sc-`, bashkë me kodin e ekipit që team sync të ndalojë) dhe pikat e
+  rikthimit, i enkripton me çelës nga PIN-i (PBKDF2-SHA-256, 310 000 raunde, salt i rastit, AES-GCM 256) në një
+  rekord në IndexedDB `sc-lock`, heq kopjet e hapura dhe ringarkon faqen. Mjetet hapen bosh pas një dialogu që kërkon
+  PIN-in; `ToolKit.write` nuk shkruan gjë sa është kyçur.
+- Pas hapjes çelësi mbetet në `sessionStorage` të skedës: skeda kyçet përsëri me një klik ose vetë pas 5/15/30/60
+  minutash pa prekje. Me mbylljen e skedës çelësi humbet. PIN-i nuk ruhet askund; PIN i gabuar nuk ndryshon asgjë.
+- "Harro gjithçka në këtë pajisje": puna, kyçja, pikat e rikthimit dhe kujtesat hiqen.
+- Kufiri thuhet në faqe: kyçja është për kolegun në të njëjtin banak, jo për atë që lexon memorien e shfletuesit
+  ndërsa mjetet janë të hapura.
+- Verifikuar: `tests/work-lock.test.cjs` (çfarë kyçet dhe çfarë mbetet, rekordi hapet vetëm me PIN-in e vet, bajt i
+  ndryshuar ose format i huaj kthen null) dhe në Chromium (kyçje, faqe bosh me dialog, PIN i gabuar, hapje me punën
+  në vend).
+
+### Pika rikthimi gjatë punës (`storage-guard.js`)
+
+- Arsye e re "recent": shtypja ose një ndryshim armatos një kohëmatës 15-minutësh; kur bie, bëhet një pikë nëse puna
+  ndryshoi. Gjashtë të fundit ruhen, më vete nga pikat ditore dhe nga ato me dorë. Pa prekje nuk ka kohëmatës.
+
+### JSON Resume te ATS CV
+
+- "Shkarko si JSON Resume (.json)" dhe hapja e një skedari `.json` nga çdo mjet tjetër: basics, work, education
+  (certifikatat hyjnë te arsimi), skills, languages; datat `2022-03` atje, `03.2022` këtu. Arritjet kryesore, seksionet
+  shtesë, titujt dhe gjuha e dokumentit udhëtojnë nën `meta.stivenCatalyst`, që skedari i ruajtur këtu të hapet
+  përsëri i plotë. Volunteer, projects dhe awards nga mjete të tjera bëhen seksione.
+
+### Tekste
+
+- 35 tekste të reja në gjermanisht dhe shqip.
+
+## Mbeten për autorin
+
+- Kyçja automatike punon vetëm në skedën që ka kyçur ose hapur një herë; një skedë e re e hapur drejt një mjeti nuk e
+  mban çelësin. Një kyçje "kur mbyllet skeda" nuk premtohet, sepse enkriptimi s'mund të garantohet në mbyllje.
+- Kujtesat (`sc-reminders`) nuk hyjnë në rekordin e kyçur; mbajnë vetëm tekstin e veprimeve të afatuara.
+- Testet në shfletues (`tests/browser/`) s'kanë ende rrugën e kyçjes; testet Node mbulojnë logjikën, prova në Chromium
+  u bë me dorë në këtë degë.

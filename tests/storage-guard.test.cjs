@@ -288,3 +288,16 @@ test('the stylesheet is balanced and keeps to the brand colours', () => {
   assert.equal((stripped.match(/\{/g) || []).length, (stripped.match(/\}/g) || []).length);
   assert.doesNotMatch(css, /--red|--gold/);
 });
+
+test('the points made while working keep the last six and never push out a point made by hand', () => {
+  const { window } = load({ page: false, idb: null, persisted: null });
+  const M = window.StorageGuardMath;
+  assert.equal(M.RECENT_MS, 15 * 60 * 1000);
+  assert.ok(M.REASONS.includes('recent'));
+  const at = (minute, reason) => M.parseId(M.pointId(new Date(Date.UTC(2026, 9, 26, 8, minute)).toISOString(), reason));
+  const points = [...Array.from({ length: 10 }, (_, i) => at(i * 15, 'recent')), at(3, 'manual'), at(4, 'before-open'), at(5, 'daily')];
+  const dropped = M.prune(points);
+  assert.equal(dropped.length, 4);
+  assert.ok(dropped.every((id) => id.endsWith(' recent')), 'only recent points go');
+  assert.ok(dropped.includes(at(0, 'recent').id) && dropped.includes(at(45, 'recent').id) && !dropped.includes(at(60, 'recent').id));
+});
