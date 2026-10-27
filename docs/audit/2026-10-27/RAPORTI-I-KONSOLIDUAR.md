@@ -16,7 +16,7 @@ poshtë është vetëm në degë dhe pret shqyrtimin tënd përfundimtar.
 | `npm audit` | 0 dobësi (markdown-it 14.3.3) |
 | `main` | `f34b1c4b` (më i fundit më 27 tetor) është i bashkuar në degë; një merge provë i degës në `main` kalon pa konflikt |
 | Publikimi | procedura e saktë, përfshirë `online-dates.mjs`, e provuar "në thatë": `docs/RELEASE.md` |
-| Nuk u verifikua | Firefox dhe Safari; pajisje reale me GPU; (Chrome 156 i CI-së **u verifikua** më 27 tetor në PR #363, `c7343fbf`: 1332/1332 unit, 176/176 në shfletues, 0 të anashkaluara) |
+| Nuk u verifikua | Firefox dhe Safari; pajisje reale me GPU; (Chrome 156 i CI-së **u verifikua** më 27 tetor në PR #363, `c7343fbf`: 1332/1332 unit, 176/176 në shfletues, 0 të anashkaluara; pas korrigjimeve të rollback-ut, `152bd4f5`: 1336/1336 dhe 176/176) |
 
 ## 2. Çfarë u bë, me pak fjalë
 

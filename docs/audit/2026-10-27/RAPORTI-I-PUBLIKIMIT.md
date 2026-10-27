@@ -20,9 +20,9 @@ asnjë fakt karriere, origjinal shqip, tekst libri apo vendim editorial që pret
 | Kontroll | Rezultati |
 | --- | --- |
 | Build | pa gabim |
-| Testet unit | 1336 / 1336, 0 të anashkaluara |
+| Testet unit (lokalisht dhe në CI) | 1336 / 1336, 0 të anashkaluara |
 | Coaching | 54 faqe, 9 udhëtime |
-| Shfletuesi, CI e GitHub-it, Chrome 156.0.8078.4 | 176 / 176 te commit-i `c7343fbf`; commit-i përfundimtar kontrollohet në PR para mbylljes |
+| CI e GitHub-it në PR, Chrome 156.0.8078.4 | `152bd4f5` (kodi përfundimtar): unit 1336 / 1336, shfletuesi 176 / 176, 0 të anashkaluara. Commit-i i dokumenteve pas tij kontrollohet edhe ai në PR |
 | Rollback në shfletues real (version i ri → i vjetër → i ri, me ruajtje dhe rikthim) | 90 kontrolle, 2 dështime që janë kufizime të faqes live (shih §3), 0 gabime faqeje |
 | Testet e reja të rollback-ut | PIN-i: puna e shkruar gjatë kyçjes ruhet dhe rikthehet nga pika; Action Tracker: i ri → live → i ri, pa prekur dhe me veprim të vetin |
 | PDF ↔ HTML | 294 PDF, 0 mospërputhje |
@@ -42,7 +42,10 @@ asnjë fakt karriere, origjinal shqip, tekst libri apo vendim editorial që pret
 3. **Team Sync:** pas publikimit të faqes, ekipet kalojnë në adresat e reja. Kodet vetëm për lexim, të bëra më parë,
    duhen bërë sërish. Worker-i i ri pret planin e vet (`docs/SYNC-WORKER-MIGRATION.md`).
 4. **Pa verifikim:** Firefox, Safari, telefona realë me GPU.
-5. **Dy hapa pas bashkimit, me dorë:** `online-dates.mjs` menjëherë pas merge-it, dhe kontrollet në faqen live
+5. **Testi axe i Field Notes në CI:** në runner-in e GitHub-it rrjeti i faqes nuk qetësohet gjithmonë, edhe pse asnjë
+   kërkesë e faqes nuk mbetet e hapur (log-u i CI-së te `152bd4f5`). Shkaku nuk u gjet (këtu nuk ndodhi në 72 prova).
+   Testi tani pret ngarkimin dhe fontet, që janë ato që mat axe, dhe e shkruan rastin në log.
+6. **Dy hapa pas bashkimit, me dorë:** `online-dates.mjs` menjëherë pas merge-it, dhe kontrollet në faqen live
    (`docs/RELEASE.md` §3–4). Midis dy publikimeve (disa minuta) datat "redaktuar" tregojnë ditët e mëparshme.
 
 ## 4. Hapat e publikimit, kur t'i miratosh
