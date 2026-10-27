@@ -1072,6 +1072,8 @@
     const file = event.target.files?.[0];
     event.target.value = "";
     if (!file) return;
+    // Checked before reading, as in the ATS CV: a file this large is no CV backup and would hold the tab.
+    if (file.size > 5 * 1024 * 1024) { say(tx("This file is larger than 5 MB, far larger than any CV. Nothing was changed.")); return; }
     try {
       const parsed = JSON.parse(await file.text());
       const saved = isObject(parsed) && isObject(parsed.cv) ? parsed.cv : parsed;

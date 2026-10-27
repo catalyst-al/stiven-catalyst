@@ -65,3 +65,15 @@ for (const lang of ['en', 'de', 'sq']) {
     assert.equal(file.read, false);
   });
 }
+
+// CV Builder's own backup (a .json of the CV): 5 MB, as the ATS CV, with the same words.
+for (const lang of ['en', 'de', 'sq']) {
+  test(`CV Builder (${lang}): a backup file over 5 MB is refused unread`, async () => {
+    const w = openTool('cv-builder', { lang });
+    const file = bigFile('cv.json', 5 * 1024 * 1024 + 1, 'application/json');
+    choose(w, w.document.querySelector('[data-import]'), file);
+    await settle(w, 20);
+    assert.equal(file.read, false, 'the file was read');
+    assert.ok(w.document.body.textContent.includes(ATS[lang]), 'the page says why');
+  });
+}
