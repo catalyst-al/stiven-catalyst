@@ -229,3 +229,16 @@ test('an unlock with nothing written while locked makes no restore point (a navi
   assert.deepEqual(idb.rowsOf('sc-restore', 'points').filter((p) => p.reason === 'before-unlock'), []);
   assert.equal(back.sessionStorage.getItem('sc-lock-kept'), null);
 });
+
+test('the privacy policy describes the PIN lock, the photos and every kind of restore point, in every language', () => {
+  const privacy = fs.readFileSync('src/datenschutz.njk', 'utf8');
+  const count = (pattern) => (privacy.match(pattern) || []).length;
+  // The lock: the key from the PIN, the PIN kept nowhere, the key in the tab's session storage.
+  assert.equal(count(/\(PBKDF2, AES-GCM\)/g), 3);
+  assert.equal(count(/PIN itself is kept nowhere|PIN selbst wird nirgends gespeichert|PIN-i nuk ruhet askund/g), 3);
+  assert.equal(count(/that tab's session storage|Session Storage\) dieses Tabs|Session Storage\) të asaj skede/g), 3);
+  // The photos (media-store.js) and the restore points of storage-guard.js and work-lock.js.
+  assert.equal(count(/made smaller on your device|auf Ihrem Gerät verkleinert|zvogëlohen në pajisjen tuaj/g), 3);
+  assert.equal(count(/quarter of an hour|Viertelstunde|çerek ore/g), 3);
+  assert.equal(count(/unlocked with the PIN|Entsperren mit der PIN|hapen me PIN/g), 3);
+});
