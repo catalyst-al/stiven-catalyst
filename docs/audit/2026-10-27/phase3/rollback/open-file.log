@@ -1,0 +1,4 @@
+work-saved-by-old.json | opened: false | "This is not a Stiven Catalyst work file, or it is damaged. Nothing was changed." | keys after: sc-seen-publications, sc-seen-writing
+work-saved-by-old.less-sc-motion.json | opened: true | "Opened. The page reloads to show your work." | keys after: sc-actions, sc-actions-ui, sc-ats-cv, sc-coaching-v1, sc-cv-builder, sc-damage-control, sc-five-s-audit, sc-room-inspection, sc-seen-publications, sc-seen-writing, sc-workplace
+work-saved-by-old-while-locked.json | opened: false | "This is not a Stiven Catalyst work file, or it is damaged. Nothing was changed." | keys after: sc-seen-publications, sc-seen-writing
+work-saved-by-old-while-locked.less-sc-locked.json | opened: true | "Opened. The page reloads to show your work." | keys after: sc-actions, sc-actions-ui, sc-damage-control, sc-seen-publications, sc-seen-writing

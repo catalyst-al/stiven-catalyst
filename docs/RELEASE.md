@@ -89,15 +89,22 @@ In a current Chrome, EN, DE and SQ:
 
 - Revert the merge on `main`: `git revert -m 1 <merge commit>` (and the dates commit), push; Pages deploys the
   previous site within minutes. No reader data lives on the server: the tools keep their work in each browser.
-- Data written by the new code and read by the old one after a revert:
-  - work lock: a PIN of 6 or more characters is accepted by the old code (it asked for 4); checked in the code;
-  - coaching: the new optional `copyOf` field of a labelled copy is ignored by the old validation; checked in the
-    code (`validProject` does not reject unknown fields);
+- Data written by the new code and read by the old one after a revert, and by the new one when it comes back:
+  **verified in a real browser** on 27 October 2026, the two builds on one origin
+  (`docs/audit/2026-10-27/phase3/rollback.md`, script and results in `phase3/rollback/`). Kept, editable on the old
+  site and neither lost nor doubled when the new one returns: the Action Tracker (with a hand-off), Damage Control,
+  the 5S Audit with its photo, Room Inspection, Coaching with a labelled copy (`copyOf` survives the old site), CV
+  Builder, ATS CV, the Daily Board's profile, the theme; a file saved by the new site opens on the old one (its
+  photos stay in the file). Three exceptions, with proposals in the review:
+  - a file saved by the **old** site after the visitor used the new one holds `sc-motion` and is refused whole by
+    the new site;
+  - the old site has **no work lock** (origin/main has no `work-lock.js`): a browser locked at the moment of the
+    revert shows its tools empty, and what is typed there is overwritten by the locked work at the unlock;
+  - an Action Tracker holding only the new site's example: the old site takes the example for real actions, and they
+    stay real after the return.
   - team sync: a team already moved to its new address is not found by the old page ("gone"), which writes nothing;
     the work stays on every device, and the new page finds the team again (tests/sync-compat.test.cjs); details in
-    `docs/SYNC-WORKER-MIGRATION.md`;
-  - other changed formats (examples marked as such, the Action Tracker, restore points with photos): **not verified**
-    against the old code; their new fields are additions, and each reads the old format (phase 1 tests).
+    `docs/SYNC-WORKER-MIGRATION.md`.
 
 ## 6. Not in this release
 
