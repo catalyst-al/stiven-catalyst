@@ -40,3 +40,20 @@ test('Coaching: the backup\'s version of a changed project is added once, labell
   assert.equal(t.projects.length, 2, 'opened again: nothing added');
   assert.ok(C.validState(t));
 });
+
+// Room Inspection: a failed critical item fails the room at once, even with items still open, and counts as a failed
+// first inspection; without a critical failure an inspection with open items has no verdict and is never a pass.
+test('Room Inspection: a critical failure fails at once; an incomplete inspection is never a pass', () => {
+  const w = openTool('room-inspection', { now: NOW });
+  const M = w.RoomInspectionMath;
+  const items = [{ qid: 'a', weight: 1, critical: true }, { qid: 'b', weight: 2, critical: false }, { qid: 'c', weight: 1, critical: false }];
+  const failedCritical = M.verdict(M.score({ a: 'fail' }, items), 0.9);
+  assert.deepEqual([failedCritical.pass, failedCritical.reason], [false, 'critical']);
+  const onePass = M.verdict(M.score({ b: 'pass' }, items), 0.9);
+  assert.deepEqual([onePass.pass, onePass.reason], [null, 'incomplete']);
+  const done = M.verdict(M.score({ a: 'pass', b: 'pass', c: 'na' }, items), 0.9);
+  assert.equal(done.pass, true, 'every item judged (n.a. counts as judged): a pass');
+  const rows = M.annotate([{ date: '2026-10-24', time: '10:00', room: '412', answers: { a: 'fail' } }, { date: '2026-10-24', time: '11:00', room: '413', answers: { b: 'pass' } }], () => items, 0.9);
+  const rate = M.rateBy(rows, () => 'all')[0];
+  assert.deepEqual([rate.first, rate.firstPass, rate.incomplete], [1, 0, 1], 'the critical failure counts as a failed first inspection; the incomplete one in neither');
+});
