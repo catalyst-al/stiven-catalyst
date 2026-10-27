@@ -1,22 +1,23 @@
 # Raporti i konsoliduar: Fazat 1, 2 dhe 3 të auditimit të 27 tetorit 2026
 
 27 tetor 2026. Dega `claude/gifted-pasteur-v7n2dw`, nga checkpoint-i `605d0df` (dega `claude/busy-cannon-mq0sqy` e
-paprekur). **Asgjë nuk është në `main`, asnjë PR, asnjë deploy, Team Sync Worker i papublikuar.** Çdo "fixed" më
-poshtë është vetëm në degë dhe pret shqyrtimin tënd përfundimtar.
+paprekur), në Draft PR catalyst-al/stiven-catalyst#363. **Asgjë nuk është në `main`, asnjë deploy, Team Sync Worker
+i papublikuar.** Çdo "fixed" më poshtë është vetëm në degë dhe pret shqyrtimin tënd përfundimtar. Raporti i shkurtër
+për publikimin: `RAPORTI-I-PUBLIKIMIT.md`.
 
-## 1. Gjendja në fund të Fazës 3
+## 1. Gjendja përfundimtare
 
 | Kontroll | Rezultati (27 tetor 2026) |
 | --- | --- |
 | Build | `npx eleventy`: pa gabim |
-| Testet unit | `npm test`: **1330 / 1330**, 0 të anashkaluara (checkpoint: 1092; fundi i Fazës 1: 1269; i Fazës 2: 1318) |
-| Testet në shfletues | `npm run test:browser` me Chrome 153: **164 / 164**, 0 të dështuara, 0 të anashkaluara (në auditim dhe në Fazat 1–2: 26 / 32). Përfshijnë axe (13 faqe × 3 gjuhë × 2 tema), printimin, grafikët në celular, lëvizjen dhe Pause-n |
+| Testet unit | `npm test`: **1336 / 1336**, 0 të anashkaluara, lokalisht dhe në CI (checkpoint: 1092; fundi i Fazës 1: 1269; i Fazës 2: 1318; i Fazës 3: 1330) |
+| Testet në shfletues | CI e PR #363, Chrome 156.0.8078.4: **176 / 176**, 0 të dështuara, 0 të anashkaluara, te `152bd4f5` (kodi përfundimtar) dhe `6fc1823b` (commit-i i fundit). Në fund të Fazës 3, lokalisht me Chrome 153: 164 / 164; në auditim dhe në Fazat 1–2: 26 / 32. Përfshijnë axe (13 faqe × 3 gjuhë × 2 tema), printimin, grafikët në celular, lëvizjen dhe Pause-n |
 | Coaching | `scripts/check-coaching-build.mjs`: 54 faqe, 9 udhëtime |
 | PDF ↔ HTML | 294 PDF kundrejt faqeve të tyre: 0 mospërputhje |
 | `npm audit` | 0 dobësi (markdown-it 14.3.3) |
 | `main` | `f34b1c4b` (më i fundit më 27 tetor) është i bashkuar në degë; një merge provë i degës në `main` kalon pa konflikt |
 | Publikimi | procedura e saktë, përfshirë `online-dates.mjs`, e provuar "në thatë": `docs/RELEASE.md` |
-| Nuk u verifikua | Firefox dhe Safari; pajisje reale me GPU; (Chrome 156 i CI-së **u verifikua** më 27 tetor në PR #363, `c7343fbf`: 1332/1332 unit, 176/176 në shfletues, 0 të anashkaluara; pas korrigjimeve të rollback-ut, `152bd4f5`: 1336/1336 dhe 176/176) |
+| Nuk u verifikua | Firefox dhe Safari; telefona realë me GPU |
 
 ## 2. Çfarë u bë, me pak fjalë
 
@@ -24,7 +25,7 @@ poshtë është vetëm në degë dhe pret shqyrtimin tënd përfundimtar.
 - **Faza 2, besueshmëria editoriale:** regjistri i korrigjimeve dhe datat reale të Management Review; metoda dhe kolofoni; "Si bëhet" (reflektimet dhe libri janë origjinale shqip); gjermanishtja me "Sie"; Udhëzuesi i mjeteve, botimi 8; kontrolli PDF ↔ HTML; vendimet e tua nga Faza 1 (PIN 6, Coaching, Hoshin, pragjet, plani i Worker-it). Raporti: `phase2/RAPORTI-FAZA-2.md`.
 - **Faza 3, sjellja në shfletues:**
   - **Kërkimi në Chrome (CI-01):** shkaku i vërtetë ishte një tast i shtypur ndërsa faqja e re po vjen, jo `replaceState`. U rregullua. CI tani përdor Playwright 1.64.1 dhe dështon edhe kur një test anashkalohet.
-  - **Planetët (M-01):** vizatohen në tri kanavaca, secili vetëm kur është pranë pamjes, me të njëjtën pamje. Pikselët janë identikë në 1440 px dhe ndryshojnë ≤ 5/255 në 390 px. Fitimi i madh për celularin pret miratimin tënd (§3).
+  - **Planetët (M-01):** vizatohen në tri kanavaca, secili vetëm kur është pranë pamjes, me të njëjtën pamje. Pikselët janë identikë në 1440 px dhe ndryshojnë ≤ 5/255 në 390 px. Vendimi yt përfundimtar: asnjë ndryshim i rezolucionit në celular; propozimet mbeten të dokumentuara.
   - **Pause për gjithë faqen (M-02, M-03):** ndalon çdo animacion të pafund dhe planetët, mbahet mend nga faqja në faqe, dhe lëvizja e reduktuar fillon e ndalur. Me Pause, kryefaqja zë 0.006 s nga 5 s në desktop (ishte 0.85–1.0 s).
   - **Printimi:** asnjë qelizë tabele e humbur në 177 faqe të printuara (59 mjete × 3 gjuhë); CV-të e gjata 70/70 pika; grafikët plotë edhe pa scroll.
   - **Leximi me zë:** ndalet në fund të tekstit; lexon kutinë e rastit; shënimi i privatësisë thotë kur një zë online ia dërgon tekstin prodhuesit; asnjë fjali e kapërcyer.
@@ -34,7 +35,7 @@ poshtë është vetëm në degë dhe pret shqyrtimin tënd përfundimtar.
 
 ## 3. Vendimet e 27 tetorit dhe ato që presin
 
-**Vendosur më 27 tetor** (shih `VENDIMET-E-HAPURA.md`): patch-et 2, 3 dhe 4 janë aplikuar në degë (`22edfaff`, `2d9f9906`, `5dd8dfc5`); Pause në fund të faqes dhe pranë planetëve, me ruajtjen e zgjedhjes, miratuar; SEO-02 shtyhet për një ndryshim editorial më vete; patch-i i planetëve në celular mbetet veçmas, me krahasim vizual.
+**Vendosur më 27 tetor** (shih `VENDIMET-E-HAPURA.md`): patch-et 2, 3 dhe 4 janë aplikuar në degë (`22edfaff`, `2d9f9906`, `5dd8dfc5`); Pause në fund të faqes dhe pranë planetëve, me ruajtjen e zgjedhjes, miratuar; SEO-02 shtyhet për një ndryshim editorial më vete; planetët në celular: asnjë patch, as 1.5, as adaptiv (vendim përfundimtar). Rollback-u: puna e shkruar gjatë kyçjes me PIN ruhet si pikë rikthimi (`e6203a47`) dhe shembulli i Action Tracker mbetet shembull (`17f737ad`).
 
 ### Gjendja para vendimeve (për histori)
 

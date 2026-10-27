@@ -1,5 +1,8 @@
 # Planets on phones: the 1.5 density patch, measured (PM-1, for the author's decision)
 
+**Decided by the author on 27 October 2026 (final): neither patch is applied.** The planets keep today's sharpness and
+identity; this comparison and the two patches in `proposals/` stay as documentation for the future.
+
 The question (the author, 27 October 2026): keep the resolution change separate, compare it visually, try it on a real
 phone if possible; the four planets must not lose sharpness, brightness or identity just to gain frames per second.
 

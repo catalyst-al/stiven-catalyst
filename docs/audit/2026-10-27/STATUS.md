@@ -1,7 +1,9 @@
 # Status of the 27 October 2026 audit findings
 
 Branch `claude/gifted-pasteur-v7n2dw`, built on the preserved checkpoint `605d0df` (branch `claude/busy-cannon-mq0sqy`,
-left untouched). Nothing is merged into `main`, no pull request is open, nothing is deployed.
+left untouched). Nothing is merged into `main`, no pull request is open, nothing is deployed. (That was the state at the
+end of phase 1. Since then the work is in the Draft PR catalyst-al/stiven-catalyst#363, still not merged or deployed;
+the current state is in `RAPORTI-I-KONSOLIDUAR.md` and `RAPORTI-I-PUBLIKIMIT.md`.)
 
 Status values:
 - **fixed**: reproduced by a test first (the test failed), the cause corrected, the test passes. The commit and the

@@ -2,6 +2,19 @@
 
 Read-only audit of `main` at `3cb88a2` (deployed 26 Oct 2026, 23:50 UTC). Nothing was changed during the audit.
 
+**Where things stand now.** The fixes that followed the audit (phases 1–3) are on the branch
+`claude/gifted-pasteur-v7n2dw`, in the Draft PR catalyst-al/stiven-catalyst#363, not merged and not deployed. The
+current documents are:
+
+| File | Content |
+| --- | --- |
+| `RAPORTI-I-PUBLIKIMIT.md` | The short release report: what goes out, the checks, the risks that remain, the steps. |
+| `RAPORTI-I-KONSOLIDUAR.md` | Every finding of the three phases with its status, commit and test. |
+| `VENDIMET-E-HAPURA.md` | The author's decisions, taken and still open. |
+| `../../RELEASE.md` | How to merge, the dates after the merge, the checks on the live site and the way back. |
+
+The files below, `STATUS.md`, `phase2/` and `phase3/` record the state at the time they were written.
+
 | File | Content |
 | --- | --- |
 | `AUDIT-REPORT.md` | The consolidated report: executive assessment, coverage, scores, defect register (T-, E-, M-, P-, A-, CI- ids), comparison with earlier audits, editorial review, benchmark, roadmap, verdict. |
