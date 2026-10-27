@@ -85,7 +85,7 @@
   <p class="url">stivencatalyst.com{{ "/magazine/operational-treatise.html" | local(lang) }}</p>
   {#- The edition line, and under it the colophon: who makes the publication and how (weekly.colophon). #}
   {%- set C = weekly[lang].colophon %}
-  <p class="edition">{{ W.short }} · {{ L.volume }} {{ volume.number }} · {{ V.date }} · Stiven Catalyst<br>{{ C.text }} {{ C.url }}</p>
+  <p class="edition">{{ W.short }} · {{ L.volume }} {{ volume.number }} · {{ V.date }} · Stiven Catalyst<br>{{ C.text }}<br>{{ C.url }}</p>
 </section>
 {%- else %}
 <section class="pg{{ ' tr-' + page.layer if page.layer }}{{ fitClass }}">
