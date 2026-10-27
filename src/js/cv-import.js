@@ -79,6 +79,23 @@ window.CvImport = (() => {
   const join = (a, b) => (/\u00ad$/.test(a) ? a.slice(0, -1) + b : /-$/.test(a) ? a + b : `${a} ${b}`);
 
   // ---------- Lines from a PDF ----------
+  // A glyph the PDF holds without its letter (see readPdf): the alternates the web font Inter puts next to digits and
+  // capitals. Its place tells what it was: right before the digits of a phone number (not before a 0, which no country
+  // code starts with) or right after a number ("8+ years") it is "+"; alone between words or dates ("03.2022 ? present",
+  // "Albanian ? Native") it is the dash; before a word that a ")" closes it is "(", after one that "(" opened it is ")";
+  // between two letters or digits ("KPI?Besprechungen") it is the hyphen. Anywhere else it is dropped.
+  const UNKNOWN = "\uFFFD";
+  const unknownGlyphs = (text) => text
+    .replace(/(^|[\s|(:,;/])\uFFFD(?=[1-9]\d*(?:[\s/().-]?\d){5,})/gu, "$1+")
+    .replace(/(\d)\uFFFD(?=$|[\s|),.;])/gu, "$1+")
+    .replace(/(\S\s+)\uFFFD(?=\s+\S)/gu, "$1–")
+    .replace(/(^|\s)\uFFFD(?=[\p{L}\d][^()\uFFFD]*[)\uFFFD])/gu, "$1(")
+    .replace(/(\([^()\uFFFD]*[\p{L}\d.])\uFFFD/gu, "$1)")
+    .replace(/([\p{L}\d])\uFFFD(?=[\p{L}\d])/gu, "$1-")
+    .replace(/\uFFFD/g, "")
+    .replace(/\s{3,}/g, "  ")
+    .trim();
+
   // items: [{ str, x, base, w, h }] with base = baseline measured from the top.
   const box = (item) => ({ top: item.base - item.h * 0.85, bottom: item.base + item.h * 0.2, left: item.x, right: item.x + item.w });
 
@@ -157,7 +174,7 @@ window.CvImport = (() => {
         end = part.x + part.w;
       }
       return {
-        text: text.replace(/[ \t]+/g, (space) => (space.length > 1 ? "  " : " ")).trim(),
+        text: unknownGlyphs(text.replace(/[ \t]+/g, (space) => (space.length > 1 ? "  " : " "))),
         size: Math.max(...parts.map((part) => part.h)),
         x: parts[0].x,
         right: end,
@@ -650,10 +667,24 @@ window.CvImport = (() => {
     for (let n = 1; n <= Math.min(doc.numPages, 10); n++) {
       const page = await doc.getPage(n);
       const { height } = page.getViewport({ scale: 1 });
-      const content = await page.getTextContent();
+      const content = await page.getTextContent({ includeMarkedContent: true });
+      // Chrome writes a few glyphs of a web font ("+" before a country code, the dash of "2015 – 2017") with a made-up
+      // letter of the private use area, wrapped in a Span that carries the real letter as ActualText. pdf.js passes the
+      // made-up letter on and drops the ActualText, so inside a Span such a glyph becomes UNKNOWN, named later by its
+      // place (unknownGlyphs). Outside a Span a private letter is left alone: Word's bullet "" is one.
+      const marks = [];
+      const items = [];
+      content.items.forEach((item) => {
+        if (item.type === "beginMarkedContent" || item.type === "beginMarkedContentProps") marks.push(item.tag);
+        else if (item.type === "endMarkedContent") marks.pop();
+        else if ("str" in item) {
+          const unknown = marks.includes("Span") && item.width > 0 && (item.str === "" || /^[-]+$/u.test(item.str));
+          items.push({ ...item, str: unknown ? UNKNOWN : item.str });
+        }
+      });
       pages.push({
         height,
-        items: content.items.filter((item) => "str" in item).map((item) => ({
+        items: items.map((item) => ({
           str: item.str,
           x: item.transform[4],
           base: height - item.transform[5],
