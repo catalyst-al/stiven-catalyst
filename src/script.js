@@ -31,6 +31,19 @@
   // in the head before the first paint; without a choice, reduced motion asked of the system starts paused. Another tab
   // that changes it, or a change of the system setting while no choice was made, is followed here.
   const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+  // A reader who asks the system for reduced motion gets every scroll of the site at once: the tools bring a result
+  // into view with scrollIntoView({ behavior: "smooth" }) (63 calls), and Chrome glides them all the same (audit PM-16,
+  // tests/browser/motion.spec.mjs). Here "smooth" becomes "auto" while reduced motion is asked for.
+  const calmScroll = (proto, name) => {
+    const original = proto?.[name];
+    if (typeof original !== "function") return;
+    proto[name] = function (...args) {
+      if (reduceMotion?.matches && args[0] && typeof args[0] === "object" && args[0].behavior === "smooth") args[0] = { ...args[0], behavior: "auto" };
+      return original.apply(this, args);
+    };
+  };
+  calmScroll(window.Element?.prototype, "scrollIntoView");
+  for (const name of ["scrollTo", "scroll", "scrollBy"]) { calmScroll(window.Element?.prototype, name); calmScroll(window, name); }
   const readMotion = () => {
     try { return localStorage.getItem("sc-motion"); } catch { return null; }
   };
