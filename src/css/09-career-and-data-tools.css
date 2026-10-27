@@ -845,7 +845,6 @@ main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label
 .cx-mini figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-size: 14px; }
 .cx-mini figcaption span { color: var(--muted); font-size: 12px; }
 .cx-mini-chart { display: block; width: 100%; height: auto; overflow: visible; }
-.cx-mini-chart circle:focus { outline: none; stroke-width: 4; }
 .cx-table-wrap { position: relative; max-height: 520px; }
 .cx-table th, .cx-table td { white-space: nowrap; }
 .cx-table tbody th { color: var(--ink); font-weight: 700; }
@@ -899,7 +898,6 @@ main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label
 .dl-stat.is-bad .dl-stat-value { color: var(--cx-bad); }
 .cx-kpi-dive { padding: 2px 0; font-size: 13px; }
 .cx-deep-trend figcaption { color: var(--muted); font-size: 13px; }
-.cx-mini-chart rect:focus { outline: none; opacity: 1; stroke: var(--cx-text); stroke-width: 2; }
 .cx-seg { padding: 0; border: 0; background: none; color: var(--blue); font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
 .cx-seg:hover { text-decoration: underline; text-underline-offset: 3px; }
 .cx-seg[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
