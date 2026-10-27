@@ -605,6 +605,8 @@
       (date ? form.vvolume : form.vdate).focus();
       return;
     }
+    // A volume of the visitor's own is own work: the example leaves first, so the volume is not lost with it later.
+    book.ownWork();
     const replaced = state.volumes.some((item) => item.date === date);
     state.volumes = cleanVolumes([...state.volumes, { date, volume }]);
     volumesChanged();
@@ -620,6 +622,7 @@
       flash(volumeImportStatus, tx("No rows found. Check the order: date, volume."));
       return;
     }
+    book.ownWork();
     state.volumes = cleanVolumes([...state.volumes, ...added]);
     volumesChanged();
     volumePaste.value = "";

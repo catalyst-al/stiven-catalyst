@@ -874,7 +874,7 @@
   const results = document.querySelector("[data-results]");
   if (!root || !dataEl || !results || !window.ToolKit) return;
   const kit = window.ToolKit;
-  const { LANG, tx, el, int, euro, pct, showDate, read, write, loadState, isObject, today, firstVisit, shareText, capital, dayMonth, copy, partialRouteLog } = kit;
+  const { LANG, tx, el, int, euro, pct, showDate, read, readOwn, write, loadState, isObject, today, firstVisit, shareText, capital, dayMonth, copy, partialRouteLog } = kit;
   const CK = window.ChartKit;
   const Workplace = window.Workplace;
   const Store = window.ActionsStore;
@@ -914,7 +914,8 @@
 
   // The saved work of every tool, in this page's language (the actions and the workplace are one for all languages).
   const logOf = (tool) => {
-    const saved = read(`sc-${tool}${SUFFIX}`, {});
+    // Read as data: an example another tool holds is left out (ToolKit readOwn).
+    const saved = readOwn(`sc-${tool}${SUFFIX}`, {});
     return isObject(saved) ? saved : {};
   };
   const readSources = () => ({

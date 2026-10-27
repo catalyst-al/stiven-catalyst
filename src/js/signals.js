@@ -667,7 +667,7 @@
   const results = document.querySelector("[data-results]");
   if (!root || !dataEl || !results || !window.ToolKit || !window.StatsKit) return;
   const kit = window.ToolKit;
-  const { LANG, tx, el, int, num, pct, euro, showDate, today, addDays: kitAddDays, read, write, loadState, isObject, stat, panel, focusCard, copy, undoNote, shareText, dayMonth, firstVisit, resultLayout } = kit;
+  const { LANG, tx, el, int, num, pct, euro, showDate, today, addDays: kitAddDays, read, readOwn, write, loadState, isObject, stat, panel, focusCard, copy, undoNote, shareText, dayMonth, firstVisit, resultLayout } = kit;
   const CK = window.ChartKit;
   const Actions = window.ActionsStore;
   const cfg = JSON.parse(dataEl.textContent);
@@ -699,7 +699,8 @@
   let exampleDismissed = {};
   let toolFilter = "";
 
-  const realGet = (key) => read(key, null);
+  // The tools' own data only: an example a tool holds is not a signal (ToolKit readOwn).
+  const realGet = (key) => readOwn(key, null);
   const realRead = () => M.collect(realGet, { today: today(), period: Number(state.period), suffix: SUFFIX, sources });
   // A first visit opens on the example, but only when no tool holds anything yet: the visitor's own data comes first.
   if (firstVisit(KEY) && !realRead().read.some((item) => item.has)) state.example = true;

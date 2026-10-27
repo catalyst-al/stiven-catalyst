@@ -345,7 +345,7 @@
   const sourcesEl = document.getElementById("print-pack-sources");
   const root = document.querySelector("[data-print-pack]");
   if (!dataEl || !sourcesEl || !root || !window.ToolKit) return;
-  const { LANG, tx, int, pct, num, lower, showDate, read, write, loadState, el, today, parseDate, flash, stat } = window.ToolKit;
+  const { LANG, tx, int, pct, num, lower, showDate, read, readOwn, write, loadState, el, today, parseDate, flash, stat } = window.ToolKit;
   const cfg = JSON.parse(dataEl.textContent);
   const src = JSON.parse(sourcesEl.textContent);
   const KEY = cfg.storageKey;
@@ -378,7 +378,8 @@
   const day = () => parseDate(dateInput.value) || today();
 
   // What the tools hold now, read once per drawing (read-only).
-  const readKey = (key) => read(key, null);
+  // As data: an example a tool holds prints as nothing (ToolKit readOwn).
+  const readKey = (key) => readOwn(key, null);
   const readState = () => ({
     actions: { rows: AS ? AS.list() : [], ui: readKey(src.actions.uiKey) },
     maintenance: readKey(src.maintenance.key),

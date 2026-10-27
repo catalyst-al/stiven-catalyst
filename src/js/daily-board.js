@@ -315,7 +315,7 @@
   const dataEl = document.getElementById("daily-board-data");
   if (!root || !dataEl || !window.ToolKit || !window.ChartKit) return;
 
-  const { LANG, tx, el, int, pct, read, isObject, str, loadState, write, today, showDate, parseDate, parseRows, canon, plural, logBook, panel, copy, flash, lower } = window.ToolKit;
+  const { LANG, tx, el, int, pct, read, readOwn, isObject, str, loadState, write, today, showDate, parseDate, parseRows, canon, plural, logBook, panel, copy, flash, lower } = window.ToolKit;
   const Chart = window.ChartKit;
   const Workplace = window.Workplace;
   const Actions = window.ActionsStore;
@@ -385,14 +385,15 @@
 
   // The logs of the other tools in this language; a tool that does not exist yet reads as empty.
   const logOf = (tool) => {
-    const saved = read(`sc-${tool}${SUFFIX}`, {});
+    // Read as data: an example another tool holds is left out (ToolKit readOwn).
+    const saved = readOwn(`sc-${tool}${SUFFIX}`, {});
     return isObject(saved) && Array.isArray(saved.rows) ? { ...saved, rows: saved.rows.filter(isObject) } : { rows: [] };
   };
   const logs = () => ({ damage: logOf("damage-control"), incomplete: logOf("incomplete-control"), audit: logOf("night-audit"), delay: logOf("delay-analyzer"), safety: logOf("safety-cross"), fives: logOf("five-s-audit"), rooms: logOf("room-inspection"), maintenance: logOf("maintenance-planner") });
   const logsInUse = (all) => Object.values(all).some((log) => log.rows.length);
   // The open issues of the handover in progress, the carried ones first.
   const handoverIssues = () => {
-    const saved = read(`sc-shift-handover${SUFFIX}`, {});
+    const saved = readOwn(`sc-shift-handover${SUFFIX}`, {});
     const issues = isObject(saved) && isObject(saved.current) && Array.isArray(saved.current.issues) ? saved.current.issues.filter(isObject) : [];
     return issues.filter((issue) => issue.done !== true && str(issue.text).trim())
       .map((issue) => ({ text: str(issue.text).trim(), priority: str(issue.priority), owner: str(issue.owner).trim(), due: str(issue.due).trim(), carried: Number.isInteger(issue.carried) ? issue.carried : 0 }))

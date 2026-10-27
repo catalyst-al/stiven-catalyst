@@ -995,6 +995,8 @@
     const raw = df.units.value.trim();
     const n = raw ? parseNumber(raw) : 0;
     if (raw && !(n >= 0)) { df.units.focus(); flash(denomStatus, tx("Enter a number of 0 or more.")); return; }
+    // The visitor's own figure: the example leaves first (ToolKit logBook ownWork).
+    book.ownWork();
     if (n > 0) state.units[date] = n;
     else delete state.units[date];
     save();
@@ -1005,6 +1007,7 @@
     const area = root.querySelector("#et-units-paste");
     const { added, skipped } = importVolumes(area.value);
     if (!added.length) { flash(denomStatus, tx("No days found. Each row needs a date and a number above 0.")); return; }
+    book.ownWork();
     added.forEach((item) => { state.units[item.date] = item.volume; });
     area.value = "";
     save();

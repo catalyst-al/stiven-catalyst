@@ -432,7 +432,7 @@
   const dataEl = document.getElementById("shift-pulse-data");
   if (!root || !dataEl || !window.ToolKit) return;
 
-  const { LANG, tx, int, pct, el, showDate, today, addDays, mondayOf, shareText, read, write, isObject, str, plural, dayMonth, trendFigure, trendShares, panel, copy } = window.ToolKit;
+  const { LANG, tx, int, pct, el, showDate, today, addDays, mondayOf, shareText, read, readOwn, write, isObject, str, plural, dayMonth, trendFigure, trendShares, panel, copy } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const SUFFIX = LANG === "en" ? "" : `-${LANG}`;
   const PREFS = `sc-shift-pulse${SUFFIX}`;
@@ -449,12 +449,13 @@
   shiftSelect.value = data.shifts.includes(prefs.shift) ? prefs.shift : "";
 
   const logOf = (tool) => {
-    const saved = read(`sc-${tool}${SUFFIX}`, {});
+    // Read as data: an example another tool holds is left out (ToolKit readOwn).
+    const saved = readOwn(`sc-${tool}${SUFFIX}`, {});
     return isObject(saved) && Array.isArray(saved.rows) ? { ...saved, rows: saved.rows.filter(isObject) } : { rows: [] };
   };
   // The open issues of the handover in progress, most urgent first.
   const openIssues = () => {
-    const saved = read(`sc-shift-handover${SUFFIX}`, {});
+    const saved = readOwn(`sc-shift-handover${SUFFIX}`, {});
     const issues = isObject(saved) && isObject(saved.current) && Array.isArray(saved.current.issues) ? saved.current.issues.filter(isObject) : [];
     const order = (priority) => (data.priorities.indexOf(priority) + 1 || 99);
     return issues.filter((issue) => issue.done !== true && str(issue.text).trim())
@@ -509,7 +510,7 @@
     const oeeLog = logOf("oee");
     const fiveLog = logOf("five-s-audit");
     const acts = actions(read("sc-actions", {}), today());
-    const saved = (tool) => { const value = read(`sc-${tool}${SUFFIX}`, {}); return isObject(value) ? value : {}; };
+    const saved = (tool) => { const value = readOwn(`sc-${tool}${SUFFIX}`, {}); return isObject(value) ? value : {}; };
     return {
       safety: safetyLog.rows.length ? safety(safetyLog, options) : null,
       oee: oeeLog.rows.length ? oee(oeeLog, { ...options, target: window.Workplace?.target("oee") }, data.oeeReasons || []) : null,

@@ -937,14 +937,45 @@ window.ToolKit = (() => {
     }).filter((item) => item.count > 0);
   };
 
-  // An example in a log is remembered by its shape (how many rows, first and last date). The moment the
-  // log differs from that shape, the visitor has started their own work and the example note goes.
+  // An example is marked, not guessed. Loaded, it is stamped { on: true, n, first, last } and each of its rows carries
+  // example: true, so removing one of its rows or pressing a period button never turns the rest into the visitor's
+  // data (audit of 27 October 2026, T-01 and T-02). The example stays whole until the visitor's own work replaces it:
+  // an own entry, an import or "Clear the example" removes all of it, rows and settings together.
+  // A log saved before then has only the shape ({ n, first, last }); while it still has that shape it is read as an
+  // example and marked. A log whose shape changed under the old rule cannot be told apart any more and stays as it is.
   // A tool opens on its example only when nothing is stored yet and no coaching project sent the visitor here:
   // someone arriving with ?coaching= works on their own case, and the example must not become its evidence.
   const firstVisit = (key) => read(key, null) === null && !new URLSearchParams(location.search).has("coaching");
-  const exampleStamp = (rows) => ({ n: rows.length, first: rows[0]?.date ?? "", last: rows.at(-1)?.date ?? "" });
-  const exampleMatches = (state) => isObject(state.example) && Number.isInteger(state.example.n) && state.rows.length === state.example.n
-    && (state.rows[0]?.date ?? "") === state.example.first && (state.rows.at(-1)?.date ?? "") === state.example.last;
+  const isExampleRow = (row) => isObject(row) && row.example === true;
+  const markExample = (rows) => {
+    if (Array.isArray(rows)) rows.forEach((row) => { if (isObject(row)) row.example = true; });
+    return rows;
+  };
+  const ownRows = (rows) => (Array.isArray(rows) ? rows.filter((row) => !isExampleRow(row)) : []);
+  const exampleStamp = (rows) => ({ on: true, n: markExample(rows).length, first: rows[0]?.date ?? "", last: rows.at(-1)?.date ?? "" });
+  const oldShape = (state) => isObject(state.example) && state.example.on === undefined && Number.isInteger(state.example.n) && Array.isArray(state.rows)
+    && state.rows.length === state.example.n && (state.rows[0]?.date ?? "") === state.example.first && (state.rows.at(-1)?.date ?? "") === state.example.last;
+  // Whether a saved state is an example, in any of the ways the tools mark one: { on: true } (with or without the
+  // shape), the old shape, or example: true (the tools that hold a single study or matrix).
+  const isExampleState = (state) => isObject(state) && (state.example === true || (isObject(state.example) && (state.example.on === true || oldShape(state))));
+  const exampleMatches = (state) => {
+    if (!isObject(state) || !isObject(state.example)) return false;
+    if (state.example.on === true) return true;
+    if (!oldShape(state)) return false;
+    state.example = { ...state.example, on: true };
+    markExample(state.rows);
+    return true;
+  };
+  // Another tool's saved state as data: null (the fallback) when it is an example, and without any example rows a
+  // team sync or an old version may have mixed in. The tools that gather other tools' logs read through this.
+  const readOwn = (key, fallback = null) => {
+    const saved = read(key, null);
+    if (saved === null || isExampleState(saved)) return fallback;
+    if (!isObject(saved)) return saved;
+    const own = { ...saved };
+    Object.keys(own).forEach((name) => { if (Array.isArray(own[name]) && own[name].some(isExampleRow)) own[name] = ownRows(own[name]); });
+    return own;
+  };
   // The note above the result while an example is loaded: what it is, and one tap to clear it.
   const exampleNote = (anchor, onClear) => {
     const note = el("div", "dl-example-note");
@@ -955,7 +986,7 @@ window.ToolKit = (() => {
     note.append(el("strong", null, tx("Example")), " ", el("span", null, tx("This is an example, so you can see what the tool shows. Add your own entries and it disappears, or clear it now.")), " ", button);
     note.hidden = true;
     anchor.before(note);
-    return { sync: (state) => { if (state.example && !exampleMatches(state)) state.example = {}; note.hidden = !exampleMatches(state); } };
+    return { sync: (state) => { note.hidden = !exampleMatches(state); } };
   };
 
   // filter, when given, returns null or { label, test(row), clear() }: the table then shows only the rows that pass,
@@ -1028,7 +1059,7 @@ window.ToolKit = (() => {
     // The example leaves as a whole: its rows and its settings (period, volume, target), so the
     // visitor's own entries are never mixed into it or scored against its volume.
     const dropExample = () => {
-      state.rows = [];
+      state.rows = ownRows(state.rows);
       state.example = {};
       state.totalsFor = {};
       clearExample?.();
@@ -1165,6 +1196,15 @@ window.ToolKit = (() => {
         if (exampleMatches(state)) { dropUndo(); dropExample(); }
         state.rows.push(row);
         changed();
+      },
+      // Own work that is not a row (a day's volume, a meter, a setting box that belongs to the visitor): the example
+      // leaves first, whole, so the work is neither mixed into it nor cleared with it later.
+      ownWork: () => {
+        if (!exampleMatches(state)) return false;
+        dropUndo();
+        dropExample();
+        changed();
+        return true;
       },
     };
   };
@@ -1368,7 +1408,7 @@ window.ToolKit = (() => {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseDateTime, parseRows, canon, sigma, sigmaText,
-    inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
+    inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, isExampleRow, isExampleState, markExample, ownRows, readOwn, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

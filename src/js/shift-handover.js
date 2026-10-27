@@ -50,7 +50,7 @@
   const dataEl = document.getElementById("shift-handover-data");
   if (!form || !dataEl || !window.ToolKit) return;
 
-  const { LOCALE, tx, dayMonth, lower, pct, plural, read, write, isObject, str, el, today, parseDate, parseNumber, renderOnPause, partialRouteLog } = window.ToolKit;
+  const { LOCALE, tx, dayMonth, lower, pct, plural, read, readOwn, write, isObject, str, el, today, parseDate, parseNumber, renderOnPause, partialRouteLog } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const KEY = data.storageKey;
   const HISTORY_MAX = 30;
@@ -286,7 +286,8 @@
   // language, with the same shift names as this page. Their numbers for this handover's date and
   // shift fill the matching empty numbers of the template; anything typed stays as it is.
   const logRows = (tool) => {
-    const saved = read(KEY.replace("shift-handover", tool), {});
+    // An example the log holds fills nothing in (ToolKit readOwn).
+    const saved = readOwn(KEY.replace("shift-handover", tool), {});
     return isObject(saved) && Array.isArray(saved.rows) ? { settings: saved, rows: saved.rows.filter(isObject) } : { settings: {}, rows: [] };
   };
   const clockMinutes = (time) => (/^\d{2}:\d{2}$/.test(str(time)) ? Number(time.slice(0, 2)) * 60 + Number(time.slice(3, 5)) : null);

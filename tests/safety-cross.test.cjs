@@ -218,7 +218,8 @@ test('the month moves, the view switches, a talk is marked, an action is done, a
   assert.equal(saved.view, 'calendar');
   assert.equal(saved.rows.length, 14);
   assert.equal(saved.rows.filter((row) => row.action && !row.done).length, 5, 'one of six ticked');
-  assert.deepEqual(Object.keys(saved.rows[0]).sort(), ['action', 'area', 'cause', 'date', 'done', 'owner', 'severity', 'shift', 'type', 'what']);
+  // The example's rows say they are the example (ToolKit exampleStamp, since 27 October 2026).
+  assert.deepEqual(Object.keys(saved.rows[0]).sort(), ['action', 'area', 'cause', 'date', 'done', 'example', 'owner', 'severity', 'shift', 'type', 'what']);
   assert.ok(saved.talks.some((talk) => talk.date === '2026-10-23' && !talk.example));
 });
 

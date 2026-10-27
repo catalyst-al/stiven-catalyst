@@ -205,7 +205,7 @@
   const root = document.querySelector("[data-cost-of-quality]");
   const dataEl = document.getElementById("cost-of-quality-data");
   if (!root || !dataEl || !window.ToolKit) return;
-  const { LANG, LOCALE, tx, num, pct, euro, el, read, write, loadState, firstVisit, today, panel, stat, focusCard, resultActions, resultLayout, renderOnPause, keepFocus, flash, undoNote, downloadCsv, downloadXlsx, copy } = window.ToolKit;
+  const { LANG, LOCALE, tx, num, pct, euro, el, read, readOwn, write, loadState, firstVisit, today, panel, stat, focusCard, resultActions, resultLayout, renderOnPause, keepFocus, flash, undoNote, downloadCsv, downloadXlsx, copy } = window.ToolKit;
   const CK = window.ChartKit;
   const AS = window.ActionsStore;
   const data = JSON.parse(dataEl.textContent);
@@ -480,8 +480,9 @@
   // Bring in from this browser: the Waste Log and the guest compensation of the last 30 days, read only.
   root.querySelector("[data-import]").addEventListener("click", () => {
     const day = today();
-    const waste = wasteTotal(read(`sc-waste-log${SUFFIX}`, null), day);
-    const comp = complaintsTotal(read(`sc-guest-complaints${SUFFIX}`, null), day);
+    // Read as data: an example either tool holds is not brought in (ToolKit readOwn).
+    const waste = wasteTotal(readOwn(`sc-waste-log${SUFFIX}`, null), day);
+    const comp = complaintsTotal(readOwn(`sc-guest-complaints${SUFFIX}`, null), day);
     const said = [];
     if (waste && waste.total > 0) {
       mergeImport(state.lines, "waste-log", "internal", data.text.wasteLine, waste.total);
