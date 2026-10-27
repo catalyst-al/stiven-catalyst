@@ -1,0 +1,1778 @@
+[
+ {
+  "lang": "en",
+  "slug": "a3-report",
+  "paper": "420x297mm",
+  "pages": 2,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "action-tracker",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "andon",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "ats-cv",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "cost-of-quality",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "cover-letter",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "cv-builder",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "cx-control-tower",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "daily-board",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "damage-control",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "delay-analyzer",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "eight-d",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 8,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "energy-tracker",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "fishbone",
+  "paper": "297x210mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "five-s-audit",
+  "paper": "210x297mm",
+  "pages": 14,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "five-whys",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "fmea",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 3,
+  "wide": [
+   "dl-table 746px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "gemba-walk",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "guest-complaints",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "heijunka",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "hoshin-kanri",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "hotel-kpis",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "housekeeping-planner",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "incomplete-control",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "inventory-abc",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 6,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "kaizen-board",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "kaizen-event",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "kanban-sizing",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "kpi-diagnostic",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "leader-standard-work",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "lean-assessment",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "lost-found",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "maintenance-planner",
+  "paper": "210x297mm",
+  "pages": 12,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "night-audit",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "oee",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "ops-report",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "pareto",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "poka-yoke",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "print-pack",
+  "paper": "210x297mm",
+  "pages": 20,
+  "tables": 28,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "process-lab",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "project-portfolio",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "risk-assessment",
+  "paper": "297x210mm",
+  "pages": 4,
+  "tables": 4,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "room-inspection",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "room-status",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "safety-cross",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "shift-capacity",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "shift-handover",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "shift-pulse",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "sigma-control-chart",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "signals",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "site-compare",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "six-sigma-dmaic",
+  "paper": "210x297mm",
+  "pages": 22,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "skills-matrix",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "smed",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "spaghetti-diagram",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "standard-work",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "time-study",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "value-stream-map",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "waste-log",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "a3-report",
+  "paper": "420x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "action-tracker",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "andon",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "ats-cv",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "cost-of-quality",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "cover-letter",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "cv-builder",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "cx-control-tower",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "daily-board",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "damage-control",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "delay-analyzer",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "eight-d",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 8,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "energy-tracker",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "fishbone",
+  "paper": "297x210mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "five-s-audit",
+  "paper": "210x297mm",
+  "pages": 14,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "five-whys",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "fmea",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 3,
+  "wide": [
+   "dl-table 892px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "gemba-walk",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "guest-complaints",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "heijunka",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "hoshin-kanri",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "hotel-kpis",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "housekeeping-planner",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "incomplete-control",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "inventory-abc",
+  "paper": "210x297mm",
+  "pages": 12,
+  "tables": 6,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "kaizen-board",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "kaizen-event",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "kanban-sizing",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "kpi-diagnostic",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "leader-standard-work",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "lean-assessment",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "lost-found",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "maintenance-planner",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "night-audit",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "oee",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "ops-report",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "pareto",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "poka-yoke",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "print-pack",
+  "paper": "210x297mm",
+  "pages": 21,
+  "tables": 28,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "process-lab",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "project-portfolio",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "risk-assessment",
+  "paper": "297x210mm",
+  "pages": 4,
+  "tables": 4,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "room-inspection",
+  "paper": "210x297mm",
+  "pages": 12,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "room-status",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "safety-cross",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "shift-capacity",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "shift-handover",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "shift-pulse",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "sigma-control-chart",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "signals",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "site-compare",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "six-sigma-dmaic",
+  "paper": "210x297mm",
+  "pages": 24,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "skills-matrix",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "smed",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "spaghetti-diagram",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "standard-work",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "time-study",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "value-stream-map",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "waste-log",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "a3-report",
+  "paper": "420x297mm",
+  "pages": 2,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "action-tracker",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "andon",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "ats-cv",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "cost-of-quality",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "cover-letter",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "cv-builder",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "cx-control-tower",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "daily-board",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "damage-control",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "delay-analyzer",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "eight-d",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 8,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "energy-tracker",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "fishbone",
+  "paper": "297x210mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "five-s-audit",
+  "paper": "210x297mm",
+  "pages": 14,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "five-whys",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "fmea",
+  "paper": "210x297mm",
+  "pages": 12,
+  "tables": 3,
+  "wide": [
+   "dl-table 860px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "gemba-walk",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "guest-complaints",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "heijunka",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "hoshin-kanri",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "hotel-kpis",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "housekeeping-planner",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "incomplete-control",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "inventory-abc",
+  "paper": "210x297mm",
+  "pages": 12,
+  "tables": 6,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "kaizen-board",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "kaizen-event",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "kanban-sizing",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "kpi-diagnostic",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "leader-standard-work",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "lean-assessment",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "lost-found",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "maintenance-planner",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "night-audit",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "oee",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "ops-report",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "pareto",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "poka-yoke",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "print-pack",
+  "paper": "210x297mm",
+  "pages": 20,
+  "tables": 28,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "process-lab",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "project-portfolio",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "risk-assessment",
+  "paper": "297x210mm",
+  "pages": 4,
+  "tables": 4,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "room-inspection",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "room-status",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "safety-cross",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "shift-capacity",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "shift-handover",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "shift-pulse",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "sigma-control-chart",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "signals",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "site-compare",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "six-sigma-dmaic",
+  "paper": "210x297mm",
+  "pages": 22,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "skills-matrix",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "smed",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "spaghetti-diagram",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "standard-work",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "time-study",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "value-stream-map",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 2,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "waste-log",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ }
+]

@@ -5,7 +5,8 @@
 import { defineConfig } from "@playwright/test";
 import { existsSync } from "node:fs";
 
-const PORT = 4173;
+// PW_PORT: another port for a second checkout's run on the same machine.
+const PORT = Number(process.env.PW_PORT) || 4173;
 // In the development container Chromium is already installed here; in CI `npx playwright install` puts it where
 // Playwright looks by itself.
 const LOCAL_CHROMIUM = "/opt/pw-browsers/chromium";
@@ -32,13 +33,15 @@ export default defineConfig({
     launchOptions,
     trace: "retain-on-failure",
   },
-  // The photo backup journey needs one width only, and the phone charts the phone width only: the other projects
-  // leave them out (rather than skipping them), so a run reports no skipped tests.
+  // The photo backup journey needs one width only, print one project only (dark theme, with motion) and the phone
+  // charts the phone width only: the other projects leave them out (rather than skipping them), so a run reports no
+  // skipped tests.
   projects: widths.flatMap((width) => themes.map((theme) => ({
     name: `${width}px ${theme}`,
     testIgnore: [
       ...(width === 1440 && theme === "light" ? [] : [/work-backup-photos\.spec\.mjs$/]),
       ...(width === 390 ? [] : [/chart-labels\.spec\.mjs$/]),
+      ...(width === 1440 && theme === "dark" ? [] : [/print\.spec\.mjs$/]),
     ],
     use: {
       viewport: { width, height: width < 600 ? 844 : 900 },
