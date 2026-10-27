@@ -1208,13 +1208,9 @@
     const printBowling = el("button", "button-secondary", tx("Print the bowling chart"));
     printBowling.type = "button";
     printBowling.addEventListener("click", () => printAs("hx-print-bowling"));
-    const csv = el("button", "button-secondary", tx("Download CSV"));
-    csv.type = "button";
-    csv.addEventListener("click", () => downloadCsv(cfg.text.csv, sheetRows()));
-    const xlsx = el("button", "button-secondary", tx("Download Excel"));
-    xlsx.type = "button";
-    xlsx.addEventListener("click", () => downloadXlsx(cfg.text.csv, sheetRows(), { sheet: tx("Bowling chart"), title: cfg.text.tool }));
-    actions.append(printMatrix, printBowling, csv, xlsx);
+    // The bowling chart as CSV or Excel is offered once, under the plan ([data-csv], [data-xlsx]): the results used to
+    // repeat the same two buttons for the same table.
+    actions.append(printMatrix, printBowling);
 
     const panels = [];
     if (CK && state.metrics.length) panels.push(trendsPanel(idx));
