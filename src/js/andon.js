@@ -44,9 +44,14 @@
     if (a === null || b === null) return null;
     return b >= a ? b - a : b - a + 1440;
   };
+  // A call closed live also keeps its moments (calledAt, arrivedAt, solvedAt: ms of the device clock) and is measured
+  // on them, in the whole minutes its clock times count: on the night the clocks go back, a call at 02:40 summer time
+  // solved at 02:10 winter time took 30 minutes, not 1,410 (audit 27 Oct 2026, P2A-05b). Rows typed after the fact,
+  // and rows saved before, have their clock times only.
+  const minutesBetween = (fromMs, toMs) => Math.floor(toMs / 6e4) - Math.floor(fromMs / 6e4);
   // Time to respond = help arrived − called; time to solve = solved − called (both from the moment of the call).
-  const respondOf = (row) => (row.arrived ? span(row.called, row.arrived) : null);
-  const resolveOf = (row) => span(row.called, row.solved);
+  const respondOf = (row) => (!row.arrived ? null : row.arrivedAt ? minutesBetween(row.calledAt, row.arrivedAt) : span(row.called, row.arrived));
+  const resolveOf = (row) => (row.solvedAt ? minutesBetween(row.calledAt, row.solvedAt) : span(row.called, row.solved));
   // A stopped line counts its stopped minutes; a line that ran on counts none.
   const stopOf = (row) => (row.stopped ? Number(row.stopMin) || 0 : 0);
 
@@ -216,7 +221,8 @@
 
   // A saved row, cleaned: no date, no call time or no solved time, no row. An arrival that comes after the solved
   // time is a typing slip and is dropped (time to solve stays). Without stopped minutes a stopped line counts the
-  // whole call, since the line waits until the work runs again.
+  // whole call, since the line waits until the work runs again. The moments of a live call are kept while they still
+  // fall on the row's date and clock times; a row changed since is measured on its clock times.
   const isObject = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
   const cleanRow = (row, cfg) => {
     if (!isObject(row)) return null;
@@ -224,12 +230,18 @@
     const called = timeOf(row.called);
     const solved = timeOf(row.solved);
     if (!date || !called || !solved) return null;
+    const ms = (value) => (typeof value === "number" && Number.isFinite(value) && value > 0 ? value : 0);
+    const on = (at, time) => at > 0 && stampOf(at).time === time;
+    const live = on(ms(row.calledAt), called) && stampOf(row.calledAt).date === date && on(ms(row.solvedAt), solved) && row.solvedAt >= row.calledAt
+      ? { calledAt: row.calledAt, solvedAt: row.solvedAt } : null;
     let arrived = timeOf(row.arrived);
-    if (arrived && span(called, arrived) > span(called, solved)) arrived = "";
+    if (live && on(ms(row.arrivedAt), arrived) && row.arrivedAt >= live.calledAt && row.arrivedAt <= live.solvedAt) live.arrivedAt = row.arrivedAt;
+    const timed = { called, arrived, solved, ...live };
+    if (arrived && respondOf(timed) > resolveOf(timed)) { arrived = ""; delete timed.arrivedAt; if (live) delete live.arrivedAt; }
     const s = (v) => (typeof v === "string" ? v.trim() : "");
     const stopped = row.stopped === true;
     const typed = typeof row.stopMin === "number" ? row.stopMin : kit.parseNumber(row.stopMin);
-    const whole = span(called, solved);
+    const whole = resolveOf(timed);
     const stopMin = !stopped ? 0 : Number.isFinite(typed) && typed >= 0 ? Math.min(Math.round(typed), whole) : whole;
     return {
       date,
@@ -241,6 +253,7 @@
       stopped,
       stopMin,
       note: s(row.note).slice(0, 300),
+      ...live,
     };
   };
   const cleanRows = (rows, cfg) => (Array.isArray(rows) ? rows.map((row) => cleanRow(row, cfg)).filter(Boolean) : []);
@@ -282,6 +295,9 @@
       called: start.time,
       arrived: stampOf(call.arrivedAt || solvedAt).time,
       solved: stampOf(solvedAt).time,
+      calledAt: call.calledAt,
+      arrivedAt: call.arrivedAt || solvedAt,
+      solvedAt,
       responder: call.responder,
       stopped: call.stopped,
       stopMin: typed === "" ? "" : typed,
