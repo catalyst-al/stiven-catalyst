@@ -38,12 +38,15 @@ test('a project changed since the backup keeps the current work and gets the bac
   s.projects.push(project('P1'));
   const backup = C.exportBackup(s);
   s.projects[0].title = 'P1 renamed';
-  let t = C.importBackup(s, backup);
-  assert.deepEqual(titles(t), ['P1 renamed', 'P1']);
+  // The backup's version is labelled as a copy (the author's decision of 27 October 2026; see owner-decisions.test.cjs).
+  const label = (title, date) => `${title} (copy of ${date})`;
+  let t = C.importBackup(s, backup, { copyTitle: label });
+  const day = JSON.parse(backup).exported.slice(0, 10);
+  assert.deepEqual(titles(t), ['P1 renamed', `P1 (copy of ${day})`]);
   assert.equal(t.projects[0].id, s.projects[0].id);
   assert.notEqual(t.projects[1].id, s.projects[0].id);
-  t = C.importBackup(t, backup);
-  assert.deepEqual(titles(t), ['P1 renamed', 'P1']);
+  t = C.importBackup(t, backup, { copyTitle: label });
+  assert.deepEqual(titles(t), ['P1 renamed', `P1 (copy of ${day})`]);
 });
 
 test('a valid backup that would pass 100 projects has its own error, not "invalid backup"', () => {
