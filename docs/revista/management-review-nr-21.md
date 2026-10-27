@@ -16,6 +16,14 @@ Network World dhe te Deloitte); McKinsey (faqja dhe PDF-ja kthejnë përgjigje b
 shifrat e tij mbeten te copat e kërkimit dhe te përmbledhja e Fortune (14 mars 2023). Këtyre pesë burimeve u propozohet
 `via`. Asnjë shifër e shtypur nuk doli ndryshe.
 
+Korrigjim, 27 tetor 2026 (auditimi i 27 tetorit, P5-03 dhe P5-11). (1) "Në 2023" për gati një të tretën e largimeve u
+hoq nga hyrja dhe nga faqja 3: pjesa e hapur e Bloomberg-ut nuk e jep vitin (shih tabelën); tani "në një analizë të
+botuar në 2024" (adresa e artikullit mban datën 2024-03-15). (2) 73% dhe 7% nuk janë në tekstin e kapitullit të
+Deloitte-it (WebFetch, 27 tetor: vetëm 40%, 36%, 42% dhe 20% në tekst; figura 2 është imazh). U konfirmuan te njoftimi
+për shtyp i Deloitte-it i 24 marsit 2025 (deloitte.com, "Nearly three-quarters (73%) of organizations recognize the
+importance of reinventing the role of the manager, but just 7% are making great progress"). Faqja thotë tani "në
+njoftimin për shtyp të raportit" dhe shënimi e emërton; numri ka një shënim korrigjimi me datë në tri gjuhët.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |

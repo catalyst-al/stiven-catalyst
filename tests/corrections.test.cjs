@@ -62,8 +62,9 @@ test('Issues 6, 72 and 74 say what was corrected on 13 October, only in the lang
     ['sq/magazine/management-review-nr-72.html', 'Korrigjim, 13 tetor 2026. Lillian Eby dhe kolegët (2008)'],
     ['magazine/management-review-nr-74.html', 'Correction, 13 October 2026. The summary of the issue now says “what it is measured against”'],
   ];
+  // No. 6 also carries, before it, the note of 12 October on its 6.1% (tests/corrections-register.test.cjs).
   for (const [path, start] of cases) {
-    assert.ok(plain(note(path)).startsWith(start), path);
+    assert.ok(plain(note(path)).includes(start), path);
     assert.match(fs.readFileSync(`_site/${path}`, 'utf8'), /class="callout is-correction/, `${path}: on the printed sources page too`);
   }
   // The German of 72 already said "Hochschul-", and only the English summary of 74 changed.

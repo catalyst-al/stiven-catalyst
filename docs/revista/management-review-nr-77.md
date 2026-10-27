@@ -34,6 +34,12 @@ prodhuesit me të dhëna mujore dhe shitësin me pakicë me parashikime javore. 
 asgjë nuk u ndryshua në faqe. `via` mbetet te të katërt: M4 "Abstract in library records"; Fildes et al. me `via` që
 përmend tani abstraktin dhe punimin paraprak të 2006; M5 background dhe M5 accuracy si më parë.
 
+Shënim (27 tetor 2026), sipas historisë së git-it: kontrolli i dytë i 11 tetorit u bë para se numri të dilte online.
+Ndryshimet e tij u bënë në degën e punës (commit a8c070b3, 11 tetor 2026) dhe numri hyri në main, nga ku botohet faqja,
+vetëm me bashkimin #177 (7b43e7c3, 11 tetor 2026, ora 20:33): versioni i parë online i ka tashmë. Prandaj këto ndryshime
+nuk kanë shënim korrigjimi dhe nuk e çojnë numrin te `checked.issues` (lib/weekly/common.js). Pas daljes online nuk
+ndryshoi në kontrollin e dytë.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |

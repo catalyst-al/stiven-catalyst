@@ -206,7 +206,8 @@ test('Publications can be narrowed by month and kind: the newest of each series 
   for (const lang of LANGS) {
     const prefix = lang === 'en' ? '' : `${lang}/`;
     const page = built(`${prefix}publications.html`);
-    for (const month of publications.months) assert.ok(page.includes(`data-month="${month.id}">${escaped(month[lang])}`), `${lang}: the button of ${month.id}`);
+    // A button for each month once there are two (src/_includes/partials/issue-filter.njk).
+    if (publications.months.length > 1) for (const month of publications.months) assert.ok(page.includes(`data-month="${month.id}">${escaped(month[lang])}`), `${lang}: the button of ${month.id}`);
     for (const kind of publications.kinds) assert.ok(page.includes(`data-block="${kind.id}">${escaped(kind[lang])}`), `${lang}: the kind ${kind.id}`);
     const dated = publications.review.length + publications.treatise.length + publications.floor.length + 1;
     assert.equal((page.match(/data-pub data-block="[a-z]+" data-month="\d{4}-\d{2}"/g) || []).length, dated, `${lang}: every dated publication has its month`);
@@ -249,17 +250,18 @@ test('no page writes its title or description escaped twice', { skip: !hasSite }
   assert.deepEqual(twice, []);
 });
 
-test('the issues come in monthly series of 40: the label names the series, the date its month', async () => {
+test('the issues come in series of 40: the label names the series, the date the month it went online', async () => {
   const { common, SERIES_SIZE, seriesOf } = await import('../lib/weekly/common.js');
   const { default: weekly } = await import('../src/_data/weekly.js');
+  const online = JSON.parse(fs.readFileSync('src/_data/online.json', 'utf8'));
   assert.equal(SERIES_SIZE, 40);
   assert.deepEqual([1, 40, 41, 80, 81].map(seriesOf), [1, 1, 2, 2, 3]);
-  const months = { 1: 'Tetor 2026', 2: 'Nëntor 2026', 3: 'Dhjetor 2026' };
   for (const issue of weekly.issues) {
     for (const lang of ['en', 'sq', 'de']) {
       assert.equal(issue[lang].edition, common.labels.series[seriesOf(issue.number) - 1][lang], `${issue.no} ${lang}`);
     }
-    if (months[seriesOf(issue.number)]) assert.equal(issue.sq.date, months[seriesOf(issue.number)], `${issue.no}: the month of its series`);
+    // Issues 1–80 went online in October 2026 (tests/publication-dates.test.cjs checks every publication).
+    if (online[issue.slug]) assert.equal(issue.month, online[issue.slug].published.slice(0, 7), `${issue.no}: the month it went online`);
   }
   assert.equal(weekly.issues[0].sq.edition, 'Seria e parë');
   for (const file of ['src/_includes/print/weekly-page.njk', 'src/_includes/pages/weekly-issue.njk']) {

@@ -551,11 +551,18 @@ test('Publications: the title lifts like a page, each series keeps its colour, t
   const counts = () => [...doc.querySelectorAll('.weekly-filter .weekly-n')].map((n) => n.textContent);
   const before = counts();
   assert.equal(doc.querySelectorAll('.is-bumped').length, 0, 'no beat when the page opens');
+  // Every publication is dated by the month it went online; while all of them are of one month (October 2026) there
+  // are no month buttons, and a choice of kind is what turns the covers in. With a second month, choosing it changes
+  // the counts, and a changed count beats.
   const months = [...doc.querySelectorAll('.weekly-months button')];
-  const other = months.find((button) => button.getAttribute('aria-pressed') === 'false' && button.dataset.month === '2026-09');
-  other.click();
-  assert.notDeepEqual(counts(), before);
-  assert.ok(doc.querySelectorAll('.weekly-n.is-bumped').length > 0, 'a changed count beats');
+  const other = months.find((button) => button.getAttribute('aria-pressed') === 'false' && button.dataset.month);
+  if (other) {
+    other.click();
+    assert.notDeepEqual(counts(), before);
+    assert.ok(doc.querySelectorAll('.weekly-n.is-bumped').length > 0, 'a changed count beats');
+  } else {
+    doc.querySelector('.weekly-filter button[data-block="review"]').click();
+  }
   assert.ok(doc.querySelector('[data-pub]:not([hidden]).is-entering'), 'the shown publications come in');
 });
 

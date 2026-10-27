@@ -68,7 +68,9 @@
   <p>{{ W.back.line }}</p>
   <p class="monthly">{{ W.back.all }}</p>
   <p class="url">stivencatalyst.com{{ W.archiveUrl | local(lang) }}</p>
-  <p class="edition">{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }} · Stiven Catalyst</p>
+  {#- The edition line, and under it the colophon: who makes the publication and how (weekly.colophon). #}
+  {%- set C = weekly[lang].colophon %}
+  <p class="edition">{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }} · Stiven Catalyst<br>{{ C.text }} {{ C.url }}</p>
 </section>
 {%- else %}
 <section class="pg{{ fitClass }}">

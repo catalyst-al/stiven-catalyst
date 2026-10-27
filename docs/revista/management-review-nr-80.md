@@ -29,6 +29,13 @@ Asnjë shifër ose fakt i shtypur nuk doli ndryshe; shënimi i faqes 3 thotë ta
 Libri i Ishikawa-s (1985) dhe The New Economics (1993) janë në archive.org vetëm për huazim (me hyrje), jo të hapur; nuk u
 lexuan dhe mbajnë `via`.
 
+Shënim (27 tetor 2026), sipas historisë së git-it: kontrolli i dytë i 11 tetorit u bë para se numri të dilte online.
+Ndryshimet e tij u bënë në degën e punës (commit 6e50b937, 11 tetor 2026) dhe numri hyri në main, nga ku botohet faqja,
+vetëm me bashkimin #177 (7b43e7c3, 11 tetor 2026, ora 20:33): versioni i parë online i ka tashmë. Prandaj këto ndryshime
+nuk kanë shënim korrigjimi dhe nuk e çojnë numrin te `checked.issues` (lib/weekly/common.js). Numri ndryshoi edhe më 12
+tetor 2026, pasi kishte dalë online (de0466bb), dhe për këtë është te `checked.issues` dhe e thotë nën përmbledhjen e
+vet.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |

@@ -1,5 +1,6 @@
 {#- All issues of the weekly Management Review, the newest first, each as its cover; the month of the edition and
-    the topics narrow the list, twelve covers at a time (js/weekly.js). Below them, the special edition of September 2026. Shared by the three languages. -#}
+    the topics narrow the list, twelve covers at a time (js/weekly.js). Below them, the special edition of October 2026
+    and the corrections register. Shared by the three languages. -#}
 {%- set lang = lang or "en" -%}
 {%- set W = weekly[lang] -%}
 {%- set L = W.labels -%}
@@ -17,9 +18,12 @@
   </section>
 
   <section class="shell weekly-archive" aria-label="{{ L.issues }}">
-    {#- How the series works, above the list: one edition a month, and why 80 issues are online before November
-        (the facts of How this is made, where the link goes). -#}
+    {#- How the series works, above the list: numbered issues dated by the month they went online (the facts of How
+        this is made, where the link goes), and the dated note on the dates corrected on 27 October 2026. -#}
     <p class="weekly-model"><strong>{{ A.model }}.</strong> {{ A.modelText }} <a href="{{ '/how-this-is-made.html' | local(lang) }}#dates">{{ A.modelLink }} <span aria-hidden="true">→</span></a></p>
+    {%- set corrections = [{ date: A.datesNote.date, t: A.datesNote.t, series: true }] %}
+    {%- set correctionsId = "dates" %}
+    {%- include "partials/book-corrections.njk" %}
     {{ filter.controls(weekly.months, weekly.blocks, lang, A, L.blocks) }}
     <ol class="weekly-grid" reversed>
       {%- for issue in weekly.issues | reverse %}
@@ -55,6 +59,19 @@
       <p class="book-subtitle">{{ A.special }}</p>
       <p>{{ R.feature }}</p>
       <a class="button-primary" href="{{ reviewUrl }}">{{ R.labels.open_edition }}</a>
+    </div>
+  </section>
+
+{#- The corrections register: every correction made after publication, the newest first, each with its date, the issue
+    it belongs to (linked) and what changed (weekly.register, from the corrections in the issues' and the special
+    edition's data, the second check and the dates note). -#}
+  <section class="shell weekly-archive" id="corrections" aria-labelledby="corrections-title">
+    <h2 id="corrections-title">{{ A.register.title }}</h2>
+    <p class="weekly-model">{{ A.register.lede }}</p>
+    <div class="book-corrections">
+      {%- for c in weekly.register[lang] %}
+      <p{% if c.checked %} data-series{% endif %}><strong>{{ c.date }} · <a href="{{ c.url }}">{{ c.label }}</a>.</strong> {{ c.t }}{% if c.issues %} {% for i in c.issues %}<a href="{{ i.url }}">{{ i.label }}</a>{{ ", " if not loop.last else "." }}{% endfor %}{% endif %}</p>
+      {%- endfor %}
     </div>
   </section>
 <script src="{{ '/js/weekly.js' | assetUrl }}" defer></script>

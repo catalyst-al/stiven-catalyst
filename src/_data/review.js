@@ -1,5 +1,6 @@
-// Management Review, September 2026: a one-off edition of Stiven Catalyst on the manager in the age of AI, in
-// English, Albanian and German. scripts/review.mjs prints it (src/guide-print/review.njk) and turns the PDF into the
+// Management Review, October 2026 (online on 4 October; dated September 2026 until 27 October): a one-off edition
+// of Stiven Catalyst on the manager in the age of AI, in English, Albanian and German. scripts/review.mjs prints it
+// (src/guide-print/review.njk) and turns the PDF into the
 // pages of the reader (src/_includes/pages/review.njk).
 //
 // Every figure was checked against its source (docs/revista/management-review-2026-09.md). Each string is written
@@ -116,7 +117,7 @@ const pages = [
       { type: "stats", cols: 2, items: [
         { n: pc(66), t: x("of AI users say AI gives them more time for high-value work.", "e përdoruesve të AI-së thonë se AI u jep më shumë kohë për punë me vlerë të lartë.", "der KI-Nutzenden sagen, dass KI ihnen mehr Zeit für wertvolle Arbeit gibt."), by: "Microsoft" },
         { n: pc(58), t: x("say AI helps them produce work they could not have done a year ago.", "thonë se AI i ndihmon të bëjnë punë që nuk mund ta bënin një vit më parë.", "sagen, dass sie mit KI Arbeit leisten, die vor einem Jahr nicht möglich war."), by: "Microsoft" },
-        { n: pc(40), t: x("higher productivity growth in the companies most exposed to AI.", "rritje më e lartë e produktivitetit te kompanitë më të ekspozuara ndaj AI-së.", "höheres Produktivitätswachstum in den am stärksten KI-exponierten Unternehmen."), by: "PwC" },
+        { n: pc(40), t: x("higher productivity growth, 2018–2025, in companies of the most AI-exposed sectors: 34% against 24%.", "rritje më e lartë e produktivitetit, 2018–2025, te kompanitë e sektorëve më të ekspozuar ndaj AI-së: 34% kundrejt 24%.", "höheres Produktivitätswachstum 2018–2025 bei Unternehmen der am stärksten KI-exponierten Branchen: 34 % gegenüber 24 %."), by: "PwC" },
         { n: pc(85), t: x("of leaders say building adaptability is critical.", "e drejtuesve thonë se ndërtimi i përshtatshmërisë është kritik.", "der Führungskräfte halten den Aufbau von Anpassungsfähigkeit für entscheidend."), by: "Deloitte" },
         { n: pc(7), t: x("say they are leading in helping their workforce grow and adapt.", "thonë se prijnë kur vjen puna te ndihma për njerëzit e tyre, që të rriten dhe të përshtaten.", "sehen sich als führend darin, ihre Belegschaft beim Wachsen und Anpassen zu unterstützen."), by: "Deloitte" },
         { n: pc(65), t: x("of organisations believe their culture needs significant change because of AI.", "e organizatave besojnë se kultura e tyre duhet të ndryshojë ndjeshëm për shkak të AI-së.", "der Organisationen glauben, dass sich ihre Kultur wegen KI deutlich ändern muss."), by: "Deloitte" },
@@ -186,7 +187,7 @@ const pages = [
     lead: x("AI is changing the output, and with it what roles are made of.", "AI po ndryshon rezultatet e punës, e bashkë me to edhe përmbajtjen e roleve.", "KI verändert die Ergebnisse der Arbeit und mit ihnen den Inhalt von Rollen."),
     blocks: [
       { type: "stats", cols: 2, items: [
-        { n: pc(40), t: x("higher productivity growth in the companies most exposed to AI than in the least exposed.", "rritje më e lartë e produktivitetit te kompanitë më të ekspozuara ndaj AI-së, krahasuar me ato më pak të ekspozuara.", "höheres Produktivitätswachstum in den am stärksten KI-exponierten Unternehmen als in den am wenigsten exponierten.") },
+        { n: pc(40), t: x("higher productivity growth from 2018 to 2025 in companies of the sectors most exposed to AI than in the least exposed: 34% against 24%.", "rritje më e lartë e produktivitetit nga 2018 deri në 2025 te kompanitë e sektorëve më të ekspozuar ndaj AI-së, krahasuar me më pak të ekspozuarit: 34% kundrejt 24%.", "höheres Produktivitätswachstum von 2018 bis 2025 bei Unternehmen der am stärksten KI-exponierten Branchen als bei den am wenigsten exponierten: 34 % gegenüber 24 %.") },
         { n: x("2×", "2×", "2×"), t: x("Skills in the most AI-exposed jobs are changing more than twice as fast.", "Aftësitë te punët më të ekspozuara ndaj AI-së po ndryshojnë më shumë se dy herë më shpejt.", "Die Fähigkeiten in den am stärksten KI-exponierten Jobs ändern sich mehr als doppelt so schnell.") },
         { n: x("7×", "7×", "7×"), t: x("In the US, AI-exposed junior roles are seven times more likely to ask for skills that used to be senior, such as leadership.", "Në SHBA, rolet fillestare të ekspozuara ndaj AI-së kanë shtatë herë më shumë gjasa të kërkojnë aftësi që dikur u kërkoheshin vetëm punonjësve me përvojë, si udhëheqja.", "In den USA verlangen KI-exponierte Einstiegsrollen siebenmal häufiger Fähigkeiten, die früher Senior-Rollen vorbehalten waren, etwa Führung.") },
         { n: x("2.5×", "2,5×", "2,5×"), t: x("The most AI-exposed jobs are adding tasks that rely on empathy, judgment and creativity 2.5 times faster.", "Punët më të ekspozuara ndaj AI-së po shtojnë 2,5 herë më shpejt detyra që mbështeten në empati, gjykim dhe kreativitet.", "In den am stärksten KI-exponierten Jobs kommen Aufgaben, die Empathie, Urteil und Kreativität brauchen, 2,5-mal schneller hinzu.") },
@@ -458,7 +459,7 @@ const pages = [
 const common = {
   name: "Management Review",
   tagline: x("Management without theatre.", "Menaxhim pa teatër.", "Management ohne Theater."),
-  date: x("September 2026", "Shtator 2026", "September 2026"),
+  date: x("October 2026", "Tetor 2026", "Oktober 2026"),
   // Corrections made after publication, shown on the edition's page (pages/review.njk), newest last.
   corrections: [
     {
@@ -467,6 +468,13 @@ const common = {
         "Three figures now say they come from US samples: PwC's finding on AI-exposed junior roles, and Gallup's figures on frontline supervisors and on managers who also carry individual work. The edition first gave them without the country.",
         "Tri shifra tani thonë se vijnë nga mostra në SHBA: gjetja e PwC-së për rolet fillestare të ekspozuara ndaj AI-së, dhe shifrat e Gallup-it për supervizorët e vijës së parë dhe për menaxherët që kanë edhe përgjegjësi individuale. Botimi fillimisht i jepte pa përmendur vendin.",
         "Drei Zahlen nennen jetzt ihre US-Stichproben: der PwC-Befund zu KI-exponierten Einstiegsrollen sowie die Gallup-Zahlen zu Frontline-Vorgesetzten und zu Führungskräften, die auch eigene Facharbeit leisten. Die Ausgabe nannte das Land zuerst nicht."),
+    },
+    {
+      date: x("27 October 2026", "27 tetor 2026", "27. Oktober 2026"),
+      t: x(
+        "The 40% now says what it compares: productivity growth from 2018 to 2025 of 34% in companies of the sectors most exposed to AI, against 24% in the least exposed, as PwC reports it. The edition first gave the 40% alone.",
+        "40% tani thotë çfarë krahason: rritjen e produktivitetit nga 2018 deri në 2025, 34% te kompanitë e sektorëve më të ekspozuar ndaj AI-së kundrejt 24% te më pak të ekspozuarit, siç e jep PwC. Botimi fillimisht e jepte 40% vetëm.",
+        "Die 40 % sagen jetzt, was sie vergleichen: das Produktivitätswachstum von 2018 bis 2025, 34 % bei Unternehmen der am stärksten KI-exponierten Branchen gegenüber 24 % bei den am wenigsten exponierten, wie PwC es angibt. Die Ausgabe nannte zuerst nur die 40 %."),
     },
   ],
   theme: x("The manager in the age of AI", "Menaxheri në epokën e AI-së", "Die Führungskraft im Zeitalter der KI"),
