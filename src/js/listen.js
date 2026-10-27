@@ -71,7 +71,10 @@
   let queue = [];        // { block, text }
   let index = 0;         // the sentence to speak next
   let playing = false;
-  let stopping = false;  // a cancel of our own, whose "interrupted" error is not a failure
+  // Each utterance belongs to a generation; a cancel of our own starts a new one, and whatever the browser still
+  // reports for an older utterance ("interrupted", or an "end" that arrives late) is ignored, so it never moves the
+  // reading on or reads a sentence twice.
+  let generation = 0;
   let current = null;    // the block marked on screen
   let voice = null;
 
@@ -134,10 +137,11 @@
     u.lang = voice?.lang || code;
     if (voice) u.voice = voice;
     u.rate = rate();
-    u.onstart = () => { mark(item.block); progress(); };
-    u.onend = () => { if (!playing || stopping) return; index += 1; speak(); };
+    const mine = generation;
+    u.onstart = () => { if (mine !== generation) return; mark(item.block); progress(); };
+    u.onend = () => { if (mine !== generation || !playing) return; index += 1; speak(); };
     u.onerror = (event) => {
-      if (stopping || event.error === "interrupted" || event.error === "canceled") return;
+      if (mine !== generation || event.error === "interrupted" || event.error === "canceled") return;
       playing = false;
       toggle.setAttribute("aria-pressed", "false");
       setLabel(box.dataset.resumeLabel || "Resume");
@@ -147,10 +151,8 @@
   };
 
   const halt = () => {
-    stopping = true;
+    generation += 1;
     synth.cancel();
-    // The "interrupted" errors of the cancelled utterance arrive after this turn.
-    setTimeout(() => { stopping = false; }, 0);
   };
 
   const play = () => {

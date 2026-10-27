@@ -123,3 +123,65 @@ test('without any voice for the language, the note says so and does not send the
   }
 });
 
+// Pause, speed and "Start again" (audit P7-05) with the two ways a browser reports a cancelled utterance: Chrome's
+// "interrupted" error, and an "end" that arrives late (some engines deliver it well after the cancel). Neither may
+// move the reading on: the sentence that was cut is read again, once, and "Start again" starts at the title.
+const engine = (mode) => {
+  const synth = { spoken: [], active: [], speak(u) { this.spoken.push(u); this.active.push(u); }, getVoices: () => [LOCAL('en')] };
+  synth.cancel = () => {
+    for (const u of synth.active.splice(0)) {
+      if (mode === 'interrupted') setTimeout(() => u.onerror?.({ error: 'interrupted' }), 0);
+      else setTimeout(() => u.onend?.(), 25);
+    }
+  };
+  // The voice finishes the utterance it is reading.
+  synth.finish = () => { const u = synth.active.shift(); u.onstart?.(); u.onend?.(); };
+  return synth;
+};
+const openWith = (synth) => {
+  const dom = new JSDOM(built('en', ESSAY), { url: `https://example.test/${ESSAY}/`, runScripts: 'outside-only', pretendToBeVisual: true });
+  const w = dom.window;
+  w.speechSynthesis = synth;
+  w.SpeechSynthesisUtterance = class { constructor(text) { this.text = text; } };
+  w.HTMLElement.prototype.scrollIntoView = function () {};
+  w.eval(LISTEN);
+  return { w, $: (s) => w.document.querySelector(s) };
+};
+const settle = () => new Promise((resolve) => setTimeout(resolve, 60));
+
+for (const mode of ['interrupted', 'late-end']) {
+  test(`${mode}: a speed change and a pause keep the sentence being read; "Start again" starts at the title`, async () => {
+    const synth = engine(mode);
+    const { w, $ } = openWith(synth);
+    $('[data-listen-toggle]').click();
+    synth.active[0].onstart();
+    for (let i = 0; i < 3; i++) synth.finish();
+    const reading = synth.active[0];
+    reading.onstart();
+    const sentence = reading.text;
+    // Speed: the same sentence again, at the new speed, and nothing else.
+    const select = $('[data-listen-rate]');
+    select.value = '1.4';
+    select.dispatchEvent(new w.Event('change'));
+    await settle();
+    assert.deepEqual(synth.active.map((u) => u.text), [sentence], 'one utterance waiting: the sentence that was cut');
+    assert.equal(synth.active[0].rate, 1.4);
+    const next = synth.spoken.length;
+    synth.finish();
+    assert.equal(synth.spoken.length, next + 1);
+    // Pause and resume: the sentence that was cut.
+    const cut = synth.active[0];
+    cut.onstart();
+    $('[data-listen-toggle]').click();
+    await settle();
+    assert.equal(synth.active.length, 0, 'nothing is read while paused');
+    $('[data-listen-toggle]').click();
+    await settle();
+    assert.deepEqual(synth.active.map((u) => u.text), [cut.text], 'resumes with the sentence that was cut');
+    // Start again while reading: the title, once.
+    synth.active[0].onstart();
+    $('[data-listen-stop]').click();
+    await settle();
+    assert.deepEqual(synth.active.map((u) => u.text), [flat($('.article-hero h1').textContent)]);
+  });
+}
