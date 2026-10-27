@@ -1831,7 +1831,7 @@
   "Paragraph {a} of {b}": "Absatz {a} von {b}",
   "Read to the end": "Bis zum Ende vorgelesen",
   "The voice stopped. Press to continue.": "Die Wiedergabe wurde unterbrochen. Zum Fortsetzen drücken.",
-  "Your browser has no voice for this language, so it cannot read this text aloud. Another browser, such as Microsoft Edge, may have one.": "Ihr Browser hat keine Stimme für diese Sprache und kann diesen Text hier nicht vorlesen. Ein anderer Browser, etwa Microsoft Edge, hat vielleicht eine.",
+  "Your browser has no voice for this language, so it cannot read this text aloud. Another browser may have one; an online voice sends the text to that browser's maker.": "Ihr Browser hat keine Stimme für diese Sprache und kann diesen Text hier nicht vorlesen. Ein anderer Browser hat vielleicht eine; eine Online-Stimme sendet den Text an den Hersteller dieses Browsers.",
   "Read aloud by a voice of your own browser. This site records and sends nothing.": "Vorgelesen von einer Stimme Ihres eigenen Browsers. Diese Seite zeichnet nichts auf und sendet nichts.",
   "Join in": "Mitreden",
   "Discuss this essay on LinkedIn": "Diesen Essay auf LinkedIn diskutieren",
@@ -7688,5 +7688,7 @@
   "The median is the observed time; the standard time adds the rating and the allowance. CV is the spread as a share of the mean: under 10 % is repeatable work, over 25 % is a method that changes from cycle to cycle.": "Der Median ist die beobachtete Zeit; die Standardzeit rechnet Leistungsgrad und Zuschlag ein. VK ist die Streuung als Anteil am Mittelwert: unter 10 % ist wiederholbare Arbeit, über 25 % eine Methode, die sich von Zyklus zu Zyklus ändert.",
   "Standard time": "Standardzeit",
   "Standard time (s)": "Standardzeit (s)",
-  "rated {r}, observed {s}": "Leistungsgrad {r}, beobachtet {s}"
+  "rated {r}, observed {s}": "Leistungsgrad {r}, beobachtet {s}",
+  "Read aloud by a voice on this device: the text does not leave it. This site records and sends nothing.": "Vorgelesen von einer Stimme auf diesem Gerät: Der Text verlässt es nicht. Diese Seite zeichnet nichts auf und sendet nichts.",
+  "Read aloud by {a}, an online voice: your browser sends the text to its maker to be spoken. This site records and sends nothing.": "Vorgelesen von {a}, einer Online-Stimme: Ihr Browser sendet den Text dafür an seinen Hersteller. Diese Seite zeichnet nichts auf und sendet nichts."
 }

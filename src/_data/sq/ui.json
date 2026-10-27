@@ -1831,7 +1831,7 @@
   "Paragraph {a} of {b}": "Paragrafi {a} nga {b}",
   "Read to the end": "U lexua deri në fund",
   "The voice stopped. Press to continue.": "Zëri u ndal. Shtyp për të vazhduar.",
-  "Your browser has no voice for this language, so it cannot read this text aloud. Another browser, such as Microsoft Edge, may have one.": "Shfletuesi yt nuk ka zë për këtë gjuhë, prandaj nuk e lexon dot këtë tekst me zë. Një shfletues tjetër, si Microsoft Edge, mund ta ketë.",
+  "Your browser has no voice for this language, so it cannot read this text aloud. Another browser may have one; an online voice sends the text to that browser's maker.": "Shfletuesi yt nuk ka zë për këtë gjuhë, prandaj nuk e lexon dot këtë tekst me zë. Një shfletues tjetër mund ta ketë; një zë online ia dërgon tekstin prodhuesit të atij shfletuesi.",
   "Read aloud by a voice of your own browser. This site records and sends nothing.": "Lexohet nga një zë i shfletuesit tënd. Kjo faqe nuk regjistron dhe nuk dërgon asgjë.",
   "Join in": "Merr pjesë",
   "Discuss this essay on LinkedIn": "Diskuto këtë ese në LinkedIn",
@@ -7688,5 +7688,7 @@
   "The median is the observed time; the standard time adds the rating and the allowance. CV is the spread as a share of the mean: under 10 % is repeatable work, over 25 % is a method that changes from cycle to cycle.": "Mediana është koha e vëzhguar; koha standarde shton vlerësimin e ritmit dhe shtesën. KV është shpërndarja si pjesë e mesatares: nën 10 % është punë e përsëritshme, mbi 25 % është një metodë që ndryshon nga cikli në cikël.",
   "Standard time": "Koha standarde",
   "Standard time (s)": "Koha standarde (s)",
-  "rated {r}, observed {s}": "vlerësuar {r}, vëzhguar {s}"
+  "rated {r}, observed {s}": "vlerësuar {r}, vëzhguar {s}",
+  "Read aloud by a voice on this device: the text does not leave it. This site records and sends nothing.": "Lexohet nga një zë në këtë pajisje: teksti nuk del prej saj. Kjo faqe nuk regjistron dhe nuk dërgon asgjë.",
+  "Read aloud by {a}, an online voice: your browser sends the text to its maker to be spoken. This site records and sends nothing.": "Lexohet nga {a}, një zë online: shfletuesi yt ia dërgon tekstin prodhuesit të tij që ta lexojë. Kjo faqe nuk regjistron dhe nuk dërgon asgjë."
 }

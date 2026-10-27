@@ -7,7 +7,10 @@
 //   is unreliable on several browsers.)
 // - The bar shows as soon as the browser can speak at all, so the text under it does not move later; the button
 //   waits for the browser's list of voices, and without a voice for the page's language the bar says so.
-// - The speed is kept in this browser only (localStorage "sc-listen-rate"). Nothing is recorded or sent.
+// - The speed is kept in this browser only (localStorage "sc-listen-rate"). This site records and sends nothing.
+// - A voice on the device is taken before an online one. The note under the bar says which kind reads: an online voice
+//   (localService false, e.g. Chrome's "Google …" or Edge's "… Online (Natural)") is spoken on its maker's servers, so
+//   the browser sends the text there.
 (() => {
   const box = document.querySelector("[data-listen]");
   const article = document.querySelector("[data-article]");
@@ -24,17 +27,19 @@
   const note = box.querySelector("[data-listen-note]");
   const KEY = "sc-listen-rate";
 
-  // The text to read: the title and intro of the hero, then the blocks of the text, without the boxes around it.
-  const SKIP = ".essay-moves, .essay-checklist, .essay-tools, .essay-notes, .essay-series, .share-row, .article-toc-fold, .visually-hidden, [data-listen]";
+  // The text to read: the title and intro of the hero, then the blocks of the text (its case box included), without
+  // the boxes around it: no aside, navigation, form or control (the feedback form, its privacy line, "Join in", the
+  // share row), nothing hidden.
+  const SKIP = "aside, nav, form, footer, button, label, select, textarea, [hidden], [aria-hidden='true'], [role='navigation'], .essay-moves, .essay-checklist, .essay-tools, .essay-notes, .essay-series, .essay-feedback, .essay-join, .share-row, .article-toc-fold, .visually-hidden, [data-listen]";
   const blocks = () => {
     const found = [];
     const title = document.querySelector(".article-hero h1");
     const deck = document.querySelector(".article-deck");
     if (title) found.push(title);
     if (deck) found.push(deck);
-    article.querySelectorAll("h2, h3, p, li, blockquote").forEach((el) => {
+    article.querySelectorAll("h2, h3, h4, p, li, blockquote, dt, dd").forEach((el) => {
       if (el.closest(SKIP)) return;
-      if (el.querySelector("p, li, h2, h3")) return; // a quote or an item whose paragraphs are read on their own
+      if (el.querySelector("p, li, h2, h3, h4, dt, dd")) return; // a quote or an item whose paragraphs are read on their own
       if (!el.textContent.trim()) return;
       found.push(el);
     });
@@ -201,7 +206,14 @@
     if (!voice && !any && !force) return; // the list is not loaded yet
     settled = true;
     toggle.removeAttribute("aria-busy");
-    if (voice) { toggle.disabled = false; return; }
+    if (voice) {
+      toggle.disabled = false;
+      // What happens to the text: it stays on the device, or the browser sends it to the maker of an online voice.
+      const said = voice.localService === true ? box.dataset.localNote
+        : voice.localService === false ? fill(box.dataset.onlineNote || "", voice.name || "", "") : "";
+      if (note && said) note.textContent = said;
+      return;
+    }
     // No voice for this language: the bar says so instead of offering a button that would speak another language.
     toggle.disabled = true;
     if (rateSelect) rateSelect.disabled = true;
