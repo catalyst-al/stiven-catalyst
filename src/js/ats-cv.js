@@ -1117,6 +1117,9 @@
     replaceCv(next, summaryOf(parsed));
   };
 
+  // A JSON Resume is a few kilobytes (under 2 MB with a photo inside) and a text CV less; a larger file is refused
+  // before it is read whole into the page.
+  const MAX_TEXT_FILE = 5 * 1024 * 1024;
   const importFile = async (file) => {
     if (!file) return;
     const name = file.name.toLowerCase();
@@ -1128,6 +1131,7 @@
       else if (name.endsWith(".docx")) parsedLines = await window.CvImport.readDocx(file);
       else if (name.endsWith(".doc")) throw new Error("doc");
       else if (name.endsWith(".json") || file.type === "application/json") {
+        if (file.size > MAX_TEXT_FILE) throw new Error("size");
         let parsed = null;
         try { parsed = JSON.parse(await file.text()); } catch { throw new Error("json"); }
         const resume = fromJsonResume(parsed);
@@ -1135,8 +1139,10 @@
         if (!confirmReplace()) { importNote.textContent = ""; return; }
         useImported(resume);
         return;
-      } else if (name.endsWith(".txt") || file.type.startsWith("text/")) parsedLines = window.CvImport.textLines(await file.text());
-      else throw new Error("type");
+      } else if (name.endsWith(".txt") || file.type.startsWith("text/")) {
+        if (file.size > MAX_TEXT_FILE) throw new Error("size");
+        parsedLines = window.CvImport.textLines(await file.text());
+      } else throw new Error("type");
       if (!parsedLines.length) throw new Error("empty");
       if (!confirmReplace()) { importNote.textContent = ""; return; }
       useImported(window.CvImport.parse(parsedLines));
@@ -1145,6 +1151,8 @@
         ? tx("Old Word files (.doc) cannot be read here. In Word, choose Save as and pick .docx or PDF.")
         : error.message === "json"
           ? tx("This file is not a JSON Resume (jsonresume.org). Nothing was changed.")
+        : error.message === "size"
+          ? tx("This file is larger than 5 MB, far larger than any CV. Nothing was changed.")
         : error.message === "zip-size"
           ? tx("This file would unpack to far more than any CV or table holds, so it was not read. It may be damaged; nothing was changed.")
         : error.message === "empty"

@@ -201,7 +201,7 @@
     if (!file) return;
     if (locked()) { say(text.locked); return; }
     if (file.size > MAX_BYTES) {
-      say(text.invalid);
+      say(text.large);
       return;
     }
     const backup = readBackup(await file.text());
