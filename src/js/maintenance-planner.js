@@ -514,14 +514,14 @@
     title: tx("Overdue: {task} · {asset}", { task: t.task.text, asset: assetLabel(t.asset) }),
     detail: [tx("Due {date}", { date: showDate(t.info.due) }), overdueText(t.late), t.task.statutory ? tx("Statutory check") : "", t.asset.supplier ? `${t.asset.supplier}${t.asset.contact ? ` (${t.asset.contact})` : ""}` : "", cfg.text.tool].filter(Boolean).join(" · "),
     owner: t.task.who === "external" ? t.asset.supplier || cfg.text.maintenanceOwner : cfg.text.maintenanceOwner,
-    due: addDays(today(), t.task.statutory ? 2 : 5), source: TOOL, check: cfg.text.checkOverdue, area: t.asset.area, priority: "High",
+    due: addDays(today(), t.task.statutory ? 2 : 5), example: exampleMatches(state), source: TOOL, check: cfg.text.checkOverdue, area: t.asset.area, priority: "High",
   });
   const repeatedAction = (g) => {
     const asset = assetById(g.asset);
     return {
       title: tx("Repeated breakdowns: {asset}", { asset: assetLabel(asset) }),
       detail: [tx("{n} breakdowns in 90 days, {minutes} of downtime", { n: int.format(g.n), minutes: minutesText(g.minutes) }), tx("Most often: {cause}", { cause: causeName(g.topCause) }), cfg.text.tool].join(" · "),
-      owner: cfg.text.maintenanceOwner, due: addDays(today(), 7), source: TOOL, check: cfg.text.checkRepeated, area: asset?.area || "", priority: asset?.crit === "A" ? "High" : "Medium",
+      owner: cfg.text.maintenanceOwner, due: addDays(today(), 7), example: exampleMatches(state), source: TOOL, check: cfg.text.checkRepeated, area: asset?.area || "", priority: asset?.crit === "A" ? "High" : "Medium",
     };
   };
   const sentKey = { overdue: (t) => `due|${t.task.id}|${t.info.due}`, repeated: (g) => `bd|${g.asset}|${g.n}` };
@@ -718,7 +718,8 @@
       send.title = tx("Overdue tasks on A assets and repeated breakdowns");
       send.addEventListener("click", () => {
         let n = 0;
-        unsent(analysis()).forEach(({ key, action }) => { if (Actions.add(action)) n++; state.sent[key] = true; });
+        // Marked as sent only when the action is on the list (added now, or already open there).
+        unsent(analysis()).forEach(({ key, action }) => { const added = Actions.add(action); if (added) n++; if (added || Actions.lastAdd === "duplicate") state.sent[key] = true; });
         save();
         renderResults();
         trackerNote(planStatus, tx("Added {n} actions.", { n: int.format(n) }));

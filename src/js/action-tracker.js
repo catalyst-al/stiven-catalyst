@@ -16,8 +16,14 @@
   if (typeof ui.status !== "string") ui.status = "live";
   if (typeof ui.owner !== "string") ui.owner = "";
   if (typeof ui.source !== "string") ui.source = "";
+  // Lists saved before 27 October 2026 kept the example's ids here; ActionsStore reads them to mark those actions, and
+  // once the marks are saved with the list the ids are not needed any more.
   if (!Array.isArray(ui.exampleIds)) ui.exampleIds = [];
   const saveUi = () => write(UI_KEY, ui);
+  if (ui.exampleIds.length && S.replaceAll(S.all())) {
+    ui.exampleIds = [];
+    saveUi();
+  }
   const sourceName = (source) => data.sources[source || "manual"] || source || data.sources.manual;
   const statusName = (status) => data.statuses[status] || status;
 
@@ -78,16 +84,14 @@
   window.ActionTrackerMath = { summarize, closedPerWeek, verdict, exampleRows, order, daysBetween };
 
   // Example ------------------------------------------------------------------------------------------------------------
-  const exampleOn = () => { const rows = S.list(); return ui.exampleIds.length > 0 && rows.length === ui.exampleIds.length && rows.every((a) => ui.exampleIds.includes(a.id)); };
+  // The example's actions are marked in the list itself (ActionsStore: example: true). The first own action, from this
+  // page or from any tool, replaces them; the other tools never count them.
+  const exampleOn = () => S.all().some((a) => a.example === true);
   const loadExample = () => {
-    const added = exampleRows(data.example, today()).map((row) => S.add(row)).filter(Boolean);
-    ui.exampleIds = added.map((a) => a.id);
-    saveUi();
+    exampleRows(data.example, today()).forEach((row) => S.add({ ...row, example: true }));
   };
   const dropExample = () => {
-    if (exampleOn()) S.replaceAll([]);
-    ui.exampleIds = [];
-    saveUi();
+    if (exampleOn()) S.replaceAll(S.list());
   };
   const exampleNote = el("div", "dl-example-note");
   exampleNote.setAttribute("role", "status");
@@ -223,7 +227,6 @@
     remove.addEventListener("click", () => {
       const gone = S.remove(a.id);
       if (!gone) return;
-      ui.exampleIds = ui.exampleIds.filter((id) => id !== a.id);
       saveUi();
       render();
       undoNote(status, tx("Removed: {text}", { text: a.title }), () => { S.restore(gone.removed, gone.index); render(); });
@@ -340,7 +343,7 @@
   };
 
   const render = () => {
-    const rows = S.list();
+    const rows = S.all();
     const day = today();
     exampleNote.hidden = !exampleOn();
     fillFilters(rows);
@@ -366,10 +369,8 @@
   textFilter.addEventListener("input", () => render());
   root.querySelector("[data-example]").addEventListener("click", () => { loadExample(); render(); results.scrollIntoView({ behavior: "smooth", block: "start" }); });
   root.querySelector("[data-clear]").addEventListener("click", () => {
-    if (!S.list().length || !window.confirm(tx("Clear every action in this browser?"))) return;
+    if (!S.all().length || !window.confirm(tx("Clear every action in this browser?"))) return;
     S.replaceAll([]);
-    ui.exampleIds = [];
-    saveUi();
     render();
   });
   const table = () => [[tx("Action"), tx("Detail"), tx("Owner"), tx("Due date"), tx("Area"), tx("Priority"), tx("Status"), tx("From"), tx("Check"), tx("Created"), tx("Closed"), tx("Result")],
@@ -394,7 +395,7 @@
   const nothingSaved = localStorage.getItem(S.KEY) === null;
   const arrived = S.fromParams(location);
   if (arrived.added) {
-    if (exampleOn()) { const keep = arrived.added; dropExample(); S.add(keep); }
+    // ActionsStore.add has already replaced an example with it.
     flash(status, tx("Added from {source}: {text}", { source: sourceName(arrived.added.source), text: arrived.added.title }));
   } else if (arrived.duplicate) {
     flash(status, tx("Already on the list."));

@@ -307,13 +307,16 @@ test('hand-offs: the top cause to 5 Whys, the votes to Pareto, the likely causes
   const send = [...results.querySelectorAll('button')].find((b) => /likely causes to actions \(3\)/.test(b.textContent));
   assert.ok(send);
   click(w, send);
-  let actions = w.ActionsStore.list();
+  // From the example, the actions arrive as the example's (ActionsStore: example: true); no other tool counts them.
+  assert.equal(w.ActionsStore.list().length, 0);
+  let actions = w.ActionsStore.all();
+  assert.ok(actions.every((a) => a.example === true));
   assert.equal(actions.length, 3);
   assert.ok(actions.every((a) => a.source === 'fishbone' && a.title.startsWith('Verify: ') && a.due === '2026-10-30'));
   assert.equal(actions.find((a) => a.priority === 'High').title, 'Verify: Alle Touren auf einmal an die Rampe, nicht in Wellen');
   assert.equal(new w.URL(results.querySelector('.fb-action-status a').href).pathname, '/de/tools/action-tracker/');
   click(w, send);
-  actions = w.ActionsStore.list();
+  actions = w.ActionsStore.all();
   assert.equal(actions.length, 3, 'each likely cause is handed over once');
   // The outline copied and the CSV rows.
   const copyButton = results.querySelector('.result-actions button');

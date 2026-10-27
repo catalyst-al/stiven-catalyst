@@ -710,25 +710,27 @@
       send.type = "button";
       send.addEventListener("click", () => {
         const open = window.ActionsStore.list().filter(window.ActionsStore.isOpen);
-        let added = 0, already = 0;
+        let added = 0, already = 0, unsaved = 0;
         const nowBottleneck = now.bottleneck ? now.bottleneck.index : -1;
         bursts.forEach((item) => {
           const title = `${item.name}: ${item.kaizen}`;
           if (open.some((action) => action.title === title && action.source === "value-stream-map")) { already++; return; }
-          window.ActionsStore.add({
-            title, source: "value-stream-map", area: item.name,
+          const action = window.ActionsStore.add({
+            title, example: state.example === true, source: "value-stream-map", area: item.name,
             priority: now.steps[item.i]?.overTakt || item.i === nowBottleneck ? "High" : "Medium",
             detail: tx("Kaizen burst on the future state of {family}. Lead time today {now}, planned {next}.", { family: state.family.trim() || data.title, now: dur(now.lead, now.minutes), next: dur(next.lead, next.minutes) }),
             check: tx("Map the stream again after the change: the lead time should move towards {next}.", { next: dur(next.lead, next.minutes) }),
           });
-          added++;
+          if (action) added++;
+          else if (window.ActionsStore.lastAdd === "unsaved") unsaved++;
+          else already++;
         });
         const status = actions.querySelector("[data-actions-status]") || el("p", "form-note vs-actions-status");
         status.dataset.actionsStatus = "";
         status.setAttribute("role", "status");
         const link = el("a", "inline-link", tx("Open the Action Tracker"));
         link.href = window.ActionsStore.trackerUrl().href;
-        status.replaceChildren(tx("Added {n} actions.", { n: added }), already ? ` ${tx("{n} were already open.", { n: already })}` : "", " ", link);
+        status.replaceChildren(window.ToolKit.actionsNote({ added, duplicate: already, unsaved }), " ", link);
         actions.append(status);
       });
       actions.append(send);

@@ -388,7 +388,10 @@ test('hand-offs: the countermeasures to the Action Tracker, the standard to prin
   const add = [...results.querySelectorAll('button')].find((b) => /^Add the \d+ countermeasures to actions$/.test(b.textContent));
   assert.equal(add.textContent, 'Add the 12 countermeasures to actions');
   click(w, add);
-  const actions = w.ActionsStore.list();
+  // From the example, the actions arrive as the example's (ActionsStore: example: true); no other tool counts them.
+  assert.equal(w.ActionsStore.list().length, 0);
+  const actions = w.ActionsStore.all();
+  assert.ok(actions.every((a) => a.example === true));
   assert.equal(actions.length, 12);
   assert.ok(actions.every((a) => a.source === 'smed' && a.area === 'Packing line 3 · vertical bagger'));
   const clamps = actions.find((a) => /8 screws/.test(a.title));

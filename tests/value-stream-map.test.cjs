@@ -155,12 +155,15 @@ test('the page opens on the example: the map with factories, triangles, ladder a
   assert.equal(window.document.querySelectorAll('.vs-kaizen').length, 6);
   const send = [...window.document.querySelectorAll('button')].find((b) => b.textContent === 'Send kaizen bursts to the Action Tracker');
   send.click();
-  const actions = window.ActionsStore.list();
+  // From the example, the actions arrive as the example's (ActionsStore: example: true); no other tool counts them.
+  assert.equal(window.ActionsStore.list().length, 0);
+  const actions = window.ActionsStore.all();
+  assert.ok(actions.every((a) => a.example === true));
   assert.equal(actions.length, 4);
   assert.ok(actions.every((a) => a.source === 'value-stream-map'));
   assert.equal(actions.find((a) => a.area === 'Pack').priority, 'High');
   send.click();
-  assert.equal(window.ActionsStore.list().length, 4, 'the same open bursts are not added twice');
+  assert.equal(window.ActionsStore.all().length, 4, 'the same open bursts are not added twice');
   // Moving and removing a step, with undo.
   window.document.querySelector('[data-view="current"]').click();
   window.document.querySelector('[data-act="down"][data-i="0"]').click();

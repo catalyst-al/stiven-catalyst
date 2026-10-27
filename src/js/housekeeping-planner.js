@@ -747,7 +747,7 @@
     return {
       title: tx("Housekeeping short on {date}: {n} attendants needed, {m} scheduled", { date: showDate(today()), n: int.format(p.needed), m: int.format(p.scheduled) }),
       detail: [`${tx("Workload")}: ${minText(p.totalMinutes)} · ${tx("hours short")}: ${hoursText(-p.diffHours)}`, ...formulaLines(a), `${cfg.text.tool} · ${showDate(today())}`].join("\n"),
-      owner: cfg.text.actionOwner, due: today(), source: TOOL, check: cfg.text.actionCheck, area: cfg.text.actionArea, priority: "High",
+      owner: cfg.text.actionOwner, due: today(), example: state.example === true, source: TOOL, check: cfg.text.actionCheck, area: cfg.text.actionArea, priority: "High",
     };
   };
 
@@ -892,7 +892,7 @@
         short.forEach((d) => {
           const title = tx("Housekeeping short on {date}: {n} attendants needed, {m} scheduled", { date: showDate(d.date), n: int.format(d.needed), m: int.format(d.scheduled) });
           if (open.includes(title)) return;
-          if (Actions.add({ title, detail: `${tx("Workload")}: ${minText(d.minutes)} · ${tx("{a} departures, {b} stay-overs", { a: int.format(d.departures), b: int.format(d.stayovers) })} · ${cfg.text.tool}`, owner: cfg.text.actionOwner, due: addDays(d.date, -1) < today() ? today() : addDays(d.date, -1), source: TOOL, check: cfg.text.actionCheck, area: cfg.text.actionArea, priority: "High" })) n++;
+          if (Actions.add({ title, detail: `${tx("Workload")}: ${minText(d.minutes)} · ${tx("{a} departures, {b} stay-overs", { a: int.format(d.departures), b: int.format(d.stayovers) })} · ${cfg.text.tool}`, owner: cfg.text.actionOwner, due: addDays(d.date, -1) < today() ? today() : addDays(d.date, -1), example: state.example === true, source: TOOL, check: cfg.text.actionCheck, area: cfg.text.actionArea, priority: "High" })) n++;
         });
         trackerNote(weekNote, n ? tx("Added {n} actions.", { n: int.format(n) }) : tx("These days are already in the Action Tracker."));
       });

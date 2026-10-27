@@ -183,7 +183,10 @@ test('countermeasures go to the Action Tracker once, with owner, date, status an
   const w = load('de');
   const doc = w.document;
   doc.querySelector('[data-send-actions]').click();
-  const actions = w.ActionsStore.list();
+  // From the example, the actions arrive as the example's (ActionsStore: example: true); no other tool counts them.
+  assert.equal(w.ActionsStore.list().length, 0);
+  const actions = w.ActionsStore.all();
+  assert.ok(actions.every((a) => a.example === true));
   assert.equal(actions.length, 4);
   assert.ok(actions.every((a) => a.source === 'a3-report'));
   assert.equal(actions[0].owner, 'Anna K. (Schichtleitung Früh)');
@@ -192,7 +195,7 @@ test('countermeasures go to the Action Tracker once, with owner, date, status an
   assert.equal(actions[0].due, '2026-08-28');
   assert.match(actions[0].detail, /^A3: /);
   doc.querySelector('[data-send-actions]').click();
-  assert.equal(w.ActionsStore.list().length, 4, 'not twice');
+  assert.equal(w.ActionsStore.all().length, 4, 'not twice');
 });
 
 test('Take from 5 Whys reads the worksheet of the page\'s language; ?problem= opens a new A3 once', () => {

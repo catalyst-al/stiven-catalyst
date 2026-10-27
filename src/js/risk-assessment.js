@@ -787,7 +787,7 @@
   const actionOf = (a, h, m) => {
     const e = M.enrich(h, state.bands);
     return {
-      title: m.text.trim(), owner: m.owner, due: m.due, source: "risk-assessment", area: a.area, priority: priorityOf(e.band),
+      title: m.text.trim(), owner: m.owner, due: m.due, example: state.example === true, source: "risk-assessment", area: a.area, priority: priorityOf(e.band),
       detail: [titleOf(a), h.text, `${stopName(m.type)}`, `${tx("Risk")} ${riskText(e.risk, e.band)}${e.residual !== null ? ` → ${riskText(e.residual, e.band2)}` : ""}`].filter(Boolean).join(" · "),
       check: tx("Effectiveness check: does the measure work at the workplace? Record the result in the risk assessment and rate the residual risk again."),
     };

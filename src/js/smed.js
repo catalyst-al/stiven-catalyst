@@ -437,7 +437,7 @@
         machine: state.study.machine.trim() || data.text.changeover, from: state.study.from.trim() || "–", to: state.study.to.trim() || "–",
         element: name, before: clock(e.dur), beforeType: typeText[kindOf(e)].toLowerCase(), after: type === "removed" ? "" : t, afterType: typeText[type].toLowerCase(),
       }).replace(/\s+\./, ".").replace(/ {2,}/g, " "),
-      owner: e.owner.trim(), due: e.due, source: "smed", area: state.study.machine.trim(),
+      owner: e.owner.trim(), due: e.due, example: state.example === true, source: "smed", area: state.study.machine.trim(),
       check: type === "removed" ? tx("At the next changeover, {element} is no longer needed.", { element: name })
         : type === "external" ? tx("At the next changeover, {element} is done while the machine runs, in {t} or less.", { element: name, t })
         : tx("At the next changeover, {element} takes {t} or less with the machine stopped.", { element: name, t }),
@@ -924,13 +924,13 @@
       const add = el("button", "button-secondary", tx("Add the {n} countermeasures to actions", { n: measures.length }));
       add.type = "button";
       add.addEventListener("click", () => {
-        measures.forEach((action) => AS.add(action));
+        const result = AS.addAll(measures);
         const line = actions.querySelector("[data-actions-status]") || el("p", "form-note sm-actions-status");
         line.dataset.actionsStatus = "";
         line.setAttribute("role", "status");
         const link = el("a", "inline-link", tx("Open the Action Tracker"));
         link.href = AS.trackerUrl().href;
-        line.replaceChildren(tx("Added {n} actions.", { n: measures.length }), " ", link);
+        line.replaceChildren(window.ToolKit.actionsNote(result), " ", link);
         actions.append(line);
         add.disabled = true;
       });

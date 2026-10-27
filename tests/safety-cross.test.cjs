@@ -229,13 +229,16 @@ test('hand-offs: open actions to the Action Tracker once, causes to Pareto, a ne
   const results = doc.querySelector('[data-results]');
   const send = [...results.querySelectorAll('button')].find((b) => /Maßnahmenliste übergeben/.test(b.textContent));
   send.click();
-  const actions = plain(w.ActionsStore.list());
+  // From the example, the actions arrive as the example's (ActionsStore: example: true); no other tool counts them.
+  assert.equal(w.ActionsStore.list().length, 0);
+  const actions = plain(w.ActionsStore.all());
+  assert.ok(actions.every((a) => a.example === true));
   assert.equal(actions.length, 6, 'the six open actions of the example');
   assert.ok(actions.every((a) => a.source === 'safety-cross'));
   assert.equal(actions.find((a) => a.detail.startsWith('Erste Hilfe')).priority, 'High', 'an injury is high');
   assert.equal(actions.find((a) => a.detail.startsWith('Unsicherer Zustand')).priority, 'Medium');
   [...results.querySelectorAll('button')].find((b) => /Maßnahmenliste übergeben/.test(b.textContent)).click();
-  assert.equal(w.ActionsStore.list().length, 6, 'not added twice');
+  assert.equal(w.ActionsStore.all().length, 6, 'not added twice');
   assert.match(results.querySelector('.sx-actions').closest('.dl-panel').querySelector('a.inline-link').href, /\/de\/tools\/action-tracker\/$/);
   const pareto = [...results.querySelectorAll('a')].find((a) => a.href.includes('/pareto/'));
   assert.ok(pareto.href.startsWith('https://example.test/de/tools/pareto/'));

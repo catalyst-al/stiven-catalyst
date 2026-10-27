@@ -906,14 +906,18 @@
     const found = findingsChecked();
     if (!found.length) return;
     const due = addDays(today(), 7);
+    const sent = { added: 0, duplicate: 0, unsaved: 0 };
     found.forEach(({ key, i, value }) => {
       const name = qid(key, i);
       const note = state.draft.notes[name] || "";
-      Actions.add({
+      const action = Actions.add({
         title: questionsOf(state.template, key)[i],
         detail: [note, tx("Score {a} / {b}", { a: value, b: SCORE_MAX }), `${cfg.text.tool} · ${pillarName(key)} · ${state.draft.area} · ${showDate(state.draft.date)}`].filter(Boolean).join(" · "),
         owner: areaOwner(state.draft.area), due, source: "five-s-audit", check: cfg.text.checkText, area: state.draft.area, priority: value === 0 ? "High" : "Medium",
       });
+      // A finding stays ticked when its action could not be saved, so it can be sent again.
+      if (!action && Actions.lastAdd === "unsaved") { sent.unsaved++; return; }
+      if (action) sent.added++; else sent.duplicate++;
       state.draft.acts[name] = false;
       const box = questionsBox.querySelector(`[data-act="${name}"]`);
       if (box) box.checked = false;
@@ -922,7 +926,7 @@
     renderProgress();
     const link = el("a", "inline-link", tx("Open the Action Tracker"));
     link.href = Actions.trackerUrl().href;
-    auditStatus.replaceChildren(`${tx("Added {n} actions.", { n: found.length })} `, link);
+    auditStatus.replaceChildren(`${window.ToolKit.actionsNote(sent)} `, link);
     clearTimeout(auditStatus.timer);
     auditStatus.timer = setTimeout(() => { auditStatus.textContent = ""; }, 8000);
   });

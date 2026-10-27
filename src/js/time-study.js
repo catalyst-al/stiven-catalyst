@@ -696,13 +696,13 @@
       const addActions = el("button", "button-secondary", tx("Add the balance moves as actions"));
       addActions.type = "button";
       addActions.addEventListener("click", () => {
-        moves.forEach((move) => window.ActionsStore.add({ title: move.title, detail: move.detail || "", source: "time-study", area: move.station, priority: "High", check: tx("Time five cycles again after the change; the station must be under {takt}.", { takt: sec(result.takt) }) }));
+        const sent = window.ActionsStore.addAll(moves.map((move) => ({ title: move.title, detail: move.detail || "", example: state.example === true, source: "time-study", area: move.station, priority: "High", check: tx("Time five cycles again after the change; the station must be under {takt}.", { takt: sec(result.takt) }) })));
         const status = actions.querySelector("[data-actions-status]") || el("p", "form-note ts-actions-status");
         status.dataset.actionsStatus = "";
         status.setAttribute("role", "status");
         const link = el("a", "inline-link", tx("Open the Action Tracker"));
         link.href = window.ActionsStore.trackerUrl().href;
-        status.replaceChildren(tx("Added {n} actions.", { n: moves.length }), " ", link);
+        status.replaceChildren(window.ToolKit.actionsNote(sent), " ", link);
         actions.append(status);
       });
       actions.append(addActions);

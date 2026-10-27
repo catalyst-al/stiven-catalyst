@@ -7,6 +7,14 @@
 //   ActionsStore.link({ title, detail, owner, due, source, check, area, priority })  →  …/tools/action-tracker/?action=…
 // The tracker reads the address once (fromParams), adds the action if the same open one is not already there, and
 // cleans the address. A page that has this script can also add directly: ActionsStore.add({...}).
+//
+// Three rules keep the list trustworthy (audit of 27 October 2026, T-03 and T-19):
+// - The Action Tracker's example is marked (example: true on each of its actions). list() and every count leave it
+//   out, and the first action of the visitor's own, from any tool, replaces it whole instead of joining it.
+// - add() refuses the same open action from the same tool (same title, same source): a second click or a reload does
+//   not add it twice. lastAdd says why an add gave null: "duplicate", "unsaved" (the browser could not save) or
+//   "invalid", or "example" (an example's action offered to a list that holds the visitor's own: it stays out).
+// - add() returns the action only when it was saved.
 window.ActionsStore = (() => {
   const KEY = "sc-actions";
   const STATUSES = ["open", "doing", "done", "verified"];
@@ -34,29 +42,75 @@ window.ActionsStore = (() => {
       created: isDate(str(item.created)) ? str(item.created) : localIso(),
       closed: isDate(str(item.closed)) ? str(item.closed) : "",
       result: str(item.result).slice(0, 1000),
+      ...(item.example === true ? { example: true } : {}),
     };
+  };
+  // A list saved before the example was marked: the tracker remembered the example's ids beside the list
+  // (sc-actions-ui, exampleIds). Those actions are marked now, even where an own action was added to them since.
+  const legacyExample = (rows) => {
+    let ids = [];
+    try { const ui = JSON.parse(localStorage.getItem(`${KEY}-ui`)); ids = isObject(ui) && Array.isArray(ui.exampleIds) ? ui.exampleIds : []; } catch { ids = []; }
+    if (!ids.length) return rows;
+    return rows.map((row) => (ids.includes(row.id) ? { ...row, example: true } : row));
   };
   const read = () => {
     try {
       const saved = JSON.parse(localStorage.getItem(KEY));
       const rows = isObject(saved) && Array.isArray(saved.rows) ? saved.rows : Array.isArray(saved) ? saved : [];
-      return rows.map(clean).filter(Boolean);
+      return legacyExample(rows.map(clean).filter(Boolean));
     } catch { return []; }
   };
+  const ownOnly = (rows) => rows.filter((row) => row.example !== true);
   let failed = false;
+  // Saves the list; false when the browser could not (storage full or blocked, or the tools locked with a PIN).
   const write = (rows) => {
-    try { localStorage.setItem(KEY, JSON.stringify({ rows })); } catch { failed = true; }
+    if (window.WorkLock?.locked) { failed = true; return false; }
+    try {
+      localStorage.setItem(KEY, JSON.stringify({ rows }));
+      failed = false;
+    } catch {
+      failed = true;
+      window.ToolKit?.warnNotSaved?.();
+    }
     window.dispatchEvent(new CustomEvent("actions:changed", { detail: { count: rows.length } }));
-    return rows;
+    return !failed;
   };
-  const list = () => read();
+  // The visitor's actions, without an example; all() with it, for the tracker that shows it.
+  const list = () => ownOnly(read());
+  const all = () => read();
+  let lastAdd = null;
   const add = (item) => {
+    lastAdd = "invalid";
     const action = clean(item);
     if (!action) return null;
-    const rows = read();
+    let rows = read();
+    if (action.example) {
+      // An example action only goes into a list that holds nothing of the visitor's.
+      if (ownOnly(rows).length) { lastAdd = "example"; return null; }
+    } else {
+      rows = ownOnly(rows);
+    }
+    if (rows.some((row) => isOpen(row) && row.title === action.title && row.source === action.source)) {
+      lastAdd = "duplicate";
+      return null;
+    }
     rows.push(action);
-    write(rows);
+    if (!write(rows)) { lastAdd = "unsaved"; return null; }
+    lastAdd = null;
     return action;
+  };
+  // Several actions from one tool, as one hand-off: what was added, what was already open and what could not be saved
+  // (ToolKit.actionsNote says it in the page's language).
+  const addAll = (items) => {
+    const result = { added: [], duplicate: 0, unsaved: 0, example: 0 };
+    (Array.isArray(items) ? items : []).forEach((item) => {
+      const action = add(item);
+      if (action) result.added.push(action);
+      else if (lastAdd === "duplicate") result.duplicate += 1;
+      else if (lastAdd === "unsaved") result.unsaved += 1;
+      else if (lastAdd === "example") result.example += 1;
+    });
+    return result;
   };
   const update = (actionId, patch) => {
     const rows = read();
@@ -86,16 +140,16 @@ window.ActionsStore = (() => {
   const replaceAll = (rows) => write(rows.map(clean).filter(Boolean));
   const isOpen = (action) => action.status === "open" || action.status === "doing";
   const isOverdue = (action, today = localIso()) => isOpen(action) && action.due !== "" && action.due < today;
-  const open = () => read().filter(isOpen);
-  const overdue = (today = localIso()) => read().filter((action) => isOverdue(action, today));
+  const open = () => list().filter(isOpen);
+  const overdue = (today = localIso()) => list().filter((action) => isOverdue(action, today));
   const dueSoon = (days = 3, today = localIso()) => {
     const limit = new Date(`${today}T00:00:00Z`);
     limit.setUTCDate(limit.getUTCDate() + days);
     const until = limit.toISOString().slice(0, 10);
-    return read().filter((action) => isOpen(action) && action.due && action.due >= today && action.due <= until);
+    return list().filter((action) => isOpen(action) && action.due && action.due >= today && action.due <= until);
   };
   const counts = (today = localIso()) => {
-    const rows = read();
+    const rows = list();
     return {
       total: rows.length,
       open: rows.filter(isOpen).length,
@@ -126,7 +180,7 @@ window.ActionsStore = (() => {
     const title = str(params.get("action"));
     if (!title) return { added: null, cleaned: false };
     const incoming = { title, detail: str(params.get("detail")), owner: str(params.get("owner")), due: str(params.get("due")), source: str(params.get("source")), check: str(params.get("check")), area: str(params.get("area")), priority: str(params.get("priority")) };
-    const rows = read();
+    const rows = list();
     const twin = rows.find((row) => isOpen(row) && row.title === title && row.source === clean({ title, source: incoming.source }).source);
     const added = twin ? null : add(incoming);
     PARAMS.forEach((name) => params.delete(name));
@@ -144,7 +198,7 @@ window.ActionsStore = (() => {
     return a;
   };
   // The list as an iCalendar file: every open action with a due date is an all-day event, so a phone can remind its owner.
-  const ics = (rows = read(), stamp = new Date()) => {
+  const ics = (rows = list(), stamp = new Date()) => {
     const esc = (text) => String(text).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
     const dt = stamp.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
     const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Stiven Catalyst//Action Tracker//EN", "CALSCALE:GREGORIAN"];
@@ -161,5 +215,5 @@ window.ActionsStore = (() => {
     return `${lines.join("\r\n")}\r\n`;
   };
 
-  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, add, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, trackerUrl, link, linkButton, fromParams, ics, get failed() { return failed; } };
+  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, trackerUrl, link, linkButton, fromParams, ics, get failed() { return failed; }, get lastAdd() { return lastAdd; } };
 })();

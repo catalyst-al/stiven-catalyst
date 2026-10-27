@@ -376,7 +376,7 @@
     open.forEach((row) => {
       if (there.has(row.action)) return;
       const detail = `${typeName(row.type)} · ${showDate(row.date)}${row.area ? ` · ${row.area}` : ""}${row.what ? `: ${row.what}` : ""}`;
-      if (Actions.add({ title: row.action, detail, owner: row.owner, source: "safety-cross", area: row.area, priority: priorityOf(row), check: tx("The same event does not happen again in this area for a month") })) added++;
+      if (Actions.add({ title: row.action, detail, owner: row.owner, example: row.example === true, source: "safety-cross", area: row.area, priority: priorityOf(row), check: tx("The same event does not happen again in this area for a month") })) added++;
       there.add(row.action);
     });
     const link = el("a", "inline-link", tx("Open the Action Tracker"));

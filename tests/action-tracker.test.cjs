@@ -110,8 +110,11 @@ test('the calendar file holds every open action with a date, escaped', () => {
 test('the page: the example opens on a first visit, the week is summed, the list is ordered overdue first', () => {
   const w = load('https://example.test/sq/tools/action-tracker/', { page: true });
   const M = w.ActionTrackerMath;
-  const rows = w.ActionsStore.list();
+  // The example is marked in the list: all() has it, list() (what every other tool reads) does not.
+  const rows = w.ActionsStore.all();
   assert.equal(rows.length, 12, 'the example list');
+  assert.ok(rows.every((a) => a.example === true));
+  assert.equal(w.ActionsStore.list().length, 0, 'no other tool counts the example');
   assert.ok(!w.document.querySelector('[data-results]').hidden);
   assert.ok(!w.document.querySelector('.dl-example-note').hidden);
   const sum = M.summarize(rows, '2026-10-23');

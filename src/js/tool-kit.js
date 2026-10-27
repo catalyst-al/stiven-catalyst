@@ -1209,6 +1209,18 @@ window.ToolKit = (() => {
     };
   };
 
+  // What a hand-off to the Action Tracker did (ActionsStore.addAll), said plainly: added, already open, not saved.
+  const actionsNote = ({ added = [], duplicate = 0, unsaved = 0, example = 0 } = {}) => [
+    (Array.isArray(added) ? added.length : added) ? tx("Added {n} actions.", { n: int.format(Array.isArray(added) ? added.length : added) }) : "",
+    duplicate ? tx("{n} were already open.", { n: int.format(duplicate) }) : "",
+    unsaved ? tx("{n} could not be saved: this browser's storage is full, blocked or locked.", { n: int.format(unsaved) }) : "",
+    example ? tx("The example's actions stay out of your own list.") : "",
+  ].filter(Boolean).join(" ") || tx("Nothing new to add.");
+  // One action (ActionsStore.add) that gave null: why, from ActionsStore.lastAdd.
+  const actionRefused = (reason) => tx(reason === "duplicate" ? "Already on the list."
+    : reason === "unsaved" ? "The action could not be saved: this browser's storage is full, blocked or locked."
+    : reason === "example" ? "The example's actions stay out of your own list." : "Could not add the action.");
+
   // Printing a form: a one-line box prints only what fits in it, and an empty box prints its grey example. Inside a
   // [data-print-fields] container each box gets its whole text as plain text for print (.print-text), and the box
   // itself is left off the paper (.has-print-text in styles.css).
@@ -1406,7 +1418,7 @@ window.ToolKit = (() => {
 
   return {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
-    read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
+    read, write, warnNotSaved, actionsNote, actionRefused, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseDateTime, parseRows, canon, sigma, sigmaText,
     inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, isExampleRow, isExampleState, markExample, ownRows, readOwn, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,

@@ -447,20 +447,22 @@
     if (!Actions) return;
     const likely = rank(d, cats).filter((c) => c.likely);
     const open = new Set(Actions.list().filter((a) => Actions.isOpen(a) && a.source === "fishbone").map((a) => a.title));
-    let added = 0;
+    let added = 0, unsaved = 0;
     likely.forEach((cause, i) => {
       const title = tx("Verify: {cause}", { cause: cause.text });
       if (open.has(title)) return;
-      Actions.add({
+      const action = Actions.add({
         title,
         detail: [`${cfg.text.tool}: ${squash(d.effect) || cfg.text.untitled}`, cause.category, cause.subs.join("; "), cause.votes ? voteText(cause.votes) : ""].filter(Boolean).join(" · "),
-        due: addDays(today(), 7), source: "fishbone", check: cfg.text.checkText, priority: i === 0 ? "High" : "Medium",
+        due: addDays(today(), 7), example: d.id === state.example, source: "fishbone", check: cfg.text.checkText, priority: i === 0 ? "High" : "Medium",
       });
-      added++;
+      // Counted only when saved (ActionsStore.add gives null for an action it could not save).
+      if (action) added++;
+      else if (Actions.lastAdd === "unsaved") unsaved++;
     });
     const link = el("a", "inline-link", tx("Open the Action Tracker"));
     link.href = Actions.trackerUrl().href;
-    status.replaceChildren(`${added ? tx("Added {n} actions.", { n: int.format(added) }) : tx("These causes are already open in the Action Tracker.")} `, link);
+    status.replaceChildren(`${added || unsaved ? window.ToolKit.actionsNote({ added, unsaved }) : tx("These causes are already open in the Action Tracker.")} `, link);
   };
 
   const renderResults = () => {
