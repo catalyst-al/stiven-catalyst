@@ -72,3 +72,11 @@ test('ATS CV: the guide names JSON Resume and the skill-aware match, and gives n
     assert.doesNotMatch(t, /60|pass mark|bestanden|kalon/i, `${lang}: no pass mark`);
   }
 });
+
+test('Room Inspection: the guide says what the code does with open items, a failed critical item included', () => {
+  const code = fs.readFileSync('src/js/room-inspection.js', 'utf8');
+  // The author's rule of 27 October 2026: open items are never a pass; a failed critical item fails at once.
+  assert.match(code, /if \(scored\.critical\.length\) return \{ pass: false, reason: "critical" \};\s*if \(scored\.open > 0\) return \{ pass: null, reason: "incomplete" \};/);
+  const said = { en: /never a pass.*critical item failed, which fails the room at once/, de: /besteht nie.*kritischer Mangel lässt das Zimmer sofort durchfallen/, sq: /nuk kalon kurrë.*pikë kritike, që e rrëzon dhomën menjëherë/ };
+  for (const lang of LANGS) assert.match(text(lang, 'room-inspection'), said[lang], lang);
+});

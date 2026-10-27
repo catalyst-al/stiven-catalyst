@@ -64,7 +64,7 @@ web-only list "What changed in Edition 8".
 | | DE/SQ | the same, "(ä oder ae, ß oder ss)" / "(ë ose e, ä ose ae)" | | |
 | ATS CV, get | EN | "Your CV as PDF, Word (.docx) and plain text." → "…, plain text and JSON Resume (.json); the ATS check; and how many of the ad's key words your CV uses, with the missing ones: a guide, not a prediction of what software or a recruiter will decide." | the score is a guide, no pass mark | ats-cv.js:914-916 |
 | | DE/SQ | the same in German and Albanian, the tool's own words ("Anhaltspunkt", "tregues") | | ui.json |
-| Room Inspection, get | EN | + "; an inspection with items still open has no verdict and stays out of the pass rate." | P2B-05: a half-done inspection was counted | `fb3cdb26` |
+| Room Inspection, get | EN | + "; an inspection with items still open is never a pass: it has no verdict and stays out of the pass rate, unless a critical item failed, which fails the room at once." | P2B-05: a half-done inspection was counted; the author's rule of 27 October 2026 (a critical failure fails at once, an incomplete check never passes), corrected by the coordinator after review; DE/SQ alike ("besteht nie … ein kritischer Mangel lässt das Zimmer sofort durchfallen", "nuk kalon kurrë … përveç kur ka rënë një pikë kritike") | `fb3cdb26`, `src/js/room-inspection.js` `verdict` |
 | | DE | + "; eine Kontrolle mit noch offenen Punkten hat kein Ergebnis und zählt in der Quote nicht mit." | | |
 | | SQ | + "; një inspektim me pika ende të pagjykuara nuk ka verdikt dhe mbetet jashtë kësaj përqindjeje." | | |
 | 5S Audit, get | EN/DE/SQ | "the trend and a league table of the areas" → "… without partial audits" ("ohne unvollständige Audits", "pa auditet e pjesshme") | P2B-11 | `6f04859b` |

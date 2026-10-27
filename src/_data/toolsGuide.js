@@ -447,7 +447,7 @@ const en = {
         "Mark the faults, then [[Mark the rest as pass]]. Add a photo of a fault and say whether it needs a re-clean or maintenance.",
         "[[Save inspection]]: maintenance items go to the Action Tracker, re-cleans back to the room attendant.",
       ],
-      get: "The first-time pass rate by attendant, floor and room type, the weekly trend, the faults that fail most and a heat map of zones by floor, to coach rather than blame; an inspection with items still open has no verdict and stays out of the pass rate. [[Print inspection sheet]] or [[Print daily summary]], and download the inspections as CSV or Excel.",
+      get: "The first-time pass rate by attendant, floor and room type, the weekly trend, the faults that fail most and a heat map of zones by floor, to coach rather than blame; an inspection with items still open is never a pass: it has no verdict and stays out of the pass rate, unless a critical item failed, which fails the room at once. [[Print inspection sheet]] or [[Print daily summary]], and download the inspections as CSV or Excel.",
       data: "The inspections and photos stay in this browser. A checklist of your own can be saved as a template file for the other hotels of the group.",
     },
     "/tools/maintenance-planner/": {
@@ -1262,7 +1262,7 @@ const sq = {
         "Shëno defektet, pastaj [[Mark the rest as pass]]. Shto një foto të defektit dhe thuaj nëse do ripastrim apo mirëmbajtje.",
         "[[Save inspection]]: pikat e mirëmbajtjes shkojnë te Lista e veprimeve, ripastrimet kthehen te personi që e pastroi dhomën.",
       ],
-      get: "Sa dhoma kalojnë herën e parë sipas personit të pastrimit, katit dhe llojit të dhomës, trendi i javës, defektet që rrëzojnë më shpesh dhe një hartë nxehtësie e zonave sipas katit, për coaching, jo për faj; një inspektim me pika ende të pagjykuara nuk ka verdikt dhe mbetet jashtë kësaj përqindjeje. [[Print inspection sheet]] ose [[Print daily summary]], dhe shkarko inspektimet si CSV ose Excel.",
+      get: "Sa dhoma kalojnë herën e parë sipas personit të pastrimit, katit dhe llojit të dhomës, trendi i javës, defektet që rrëzojnë më shpesh dhe një hartë nxehtësie e zonave sipas katit, për coaching, jo për faj; një inspektim me pika ende të pagjykuara nuk kalon kurrë: nuk ka verdikt dhe mbetet jashtë kësaj përqindjeje, përveç kur ka rënë një pikë kritike, që e rrëzon dhomën menjëherë. [[Print inspection sheet]] ose [[Print daily summary]], dhe shkarko inspektimet si CSV ose Excel.",
       data: "Inspektimet dhe fotot mbeten në këtë shfletues. Një listë kontrolli e jotja ruhet si skedar modeli për hotelet e tjera të grupit.",
     },
     "/tools/maintenance-planner/": {
@@ -2077,7 +2077,7 @@ const de = {
         "Markieren Sie die Mängel, dann [[Mark the rest as pass]]. Fügen Sie ein Foto des Mangels hinzu und sagen Sie, ob er eine Nachreinigung oder die Technik braucht.",
         "[[Save inspection]]: Technik-Punkte gehen in die Maßnahmenliste, Nachreinigungen zurück an die Reinigungskraft.",
       ],
-      get: "Die Quote der Zimmer, die beim ersten Mal bestehen, je Reinigungskraft, Etage und Zimmertyp, der Wochentrend, die häufigsten Mängel und eine Heatmap der Zonen nach Etage, zum Coachen, nicht zum Beschuldigen; eine Kontrolle mit noch offenen Punkten hat kein Ergebnis und zählt in der Quote nicht mit. [[Print inspection sheet]] oder [[Print daily summary]], und die Kontrollen als CSV oder Excel herunterladen.",
+      get: "Die Quote der Zimmer, die beim ersten Mal bestehen, je Reinigungskraft, Etage und Zimmertyp, der Wochentrend, die häufigsten Mängel und eine Heatmap der Zonen nach Etage, zum Coachen, nicht zum Beschuldigen; eine Kontrolle mit offenen Punkten besteht nie und zählt nicht in der Quote; ein kritischer Mangel lässt das Zimmer sofort durchfallen. [[Print inspection sheet]] oder [[Print daily summary]], und die Kontrollen als CSV oder Excel herunterladen.",
       data: "Die Kontrollen und Fotos bleiben in diesem Browser. Eine eigene Checkliste lässt sich als Vorlagendatei für die anderen Hotels der Gruppe speichern.",
     },
     "/tools/maintenance-planner/": {
