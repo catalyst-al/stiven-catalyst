@@ -30,32 +30,37 @@
   "kpis": {
     "damageRate": {
       "label": "Schadensquote",
-      "detail": "{units} beschädigt von {volume}"
+      "detail": "{units} beschädigt von {volume}",
+      "sample": "{n} Einheiten"
     },
     "damageUnits": {
       "label": "Beschädigte Einheiten"
     },
     "incompleteRate": {
       "label": "Unvollständigkeitsquote",
-      "detail": "{units} unvollständig von {volume}"
+      "detail": "{units} unvollständig von {volume}",
+      "sample": "{n} Aufträge"
     },
     "incompleteUnits": {
       "label": "Unvollständige Aufträge"
     },
     "onTime": {
       "label": "Pünktliche Touren",
-      "detail": "{late} verspätet von {routes}"
+      "detail": "{late} verspätet von {routes}",
+      "sample": "{n} Touren"
     },
     "lateRoutes": {
       "label": "Verspätete Touren"
     },
     "oee": {
       "label": "OEE (alle Anlagen)",
-      "detail": "{entries} Schichten · Anlagen: {machines}"
+      "detail": "{entries} Schichten · Anlagen: {machines}",
+      "sample": "{n} Schichten"
     },
     "fiveS": {
       "label": "5S-Durchschnitt",
-      "detail": "Audits: {audits}"
+      "detail": "Audits: {audits}",
+      "sample": "{n} Audits"
     },
     "accidents": {
       "label": "Unfälle"
@@ -80,18 +85,21 @@
     },
     "pm": {
       "label": "PM-Erfüllung",
-      "detail": "{onTime} von {scheduled} rechtzeitig"
+      "detail": "{onTime} von {scheduled} rechtzeitig",
+      "sample": "{n} fällige Aufgaben"
     },
     "pmOverdue": {
       "label": "Überfällige Wartungsaufgaben"
     },
     "firstPass": {
       "label": "Zimmer beim ersten Mal abgenommen",
-      "detail": "{firstPass} von {first}"
+      "detail": "{firstPass} von {first}",
+      "sample": "{n} Zimmer"
     },
     "complaintsPer100": {
       "label": "Beschwerden pro 100 belegte Zimmernächte",
-      "detail": "{complaints} bei {nights} Zimmernächten"
+      "detail": "{complaints} bei {nights} Zimmernächten",
+      "sample": "{n} Zimmernächte"
     },
     "complaints": {
       "label": "Gästebeschwerden"
