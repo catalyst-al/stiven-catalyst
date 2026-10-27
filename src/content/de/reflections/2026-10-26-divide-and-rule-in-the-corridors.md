@@ -31,7 +31,7 @@ Erstens zerstört er jede Möglichkeit von Solidarität. Er weiß sehr genau: We
 
 Ein geeintes, klarsichtiges Team verlangt Rechenschaft, verlangt Standards und verlangt Würde. Und genau das ist der größte Albtraum einer unfähigen Führung.
 
-Zweitens macht sich der Vorgesetzte durch diese Spaltung unentbehrlich. Er wird zum einzigen Schwerpunkt, zum einzigen Kommunikationskanal, zum obersten Vater, der zwischen streitenden Kindern das Gleichgewicht hält. Die Mitarbeiter gehen nicht mehr zum Kollegen, um ein betriebliches Problem zu klären; sie gehen zum Chef, um zu petzen und Schutz zu suchen. Und der Chef genießt es, erwachsene Menschen ihre Würde senken zu sehen, nur um in seinen Augen einen Krümel Gunst zu gewinnen.
+Zweitens macht sich der Vorgesetzte durch diese Spaltung unentbehrlich. Er wird zum einzigen Schwerpunkt, zum einzigen Kommunikationskanal, zum obersten Vater, der zwischen streitenden Kindern das Gleichgewicht hält. Die Mitarbeiter gehen nicht mehr zum Kollegen, um ein betriebliches Problem zu klären; sie gehen zum Chef, um zu petzen und Schutz zu suchen. Und der Chef genießt es, erwachsene Menschen sich erniedrigen zu sehen, nur um in seinen Augen einen Krümel Gunst zu gewinnen.
 
 Der Preis, den ein Betrieb für dieses kranke Spiel zahlt, ist enorm.
 
@@ -47,4 +47,4 @@ Wenn Sie heute an einem Ort arbeiten, an dem die Luft schwer ist vor Eifersucht 
 
 Öffnen Sie die Augen und sehen Sie, wer von diesem sinnlosen Krieg profitiert. Sehen Sie, wer seine eigene Schwäche hinter dem Lärm Ihrer Zusammenstöße versteckt.
 
-Denn die Wahrheit bleibt immer einfach: Kleine Menschen spalten, um über Trümmer herrschen zu können, große Führungskräfte aber einen, weil sie genau wissen, dass keine echte Burg stehen bleiben kann, wenn die Steine ihres Fundaments einander zerreiben.
+Denn die Wahrheit bleibt immer einfach: Kleingeister spalten, um über Trümmer herrschen zu können, große Führungskräfte aber einen, weil sie genau wissen, dass keine echte Burg stehen bleiben kann, wenn die Steine ihres Fundaments einander zerreiben.

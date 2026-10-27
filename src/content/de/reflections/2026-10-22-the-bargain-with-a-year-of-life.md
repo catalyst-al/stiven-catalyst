@@ -29,7 +29,7 @@ Das ist die universelle Lüge, die jedes Mal benutzt wird, wenn der Schweiß des
 
 Diese Art der Behandlung richtet einen weit tieferen Schaden an als bloße finanzielle Enttäuschung. Sie tötet das Vertrauen. Denn in diesem Moment begreift jeder Mitarbeiter, dass die Versprechen von Karriere, Anerkennung und gemeinsamem Wachstum nur Märchen waren, um Zeit zu gewinnen. Von ihm werden höchster Einsatz, Flexibilität ohne feste Zeiten und Liebe zur Firma verlangt, doch wenn es darum geht, ihn zu belohnen, benimmt sich die Firma wie ein Krämer, der die letzten Münzen am Boden der Tasche zählt.
 
-Ich weiß genau, was dieser Mitarbeiter denkt, wenn er mit dem Schreiben über die Erhöhung in der Hand das Büro verlässt. Er fühlt sich nicht wertgeschätzt; er fühlt sich bestohlen. Er fühlt sich, als hätte ihm jemand ein ganzes Jahr seines Lebens, seiner Jugend und seiner Kraft genommen und ihm dafür ein paar Krümel auf den Tisch geworfen, und verlange obendrein noch ein „Danke“.
+Ich weiß genau, was dieser Mitarbeiter denkt, wenn er mit dem Schreiben über die Erhöhung in der Hand das Büro verlässt. Er fühlt sich nicht wertgeschätzt; er fühlt sich bestohlen. Er fühlt sich, als hätte ihm jemand ein ganzes Jahr seines Lebens, seiner Jugend und seiner Kraft genommen und ihm dafür ein paar Krümel auf den Tisch geworfen, und verlangte obendrein noch ein „Danke“.
 
 Und dann, sechs Monate später, wenn dieser Mitarbeiter eine andere Chance findet und seinen Platz leer zurücklässt, tun dieselben Führungskräfte überrascht. Sie versammeln sich wieder in ihren Büros und fragen mit gespielter Naivität: *Warum ist er gegangen? Wir haben ihm doch gerade das Gehalt erhöht.*
 

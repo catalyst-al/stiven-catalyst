@@ -9,11 +9,11 @@ description: 'Über den, der den Ablauf verbirgt, um unersetzlich zu werden, üb
 
 Es gibt eine sehr bekannte Figur in unseren Büros, Hotels und Lagern, eine Gestalt, der man in fast jeder Branche begegnet, in der geschriebene Regeln fehlen. Es ist der Mensch, der alle Schlüssel in der eigenen Tasche trägt.
 
-Er ist der Einzige, der weiß, wo die Passwörter des Systems liegen. Er ist der Einzige, der die private Nummer des wichtigsten Lieferanten hat. Er ist der Einzige, der weiß, wie man um fünf Uhr morgens diesen besonderen Bericht druckt und welchen magischen Handgriff an der Tastatur es braucht, wenn der Computer hängt. Fragt man ihn höflich, wie ein Ablauf funktioniert, antwortet er in halben Sätzen, mit trüben Anweisungen, oder sagt mit einem geheimnisvollen Lächeln: „Lass das liegen, ich mach das später, das ist kompliziert.“
+Er ist der Einzige, der weiß, wo die Passwörter des Systems liegen. Er ist der Einzige, der die private Nummer des wichtigsten Lieferanten hat. Er ist der Einzige, der weiß, wie man um fünf Uhr morgens diesen besonderen Bericht druckt und welchen magischen Handgriff an der Tastatur es braucht, wenn der Computer hängt. Fragt man ihn höflich, wie ein Ablauf funktioniert, antwortet er in halben Sätzen, mit vagen Anweisungen, oder sagt mit einem geheimnisvollen Lächeln: „Lass das liegen, ich mach das später, das ist kompliziert.“
 
 Auf den ersten Blick wirkt dieser Mensch wie die unerschütterliche Säule der Firma. Er scheint ein unermüdlicher Arbeiter, einer, der nie richtig Urlaub nimmt, der aus den Ferien anruft, um einen dringenden Code durchzugeben, und ohne den die Arbeit scheinbar nicht vorankommt.
 
-Doch betrachten wir dieses Verhalten ohne Naivität und mit beruflichem Mut. **Informationen zurückzuhalten ist keine Hingabe; es ist eine stille Geiselnahme der Organisation. Und wer sich weigert, seinen Ablauf zu dokumentieren, schützt nicht die Firma; er baut ein künstliches Monopol, um die Unsicherheit seines eigenen Stuhls zu schützen.**
+Doch betrachten wir dieses Verhalten ohne Naivität und mit beruflichem Mut. **Informationen zurückzuhalten ist keine Hingabe; es ist eine stille Geiselnahme der Organisation. Und wer sich weigert, seinen Ablauf zu dokumentieren, schützt nicht die Firma; er baut ein künstliches Monopol, um den eigenen wackligen Posten zu sichern.**
 
 Warum tut ein Mensch das?
 

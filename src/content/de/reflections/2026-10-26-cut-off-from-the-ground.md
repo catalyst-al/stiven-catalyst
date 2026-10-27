@@ -3,8 +3,8 @@ title: 'Ohne Bodenhaftung: Wenn Entscheidungen auf Schatten statt auf der Wirkli
 date: 2026-10-26
 status: published
 summary: 'Eine Entscheidung, in fünf Minuten im gläsernen Besprechungsraum getroffen, landet im Lager als körperliche Last. Wer vor den Folgen geschützt ist, macht den Fehler zur Gewissheit.'
-deck: 'Wenn Führung zu einer abstrakten Übung mit Tabellen und Prozenten wird, wird der Abstand zwischen dem klimatisierten Büro und der Fläche zum Grab jeder Organisation.'
-description: 'Über Entscheidungen fern der Fläche, über Zahlen, hinter denen Menschen verschwinden, und warum eine Führungskraft regelmäßig hinuntergehen muss.'
+deck: 'Wenn Führung zu einer abstrakten Übung mit Tabellen und Prozenten wird, wird der Abstand zwischen dem klimatisierten Büro und der Halle zum Grab jeder Organisation.'
+description: 'Über Entscheidungen fern der Halle, über Zahlen, hinter denen Menschen verschwinden, und warum eine Führungskraft regelmäßig hinuntergehen muss.'
 ---
 
 Es gibt eine besondere Krankheit, die große Strukturen befällt, wenn sie schnell wachsen, eine Art eleganter Blindheit, die nicht aus mangelnder Intelligenz entsteht, sondern aus dem völligen Verlust des Kontakts zur alltäglichen Schwerkraft.
@@ -25,7 +25,7 @@ Die Geschichte der Führung lehrt uns, dass keine echte Schlacht je gewonnen wur
 
 Was geschieht, wenn der Vorgesetzte nicht weiß, wie viel eine Kiste wiegt? Was geschieht, wenn er keine Ahnung hat, wie viele Minuten das Buchen einer Rechnung tatsächlich dauert, wenn das System langsam wird, oder wie sich der menschliche Körper nach sieben Stunden Stehen auf Beton anfühlt?
 
-Es geschieht, was wir in unserer Wirtschaft ständig sehen: Es werden Anweisungen gegeben, die auf dem Papier genial aussehen, in der Wirklichkeit aber völlig undurchführbar sind. Und wenn der Plan zwangsläufig scheitert, zweifeln die, die ihn vom bequemen Stuhl aus erfunden haben, nie an ihrer Theorie. Sie erklären die Fläche für schuldig. Sie sagen, die Leute hätten die Vision nicht verstanden, das Team an der Basis sei langsam, die Arbeiter kämen mit dem modernen Tempo der Firma nicht mit.
+Es geschieht, was wir in unserer Wirtschaft ständig sehen: Es werden Anweisungen gegeben, die auf dem Papier genial aussehen, in der Wirklichkeit aber völlig undurchführbar sind. Und wenn der Plan zwangsläufig scheitert, zweifeln die, die ihn vom bequemen Stuhl aus erfunden haben, nie an ihrer Theorie. Sie erklären die Leute in der Halle für schuldig. Sie sagen, die Leute hätten die Vision nicht verstanden, das Team an der Basis sei langsam, die Arbeiter kämen mit dem modernen Tempo der Firma nicht mit.
 
 Das ist die Arroganz der Distanz. Es ist die Illusion, die Welt funktioniere nach den Wünschen dessen, der den Stift hält, und nicht nach den Gesetzen von Reibung, Ermüdung und einfacher menschlicher Logik.
 

@@ -37,7 +37,7 @@ Um 2 Uhr nachts schläft der größte Teil eines Hotels. Weniger Leute sind im D
 
 ## Was nachts möglich ist
 
-Als Night Auditor kümmerte ich mich um die Probleme, die sich im Rahmen der Zuständigkeit der Rezeption lösen ließen. Brauchte ein Problem eine andere Abteilung, ging es an die zuständige Person, und was in der Nacht nicht abgeschlossen wurde, kam in die Übergabe. Aus diesen Nächten sind folgende Zimmerprobleme festgehalten: schwachen Wasserdruck in der Dusche, Mängel bei der Sauberkeit des Badezimmers, technische Störungen, für die die zuständige Abteilung gebraucht wurde, und offene Probleme, die die nächste Schicht weiterverfolgen musste.
+Als Night Auditor kümmerte ich mich um die Probleme, die sich im Rahmen der Zuständigkeit der Rezeption lösen ließen. Brauchte ein Problem eine andere Abteilung, ging es an die zuständige Person, und was in der Nacht nicht abgeschlossen wurde, kam in die Übergabe. Aus diesen Nächten sind folgende Zimmerprobleme festgehalten: schwacher Wasserdruck in der Dusche, Mängel bei der Sauberkeit des Badezimmers, technische Störungen, für die die zuständige Abteilung gebraucht wurde, und offene Probleme, die die nächste Schicht weiterverfolgen musste.
 
 In [Wann Sie es selbst lösen und wann Sie es nach oben weitergeben](/de/insights/solve-it-or-escalate-it/) habe ich über die Grenze zwischen Initiative und Befugnis in der Nacht geschrieben. Hier kommt zu derselben Frage ein Dritter hinzu: der Gast, der vor Ihnen steht und wartet.
 

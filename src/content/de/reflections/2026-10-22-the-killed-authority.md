@@ -35,6 +35,6 @@ Echte Fachleute bleiben nicht lange an einem Ort, an dem ihr Wort binnen einer M
 
 Eine echte Führungskraft versteht ein Grundprinzip: **Wenn Sie jemanden an die Spitze eines Teams gestellt haben, geben Sie ihm entweder Ihr volles Vertrauen und Ihre Unterstützung, um den Standard durchzusetzen, oder setzen Sie sich hin und machen Sie seine Arbeit selbst.**
 
-Man kann nicht zugleich eine moderne Organisation und eine Hintertür für Klatsch haben. Man kann keine Disziplin auf der Fläche verlangen, wenn man diese Disziplin mit eigener Hand bricht, sobald sich jemand beschwert.
+Man kann nicht zugleich eine moderne Organisation und eine Hintertür für Klatsch haben. Man kann keine Disziplin vor Ort verlangen, wenn man diese Disziplin mit eigener Hand bricht, sobald sich jemand beschwert.
 
 Albanische Unternehmen werden erst wachsen, wenn sie dieses primitive Spiel der Intrigen aufgeben. Bis dahin werden die Eigentümer weiter klagen, dass sie in Arbeit ertrinken, dass niemand sie atmen lässt und dass ohne sie nichts vorangeht, ohne zu begreifen, dass sie dieses ermüdende Gefängnis mit eigenen Händen gebaut haben, Stein für Stein, jedes Mal, wenn sie dem Manager die Ehre nahmen, um die Unfähigkeit zu füttern.
