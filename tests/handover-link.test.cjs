@@ -162,7 +162,7 @@ test('the issues of a received handover beside the ones open here: new, the same
   const merged = Link.mergeIssues(incoming, here);
   assert.deepEqual(plain(merged.issues.map((issue) => [issue.text.slice(0, 12), issue.kept, issue.carried, issue.owner])), [['Dock 4 door ', false, 2, 'Maintenance'], ['New temp nee', false, 0, ''], ['Pallet wrap ', true, 0, 'Lena']]);
   assert.deepEqual([merged.added, merged.same, merged.kept, merged.conflicts], [1, 1, 1, 0]);
-  assert.deepEqual(plain(Link.mergeIssues(incoming, [])), { issues: incoming.map((issue) => ({ ...issue, kept: false, conflicts: [] })), added: 2, same: 0, kept: 0, conflicts: 0 });
+  assert.deepEqual(plain(Link.mergeIssues(incoming, [])), { issues: incoming.map((issue) => ({ ...issue, kept: false, ambiguous: false, conflicts: [] })), added: 2, same: 0, kept: 0, ambiguous: 0, conflicts: 0 });
   assert.deepEqual(plain(Link.mergeIssues([], []).issues), []);
 });
 
@@ -237,8 +237,8 @@ test('when the same issue differs on the two devices the safer state wins, nothi
     { text: 'Label printer 2 out of ribbon', priority: 'Low', owner: 'Lena', due: '2026-10-29', done: false, carried: 0 },
   ];
   const incoming = [
-    // Solved there, open here, another owner, another date, a higher priority there.
-    { text: 'Dock 4 door jams at the top', priority: 'High', owner: 'Facilities', due: '2026-10-28', done: true, carried: 0 },
+    // Solved there, open here; the same owner, no date there, a higher priority there: one issue, open, with the date here.
+    { text: 'Dock 4 door jams at the top', priority: 'High', owner: 'Maintenance', due: '', done: true, carried: 0 },
     // Solved there, open here, no owner or date on either side.
     { text: 'Scanner 7 battery swollen', priority: 'Low', owner: '', due: '', done: true, carried: 1 },
     // The sender left the names out: the owner and the date here are kept, the lower priority there loses.
@@ -248,11 +248,11 @@ test('when the same issue differs on the two devices the safer state wins, nothi
   assert.equal(merged.issues.length, 3);
   const [dock, scanner, printer] = merged.issues;
   assert.equal(dock.done, false, 'open here stays open');
-  assert.equal(dock.owner, 'Maintenance', 'the owner here is kept when the two differ');
-  assert.equal(dock.due, '2026-10-27', 'the due date here is kept when the two differ');
+  assert.equal(dock.owner, 'Maintenance');
+  assert.equal(dock.due, '2026-10-27', 'the date here fills the missing one');
   assert.equal(dock.priority, 'High', 'the higher priority');
   assert.equal(dock.carried, 2);
-  assert.deepEqual(dock.conflicts, ['solvedThere', 'owner', 'due', 'priority']);
+  assert.deepEqual(dock.conflicts, ['solvedThere', 'priority']);
   assert.equal(scanner.done, false);
   assert.deepEqual(scanner.conflicts, ['solvedThere']);
   assert.equal(scanner.carried, 1);
@@ -261,8 +261,8 @@ test('when the same issue differs on the two devices the safer state wins, nothi
   assert.equal(printer.due, '2026-10-29');
   assert.equal(printer.priority, 'Medium', 'Medium is higher than Low');
   assert.deepEqual(printer.conflicts, ['priority']);
-  assert.equal(merged.conflicts, 6);
-  // Solved on both sides: solved. Open there, solved here: it is open again (the sender reopened it), said so by nothing: no conflict kind for it.
+  assert.deepEqual([merged.same, merged.kept, merged.ambiguous, merged.conflicts], [3, 0, 0, 4]);
+  // Solved on both sides: solved, no conflict.
   const both = plain(Link.mergeIssues([{ text: 'A', priority: 'Low', owner: '', due: '', done: true, carried: 0 }], [{ text: 'a', priority: 'Low', owner: '', due: '', done: true, carried: 0 }], priorities));
   assert.equal(both.issues[0].done, true);
   assert.deepEqual(both.issues[0].conflicts, []);
@@ -270,6 +270,44 @@ test('when the same issue differs on the two devices the safer state wins, nothi
   const unordered = plain(Link.mergeIssues([{ text: 'B', priority: 'Low', owner: '', due: '', done: false, carried: 0 }], [{ text: 'B', priority: 'High', owner: '', due: '', done: false, carried: 0 }]));
   assert.equal(unordered.issues[0].priority, 'Low');
   assert.deepEqual(unordered.issues[0].conflicts, ['priority']);
+});
+
+test('the same text is not the same issue: another owner or date, or more than one candidate, keeps every record and says so', () => {
+  const priorities = ['High', 'Medium', 'Low'];
+  const issue = (text, owner, due, extra = {}) => ({ text, priority: 'Medium', owner, due, done: false, carried: 0, ...extra });
+  // Two issues here with the same text, another owner and date each; the sender has one of them, named.
+  const here = [issue('Dock 4 door jams', 'Maintenance', '2026-10-27', { carried: 2 }), issue('Dock 4 door jams', 'Facilities', '2026-10-29')];
+  const one = plain(Link.mergeIssues([issue('Dock 4 door jams', 'Facilities', '2026-10-29', { done: true })], here, priorities));
+  assert.equal(one.issues.length, 2, 'the matching one merged, the other kept');
+  assert.deepEqual(one.issues.map((i) => [i.owner, i.due, i.done, i.kept, i.ambiguous]), [['Facilities', '2026-10-29', false, false, false], ['Maintenance', '2026-10-27', false, true, false]]);
+  assert.deepEqual([one.same, one.kept, one.ambiguous], [1, 1, 0]);
+  // The sender's issue has another owner and date than the one here: both are kept, the incoming one marked.
+  const other = plain(Link.mergeIssues([issue('Dock 4 door jams', 'Facilities', '2026-10-29')], [issue('Dock 4 door jams', 'Maintenance', '2026-10-27')], priorities));
+  assert.equal(other.issues.length, 2);
+  assert.deepEqual(other.issues.map((i) => [i.owner, i.due, i.kept, i.ambiguous]), [['Facilities', '2026-10-29', false, true], ['Maintenance', '2026-10-27', true, false]]);
+  assert.deepEqual([other.same, other.kept, other.ambiguous, other.added], [0, 1, 1, 1]);
+  // The same owner, another date: not the same issue either.
+  const date = plain(Link.mergeIssues([issue('Dock 4 door jams', 'Maintenance', '2026-10-29')], [issue('Dock 4 door jams', 'Maintenance', '2026-10-27')], priorities));
+  assert.equal(date.issues.length, 2);
+  assert.ok(date.issues[0].ambiguous && date.issues[1].kept);
+  // The sender left the names out, and two issues here could be the one meant: all three stay, the incoming one marked.
+  const unnamed = plain(Link.mergeIssues([issue('Dock 4 door jams', '', '')], here, priorities));
+  assert.equal(unnamed.issues.length, 3);
+  assert.deepEqual(unnamed.issues.map((i) => [i.owner, i.kept, i.ambiguous]), [['', false, true], ['Maintenance', true, false], ['Facilities', true, false]]);
+  assert.equal(unnamed.ambiguous, 1);
+  // The sender has two issues with the same text and different owners; nothing like it here: both arrive as new.
+  const twoThere = plain(Link.mergeIssues([issue('Dock 4 door jams', 'Facilities', '2026-10-29'), issue('Dock 4 door jams', 'Maintenance', '2026-10-27')], [], priorities));
+  assert.equal(twoThere.issues.length, 2);
+  assert.ok(twoThere.issues.every((i) => !i.kept && !i.ambiguous));
+  // The sender has the same two; one is here: that one merges with its own, the other arrives as new; and two here are never collapsed into one.
+  const twoBoth = plain(Link.mergeIssues([issue('Dock 4 door jams', 'Facilities', '2026-10-29'), issue('Dock 4 door jams', 'Maintenance', '2026-10-27', { done: true })], here, priorities));
+  assert.equal(twoBoth.issues.length, 2);
+  assert.deepEqual(twoBoth.issues.map((i) => [i.owner, i.due, i.done, i.carried, i.ambiguous]), [['Facilities', '2026-10-29', false, 0, false], ['Maintenance', '2026-10-27', false, 2, false]]);
+  assert.equal(twoBoth.same, 2);
+  // Two here with the same text and no owner or date at all: still two candidates, so the incoming stays apart.
+  const bare = plain(Link.mergeIssues([issue('Spill by dock 2', '', '')], [issue('Spill by dock 2', '', ''), issue('Spill by dock 2', '', '')], priorities));
+  assert.equal(bare.issues.length, 3);
+  assert.equal(bare.issues[0].ambiguous, true);
 });
 
 test('a state saved by the version before this one loads unchanged, and taking over keeps the history as it was', { skip: !fs.existsSync('_site/tools/shift-handover/index.html') }, async () => {

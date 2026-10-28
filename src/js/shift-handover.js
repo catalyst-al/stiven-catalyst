@@ -272,43 +272,53 @@
   // ---- New issues and the ones already here ----
   const issueKey = (text) => String(text ?? "").toLowerCase().replace(/\s+/g, " ").trim();
   // The issues of a received handover beside the open issues of this device: the incoming ones, then this device's
-  // open issues the sender did not have, marked as kept, so nothing open here is lost by taking over. An incoming
-  // issue that is open here too is one issue, and the safer state wins: it stays open even when the sender marked it
-  // solved; an owner, a due date or a priority this device has is kept when the sender's is missing, and kept too
-  // when the two differ (the higher priority, by the order given, high first); the carry count is the higher one.
-  // Each such difference is listed in `conflicts`, so the person taking over sees it before deciding.
+  // open issues the sender did not have, marked as kept, so nothing open here is lost by taking over.
+  // The same text is not the same issue: two problems can be written the same way with another owner or another
+  // date. An incoming issue is taken for one open here only when the texts match and the owner and the due date
+  // agree or are missing on one side, and when exactly one such issue is here. Then it is one issue and the safer
+  // state wins: it stays open even when the sender marked it solved; a missing owner or date is filled from here;
+  // the higher priority (by the order given, high first) and the higher carry count stay; each difference is listed
+  // in `conflicts`. When the owner or the date differ, or more than one issue here could be the same, the identity
+  // is not certain: every record is kept, and the incoming one is marked `ambiguous`, so the person taking over
+  // sees it before deciding.
+  const agree = (a, b) => !a || !b || a === b;
   const mergeIssues = (incoming, existingOpen, priorities = []) => {
-    const here = new Map((existingOpen || []).filter((issue) => issueKey(issue.text)).map((issue) => [issueKey(issue.text), issue]));
+    const here = (existingOpen || []).map((issue, index) => ({ issue, index, key: issueKey(issue.text) })).filter((entry) => entry.key);
     const rank = (p) => { const i = priorities.indexOf(p); return i < 0 ? priorities.length : i; };
-    const seen = new Set();
+    const used = new Set();
     let same = 0;
+    let ambiguous = 0;
     const issues = (incoming || []).map((issue) => {
       const key = issueKey(issue.text);
-      const match = key ? here.get(key) : null;
-      if (key) seen.add(key);
-      if (!match) return { ...issue, kept: false, conflicts: [] };
+      const sameText = key ? here.filter((entry) => !used.has(entry.index) && entry.key === key) : [];
+      if (!sameText.length) return { ...issue, kept: false, ambiguous: false, conflicts: [] };
+      const exact = sameText.filter((entry) => entry.issue.owner === issue.owner && entry.issue.due === issue.due);
+      const compatible = sameText.filter((entry) => agree(entry.issue.owner, issue.owner) && agree(entry.issue.due, issue.due));
+      const candidates = exact.length ? exact : compatible;
+      if (candidates.length !== 1) {
+        ambiguous += 1;
+        return { ...issue, kept: false, ambiguous: true, conflicts: [] };
+      }
+      const match = candidates[0].issue;
+      used.add(candidates[0].index);
       same += 1;
       const conflicts = [];
       if (issue.done && !match.done) conflicts.push("solvedThere");
-      const owner = issue.owner || match.owner;
-      if (issue.owner && match.owner && issue.owner !== match.owner) conflicts.push("owner");
-      const due = issue.due || match.due;
-      if (issue.due && match.due && issue.due !== match.due) conflicts.push("due");
-      const priority = rank(match.priority) < rank(issue.priority) ? match.priority : issue.priority;
       if (issue.priority !== match.priority) conflicts.push("priority");
       return {
         ...issue,
         done: Boolean(issue.done && match.done),
-        owner: conflicts.includes("owner") ? match.owner : owner,
-        due: conflicts.includes("due") ? match.due : due,
-        priority,
+        owner: issue.owner || match.owner,
+        due: issue.due || match.due,
+        priority: rank(match.priority) < rank(issue.priority) ? match.priority : issue.priority,
         carried: Math.max(issue.carried || 0, match.carried || 0),
         kept: false,
+        ambiguous: false,
         conflicts,
       };
     });
-    const kept = [...here.values()].filter((issue) => !seen.has(issueKey(issue.text))).map((issue) => ({ ...issue, kept: true, conflicts: [] }));
-    return { issues: [...issues, ...kept], added: issues.length - same, same, kept: kept.length, conflicts: issues.reduce((n, issue) => n + issue.conflicts.length, 0) };
+    const kept = (existingOpen || []).filter((issue, index) => !used.has(index)).map((issue) => ({ ...issue, kept: true, ambiguous: false, conflicts: [] }));
+    return { issues: [...issues, ...kept], added: issues.length - same, same, kept: kept.length, ambiguous, conflicts: issues.reduce((n, issue) => n + issue.conflicts.length, 0) };
   };
 
   window.ShiftHandoverLink = {
@@ -1259,7 +1269,7 @@
       state.history = state.history.slice(0, HISTORY_MAX);
     }
     const now = new Date().toISOString();
-    state.current = { ...h, issues: merged.issues.map(({ kept, conflicts, ...issue }) => issue), ackAt: "", shared: [], ack: null, received: id ? { id, at: now, from: h.from, ackCode } : null };
+    state.current = { ...h, issues: merged.issues.map(({ kept, ambiguous, conflicts, ...issue }) => issue), ackAt: "", shared: [], ack: null, received: id ? { id, at: now, from: h.from, ackCode } : null };
     if (id) state.received = [...state.received.filter((entry) => entry.id !== id), { id, at: now }].slice(-50);
     save();
     renderAll();
@@ -1303,16 +1313,21 @@
       fillList(previewSummary, summaryLines(h, { names: Boolean(h.from || h.to || h.issues.some((issue) => issue.owner)) }));
       const CONFLICT = {
         solvedThere: "solved there, still open here: stays open",
-        owner: "another owner there: {here} kept",
-        due: "another due date there: {here} kept",
         priority: "another priority there: the higher one kept",
       };
+      const sameTextHere = (issue) => issue.text && openIssues(cur()).some((own) => Link.issueKey(own.text) === Link.issueKey(issue.text));
       previewIssues.replaceChildren(...merged.issues.map((issue) => {
-        const line = el("li", issue.kept ? "is-kept" : issue.text && openIssues(cur()).some((own) => Link.issueKey(own.text) === Link.issueKey(issue.text)) ? "is-same" : "is-new");
-        line.append(el("span", "sh-tag", issue.kept ? tx("kept from here") : line.className === "is-same" ? tx("already open here") : tx("new")), ` ${issue.text}${issue.done ? ` (${tx("solved")})` : ""}`);
-        if (issue.conflicts?.length) {
+        const kind = issue.kept ? "kept" : issue.ambiguous ? "ambiguous" : sameTextHere(issue) ? "same" : "new";
+        const line = el("li", `is-${kind}`);
+        const tag = { kept: tx("kept from here"), ambiguous: tx("same text as an issue here"), same: tx("already open here"), new: tx("new") }[kind];
+        const who = [issue.owner, issue.due].filter(Boolean).join(" · ");
+        line.append(el("span", "sh-tag", tag), ` ${issue.text}${issue.done ? ` (${tx("solved")})` : ""}${who ? ` (${who})` : ""}`);
+        if (issue.ambiguous) {
           line.classList.add("has-conflict");
-          line.append(el("span", "sh-conflict", issue.conflicts.map((kind) => tx(CONFLICT[kind], { here: kind === "owner" ? issue.owner : issue.due })).join(" · ")));
+          line.append(el("span", "sh-conflict", tx("another owner or date, or more than one issue here with this text: both are kept, decide yourself")));
+        } else if (issue.conflicts?.length) {
+          line.classList.add("has-conflict");
+          line.append(el("span", "sh-conflict", issue.conflicts.map((k) => tx(CONFLICT[k])).join(" · ")));
         }
         return line;
       }));

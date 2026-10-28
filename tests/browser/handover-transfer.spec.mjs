@@ -263,6 +263,57 @@ test("a damaged link, a foreign fragment and a file: refused or opened, by keybo
   await B.context.close();
 });
 
+test("two issues with the same text but another owner and date are kept apart on both devices, and the history stays", async ({ page, browser, theme }) => {
+  test.setTimeout(60_000);
+  const errorsB = [];
+  const B = await otherDevice(browser, theme, errorsB);
+  const code = "cabin-river-pilot-amber-delta-ember";
+  const seed = (from, issues) => ({ template: "warehouse", date: "2026-10-26", shift: "Early", area: "Outbound", from, to: "", ackAt: "", metrics: [["Units handled", "500", ""]], issues, headsUp: "", safety: "", checks: [] });
+  // Device A: the same text twice, with another owner and date each (names included, so they travel).
+  await page.goto("/tools/shift-handover/");
+  await page.evaluate((state) => localStorage.setItem("sc-shift-handover", JSON.stringify(state)), { current: seed("Arben", [
+    { text: "Dock 4 door jams at the top", priority: "High", owner: "Facilities", due: "2026-10-29", done: false, carried: 0 },
+    { text: "Dock 4 door jams at the top", priority: "Low", owner: "Maintenance", due: "2026-10-27", done: true, carried: 0 },
+  ]), history: [] });
+  await page.reload();
+  await page.locator("[data-send]").click();
+  const dialog = page.locator("[data-send-dialog]");
+  await dialog.locator("[data-send-names]").check();
+  await dialog.locator("[data-send-code]").fill(code);
+  await dialog.locator("[data-send-make]").click();
+  await expect(dialog.locator("[data-send-link]")).toHaveValue(/#h2=/, { timeout: 20_000 });
+  const link = await dialog.locator("[data-send-link]").inputValue();
+  // Device B: the same text once more, with a third owner, and a closed shift in the history.
+  await B.page.goto("/tools/shift-handover/");
+  const history = [{ closedAt: "2026-10-26T06:05:00.000Z", handover: seed("Mira", []), text: "Shift handover | Outbound" }];
+  await B.page.evaluate((state) => localStorage.setItem("sc-shift-handover", JSON.stringify(state)), { current: seed("Lena", [
+    { text: "Dock 4 door jams at the top", priority: "Medium", owner: "Lena", due: "2026-10-28", done: false, carried: 1 },
+  ]), history });
+  await B.page.goto(link);
+  const box = B.page.locator("[data-incoming]");
+  await box.locator("[data-incoming-unlock] [name=code]").fill(code);
+  await box.locator("[data-incoming-unlock] button[type=submit]").click();
+  const issues = box.locator("[data-incoming-issues] li");
+  await expect(issues).toHaveCount(3, { timeout: 20_000 });
+  await expect(box.locator("[data-incoming-issues] li.is-ambiguous")).toHaveCount(2);
+  await expect(box.locator("[data-incoming-issues] li.is-ambiguous").first()).toContainText("same text as an issue here");
+  await expect(box.locator("[data-incoming-issues] li.is-kept")).toContainText("Lena");
+  B.page.once("dialog", (d) => d.accept());
+  await box.locator("[data-incoming-open]").click();
+  await expect(box).toBeHidden();
+  const state = await stored(B.page, "sc-shift-handover");
+  expect(state.current.issues.map((issue) => [issue.owner, issue.due, issue.done, issue.carried])).toEqual([
+    ["Facilities", "2026-10-29", false, 0],
+    ["Maintenance", "2026-10-27", true, 0],
+    ["Lena", "2026-10-28", false, 1],
+  ]);
+  expect(state.history).toHaveLength(2);
+  expect(state.history[1]).toEqual(history[0]);
+  expect(state.history[0].handover.from).toBe("Lena");
+  expect(errorsB).toEqual([]);
+  await B.context.close();
+});
+
 test("a browser that cannot copy does not count the handover as shared", async ({ page }) => {
   await page.addInitScript(() => {
     Object.defineProperty(navigator, "clipboard", { value: { writeText: () => Promise.reject(new Error("no clipboard")) } });

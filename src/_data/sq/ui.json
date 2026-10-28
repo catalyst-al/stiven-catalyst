@@ -7774,10 +7774,10 @@
   "Code {code} typed in here at {time}. It matches the code of a handover shared from here, so that handover was opened with its transfer code. It does not prove who opened it, or on which device.": "Kodi {code} u shkrua këtu në {time}. Përputhet me kodin e një dorëzimi të ndarë nga këtu, pra ai dorëzim u hap me kodin e vet të transferimit. Nuk vërteton kush e hapi, as në cilën pajisje.",
   "You received this handover. Confirm takeover once you have read it; a confirmation code appears, for you to pass to the sender by hand.": "E more këtë dorëzim. Konfirmo marrjen pasi ta kesh lexuar; shfaqet një kod konfirmimi, që ia jep dërguesit me dorë.",
   "solved there, still open here: stays open": "e zgjidhur atje, ende e hapur këtu: mbetet e hapur",
-  "another owner there: {here} kept": "përgjegjës tjetër atje: u mbajt {here}",
-  "another due date there: {here} kept": "afat tjetër atje: u mbajt {here}",
   "another priority there: the higher one kept": "prioritet tjetër atje: u mbajt më i larti",
   "Six words made for you, or a code of your own. Tell it to the next shift in person or by phone, never in the same message as the link.": "Gjashtë fjalë të gjeneruara për ty, ose një kod i yti. Thuaja turnit tjetër personalisht ose me telefon, kurrë në të njëjtin mesazh me linkun.",
   "Give the sender this confirmation code, by voice or in your own message. Typed on their device, it marks their handover as acknowledged. It is a manual confirmation, not a proof of who you are.": "Jepi dërguesit këtë kod konfirmimi, me zë ose me një mesazh tëndin. I shkruar në pajisjen e tij, e shënon dorëzimin si të pranuar. Është konfirmim me dorë, jo provë e identitetit tënd.",
-  "When the next shift has taken over on their device, they get a confirmation code. Type it here: a manual confirmation that the handover was opened with its transfer code, not a proof of who did it.": "Kur turni tjetër ta ketë marrë në pajisjen e vet, merr një kod konfirmimi. Shkruaje këtu: një konfirmim me dorë se dorëzimi u hap me kodin e vet të transferimit, jo provë se kush e bëri."
+  "When the next shift has taken over on their device, they get a confirmation code. Type it here: a manual confirmation that the handover was opened with its transfer code, not a proof of who did it.": "Kur turni tjetër ta ketë marrë në pajisjen e vet, merr një kod konfirmimi. Shkruaje këtu: një konfirmim me dorë se dorëzimi u hap me kodin e vet të transferimit, jo provë se kush e bëri.",
+  "same text as an issue here": "tekst i njëjtë me një çështje këtu",
+  "another owner or date, or more than one issue here with this text: both are kept, decide yourself": "përgjegjës ose afat tjetër, ose më shumë se një çështje këtu me këtë tekst: të dyja mbahen, vendos vetë"
 }

@@ -808,6 +808,7 @@ select.sh-in { cursor: pointer; }
 .sh-preview-issues .is-new .sh-tag { background: color-mix(in srgb, var(--ok) 18%, transparent); color: var(--ok); }
 .sh-preview-issues .is-same .sh-tag { background: color-mix(in srgb, var(--blue) 18%, transparent); color: var(--blue); }
 .sh-preview-issues .is-kept .sh-tag { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+.sh-preview-issues .is-ambiguous .sh-tag { background: color-mix(in srgb, var(--danger) 16%, transparent); color: var(--danger); }
 .sh-warn { margin: 0; padding: 10px 12px; border: 1px solid color-mix(in srgb, var(--warn) 60%, var(--line)); border-radius: 10px; font-size: 14px; }
 .sh-warn ul { margin: 6px 0 0; padding-left: 18px; }
 .sh-warn .form-note { margin: 0; color: var(--ink); }

@@ -68,7 +68,7 @@ kurrë faqen nuk e hap linkun offline, sepse s'ka kopje; teksti i faqes dhe ky r
 
 - Turni aktual i marrësit me përmbajtje: kalon te historiku para marrjes, me konfirmim.
 - Çështjet e hapura të marrësit që dërguesi s'i ka: mbahen te turni i ri, të shënuara "mbajtur nga këtu".
-- Çështje e njëjtë (teksti i njëjtë, pa dalluar shkronjat e mëdha dhe hapësirat): mbetet një herë; e hapur këtu nuk bëhet e zgjidhur se e solli ashtu transferimi; përgjegjësi, afati dhe prioriteti më i lartë i marrësit nuk humbasin; bartja më e lartë; çdo ndryshim i dukshëm në parapamje.
+- Çështje e njëjtë: teksti i njëjtë nuk mjafton. Një çështje hyrëse merret për të njëjtën me një të hapur këtu vetëm kur teksti përputhet, përgjegjësi dhe afati pajtohen ose mungojnë në njërën anë, dhe këtu ka saktësisht një të tillë. Atëherë mbetet një: e hapur këtu nuk bëhet e zgjidhur se e solli ashtu transferimi; përgjegjësi ose afati që mungon plotësohet nga këtu; prioriteti dhe bartja më e lartë; çdo ndryshim i dukshëm. Kur përgjegjësi ose afati ndryshojnë, ose ka më shumë se një kandidat, identiteti nuk është i sigurt: të gjitha regjistrimet ruhen dhe çështja hyrëse shënohet "tekst i njëjtë me një çështje këtu".
 - I njëjti transferim dy herë: njihet nga id-ja, kërkon "përsëri gjithsesi".
 
 ## 6. Çfarë u testua
@@ -120,3 +120,21 @@ Teste të shtuara: bashkimi me konflikt (6 raste), kodet e dobëta (12 raste), g
 mëparshëm që ngarkohet e pandryshuar dhe historiku i paprekur pas marrjes (jsdom); në shfletues: paralajmërimi i
 kodit të dobët, konflikti i dukshëm, historiku i marrësit i paprekur, formulimi i Acknowledged, shfletues që nuk
 kopjon → jo Shared. Rezultatet: §6, rreshti i fundit.
+
+## 9. Korrigjimi i identitetit të çështjeve (28 tetor, pas shqyrtimit të dytë)
+
+Rreziku i gjetur nga autori: `mergeIssues` i identifikonte çështjet vetëm nga teksti i normalizuar dhe i vendoste
+në një Map, kështu që dy probleme me të njëjtin përshkrim por me përgjegjës ose afate të ndryshme mund të
+bashkoheshin dhe njëri të humbiste, edhe brenda vetë pajisjes marrëse.
+
+Tani: identiteti kërkon tekst të njëjtë **dhe** përgjegjës e afat që pajtohen (të barabartë ose bosh në një anë)
+**dhe** një kandidat të vetëm këtu. Çdo rast tjetër ruan të gjitha regjistrimet: çështja hyrëse shënohet
+`ambiguous` dhe del në parapamje me etiketën "tekst i njëjtë me një çështje këtu" dhe shpjegimin "vendos vetë";
+çështjet e marrësit mbeten "mbajtur nga këtu". Dy çështje të marrësit me tekst të njëjtë nuk bashkohen kurrë mes
+tyre; dy çështje të dërguesit me tekst të njëjtë mbërrijnë të dyja.
+
+Teste: në Node 7 raste (një kandidat i saktë mes dy, përgjegjës tjetër, afat tjetër, pa emra me dy kandidatë,
+dy identike te dërguesi pa asgjë këtu, dy identike te dërguesi me njërën këtu, dy identike bosh këtu); në
+shfletues, pajisja A me dy "Dock 4 door jams" (Facilities / Maintenance), pajisja B me një të tretën (Lena) dhe një
+turn në historik: pas marrjes tri regjistrime me përgjegjësit dhe afatet e veta, historiku i paprekur plus turni i
+mëparshëm i B-së.
