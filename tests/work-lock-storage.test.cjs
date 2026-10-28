@@ -249,4 +249,5 @@ test('the privacy policy describes the PIN lock, the photos and every kind of re
   // The visit count: the script, where it loads and what it is for; no claim that visits are being counted.
   assert.equal(count(/I count visits|zähle ich|i numëroj vizitat/g), 0);
   assert.equal(count(/Its purpose is to count|Es dient dazu, zu zählen|Qëllimi i tij është të numërojë/g), 3);
+  assert.equal(count(/script for anonymous visit counts|Skript für anonyme Besuchszahlen|skript(it)? për numërimin anonim/g), 6);
 });
