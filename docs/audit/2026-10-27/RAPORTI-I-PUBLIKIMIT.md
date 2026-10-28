@@ -1,8 +1,9 @@
 # Raport i shkurtër për publikimin: mbyllja e auditimit teknik të 27 tetorit 2026
 
-Dega `claude/gifted-pasteur-v7n2dw`, Draft PR catalyst-al/stiven-catalyst#363. **Asgjë nuk është bashkuar në `main`,
-asgjë nuk është publikuar, Team Sync Worker dhe Cloudflare të paprekura.** Bashkimi dhe publikimi presin vetëm
-miratimin tënd përfundimtar.
+**Publikuar më 28 tetor 2026** me miratimin tënd: merge `5371dec8`, datat `669b34d3`. Hapat dhe kontrollet live:
+`publikimi-2026-10-28/README.md`. Team Sync Worker dhe Cloudflare mbetën të paprekura.
+
+Poshtë: raporti siç u shkrua para publikimit (dega `claude/gifted-pasteur-v7n2dw`, PR catalyst-al/stiven-catalyst#363).
 
 ## 1. Çfarë hyn në publikim
 
