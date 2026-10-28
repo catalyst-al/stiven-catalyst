@@ -58,11 +58,8 @@ test("problem → whys → action → done → KPI before/after → closed, acro
   await expect(page).toHaveURL(/\/tools\/action-tracker\/$/);
   const item = page.locator(".at-item").filter({ hasText: "Heavy-first loading sequence" });
   await expect(item.locator(".at-case a")).toHaveText(`Investigation ${caseId}`);
-  // "Verified" is not a click here: it asks for the result and leaves the status as it was.
-  await item.locator(".at-status select").selectOption("verified");
-  await expect(item.locator(".at-pending")).toBeVisible();
-  expect((await stored(page, "sc-actions")).rows[0].status).toBe("open");
-  await item.getByRole("button", { name: "Cancel" }).click();
+  // "Verified" is not a click here: an action of a case is verified by the case, from the KPI; the option is greyed.
+  await expect(item.locator('.at-status option[value="verified"]')).toBeDisabled();
   await item.locator(".at-status select").selectOption("done");
   await expect.poll(() => stored(page, "sc-actions").then((s) => s.rows[0].status)).toBe("done");
 
