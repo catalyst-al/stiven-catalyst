@@ -47,7 +47,7 @@ Në degë, pas ndryshimit të fundit (`25d85b4f`), me ndërtimin e plotë (`npm 
 | --- | --- |
 | `npm test` (node --test, 1 355 teste, 9 të reja: tabelat e `pdf-kit`, fleta PDF e dorëzimit në EN/DE/SQ, skedari i vulosur, rrjeta e gabimeve, formatet e të dhënave) | 1 355 kalojnë, 0 dështojnë |
 | `tool-pages.spec.mjs` (177 faqe mjetesh, 3 gjuhë, 1440 px i errët) + `work-backup-sealed.spec.mjs` + `handover-transfer.spec.mjs` (të gjitha projektet) | 35 kalojnë, 0 dështojnë, 6 min |
-| Gjithë suita e shfletuesit (`npx playwright test`) | në CI të këtij PR-i dhe lokalisht para hapjes së PR-it |
+| Gjithë suita e shfletuesit (`npx playwright test`, 6 projekte: 390/768/1440 px × errët/çelët) | 211 kalojnë, 0 dështojnë, 19,5 min |
 
 Çfarë u gjet dhe u ndreq gjatë provës: shembulli i Site Compare jeton vetëm në kujtesën e faqes (pa çelës `sc-*`), kështu
 spec-i kontrollon mbijetesën e rifreskimit vetëm për atë që ruhet; dialogu i fjalëkalimit kishte `minlength` natyror që
