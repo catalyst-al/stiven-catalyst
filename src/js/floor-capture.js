@@ -197,7 +197,7 @@ window.FloorCapture = (() => {
     show(viewer.box);
   };
 
-  const NOTE = () => tx("Photos stay on this device and are not in the saved file.");
+  const NOTE = () => tx("Photos stay on this device. The file with all your work takes them along, up to 20 MB.");
   // The photo control of one entry. Options: tool and ref (which entry), note (false when the page shows the note
   // once for many controls), onChange(count) after every change.
   const attach = (container, { tool, ref, note = true, onChange } = {}) => {

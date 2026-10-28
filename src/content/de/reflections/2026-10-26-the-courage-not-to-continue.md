@@ -613,17 +613,17 @@ Denn manchmal hat das, was wir nicht aufbauten, was wir nicht fortsetzten und wa
 
 Ich glaube nicht, dass Mut nur die Fähigkeit ist, zu etwas aufzubrechen, von dem wir nicht wissen, ob es funktioniert.
 
-Mut ist auch, zu einer Entscheidung zurückzukehren, die man jahrelang verteidigt hat, und sie erneut zu prüfen, ohne von der Wahrheit zu verlangen, dir einen Gefallen zu tun.
+Mut ist auch, zu einer Entscheidung zurückzukehren, die man jahrelang verteidigt hat, und sie erneut zu prüfen, ohne von der Wahrheit eine Gefälligkeit zu verlangen.
 
 Zu akzeptieren, dass die Zeit neue Information gebracht hat.
 
 Dass sich Umstände geändert haben.
 
-Dass Erfahrung dich etwas gelehrt haben kann, das du beim Anfangen nicht wusstest.
+Dass Erfahrung einen etwas gelehrt haben kann, das man beim Anfangen nicht wusste.
 
-Und dass du der Vergangenheit die Fortführung einer Entscheidung nicht schuldest, nur weil du viel investiert hast, sie zu treffen.
+Und dass man der Vergangenheit die Fortführung einer Entscheidung nicht schuldet, nur weil man viel investiert hat, sie zu treffen.
 
-Du schuldest der Zukunft ein ehrliches Urteil.
+Man schuldet der Zukunft ein ehrliches Urteil.
 
 Das macht das Aufhören nicht leichter.
 
@@ -639,7 +639,7 @@ In die Entscheidung, die wir heute treffen können.
 
 Nicht in die Entscheidung, die wir gestern gern getroffen hätten.
 
-Und vielleicht ist die schwerste Probe beruflicher Reife zu begreifen, dass du nicht alles, was du begonnen hast, zum Erfolg erklären musst, um eine fähige Führungskraft zu sein.
+Und vielleicht ist die schwerste Probe beruflicher Reife zu begreifen, dass man nicht alles, was man begonnen hat, zum Erfolg erklären muss, um eine fähige Führungskraft zu sein.
 
 Es genügt, die Fakten nicht zu verraten, um den Stolz zu schützen.
 

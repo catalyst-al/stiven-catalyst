@@ -106,11 +106,14 @@ test('the word list and the team code: six of 1296 plain words, at least 60 bits
   assert.equal(M.parseCode('acid acorn acre').ok, false);
 });
 
-test('keys: the space id and the write token are SHA-256 of the code, the key is PBKDF2 → AES-GCM, all deterministic', async () => {
+test('keys: the space id and the write token are PBKDF2 of the code with their own salt, the key is PBKDF2 → AES-GCM, all deterministic', async () => {
   const w = load();
   const a = await w.TeamSyncMath.deriveKeys(CODE);
-  assert.equal(a.spaceId, sha(`space:${CODE}`));
-  assert.equal(a.writeToken, sha(`write:${CODE}`));
+  // Not SHA-256 of the code any more (tests/team-sync-keys.test.cjs): that is only where a team made before is found.
+  const ids = nodeCrypto.pbkdf2Sync(CODE, 'stiven-catalyst-sync-id-v2', 310000, 64, 'sha256');
+  assert.equal(a.spaceId, ids.subarray(0, 32).toString('hex'));
+  assert.equal(a.writeToken, ids.subarray(32).toString('hex'));
+  assert.deepEqual(plain(a.legacy), { spaceId: sha(`space:${CODE}`), writeToken: sha(`write:${CODE}`) });
   assert.match(a.spaceId, /^[0-9a-f]{64}$/);
   assert.notEqual(a.spaceId, a.writeToken);
   const b = await w.TeamSyncMath.deriveKeys('ACID acorn acre acts afar affix');
@@ -233,7 +236,9 @@ test('merge: an unchanged text stays the very same string, and merging again cha
   const once = M.merge(a, b);
   const base = M.baseOf(once);
   assert.deepEqual(plain(M.merge(once, once, base)), plain(once));
-  assert.deepEqual(plain(M.merge(once, b, base)), plain(once), 'an older team copy takes nothing back');
+  // A team copy without rows this device holds as they were last synced: they were deleted on the team, and go here
+  // too (team-sync-deletions.test.cjs); the fields of the plain object stay.
+  assert.deepEqual(plain(M.merge(once, b, base)), { ...plain(once), 'sc-actions': b['sc-actions'] }, 'rows the team deleted go here too');
   assert.deepEqual(plain(M.changedSince(once, base)), []);
   assert.deepEqual(plain(M.changedSince({ ...once, 'sc-workplace': '{}' }, base)), ['sc-workplace']);
 });
@@ -267,7 +272,7 @@ test('the payload never holds a skipped or personal key, and a team copy cannot 
   assert.equal(result.status, 'synced');
   const copy = await teamCopy(server, dev);
   assert.equal(copy.format, 'stiven-catalyst-team');
-  assert.equal(copy.version, 1);
+  assert.equal(copy.version, 2, 'version 2: with tombstones');
   assert.deepEqual(Object.keys(copy.items).sort(), ['sc-actions', 'sc-night-audit', 'sc-pareto']);
   assert.ok(!JSON.stringify(copy).includes(CODE), 'the code is not in the payload');
   // A copy that carries personal or skipped keys (made by hand): they are dropped on reading, never written here.
@@ -434,7 +439,22 @@ test('the QR code matches a reference encoder (byte mode, level M), and is drawn
   const auto = M.qrEncode(M.newCode());
   assert.ok(auto.version <= 3 && auto.mask >= 0 && auto.mask < 8);
   assert.equal(M.qrEncode('x'.repeat(213)).version, 10);
-  assert.equal(M.qrEncode('x'.repeat(214)), null, 'beyond version 10 at level M');
+  assert.equal(M.qrEncode('x'.repeat(214)).version, 11, 'a longer text takes the next version');
+  // The computed table matches the standard's rows: the capacity of each version at level M, and the alignment
+  // pattern centres (version 32 is the exception to the rounding).
+  assert.equal(M.qrEncode('x'.repeat(997)).version, 25);
+  assert.equal(M.qrEncode('x'.repeat(998)).version, 26);
+  assert.equal(M.qrEncode('x'.repeat(2331)).version, 40);
+  assert.equal(M.qrEncode('x'.repeat(2332)), null, 'beyond version 40 at level M');
+  const big = M.qrEncode('x'.repeat(1500));
+  assert.equal(big.version, 32);
+  assert.equal(big.matrix.length, 145);
+  // Alignment pattern centres: a dark module ringed by light then dark; (34, 34), (60, 60) … on version 32.
+  for (const at of [34, 60, 86, 112, 138]) {
+    assert.equal(big.matrix[at][at], 1, `centre at ${at}`);
+    assert.equal(big.matrix[at - 1][at], 0, `light ring at ${at}`);
+    assert.equal(big.matrix[at - 2][at], 1, `dark ring at ${at}`);
+  }
   const svg = M.qrSvg(M.qrEncode('hello', 3).matrix, 'QR "code"');
   assert.match(svg, /^<svg [^>]*viewBox="0 0 29 29"[^>]*aria-label="QR &quot;code&quot;"/);
   assert.match(svg, /<rect width="29" height="29" fill="#fff"\/><path d="M4 4h7v1h-7z/);
@@ -657,7 +677,7 @@ test('change the team code: the whole merged copy goes to the new space, then th
   // B shares the Pareto data, which A does not tick, and has an action A has not seen yet.
   const b = await device(load({ storage: { 'sc-pareto': { from: 'B' }, 'sc-actions': { rows: [{ id: 'b1', title: 'Order gloves' }] } } }));
   await run(b, server, { selected: () => true });
-  b.w.localStorage.setItem('sc-actions', JSON.stringify({ rows: [{ id: 'b1', title: 'Order gloves' }, { id: 'b2', title: 'Label racks' }] }));
+  b.w.localStorage.setItem('sc-actions', JSON.stringify({ rows: [...stored(b.w, 'sc-actions').rows, { id: 'b2', title: 'Label racks' }] }));
   await run(b, server, { selected: () => true });
   const oldViewer = await vwKeys(b.w, CODE);
   const result = await aw.TeamSync.rotate(rotateCtx(a, server));

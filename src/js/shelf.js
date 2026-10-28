@@ -14,8 +14,13 @@ window.Shelf = (() => {
   const write = (key, value) => { try { storage?.setItem(key, JSON.stringify(value)); return true; } catch { return false; } };
 
   // The saved items, newest first. Only pages of this site: an address from a file opened in "All your work in one
-  // file" that leads elsewhere (another site, a script) is not shown.
-  const ownPage = (url) => /^\/(?!\/)/.test(url);
+  // file" that leads elsewhere (another site, a script) is not shown. A path of this site only: one slash, then no
+  // second slash, no backslash, tab, line break or other control character (a browser reads "/\host" and
+  // "/<tab>/host" as "//host"), and an address that stays on this origin once the browser has read it.
+  const ownPage = (url) => {
+    if (typeof url !== "string" || !/^\/(?!\/)/.test(url) || /[\u0000-\u001f\u007f\\]/.test(url)) return false;
+    try { return new URL(url, location.href).origin === location.origin; } catch { return false; }
+  };
   const items = () => {
     const data = read(KEY, { v: 1, items: [] });
     return Array.isArray(data.items) ? data.items.filter((i) => i && typeof i.u === "string" && ownPage(i.u)) : [];

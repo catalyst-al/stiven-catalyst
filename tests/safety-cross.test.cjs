@@ -218,7 +218,8 @@ test('the month moves, the view switches, a talk is marked, an action is done, a
   assert.equal(saved.view, 'calendar');
   assert.equal(saved.rows.length, 14);
   assert.equal(saved.rows.filter((row) => row.action && !row.done).length, 5, 'one of six ticked');
-  assert.deepEqual(Object.keys(saved.rows[0]).sort(), ['action', 'area', 'cause', 'date', 'done', 'owner', 'severity', 'shift', 'type', 'what']);
+  // The example's rows say they are the example (ToolKit exampleStamp, since 27 October 2026).
+  assert.deepEqual(Object.keys(saved.rows[0]).sort(), ['action', 'area', 'cause', 'date', 'done', 'example', 'owner', 'severity', 'shift', 'type', 'what']);
   assert.ok(saved.talks.some((talk) => talk.date === '2026-10-23' && !talk.example));
 });
 
@@ -228,13 +229,16 @@ test('hand-offs: open actions to the Action Tracker once, causes to Pareto, a ne
   const results = doc.querySelector('[data-results]');
   const send = [...results.querySelectorAll('button')].find((b) => /Maßnahmenliste übergeben/.test(b.textContent));
   send.click();
-  const actions = plain(w.ActionsStore.list());
+  // From the example, the actions arrive as the example's (ActionsStore: example: true); no other tool counts them.
+  assert.equal(w.ActionsStore.list().length, 0);
+  const actions = plain(w.ActionsStore.all());
+  assert.ok(actions.every((a) => a.example === true));
   assert.equal(actions.length, 6, 'the six open actions of the example');
   assert.ok(actions.every((a) => a.source === 'safety-cross'));
   assert.equal(actions.find((a) => a.detail.startsWith('Erste Hilfe')).priority, 'High', 'an injury is high');
   assert.equal(actions.find((a) => a.detail.startsWith('Unsicherer Zustand')).priority, 'Medium');
   [...results.querySelectorAll('button')].find((b) => /Maßnahmenliste übergeben/.test(b.textContent)).click();
-  assert.equal(w.ActionsStore.list().length, 6, 'not added twice');
+  assert.equal(w.ActionsStore.all().length, 6, 'not added twice');
   assert.match(results.querySelector('.sx-actions').closest('.dl-panel').querySelector('a.inline-link').href, /\/de\/tools\/action-tracker\/$/);
   const pareto = [...results.querySelectorAll('a')].find((a) => a.href.includes('/pareto/'));
   assert.ok(pareto.href.startsWith('https://example.test/de/tools/pareto/'));

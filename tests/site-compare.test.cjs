@@ -315,7 +315,9 @@ test('best and worst: by the way that is good, equal values share the mark, all 
 });
 
 test('the ranking: 100 for the best and 0 for the worst on each shared rate, shared places, the mean over a site\'s rates', () => {
-  const site = (id, figures) => ({ id, name: id.toUpperCase(), figures: Object.fromEntries(Object.entries(figures).map(([k, value]) => [k, { value }])) });
+  // Each rate with the sample a summary gives it (enough to rank, see the next test): units handled, shifts, audits.
+  const SAMPLE = { damageRate: { units: 10, volume: 5000 }, oee: { entries: 20, machines: 2 }, fiveS: { audits: 4 } };
+  const site = (id, figures) => ({ id, name: id.toUpperCase(), figures: Object.fromEntries(Object.entries(figures).map(([k, value]) => [k, { value, ...SAMPLE[k] }])) });
   const sites = [
     site('a', { damageRate: 0.002, oee: 0.8, accidents: 9 }),
     site('b', { damageRate: 0.004, oee: 0.6 }),
@@ -328,6 +330,81 @@ test('the ranking: 100 for the best and 0 for the worst on each shared rate, sha
   // The widest gap, relative to the larger value: damage 0.002 vs 0.004 (50 %) over OEE 0.8 vs 0.6 (25 %).
   assert.deepEqual(plain(M.widestGap(sites)), { kpi: 'damageRate', gap: 0.5, best: 'a', worst: 'b', bestValue: 0.002, worstValue: 0.004 });
   assert.equal(M.widestGap([sites[3]]), null);
+});
+
+// Audit P2A-13 (T-14): a depot with 2 routes and nothing else ranked first (100) above a hub of 2,000 routes (87.5).
+test('the ranking needs enough data: a site of 2 routes is not ranked, and says why; n goes with every score', () => {
+  const w = load({ page: false });
+  const S = w.SiteCompareMath;
+  // The hub and the mid site from the example's real team copies; the depot a Delay Analyzer log of 2 routes, on time.
+  const reasons = dataOf('oee', 'en').reasons;
+  const summaryOf = (items) => plain(S.summarize(items, TODAY, ctxOf(w)));
+  const route = (date, r) => ({ date, shift: '', route: `R0${r}`, planDep: '04:30', actDep: '04:30', planArr: '06:00', actArr: '06:03', reason: '', note: '' });
+  const depot = summaryOf({ 'sc-delay-analyzer': JSON.stringify({ arrivalGrace: '15', departureGrace: '10', target: '', routes: '', from: '', to: '', rows: [route('2026-10-20', 1), route('2026-10-20', 2)] }) });
+  assert.deepEqual(depot.periods.last30.onTime, { value: 1, late: 0, routes: 2 }, 'the depot is on time on its 2 routes');
+  const sites = [
+    { id: 'hub', name: 'Leipzig', figures: summaryOf(S.exampleItems(DATA.en.example.sites[0], TODAY, '', reasons)).periods.last30 },
+    { id: 'mid', name: 'Kassel', figures: summaryOf(S.exampleItems(DATA.en.example.sites[1], TODAY, '', reasons)).periods.last30 },
+    { id: 'depot', name: 'Tiny depot', figures: depot.periods.last30 },
+  ];
+  const r = plain(S.ranking(sites));
+  assert.notEqual(r[0].id, 'depot', 'two routes do not rank first');
+  assert.deepEqual(r.map((x) => [x.id, x.ranked]), [['hub', true], ['mid', true], ['depot', false]]);
+  const depotRank = r.find((x) => x.id === 'depot');
+  assert.equal(depotRank.score, null);
+  assert.equal(depotRank.why, 'volume');
+  assert.deepEqual(depotRank.short, [{ kpi: 'onTime', n: 2, min: 30 }]);
+  // Every point of a score carries the n behind it.
+  const hub = r.find((x) => x.id === 'hub');
+  assert.ok(hub.places.length >= 4);
+  hub.places.forEach((p) => assert.ok(p.n >= S.MIN_N[p.kpi].min, `${p.kpi}: n ${p.n}`));
+  assert.equal(hub.places.find((p) => p.kpi === 'onTime').n, sites[0].figures.onTime.routes);
+
+  // The audit's figures, typed: the hub ranks, the depot does not; a site with plenty of routes on one rate only of the
+  // four compared covers less than half of them and is listed with that reason.
+  const hand = [
+    { id: 'big', name: 'Big hub', figures: { onTime: { value: 0.97, routes: 2000 }, damageRate: { value: 0.002, volume: 50000 }, oee: { value: 0.70, entries: 40 }, fiveS: { value: 0.85, audits: 4 } } },
+    { id: 'tiny', name: 'Tiny depot', figures: { onTime: { value: 1, routes: 2 } } },
+    { id: 'mid', name: 'Mid site', figures: { onTime: { value: 0.96, routes: 800 }, damageRate: { value: 0.003, volume: 20000 }, oee: { value: 0.65, entries: 40 }, fiveS: { value: 0.80, audits: 4 } } },
+    { id: 'one', name: 'One rate', figures: { onTime: { value: 0.99, routes: 500 } } },
+  ];
+  const h = plain(S.ranking(hand));
+  assert.deepEqual(h.map((x) => [x.id, x.score, x.why]), [['big', 100, null], ['mid', 0, null], ['one', null, 'coverage'], ['tiny', null, 'volume']]);
+  assert.deepEqual([h[2].covered, h[2].compared], [1, 4]);
+  // The prompt learns from sites with enough data only.
+  assert.equal(S.widestGap([hand[1], { ...hand[2], figures: { onTime: hand[2].figures.onTime } }]), null);
+});
+
+const int = (lang, n) => new Intl.NumberFormat(lang === 'en' ? 'en-GB' : 'de-DE').format(n);
+test('the page lists the ranked sites with n next to each score, and the sites not ranked apart, with the reason', async () => {
+  const w0 = load({ page: false });
+  const S = w0.SiteCompareMath;
+  const reasons = dataOf('oee', 'en').reasons;
+  const summary = (items) => plain(S.summarize(items, TODAY, ctxOf(w0)));
+  const route = (date, r) => ({ date, shift: '', route: `R0${r}`, planDep: '04:30', actDep: '04:30', planArr: '06:00', actArr: '06:03', reason: '', note: '' });
+  const code = (k) => `scr1.${'abcdefgh'.repeat(4)}${k}`;
+  const stored = [
+    { id: 'hub1', name: 'Leipzig', code: code('a'), status: 'ok', fetched: NOW.replace('Z', '.000Z'), summary: summary(S.exampleItems(DATA.en.example.sites[0], TODAY, '', reasons)) },
+    { id: 'mid1', name: 'Kassel', code: code('b'), status: 'ok', fetched: NOW.replace('Z', '.000Z'), summary: summary(S.exampleItems(DATA.en.example.sites[1], TODAY, '', reasons)) },
+    { id: 'tiny1', name: 'Tiny depot', code: code('c'), status: 'ok', fetched: NOW.replace('Z', '.000Z'), summary: summary({ 'sc-delay-analyzer': JSON.stringify({ arrivalGrace: '15', rows: [route('2026-10-20', 1), route('2026-10-20', 2)] }) }) },
+  ];
+  for (const lang of ['en', 'de', 'sq']) {
+    const w = load({ lang, storage: { [DATA[lang].storageKey]: { period: 'last30', sites: stored } } });
+    const results = w.document.querySelector('[data-results]');
+    assert.equal(results.hidden, false, lang);
+    const ranked = [...results.querySelectorAll('.sv-ranking li')].map((li) => li.textContent);
+    assert.equal(ranked.length, 2, lang);
+    assert.ok(!ranked.some((text) => /Tiny depot/.test(text)), `${lang}: the depot is not in the ranking`);
+    // n next to every score: the routes of Leipzig's on-time share, in the page's language.
+    const routes = int(lang, stored[0].summary.periods.last30.onTime.routes);
+    const sample = lang === 'en' ? DATA.en.kpis.onTime.sample : DATA[lang].kpis.onTime.sample;
+    assert.ok(ranked[0].includes(sample.replace('{n}', routes)), `${lang}: ${ranked[0]}`);
+    const apart = [...results.querySelectorAll('.sv-unranked li')].map((li) => li.textContent);
+    assert.equal(apart.length, 1, lang);
+    assert.match(apart[0], /Tiny depot/);
+    assert.ok(apart[0].includes(sample.replace('{n}', '2')), `${lang}: ${apart[0]}`);
+    if (lang === 'en') assert.match(apart[0], /not ranked: too little data\. Routes on time: 2 routes, at least 30 needed/);
+  }
 });
 
 test('readTeamCopy and the page: a site is read with GET only, this browser\'s own team untouched, only the summary stored', async () => {

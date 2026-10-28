@@ -345,7 +345,7 @@
   const sourcesEl = document.getElementById("print-pack-sources");
   const root = document.querySelector("[data-print-pack]");
   if (!dataEl || !sourcesEl || !root || !window.ToolKit) return;
-  const { LANG, tx, int, pct, num, lower, showDate, read, write, loadState, el, today, parseDate, flash, stat } = window.ToolKit;
+  const { LANG, tx, int, pct, num, lower, showDate, read, readOwn, write, loadState, el, today, parseDate, flash, stat } = window.ToolKit;
   const cfg = JSON.parse(dataEl.textContent);
   const src = JSON.parse(sourcesEl.textContent);
   const KEY = cfg.storageKey;
@@ -378,7 +378,8 @@
   const day = () => parseDate(dateInput.value) || today();
 
   // What the tools hold now, read once per drawing (read-only).
-  const readKey = (key) => read(key, null);
+  // As data: an example a tool holds prints as nothing (ToolKit readOwn).
+  const readKey = (key) => readOwn(key, null);
   const readState = () => ({
     actions: { rows: AS ? AS.list() : [], ui: readKey(src.actions.uiKey) },
     maintenance: readKey(src.maintenance.key),
@@ -589,7 +590,8 @@
     const targetShare = (key) => { const value = Workplace?.target(key); return Number.isFinite(value) && value > 0 ? value / 100 : null; };
     return {
       targets: { damage: targetShare("damage"), incomplete: targetShare("incomplete"), ontime: targetShare("ontime"), fives: targetShare("fives") },
-      defaults: Object.fromEntries(list(src.board.targets).filter((t) => Number.isFinite(t.default)).map((t) => [t.key, t.default / 100])),
+      // No default targets: a figure without a target the visitor set gives no colour (as on the Daily Board itself).
+      defaults: {},
       extra: { rooms: src.roomInspection, rules: src.board.rules },
     };
   };

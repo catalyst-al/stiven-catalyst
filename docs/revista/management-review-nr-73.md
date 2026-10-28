@@ -33,6 +33,13 @@ some way"; "no article reported cases where TDABC influenced reimbursement schem
 `via` e Keel-it bëhet "Abstract and the first author's thesis (2020)"; Ittner mban të vetën. Shënimi i faqes 6 thotë tani
 "nuk u lexuan të plotë" në vend të "vetëm te abstraktet". Asnjë shifër e shtypur nuk doli ndryshe.
 
+Shënim (27 tetor 2026), sipas historisë së git-it: kontrolli i dytë i 11 tetorit u bë para se numri të dilte online.
+Ndryshimet e tij u bënë në degën e punës (commit 3565e02a, 11 tetor 2026) dhe numri hyri në main, nga ku botohet faqja,
+vetëm me bashkimin #177 (7b43e7c3, 11 tetor 2026, ora 20:33): versioni i parë online i ka tashmë. Prandaj këto ndryshime
+nuk kanë shënim korrigjimi dhe nuk e çojnë numrin te `checked.issues` (lib/weekly/common.js). Numri ndryshoi edhe më 12
+tetor 2026, pasi kishte dalë online (de0466bb), dhe për këtë është te `checked.issues` dhe e thotë nën përmbledhjen e
+vet.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |

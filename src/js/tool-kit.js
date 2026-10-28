@@ -52,6 +52,8 @@ window.ToolKit = (() => {
     document.body.append(box);
   };
   const write = (key, value) => {
+    // Locked for a shared computer (js/work-lock.js): the tools show nothing and keep nothing until the PIN.
+    if (window.WorkLock?.locked) return false;
     try {
       localStorage.setItem(key, JSON.stringify(value));
       return true;
@@ -65,7 +67,32 @@ window.ToolKit = (() => {
   // Load only what has the expected shape, so a tool never breaks on load.
   const isObject = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   const str = (value) => (typeof value === "string" ? value : "");
+  // Saved text the browser cannot parse any more is never thrown away: it is kept, as it is, under key + ".unreadable"
+  // (it goes into the backup file with the rest), the page says so once, and the tool starts empty instead of opening
+  // on its example over it (audit of 27 October 2026, P2A-10 and P2B-08).
+  let warnedDamaged = false;
+  const keepDamaged = (key) => {
+    let raw = null;
+    try { raw = localStorage.getItem(key); } catch { return; }
+    if (raw === null) return;
+    try { JSON.parse(raw); return; } catch { /* damaged: kept below */ }
+    try { if (localStorage.getItem(`${key}.unreadable`) === null) localStorage.setItem(`${key}.unreadable`, raw); } catch { /* storage full: the text stays under its own key until the next save */ }
+    if (warnedDamaged || !document.body) return;
+    warnedDamaged = true;
+    const box = document.createElement("div");
+    box.className = "tk-save-warning";
+    box.setAttribute("role", "alert");
+    const text = document.createElement("p");
+    text.textContent = tx("The saved data of this tool could not be read: it is damaged. It is kept aside unchanged, so nothing is lost, and the tool starts empty. A backup file or a restore point can bring your work back.");
+    const close = document.createElement("button");
+    close.type = "button";
+    close.textContent = "OK";
+    close.addEventListener("click", () => box.remove());
+    box.append(text, close);
+    document.body.append(box);
+  };
   const loadState = (key, defaults) => {
+    keepDamaged(key);
     const saved = read(key, {});
     const state = { ...defaults };
     if (!isObject(saved)) return state;
@@ -935,14 +962,47 @@ window.ToolKit = (() => {
     }).filter((item) => item.count > 0);
   };
 
-  // An example in a log is remembered by its shape (how many rows, first and last date). The moment the
-  // log differs from that shape, the visitor has started their own work and the example note goes.
+  // An example is marked, not guessed. Loaded, it is stamped { on: true, n, first, last } and each of its rows carries
+  // example: true, so removing one of its rows or pressing a period button never turns the rest into the visitor's
+  // data (audit of 27 October 2026, T-01 and T-02). The example stays whole until the visitor's own work replaces it:
+  // an own entry, an import or "Clear the example" removes all of it, rows and settings together.
+  // A log saved before then has only the shape ({ n, first, last }); while it still has that shape it is read as an
+  // example and marked. A log whose shape changed under the old rule cannot be told apart any more and stays as it is.
   // A tool opens on its example only when nothing is stored yet and no coaching project sent the visitor here:
   // someone arriving with ?coaching= works on their own case, and the example must not become its evidence.
-  const firstVisit = (key) => read(key, null) === null && !new URLSearchParams(location.search).has("coaching");
-  const exampleStamp = (rows) => ({ n: rows.length, first: rows[0]?.date ?? "", last: rows.at(-1)?.date ?? "" });
-  const exampleMatches = (state) => isObject(state.example) && Number.isInteger(state.example.n) && state.rows.length === state.example.n
-    && (state.rows[0]?.date ?? "") === state.example.first && (state.rows.at(-1)?.date ?? "") === state.example.last;
+  // Anything stored counts, even text that cannot be read any more (it is kept aside, see keepDamaged).
+  const stored = (key) => { try { return localStorage.getItem(key) !== null; } catch { return false; } };
+  const firstVisit = (key) => !stored(key) && !new URLSearchParams(location.search).has("coaching");
+  const isExampleRow = (row) => isObject(row) && row.example === true;
+  const markExample = (rows) => {
+    if (Array.isArray(rows)) rows.forEach((row) => { if (isObject(row)) row.example = true; });
+    return rows;
+  };
+  const ownRows = (rows) => (Array.isArray(rows) ? rows.filter((row) => !isExampleRow(row)) : []);
+  const exampleStamp = (rows) => ({ on: true, n: markExample(rows).length, first: rows[0]?.date ?? "", last: rows.at(-1)?.date ?? "" });
+  const oldShape = (state) => isObject(state.example) && state.example.on === undefined && Number.isInteger(state.example.n) && Array.isArray(state.rows)
+    && state.rows.length === state.example.n && (state.rows[0]?.date ?? "") === state.example.first && (state.rows.at(-1)?.date ?? "") === state.example.last;
+  // Whether a saved state is an example, in any of the ways the tools mark one: { on: true } (with or without the
+  // shape), the old shape, or example: true (the tools that hold a single study or matrix).
+  const isExampleState = (state) => isObject(state) && (state.example === true || (isObject(state.example) && (state.example.on === true || oldShape(state))));
+  const exampleMatches = (state) => {
+    if (!isObject(state) || !isObject(state.example)) return false;
+    if (state.example.on === true) return true;
+    if (!oldShape(state)) return false;
+    state.example = { ...state.example, on: true };
+    markExample(state.rows);
+    return true;
+  };
+  // Another tool's saved state as data: null (the fallback) when it is an example, and without any example rows a
+  // team sync or an old version may have mixed in. The tools that gather other tools' logs read through this.
+  const readOwn = (key, fallback = null) => {
+    const saved = read(key, null);
+    if (saved === null || isExampleState(saved)) return fallback;
+    if (!isObject(saved)) return saved;
+    const own = { ...saved };
+    Object.keys(own).forEach((name) => { if (Array.isArray(own[name]) && own[name].some(isExampleRow)) own[name] = ownRows(own[name]); });
+    return own;
+  };
   // The note above the result while an example is loaded: what it is, and one tap to clear it.
   const exampleNote = (anchor, onClear) => {
     const note = el("div", "dl-example-note");
@@ -953,12 +1013,28 @@ window.ToolKit = (() => {
     note.append(el("strong", null, tx("Example")), " ", el("span", null, tx("This is an example, so you can see what the tool shows. Add your own entries and it disappears, or clear it now.")), " ", button);
     note.hidden = true;
     anchor.before(note);
-    return { sync: (state) => { if (state.example && !exampleMatches(state)) state.example = {}; note.hidden = !exampleMatches(state); } };
+    return { sync: (state) => { note.hidden = !exampleMatches(state); } };
   };
 
+  // The rows of a paste that are not in the log yet: a row equal to one already there, field for field (its example
+  // mark aside), is left out once for each such row, so a paste of two identical events adds two.
+  const rowKey = (row) => JSON.stringify(Object.keys(row).filter((name) => name !== "example").sort().map((name) => [name, row[name] ?? ""]));
+  const newRows = (rows, added) => {
+    const left = new Map();
+    ownRows(rows).forEach((row) => { const k = rowKey(row); left.set(k, (left.get(k) || 0) + 1); });
+    const fresh = [];
+    let already = 0;
+    added.forEach((row) => {
+      const k = rowKey(row);
+      if (left.get(k) > 0) { left.set(k, left.get(k) - 1); already += 1; } else fresh.push(row);
+    });
+    return { fresh, already };
+  };
   // filter, when given, returns null or { label, test(row), clear() }: the table then shows only the rows that pass,
   // under a chip that clears it (the result is not filtered here: the tool decides what it filters).
-  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearExample, clearText, csv, renderResults, results, filter = null }) => {
+  // firstExample: false when the page should not open on its example even on a first visit (the Daily Board, when other
+  // tools already hold the visitor's data).
+  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearExample, clearText, csv, renderResults, results, filter = null, firstExample = true }) => {
     const logBody = root.querySelector("[data-log]");
     const logWrap = root.querySelector("[data-log-wrap]");
     const logEmpty = root.querySelector("[data-log-empty]");
@@ -1026,7 +1102,7 @@ window.ToolKit = (() => {
     // The example leaves as a whole: its rows and its settings (period, volume, target), so the
     // visitor's own entries are never mixed into it or scored against its volume.
     const dropExample = () => {
-      state.rows = [];
+      state.rows = ownRows(state.rows);
       state.example = {};
       state.totalsFor = {};
       clearExample?.();
@@ -1086,10 +1162,17 @@ window.ToolKit = (() => {
         return;
       }
       if (exampleMatches(state)) dropExample();
-      state.rows.push(...added);
+      // The same rows pasted again (the same export twice, or after a reload) are not counted twice: a pasted row that
+      // matches a row already in the log, field for field, is left out, once per matching row (audit T-17).
+      const { fresh, already } = newRows(state.rows, added);
+      if (!fresh.length) {
+        flash(importStatus, tx("All {n} rows are already in the log: nothing was added.", { n: int.format(already) }));
+        return;
+      }
+      state.rows.push(...fresh);
       changed();
       paste.value = "";
-      flash(importStatus, importText.done(added.length, skipped));
+      flash(importStatus, `${importText.done(fresh.length, skipped)}${already ? ` ${tx("{n} rows were already in the log and were not added again.", { n: int.format(already) })}` : ""}`);
     });
 
     logBody.addEventListener("click", (event) => {
@@ -1142,7 +1225,7 @@ window.ToolKit = (() => {
     });
 
     // A first visit opens on the example, so the result is visible at once; the note says so.
-    if (key && !state.rows.length && firstVisit(key)) {
+    if (key && firstExample && !state.rows.length && firstVisit(key)) {
       loadExample();
       state.example = exampleStamp(state.rows);
       state.from = "";
@@ -1164,8 +1247,54 @@ window.ToolKit = (() => {
         state.rows.push(row);
         changed();
       },
+      // Own work that is not a row (a day's volume, a meter, a setting box that belongs to the visitor): the example
+      // leaves first, whole, so the work is neither mixed into it nor cleared with it later.
+      ownWork: () => {
+        if (!exampleMatches(state)) return false;
+        dropUndo();
+        dropExample();
+        changed();
+        return true;
+      },
     };
   };
+
+  // A 5S audit's scores ({ S: [0–4 or null, ...], ... }) as the 5S Audit scores them (FiveSMath.score): per S the mean of
+  // the answered questions over 4, the audit the mean of the S that have an answer; complete when at least 80 % of its
+  // questions and every S have a score. The tools that read the 5S Audit's audits all use this one function: each had
+  // its own copy, and they drifted apart (audit of 27 October 2026, T-16). keys: the S of the audit's scope, when known.
+  const FIVE_S_COMPLETE = 0.8;
+  const fiveSScore = (scores, keys = null) => {
+    const source = isObject(scores) ? scores : {};
+    const lists = (Array.isArray(keys) ? keys : Object.keys(source)).map((key) => (Array.isArray(source[key]) ? source[key] : []));
+    const isScore = (value) => Number.isInteger(value) && value >= 0 && value <= 4;
+    let answered = 0;
+    let total = 0;
+    const shares = [];
+    lists.forEach((list) => {
+      const values = list.filter(isScore);
+      answered += values.length;
+      total += list.length;
+      if (values.length) shares.push(values.reduce((sum, value) => sum + value, 0) / values.length / 4);
+    });
+    const overall = shares.length ? shares.reduce((sum, share) => sum + share, 0) / shares.length : null;
+    const complete = answered > 0 && answered / total >= FIVE_S_COMPLETE && lists.every((list) => !list.length || list.some(isScore));
+    return { overall, complete };
+  };
+  // The score of a 5S audit as data for another tool: null when the 5S Audit calls it partial.
+  const fiveSShare = (scores, keys = null) => { const result = fiveSScore(scores, keys); return result.complete ? result.overall : null; };
+
+  // What a hand-off to the Action Tracker did (ActionsStore.addAll), said plainly: added, already open, not saved.
+  const actionsNote = ({ added = [], duplicate = 0, unsaved = 0, example = 0 } = {}) => [
+    (Array.isArray(added) ? added.length : added) ? tx("Added {n} actions.", { n: int.format(Array.isArray(added) ? added.length : added) }) : "",
+    duplicate ? tx("{n} were already open.", { n: int.format(duplicate) }) : "",
+    unsaved ? tx("{n} could not be saved: this browser's storage is full, blocked or locked.", { n: int.format(unsaved) }) : "",
+    example ? tx("The example's actions stay out of your own list.") : "",
+  ].filter(Boolean).join(" ") || tx("Nothing new to add.");
+  // One action (ActionsStore.add) that gave null: why, from ActionsStore.lastAdd.
+  const actionRefused = (reason) => tx(reason === "duplicate" ? "Already on the list."
+    : reason === "unsaved" ? "The action could not be saved: this browser's storage is full, blocked or locked."
+    : reason === "example" ? "The example's actions stay out of your own list." : "Could not add the action.");
 
   // Printing a form: a one-line box prints only what fits in it, and an empty box prints its grey example. Inside a
   // [data-print-fields] container each box gets its whole text as plain text for print (.print-text), and the box
@@ -1289,7 +1418,8 @@ window.ToolKit = (() => {
     if (text === "") return "";
     const serial = excelDate(text);
     if (serial) return `<c r="${ref}" s="2"><v>${serial}</v></c>`;
-    if (/^-?\d+(?:\.\d+)?$/.test(text) && text.length < 16) return `<c r="${ref}"><v>${Number(text)}</v></c>`;
+    // A number only when it reads back the same: "00123" (a code, an article number) stays text (audit T-22).
+    if (/^-?(?:0|[1-9]\d*)(?:\.\d+)?$/.test(text) && text.length < 16) return `<c r="${ref}"><v>${Number(text)}</v></c>`;
     return `<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${xmlText(text)}</t></is></c>`;
   };
   const xlsxFile = (rows, { sheet = "Sheet1", title = "" } = {}) => {
@@ -1364,9 +1494,9 @@ window.ToolKit = (() => {
 
   return {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
-    read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
+    read, write, warnNotSaved, actionsNote, actionRefused, newRows, keepDamaged, fiveSScore, fiveSShare, FIVE_S_COMPLETE, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseDateTime, parseRows, canon, sigma, sigmaText,
-    inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
+    inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, isExampleRow, isExampleState, markExample, ownRows, readOwn, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

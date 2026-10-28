@@ -70,7 +70,10 @@ test('the small rules: minutes late, the 5S score, counts, rates and on time aga
   const M = load().DailyBoardMath;
   assert.equal(M.minutesLate('23:50', '00:20'), 30, 'a night route across midnight');
   assert.equal(M.minutesLate('10:00', ''), null);
-  assert.equal(M.fivesScore({ scores: { S: [4, 2], Q: [null, 3, null] } }), 9 / 12, 'an unscored question is no zero');
+  // Per S, as the 5S Audit: S (4+2)/8 = 0.75, Q (3+3+3+3)/16 = 0.75; the unscored question is no zero (6 of 7 scored).
+  assert.equal(M.fivesScore({ scores: { S: [4, 2], Q: [3, 3, null, 3, 3] } }), 0.75, 'an unscored question is no zero');
+  // 3 of 5 questions scored is a partial audit for the 5S Audit, so no score on the board either.
+  assert.equal(M.fivesScore({ scores: { S: [4, 2], Q: [null, 3, null] } }), null, 'a partial audit');
   assert.equal(M.fivesScore({ scores: {} }), null);
   assert.equal(M.countState(0, 2), 'green');
   assert.equal(M.countState(3, null), 'amber', 'no usual day yet: a question for the huddle');
@@ -169,7 +172,7 @@ test('an entry by hand wins over the logs, the worst entry of a day wins, and a 
   assert.notEqual(M.safetyIndex('2026-10-23', 12), M.safetyIndex('2026-10-24', 12));
 });
 
-test('the page: the example opens on a first visit with a demo profile, and leaves with it', () => {
+test('the page: the example opens on a first visit with its demo profile on this page only, and leaves with it', () => {
   const w = load({ page: true });
   const doc = w.document;
   const results = doc.querySelector('[data-results]');
@@ -178,7 +181,10 @@ test('the page: the example opens on a first visit with a demo profile, and leav
   assert.equal(doc.querySelectorAll('.db-cal').length, 5, 'five calendars');
   assert.equal(doc.querySelectorAll('.db-chip').length, 5, 'one chip per letter today');
   assert.match(doc.querySelector('.db-chip').textContent, /Siguria/);
-  assert.equal(w.Workplace.get().site, data.sq.example.profile.site, 'the demo profile');
+  // The example's profile is used on this page, never written to the shared profile (audit of 27 October 2026, T-04).
+  assert.match(doc.querySelector('.db-results .kicker, [data-results] .kicker').textContent, new RegExp(data.sq.example.profile.site.split(' ')[0]), 'the demo profile on the page');
+  assert.equal(w.Workplace.get().site, '', 'and not in the shared profile');
+  assert.equal(w.localStorage.getItem('sc-workplace'), null);
   assert.equal(doc.querySelectorAll('.db-agenda > li').length, 5, 'five agenda steps');
   assert.match(doc.querySelector('.db-agenda').textContent, /Tabela e djeshme/);
   assert.match(results.textContent, /Kostoja e kuqe|Cilësia/, 'yesterday’s red is on the agenda');
@@ -369,12 +375,15 @@ test('the huddle hears the overdue tasks on A assets, by the planner\'s own due 
 });
 
 test('the page: Room Inspection colours Quality, the planner Delivery, and the agenda reads the overdue A tasks', () => {
+  // The tool's real checklist has more items than the four answered here; the rest are n.a., so each inspection is
+  // complete (an inspection with items left open has no verdict and does not count) and is judged on the same four.
+  const restNa = Object.fromEntries(Object.entries(read('src/_data/de/roomInspection.json').templates.standard.questions).flatMap(([zone, items]) => items.map((item, i) => [`${zone}-${i}`, 'na'])));
   const w = load({
     lang: 'de',
     page: true,
     storage: {
       'sc-workplace': { site: 'Hotel Nord', areas: [], targets: {} },
-      'sc-room-inspection-de': { threshold: 0.9, rows: roomsOn('2026-10-22', 4, 2).map((row) => ({ ...row, template: 'standard' })) },
+      'sc-room-inspection-de': { threshold: 0.9, rows: roomsOn('2026-10-22', 4, 2).map((row) => ({ ...row, template: 'standard', answers: { ...restNa, ...row.answers } })) },
       'sc-maintenance-planner-de': {
         assets: [{ id: 'a1', tag: 'AUF-1', name: 'Aufzug', crit: 'A', tasks: [{ id: 't1', text: 'Seilprüfung', every: 1, unit: 'months', hours: 0, last: '2026-09-01', lastHours: null, start: '' }] }],
         rows: [{ kind: 'breakdown', asset: 'a1', date: '2026-10-22', minutes: 90, cause: 'other' }],

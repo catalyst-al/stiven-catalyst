@@ -19,9 +19,11 @@
   const chips = [...root.querySelectorAll("[data-family]")];
   const panels = [...root.querySelectorAll("[data-family-panel]")];
   const hint = root.querySelector("[data-cosmos-hint]");
-  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Stopped by the visitor ("Pause the motion"): then, as with reduced motion, the scene is drawn only when it changes.
-  let paused = false;
+  // Still: the motion of the site is paused (<html data-motion="paused">: the switch "Pause the motion" at the foot of
+  // the page and beside the planets, script.js; and, until the reader chooses, reduced motion). Then the scene is
+  // drawn only when it changes, with the light already on.
+  const page = document.documentElement;
+  let still = page.dataset.motion === "paused";
 
   const rgbOf = (hex) => {
     const n = parseInt(hex.replace("#", ""), 16);
@@ -156,7 +158,14 @@
   let quality = 1;
   const pace = { n: 0, slow: 0 };
   let width = 0;
+  // The scene is laid out on the whole hero (width x height, in canvas pixels), but drawn on three canvases: the planets'
+  // band (this canvas: everything that moves around the light, with the stars behind it) and, where the hero is taller
+  // than that band (on a phone the words stand above the planets and the books below them), a canvas above and one
+  // below it with the stars of the rest of the sky. Each is drawn only while it is on screen or near it, and the band
+  // is far smaller than the hero on a phone, so a frame costs a fraction of the whole hero; every pixel is where it was.
   let height = 0;
+  let bandTop = 0;
+  let bandBottom = 0;
   let cx = 0;
   let cy = 0;
   // Where the cable hangs from: the top of the hero, or on a phone, where the system stands under the words, the top of
@@ -194,14 +203,39 @@
     return project(x, -z0 * Math.sin(incl), z0 * Math.cos(incl));
   };
 
+  // The three canvases (see width and height above). Each knows the rows of the hero it shows, and whether it is near
+  // the view (seen).
+  const layerOf = (c, context) => ({ canvas: c, ctx: context, y0: 0, rows: 0, seen: true });
+  const skyCanvas = () => {
+    const c = document.createElement("canvas");
+    c.className = "cosmos-canvas";
+    c.setAttribute("aria-hidden", "true");
+    c.style.display = "none";
+    canvas.before(c);
+    return layerOf(c, c.getContext("2d"));
+  };
+  const band = layerOf(canvas, ctx);
+  const skyAbove = skyCanvas();
+  const skyBelow = skyCanvas();
+  const layers = [band, skyAbove, skyBelow];
+  // A canvas over the rows y0 to y1 of the hero, one canvas pixel to one pixel of the screen; none where there are none.
+  const place = (layer, y0, y1) => {
+    const rows = Math.max(0, y1 - y0);
+    layer.y0 = y0;
+    layer.rows = rows;
+    layer.canvas.style.display = rows ? "" : "none";
+    layer.canvas.width = rows ? width : 0;
+    layer.canvas.height = rows;
+    layer.canvas.style.top = `${y0 / dpr}px`;
+    layer.canvas.style.height = `${rows / dpr}px`;
+  };
+
   const resize = () => {
     dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2) * quality);
     const box = root.getBoundingClientRect();
     const spot = anchor.getBoundingClientRect();
     width = Math.max(1, Math.round(box.width * dpr));
     height = Math.max(1, Math.round(box.height * dpr));
-    canvas.width = width;
-    canvas.height = height;
     cx = (spot.left - box.left + spot.width / 2) * dpr;
     cy = (spot.top - box.top + spot.height / 2) * dpr;
     const copy = root.querySelector(".cosmos-copy");
@@ -209,22 +243,33 @@
     top = copy && copy.getBoundingClientRect().bottom <= system.top ? (system.top - box.top) * dpr : 0;
     S0 = Math.min(spot.width / 2 / (spot.width < 560 ? 1.24 : 1.32), spot.height / 2 / 0.66) * dpr;
     S = S0 * (1 + ZOOM * zoom);
+    // The band: from the cable's top to where the farthest particle can reach, the system tilted and drawn closer as
+    // far as it goes (2.26 radii of the system down, 1.9 up; the glow at its brightest, 2 radii), with room to spare.
+    const reach = 2.5 * S0 * (1 + ZOOM) + 16 * dpr;
+    bandTop = Math.max(0, Math.floor(Math.min(top, cy - reach)));
+    bandBottom = Math.min(height, Math.ceil(cy + reach));
+    place(band, bandTop, bandBottom);
+    place(skyAbove, 0, bandTop);
+    place(skyBelow, bandBottom, height);
     const count = Math.round(Math.min(2600, Math.max(900, (spot.width * spot.height) / 120)) * quality);
     if (!disc || Math.abs(disc.n - count) > 250) buildParticles(count);
-    draw();
+    draw(true);
   };
 
   // ---- Drawing ----
-  const drawSky = () => {
-    ctx.fillStyle = "#dfe9f5";
+  // The stars of the sky between the rows y0 and y1 of the hero (those of a layer, with any that overlap its edge).
+  const drawSky = (c, y0, y1) => {
+    c.fillStyle = "#dfe9f5";
     const shift = view.yaw * 14 * dpr;
     for (const star of sky) {
-      const x = ((star.x * width + shift * star.d) % width + width) % width;
-      ctx.globalAlpha = (0.18 + 0.4 * star.d) * (0.7 + 0.3 * Math.sin(time * 1.7 + star.tw));
+      const y = star.y * height;
       const s = star.s * dpr;
-      ctx.fillRect(x, star.y * height, s, s);
+      if (y + s <= y0 || y >= y1) continue;
+      const x = ((star.x * width + shift * star.d) % width + width) % width;
+      c.globalAlpha = (0.18 + 0.4 * star.d) * (0.7 + 0.3 * Math.sin(time * 1.7 + star.tw));
+      c.fillRect(x, y, s, s);
     }
-    ctx.globalAlpha = 1;
+    c.globalAlpha = 1;
   };
 
   const drawOrbit = (planet, front) => {
@@ -256,7 +301,7 @@
       }
       const angle = a[i] + speed[i] * time;
       const p = project(r[i] * Math.cos(angle), y[i], r[i] * Math.sin(angle));
-      if (p.x < -4 || p.y < -4 || p.x > width + 4 || p.y > height + 4) continue;
+      if (p.x < -4 || p.y < bandTop - 4 || p.x > width + 4 || p.y > bandBottom + 4) continue;
       const near = r[i] < 0.6 ? 1.35 : 1;
       const depth = 0.5 + 0.5 * Math.min(1, Math.max(0, (p.z + 1.4) / 2.8));
       ctx.globalAlpha = Math.min(1, depth * near * (0.55 + 0.45 * Math.sin(time * 2.2 + tw[i])));
@@ -276,7 +321,10 @@
     g.addColorStop(0.62, "rgba(223,17,25,0.035)");
     g.addColorStop(1, "rgba(0,0,0,0)");
     ctx.fillStyle = g;
-    ctx.fillRect(cx - S * 1.4 * breathe, cy - S * 1.4 * breathe, S * 2.8 * breathe, S * 2.8 * breathe);
+    // Filled as the disc of the gradient, not its square: past its radius the gradient adds nothing ("lighter" with a
+    // transparent colour), so the pixels are the same and the corners cost nothing.
+    circle(cx, cy, S * 1.25 * breathe);
+    ctx.fill();
     const b = S * BULB;
     ctx.globalAlpha = dim * warm;
     g = ctx.createRadialGradient(bx, by, 0, bx, by, b * 3 * breathe);
@@ -926,14 +974,29 @@
     ctx.restore();
   };
 
-  const draw = () => {
+  // A frame: the band and the sky above and below it, each only while it is on screen or near it, or every one of
+  // them (after a resize, so none is ever left empty).
+  const draw = (all = false) => {
     if (!disc) return;
-    ctx.clearRect(0, 0, width, height);
     setAngles();
     placeBulb();
     placePlanets();
     placeReader();
-    drawSky();
+    for (const layer of [skyAbove, skyBelow]) {
+      if (!layer.rows || !(all || layer.seen)) continue;
+      const c = layer.ctx;
+      c.setTransform(1, 0, 0, 1, 0, -layer.y0);
+      c.clearRect(0, layer.y0, width, layer.rows);
+      drawSky(c, layer.y0, layer.y0 + layer.rows);
+      if (warm < 1) {
+        c.fillStyle = rgba(BLACK, 0.72 * (1 - warm));
+        c.fillRect(0, layer.y0, width, layer.rows);
+      }
+    }
+    if (!(all || band.seen)) return;
+    ctx.setTransform(1, 0, 0, 1, 0, -bandTop);
+    ctx.clearRect(0, bandTop, width, bandBottom - bandTop);
+    drawSky(ctx, bandTop, bandBottom);
     drawPool();
     for (const planet of planets) drawOrbit(planet, false);
     for (const planet of planets) if (planet.sz < 0) drawPlanet(planet);
@@ -948,7 +1011,7 @@
     if (warm < 1) {
       // The room is dark until the light is on; the bulb itself sits over the dark.
       ctx.fillStyle = rgba(BLACK, 0.72 * (1 - warm));
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, bandTop, width, bandBottom - bandTop);
       drawBulb();
     }
   };
@@ -1006,7 +1069,7 @@
     frameId = requestAnimationFrame(step);
   };
   const start = () => {
-    if (running || still || paused || !visible || document.hidden) return;
+    if (running || still || !visible || document.hidden) return;
     running = true;
     last = performance.now();
     frameId = requestAnimationFrame(step);
@@ -1022,7 +1085,7 @@
   const select = (id) => {
     selected = planets.find((planet) => planet.id === id && planet !== selected) || null;
     follow = Boolean(selected);
-    if (still || paused) {
+    if (still) {
       if (selected) view.yaw = Math.PI / 2 - (selected.phase + selected.speed * time);
       zoom = selected ? 1 : 0;
       S = S0 * (1 + ZOOM * zoom);
@@ -1042,7 +1105,7 @@
 
   // ---- Pointer ----
   const local = (event) => {
-    const box = canvas.getBoundingClientRect();
+    const box = root.getBoundingClientRect();
     return { x: (event.clientX - box.left) * dpr, y: (event.clientY - box.top) * dpr };
   };
   const planetAt = ({ x, y }) => {
@@ -1145,25 +1208,34 @@
 
   // ---- Life cycle ----
   new ResizeObserver(resize).observe(root);
+  // Each layer is drawn while it is within half a screen of the view, so it is up to date before it shows; the motion
+  // runs while any of them is (and stops, as before, when the whole hero is out of view).
   if ("IntersectionObserver" in window) {
-    new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      if (visible) start(); else stop();
-    }).observe(root);
+    const watch = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const layer = layers.find((l) => l.canvas === entry.target);
+        if (layer) layer.seen = entry.isIntersecting;
+      }
+      visible = layers.some((l) => l.seen && l.rows);
+      if (visible) { start(); refresh(); } else stop();
+    }, { rootMargin: "50% 0px" });
+    for (const layer of layers) watch.observe(layer.canvas);
   }
   document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
-  const pause = root.querySelector("[data-cosmos-pause]");
-  if (pause && !still) {
-    const pauseLabel = pause.textContent;
-    pause.hidden = false;
-    pause.addEventListener("click", () => {
-      paused = !paused;
-      pause.textContent = paused ? pause.dataset.playLabel : pauseLabel;
-      // The beating dots and rings of the planet buttons stop with the planets (styles.css, .cosmos.is-paused).
-      root.classList.toggle("is-paused", paused);
-      if (paused) stop(); else start();
-    });
-  }
+  // Paused or played again, here or in another tab: the loop stops, the scene settles where it is (the light on, the
+  // opened planet at the front), or the loop starts again from there.
+  new MutationObserver(() => {
+    const now = page.dataset.motion === "paused";
+    if (now === still) return;
+    still = now;
+    if (still) {
+      stop();
+      warm = 1;
+      zoom = selected ? 1 : 0;
+      S = S0 * (1 + ZOOM * zoom);
+      refresh();
+    } else start();
+  }).observe(page, { attributes: true, attributeFilter: ["data-motion"] });
   root.classList.add("is-live");
   resize();
   start();

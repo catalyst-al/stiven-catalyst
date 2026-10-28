@@ -22,6 +22,8 @@ window.Workplace = (() => {
   };
   const set = (patch) => {
     const next = clean({ ...get(), ...patch });
+    // Locked with a PIN (js/work-lock.js): the profile is not written in plain text.
+    if (window.WorkLock?.locked) return next;
     try { localStorage.setItem(KEY, JSON.stringify(next)); } catch { /* storage unavailable: the page keeps working */ }
     window.dispatchEvent(new CustomEvent("workplace:changed", { detail: next }));
     return next;
@@ -126,5 +128,5 @@ window.Workplace = (() => {
     select.replaceChildren(...list.map((value) => { const option = document.createElement("option"); option.value = value; option.textContent = value; option.selected = value === current; return option; }));
   };
 
-  return { KEY, get, set, areas, shifts, teams, target, isEmpty, renderSetup, fillSelect };
+  return { KEY, clean, get, set, areas, shifts, teams, target, isEmpty, renderSetup, fillSelect };
 })();

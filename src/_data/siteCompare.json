@@ -1,5 +1,6 @@
 {
   "storageKey": "sc-site-compare",
+  "minimums": {"damageRate": 1000, "incompleteRate": 1000, "onTime": 30, "oee": 5, "pm": 5, "fiveS": 2, "firstPass": 30, "complaintsPer100": 300},
   "periods": [
     {
       "key": "last7",
@@ -30,32 +31,37 @@
   "kpis": {
     "damageRate": {
       "label": "Damage rate",
-      "detail": "{units} damaged of {volume}"
+      "detail": "{units} damaged of {volume}",
+      "sample": "{n} units"
     },
     "damageUnits": {
       "label": "Damaged units"
     },
     "incompleteRate": {
       "label": "Incomplete rate",
-      "detail": "{units} incomplete of {volume}"
+      "detail": "{units} incomplete of {volume}",
+      "sample": "{n} orders"
     },
     "incompleteUnits": {
       "label": "Incomplete orders"
     },
     "onTime": {
       "label": "Routes on time",
-      "detail": "{late} late of {routes}"
+      "detail": "{late} late of {routes}",
+      "sample": "{n} routes"
     },
     "lateRoutes": {
       "label": "Late routes"
     },
     "oee": {
       "label": "OEE (all machines)",
-      "detail": "{entries} shifts · machines: {machines}"
+      "detail": "{entries} shifts · machines: {machines}",
+      "sample": "{n} shifts"
     },
     "fiveS": {
       "label": "5S average score",
-      "detail": "audits: {audits}"
+      "detail": "audits: {audits}",
+      "sample": "{n} audits"
     },
     "accidents": {
       "label": "Accidents"
@@ -80,18 +86,21 @@
     },
     "pm": {
       "label": "PM compliance",
-      "detail": "{onTime} of {scheduled} on time"
+      "detail": "{onTime} of {scheduled} on time",
+      "sample": "{n} tasks due"
     },
     "pmOverdue": {
       "label": "Overdue maintenance tasks"
     },
     "firstPass": {
       "label": "Rooms passed first time",
-      "detail": "{firstPass} of {first}"
+      "detail": "{firstPass} of {first}",
+      "sample": "{n} rooms"
     },
     "complaintsPer100": {
       "label": "Complaints per 100 occupied room nights",
-      "detail": "{complaints} of {nights} room nights"
+      "detail": "{complaints} of {nights} room nights",
+      "sample": "{n} room nights"
     },
     "complaints": {
       "label": "Guest complaints"

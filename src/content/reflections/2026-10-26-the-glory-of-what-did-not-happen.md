@@ -203,7 +203,7 @@ Another that he need not worry about every detail.
 
 He may even hear the most dangerous sentence of an organisation that has begun to confuse luck with competence:
 
-"We've always worked this way and nothing has happened."
+“We've always worked this way and nothing has happened.”
 
 But the absence of a previous incident is not a guarantee of the safety of a process.
 

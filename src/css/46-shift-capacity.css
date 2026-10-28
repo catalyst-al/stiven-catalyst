@@ -82,6 +82,8 @@
   .cp-print-table .num { text-align: right; white-space: nowrap; }
   .cp-print-total td { font-weight: 700; }
   .cp-print-table :is(td, th):first-child { white-space: nowrap; }
+  /* The headers and the volume ("2.600 pako jashtë sorterit") wrap, so the ten columns fit the A4 page in every language. */
+  .cp-print-table thead :is(th, .num), .cp-print-table td.num:nth-child(2) { white-space: normal; }
   .cp-print-blank { width: 10%; }
   .cp-print-options { margin: 4px 0 0; padding: 0; list-style: none; }
   .cp-print-sign { margin: 16px 0 0; }

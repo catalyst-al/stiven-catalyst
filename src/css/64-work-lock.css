@@ -1,0 +1,37 @@
+/* A PIN for a shared computer (partials/work-lock.njk, js/work-lock.js): the section in "All your work in one file"
+   and the dialog over a locked page. */
+.wl { display: grid; gap: 10px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.wl .kicker { margin: 0; }
+.wl > .form-note { margin: 0; }
+.wl > .form-note:empty { display: none; }
+.wl-actions { align-items: center; gap: 10px 14px; margin: 0; }
+.wl-idle { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; }
+.wl-idle select { padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); font: inherit; font-size: 14px; }
+.wl-forget { color: var(--danger); }
+.wl-setup { display: grid; gap: 10px; margin: 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; }
+.wl-setup .form-note { margin: 0; }
+.wl-fields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 10px; align-items: end; }
+.wl-fields .field { margin: 0; }
+.wl-fields input { width: 100%; box-sizing: border-box; letter-spacing: .2em; }
+@media (max-width: 640px) { .wl-fields { grid-template-columns: 1fr; } }
+.wl-status:empty { display: none; }
+.wl-dialog {
+  width: min(calc(100% - 32px), 440px);
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.wl-dialog::backdrop { background: rgba(10, 14, 24, .72); backdrop-filter: blur(6px); }
+.wl-dialog .kicker { margin: 0 0 6px; }
+.wl-dialog h2 { margin: 0 0 8px; font-size: 22px; line-height: 1.25; }
+.wl-dialog p { margin: 0 0 14px; }
+.wl-dialog .field { margin: 0 0 14px; }
+.wl-dialog input { width: 100%; box-sizing: border-box; font-size: 20px; letter-spacing: .3em; }
+.wl-dialog .tool-actions { margin: 0; }
+.wl-error { min-height: 1.4em; margin: 10px 0 0; color: var(--danger); }
+.wl-forgot { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+.wl-forgot summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+.wl-forgot .form-note { margin: 10px 0; }

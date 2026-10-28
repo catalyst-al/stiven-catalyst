@@ -1,0 +1,107 @@
+{
+ "date": "2026-10-27T12:54:37.712Z",
+ "path": "/",
+ "runs": 3,
+ "a": "http://127.0.0.1:8322",
+ "b": null,
+ "tap": ".cosmos-chip",
+ "windowMs": 5000,
+ "init": "try{localStorage.setItem(\"sc-motion\",\"paused\")}catch(e){}",
+ "machine": {
+  "cpus": 4,
+  "model": "Intel(R) Xeon(R) Processor @ 2.30GHz",
+  "load": [
+   14.32,
+   10.12,
+   9.99
+  ]
+ },
+ "summary": {
+  "desktop": {
+   "a": {
+    "busy": 0.006,
+    "fps": 0,
+    "p95": null,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 3,
+    "tap": 264
+   }
+  },
+  "phone4x": {
+   "a": {
+    "busy": 0.015,
+    "fps": 0,
+    "p95": null,
+    "longTasks": 0,
+    "blocking": 0,
+    "delay": 114,
+    "tap": 392
+   }
+  }
+ },
+ "raw": {
+  "desktop": {
+   "a": [
+    {
+     "busy": 0.006,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 3,
+     "tap": 304
+    },
+    {
+     "busy": 0.003,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 3,
+     "tap": 208
+    },
+    {
+     "busy": 0.01,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 3,
+     "tap": 264
+    }
+   ]
+  },
+  "phone4x": {
+   "a": [
+    {
+     "busy": 0.015,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 4,
+     "tap": 192
+    },
+    {
+     "busy": 0.02,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 176,
+     "tap": 392
+    },
+    {
+     "busy": 0.007,
+     "fps": 0,
+     "p95": null,
+     "longTasks": 0,
+     "blocking": 0,
+     "delay": 114,
+     "tap": 448
+    }
+   ]
+  }
+ }
+}

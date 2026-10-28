@@ -97,15 +97,15 @@ Das Privatleben ist nicht immer so klar.
 
 Es gibt kein Zertifikat für einen mit der Familie verbrachten Abend.
 
-Es gibt keine Beförderung für die Geduld, die du jemandem gegenüber zeigtest, der reden musste.
+Es gibt keine Beförderung für die Geduld, die man jemandem gegenüber zeigte, der reden musste.
 
-Es gibt keine Leistungskennzahl dafür, dass du in einem gewöhnlichen Moment da warst, der für jemand anderen außerordentliche Bedeutung gehabt haben kann.
+Es gibt keine Leistungskennzahl dafür, dass man in einem gewöhnlichen Moment da war, der für jemand anderen außerordentliche Bedeutung gehabt haben kann.
 
 Diese Dinge sammeln sich nicht in einem Lebenslauf.
 
-Sie helfen dir nicht unbedingt, ein Vorstellungsgespräch zu gewinnen.
+Sie helfen einem nicht unbedingt, ein Vorstellungsgespräch zu gewinnen.
 
-Du kannst sie bei einer Jahresversammlung nicht als Beleg beruflicher Entwicklung vorlegen.
+Man kann sie bei einer Jahresversammlung nicht als Beleg beruflicher Entwicklung vorlegen.
 
 Aber das Fehlen eines Messsystems macht sie nicht weniger wichtig.
 
@@ -205,9 +205,9 @@ Dass wir akzeptieren, nicht immer Antworten zu haben.
 
 Für einen Menschen, der seine Identität um die Fähigkeit herum aufgebaut hat, Probleme zu lösen, kann das schwerer sein, als es aussieht.
 
-Bei der Arbeit kannst du die Führungskraft sein, die Entscheidungen trifft.
+Bei der Arbeit kann man die Führungskraft sein, die Entscheidungen trifft.
 
-Zu Hause bist du vielleicht einfach der Mensch, dem jemand zuhören muss.
+Zu Hause ist man vielleicht einfach der Mensch, dem jemand zuhören muss.
 
 Und manchmal suchen wir, ohne es zu merken, Zuflucht an dem Ort, an dem wir uns am kompetentesten fühlen.
 
@@ -283,11 +283,11 @@ Aber auch Anwesenheit muss verstanden werden.
 
 Körperlich zu Hause zu sein heißt nicht unbedingt, anwesend zu sein.
 
-Du kannst im selben Raum mit den Deinen sitzen, und der Kopf ist noch bei einer E-Mail, die keine Antwort bekam.
+Man kann im selben Raum mit den Seinen sitzen, und der Kopf ist noch bei einer E-Mail, die keine Antwort bekam.
 
-Du kannst einen Nachmittag mit dem Kind verbringen, während die Aufmerksamkeit immer wieder zum Telefon geht.
+Man kann einen Nachmittag mit dem Kind verbringen, während die Aufmerksamkeit immer wieder zum Telefon geht.
 
-Du kannst ein paar Tage freinehmen und weiter unter dem Druck einer Arbeit leben, die du auch vorübergehend nicht loslassen kannst.
+Man kann ein paar Tage freinehmen und weiter unter dem Druck einer Arbeit leben, die man auch vorübergehend nicht loslassen kann.
 
 Hier ist das Problem nicht mehr nur die Zahl der Stunden.
 
@@ -393,15 +393,15 @@ Aber das geschieht nicht immer von selbst.
 
 Es verlangt Entscheidungen.
 
-Manchmal verlangt es, eine Möglichkeit abzulehnen, die auf dem Papier wunderbar aussieht, aber einen persönlichen Preis hätte, den du nicht zahlen willst.
+Manchmal verlangt es, eine Möglichkeit abzulehnen, die auf dem Papier wunderbar aussieht, aber einen persönlichen Preis hätte, den man nicht zahlen will.
 
-Manchmal verlangt es, eine schwere Möglichkeit anzunehmen, weil du weißt, dass das Opfer einen klaren Zweck und eine bestimmte Grenze hat.
+Manchmal verlangt es, eine schwere Möglichkeit anzunehmen, weil man weiß, dass das Opfer einen klaren Zweck und eine bestimmte Grenze hat.
 
-Und manchmal verlangt es zu akzeptieren, dass das, was du vor zehn Jahren wolltest, nicht unbedingt das ist, was du heute willst.
+Und manchmal verlangt es zu akzeptieren, dass das, was man vor zehn Jahren wollte, nicht unbedingt das ist, was man heute will.
 
 Das ist kein Verlust von Ehrgeiz.
 
-Es ist die Fähigkeit, sich auch in der Art zu entwickeln, wie du Erfolg verstehst.
+Es ist die Fähigkeit, sich auch in der Art zu entwickeln, wie man Erfolg versteht.
 
 ***
 

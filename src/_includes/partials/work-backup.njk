@@ -7,9 +7,16 @@
   nothing: "No saved work in this browser yet." | t(lang),
   saved: "Saved as {file}. Keep it, or open it on another device with “Open a saved file”." | t(lang),
   invalid: "This is not a Stiven Catalyst work file, or it is damaged. Nothing was changed." | t(lang),
+  large: "This file is larger than 40 MB; a work file from this site is never that large. Nothing was changed." | t(lang),
   confirm: "Open the work saved on {date}? For these tools the work in this browser is replaced: {tools}. Other tools stay as they are." | t(lang),
   full: "This browser ran out of space, so nothing was changed. Free some space and open the file again." | t(lang),
-  opened: "Opened. The page reloads to show your work." | t(lang)
+  opened: "Opened. The page reloads to show your work." | t(lang),
+  savedPhotos: "Photos in the file: {n}." | t(lang),
+  photosLeft: "Left out so that the file stays under 20 MB: {n} older photos. They stay on this device." | t(lang),
+  photosUnread: "The photos could not be read here, so the file holds the work without them." | t(lang),
+  openedPhotos: "Photos from the file: {n}." | t(lang),
+  photosFailed: "The photos in the file could not be kept in this browser; the rest of the work is opened." | t(lang),
+  locked: "The tools are locked. Unlock them with the PIN first; nothing was changed." | t(lang)
 } %}
 {#- Restore points, space and the browser's promise to keep it (js/storage-guard.js). -#}
 {%- set sgText = {
@@ -27,7 +34,9 @@
     daily: "Daily" | t(lang),
     "before-open": "Before a file was opened" | t(lang),
     "before-restore": "Before a restore" | t(lang),
-    manual: "Made by hand" | t(lang)
+    "before-unlock": "Before the unlock" | t(lang),
+    manual: "Made by hand" | t(lang),
+    recent: "While working, every 15 minutes" | t(lang)
   },
   made: "Restore point made: {tools}." | t(lang),
   failed: "The browser did not keep the restore point, so nothing was changed. Save a file instead." | t(lang),
@@ -45,6 +54,7 @@
       <p class="kicker">{{ "Your work" | t(lang) }}</p>
       <h2 id="work-backup-title">{{ "All your work in one file" | t(lang) }}</h2>
       <p>{{ "Every tool keeps your work only in this browser. Save it as one file to keep a copy, to carry on from another phone or computer, or to hand it to a colleague. Nothing is uploaded." | t(lang) }}</p>
+      <p class="form-note">{{ "The file holds the tools' photos too, up to 20 MB of them; restore points stay on this device." | t(lang) }}</p>
       <p class="form-note" data-work-summary></p>
       <div class="sg" data-storage-guard data-text="{{ sgText | dump }}" hidden>
         <p class="form-note sg-keep" data-sg-keep hidden></p>
@@ -70,6 +80,7 @@
 {%- if site.sync.endpoint %}
     {% include "partials/team-sync.njk" %}
 {%- endif %}
+    {% include "partials/work-lock.njk" %}
   </div>
 </section>
 <script type="application/json" id="work-backup-names">{

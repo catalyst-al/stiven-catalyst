@@ -787,6 +787,15 @@ select.sh-in { cursor: pointer; }
 .sh-problems li { margin-bottom: 8px; }
 .sh-ok { margin: 0; color: var(--ink); }
 .sh-actions { gap: 10px; }
+/* Send to the next shift: the dialog with the QR code and the link; the box for a handover that arrived. */
+.sh-send { width: min(92vw, 520px); padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--card, var(--bg)); color: var(--ink); }
+.sh-send::backdrop { background: rgba(0, 0, 0, .55); }
+.sh-send h2 { margin: 0 0 8px; font-size: 20px; line-height: 1.25; }
+.sh-send .tool-actions { margin-top: 12px; }
+.sh-qr { width: min(100%, 320px); margin: 12px auto 0; }
+.sh-qr svg { display: block; width: 100%; height: auto; border-radius: 8px; }
+.sh-link { width: 100%; box-sizing: border-box; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; word-break: break-all; }
+.sh-incoming { margin: 0 0 16px; border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .sh-side > .form-note { margin: 0; }
 .sh-history { padding: 20px 0 110px; }
 .sh-history-list { display: grid; gap: 12px; margin-bottom: 20px; }
@@ -841,6 +850,22 @@ select.sh-in { cursor: pointer; }
   .dl-results { padding: 0; border: 0; }
   .dl-panel, .dl-stat, .dl-focus, .dl-check-item { break-inside: avoid; }
   .dl-matrix td.is-heat { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Tables on paper: no sideways scroll, so every column is on the page. The box around a table no longer scrolls or
+     cuts, the cells wrap their text (a word longer than its column breaks rather than running out of the page), the
+     type is smaller, the header repeats on each page and a row is not split between two pages. */
+  .dl-table-wrap { max-height: none !important; overflow: visible !important; border: 0; border-radius: 0; }
+  .dl-table { width: 100%; font-size: 8.5pt; }
+  .dl-table th, .dl-table td { padding: 3px 5px; white-space: normal; overflow-wrap: break-word; vertical-align: top; }
+  .dl-table thead { display: table-header-group; }
+  .dl-table thead th { position: static; font-size: 6.5pt; letter-spacing: .03em; }
+  .dl-table tr { break-inside: avoid; }
+  .dl-table .dl-note { max-width: none; overflow: visible; text-overflow: clip; }
+  /* Eight columns or more (a register): smaller still, so its longest words fit side by side. */
+  .dl-table:has(thead th:nth-child(8)) { font-size: 7.5pt; }
+  .dl-table:has(thead th:nth-child(8)) :is(th, td) { padding: 2px 3px; }
+  /* Twelve or more (an FMEA sheet, a bowling chart): a long word of a header may break, as in "VERMEIDUNGS-
+     MASSNAHME", rather than push the last columns off the sheet. */
+  .dl-table:has(thead th:nth-child(12)) thead th { overflow-wrap: anywhere; hyphens: auto; }
   .dl-check { padding: 20px 0 0; }
   /* A box prints only what fits in it, and an empty one its grey example: on paper its whole text stands in for it. */
   .has-print-text { display: none !important; }

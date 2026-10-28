@@ -874,8 +874,10 @@
           Object.assign(state.targets, targets);
           report.push(tx("Targets taken from {sheet}.", { sheet: targetSheet || file.name }));
         }
-      } catch {
-        report.push(tx("{name} could not be read. Save it as CSV or .xlsx and try again.", { name: file.name }));
+      } catch (error) {
+        report.push(error?.message === "zip-size"
+          ? tx("{name}: would unpack to far more than any table holds, so it was not read.", { name: file.name })
+          : tx("{name} could not be read. Save it as CSV or .xlsx and try again.", { name: file.name }));
       }
     }
     if (got && state.example) {
@@ -1034,7 +1036,10 @@
     if (kpi.unit !== "pct") lo = Math.max(0, lo);
     const x = (i) => left + (points.length === 1 ? (W - left - right) / 2 : (i * (W - left - right)) / (points.length - 1));
     const y = (v) => top + (1 - (v - lo) / (hi - lo)) * (H - top - bottom);
-    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, class: "cx-mini-chart", role: "img", "aria-label": `${label(kpi)}: ${points.map((p) => `${p.week} ${fmt(kpi, p.value)}`).join(", ")}` });
+    // One image for a screen reader: every week's value, and which weeks are off target. The points keep their
+    // tooltip for the mouse but are not tab stops (audit PM-9).
+    const offTarget = (p) => p.value != null && C.judge(kpi, p.value, target) === false;
+    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, class: "cx-mini-chart", role: "img", "aria-label": `${label(kpi)}: ${points.map((p) => `${p.week} ${fmt(kpi, p.value)}${offTarget(p) ? ` (${tx("off target")})` : ""}`).join(", ")}` });
     [lo, (lo + hi) / 2, hi].forEach((v) => {
       svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(v), y2: y(v), style: "stroke: var(--cx-grid)", "stroke-width": 1 }));
       svg.append(svgEl("text", { x: left - 6, y: y(v) + 4, "text-anchor": "end", "font-size": 11, style: "fill: var(--cx-muted)" }, fmt(kpi, v).replace(" min", "")));
@@ -1049,7 +1054,7 @@
       if (i % step === 0 || i === points.length - 1) svg.append(svgEl("text", { x: x(i), y: H - 8, "text-anchor": "middle", "font-size": 11, style: "fill: var(--cx-muted)" }, p.week.slice(5)));
       if (p.value == null) return;
       const ok = C.judge(kpi, p.value, target);
-      const dot = svgEl("circle", { cx: x(i), cy: y(p.value), r: 4.5, style: `fill: ${ok === false ? "var(--cx-surface)" : "var(--cx-line)"}; stroke: var(--cx-line)`, "stroke-width": 2, tabindex: 0 });
+      const dot = svgEl("circle", { cx: x(i), cy: y(p.value), r: 4.5, style: `fill: ${ok === false ? "var(--cx-surface)" : "var(--cx-line)"}; stroke: var(--cx-line)`, "stroke-width": 2 });
       dot.append(svgEl("title", {}, `${p.week}: ${fmt(kpi, p.value)} · ${grainWord(kpi, p.n)}${ok === false ? ` · ${tx("off target")}` : ""}`));
       svg.append(dot);
     });
@@ -2023,7 +2028,8 @@
     const areaH = H - top - bottom;
     const x = (i) => left + ((i + 0.5) * areaW) / points.length;
     const y = (v) => H - bottom - (v / maxRate) * areaH;
-    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, class: "cx-mini-chart", role: "img", "aria-label": `${deepLabel(metric)}: ${points.map((p) => `${p.week} ${deepRate(p.rate)}`).join(", ")}` });
+    const over = (p) => target != null && p.rate > target + 1e-9;
+    const svg = svgEl("svg", { viewBox: `0 0 ${W} ${H}`, class: "cx-mini-chart", role: "img", "aria-label": `${deepLabel(metric)}: ${points.map((p) => `${p.week} ${deepRate(p.rate)}${over(p) ? ` (${tx("off target")})` : ""}`).join(", ")}` });
     [0, 0.25, 0.5, 0.75, 1].forEach((f) => {
       const v = maxRate * f;
       svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(v), y2: y(v), style: "stroke: var(--cx-grid)", "stroke-width": 1 }));
@@ -2033,9 +2039,8 @@
     const barW = Math.min(64, areaW / (points.length * 1.7));
     const step = points.length > 10 ? Math.ceil(points.length / 8) : 1;
     points.forEach((p, i) => {
-      const over = target != null && p.rate > target + 1e-9;
-      const bar = svgEl("rect", { x: x(i) - barW / 2, y: y(p.rate), width: barW, height: Math.max(0, y(0) - y(p.rate)), rx: 3, style: `fill: ${over ? "var(--cx-bad)" : "var(--cx-line)"}; opacity: .85`, tabindex: 0 });
-      bar.append(svgEl("title", {}, `${p.week}: ${int.format(p.k)} / ${int.format(p.n)} (${deepRate(p.rate)})${over ? ` · ${tx("off target")}` : ""}`));
+      const bar = svgEl("rect", { x: x(i) - barW / 2, y: y(p.rate), width: barW, height: Math.max(0, y(0) - y(p.rate)), rx: 3, style: `fill: ${over(p) ? "var(--cx-bad)" : "var(--cx-line)"}; opacity: .85` });
+      bar.append(svgEl("title", {}, `${p.week}: ${int.format(p.k)} / ${int.format(p.n)} (${deepRate(p.rate)})${over(p) ? ` · ${tx("off target")}` : ""}`));
       svg.append(bar);
       if (i % step === 0 || i === points.length - 1) svg.append(svgEl("text", { x: x(i), y: H - 12, "text-anchor": "middle", "font-size": 11, style: "fill: var(--cx-muted)" }, p.week.slice(5)));
       if (points.length <= 12) svg.append(svgEl("text", { x: x(i), y: y(p.rate) - 6, "text-anchor": "middle", "font-size": 11, "font-weight": 700, style: "fill: var(--cx-text)" }, deepRate(p.rate)));

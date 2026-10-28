@@ -25,7 +25,7 @@ Doch reden wir offen. Gott ist nie auf die Erde herabgestiegen, um Vollzeitvertr
 
 Betriebe werden vom System aufgebaut, vom Kunden, der bezahlt, von der Infrastruktur dieses Landes und vor allem von den müden Händen der Menschen, die im Morgengrauen aufstehen, um dieses Lager oder diesen Laden offen zu halten. Der Bissen am Monatsende wird von niemandem geschenkt. Er wird verdient, mit jedem Liter Schweiß, jeder Sekunde Konzentration und jedem Stück Gesundheit dessen, der arbeitet.
 
-Diese Idee vom Eigentümer als Retter ist die vollkommenste Maske, um fehlende Vision zu verbergen. Es ist leichter, sich einzureden, man sei ein Wohltäter, der ein unfähiges Volk auf dem Rücken trägt, als die bittere Wahrheit anzunehmen: dass dein Betrieb keinen einzigen Tag ohne die unermüdliche Arbeit derer überleben würde, die du als minderwertig behandelst.
+Diese Idee vom Eigentümer als Retter ist die vollkommenste Maske, um fehlende Vision zu verbergen. Es ist leichter, sich einzureden, man sei ein Wohltäter, der ein unfähiges Volk auf dem Rücken trägt, als die bittere Wahrheit anzunehmen: dass der eigene Betrieb keinen einzigen Tag ohne die unermüdliche Arbeit derer überleben würde, die man als minderwertig behandelt.
 
 Unsere Leute brauchen niemandes Almosen. Sie bitten nicht um die Gunst des Eigentümers und nicht um die Güte derer, die ihnen ein wenig Geld zustecken, damit sie über den Monat kommen. Sie verlangen Gerechtigkeit. Sie verlangen ein System, in dem Arbeit für das geschätzt wird, was sie ist, in dem der Vertrag geachtet wird und in dem die Menschenwürde nicht den kleinen Theokratien privater Büros unterworfen ist.
 

@@ -33,8 +33,8 @@ Diese Denkweise ist Selbstmord für jedes Unternehmen.
 
 Echte Fachleute bleiben nicht lange an einem Ort, an dem ihr Wort binnen einer Minute entwertet wird. Sie können körperliche Erschöpfung ertragen, lange schlaflose Nächte, aber sie können nicht hinnehmen, zu Marionetten ohne Stimme zu werden. Deshalb gehen die mit Wissen und Charakter zuerst. Und dem Eigentümer bleiben nur zwei Arten von Menschen: unterwürfige Manager, die nichts selbst entscheiden können, und gleichgültige Mitarbeiter, die gerade so viel arbeiten, dass sie nicht entlassen werden.
 
-Eine echte Führungskraft versteht ein Grundprinzip: **Wenn du jemanden an die Spitze eines Teams gestellt hast, gib ihm entweder dein volles Vertrauen und deine Unterstützung, um den Standard durchzusetzen, oder setz dich hin und mach seine Arbeit selbst.**
+Eine echte Führungskraft versteht ein Grundprinzip: **Wenn Sie jemanden an die Spitze eines Teams gestellt haben, geben Sie ihm entweder Ihr volles Vertrauen und Ihre Unterstützung, um den Standard durchzusetzen, oder setzen Sie sich hin und machen Sie seine Arbeit selbst.**
 
-Man kann nicht zugleich eine moderne Organisation und eine Hintertür für Klatsch haben. Man kann keine Disziplin auf der Fläche verlangen, wenn man diese Disziplin mit eigener Hand bricht, sobald sich jemand beschwert.
+Man kann nicht zugleich eine moderne Organisation und eine Hintertür für Klatsch haben. Man kann keine Disziplin vor Ort verlangen, wenn man diese Disziplin mit eigener Hand bricht, sobald sich jemand beschwert.
 
 Albanische Unternehmen werden erst wachsen, wenn sie dieses primitive Spiel der Intrigen aufgeben. Bis dahin werden die Eigentümer weiter klagen, dass sie in Arbeit ertrinken, dass niemand sie atmen lässt und dass ohne sie nichts vorangeht, ohne zu begreifen, dass sie dieses ermüdende Gefängnis mit eigenen Händen gebaut haben, Stein für Stein, jedes Mal, wenn sie dem Manager die Ehre nahmen, um die Unfähigkeit zu füttern.

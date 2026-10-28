@@ -110,8 +110,8 @@
   },
   "rules": {
     "safety": "Jeder Unfall (mit oder ohne Ausfallzeit) und jede Erste Hilfe der letzten 7 Tage ist ein Signal und steht immer oben.",
-    "beyond": "Außerhalb der Grenze: Der letzte Punkt liegt mehr als drei Sigma von der Mittellinie entfernt. An diesem Tag hat sich etwas verändert; suchen Sie danach, solange sich die Leute noch erinnern.",
-    "run": "Lauf: Der letzte Punkt beendet 8 oder mehr Punkte in Folge auf derselben Seite der Mittellinie (Western Electric). Das Niveau hat sich verschoben.",
+    "beyond": "Außerhalb der Grenze: Der letzte Punkt liegt mehr als drei Sigma von der Mittellinie entfernt. An diesem Tag hat sich etwas verändert; suchen Sie danach, solange sich die Leute noch erinnern. Bei weniger als 5 erwarteten pro Tag muss die Zahl auch nach ihrer eigenen Verteilung (Poisson oder binomial) so selten sein, und ein Punkt auf der guten Seite braucht eine untere Grenze über 0.",
+    "run": "Lauf: Der letzte Punkt beendet 8 oder mehr Punkte in Folge auf derselben Seite der Mittellinie (Western Electric). Das Niveau hat sich verschoben. Bei weniger als 5 erwarteten pro Tag muss der Lauf so unwahrscheinlich sein wie 8 gleiche Münzwürfe in Folge: Bei 0,2 pro Tag sind acht Tage ohne Fall normal, kein Signal.",
     "trend": "Trend: Der letzte Punkt beendet 6 Punkte in Folge, jeder höher (oder jeder niedriger) als der vorige (Nelson-Regel 3). Etwas driftet.",
     "minPoints": "Eine Regelkarte braucht mindestens 8 Punkte. Mit weniger gibt es kein statistisches Signal: Die Grenzen würden ein paar Tage beschreiben, nicht den Prozess.",
     "charts": "Jede tägliche Reihe bekommt die Regelkarte, die sie braucht: eine Quote mit der Menge jedes Tages eine p-Karte (volle Tage bekommen engere Grenzen), eine Anzahl ohne Menge eine c-Karte, Beschwerden pro verkauftem Zimmer eine u-Karte, ein gemessener Wert (OEE, 5S-Ergebnis, Minuten Verspätung, Auslastung, ADR) eine Einzelwertkarte (I-MR). Die Grenzen kommen aus den Punkten des Zeitraums, und nur der letzte Punkt wird beurteilt.",

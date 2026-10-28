@@ -449,7 +449,7 @@ Aber wir dürfen sie nicht automatisch Verbesserung im Leben der Mitarbeiter nen
 
 ***
 
-Stell dir eine Organisation vor, die beschließt, einen Teil der gesparten Zeit zu nutzen, um die Arbeit zu verbessern, nicht nur, um sie zu vermehren.
+Stellen Sie sich eine Organisation vor, die beschließt, einen Teil der gesparten Zeit zu nutzen, um die Arbeit zu verbessern, nicht nur, um sie zu vermehren.
 
 Die Mitarbeiter könnten mehr Raum für Schulung haben.
 

@@ -251,7 +251,7 @@ Verantwortung ist ein Prozess.
 
 Sie verlangt zu verstehen, welcher Schaden entstanden ist, was sich korrigieren lässt und was sich ändern muss, damit sich dieselbe Lage nicht wiederholt.
 
-Sie verlangt, Menschen vor den ungerechten Folgen deiner Entscheidung zu schützen, im Rahmen der Befugnis und Mittel, die du hast.
+Sie verlangt, Menschen vor den ungerechten Folgen der eigenen Entscheidung zu schützen, im Rahmen der Befugnis und Mittel, die man hat.
 
 Und manchmal verlangt sie auch, eine persönliche Folge hinzunehmen.
 
@@ -501,15 +501,15 @@ Und ohne sie kann keine Verbesserung ganz ehrlich sein.
 
 ***
 
-Ich bin überzeugt, dass Autorität nicht nur in dem Moment bewiesen wird, in dem die Menschen ausführen, was du von ihnen verlangst.
+Ich bin überzeugt, dass Autorität nicht nur in dem Moment bewiesen wird, in dem die Menschen ausführen, was man von ihnen verlangt.
 
-Sie wird auch in dem Moment bewiesen, in dem du ihnen sagen musst, dass du es nicht hättest verlangen sollen.
+Sie wird auch in dem Moment bewiesen, in dem man ihnen sagen muss, dass man es nicht hätte verlangen sollen.
 
 Dort, wo die Sicherheit des Titels endet und die Verantwortung des Menschen beginnt.
 
 Denn jeder kann ein Büro haben, eine Position und das Recht, Anweisungen zu geben.
 
-Schwerer ist es, diese Position nicht als Zuflucht zu benutzen, wenn deine Entscheidungen Folgen haben.
+Schwerer ist es, diese Position nicht als Zuflucht zu benutzen, wenn die eigenen Entscheidungen Folgen haben.
 
 Führungskräfte haben nicht die Pflicht, unfehlbar zu sein.
 

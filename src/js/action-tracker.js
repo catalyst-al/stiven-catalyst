@@ -16,8 +16,22 @@
   if (typeof ui.status !== "string") ui.status = "live";
   if (typeof ui.owner !== "string") ui.owner = "";
   if (typeof ui.source !== "string") ui.source = "";
+  // The example is marked in the list itself (ActionsStore: example: true), and its ids are kept here as well, where
+  // the version of the site before 27 October 2026 looks for them: after a rollback to it, that version still shows the
+  // example as one, and when its store saves the list without the marks, ActionsStore reads the ids back and marks
+  // the actions again (tests/actions-integrity.test.cjs, new → live → new). The ids follow the marks: they are emptied
+  // when the example leaves.
   if (!Array.isArray(ui.exampleIds)) ui.exampleIds = [];
   const saveUi = () => write(UI_KEY, ui);
+  const syncExampleIds = () => {
+    const ids = S.all().filter((a) => a.example === true).map((a) => a.id);
+    if (ids.length === ui.exampleIds.length && ids.every((id) => ui.exampleIds.includes(id))) return;
+    ui.exampleIds = ids;
+    saveUi();
+  };
+  // A list saved without the marks (by the older version): they are saved with it again.
+  if (ui.exampleIds.length && S.all().some((a) => a.example === true)) S.replaceAll(S.all());
+  syncExampleIds();
   const sourceName = (source) => data.sources[source || "manual"] || source || data.sources.manual;
   const statusName = (status) => data.statuses[status] || status;
 
@@ -78,16 +92,14 @@
   window.ActionTrackerMath = { summarize, closedPerWeek, verdict, exampleRows, order, daysBetween };
 
   // Example ------------------------------------------------------------------------------------------------------------
-  const exampleOn = () => { const rows = S.list(); return ui.exampleIds.length > 0 && rows.length === ui.exampleIds.length && rows.every((a) => ui.exampleIds.includes(a.id)); };
+  // The example's actions are marked in the list itself (ActionsStore: example: true). The first own action, from this
+  // page or from any tool, replaces them; the other tools never count them.
+  const exampleOn = () => S.all().some((a) => a.example === true);
   const loadExample = () => {
-    const added = exampleRows(data.example, today()).map((row) => S.add(row)).filter(Boolean);
-    ui.exampleIds = added.map((a) => a.id);
-    saveUi();
+    exampleRows(data.example, today()).forEach((row) => S.add({ ...row, example: true }));
   };
   const dropExample = () => {
-    if (exampleOn()) S.replaceAll([]);
-    ui.exampleIds = [];
-    saveUi();
+    if (exampleOn()) S.replaceAll(S.list());
   };
   const exampleNote = el("div", "dl-example-note");
   exampleNote.setAttribute("role", "status");
@@ -223,7 +235,6 @@
     remove.addEventListener("click", () => {
       const gone = S.remove(a.id);
       if (!gone) return;
-      ui.exampleIds = ui.exampleIds.filter((id) => id !== a.id);
       saveUi();
       render();
       undoNote(status, tx("Removed: {text}", { text: a.title }), () => { S.restore(gone.removed, gone.index); render(); });
@@ -340,7 +351,8 @@
   };
 
   const render = () => {
-    const rows = S.list();
+    syncExampleIds();
+    const rows = S.all();
     const day = today();
     exampleNote.hidden = !exampleOn();
     fillFilters(rows);
@@ -366,10 +378,8 @@
   textFilter.addEventListener("input", () => render());
   root.querySelector("[data-example]").addEventListener("click", () => { loadExample(); render(); results.scrollIntoView({ behavior: "smooth", block: "start" }); });
   root.querySelector("[data-clear]").addEventListener("click", () => {
-    if (!S.list().length || !window.confirm(tx("Clear every action in this browser?"))) return;
+    if (!S.all().length || !window.confirm(tx("Clear every action in this browser?"))) return;
     S.replaceAll([]);
-    ui.exampleIds = [];
-    saveUi();
     render();
   });
   const table = () => [[tx("Action"), tx("Detail"), tx("Owner"), tx("Due date"), tx("Area"), tx("Priority"), tx("Status"), tx("From"), tx("Check"), tx("Created"), tx("Closed"), tx("Result")],
@@ -394,7 +404,7 @@
   const nothingSaved = localStorage.getItem(S.KEY) === null;
   const arrived = S.fromParams(location);
   if (arrived.added) {
-    if (exampleOn()) { const keep = arrived.added; dropExample(); S.add(keep); }
+    // ActionsStore.add has already replaced an example with it.
     flash(status, tx("Added from {source}: {text}", { source: sourceName(arrived.added.source), text: arrived.added.title }));
   } else if (arrived.duplicate) {
     flash(status, tx("Already on the list."));

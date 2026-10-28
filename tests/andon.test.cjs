@@ -348,3 +348,41 @@ test('an entry after the fact replaces the example; filters and the workplace pr
   assert.match(doc.querySelector('[data-entry-status]').textContent, /midis thirrjes dhe zgjidhjes/);
   assert.equal(JSON.parse(w.localStorage.getItem('sc-andon-sq')).rows.length, 1);
 });
+
+// Audit 27 Oct 2026, P2A-05b: a live call was measured on its clock times, so 30 real minutes in the hour the clocks
+// went back (02:40 CEST → 02:10 CET on 25 Oct 2026) counted as 1,410 minutes, and 20 minutes across the spring change
+// as 80. A live call now keeps its time stamps and is measured on them; typed and older rows keep their clock times.
+test('live calls across the clock changes are measured in real minutes (TZ Europe/Berlin)', () => {
+  const w = load();
+  const M = w.AndonMath;
+  const close = (calledUtc, minutes, arrivedAfter = 0) => {
+    const calledAt = Date.parse(calledUtc);
+    return M.closeCall({ calledAt, arrivedAt: arrivedAfter ? calledAt + arrivedAfter * 6e4 : 0, area: 'Line 1', shift: 'Night', reason: 'machine', stopped: true, stopMin: '', responder: '', note: '' }, calledAt + minutes * 6e4, data.en);
+  };
+  const back = close('2026-10-25T00:40:00Z', 30, 10);
+  assert.deepEqual(plain([back.date, back.called, back.arrived, back.solved]), ['2026-10-25', '02:40', '02:50', '02:10'], 'the clock went back an hour');
+  assert.deepEqual(plain([M.resolveOf(back), M.respondOf(back), back.stopMin]), [30, 10, 30], 'fall back: 30 real minutes, help in 10');
+  const forward = close('2026-03-29T00:50:00Z', 20);
+  assert.deepEqual(plain([forward.called, forward.solved, M.resolveOf(forward)]), ['01:50', '03:10', 20], 'spring forward: 20 real minutes');
+  assert.equal(M.resolveOf(close('2026-10-26T22:50:00Z', 30)), 30, 'past midnight as before');
+  assert.equal(M.resolveOf(close('2026-10-20T08:00:00Z', 25 * 60)), 1500, 'a call of 25 hours is 25 hours');
+  const fixed = M.summary([back, forward], M.settings(data.en));
+  assert.deepEqual(plain([fixed.resolve.mean, fixed.resolve.median]), [25, 25]);
+  // Saved and read back, the time stamps stay; a row typed after the fact, or saved before, reads its clock times.
+  const [kept] = M.cleanRows(plain([back]), data.en);
+  assert.equal(M.resolveOf(kept), 30);
+  const old = M.cleanRow({ date: '2026-10-14', called: '23:40', arrived: '23:50', solved: '00:05', reason: 'machine' }, data.en);
+  assert.deepEqual(plain([M.resolveOf(old), M.respondOf(old)]), [25, 10]);
+  // Time stamps that no longer match the clock times (the row was changed by hand) are not trusted.
+  const changed = M.cleanRow({ ...plain(back), solved: '03:00' }, data.en);
+  assert.equal(M.resolveOf(changed), M.span('02:40', '03:00'));
+  // On the page: a call started at 02:40 summer time and solved 30 minutes later, at 02:10 winter time.
+  const calledAt = Date.parse('2026-10-25T00:40:00Z');
+  const page = load({ page: true, now: '2026-10-25T00:40:00Z', storage: { 'sc-andon': { rows: [], open: [{ id: 'c1', area: 'Picking', shift: 'Night', reason: 'machine', calledAt, arrivedAt: 0, responder: '', stopped: false, stopMin: '', note: '' }] } } });
+  page.__setNow(calledAt + 30 * 6e4);
+  page.document.querySelector('[data-call-id="c1"] .an-solved').click();
+  assert.match(page.document.querySelector('[data-results] h2').textContent, /solved in 30 min/);
+  flush(page);
+  const saved = JSON.parse(page.localStorage.getItem('sc-andon')).rows[0];
+  assert.deepEqual([saved.called, saved.solved, saved.calledAt, saved.solvedAt], ['02:40', '02:10', calledAt, calledAt + 30 * 6e4]);
+});

@@ -1,0 +1,87 @@
+{
+ "date": "2026-10-27T12:38:42.670Z",
+ "a": "http://127.0.0.1:8321",
+ "b": "http://127.0.0.1:8322",
+ "times": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "report": {
+  "tool-badge": {
+   "a": [
+    {
+     "name": "badge-breathe",
+     "keyframes": [
+      {
+       "offset": 0,
+       "scale": "none"
+      },
+      {
+       "offset": 0.5,
+       "scale": "1.15"
+      },
+      {
+       "offset": 1,
+       "scale": "none"
+      }
+     ]
+    }
+   ],
+   "b": [
+    {
+     "name": "badge-breathe",
+     "keyframes": [
+      {
+       "offset": 0,
+       "scale": "none"
+      },
+      {
+       "offset": 0.5,
+       "scale": "1.15"
+      },
+      {
+       "offset": 1,
+       "scale": "none"
+      }
+     ]
+    }
+   ],
+   "diffs": [
+    {
+     "t": 0,
+     "differPercent": 0,
+     "maxDelta": 0
+    },
+    {
+     "t": 1,
+     "differPercent": 4.85,
+     "maxDelta": 21
+    },
+    {
+     "t": 2,
+     "differPercent": 5.45,
+     "maxDelta": 13
+    },
+    {
+     "t": 3,
+     "differPercent": 1.69,
+     "maxDelta": 15
+    },
+    {
+     "t": 4,
+     "differPercent": 4.51,
+     "maxDelta": 13
+    },
+    {
+     "t": 5,
+     "differPercent": 5.39,
+     "maxDelta": 17
+    }
+   ]
+  }
+ }
+}

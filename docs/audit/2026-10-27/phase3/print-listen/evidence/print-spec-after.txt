@@ -1,0 +1,16 @@
+
+Running 12 tests using 2 workers
+
+[1A[2K[1/12] [1440px dark] › tests/browser/print.spec.mjs:107:3 › guest-complaints: every column of every table is on paper, in English, German and Albanian
+[1A[2K[2/12] [1440px dark] › tests/browser/print.spec.mjs:107:3 › andon: every column of every table is on paper, in English, German and Albanian
+[1A[2K[3/12] [1440px dark] › tests/browser/print.spec.mjs:107:3 › waste-log: every column of every table is on paper, in English, German and Albanian
+[1A[2K[4/12] [1440px dark] › tests/browser/print.spec.mjs:107:3 › lost-found: every column of every table is on paper, in English, German and Albanian
+[1A[2K[5/12] [1440px dark] › tests/browser/print.spec.mjs:107:3 › oee: every column of every table is on paper, in English, German and Albanian
+[1A[2K[6/12] [1440px dark] › tests/browser/print.spec.mjs:107:3 › energy-tracker: every column of every table is on paper, in English, German and Albanian
+[1A[2K[7/12] [1440px dark] › tests/browser/print.spec.mjs:107:3 › sigma-control-chart: every column of every table is on paper, in English, German and Albanian
+[1A[2K[8/12] [1440px dark] › tests/browser/print.spec.mjs:107:3 › a3-report: every column of every table is on paper, in English, German and Albanian
+[1A[2K[9/12] [1440px dark] › tests/browser/print.spec.mjs:129:1 › CV Builder: a job with 70 bullet points prints all of them, the last one included
+[1A[2K[10/12] [1440px dark] › tests/browser/print.spec.mjs:154:1 › ATS CV: printed from the page, a job with 70 bullet points keeps all of them
+[1A[2K[11/12] [1440px dark] › tests/browser/print.spec.mjs:176:1 › Management Review: the charts of an issue print drawn, without scrolling to them first
+[1A[2K[12/12] [1440px dark] › tests/browser/print.spec.mjs:205:1 › Treatise: the boxes that come in with the scroll print, unscrolled, in all three languages
+[1A[2K  12 passed (2.5m)

@@ -16,7 +16,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # The browser tests (128, of them 78 axe checks) took 7 minutes on a shared four-core machine; the runner's time is
+    # not measured yet, so the job has room.
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -37,13 +39,18 @@ jobs:
           grep -q '^# skipped 0$' test.log
       - run: node scripts/check-coaching-build.mjs
       # The reader journeys in a real browser (tests/browser): the built site at three widths, in both themes, with
-      # the accessibility check. Only Chromium is installed, with the system libraries it needs.
+      # the accessibility check. Only Chromium is installed, with the system libraries it needs: the Chrome for Testing
+      # that the pinned @playwright/test brings (1.64.1: Chrome 156), so the journeys run on a current browser; the log
+      # names its version. Keep @playwright/test current, or the tests drive a browser readers no longer use.
       - run: npx playwright install --with-deps chromium
-      - name: Browser tests (no journey may fail)
+      - name: Browser tests (no journey may fail or be skipped)
         shell: bash
         run: |
           set -o pipefail
+          node -e "const { chromium } = require('@playwright/test'); chromium.launch().then(async (b) => { console.log('Chromium', b.version()); await b.close(); })"
           npm run test:browser 2>&1 | tee browser-test.log
+          grep -qE '^ +[0-9]+ passed' browser-test.log
+          if grep -qE '^ +[0-9]+ (skipped|flaky|did not run)' browser-test.log; then exit 1; fi
       - if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
       - if: github.event_name != 'pull_request'

@@ -9,11 +9,11 @@ description: 'Über den, der den Ablauf verbirgt, um unersetzlich zu werden, üb
 
 Es gibt eine sehr bekannte Figur in unseren Büros, Hotels und Lagern, eine Gestalt, der man in fast jeder Branche begegnet, in der geschriebene Regeln fehlen. Es ist der Mensch, der alle Schlüssel in der eigenen Tasche trägt.
 
-Er ist der Einzige, der weiß, wo die Passwörter des Systems liegen. Er ist der Einzige, der die private Nummer des wichtigsten Lieferanten hat. Er ist der Einzige, der weiß, wie man um fünf Uhr morgens diesen besonderen Bericht druckt und welchen magischen Handgriff an der Tastatur es braucht, wenn der Computer hängt. Fragt man ihn höflich, wie ein Ablauf funktioniert, antwortet er in halben Sätzen, mit trüben Anweisungen, oder sagt mit einem geheimnisvollen Lächeln: „Lass das liegen, ich mach das später, das ist kompliziert.“
+Er ist der Einzige, der weiß, wo die Passwörter des Systems liegen. Er ist der Einzige, der die private Nummer des wichtigsten Lieferanten hat. Er ist der Einzige, der weiß, wie man um fünf Uhr morgens diesen besonderen Bericht druckt und welchen magischen Handgriff an der Tastatur es braucht, wenn der Computer hängt. Fragt man ihn höflich, wie ein Ablauf funktioniert, antwortet er in halben Sätzen, mit vagen Anweisungen, oder sagt mit einem geheimnisvollen Lächeln: „Lass das liegen, ich mach das später, das ist kompliziert.“
 
 Auf den ersten Blick wirkt dieser Mensch wie die unerschütterliche Säule der Firma. Er scheint ein unermüdlicher Arbeiter, einer, der nie richtig Urlaub nimmt, der aus den Ferien anruft, um einen dringenden Code durchzugeben, und ohne den die Arbeit scheinbar nicht vorankommt.
 
-Doch betrachten wir dieses Verhalten ohne Naivität und mit beruflichem Mut. **Informationen zurückzuhalten ist keine Hingabe; es ist eine stille Geiselnahme der Organisation. Und wer sich weigert, seinen Ablauf zu dokumentieren, schützt nicht die Firma; er baut ein künstliches Monopol, um die Unsicherheit seines eigenen Stuhls zu schützen.**
+Doch betrachten wir dieses Verhalten ohne Naivität und mit beruflichem Mut. **Informationen zurückzuhalten ist keine Hingabe; es ist eine stille Geiselnahme der Organisation. Und wer sich weigert, seinen Ablauf zu dokumentieren, schützt nicht die Firma; er baut ein künstliches Monopol, um den eigenen wackligen Posten zu sichern.**
 
 Warum tut ein Mensch das?
 
@@ -31,7 +31,7 @@ Der schwerste Schaden ist nicht nur finanziell; der schwerste Schaden ist das Gi
 
 Wenn das Zurückhalten von Informationen von oben geduldet wird, stirbt die Zusammenarbeit. Die Mitarbeiter sehen einander nicht mehr als Mitstreiter mit einer gemeinsamen Aufgabe, sondern als gefährliche Rivalen, vor denen man jede Notiz, jede Datei und jede gelernte Erfahrung hüten muss. Der Arbeitsplatz wird zu einem Markt der Intrigen, auf dem jeder ein Stück der Wahrheit im Kopf behält und darauf wartet, dass der andere stürzt, um den eigenen Wert zu beweisen.
 
-Echte Führung, die Spuren hinterlässt und beständige Institutionen baut, beruht auf dem genau entgegengesetzten Grundsatz: **Dein wahrer Wert bemisst sich nicht daran, wie unersetzlich du dich gibst, indem du Wissen verbirgst, sondern daran, wie unabhängig du die Menschen um dich herum machst.**
+Echte Führung, die Spuren hinterlässt und beständige Institutionen baut, beruht auf dem genau entgegengesetzten Grundsatz: **Ihr wahrer Wert bemisst sich nicht daran, wie unersetzlich Sie sich geben, indem Sie Wissen verbergen, sondern daran, wie unabhängig Sie die Menschen um sich herum machen.**
 
 Ein Profi mit Würde hat keine Angst vor Transparenz. Er schreibt das Verfahren sorgfältig auf. Er dokumentiert jeden Schritt der Schicht, hinterlässt das System sauber, bringt anderen alles bei, ohne ein Detail zurückzuhalten, und sorgt dafür, dass die Arbeit reibungslos läuft, auch wenn er Hunderte Kilometer entfernt ist. Er weiß genau, dass seine berufliche Sicherheit nicht aus geheimen Codes in der Tasche kommt, sondern aus der Qualität seines Charakters, aus der Fähigkeit, neue Probleme zu lösen, und aus der Demut, andere aufzubauen.
 

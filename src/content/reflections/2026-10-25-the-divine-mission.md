@@ -19,7 +19,7 @@ The logic of this divine mission is simple, but destructive. If the business is 
 
 And so the work relationship is turned upside down. It is no longer an honest exchange between two free parties, where labour meets capital. It becomes a performance of feudal charity.
 
-The owner is no longer an employer; he is a benefactor. The employee is no longer a professional who creates value; he is the silent beggar who must give thanks every evening for the fact that he still exists. And when the moment of accountability comes, when someone asks why profits grow while wages stay where they are, the answer comes in the same tone of a weary messiah: "I am keeping you in bread in this hard country."
+The owner is no longer an employer; he is a benefactor. The employee is no longer a professional who creates value; he is the silent beggar who must give thanks every evening for the fact that he still exists. And when the moment of accountability comes, when someone asks why profits grow while wages stay where they are, the answer comes in the same tone of a weary messiah: “I am keeping you in bread in this hard country.”
 
 But let us speak openly. God has never come down to earth to sign full-time work contracts without pay for overtime. Heaven has not appointed any oligarch or small trader to be the guardian of the fate of Albanians.
 

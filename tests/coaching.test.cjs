@@ -93,7 +93,11 @@ test('backup import makes independent copies and preserves current context, acti
   assert.equal(stripped.brief.junk, undefined);
   assert.equal(stripped.actions.at(-1).note, undefined);
   assert.equal(stripped.actions.at(-1).text, 'Check');
-  const imported = C.importBackup(s, C.exportBackup(s));
+  // A backup of the project as it was before a change: opening it adds that version as a copy beside the current one.
+  // (A backup identical to the workspace adds nothing: tests/coaching-import.test.cjs.)
+  const earlier = JSON.parse(C.exportBackup(s));
+  earlier.state.projects[0].title = 'One handoff, first draft';
+  const imported = C.importBackup(s, JSON.stringify(earlier));
   assert.equal(imported.projects.length, 2); assert.equal(imported.profile.name, s.profile.name);
   assert.equal(imported.active.lumen, p.id); assert.notEqual(imported.projects[1].id, p.id);
   assert.notEqual(imported.projects[1].actions[0].id, actionId);
@@ -117,7 +121,9 @@ test('invalid backups reject atomically: versions, shape, dates, measurement bou
     assert.throws(() => C.importBackup(s, JSON.stringify(b)), /invalidBackup/);
     assert.equal(JSON.stringify(s), original);
   }
-  assert.throws(() => C.importBackup(s, 'x'.repeat(5 * 1024 * 1024 + 1)), /invalidBackup/);
+  // Too large is said as such, not as an invalid backup.
+  assert.throws(() => C.importBackup(s, 'x'.repeat(5 * 1024 * 1024 + 1)), /backupTooLarge/);
+  assert.equal(JSON.stringify(s), original);
 });
 
 test('before/after uses weighted counts and rejects impossible or duplicate observations', () => {
@@ -367,7 +373,8 @@ test('UI restores valid backups as copies and produces a printable report with s
   click(w, '[data-view="backup"]');
   const OriginalFormData = w.FormData;
   w.FormData = class extends OriginalFormData {
-    *[Symbol.iterator]() { yield ['backup', { size: 1000, text: async () => C.exportBackup(s) }]; }
+    // An earlier version of the project: a backup identical to the workspace would add nothing.
+    *[Symbol.iterator]() { yield ['backup', { size: 1000, text: async () => C.exportBackup({ ...s, projects: [{ ...s.projects[0], title: 'One handoff, first draft' }] }) }]; }
   };
   const form = w.document.querySelector('[data-form="import"]');
   form.reportValidity = () => true;

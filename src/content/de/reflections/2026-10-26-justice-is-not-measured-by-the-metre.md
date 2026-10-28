@@ -67,9 +67,9 @@ Aber eine Entscheidung kann praktisch und zugleich ungerecht sein.
 
 Wird Kompetenz zum Grund, immer wieder dieselbe Person mit zusätzlicher Verantwortung zu belasten, während fehlende Kompetenz zum Schutz vor Verantwortung wird, beginnt die Organisation, eine gefährliche Lektion zu erteilen.
 
-Je mehr du gibst, desto mehr wird von dir verlangt.
+Je mehr man gibt, desto mehr wird von einem verlangt.
 
-Je weniger du übernimmst, desto weniger wird man dich behelligen.
+Je weniger man übernimmt, desto weniger wird man behelligt.
 
 In einem solchen Umfeld verlieren Menschen nicht unbedingt die Fähigkeit, gut zu arbeiten.
 

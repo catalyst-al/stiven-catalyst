@@ -410,23 +410,30 @@
     const total = WASTES.reduce((sum, key) => sum + row.tallies[key], 0);
     return tx("{n} wastes", { n: int.format(total) });
   };
+  // What was added, already open or not saved (ActionsStore.lastAdd); sent(i) says whether item i reached the list.
   const handOver = (items) => {
-    if (!Actions) return 0;
+    const result = { added: 0, duplicate: 0, unsaved: 0, sent: [] };
+    if (!Actions) return result;
     const due = addDays(today(), 7);
     items.forEach(({ row, index }) => {
       const item = questionOf(row, index);
-      Actions.add({
+      const action = Actions.add({
         title: item?.text || `${tx("Question")} ${index + 1}`,
         detail: [row.findings[index], item ? `${tx("Standard")}: ${item.standard}` : "", `${cfg.text.tool} · ${layerName(row.layer)} · ${row.area} · ${showDate(row.date)}`].filter(Boolean).join(" · "),
-        owner: areaOwner(row.area), due, source: "gemba-walk", check: cfg.text.checkText, area: row.area, priority: "Medium",
+        owner: areaOwner(row.area), due, example: row.example === true, source: "gemba-walk", check: cfg.text.checkText, area: row.area, priority: "Medium",
       });
+      const saved = Boolean(action) || Actions.lastAdd === "duplicate";
+      result.sent.push(saved);
+      if (action) result.added++;
+      else if (saved) result.duplicate++;
+      else if (Actions.lastAdd === "unsaved") result.unsaved++;
     });
-    return items.length;
+    return result;
   };
-  const addedNote = (node, n) => {
+  const addedNote = (node, result) => {
     const link = el("a", "inline-link", tx("Open the Action Tracker"));
     link.href = Actions.trackerUrl().href;
-    node.replaceChildren(`${tx("Added {n} actions.", { n: int.format(n) })} `, link);
+    node.replaceChildren(`${window.ToolKit.actionsNote(result)} `, link);
     clearTimeout(node.timer);
     node.timer = setTimeout(() => { node.textContent = ""; }, 8000);
   };
@@ -517,10 +524,10 @@
       send.type = "button";
       send.addEventListener("click", () => {
         const items = openFindings(state.rows);
-        const n = handOver(items);
-        items.forEach(({ row, index }) => { row.sent[index] = true; });
+        const result = handOver(items);
+        items.forEach(({ row, index }, i) => { if (result.sent[i]) row.sent[index] = true; });
         changed();
-        addedNote(walkStatus, n);
+        addedNote(walkStatus, result);
       });
       actions.append(send);
     }
@@ -859,15 +866,16 @@
     const found = draftFindings();
     if (!found.length || !Actions) return;
     const d = state.draft;
-    const n = handOver(found.map(({ index }) => ({ row: { ...d, template: state.template }, index })));
-    found.forEach(({ index }) => {
+    const result = handOver(found.map(({ index }) => ({ row: { ...d, template: state.template }, index })));
+    found.forEach(({ index }, i) => {
+      if (!result.sent[i]) return;
       delete d.acts[index];
       const box = questionsBox.querySelector(`[data-act="${index}"]`);
       if (box) box.checked = false;
     });
     save();
     renderProgress();
-    addedNote(walkStatus, n);
+    addedNote(walkStatus, result);
   });
   sheetButton.addEventListener("click", () => {
     renderSheet();

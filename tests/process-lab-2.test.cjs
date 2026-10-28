@@ -275,6 +275,48 @@ test('pasting: chart rows, a table, pairs, a study table, wide and long Gage dat
   assert.equal(de.exampleText(['Teil', 'A 1'], ['1|0.29', '2|-1.36']), 'Teil\tA 1\n1\t0,29\n2\t-1,36');
 });
 
+// Audit 27 Oct 2026, P2B-01: the second set read pastes the same way, so "47,2" on the English page was a row of 47
+// and 2. Every section now reads the decimal mark from the paste (process-lab.js, readPaste) in all three languages.
+test('pasting: every section reads decimal commas and points the same in English, German and Albanian', () => {
+  for (const lang of ['en', 'de', 'sq']) {
+    const M = load(lang).ProcessLab2Math;
+    const at = `${lang}: `;
+    assert.deepEqual(plain(M.parseChartRows('47,2\n48,1\n46,9', 'imr').rows.map((row) => row.value)), [47.2, 48.1, 46.9], `${at}a decimal-comma column`);
+    assert.deepEqual(plain(M.parseChartRows('47.2\n48.1', 'imr').rows.map((row) => row.value)), [47.2, 48.1], `${at}a decimal-point column`);
+    assert.deepEqual(plain(M.parseChartRows('14.10.2026 47,2 44,1\n15.10.2026 45,0 46,3', 'xbar').rows.map((row) => row.values)), [[47.2, 44.1], [45, 46.3]], `${at}subgroups with spaces`);
+    assert.deepEqual(plain(M.parseChartRows('2026-10-14\t47.2\t44.1\n2026-10-15\t45.0\t46.3', 'xbar').rows.map((row) => row.values)), [[47.2, 44.1], [45, 46.3]], `${at}subgroups from Excel`);
+    assert.deepEqual(plain(M.parseChartRows('Mon,3,50\nTue,60,50', 'np').rows.map((row) => [row.count, row.size])), [[3, 50]], `${at}a comma-separated file`);
+    assert.deepEqual(plain(M.parseXY('Pallets\tMinutes\n10\t30,5\n12\t35,25').points.map((p) => [p.x, p.y])), [[10, 30.5], [12, 35.25]], `${at}pairs with a decimal comma`);
+    assert.deepEqual(plain(M.parseXY('10;1.234,5\n12;987,5').points.map((p) => p.y)), [1234.5, 987.5], `${at}pairs with German thousands`);
+    assert.deepEqual(plain(M.parseGage('Part\tA1\tA2\tB1\tB2\n1\t1,0\t1,1\t1,2\t1,3\n2\t2,0\t2,1\t2,2\t2,3\n').y), [[[1, 1.1], [1.2, 1.3]], [[2, 2.1], [2.2, 2.3]]], `${at}Gage data with decimal commas`);
+    assert.equal(M.parseChartRows('47,2\n48,1', 'imr').ambiguous, null, `${at}nothing unclear`);
+    const unclear = M.parseChartRows('1,234\n1,236\n1,229', 'imr');
+    assert.deepEqual(plain(unclear.rows.map((row) => row.value)), lang === 'en' ? [1234, 1236, 1229] : [1.234, 1.236, 1.229], `${at}the page's convention`);
+    assert.equal(unclear.ambiguous.count, 3, `${at}the warning counts the values`);
+    assert.equal(M.parseXY('1\t1,234\n2\t1,236').ambiguous.token, '1,234', `${at}pairs warn too`);
+    const counts = M.parseTable('Shift\tA\tB\nEarly\t1,234\t87\nLate\t1.050\t90');
+    assert.deepEqual(plain(counts.counts), [[1234, 87], [1050, 90]], `${at}counts are whole: a separator groups thousands`);
+    assert.equal(counts.ambiguous, null, `${at}and that is not unclear`);
+  }
+});
+
+test('the page shows the warning when a pasted decimal mark is unclear', () => {
+  const texts = { en: /Check the decimal mark/, de: /Dezimalzeichen/, sq: /shenjën dhjetore/ };
+  for (const lang of ['en', 'de', 'sq']) {
+    const w = load(lang, { page: true });
+    const box = w.document.querySelector('[data-lab="chart"]');
+    const textarea = box.querySelector("textarea[name='text']");
+    w.document.querySelector(`[data-kind][value="imr"]`).click();
+    textarea.value = '47,2\n48,1\n46,9\n47,5\n48,0\n47,7';
+    textarea.dispatchEvent(new w.Event('input', { bubbles: true }));
+    assert.doesNotMatch(box.textContent, texts[lang], `${lang}: a clear column`);
+    assert.match(box.querySelector('[data-count]').textContent, /6/, `${lang}: six rows`);
+    textarea.value = '1,234\n1,236\n1,229\n1,241\n1,238';
+    textarea.dispatchEvent(new w.Event('input', { bubbles: true }));
+    assert.match(box.textContent, texts[lang], `${lang}: the unclear decimal mark is said`);
+  }
+});
+
 test('the examples: the Xbar-R example drops at its change, the tables give the intended verdicts', () => {
   const { StatsKit: S, ProcessLab2Math: M } = load();
   const lab = read(dataFile('en')).lab;

@@ -9,7 +9,7 @@ description: 'Über den Eigentümer, der über seinen eigenen Leuten stehen will
 
 Es gibt eine besondere Art menschlicher Unsicherheit, die sich weder mit Bankkonten noch mit Luxusautos noch mit Büros in teurem Holz heilen lässt. Es ist die innere Angst, tief verborgen hinter einer harten Fassade, dass jemand in der Firma es wagen könnte, mehr zu wissen, klarer zu denken oder mehr Respekt zu genießen als der Eigentümer selbst.
 
-In jedem entwickelten Markt ist die erste Regel eines klugen Unternehmers einfach: Such dir Menschen, die auf ihrem Gebiet klüger sind als du, gib ihnen die richtigen Werkzeuge und lass sie arbeiten. Stellst du einen Logistikleiter ein, dann weil er die Lieferkette besser kennt als du. Stellst du einen Betriebsleiter ein, dann weil er Abläufe aufbauen und die Knoten lösen kann, denen du keine Zeit widmen kannst. Ihr Erfolg ist dein Erfolg.
+In jedem entwickelten Markt ist die erste Regel eines klugen Unternehmers einfach: Suchen Sie sich Menschen, die auf ihrem Gebiet klüger sind als Sie, geben Sie ihnen die richtigen Werkzeuge und lassen Sie sie arbeiten. Stellen Sie einen Logistikleiter ein, dann weil er die Lieferkette besser kennt als Sie. Stellen Sie einen Betriebsleiter ein, dann weil er Abläufe aufbauen und die Knoten lösen kann, denen Sie keine Zeit widmen können. Deren Erfolg ist Ihr Erfolg.
 
 Doch in vielen albanischen Betrieben wird diese Logik, sobald man die Tür der Zentrale durchschreitet, völlig auf den Kopf gestellt. Dort beginnt ein unsichtbarer, täglicher und zutiefst unfruchtbarer Krieg: der Kampf des Eigentümers, um jeden Preis, in jeder Sekunde und bei jedem Thema über seinen Mitarbeitern und Vorgesetzten zu stehen.
 

@@ -31,4 +31,4 @@ Echte Führung beginnt nicht am Rednerpult einer Konferenz. Sie beginnt in der s
 
 Albanien braucht nicht noch mehr Führungskräfte, die vor dem Spiegel des falschen Erfolgs posieren können. Dieses Land braucht Menschen, die keine Angst haben, dorthin hinunterzugehen, wo die Arbeit schwer ist, wo das System hakt und wo die Wahrheit keine Filter hat.
 
-Denn am Ende des Tages, wenn der Projektor ausgeht und die schönen Mappen geschlossen sind, bleibt nur eine Frage, die zählt: **Hast du die Arbeit für die, die nach dir kommen, leichter, gerechter und klarer hinterlassen, oder warst du nur ein weiterer Architekt des Rauchs?**
+Denn am Ende des Tages, wenn der Projektor ausgeht und die schönen Mappen geschlossen sind, bleibt nur eine Frage, die zählt: **Haben Sie die Arbeit für die, die nach Ihnen kommen, leichter, gerechter und klarer hinterlassen, oder waren Sie nur ein weiterer Architekt des Rauchs?**

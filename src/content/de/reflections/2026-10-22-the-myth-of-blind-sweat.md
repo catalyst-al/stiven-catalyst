@@ -29,4 +29,4 @@ Nachdenken, bevor man handelt, ist keine Flucht vor der Arbeit. Zu analysieren, 
 
 Albanische Unternehmen, die Standardisierung ablehnen und strukturiertes Denken weiter verspotten, bleiben für immer Geiseln der Improvisation. Sie werden immer müde sein, immer zu wenig Personal haben und immer einen Schuldigen bei anderen suchen.
 
-Denn Muskeln und guter Wille können dir durch eine schwere Schicht helfen, aber **nur Prozess, Klarheit und ein System können dir eine Zukunft bauen.** Und wer Denken Faulheit nennt, wird früher oder später die schwere Rechnung seiner eigenen Ignoranz bezahlen.
+Denn Muskeln und guter Wille können einem durch eine schwere Schicht helfen, aber **nur Prozess, Klarheit und ein System können einem eine Zukunft bauen.** Und wer Denken Faulheit nennt, wird früher oder später die schwere Rechnung seiner eigenen Ignoranz bezahlen.

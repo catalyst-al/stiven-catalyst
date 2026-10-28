@@ -1,0 +1,197 @@
+{
+ "date": "2026-10-27T12:21:25.767Z",
+ "a": "http://127.0.0.1:8321",
+ "b": "http://127.0.0.1:8322",
+ "times": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "report": {
+  "tool-sky-radar": {
+   "a": [
+    {
+     "name": "family-sweep",
+     "keyframes": [
+      {
+       "offset": 0,
+       "backgroundPositionX": "120%",
+       "backgroundPositionY": "0px",
+       "opacity": "1"
+      },
+      {
+       "offset": 1,
+       "backgroundPositionX": "-20%",
+       "backgroundPositionY": "0px",
+       "opacity": "0"
+      }
+     ]
+    }
+   ],
+   "b": []
+  },
+  "planet-card-radar": {
+   "a": [
+    {
+     "name": "family-sweep",
+     "keyframes": [
+      {
+       "offset": 0,
+       "backgroundPositionX": "120%",
+       "backgroundPositionY": "0px",
+       "opacity": "1"
+      },
+      {
+       "offset": 1,
+       "backgroundPositionX": "-20%",
+       "backgroundPositionY": "0px",
+       "opacity": "0"
+      }
+     ]
+    }
+   ],
+   "b": [
+    {
+     "name": "family-sweep",
+     "keyframes": [
+      {
+       "offset": 0,
+       "transform": "none"
+      },
+      {
+       "offset": 1,
+       "transform": "rotate(360deg)"
+      }
+     ]
+    }
+   ]
+  },
+  "podcast-steps": {
+   "a": [
+    {
+     "name": "step-reach",
+     "keyframes": [
+      {
+       "offset": 0,
+       "backgroundOrigin": "padding-box",
+       "backgroundPositionX": "0%",
+       "backgroundPositionY": "0%",
+       "backgroundRepeat": "repeat",
+       "backgroundSize": "auto",
+       "borderLeftColor": "rgb(74, 181, 247)",
+       "borderRightColor": "rgb(74, 181, 247)",
+       "color": "rgb(209, 165, 83)",
+       "borderTopColor": "rgb(74, 181, 247)",
+       "borderBottomColor": "rgb(74, 181, 247)",
+       "boxShadow": "none",
+       "backgroundAttachment": "scroll",
+       "backgroundClip": "border-box",
+       "backgroundColor": "rgba(0, 0, 0, 0)",
+       "backgroundImage": "none"
+      },
+      {
+       "offset": 0.6,
+       "backgroundOrigin": "padding-box",
+       "backgroundPositionX": "0%",
+       "backgroundPositionY": "0%",
+       "backgroundRepeat": "repeat",
+       "backgroundSize": "auto",
+       "borderLeftColor": "rgb(209, 165, 83)",
+       "borderRightColor": "rgb(209, 165, 83)",
+       "color": "rgb(58, 42, 12)",
+       "borderTopColor": "rgb(209, 165, 83)",
+       "borderBottomColor": "rgb(209, 165, 83)",
+       "boxShadow": "rgba(255, 214, 150, 0.16) 0px 0px 0px 6px, rgb(255, 255, 255) 0px 0px 8px 0px, rgb(255, 214, 150) 0px 0px 24px 0px",
+       "backgroundAttachment": "scroll",
+       "backgroundClip": "border-box",
+       "backgroundColor": "rgb(255, 244, 220)",
+       "backgroundImage": "none"
+      },
+      {
+       "offset": 1,
+       "backgroundOrigin": "padding-box",
+       "backgroundPositionX": "0%",
+       "backgroundPositionY": "0%",
+       "backgroundRepeat": "repeat",
+       "backgroundSize": "auto",
+       "borderLeftColor": "rgb(209, 165, 83)",
+       "borderRightColor": "rgb(209, 165, 83)",
+       "color": "rgb(58, 42, 12)",
+       "borderTopColor": "rgb(209, 165, 83)",
+       "borderBottomColor": "rgb(209, 165, 83)",
+       "boxShadow": "rgb(255, 255, 255) 0px 0px 6px 0px, rgba(255, 214, 150, 0.8) 0px 0px 16px 0px, rgba(255, 196, 120, 0.35) 0px 0px 32px 0px",
+       "backgroundAttachment": "scroll",
+       "backgroundClip": "border-box",
+       "backgroundColor": "rgb(255, 244, 220)",
+       "backgroundImage": "none"
+      }
+     ]
+    }
+   ],
+   "b": [
+    {
+     "name": "step-reach",
+     "keyframes": [
+      {
+       "offset": 0,
+       "backgroundOrigin": "padding-box",
+       "backgroundPositionX": "0%",
+       "backgroundPositionY": "0%",
+       "backgroundRepeat": "repeat",
+       "backgroundSize": "auto",
+       "borderLeftColor": "rgb(74, 181, 247)",
+       "borderRightColor": "rgb(74, 181, 247)",
+       "color": "rgb(165, 176, 184)",
+       "borderTopColor": "rgb(74, 181, 247)",
+       "borderBottomColor": "rgb(74, 181, 247)",
+       "boxShadow": "none",
+       "backgroundAttachment": "scroll",
+       "backgroundClip": "border-box",
+       "backgroundColor": "rgba(0, 0, 0, 0)",
+       "backgroundImage": "none"
+      },
+      {
+       "offset": 0.6,
+       "backgroundOrigin": "padding-box",
+       "backgroundPositionX": "0%",
+       "backgroundPositionY": "0%",
+       "backgroundRepeat": "repeat",
+       "backgroundSize": "auto",
+       "borderLeftColor": "rgb(74, 181, 247)",
+       "borderRightColor": "rgb(74, 181, 247)",
+       "color": "rgb(0, 16, 24)",
+       "borderTopColor": "rgb(74, 181, 247)",
+       "borderBottomColor": "rgb(74, 181, 247)",
+       "boxShadow": "color(srgb 0.290196 0.709804 0.968627 / 0.18) 0px 0px 0px 6px, rgb(74, 181, 247) 0px 0px 18px 0px",
+       "backgroundAttachment": "scroll",
+       "backgroundClip": "border-box",
+       "backgroundColor": "rgb(74, 181, 247)",
+       "backgroundImage": "none"
+      },
+      {
+       "offset": 1,
+       "backgroundOrigin": "padding-box",
+       "backgroundPositionX": "0%",
+       "backgroundPositionY": "0%",
+       "backgroundRepeat": "repeat",
+       "backgroundSize": "auto",
+       "borderLeftColor": "rgb(74, 181, 247)",
+       "borderRightColor": "rgb(74, 181, 247)",
+       "color": "rgb(0, 16, 24)",
+       "borderTopColor": "rgb(74, 181, 247)",
+       "borderBottomColor": "rgb(74, 181, 247)",
+       "boxShadow": "color(srgb 0.290196 0.709804 0.968627 / 0.5) 0px 0px 10px 0px",
+       "backgroundAttachment": "scroll",
+       "backgroundClip": "border-box",
+       "backgroundColor": "rgb(74, 181, 247)",
+       "backgroundImage": "none"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

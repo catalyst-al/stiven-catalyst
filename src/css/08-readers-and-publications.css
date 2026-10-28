@@ -828,6 +828,16 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .wk-anim.is-in .wk-arc { stroke-dasharray: var(--v) 100; transition: stroke-dasharray 1.4s cubic-bezier(.3, .7, .2, 1) .15s; }
 .wk-anim.is-in .wk-legend li { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease; }
 .wk-anim.is-in .wk-legend li:nth-child(2) { transition-delay: .9s; }
+/* On paper every chart is drawn, whether or not the reader scrolled to it on screen (audit PM-5), and without the
+   movement: a print is not taken halfway through it. */
+@media print {
+  .wk-anim .wk-path { stroke-dashoffset: 0; }
+  .wk-anim .wk-area { opacity: .14; }
+  .wk-anim .wk-pop, .wk-anim .wk-legend li { opacity: 1; transform: none; }
+  .wk-anim .wk-grow, .wk-anim .wk-rise { transform: none; }
+  .wk-anim .wk-arc { stroke-dasharray: var(--v) 100; }
+  .wk-anim :is(.wk-path, .wk-area, .wk-pop, .wk-grow, .wk-rise, .wk-arc, .wk-legend li) { transition: none !important; }
+}
 .wk-anim.is-in .wk-legend li:nth-child(3) { transition-delay: 1.3s; }
 .wk-anim.is-in .wk-legend li:first-child { transition-delay: .5s; }
 
@@ -886,6 +896,8 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 @keyframes scroll-rise { from { opacity: 0; translate: 0 26px; } }
 .weekly-n { margin-left: 8px; font-weight: 600; opacity: .7; font-variant-numeric: tabular-nums; }
 .weekly-n:empty { display: none; }
+/* The count in the chosen month, light theme: white at .7 on the blue read 3.6:1; at .85 it reads 4.57:1 (audit PM-11). */
+[data-theme="light"] .weekly-months button[aria-pressed="true"] .weekly-n { opacity: .85; }
 .weekly-filter { display: flex; flex-wrap: wrap; gap: 10px; }
 .weekly-filter button {
   transition: color .25s ease, background .25s ease, border-color .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1);

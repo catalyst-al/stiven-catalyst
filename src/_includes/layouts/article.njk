@@ -82,7 +82,9 @@ ogType: article
          data-play-label="{{ 'Listen' | t(lang) }}" data-pause-label="{{ 'Pause' | t(lang) }}" data-resume-label="{{ 'Resume' | t(lang) }}"
          data-progress-label="{{ 'Paragraph {a} of {b}' | t(lang) }}" data-done-label="{{ 'Read to the end' | t(lang) }}"
          data-failed-label="{{ 'The voice stopped. Press to continue.' | t(lang) }}"
-         data-no-voice="{{ 'Your browser has no voice for this language, so it cannot read this text aloud. Another browser, such as Microsoft Edge, may have one.' | t(lang) }}">
+         data-no-voice="{{ "Your browser has no voice for this language, so it cannot read this text aloud. Another browser may have one; an online voice sends the text to that browser's maker." | t(lang) }}"
+         data-local-note="{{ 'Read aloud by a voice on this device: the text does not leave it. This site records and sends nothing.' | t(lang) }}"
+         data-online-note="{{ 'Read aloud by {a}, an online voice: your browser sends the text to its maker to be spoken. This site records and sends nothing.' | t(lang) }}">
       <div class="essay-listen-row">
         <button type="button" class="essay-listen-play" data-listen-toggle aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5v15a1 1 0 0 0 1.5.86l13-7.5a1 1 0 0 0 0-1.72l-13-7.5A1 1 0 0 0 4 4.5z"/></svg>

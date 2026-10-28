@@ -600,6 +600,8 @@
     let table = el("p", "a3-empty", tx("Not filled in yet."));
     if (measures.length) {
       table = el("div", "dl-table-wrap a3-table-wrap");
+      // The table can scroll: it takes the focus, so the keyboard can scroll it too.
+      table.tabIndex = 0;
       const t = el("table", "dl-table a3-table");
       const thead = el("thead");
       const hr = el("tr");
@@ -750,12 +752,13 @@
     const measures = r ? r.countermeasures.filter((c) => c.text.trim()) : [];
     if (!measures.length) { flash(actionsStatus, tx("Write a countermeasure first.")); return; }
     if (!S) return;
-    const known = S.list();
+    // Every action on the list, the example's too: a countermeasure already sent is not sent again, whatever its status.
+    const known = S.all();
     let added = 0;
     measures.forEach((c) => {
       const title = c.text.trim();
       if (known.some((a) => a.source === "a3-report" && a.title === title)) return;
-      if (S.add({ title, owner: c.owner, due: c.due, status: storeStatus(c.status, statuses), source: "a3-report", detail: `A3: ${nameOf(r)}`, check: r.how, area: r.area, priority: "Medium" })) added += 1;
+      if (S.add({ title, owner: c.owner, due: c.due, status: storeStatus(c.status, statuses), example: Boolean(state.example) && state.example === r.id, source: "a3-report", detail: `A3: ${nameOf(r)}`, check: r.how, area: r.area, priority: "Medium" })) added += 1;
     });
     flash(actionsStatus, added ? (added === 1 ? tx("1 countermeasure sent to the Action Tracker.") : tx("{n} countermeasures sent to the Action Tracker.", { n: int.format(added) })) : tx("Already on the list."));
   });

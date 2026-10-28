@@ -867,21 +867,23 @@
     if (!Actions) return;
     const rows = state.plan.filter((r) => !r.sent && taskOf(r.task) && realName(r.trainee));
     if (!rows.length) { flash(planStatus, tx("Nothing new to send: every row is already in the Action Tracker.")); return; }
+    let sent = 0, unsaved = 0;
     rows.forEach((r) => {
       const task = taskOf(r.task);
-      Actions.add({
+      const action = Actions.add({
         title: tx("Train {trainee} on {task}", { trainee: realName(r.trainee), task: task.name }),
         detail: [tx("Level now {a}, target {b}", { a: level(state.levels, r.trainee, r.task), b: r.target }), `${tx("Criticality")}: ${critName(task.crit)}`, `${cfg.text.tool}${state.team ? ` · ${state.team}` : ""}`].join(" · "),
-        owner: realName(r.trainer), due: r.due, source: "skills-matrix",
+        owner: realName(r.trainer), due: r.due, example: state.example === true, source: "skills-matrix",
         check: cfg.text.checkText.replace("{trainee}", realName(r.trainee)).replace("{task}", task.name).replace("{level}", String(r.target)).replace("{trainer}", realName(r.trainer) || "–"),
         area: state.team, priority: task.crit === 3 ? "High" : task.crit === 2 ? "Medium" : "Low",
       });
-      r.sent = true;
+      // A row is marked sent only when its action is on the list (added now, or already open).
+      if (action || Actions.lastAdd === "duplicate") { r.sent = true; sent++; } else if (Actions.lastAdd === "unsaved") unsaved++;
     });
     changed();
     const link = el("a", "inline-link", tx("Open the Action Tracker"));
     link.href = Actions.trackerUrl().href;
-    planStatus.replaceChildren(`${tx("Sent {n} rows to the Action Tracker.", { n: rows.length })} `, link);
+    planStatus.replaceChildren(`${sent ? tx("Sent {n} rows to the Action Tracker.", { n: sent }) : ""}${unsaved ? ` ${window.ToolKit.actionsNote({ unsaved })}` : ""} `, link);
     clearTimeout(planStatus.timer);
     planStatus.timer = setTimeout(() => { planStatus.textContent = ""; }, 8000);
   });

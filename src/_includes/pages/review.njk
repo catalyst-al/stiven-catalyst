@@ -137,6 +137,8 @@
         <ul class="book-text-sources">{% for s in review.sources %}<li>{{ s.by }}, {% if s.lang and s.lang != (lang or "en") %}<span lang="{{ s.lang }}">{{ s.title | softHyphens | quoted(lang) }}</span>{% else %}{{ s.title | softHyphens | quoted(lang) }}{% endif %}. <a href="{{ s.url }}" rel="noopener">{{ s.url }}</a></li>{% endfor %}</ul>
         <h3>{{ R.sourcesPage.method }}</h3>
         <p>{{ R.sourcesPage.methodText }}</p>
+        {%- set C = weekly[lang].colophon %}
+        <p><small>{{ C.text }} <a href="{{ '/how-this-is-made.html' | local(lang) }}">{{ C.more }}</a></small></p>
       </div>
     </details>
   </section>

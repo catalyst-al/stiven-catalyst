@@ -111,6 +111,23 @@
 
   const hint = (text) => el("p", "form-note sc-hint", text);
 
+  // How far a sigma level can be trusted. d defects of n chances: the 95 % range of the defect rate (Wilson's score
+  // interval) as sigma levels; when it spans more than half a sigma, the level is a rough figure and the note says how
+  // rough. No defect at all: the level the data can prove (the rule of three) and no higher. null: a firm figure.
+  const wilson = (d, n, z = 1.96) => {
+    const p = d / n, z2 = z * z, scale = 1 + z2 / n;
+    const centre = (p + z2 / (2 * n)) / scale;
+    const half = (z * Math.sqrt((p * (1 - p)) / n + z2 / (4 * n * n))) / scale;
+    return [Math.max(0, centre - half), Math.min(1, centre + half)];
+  };
+  const sigmaCaveat = (d, n, unitText = "") => {
+    if (!(n > 0)) return null;
+    if (d <= 0) return tx("no defect in {n}: the data can show this level and no higher (95% confidence, rule of three). Collect more to show more.", { n: `${int.format(n)}${unitText ? ` ${unitText}` : ""}` });
+    const [low, high] = wilson(d, n);
+    if (sigma(low) - sigma(high) <= 0.5) return null;
+    return tx("a rough figure: with {n} chances the level could be anywhere from {low} to {high} (95% range)", { n: int.format(n), low: num(sigma(high), 2), high: num(sigma(low), 2) });
+  };
+
   // dpmo: the process's defects per million chances, or null.
   const renderTable = (dpmo) => {
     sigmaTable.replaceChildren();
@@ -152,7 +169,7 @@
       stat(tx("Defect rate"), rate(value), tx("{a} of {b}", { a: int.format(defects), b: int.format(chances) })),
       stat("DPMO", int.format(Math.round(value * 1e6)), tx("defects per million chances")),
       stat(tx("Yield"), rate(1 - value), tx("right first time")),
-      stat(tx("Sigma level"), sigmaText(value, chances), defects ? tx("short term, with 1.5 shift") : tx("no defect in this sample: the least it can be, with 95% confidence (rule of three)")),
+      stat(tx("Sigma level"), sigmaText(value, chances), defects ? (sigmaCaveat(defects, chances) || tx("short term, with 1.5 shift")) : tx("no defect in this sample: the least it can be, with 95% confidence (rule of three)")),
     );
     renderTable(value * 1e6);
     return value;
@@ -272,6 +289,8 @@
     const useBase = !split && baseCount >= 2 && baseCount < rows.length;
     const base = useBase ? rows.slice(0, baseCount) : rows;
     const pBar = split ? parts.at(-1).pBar : base.reduce((sum, row) => sum + row.d, 0) / base.reduce((sum, row) => sum + row.n, 0);
+    // What the centre line (and its sigma level) rests on: the handled and the defects behind it.
+    const behind = split ? { n: parts.at(-1).n, d: parts.at(-1).d } : { n: base.reduce((sum, row) => sum + row.n, 0), d: base.reduce((sum, row) => sum + row.d, 0) };
 
     const points = rows.map((row, index) => {
       const phase = split ? parts.findIndex((part) => index >= part.start && index < part.end) : 0;
@@ -304,8 +323,11 @@
     const total = rows.reduce((sum, row) => sum + row.d, 0) / rows.reduce((sum, row) => sum + row.n, 0);
     const after = useBase ? rows.slice(baseCount) : [];
     const afterRate = after.length ? after.reduce((sum, row) => sum + row.d, 0) / after.reduce((sum, row) => sum + row.n, 0) : null;
-    return { points, events, pBar, total, useBase, baseCount, afterRate, phases: split ? parts : null, changes: split ? levelChanges(parts) : [] };
+    return { points, events, pBar, behind, total, useBase, baseCount, afterRate, phases: split ? parts : null, changes: split ? levelChanges(parts) : [] };
   };
+  // The sigma level of the centre line, with the n behind it: no defect in 250 is "≥ 3.76" (rule of three), not "6+".
+  const levelOf = (result) => sigmaText(result.pBar, result.behind.n);
+  const levelNote = (result) => sigmaCaveat(result.behind.d, result.behind.n, lower(unit()));
   // "From 12 Oct the level moved from 0.57% to 0.42% (−26%)."
   const levelText = (change) => tx("From {date} the level moved from {before} to {after} ({change}).", {
     date: shortDate(change.at), before: rate(change.before), after: rate(change.after),
@@ -464,13 +486,17 @@
 
   const verdict = (result) => {
     const worse = result.events.some((e) => e.worse);
-    const better = result.events.some((e) => !e.worse);
+    // Only a shift (eight or more in a row on the better side) shows a lasting improvement. One point beyond a limit,
+    // or a trend, on the better side is a signal to investigate: something was different, not yet a new level.
+    const lasting = result.events.some((e) => !e.worse && e.rule === "run");
+    const better = result.events.some((e) => !e.worse && e.rule !== "run");
     const parts = [];
-    if (!worse && !better) parts.push(data.verdicts.stable);
+    if (!worse && !lasting && !better) parts.push(data.verdicts.stable);
     if (worse) parts.push(data.verdicts.badSpecial);
-    if (better) parts.push(data.verdicts.goodSpecial);
+    if (lasting) parts.push(data.verdicts.goodSpecial);
+    else if (better) parts.push(weekly() && data.verdicts.goodSignalWeek ? data.verdicts.goodSignalWeek : data.verdicts.goodSignal);
     if (result.points.length < 12) parts.push(weekly() && data.verdicts.shortWeek ? data.verdicts.shortWeek : data.verdicts.short);
-    return { title: worse ? tx("Signals to investigate") : better ? tx("A real improvement") : tx("Stable: this is noise"), text: parts.join(" ") };
+    return { title: worse ? tx("Signals to investigate") : lasting ? tx("A real improvement") : better ? tx("Better than usual: a signal to investigate") : tx("Stable: this is noise"), text: parts.join(" ") };
   };
 
   const problemText = (result) => {
@@ -486,9 +512,9 @@
       lines.push(`${tx("Limits split at the changes on the timeline")}:`);
       result.phases.forEach((part) => lines.push(`- ${shortDate(part.from)} – ${shortDate(part.to)}: ${tx("Average")} ${rate(part.pBar)}`));
       result.changes.forEach((change) => lines.push(levelText(change)));
-      lines.push(`${tx("sigma level")} ${sigmaText(result.pBar)}`);
+      lines.push(`${tx("sigma level")} ${levelOf(result)}${levelNote(result) ? ` (${levelNote(result)})` : ""}`);
     } else {
-      lines.push(`${tx("Average")} ${rate(result.pBar)}${result.useBase ? ` ${weekly() ? tx("over the first {n} weeks", { n: result.baseCount }) : tx("over the first {n} days", { n: result.baseCount })}` : ""} · ${tx("sigma level")} ${sigmaText(result.pBar)}`);
+      lines.push(`${tx("Average")} ${rate(result.pBar)}${result.useBase ? ` ${weekly() ? tx("over the first {n} weeks", { n: result.baseCount }) : tx("over the first {n} days", { n: result.baseCount })}` : ""} · ${tx("sigma level")} ${levelOf(result)}${levelNote(result) ? ` (${levelNote(result)})` : ""}`);
     }
     if (result.afterRate !== null) lines.push(`${tx("Since then")}: ${rate(result.afterRate)}`);
     lines.push("", `${v.title}. ${v.text}`);
@@ -543,7 +569,7 @@
     const last = result.points.at(-1);
     stats.append(stat(weekly() ? tx("Latest week") : tx("Latest day"), rate(last.p), last.signals.length ? signalText(last) : tx("inside the limits, noise")));
     stats.append(stat(tx("Signals"), String(result.events.length), result.events.length ? tx("{a} worse, {b} better", { a: result.events.filter((e) => e.worse).length, b: result.events.filter((e) => !e.worse).length }) : tx("nothing to chase")));
-    stats.append(stat(tx("Sigma level"), sigmaText(result.pBar), tx("at the average rate")));
+    stats.append(stat(tx("Sigma level"), levelOf(result), levelNote(result) || tx("at the average rate")));
     results.append(stats);
 
     const chartPanel = weekly()

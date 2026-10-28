@@ -31,7 +31,7 @@ Keine Tyrannei, ob groß oder klein, entsteht über Nacht mit voller Macht. Sie 
 
 Der höchste Preis dieses Kompromisses ist nicht das, was dem nächsten Opfer widerfährt. Der höchste Preis ist das, was mit dem Menschen geschieht, der schweigt.
 
-Denn jedes Mal, wenn du eine Wahrheit herunterschluckst, um die Bequemlichkeit des Augenblicks zu bewahren, schrumpft etwas in dir. Du verlierst ein Stück deiner Freiheit. Du beginnst, dir einzureden, dass du nichts tun kannst, dass du machtlos bist, bis du am Ende genau das wirst, was das System will: ein gehorsames Rädchen ohne eigenen Willen. Und wenn der Tag kommt, an dem das Unrecht an deine Tür klopft, wenn du an der Reihe bist, mit Füßen getreten zu werden, wirst du mit Entsetzen feststellen, dass um dich herum niemand mehr übrig ist, der den Mund aufmacht, denn alle haben gelernt, das zu tun, was du jahrelang getan hast: den Kopf zu senken und zu schweigen.
+Denn jedes Mal, wenn Sie eine Wahrheit herunterschlucken, um die Bequemlichkeit des Augenblicks zu bewahren, schrumpft etwas in Ihnen. Sie verlieren ein Stück Ihrer Freiheit. Sie beginnen, sich einzureden, dass Sie nichts tun können, dass Sie machtlos sind, bis Sie am Ende genau das werden, was das System will: ein gehorsames Rädchen ohne eigenen Willen. Und wenn der Tag kommt, an dem das Unrecht an Ihre Tür klopft, wenn Sie an der Reihe sind, mit Füßen getreten zu werden, werden Sie mit Entsetzen feststellen, dass um Sie herum niemand mehr übrig ist, der den Mund aufmacht, denn alle haben gelernt, das zu tun, was Sie jahrelang getan haben: den Kopf zu senken und zu schweigen.
 
 Zivilcourage und beruflicher Mut verlangen nicht unbedingt, mit einer Fahne auf den Platz zu ziehen oder in einer blinden Konfrontation alles zu opfern.
 

@@ -8,16 +8,17 @@
   // A header that names the known answer of an attribute study, in the three languages.
   const STANDARD = /^(standard|reference|ref|master|known|soll|sollwert|referenz|standardi|referenca|etalon)$/i;
 
-  // Pasted rows as cells. Tabs or semicolons split as in Excel; without them a page with a decimal comma splits on
-  // spaces ("47,2" is one value), and an English page on commas, then on spaces.
-  const cellsOf = (text) => {
-    const K = kit();
-    const source = String(text ?? "");
-    if (/[\t;]/.test(source)) return K.parseRows(source);
-    if (K.DECIMAL_COMMA) return source.split(/\r?\n/).map((line) => line.trim()).filter(Boolean).map((line) => line.split(/\s+/));
-    return K.parseRows(source).map((row) => (row.length === 1 && /\s/.test(row[0]) ? row[0].split(/\s+/) : row));
+  // Pasted rows as cells and a reader for their numbers, the way the first set reads them (process-lab.js, readPaste):
+  // tabs or semicolons split as in Excel, otherwise spaces, or commas in a comma-separated file. The decimal mark is
+  // the one the pasted numbers prove, on every page ("47,2" is 47.2 on the English page too); `ambiguous` names a
+  // value nothing in the paste settles, for the warning.
+  const pasteOf = (text, options) => {
+    const paste = window.ProcessLabMath.readPaste(text, options);
+    return { ...paste, isNum: (cell) => Number.isFinite(paste.number(cell)) };
   };
-  const isNum = (cell) => Number.isFinite(kit().parseNumber(cell));
+  const cellsOf = (text) => pasteOf(text).rows;
+  // The result of a parser with that `ambiguous`, kept out of its enumerable shape.
+  const noting = (result, paste) => Object.defineProperty(result, "ambiguous", { value: paste.ambiguous });
   // A first cell that reads as a date (with separators: a five-digit count is not an Excel date here) is the row's date.
   const dateOf = (cell) => (/[-./]/.test(String(cell)) ? kit().parseDate(cell) : "");
   const decimals = (values) => Math.min(3, Math.max(0, ...values.map((value) => { const text = String(value); const at = text.indexOf("."); return at < 0 ? 0 : text.length - at - 1; })));
@@ -26,17 +27,17 @@
   // Rows for a control chart: a date or label first (optional), then the numbers the chart needs. Rows without a
   // number (a header) are passed over; rows with the wrong numbers are counted as skipped.
   const parseChartRows = (text, kind) => {
-    const K = kit();
+    const paste = pasteOf(text);
     const rows = [];
     let skipped = 0;
-    cellsOf(text).forEach((cells) => {
+    paste.rows.forEach((cells) => {
       const list = cells.map((cell) => String(cell).trim()).filter(Boolean);
       if (!list.length) return;
       let label = "", date = "";
       const day = dateOf(list[0]);
       if (day) { date = day; label = list.shift(); }
-      else if (!isNum(list[0])) label = list.shift();
-      const numbers = list.map(K.parseNumber).filter(Number.isFinite);
+      else if (!paste.isNum(list[0])) label = list.shift();
+      const numbers = list.map(paste.number).filter(Number.isFinite);
       if (!numbers.length) return;
       const row = { label, date };
       if (kind === "imr") row.value = numbers.at(-1);
@@ -54,13 +55,15 @@
       }
       rows.push(row);
     });
-    return { rows, skipped };
+    return noting({ rows, skipped }, paste);
   };
 
   // A table of counts: a header row with the column names (its first cell names the rows), then one row per group.
   const parseTable = (text) => {
-    const K = kit();
-    const rows = cellsOf(text).filter((cells) => cells.some((cell) => String(cell).trim()));
+    // Counts are whole numbers, so "1,234" or "1.234" in a table is a thousand on every page.
+    const paste = pasteOf(text, { whole: true });
+    const { isNum } = paste;
+    const rows = paste.rows.filter((cells) => cells.some((cell) => String(cell).trim()));
     if (!rows.length) return null;
     let head = null;
     if (rows[0].slice(1).some((cell) => String(cell).trim() && !isNum(cell))) head = rows.shift();
@@ -69,22 +72,23 @@
     const counts = [], rowLabels = [];
     let bad = 0;
     rows.forEach((cells, i) => {
-      const values = (labelled ? cells.slice(1) : cells).map((cell) => (String(cell).trim() === "" ? 0 : K.parseNumber(cell)));
+      const values = (labelled ? cells.slice(1) : cells).map((cell) => (String(cell).trim() === "" ? 0 : paste.number(cell)));
       if (values.some((value) => !(value >= 0) || !Number.isInteger(value))) { bad++; return; }
       counts.push(values);
       rowLabels.push(labelled ? String(cells[0]).trim() || String(i + 1) : String(i + 1));
     });
     const columns = Math.max(0, ...counts.map((row) => row.length));
     const colLabels = [...Array(columns)].map((_, j) => String(head?.[labelled ? j + 1 : j] ?? "").trim() || String(j + 1));
-    return { rowName: labelled ? String(head?.[0] ?? "").trim() : "", rowLabels, colLabels, counts: counts.map((row) => [...Array(columns)].map((_, j) => row[j] || 0)), bad, width };
+    return noting({ rowName: labelled ? String(head?.[0] ?? "").trim() : "", rowLabels, colLabels, counts: counts.map((row) => [...Array(columns)].map((_, j) => row[j] || 0)), bad, width }, paste);
   };
 
   // Two columns, x and y; a header row gives their names, a text first cell is the point's label.
   const parseXY = (text) => {
-    const K = kit();
+    const paste = pasteOf(text);
+    const { isNum } = paste;
     const points = [];
     let xName = "", yName = "";
-    cellsOf(text).forEach((cells, index) => {
+    paste.rows.forEach((cells, index) => {
       const list = cells.map((cell) => String(cell).trim()).filter(Boolean);
       const numbers = list.filter(isNum);
       if (numbers.length < 2) {
@@ -92,9 +96,9 @@
         return;
       }
       const label = !isNum(list[0]) ? list[0] : "";
-      points.push({ x: K.parseNumber(numbers.at(-2)), y: K.parseNumber(numbers.at(-1)), label });
+      points.push({ x: paste.number(numbers.at(-2)), y: paste.number(numbers.at(-1)), label });
     });
-    return { points, xName, yName };
+    return noting({ points, xName, yName }, paste);
   };
 
   // The header of a study table: Part, then Standard (optional), then a column per appraiser and trial ("Anna 1",
@@ -107,10 +111,11 @@
     return { kind: "rating", col: j + 1, name };
   });
   const studyTable = (text) => {
-    const rows = cellsOf(text).map((cells) => cells.map((cell) => String(cell ?? "").trim())).filter((cells) => cells.some(Boolean));
+    const paste = pasteOf(text);
+    const rows = paste.rows.map((cells) => cells.map((cell) => String(cell ?? "").trim())).filter((cells) => cells.some(Boolean));
     if (rows.length < 3) return null;
     const [head, ...body] = rows;
-    return { head, body, columns: columnsOf(head) };
+    return noting({ head, body, columns: columnsOf(head), number: paste.number }, paste);
   };
 
   // Attribute agreement: judgements are words (good / bad, OK / damaged), matched without regard to case.
@@ -149,7 +154,6 @@
   // Gage R&R data: wide (Part, then "Anna 1", "Anna 2" …; a part may also come back on later rows for more trials) or
   // long (three columns: part, operator, value). Returns y[part][operator][trial], or an error word.
   const parseGage = (text) => {
-    const K = kit();
     const table = studyTable(text);
     if (!table) return { error: "need" };
     const ratingCols = table.columns.filter((column) => column.kind === "rating");
@@ -169,12 +173,12 @@
     table.body.forEach((row) => {
       const part = row[0] || "";
       if (long) {
-        const value = K.parseNumber(row[2]);
+        const value = table.number(row[2]);
         if (!part || !row[1] || !Number.isFinite(value)) { skipped++; return; }
         put(part, row[1], value);
         return;
       }
-      const values = ratingCols.map((column) => K.parseNumber(row[column.col]));
+      const values = ratingCols.map((column) => table.number(row[column.col]));
       if (!part || values.some((value) => !Number.isFinite(value))) { skipped++; return; }
       ratingCols.forEach((column, i) => put(part, column.name, values[i]));
     });
@@ -182,7 +186,7 @@
     const y = parts.map((part) => operators.map((operator) => cells.get(`${part}\u0000${operator}`) || []));
     const trials = y[0][0].length;
     if (trials < 2 || y.some((row) => row.some((cell) => cell.length !== trials))) return { error: "unbalanced", parts, operators };
-    return { parts, operators, trials, y, long, skipped };
+    return noting({ parts, operators, trials, y, long, skipped }, table);
   };
 
   // Did the level change between the first phase and the last? Welch's t on the single values of a measurement chart,
@@ -254,6 +258,8 @@
   const chanceText = (p) => { const n = oneIn(p); return n ? fill(data.proportion.oneInWords, { n: int.format(Math.min(n, 10000)) }) : pct(p, 0); };
   const signed = (value, digits, unit = "") => `${value > 0 ? "+" : ""}${n2(value, digits)}${unit ? ` ${unit}` : ""}`;
   const hint = (text) => el("p", "form-note pl-hint", text);
+  // A decimal mark the paste leaves open is said above the result (process-lab.js, decimalNote).
+  const decimalHint = (sec, parsed) => { const note = window.ProcessLabMath.decimalNote(parsed?.ambiguous); if (note) sec.out.append(hint(note)); };
   const verdictCard = (text, kind, words) => {
     const card = el("div", `pl-verdict-card is-${kind}`);
     card.append(el("strong", null, words[kind]), " ", text);
@@ -400,6 +406,7 @@
     sec.count.textContent = rows.length ? `${tx("{n} rows", { n: int.format(rows.length) })}${parsed.skipped ? ` · ${fill(lab.chart.skipped, { n: parsed.skipped, need: lab.chart.need[kind.id] })}` : ""}` : "";
     sec.empty.hidden = Boolean(str(b.text).trim());
     sec.out.replaceChildren();
+    decimalHint(sec, parsed);
     if (kind.id === "p") { renderP(sec, rows, b); return; }
     if (rows.length < 2) {
       if (str(b.text).trim()) sec.out.append(hint(fill(lab.chart.needRows, { need: lab.chart.need[kind.id] })));
@@ -571,6 +578,7 @@
     sec.out.replaceChildren();
     if (!str(b.text).trim()) return;
     const parsed = parseTable(b.text);
+    decimalHint(sec, parsed);
     const test = parsed && !parsed.bad ? S.chiSquare(parsed.counts) : null;
     if (!test) { sec.out.append(hint(lab.chi.need)); return; }
     const rowLabels = test.kept.rows.map((i) => parsed.rowLabels[i]);
@@ -625,6 +633,7 @@
     const parsed = parseXY(b.text);
     if (sec.count) sec.count.textContent = parsed.points.length ? tx("{n} pairs", { n: int.format(parsed.points.length) }) : "";
     if (!str(b.text).trim()) return;
+    decimalHint(sec, parsed);
     if (parsed.points.length < 3) { sec.out.append(hint(lab.reg.need)); return; }
     const xs = parsed.points.map((point) => point.x), ys = parsed.points.map((point) => point.y);
     const fit = S.linearFit(xs, ys);
@@ -722,6 +731,7 @@
     sec.out.replaceChildren();
     if (!str(b.text).trim()) return;
     const parsed = parseGage(b.text);
+    decimalHint(sec, parsed);
     if (parsed.error) { sec.out.append(hint(lab.gage[parsed.error] || lab.gage.need)); return; }
     const tolerance = parseNumber(b.tol);
     const g = S.gageRR(parsed.y, { tolerance });

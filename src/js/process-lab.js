@@ -2,33 +2,95 @@
   // Plain arithmetic, usable without the page (tests/process-lab.test.cjs): a pasted column of measurements and the
   // whole analysis of a sample. Needs window.ToolKit (parsing) and window.StatsKit (statistics).
   const fill = (template, vars = {}) => String(template ?? "").replace(/\{(\w+)\}/g, (match, name) => (name in vars ? vars[name] : match));
+
+  // The written form of a number: its sign, digits and separators, and which decimal mark that form proves. "comma"
+  // (47,2 · 1.234,5 · 1.234.567), "dot" (47.2 · 1,234.5 · 1,234,567), "either" for one separator before exactly three
+  // digits (1,234 · 1.234: a decimal or a thousand), "none" for a whole number, null when the text is not a number.
+  const CURRENCY = /^(?:EUR|CHF|USD|GBP|ALL|Lek)(?=[\d+.,-])|([\d.,-])(?:EUR|CHF|USD|GBP|ALL|Lek)$/gi;
+  const formOf = (cell) => {
+    let text = String(cell ?? "").replace(/[\s€]/g, "").replace(CURRENCY, "$1");
+    let sign = "";
+    if (/^[+-]/.test(text)) [sign, text] = [text[0], text.slice(1)];
+    else if (/^[\d.,]+-$/.test(text)) [sign, text] = ["-", text.slice(0, -1)];
+    if (!/^[\d.,]*\d[\d.,]*$/.test(text)) return null;
+    const commas = (text.match(/,/g) || []).length, dots = (text.match(/\./g) || []).length;
+    const mark = !commas && !dots ? "none"
+      : commas && dots ? (text.lastIndexOf(",") > text.lastIndexOf(".") ? (/^\d{1,3}(\.\d{3})*,\d+$/.test(text) ? "comma" : null) : (/^\d{1,3}(,\d{3})*\.\d+$/.test(text) ? "dot" : null))
+      : commas > 1 ? (/^\d{1,3}(,\d{3})+$/.test(text) ? "dot" : null)
+      : dots > 1 ? (/^\d{1,3}(\.\d{3})+$/.test(text) ? "comma" : null)
+      : /^[1-9]\d{0,2}[.,]\d{3}$/.test(text) ? "either"
+      : /^\d*[.,]\d+$/.test(text) ? (commas ? "comma" : "dot") : null;
+    return mark && { sign, text, mark };
+  };
+  // A form read with a decimal comma (true) or a decimal point (false): the other mark groups thousands.
+  const valueOf = (form, comma) => Number(form.sign + (comma ? form.text.replace(/\./g, "").replace(",", ".") : form.text.replace(/,/g, "")));
+  // The two readings of an "either" form, the decimal and the thousand: 1,234 and 1.234 are both 1.234 or 1234.
+  const readings = (form) => { const [a, b] = [valueOf(form, true), valueOf(form, false)]; return Math.abs(a) < Math.abs(b) ? { small: a, large: b } : { small: b, large: a }; };
+
+  // Pasted text as rows of cells, and a reader for its numbers. Tabs or semicolons split cells as in Excel. Without
+  // them a comma splits only a comma-separated file (a line such as "2026-10-01,42.4" or a header "Point,Minutes");
+  // otherwise spaces split, so "47,2" stays one value whatever the page's language. The decimal mark is the one the
+  // pasted numbers prove; only a value no other value settles ("1,234" next to whole numbers) is read as this page
+  // writes numbers, and `ambiguous` says which value that was and how many there were, for a visible warning. With
+  // `whole` (counts), "1,234" and "1.234" can only be a thousand.
+  const readPaste = (text, { whole = false } = {}) => {
+    const kit = window.ToolKit;
+    // A no-break space between digit groups (Excel in Albanian or French) belongs to the number.
+    const source = String(text ?? "").replace(/^\uFEFF/, "").replace(/(\d)[\u00a0\u202f](?=\d{3}(?!\d))/g, "$1");
+    // ToolKit.parseRows takes its separator from the first line; a first line made of the separator alone fixes it.
+    const split = (separator) => kit.parseRows(`${separator}\n${source}`);
+    const lines = source.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+    // A comma inside a word that is neither a number nor a date; "Loading time, minutes" is a header, not a file.
+    const csv = (line) => line.split(/\s+/).some((word) => /[^,],+[^,]/.test(word) && !formOf(word) && !kit.parseDate(word));
+    const spaced = !/[\t;]/.test(source) && !lines.some(csv);
+    const rows = source.includes("\t") ? split("\t") : source.includes(";") ? split(";") : spaced ? lines.map((line) => line.split(/\s+/)) : split(",");
+    const forms = new Map();
+    rows.flat().forEach((cell) => { if (!kit.parseDate(cell)) { const form = formOf(cell); if (form) forms.set(cell, form); } });
+    const marks = [...forms.values()].map((form) => form.mark);
+    const comma = marks.includes("comma"), dot = marks.includes("dot");
+    // Settled by the paste when only one decimal mark appears in it; otherwise the page's own.
+    const settled = comma !== dot;
+    const decimalComma = settled ? comma : kit.DECIMAL_COMMA;
+    const unclear = settled || whole ? [] : [...forms.entries()].filter(([, form]) => form.mark === "either");
+    const count = unclear.length ? rows.flat().filter((cell) => forms.get(cell)?.mark === "either").length : 0;
+    const ambiguous = count ? (([token, form]) => ({ count, token, ...readings(form), read: valueOf(form, decimalComma) }))(unclear[0]) : null;
+    const number = (cell) => {
+      const form = forms.get(cell) || formOf(cell);
+      if (!form) return NaN;
+      const value = whole && form.mark === "either" ? readings(form).large : valueOf(form, form.mark === "comma" || (form.mark === "dot" ? false : decimalComma));
+      return Number.isFinite(value) ? value : NaN;
+    };
+    return { rows, number, ambiguous, spaced };
+  };
+
   // A pasted column: one value per line, or a date and a value, or a row number and a value (the last number of a row
   // is the measurement, a cell that reads as a date is its label). A single line of numbers separated by spaces counts
-  // too. Rows without a number (a header) are skipped.
+  // too. Rows without a number (a header) are skipped. The list carries `ambiguous` (see readPaste), not enumerable.
   const parseValues = (text) => {
     const kit = window.ToolKit;
+    const paste = readPaste(text);
     const out = [];
-    const source = String(text ?? "");
-    // With a decimal comma and no tab or semicolon in the text, "47,2" is one value, not a row of 47 and 2: a
-    // column copied from a German or Albanian Excel looks exactly like that.
-    const commaColumn = kit.DECIMAL_COMMA && !/[\t;]/.test(source);
-    const rows = commaColumn
-      ? source.split(/\r?\n/).map((line) => line.trim()).filter(Boolean).map((line) => (/^[+-]?\d[\d.]*(?:,\d+)?$/.test(line) ? [line] : kit.parseRows(line)[0] || []))
-      : kit.parseRows(source);
-    const single = rows.length === 1 && rows[0].length === 1 && /\s/.test(rows[0][0].trim());
-    const lines = single ? rows[0][0].trim().split(/\s+/).map((cell) => [cell]) : rows;
-    lines.forEach((cells) => {
+    // One line of numbers with spaces between them is a list, not one row.
+    const single = paste.spaced && paste.rows.length === 1 && paste.rows[0].every((cell) => Number.isFinite(paste.number(cell)));
+    (single ? paste.rows[0].map((cell) => [cell]) : paste.rows).forEach((cells) => {
       let date = "";
       let value = NaN;
       cells.forEach((cell) => {
         const day = kit.parseDate(cell);
         if (day && !date) { date = day; return; }
-        const number = kit.parseNumber(cell);
+        const number = paste.number(cell);
         if (Number.isFinite(number)) value = number;
       });
       if (Number.isFinite(value)) out.push({ date, value });
     });
-    return out;
+    return Object.defineProperty(out, "ambiguous", { value: paste.ambiguous });
+  };
+  // The warning for a decimal mark the paste leaves open, in the page's language ("" when there is none).
+  const decimalNote = (ambiguous) => {
+    if (!ambiguous) return "";
+    const { tx, num } = window.ToolKit;
+    const small = num(ambiguous.small, 3), large = String(ambiguous.large);
+    return tx("Check the decimal mark: “{token}” can mean {small} or {large}. Read as {read}, the way this page writes numbers ({n} values like it). If that is wrong, paste the values with their decimals or open the page in the language of your spreadsheet.", { token: ambiguous.token, small, large, read: ambiguous.read === ambiguous.small ? small : large, n: ambiguous.count });
   };
   // Decimals in the sample (at most 3), so the results are shown with one more than the data.
   const decimals = (values) => Math.min(3, Math.max(0, ...values.map((value) => { const text = String(value); const at = text.indexOf("."); return at < 0 ? 0 : text.length - at - 1; })));
@@ -67,7 +129,7 @@
       band: band(cap.cpk), digits: decimals(values), lsl, usl, target: Number.isFinite(spec.target) ? spec.target : null,
     };
   };
-  window.ProcessLabMath = { fill, parseValues, decimals, band, oneIn, verdictOf, analyse };
+  window.ProcessLabMath = { fill, readPaste, parseValues, decimalNote, decimals, band, oneIn, verdictOf, analyse };
 
   const dataEl = document.getElementById("process-lab-data");
   if (!dataEl || !window.ToolKit || !window.StatsKit || !window.ChartKit) return;
@@ -179,7 +241,7 @@
     results.replaceChildren();
     const list = points();
     results.hidden = state.tab !== "measure" || list.length < 2;
-    valuesCount.textContent = list.length ? tx("{n} measurements", { n: int.format(list.length) }) : "";
+    valuesCount.textContent = [list.length ? tx("{n} measurements", { n: int.format(list.length) }) : "", decimalNote(list.ambiguous)].filter(Boolean).join(" · ");
     empty.hidden = list.length > 0;
     if (results.hidden) return;
     const result = analyse(list, specOf());
@@ -353,8 +415,9 @@
 
   const renderMeans = () => {
     meansOut.replaceChildren();
-    const a = parseValues(state.means.a).map((point) => point.value);
-    const b = parseValues(state.means.b).map((point) => point.value);
+    const pastes = [parseValues(state.means.a), parseValues(state.means.b)];
+    const [a, b] = pastes.map((list) => list.map((point) => point.value));
+    pastes.forEach((list) => { if (list.ambiguous) meansOut.append(hint(decimalNote(list.ambiguous))); });
     const test = S.welch(a, b);
     if (!test) {
       if (str(state.means.a).trim() || str(state.means.b).trim()) meansOut.append(hint(data.means.need));

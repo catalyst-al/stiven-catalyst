@@ -14,7 +14,7 @@
   const D = v => { const s = String(v ?? ''); return E(lang !== 'en' && /^\d{4}-\d{2}-\d{2}$/.test(s) ? `${s.slice(8, 10)}.${s.slice(5, 7)}.${s.slice(0, 4)}` : s); };
   const roleId = root.dataset.role, role = data.roles[roleId];
   const app = root.querySelector('[data-coaching-app]'), status = root.querySelector('[data-coaching-status]');
-  const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => window.localStorage.setItem(key, value) };
+  const storage = { getItem: key => window.localStorage.getItem(key), setItem: (key, value) => { if (window.WorkLock?.locked) throw new Error('locked'); window.localStorage.setItem(key, value); } };
   const loaded = C.load(storage);
   let state = loaded.state, blocked = loaded.error === 'corrupt' ? 'corrupt' : null, view = blocked ? 'backup' : 'today', moduleId = role.modules[0], dirty = false, fieldIndex = 0, volatile = false;
   const dirtyForms = new Set();
@@ -178,9 +178,15 @@
     }
     if (kind === 'import') {
       const file = values.backup;
-      if (!file || file.size > 5 * 1024 * 1024) { notice('invalidBackup'); return; }
+      if (!file) { notice('invalidBackup'); return; }
+      // Refused before it is read: a file of hundreds of megabytes would hold the tab while it is read whole.
+      if (file.size > C.BACKUP_BYTES) { notice('backupTooLarge'); return; }
       try {
-        const next = C.importBackup(state, await file.text());
+        // The backup's version of a project changed here since is added beside it with a label that says so.
+        const day = d => (lang !== 'en' && /^\d{4}-\d{2}-\d{2}$/.test(d) ? `${d.slice(8, 10)}.${d.slice(5, 7)}.${d.slice(0, 4)}` : d);
+        const copyTitle = (title, date) => tx('copyOfBackup').replace('{title}', title).replace('{date}', day(date) || '–');
+        const next = C.importBackup(state, await file.text(), { copyTitle });
+        if (blocked !== 'corrupt' && next.projects.length === state.projects.length) { notice('alreadyImported'); return; }
         if (blocked === 'corrupt') {
           if (!window.confirm(tx('recover'))) return;
           const old = storage.getItem(C.KEY);
@@ -192,7 +198,7 @@
         } else if (blocked) { notice(blocked === 'conflict' ? 'conflict' : 'unavailable'); return; }
         else if (!update(s => { s.projects = next.projects; s.active = next.active; })) return;
         notice('imported'); dirty = false; render();
-      } catch { notice('invalidBackup'); }
+      } catch (error) { notice(['backupTooLarge', 'tooManyProjects'].includes(error?.message) ? error.message : 'invalidBackup'); }
       return;
     }
     const ok = update(s => {

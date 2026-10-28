@@ -60,7 +60,9 @@ test('process time, value-added time, PCE, rolled yield, capacity and bottleneck
   assert.equal(VsmMath.valueAddedTime(steps), 22);
   near(VsmMath.rolledYield(steps), 0.72);
   assert.equal(VsmMath.rolledYield([]), null);
-  assert.equal(VsmMath.bottleneck(steps), 1, 'B releases a piece every 15 s');
+  // B has the longest CT per operator (15 s), but C needs (12 s + 600 s / 60) / 50 % = 44 s of the day per piece:
+  // the least capacity (audit P2B-14).
+  assert.equal(VsmMath.bottleneck(steps), 2, 'C, with its uptime and changeovers, not B by CT');
   assert.equal(VsmMath.bottleneck([{ ct: '' }]), -1);
   // C: 600 min × 50 % = 18 000 s; per piece 12 s + 600 s / 60 = 22 s.
   near(VsmMath.capacity(steps[2], 600), 18000 / 22);
@@ -73,7 +75,7 @@ test('process time, value-added time, PCE, rolled yield, capacity and bottleneck
   assert.equal(result.lead, 360 * 60 + 52);
   near(result.pce, 22 / (360 * 60 + 52));
   assert.equal(result.pieces, 360);
-  assert.equal(result.bottleneck.name, 'B');
+  assert.equal(result.bottleneck.name, 'C');
   assert.deepEqual(plain(result.over), []);
   assert.deepEqual(plain(result.ladder.map((part) => [part.kind, part.seconds])), [['wait', 6000], ['process', 10], ['wait', 12000], ['process', 30], ['wait', 0], ['process', 12], ['wait', 3600]]);
   assert.equal(result.longestWait.step, 1);
@@ -155,12 +157,15 @@ test('the page opens on the example: the map with factories, triangles, ladder a
   assert.equal(window.document.querySelectorAll('.vs-kaizen').length, 6);
   const send = [...window.document.querySelectorAll('button')].find((b) => b.textContent === 'Send kaizen bursts to the Action Tracker');
   send.click();
-  const actions = window.ActionsStore.list();
+  // From the example, the actions arrive as the example's (ActionsStore: example: true); no other tool counts them.
+  assert.equal(window.ActionsStore.list().length, 0);
+  const actions = window.ActionsStore.all();
+  assert.ok(actions.every((a) => a.example === true));
   assert.equal(actions.length, 4);
   assert.ok(actions.every((a) => a.source === 'value-stream-map'));
   assert.equal(actions.find((a) => a.area === 'Pack').priority, 'High');
   send.click();
-  assert.equal(window.ActionsStore.list().length, 4, 'the same open bursts are not added twice');
+  assert.equal(window.ActionsStore.all().length, 4, 'the same open bursts are not added twice');
   // Moving and removing a step, with undo.
   window.document.querySelector('[data-view="current"]').click();
   window.document.querySelector('[data-act="down"][data-i="0"]').click();

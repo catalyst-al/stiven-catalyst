@@ -1,0 +1,62 @@
+/magazine/management-review-nr-03.html minFont 6.3 CLIPPED: about 50%
+/de/magazine/management-review-nr-03.html minFont 6.3 CLIPPED: etwa 50 %
+/sq/magazine/management-review-nr-03.html minFont 6.3 CLIPPED: rreth 50%
+/de/magazine/management-review-nr-06.html minFont 10.4 CLIPPED: Für Leistung oder Betriebszugehörigkeit in der operativen Arbeit
+/de/magazine/management-review-nr-08.html minFont 6.3 CLIPPED: Hervorragend im Entscheiden
+/sq/magazine/management-review-nr-08.html minFont 6.3 CLIPPED: E shkëlqyer në vendime
+/magazine/management-review-nr-10.html minFont 10.4 CLIPPED: Frequent use, a clear plan and the manager's support together
+/de/magazine/management-review-nr-10.html minFont 10.4 CLIPPED: Häufige Nutzung, klarer Plan und Unterstützung der Führung zusammen
+/sq/magazine/management-review-nr-10.html minFont 10.4 CLIPPED: Përdorim i shpeshtë, plan i qartë dhe mbështetja e menaxherit bashkë || Menaxheri e mbështet në mënyrë aktive përdorimin e AI-së
+/magazine/management-review-nr-12.html minFont 11.6 CLIPPED: Do not know how to find other teams' goals when they need them
+/de/magazine/management-review-nr-12.html minFont 11.6 CLIPPED: Wissen nicht, wie sie die Ziele anderer Teams finden, wenn sie sie bra
+/sq/magazine/management-review-nr-12.html minFont 11.6 CLIPPED: Nuk dinë si t'i gjejnë qëllimet e ekipeve të tjera kur u duhen
+/magazine/management-review-nr-24.html minFont 10.4 CLIPPED: Within 5 years
+/de/magazine/management-review-nr-24.html minFont 10.4 CLIPPED: Binnen 5 Jahren
+/sq/magazine/management-review-nr-24.html minFont 10.4 CLIPPED: Brenda 5 vjetëve
+/de/magazine/management-review-nr-31.html minFont 10.4 CLIPPED: Selbst und Vorgesetzte || Kollegen und Vorgesetzte
+/magazine/management-review-nr-45.html minFont 6.9 CLIPPED: Worked 2+ hours between 22:00 and 05:00, at least monthly || Under 11 hours' rest between working days, at least monthly
+/de/magazine/management-review-nr-45.html minFont 6.9 CLIPPED: Arbeiteten 2+ Stunden zwischen 22 und 5 Uhr, mindestens monatlich || Unter 11 Stunden Ruhe zwischen Arbeitstagen, mindestens monatlich
+/sq/magazine/management-review-nr-45.html minFont 6.9 CLIPPED: Punuan 2+ orë mes 22:00 dhe 05:00, të paktën një herë në muaj || Nën 11 orë pushim mes dy ditëve pune, të paktën një herë në muaj
+/magazine/management-review-nr-49.html minFont 10.4 CLIPPED: 3rd exercise
+/magazine/management-review-nr-51.html minFont 10.4 CLIPPED: Encouraged
+/de/magazine/management-review-nr-51.html minFont 10.4 CLIPPED: Ermutigt
+/magazine/management-review-nr-56.html minFont 11.6 CLIPPED: 20 of 60 || 19 of 60
+/de/magazine/management-review-nr-56.html minFont 11.6 CLIPPED: 38 von 60 || 22 von 60 || 20 von 60
+/sq/magazine/management-review-nr-56.html minFont 11.6 CLIPPED: 38 nga 60 || 22 nga 60 || 20 nga 60
+/magazine/management-review-nr-57.html minFont 6.3 CLIPPED: With weekly feedback
+/de/magazine/management-review-nr-57.html minFont 6.3 CLIPPED: Mit wöchentlicher Rückmeldung
+/magazine/management-review-nr-58.html minFont 10.4 CLIPPED: With variability
+/de/magazine/management-review-nr-58.html minFont 10.4 CLIPPED: Mit Schwankung
+/sq/magazine/management-review-nr-58.html minFont 10.4 CLIPPED: Me ndryshueshmëri
+/magazine/management-review-nr-59.html minFont 10.4 CLIPPED: Autumn 2003
+/de/magazine/management-review-nr-59.html minFont 10.4 CLIPPED: Herbst 2003
+/magazine/management-review-nr-62.html minFont 10.4 CLIPPED: under 12%
+/de/magazine/management-review-nr-62.html minFont 10.4 CLIPPED: über 80 % || unter 12 %
+/sq/magazine/management-review-nr-62.html minFont 10.4 CLIPPED: nën 12%
+/sq/magazine/management-review-nr-65.html minFont 10.4 CLIPPED: Vetëm notat e mëparshme
+/de/magazine/management-review-nr-77.html minFont 10.4 CLIPPED: Produkt, Filiale (10–12)
+/sq/magazine/management-review-nr-77.html minFont 10.4 CLIPPED: Produkt, dyqan (10–12)
+/magazine/management-review-nr-80.html minFont 10.4 CLIPPED: Reported improvement
+/de/magazine/management-review-nr-80.html minFont 10.4 CLIPPED: Verbesserung gemeldet
+/sq/magazine/management-review-nr-80.html minFont 10.4 CLIPPED: Raportuan përmirësim
+/magazine/operational-treatise-vol-02.html minFont 10.4 CLIPPED: 20 of 80 || 19 of 80
+/de/magazine/operational-treatise-vol-02.html minFont 10.4 CLIPPED: 60 von 80 || 38 von 80 || 20 von 80
+/sq/magazine/operational-treatise-vol-02.html minFont 10.4 CLIPPED: 60 nga 80 || 38 nga 80 || 20 nga 80
+/de/magazine/operational-treatise-vol-03.html minFont 10.4 CLIPPED: Echte Ausnahmen
+/sq/magazine/operational-treatise-vol-03.html minFont 10.4 CLIPPED: Përjashtime të vërteta
+/magazine/operational-treatise-vol-05.html minFont 10.4 CLIPPED: 10 / window || 24 / window || Preparation upgraded
+/de/magazine/operational-treatise-vol-05.html minFont 10.4 CLIPPED: 10 / Fenster || 24 / Fenster || 70 % ausgelastet
+/sq/magazine/operational-treatise-vol-05.html minFont 10.4 CLIPPED: 10 / dritare || 24 / dritare || Përgatitja e përmirësuar
+/magazine/operational-treatise-vol-06.html minFont 10.4 CLIPPED: 30 · 3.0% || Upper control limit || 90/100 = 90.0%
+/de/magazine/operational-treatise-vol-06.html minFont 10.4 CLIPPED: 80 · 8,0 % || 60 · 6,0 % || 30 · 3,0 %
+/sq/magazine/operational-treatise-vol-06.html minFont 10.4 CLIPPED: 30 · 3,0% || Objektivi i biznesit || Kufiri i sipërm i kontrollit
+/magazine/operational-treatise-vol-08.html minFont 11.6 CLIPPED: d = 0.80
+/de/magazine/operational-treatise-vol-08.html minFont 11.6 CLIPPED: d = 0.80
+/sq/magazine/operational-treatise-vol-08.html minFont 11.6 CLIPPED: d = 0.80
+/sq/magazine/operational-treatise-vol-13.html minFont 11.6 CLIPPED: Mosmarrëveshje me dy palë në zinxhirin e furnizimit, të mbajtura
+/de/magazine/nga-terreni-01.html minFont 6.3 CLIPPED: Häufige Nutzung, klarer Plan und Unterstützung der Führung
+/sq/magazine/nga-terreni-01.html minFont 6.3 CLIPPED: Përdorim i shpeshtë, plan i qartë dhe mbështetja e menaxherit
+/magazine/nga-terreni-02.html minFont 6.3 CLIPPED: 1.68–1.73×
+/de/magazine/nga-terreni-02.html minFont 6.3 CLIPPED: Durchschnittstag 2025 || 1,68–1,73×
+/sq/magazine/nga-terreni-02.html minFont 6.3 CLIPPED: 1,68–1,73×
+pages 285, pages with clipped chart text 61, clipped labels 105, pages with horizontal scroll 0, pages with chart text <8px 48

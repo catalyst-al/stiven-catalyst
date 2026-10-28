@@ -1,0 +1,171 @@
+TAP version 13
+# Subtest: en: the essay and its whole case box are read, and nothing of the form, the Join box or the share row
+not ok 1 - en: the essay and its whole case box are read, and nothing of the form, the Join box or the share row
+  ---
+  duration_ms: 360.605479
+  type: 'test'
+  location: '/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:45:3'
+  failureType: 'testCodeFailure'
+  error: 'read: A documented delay report with 19 cases: missing bags, wrong'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:55:38)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: de: the essay and its whole case box are read, and nothing of the form, the Join box or the share row
+not ok 2 - de: the essay and its whole case box are read, and nothing of the form, the Join box or the share row
+  ---
+  duration_ms: 290.488477
+  type: 'test'
+  location: '/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:45:3'
+  failureType: 'testCodeFailure'
+  error: 'read: Ein dokumentierter Verspätungsbericht mit 19 Fällen: fehlend'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:55:38)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: sq: the essay and its whole case box are read, and nothing of the form, the Join box or the share row
+not ok 3 - sq: the essay and its whole case box are read, and nothing of the form, the Join box or the share row
+  ---
+  duration_ms: 140.6952
+  type: 'test'
+  location: '/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:45:3'
+  failureType: 'testCodeFailure'
+  error: 'read: Një raport i dokumentuar vonesash me 19 raste: çanta që mung'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:55:38)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: a reflection without a case box ends on its last paragraph, in all three languages
+not ok 4 - a reflection without a case box ends on its last paragraph, in all three languages
+  ---
+  duration_ms: 146.355358
+  type: 'test'
+  location: '/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:73:1'
+  failureType: 'testCodeFailure'
+  error: 'en: ends on "Join in"'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:81:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: a voice on the device is taken before an online one, and the note says the text stays on the device
+not ok 5 - a voice on the device is taken before an online one, and the note says the text stays on the device
+  ---
+  duration_ms: 100.961465
+  type: 'test'
+  location: '/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:85:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    en: the note for a voice on the device
+    + actual - expected
+    
+    + 'Read aloud by a voice of your own browser. This site records and sends nothing.'
+    - undefined
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual: 'Read aloud by a voice of your own browser. This site records and sends nothing.'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:92:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: with only an online voice, the note names it and says the browser sends the text to its maker
+not ok 6 - with only an online voice, the note names it and says the browser sends the text to its maker
+  ---
+  duration_ms: 159.354184
+  type: 'test'
+  location: '/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:97:1'
+  failureType: 'testCodeFailure'
+  error: 'en: Read aloud by a voice of your own browser. This site records and sends nothing.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: 'Read aloud by a voice of your own browser. This site records and sends nothing.'
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:107:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: without any voice for the language, the note says so and does not send the reader to a browser with online voices
+not ok 7 - without any voice for the language, the note says so and does not send the reader to a browser with online voices
+  ---
+  duration_ms: 160.333051
+  type: 'test'
+  location: '/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:112:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input was expected to not match the regular expression /Edge/. Input:
+    
+    'Your browser has no voice for this language, so it cannot read this text aloud. Another browser, such as Microsoft Edge, may have one.'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: 'Your browser has no voice for this language, so it cannot read this text aloud. Another browser, such as Microsoft Edge, may have one.'
+  operator: 'doesNotMatch'
+  stack: |-
+    TestContext.<anonymous> (/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:117:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 0
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2571.7098

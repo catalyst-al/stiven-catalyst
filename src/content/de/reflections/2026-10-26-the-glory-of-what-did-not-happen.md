@@ -427,7 +427,7 @@ Keine Fotos für die Jahresabschlusspräsentation.
 
 Sie haben nur ein System, das weiter funktioniert, und Menschen, die ihre Arbeit tun können, ohne den Folgen eines vermeidbaren Fehlers begegnen zu müssen.
 
-**Und vielleicht ist das die schwerste Form beruflichen Ruhms: entscheidend zu einem Ergebnis beizutragen, ohne dass etwas schiefgehen muss, damit dein Beitrag sichtbar wird.**
+**Und vielleicht ist das die schwerste Form beruflichen Ruhms: entscheidend zu einem Ergebnis beizutragen, ohne dass etwas schiefgehen muss, damit der eigene Beitrag sichtbar wird.**
 
 Denn eine Organisation, die Menschen nur sieht, wenn die Krise ausbricht, riskiert früher oder später, genau die zu verlieren, die dafür sorgten, dass sie nicht ausbrach.
 

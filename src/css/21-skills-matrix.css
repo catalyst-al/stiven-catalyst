@@ -101,6 +101,10 @@
   .sm-box { margin-bottom: 12px; break-inside: avoid; }
   .sm-grid-wrap, .sm-plan-wrap { overflow: visible; border: 0; }
   .sm-grid :is(.sm-corner, .sm-person, tfoot th) { position: static; }
+  /* The screen's minimum widths (a finger's width per cell) would push the last tasks off the page. */
+  .sm-grid .sm-task, .sm-person { min-width: 0; }
+  .sm-cell { width: 30px; height: 30px; }
+  .sm-icon { width: 22px; height: 22px; }
   .sm-icon .sm-fill, .sm-icon .sm-dot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .sm-plan-table select, .sm-plan-table input { border: 0; padding: 0; appearance: none; background: none; }
+  .sm-plan-table select, .sm-plan-table input { width: 100%; min-width: 0; border: 0; padding: 0; appearance: none; background: none; }
 }

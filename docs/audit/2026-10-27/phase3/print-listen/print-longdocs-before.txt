@@ -1,0 +1,27 @@
+FAIL en guides/tools-guide.html pages=3 blocks=20 lost=1 ["The Tools Guide"]
+FAIL en magazine/management-review-nr-80.html pages=4 blocks=17 lost=7 ["PDCA: the cycle that does not end","THE NUMBERS The 47 reports that described their cycles (2014)","Published reports may describe the work less fully than it was done. The bars co","Source: Michael J. Taylor et al., BMJ Quality & Safety 23(4), 2014"] hiddenChart=14
+FAIL en magazine/management-review-nr-01.html pages=5 blocks=27 lost=16 ["What the best managers do","70% at least, of the variance in engagement between business units is explained ","From Gallup's 2015 report on managers in the United States. A share of the varia","Source: Gallup, 2015"] hiddenChart=35
+FAIL en magazine/management-review-2026-09.html pages=2 blocks=7 lost=1 ["The manager in the age of AI"]
+FAIL en magazine/operational-treatise-vol-01.html pages=4 blocks=18 lost=8 ["Gemba: management where the work happens","A shift, a ramp, a desk at 03:00: one piece of work followed as it actually happ","The mechanism behind the scene, named with the model that explains it, and the r","What a working team can try on Monday: fields, questions, a cadence and a count,"] hiddenChart=10
+FAIL en magazine/from-the-floor.html pages=1 blocks=5 lost=1 ["ISSUE 2 When the load rises OCTOBER 2026 November opens the busiest season in lo"]
+ok   en insights/pareto-and-5-why-in-practice/ pages=5 blocks=38
+ok   en reflections/who-owns-the-hour-the-machine-saves/ pages=22 blocks=276
+ok   en reflections/the-courage-not-to-continue/ pages=24 blocks=311
+FAIL de guides/tools-guide.html pages=3 blocks=20 lost=1 ["Der Werkzeug-Leitfaden"]
+FAIL de magazine/management-review-nr-80.html pages=4 blocks=16 lost=7 ["PDCA: der Zyklus, der nicht endet","DIE ZAHLEN Die 47 Berichte, die ihre Zyklen beschrieben (2014)","Veröffentlichte Berichte beschreiben die Arbeit womöglich knapper, als sie getan","Quelle: Michael J. Taylor et al., BMJ Quality & Safety 23(4), 2014"] hiddenChart=14
+FAIL de magazine/management-review-nr-01.html pages=5 blocks=26 lost=16 ["Was die besten Führungskräfte tun","70 % mindestens, der Unterschiede im Engagement zwischen Geschäftseinheiten erkl","Aus dem Gallup-Bericht von 2015 über Führungskräfte in den USA. Ein Anteil an de","Quelle: Gallup, 2015"] hiddenChart=35
+FAIL de magazine/management-review-2026-09.html pages=2 blocks=6 lost=1 ["Die Führungskraft im Zeitalter der KI"]
+FAIL de magazine/operational-treatise-vol-01.html pages=4 blocks=17 lost=8 ["Gemba: führen, wo die Arbeit geschieht","Eine Schicht, eine Rampe, eine Rezeption um 03:00: ein Stück Arbeit, verfolgt, w","Der Mechanismus hinter der Szene, benannt mit dem Modell, das ihn erklärt, und d","Was ein Team am Montag ausprobieren kann: Felder, Fragen, einen Takt und eine Zä"] hiddenChart=10
+FAIL de magazine/from-the-floor.html pages=1 blocks=5 lost=1 ["AUSGABE 2 Wenn die Last steigt OKTOBER 2026 Der November eröffnet die arbeitsrei"] clipped=["span.weekly-card-line 584x74>584x50"]
+ok   de insights/pareto-and-5-why-in-practice/ pages=6 blocks=40
+ok   de reflections/who-owns-the-hour-the-machine-saves/ pages=24 blocks=276
+ok   de reflections/the-courage-not-to-continue/ pages=26 blocks=316
+FAIL sq guides/tools-guide.html pages=3 blocks=20 lost=1 ["Udhëzuesi i mjeteve"]
+FAIL sq magazine/management-review-nr-80.html pages=4 blocks=17 lost=7 ["PDCA: cikli që nuk mbaron","SHIFRAT 47 raportet që i përshkruan ciklet (2014)","Raportet e botuara mund ta përshkruajnë punën më pak plotësisht se si u bë. Shir","Burimi: Michael J. Taylor et al., BMJ Quality & Safety 23(4), 2014"] hiddenChart=14
+FAIL sq magazine/management-review-nr-01.html pages=5 blocks=28 lost=17 ["Çfarë bëjnë menaxherët më të mirë","TEMA KRYESORE","70% të paktën, e ndryshimit në angazhim mes njësive të biznesit shpjegohet nga m","Nga raporti i Gallup-it i vitit 2015 për menaxherët në Shtetet e Bashkuara. Pjes"] hiddenChart=35
+FAIL sq magazine/management-review-2026-09.html pages=2 blocks=7 lost=1 ["Menaxheri në epokën e AI-së"]
+FAIL sq magazine/operational-treatise-vol-01.html pages=4 blocks=18 lost=8 ["Gemba: menaxhimi aty ku ndodh puna","Një turn, një rampë, një sportel në 03:00: një punë e ndjekur ashtu si ndodh vër","Mekanizmi pas skenës, i emërtuar me modelin që e shpjegon, dhe kërkimi që e prov","Çfarë mund të provojë një ekip të hënën: fusha, pyetje, një ritëm dhe një numëri"] hiddenChart=10
+FAIL sq magazine/from-the-floor.html pages=1 blocks=4 lost=2 ["NUMRI 2 Kur ngarkesa rritet TETOR 2026 Nëntori hap sezonin më të ngarkuar në log","NUMRI 1 Menaxheri në mes TETOR 2026 Të dhënat e fundit tregojnë diçka që shumë n"] clipped=["span.weekly-card-line 584x74>584x50"]
+ok   sq insights/pareto-and-5-why-in-practice/ pages=5 blocks=38
+ok   sq reflections/who-owns-the-hour-the-machine-saves/ pages=23 blocks=276
+ok   sq reflections/the-courage-not-to-continue/ pages=24 blocks=314

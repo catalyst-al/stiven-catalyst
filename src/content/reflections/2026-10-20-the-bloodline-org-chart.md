@@ -15,7 +15,7 @@ This is our operational reality. You are not asked to know the system. You are a
 
 **Let me say it without gloves. When a blood tie is worth more than the work rules, you have not built a company. You have simply set up a clan with a business tax number.**
 
-Look at what this mindset does to a day-to-day operation. You may be the best-prepared manager, you may have built clear procedures to cut damage, speed up service or bring order to the shift. But that whole structure collapses the very second it collides with the interest or the laziness of a "nephew" or a "friend of the family".
+Look at what this mindset does to a day-to-day operation. You may be the best-prepared manager, you may have built clear procedures to cut damage, speed up service or bring order to the shift. But that whole structure collapses the very second it collides with the interest or the laziness of a “nephew” or a “friend of the family”.
 
 In that moment the rule stops working. The procedure becomes a laughable piece of paper. Because if an ordinary employee is ten minutes late, they are fined in the name of discipline. If the owner's nephew does not turn up at all, or wrecks a whole day's operation, the manager is asked to look away, quietly fix the numbers and carry someone else's mistake on their own back.
 

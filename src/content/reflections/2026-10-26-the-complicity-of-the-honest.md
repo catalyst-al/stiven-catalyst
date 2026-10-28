@@ -7,7 +7,7 @@ deck: 'In a distorted system, evil does not flourish only through those who brea
 description: 'A reflection on silence in meetings, on good people who "mind their own business" and why courage begins with a word spoken calmly.'
 ---
 
-There is a very comfortable shelter where good people go to hide whenever they face a difficult moral decision. It is a shelter built from seemingly harmless excuses, from words that sound like folk wisdom: "I mind my own business", "It's none of my concern", "Why should I be the hero who fixes the world".
+There is a very comfortable shelter where good people go to hide whenever they face a difficult moral decision. It is a shelter built from seemingly harmless excuses, from words that sound like folk wisdom: “I mind my own business”, “It's none of my concern”, “Why should I be the hero who fixes the world”.
 
 These sentences are repeated every day in offices, in warehouses, in the corridors of institutions and in public life. They serve as a kind of sedative for the conscience. A person tells himself that it is enough not to steal yourself, enough not to insult anyone with your own mouth and to keep to your working hours, to be called a person of integrity. He believes that between the executioner and the victim there is a neutral zone, a no man's land where you can stand aside, stay out of it and keep your hands clean.
 
@@ -35,7 +35,7 @@ Because every time you swallow a truth to preserve the comfort of the moment, so
 
 Civic and professional courage does not necessarily require you to march into the square with a flag or to sacrifice everything in a blind confrontation.
 
-Courage begins with much simpler, but essential, decisions. It begins with a word spoken in a calm and firm voice in a meeting: "That is not correct." It begins with refusing to laugh at the boss's humiliating joke. It begins with a hand placed on the shoulder of a colleague who is being unfairly attacked, saying openly in front of everyone: "You are not alone, the truth is different."
+Courage begins with much simpler, but essential, decisions. It begins with a word spoken in a calm and firm voice in a meeting: “That is not correct.” It begins with refusing to laugh at the boss's humiliating joke. It begins with a hand placed on the shoulder of a colleague who is being unfairly attacked, saying openly in front of everyone: “You are not alone, the truth is different.”
 
 A just system is not built only with laws well written on paper. It is built with the daily refusal of ordinary people to become spectators of shame.
 

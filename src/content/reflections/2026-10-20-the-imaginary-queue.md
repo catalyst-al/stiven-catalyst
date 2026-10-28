@@ -7,7 +7,7 @@ deck: 'When a manager sees capable people off with the arrogance that the market
 description: 'A reflection on "there are plenty waiting at the door", on the hidden cost of a person who leaves, and why when a good one goes, it is management that failed.'
 ---
 
-For years, in the offices of Albanian directors and owners, one sentence has gone round that was used as a hammer against every request for dignity, a pay rise or better conditions: "Let them leave, there are as many people as you like waiting at the door to work."
+For years, in the offices of Albanian directors and owners, one sentence has gone round that was used as a hammer against every request for dignity, a pay rise or better conditions: “Let them leave, there are as many people as you like waiting at the door to work.”
 
 It was the ready answer of an arrogance that knew no limits. It was the philosophy of a market in which a person was seen as a cheap spare part, thrown away as soon as it was worn out, to be replaced by the next in line. And for a long time poverty and the lack of alternatives kept this illusion alive. Managers learned to think that value lay only in the walls of their business, and not in the hands and minds of those who kept that business open.
 
@@ -25,7 +25,7 @@ I have seen up close how businesses led by this cynicism wither. First the best 
 
 **This is no longer a business that moves forward. It is a field hospital where yesterday's wounds are dressed every day.**
 
-Today, those who used to say "let them leave" are the same ones holding their heads in their hands because they cannot find a single person to take responsibility for one shift. They are the same ones who complain that the young generation has no patience. But the young generation does not lack patience for work; it lacks patience for arrogance. No one accepts any more to be treated as surplus in a place where they carry the main weight.
+Today, those who used to say “let them leave” are the same ones holding their heads in their hands because they cannot find a single person to take responsibility for one shift. They are the same ones who complain that the young generation has no patience. But the young generation does not lack patience for work; it lacks patience for arrogance. No one accepts any more to be treated as surplus in a place where they carry the main weight.
 
 The lesson of this time is simple, but merciless for those who refuse to change. People are not raw material bought in bulk on the market.
 

@@ -1,0 +1,93 @@
+
+Running 2 tests using 2 workers
+
+[1A[2K[1/2] [1440px dark] › tests/browser/print.spec.mjs:205:1 › Treatise: the boxes that come in with the scroll print, unscrolled, in all three languages
+[1A[2K[2/2] [1440px dark] › tests/browser/print.spec.mjs:176:1 › Management Review: the charts of an issue print drawn, without scrolling to them first
+[1A[2K  1) [1440px dark] › tests/browser/print.spec.mjs:205:1 › Treatise: the boxes that come in with the scroll print, unscrolled, in all three languages 
+
+    Error: en: the boxes are not transparent on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 3[39m
+    [31m+ Received  + 3[39m
+
+    [2m  Array [[22m
+    [32m-   "1",[39m
+    [32m-   "1",[39m
+    [32m-   "1",[39m
+    [31m+   "0",[39m
+    [31m+   "0",[39m
+    [31m+   "0",[39m
+    [2m  ][22m
+
+      213 |     await expect(layers).toHaveCount(3);
+      214 |     const opacities = await layers.evaluateAll((els) => els.map((e) => getComputedStyle(e).opacity));
+    > 215 |     expect(opacities, `${lang}: the boxes are not transparent on paper`).toEqual(["1", "1", "1"]);
+          |                                                                          ^
+      216 |     const last = (await layers.last().locator("p").innerText()).replace(/[^\p{L}\p{N}]+/gu, "");
+      217 |     const { pages } = await readPdf(browser, await printPdf(page));
+      218 |     expect(pages.join("").replace(/[^\p{L}\p{N}]+/gu, ""), `${lang}: the last box's text is in the PDF`).toContain(last.slice(0, 40));
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:215:74
+
+    Error Context: test-results/browser/print-Treatise-the-boxes-t-fcc89-lled-in-all-three-languages-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-Treatise-the-boxes-t-fcc89-lled-in-all-three-languages-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-Treatise-the-boxes-t-fcc89-lled-in-all-three-languages-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2) [1440px dark] › tests/browser/print.spec.mjs:176:1 › Management Review: the charts of an issue print drawn, without scrolling to them first 
+
+    Error: parts of the charts hidden on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  -  1[39m
+    [31m+ Received  + 16[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "wk-bar wk-grow",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+   "wk-bar wk-grow",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+   "wk-bar wk-grow is-alert",[39m
+    [31m+   "wk-value wk-pop is-key is-alert",[39m
+    [31m+   "wk-bar wk-grow",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+   "wk-col wk-rise",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+   "wk-col wk-rise",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+   "wk-col wk-rise is-alert",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+ ][39m
+
+      195 |     return out;
+      196 |   });
+    > 197 |   expect(hidden, "parts of the charts hidden on paper").toEqual([]);
+          |                                                         ^
+      198 |   // And the page of the first chart has its bars: coloured ink, not only its caption.
+      199 |   const caption = await page.locator("[data-weekly-chart] figcaption strong").first().innerText();
+      200 |   const { ink } = await readPdf(browser, await printPdf(page), { inkOn: caption.replace(/\s+/g, " ").slice(0, 24) });
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:197:57
+
+    Error Context: test-results/browser/print-Management-Review-th-7a17f-out-scrolling-to-them-first-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-Management-Review-th-7a17f-out-scrolling-to-them-first-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-Management-Review-th-7a17f-out-scrolling-to-them-first-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [1440px dark] › tests/browser/print.spec.mjs:176:1 › Management Review: the charts of an issue print drawn, without scrolling to them first 
+    [1440px dark] › tests/browser/print.spec.mjs:205:1 › Treatise: the boxes that come in with the scroll print, unscrolled, in all three languages 

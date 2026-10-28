@@ -93,8 +93,50 @@
     for (let i = zs.length - 1; i >= 0 && Math.sign(zs[i]) === side; i--) n++;
     return { n, dir: side > 0 ? "up" : "down" };
   };
+  // Low counts. The 3σ line and the run of 8 assume that a point beyond 3σ is rare (0.135 % on each side) and that a
+  // point is as likely above the centre line as below it. A count of a few a day is neither: at c̄ = 0.2 four days in
+  // five are 0, below the centre line, so 8 in a row below it comes on one day in five; and 2 on a day is beyond
+  // c̄ + 3√c̄ on 1.8 % of days. Under LOW_COUNT expected per point, a count chart's rules use the count's own law
+  // instead: Poisson (c- and u-charts) or binomial (p-chart), with the chart's centre line as its mean.
+  const LOW_COUNT = 5;
+  const TAIL = 0.00135;
+  const RUN_CHANCE = 0.5 ** RUN;
+  // Each point of a count chart as { k (its count), e (the count its centre line expects), cdf (P(X ≤ x)) }; null for
+  // an individuals chart, or without StatsKit's counts.
+  const countModel = (chart, Stats = window.StatsKit) => {
+    if (!chart || !["c", "u", "p"].includes(chart.kind) || !Stats?.poissonCdf || !Stats?.binomialCdf) return null;
+    return chart.points.map((point) => {
+      if (chart.kind === "p") {
+        const n = Math.round(Number(point.n));
+        return { k: Number(point.d), e: n * chart.center, cdf: (x) => Stats.binomialCdf(x, n, chart.center) };
+      }
+      const e = chart.kind === "u" ? chart.center * Number(point.n) : chart.center;
+      return { k: Number(point.c), e, cdf: (x) => Stats.poissonCdf(x, e) };
+    });
+  };
+  // A point beyond a limit that is rare by the count's own law too: on the high side P(X ≥ k) at most TAIL. A point on
+  // the low side needs a lower limit above 0: with none, no count is low enough to be beyond it.
+  const rareBeyond = (chart, model, i, dir) => {
+    if (dir === "down" && chart.kind !== "imr" && !(chart.points[i].lcl > 0)) return false;
+    const m = model?.[i];
+    if (!m || m.e >= LOW_COUNT) return true;
+    return dir === "up" ? 1 - m.cdf(m.k - 1) <= TAIL : m.cdf(m.k) <= TAIL;
+  };
+  // A run ending at the latest point that is as unlikely as 8 in a row on one side of a fair coin (0.5⁸): the chance
+  // of each point on its side of the centre line by the count's law (0.5 from LOW_COUNT up), multiplied over the run.
+  // At c̄ = 0.2 a day below the centre line has a chance of 0.82, so 8 zero days are no signal; at c̄ = 3.4, 10 are.
+  const rareRun = (model, last, run) => {
+    if (!model) return true;
+    let chance = 1;
+    for (let i = last; i > last - run.n; i--) {
+      const m = model[i];
+      chance *= m.e >= LOW_COUNT ? 0.5 : run.dir === "up" ? 1 - m.cdf(Math.floor(m.e)) : m.cdf(Math.ceil(m.e) - 1);
+    }
+    return chance <= RUN_CHANCE;
+  };
   // The rules on the latest point of a chart. beyond: StatsKit's rule 1 on the standardized point (more than 3σ from
-  // the centre, so a p-chart's own limits of the day count). run: 8 or more in a row on one side, ending with it. trend:
+  // the centre, so a p-chart's own limits of the day count), and for a low count rare by its own law (rareBeyond).
+  // run: 8 or more in a row on one side, ending with it, and for a low count as rare as 8 would be (rareRun). trend:
   // StatsKit's Nelson rule 3 (6 in a row, each higher or each lower than the one before) on the plotted values, ending
   // with it. Each rule says its direction; `better` ("up" or "down") says which direction is good news.
   const rulesAt = (chart, better, Stats = window.StatsKit) => {
@@ -102,9 +144,11 @@
     const last = chart.points.length - 1;
     const out = [];
     const zs = chart.points.map((p) => p.z);
-    if ((chart.signals[last] || []).includes(1)) out.push({ rule: "beyond", dir: zs[last] > 0 ? "up" : "down", points: 1 });
+    const model = countModel(chart, Stats);
+    const beyond = zs[last] > 0 ? "up" : "down";
+    if ((chart.signals[last] || []).includes(1) && rareBeyond(chart, model, last, beyond)) out.push({ rule: "beyond", dir: beyond, points: 1 });
     const run = runLength(zs);
-    if (run.n >= RUN) out.push({ rule: "run", dir: run.dir, points: run.n });
+    if (run.n >= RUN && rareRun(model, last, run)) out.push({ rule: "run", dir: run.dir, points: run.n });
     const values = chart.points.map((p) => p.y);
     const trend = Stats.nelson(values, chart.center, chart.sigma);
     if (last >= TREND - 1 && (trend[last] || []).includes(3)) {
@@ -237,12 +281,8 @@
 
   // 5S Audit: the overall share of each audit as the audit tool scores it (per S the mean of the answered questions,
   // 0–4, over 4; then the mean of the S with an answer), one series per area. Target: the profile's 5S score.
-  const isScore = (value) => Number.isInteger(value) && value >= 0 && value <= 4;
-  const fiveSOverall = (row, scopes = FIVE_S) => {
-    const keys = Array.isArray(scopes[row.scope]) ? scopes[row.scope] : scopes["5S"];
-    const shares = keys.map((key) => list(row.scores?.[key]).filter(isScore)).filter((values) => values.length).map((values) => sum(values) / values.length / 4);
-    return shares.length ? sum(shares) / shares.length : null;
-  };
+  // A partial audit (as the 5S Audit calls it) is no point here either: ToolKit.fiveSShare, one function for every reader.
+  const fiveSOverall = (row, scopes = FIVE_S) => window.ToolKit.fiveSShare(row.scores, Array.isArray(scopes[row.scope]) ? scopes[row.scope] : scopes["5S"]);
   const fiveSSeries = (saved, period, targets = {}, scopes = FIVE_S) => {
     const byArea = new Map();
     list(saved?.rows).filter(isObj).map((row, i) => ({ row, i })).filter(({ row }) => inPeriod(row.date, period) && str(row.area))
@@ -264,7 +304,8 @@
   const hotelSeries = (saved, period) => {
     const byDate = new Map();
     list(saved?.rows).filter(isObj).forEach((row) => { if (isIso(row.date)) byDate.set(row.date, row); });
-    const nights = [...byDate.values()].filter((row) => inPeriod(row.date, period) && positive(row.available) > 0).sort((a, b) => a.date.localeCompare(b.date))
+    // A night that sold more rooms than it had is a typing error, as the Hotel KPIs tool itself says: no point.
+    const nights = [...byDate.values()].filter((row) => inPeriod(row.date, period) && positive(row.available) > 0 && !(Number(row.sold) > positive(row.available))).sort((a, b) => a.date.localeCompare(b.date))
       .map((row) => ({ date: row.date, available: positive(row.available), sold: Math.max(0, Math.round(Number(row.sold) || 0)), roomRev: positive(row.roomRev), arrivals: Math.round(positive(row.arrivals)), noShows: Math.round(positive(row.noShows)), complaints: Math.round(positive(row.complaints)) }));
     const occTyped = typed(saved?.budgetOcc);
     const occ = occTyped > 0 ? (occTyped > 1 ? occTyped / 100 : occTyped) : null;
@@ -667,7 +708,7 @@
   const results = document.querySelector("[data-results]");
   if (!root || !dataEl || !results || !window.ToolKit || !window.StatsKit) return;
   const kit = window.ToolKit;
-  const { LANG, tx, el, int, num, pct, euro, showDate, today, addDays: kitAddDays, read, write, loadState, isObject, stat, panel, focusCard, copy, undoNote, shareText, dayMonth, firstVisit, resultLayout } = kit;
+  const { LANG, tx, el, int, num, pct, euro, showDate, today, addDays: kitAddDays, read, readOwn, write, loadState, isObject, stat, panel, focusCard, copy, undoNote, shareText, dayMonth, firstVisit, resultLayout } = kit;
   const CK = window.ChartKit;
   const Actions = window.ActionsStore;
   const cfg = JSON.parse(dataEl.textContent);
@@ -699,7 +740,8 @@
   let exampleDismissed = {};
   let toolFilter = "";
 
-  const realGet = (key) => read(key, null);
+  // The tools' own data only: an example a tool holds is not a signal (ToolKit readOwn).
+  const realGet = (key) => readOwn(key, null);
   const realRead = () => M.collect(realGet, { today: today(), period: Number(state.period), suffix: SUFFIX, sources });
   // A first visit opens on the example, but only when no tool holds anything yet: the visitor's own data comes first.
   if (firstVisit(KEY) && !realRead().read.some((item) => item.has)) state.example = true;

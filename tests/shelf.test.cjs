@@ -132,6 +132,21 @@ test('the shelf shows only pages of this site, whatever a backup file put in it'
   assert.ok($$('a').every((a) => !/^(javascript:|https?:|\/\/)/.test(a.getAttribute('href') || '')), 'no link leads off the site');
 });
 
+test('addresses a browser reads as another site are refused too: a backslash, a tab or a line break after the slash', () => {
+  // Browsers read "/\host", "/\t/host" and "/\n/host" as "//host" (the URL standard turns "\" into "/" and drops
+  // tabs and line breaks), so each of these would open evil.example from the shelf.
+  const tricks = ['/\\evil.example/phish', '/\\\\evil.example/', '/\t/evil.example/', '/\n/evil.example/', '/\r\\evil.example/', '\\/evil.example/'];
+  const storage = {
+    'sc-shelf': { v: 1, items: [...tricks.map((u, i) => ({ u, t: `Trick ${i}`, k: 'tool', l: 'sq', at: 10 + i })), { u: '/sq/insights/gemba/', t: 'Gemba (sq)', k: 'essay', l: 'sq', at: 1 }] },
+    'sc-checklists': Object.fromEntries(tricks.map((u, i) => [`t${i}`, { u, t: 'X', c: 'Card', v: [1], n: 2, d: 1, at: i + 1 }])),
+  };
+  const { w, $$ } = open(shelfPage('sq'), 'https://stivencatalyst.com/sq/shelf.html', storage);
+  assert.deepEqual($$('[data-shelf-saved] .shelf-row strong').map((s) => s.textContent), ['Gemba (sq)']);
+  assert.deepEqual($$('[data-shelf-cards] .shelf-row'), []);
+  for (const a of $$('a[href]')) assert.equal(new w.URL(a.href).origin, 'https://stivencatalyst.com', a.getAttribute('href'));
+  assert.equal(w.Shelf.count(), 1, 'the header badge counts only the page of this site');
+});
+
 test('the templates carry the bookmark in the header, the byline and the share planet; the texts are translated; the backup names the keys', () => {
   const base = fs.readFileSync('src/_includes/layouts/base.njk', 'utf8');
   assert.match(base, /class="icon-button shelf-link" href="\{\{ '\/shelf\.html' \| local\(lang\) \}\}"/);

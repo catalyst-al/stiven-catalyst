@@ -20,6 +20,12 @@ Garvin-it ("median favorability scores rose from 83% to 88%"), prandaj grafikut 
 (vetëm te faqja në web). Asnjë shifër tjetër e shtypur nuk doli ndryshe. Gallup 2026 jep tani edhe vitet 2023 dhe 2024
 për jo-menaxherët (18% dhe 18%); grafiku nuk ndryshon.
 
+Korrigjim, 27 tetor 2026 (auditimi i 27 tetorit, P5-03). Grafiku i faqes 7 ua atribuonte të dy rreshtat (83% → 88% dhe
+70% → 77%) Garvin-it dhe Bock-ut bashkë, ndërsa artikulli i Garvin-it jep vetëm 83% dhe 88%. Faqja e WEF ktheu sërish
+403; një kërkim (27 tetor) e përmbledh artikullin e WEF me 70% → 77% për çerekun më të dobët, pra mbetet burim dytësor.
+Shënimi i grafikut thotë tani nga vjen çdo rresht dhe se libri i Bock-ut nuk u pa; numri ka një shënim korrigjimi me
+datë në tri gjuhët.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |

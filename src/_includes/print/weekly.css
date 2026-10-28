@@ -42,7 +42,7 @@
 .mr .pg .wk-legend-box div { border: .25mm solid var(--line); border-radius: 2.2mm; padding: 2.6mm; background: var(--card); }
 .mr .pg .wk-legend-box div:nth-child(1) { border-color: rgba(74,181,247,.45); }
 .mr .pg .wk-legend-box div:nth-child(2) { border-color: rgba(255,75,92,.42); }
-.mr .pg .wk-legend-box h4 { font-size: 7.6pt; margin-bottom: .8mm; }
+.mr .pg .wk-legend-box h3 { font-size: 7.6pt; margin-bottom: .8mm; }
 .mr .pg .wk-legend-box p { font-size: 7pt; margin: 0; line-height: 1.38; }
 
 .mr .pg .wk-figure { margin: 0 0 3.8mm; }

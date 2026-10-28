@@ -103,6 +103,9 @@ const load = ({ lang = 'en', storage = {}, idb = fakeIndexedDB(), persisted = fa
   return { window, idb, asked };
 };
 const settle = (ms = 30) => new Promise((resolve) => setTimeout(resolve, ms));
+// Waits for what the page does next rather than for a fixed time: under a full parallel run 30 ms was not always
+// enough (27 October 2026). Gives up after two seconds, and the assertion that follows says what was missing.
+const until = async (check, ms = 2000) => { const end = Date.now() + ms; while (!check() && Date.now() < end) await settle(10); };
 
 test('a restore point keeps the work and nothing else; sizes and the largest tools', () => {
   const { window } = load({ page: false, idb: null, persisted: null });
@@ -176,7 +179,7 @@ test('with work saved: the browser is asked to keep it, a daily point is made on
   const storage = { 'sc-damage-control': '{"rows":[{"units":3}]}', 'sc-pareto': '{}', 'sc-theme': 'dark' };
   const { window, idb, asked } = load({ storage });
   await window.StorageGuard.ready;
-  await settle();
+  await until(() => asked.length && rows(idb).length && /Restore points/.test(window.document.querySelector('[data-sg-points-text]')?.textContent || ''));
   assert.equal(asked.length, 1, 'persist asked once');
   const points = rows(idb);
   assert.equal(points.length, 1);
@@ -191,7 +194,7 @@ test('with work saved: the browser is asked to keep it, a daily point is made on
   assert.equal(doc.querySelector('[data-sg-full]').hidden, true);
   // Showing the list: the date, the reason and the tools by the names the box uses.
   doc.querySelector('[data-sg-toggle]').click();
-  await settle();
+  await until(() => doc.querySelector('.sg-point'));
   const item = doc.querySelector('.sg-point');
   assert.match(item.textContent, /Daily/);
   assert.match(item.querySelector('.sg-point-tools').textContent, /Damage Control/);
@@ -199,10 +202,11 @@ test('with work saved: the browser is asked to keep it, a daily point is made on
   // A second visit the same day makes no second daily point; a point by hand is added.
   const again = load({ storage, idb });
   await again.window.StorageGuard.ready;
+  await until(() => /Restore points: 1/.test(again.window.document.querySelector('[data-sg-points-text]')?.textContent || ''));
   await settle();
   assert.equal(rows(idb).length, 1);
   again.window.document.querySelector('[data-sg-make]').click();
-  await settle(60);
+  await until(() => rows(idb).length === 2 && /Restore point made/.test(again.window.document.querySelector('[data-work-status]')?.textContent || ''));
   assert.deepEqual(rows(idb).map((p) => p.reason).sort(), ['daily', 'manual']);
   assert.match(again.window.document.querySelector('[data-work-status]').textContent, /Restore point made: Damage Control, Pareto/);
 });
@@ -287,4 +291,17 @@ test('the stylesheet is balanced and keeps to the brand colours', () => {
   const stripped = css.replace(/\/\*[\s\S]*?\*\//g, '');
   assert.equal((stripped.match(/\{/g) || []).length, (stripped.match(/\}/g) || []).length);
   assert.doesNotMatch(css, /--red|--gold/);
+});
+
+test('the points made while working keep the last six and never push out a point made by hand', () => {
+  const { window } = load({ page: false, idb: null, persisted: null });
+  const M = window.StorageGuardMath;
+  assert.equal(M.RECENT_MS, 15 * 60 * 1000);
+  assert.ok(M.REASONS.includes('recent'));
+  const at = (minute, reason) => M.parseId(M.pointId(new Date(Date.UTC(2026, 9, 26, 8, minute)).toISOString(), reason));
+  const points = [...Array.from({ length: 10 }, (_, i) => at(i * 15, 'recent')), at(3, 'manual'), at(4, 'before-open'), at(5, 'daily')];
+  const dropped = M.prune(points);
+  assert.equal(dropped.length, 4);
+  assert.ok(dropped.every((id) => id.endsWith(' recent')), 'only recent points go');
+  assert.ok(dropped.includes(at(0, 'recent').id) && dropped.includes(at(45, 'recent').id) && !dropped.includes(at(60, 'recent').id));
 });

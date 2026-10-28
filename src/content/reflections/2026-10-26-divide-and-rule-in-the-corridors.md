@@ -21,7 +21,7 @@ Let me say this with all the clarity the truth deserves. **When an insecure mana
 
 Let us watch how this little civil war in the corridors is orchestrated.
 
-It always begins in the boss's closed office, in secret conversations behind half-open doors. The owner or the director calls in one of the employees, offers him a coffee, smiles at him with false confidence and whispers in a low voice: "Look, I count on you. You're the only one who really works here. Watch out for that other one, he said some unkind things about you yesterday."
+It always begins in the boss's closed office, in secret conversations behind half-open doors. The owner or the director calls in one of the employees, offers him a coffee, smiles at him with false confidence and whispers in a low voice: “Look, I count on you. You're the only one who really works here. Watch out for that other one, he said some unkind things about you yesterday.”
 
 Then, just an hour later, the same scene is repeated with the other colleague, with only the names changed.
 
@@ -31,7 +31,7 @@ First, he destroys any chance of solidarity. He knows very well that if the staf
 
 A united, clear-sighted team demands accountability, demands standards and demands dignity. And that is the worst nightmare of incompetent management.
 
-Second, through this division, the manager casts himself as indispensable. He becomes the only centre of gravity, the only channel of communication, the supreme father keeping the balance between quarrelling children. Employees no longer go to a colleague to clear up an operational problem; they go to the boss to inform on each other and to seek protection. And the boss enjoys watching grown adults lower their dignity just to win a crumb of favour in his eyes.
+Second, through this division, the manager casts himself as indispensable. He becomes the only centre of gravity, the only channel of communication, the supreme father keeping the balance between quarrelling children. Employees no longer go to a colleague to clear up an operational problem; they go to the boss to inform on each other and to seek protection. And the boss enjoys watching grown adults demean themselves just to win a crumb of favour in his eyes.
 
 The price a business pays for this sick game is enormous.
 
@@ -39,7 +39,7 @@ The energy that should go into improving customer service, eliminating mistakes 
 
 True leadership does exactly the opposite.
 
-A leader with integrity and self-confidence knows that his success is measured by the level of trust that exists between people when he is not in the room at all. He cannot stand intrigue. As soon as someone walks into his office to speak badly about a colleague, a true leader stops him at once and says: "Call him in here, sit down across from him and tell him to his face what you have to say."
+A leader with integrity and self-confidence knows that his success is measured by the level of trust that exists between people when he is not in the room at all. He cannot stand intrigue. As soon as someone walks into his office to speak badly about a colleague, a true leader stops him at once and says: “Call him in here, sit down across from him and tell him to his face what you have to say.”
 
 He sets clear procedures for communication, builds transparent handover protocols and creates an environment where each person's result depends on the success of everyone together.
 
@@ -47,4 +47,4 @@ If you are working today in a place where the air is heavy with jealousy and col
 
 Open your eyes and look at who is profiting from this senseless war. Look at who is hiding his own weakness behind the noise of your clashes.
 
-Because the truth always remains simple: small people divide so they can rule over ruins, but great leaders unite, because they know well that no real castle can stay standing if the stones of its foundation are wearing each other away.
+Because the truth always remains simple: small minds divide so they can rule over ruins, but great leaders unite, because they know well that no real castle can stay standing if the stones of its foundation are wearing each other away.

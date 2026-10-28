@@ -194,18 +194,17 @@
   };
   // A calendar file of the due tasks: each one an all-day event, so a phone can remind whoever does it.
   const ics = (items, stamp = new Date()) => {
-    const esc = (text) => String(text).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
-    // Lines longer than 75 bytes are folded; 60 characters keep a line with umlauts inside the limit.
-    const fold = (line) => { const parts = []; let rest = line; while (rest.length > 60) { parts.push(rest.slice(0, 60)); rest = ` ${rest.slice(60)}`; } parts.push(rest); return parts.join("\r\n"); };
+    // Escaped, and every line folded at 75 octets of UTF-8 (the one rule of ActionsStore, which the page loads first).
+    const { icsText: esc, icsFold: fold } = window.ActionsStore;
     const dt = stamp.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
     const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Stiven Catalyst//Maintenance Planner//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"];
     items.filter((item) => isIso(item.date)).forEach((item) => {
-      lines.push("BEGIN:VEVENT", `UID:${item.uid}@stivencatalyst.com`, `DTSTAMP:${dt}`, `DTSTART;VALUE=DATE:${item.date.replace(/-/g, "")}`, `DTEND;VALUE=DATE:${addDays(item.date, 1).replace(/-/g, "")}`, fold(`SUMMARY:${esc(item.summary)}`));
-      if (item.description) lines.push(fold(`DESCRIPTION:${esc(item.description)}`));
+      lines.push("BEGIN:VEVENT", `UID:${item.uid}@stivencatalyst.com`, `DTSTAMP:${dt}`, `DTSTART;VALUE=DATE:${item.date.replace(/-/g, "")}`, `DTEND;VALUE=DATE:${addDays(item.date, 1).replace(/-/g, "")}`, `SUMMARY:${esc(item.summary)}`);
+      if (item.description) lines.push(`DESCRIPTION:${esc(item.description)}`);
       lines.push("END:VEVENT");
     });
     lines.push("END:VCALENDAR");
-    return `${lines.join("\r\n")}\r\n`;
+    return `${lines.map(fold).join("\r\n")}\r\n`;
   };
 
   // The example: a seeded walk through three months of a parcel hub, so every visitor sees the same numbers.
@@ -514,14 +513,14 @@
     title: tx("Overdue: {task} · {asset}", { task: t.task.text, asset: assetLabel(t.asset) }),
     detail: [tx("Due {date}", { date: showDate(t.info.due) }), overdueText(t.late), t.task.statutory ? tx("Statutory check") : "", t.asset.supplier ? `${t.asset.supplier}${t.asset.contact ? ` (${t.asset.contact})` : ""}` : "", cfg.text.tool].filter(Boolean).join(" · "),
     owner: t.task.who === "external" ? t.asset.supplier || cfg.text.maintenanceOwner : cfg.text.maintenanceOwner,
-    due: addDays(today(), t.task.statutory ? 2 : 5), source: TOOL, check: cfg.text.checkOverdue, area: t.asset.area, priority: "High",
+    due: addDays(today(), t.task.statutory ? 2 : 5), example: exampleMatches(state), source: TOOL, check: cfg.text.checkOverdue, area: t.asset.area, priority: "High",
   });
   const repeatedAction = (g) => {
     const asset = assetById(g.asset);
     return {
       title: tx("Repeated breakdowns: {asset}", { asset: assetLabel(asset) }),
       detail: [tx("{n} breakdowns in 90 days, {minutes} of downtime", { n: int.format(g.n), minutes: minutesText(g.minutes) }), tx("Most often: {cause}", { cause: causeName(g.topCause) }), cfg.text.tool].join(" · "),
-      owner: cfg.text.maintenanceOwner, due: addDays(today(), 7), source: TOOL, check: cfg.text.checkRepeated, area: asset?.area || "", priority: asset?.crit === "A" ? "High" : "Medium",
+      owner: cfg.text.maintenanceOwner, due: addDays(today(), 7), example: exampleMatches(state), source: TOOL, check: cfg.text.checkRepeated, area: asset?.area || "", priority: asset?.crit === "A" ? "High" : "Medium",
     };
   };
   const sentKey = { overdue: (t) => `due|${t.task.id}|${t.info.due}`, repeated: (g) => `bd|${g.asset}|${g.n}` };
@@ -718,7 +717,8 @@
       send.title = tx("Overdue tasks on A assets and repeated breakdowns");
       send.addEventListener("click", () => {
         let n = 0;
-        unsent(analysis()).forEach(({ key, action }) => { if (Actions.add(action)) n++; state.sent[key] = true; });
+        // Marked as sent only when the action is on the list (added now, or already open there).
+        unsent(analysis()).forEach(({ key, action }) => { const added = Actions.add(action); if (added) n++; if (added || Actions.lastAdd === "duplicate") state.sent[key] = true; });
         save();
         renderResults();
         trackerNote(planStatus, tx("Added {n} actions.", { n: int.format(n) }));

@@ -367,10 +367,10 @@
     if (row.status === "plan" && window.ActionsStore) {
       // The next step of a planned idea is an action with an owner and a date; the tracker keeps it with the others.
       actions.append(button("action", tx("Add to actions"), tx("Add the next step to the Action Tracker: {title}", { title: row.title }), () => {
-        const added = window.ActionsStore.add({ title: row.next || row.title, detail: `${tx("Kaizen idea")}: ${row.title}${row.by ? ` (${row.by})` : ""}`, owner: row.owner || row.by, due: row.due, source: "kaizen-board", check: row.result, area: row.area, priority: score >= 5 ? "High" : "Medium" });
+        const added = window.ActionsStore.add({ title: row.next || row.title, detail: `${tx("Kaizen idea")}: ${row.title}${row.by ? ` (${row.by})` : ""}`, owner: row.owner || row.by, due: row.due, example: row.example === true, source: "kaizen-board", check: row.result, area: row.area, priority: score >= 5 ? "High" : "Medium" });
         const link = el("a", "inline-link", tx("Open the Action Tracker"));
         link.href = window.ActionsStore.trackerUrl().href;
-        status.replaceChildren(added ? `${tx("Added to the actions: {title}", { title: added.title })} ` : `${tx("Could not add the action.")} `, link);
+        status.replaceChildren(added ? `${tx("Added to the actions: {title}", { title: added.title })} ` : `${window.ToolKit.actionRefused(window.ActionsStore.lastAdd)} `, link);
         clearTimeout(status.timer);
         status.timer = setTimeout(() => { status.textContent = ""; }, 8000);
       }));

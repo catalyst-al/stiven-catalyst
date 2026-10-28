@@ -403,7 +403,7 @@
       // An action already open on the tracker, or twice on this sheet, goes over once.
       const known = new Set(S.list().filter((a) => S.isOpen(a) && a.source === "fmea").map((a) => a.title));
       const added = sortRows(state.rows.map(enrich), "ap").filter(isOpenAction).filter((row) => { const title = row.action.trim(); if (known.has(title)) return false; known.add(title); return true; }).map((row) => S.add({
-        title: row.action.trim(), owner: row.owner, due: row.due, source: "fmea", area: row.step,
+        title: row.action.trim(), owner: row.owner, due: row.due, example: state.example === true, source: "fmea", area: row.step,
         priority: row.ap === "H" ? "High" : row.ap === "L" ? "Low" : "Medium",
         detail: [row.mode, row.cause && `${C.cause}: ${row.cause}`, row.rpn && `S ${row.s} · O ${row.o} · D ${row.d} · ${C.rpn} ${row.rpn} · AP ${data.ap[row.ap]}`].filter(Boolean).join(" · "),
         check: tx("Re-rate S, O and D on the FMEA row after the action: the RPN and the action priority must drop."),

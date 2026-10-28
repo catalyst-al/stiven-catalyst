@@ -3,7 +3,7 @@ title: 'Die Wahrheit, die nicht in die Chefetage steigt: Anatomie einer Organisa
 date: 2026-10-26
 status: published
 summary: 'Der Bericht wird Wort für Wort geändert, bis aus einer harten Nacht „Betrieb normal abgeschlossen“ wird. Niemand lügt, doch alle haben gelernt, dass Wahrheit ihren Preis hat, und die Führung entscheidet über eine von anderen gewählte Wirklichkeit.'
-deck: 'Macht kann Menschen zwingen, dir Antworten zu geben, aber nicht, dir die Wahrheit zu sagen, wenn du sie gelehrt hast, sie zu fürchten.'
+deck: 'Macht kann Menschen zwingen, Ihnen Antworten zu geben, aber nicht, Ihnen die Wahrheit zu sagen, wenn Sie sie gelehrt haben, sie zu fürchten.'
 description: 'Über Information, die auf dem Weg zur Führung verzerrt wird, Selbstzensur, schöne Kennzahlen und die Frage, die sich eine Führungskraft stellen muss.'
 ---
 
@@ -331,7 +331,7 @@ Sie hat die Zustimmung aller Manager.
 
 Nur die Wirklichkeit fehlt.
 
-**Denn Macht kann Menschen zwingen, dir Antworten zu geben. Aber sie kann sie nicht zwingen, dir die Wahrheit zu sagen, wenn du sie gelehrt hast, sie zu fürchten.**
+**Denn Macht kann Menschen zwingen, Ihnen Antworten zu geben. Aber sie kann sie nicht zwingen, Ihnen die Wahrheit zu sagen, wenn Sie sie gelehrt haben, sie zu fürchten.**
 
 Und wenn die Wahrheit nicht mehr wagt, in die Chefetage zu steigen, hat nicht die Information es verfehlt, die Führung zu erreichen.
 

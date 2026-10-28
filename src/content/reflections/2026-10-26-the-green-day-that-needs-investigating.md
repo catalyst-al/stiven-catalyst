@@ -369,11 +369,11 @@ And if a leader uses it only to prove success, he risks losing the most importan
 
 In the end, the most important question of a green day is not always:
 
-"Did we reach the target?"
+“Did we reach the target?”
 
 Sometimes it is:
 
-**"What did we have to not see, for everything to look in order?"**
+**“What did we have to not see, for everything to look in order?”**
 
 Because the numbers may be accurate.
 

@@ -73,7 +73,9 @@
   <p class="monthly">{{ magazine.names[lang].name }}</p>
   <p>{{ R.back.more }}</p>
   <p class="url">stivencatalyst.com{{ "/publications.html" | local(lang) }}</p>
-  <p class="edition">{{ R.name }} · {{ R.date }} · Stiven Catalyst</p>
+  {#- The edition line, and under it the colophon: who makes the publication and how (weekly.colophon). #}
+  {%- set C = weekly[lang].colophon %}
+  <p class="edition">{{ R.name }} · {{ R.date }} · Stiven Catalyst<br>{{ C.text }}<br>{{ C.url }}</p>
 </section>
 {%- else %}
 <section class="pg{{ fitClass }}">

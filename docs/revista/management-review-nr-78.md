@@ -32,6 +32,13 @@ redaksisë: shënimi i faqes 5 u ndreq; (5) artikulli thotë "talks the ethics t
 (f. 138): fjalia angleze e faqes 5 ndjek tani këtë formulim; (6) pyetjet e ELS vijnë nga tabela 3 e artikullit: shënimi i
 faqes 7 u ndreq. Asnjë shifër tjetër e shtypur nuk doli ndryshe.
 
+Shënim (27 tetor 2026), sipas historisë së git-it: kontrolli i dytë i 11 tetorit u bë para se numri të dilte online.
+Ndryshimet e tij u bënë në degën e punës (commit 3565e02a, 11 tetor 2026) dhe numri hyri në main, nga ku botohet faqja,
+vetëm me bashkimin #177 (7b43e7c3, 11 tetor 2026, ora 20:33): versioni i parë online i ka tashmë. Prandaj këto ndryshime
+nuk kanë shënim korrigjimi dhe nuk e çojnë numrin te `checked.issues` (lib/weekly/common.js). Numri ndryshoi edhe më 12
+tetor 2026, pasi kishte dalë online (de0466bb), dhe për këtë është te `checked.issues` dhe e thotë nën përmbledhjen e
+vet.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |

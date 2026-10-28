@@ -146,5 +146,9 @@
   body.hx-print-matrix .hx-xm-panel { page: hx-a3; padding: 0; border: 0; }
   body.hx-print-matrix .hx-xm { max-height: 265mm; }
   body.hx-print-bowling .hx-bowling { page: hx-a4; padding: 0; border: 0; }
+  /* With Ctrl+P (a portrait page), the bowling chart's month columns are smaller still, so the last months fit. */
+  body:not(.hx-print-bowling) .hx-bowl :is(th, td) { padding: 1px 2px; font-size: 6.5pt; letter-spacing: 0; white-space: normal; }
+  body:not(.hx-print-bowling) .hx-bowl .hx-bowl-name { min-width: 0; }
+  body:not(.hx-print-bowling) .hx-bowl-cell .hx-bowl-word { font-size: inherit; }
   body:is(.hx-print-matrix, .hx-print-bowling) :is(main, .hx-results) { min-height: 0; margin: 0; padding: 0; }
 }

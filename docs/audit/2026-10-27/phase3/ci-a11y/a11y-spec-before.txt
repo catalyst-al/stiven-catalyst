@@ -1,0 +1,41 @@
+# tests/browser/a11y-pages.spec.mjs before the fixes (PM-9, PM-11, PM-12, 8D tables), Chrome 153, 1440px dark and light projects
+  17 failed
+  65 passed (6.3m)
+    [1440px dark] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /magazine/management-review-nr-80.html 
+    [1440px dark] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /tools/eight-d/ ──────────────────
+    [1440px dark] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /de/magazine/management-review-nr-80.html 
+    [1440px dark] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /de/tools/eight-d/ ───────────────
+    [1440px dark] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /sq/magazine/management-review-nr-80.html 
+    [1440px dark] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /sq/tools/eight-d/ ───────────────
+    [1440px dark] › tests/browser/a11y-pages.spec.mjs:62:1 › CX Control Tower: the charts are images with a name, not a run of tab stops 
+    [1440px light] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /magazine/management-review-nr-80.html 
+    [1440px light] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /field-notes.html ───────────────
+    [1440px light] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /tools/eight-d/ ─────────────────
+    [1440px light] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /de/magazine/management-review-nr-80.html 
+    [1440px light] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /de/field-notes.html ────────────
+    [1440px light] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /de/tools/eight-d/ ──────────────
+    [1440px light] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /sq/magazine/management-review-nr-80.html 
+    [1440px light] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /sq/field-notes.html ────────────
+    [1440px light] › tests/browser/a11y-pages.spec.mjs:44:5 › axe: /sq/tools/eight-d/ ──────────────
+    [1440px light] › tests/browser/a11y-pages.spec.mjs:62:1 › CX Control Tower: the charts are images with a name, not a run of tab stops 
+# distinct failing nodes (count of occurrences across tests):
+      9     +   "390 color-contrast: .ed-row-d7-lines[data-index=N][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+      9     +   "1440 color-contrast: .ed-row-d7-lines[data-index=N][data-row=\"d7.lines\"] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+      6     +   "390 scrollable-region-focusable: .ed-sheet-head > .dl-table-wrap.ed-table-wrap",
+      6     +   "390 scrollable-region-focusable: .ed-d-d7 > .dl-table-wrap.ed-table-wrap",
+      6     +   "390 scrollable-region-focusable: .ed-d-d6 > .dl-table-wrap.ed-table-wrap",
+      6     +   "390 scrollable-region-focusable: .ed-d-d5 > .dl-table-wrap.ed-table-wrap",
+      6     +   "390 scrollable-region-focusable: .ed-d-d3 > .dl-table-wrap.ed-table-wrap",
+      6     +   "390 scrollable-region-focusable: .dl-table-wrap.ed-table-wrap:nth-child(N)",
+      6     +   "390 heading-order: .wk-legend-box > div:nth-child(N) > h4",
+      6     +   "390 color-contrast: .ed-row-d7-lines[data-row=\"d7.lines\"][data-index=N] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+      6     +   "1440 heading-order: .wk-legend-box > div:nth-child(N) > h4",
+      6     +   "1440 color-contrast: .ed-row-d7-lines[data-row=\"d7.lines\"][data-index=N] > .ed-row-tools > .ed-handoff.button-ghost #9c824a on #eceff0",
+      5     +   "390 color-contrast: button[aria-label=\"Remove: System change N\"] #9c824a on #eceff0",
+      5     +   "390 color-contrast: button[aria-label=\"Hiq: Ndryshimi në sistem N\"] #9c824a on #eceff0",
+      5     +   "390 color-contrast: button[aria-label=\"Entfernen: Systemänderung N\"] #9c824a on #eceff0",
+      5     +   "1440 color-contrast: button[aria-label=\"Remove: System change N\"] #9c824a on #eceff0",
+      5     +   "1440 color-contrast: button[aria-label=\"Hiq: Ndryshimi në sistem N\"] #9c824a on #eceff0",
+      5     +   "1440 color-contrast: button[aria-label=\"Entfernen: Systemänderung N\"] #9c824a on #eceff0",
+      3     +   "390 color-contrast: button[data-filter-month=\"2026-10\"] > .weekly-n #b6d2e7 on #0a6ab0",
+      3     +   "1440 color-contrast: button[data-filter-month=\"2026-10\"] > .weekly-n #b6d2e7 on #0a6ab0",

@@ -358,10 +358,13 @@ test('the page opens on the example, draws both matrices and the cross-check, an
   // All open measures at once, each only once.
   const all = [...results.querySelectorAll('button')].find((b) => b.textContent === 'Add open measures to the Action Tracker');
   click(w, all);
-  assert.equal(w.ActionsStore.list().length, 14);
-  assert.ok(w.ActionsStore.list().every((a) => a.source === 'risk-assessment'));
+  // From the example, the actions arrive as the example's (ActionsStore: example: true); no other tool counts them.
+  assert.ok(w.ActionsStore.all().every((a) => a.example === true));
+  assert.equal(w.ActionsStore.list().length, 0);
+  assert.equal(w.ActionsStore.all().length, 14);
+  assert.ok(w.ActionsStore.all().every((a) => a.source === 'risk-assessment'));
   click(w, [...doc.querySelector('[data-results]').querySelectorAll('button')].find((b) => b.textContent === 'Add open measures to the Action Tracker'));
-  assert.equal(w.ActionsStore.list().length, 14, 'not twice');
+  assert.equal(w.ActionsStore.all().length, 14, 'not twice');
   // The printed documentation: one page per assessment, with the signature lines.
   const print = doc.querySelector('[data-print]');
   assert.equal(print.querySelectorAll('.ra-print-page').length, 4);

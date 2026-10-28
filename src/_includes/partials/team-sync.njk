@@ -58,7 +58,8 @@
   rotated: "The team code is changed. Give the new code to your team now: it is shown only this once. Every other device must leave the team and join again with it; the old code and the old read-only codes no longer work." | t(lang),
   rotateFailed: "The team code was not changed, and the team keeps the old one. {reason}" | t(lang),
   retireFailed: "The old copy could not be deleted yet, so devices with the old code can still read it. This device tries again at every sync." | t(lang),
-  retired: "The old copy of the team is now deleted." | t(lang)
+  retired: "The old copy of the team is now deleted." | t(lang),
+  locked: "Team sync is paused while the tools are locked." | t(lang)
 } %}
 <details class="tm" data-team-sync data-endpoint="{{ site.sync.endpoint }}" data-text="{{ tmText | dump }}">
   <summary class="tm-summary"><strong>{{ "Team sync" | t(lang) }}</strong> <span class="tm-state" data-tm-summary>{{ "Off" | t(lang) }}</span></summary>
@@ -96,7 +97,7 @@
         <legend class="kicker"><span data-tm-member-only>{{ "What is shared" | t(lang) }}</span><span data-tm-viewer-only hidden>{{ "What this device takes from the team" | t(lang) }}</span></legend>
         <div class="tm-tool-list" data-tm-tools></div>
         <p class="form-note" data-tm-tools-empty hidden>{{ "No tool has work in this browser yet. What the team shares appears here after the first sync." | t(lang) }}</p>
-        <p class="form-note" data-tm-member-only>{{ "Unticking a tool stops this device sharing it; what the team already has stays. The career tools, your shelf, reading and coaching are personal and never shared." | t(lang) }}</p>
+        <p class="form-note" data-tm-member-only>{{ "Unticking a tool stops this device sharing it; what the team already has stays. The career tools, your shelf, reading and coaching are personal and never shared." | t(lang) }} {{ "A row deleted on one device is deleted on every device of the team at the next sync, and does not come back." | t(lang) }}</p>
         <p class="form-note" data-tm-viewer-only hidden>{{ "Unticking a tool stops this device taking the team's version of it; the work here then stays as it is. The career tools, your shelf, reading and coaching are personal and never shared." | t(lang) }}</p>
       </fieldset>
       <div class="field tm-device" data-tm-member-only>

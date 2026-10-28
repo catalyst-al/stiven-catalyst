@@ -1,0 +1,63 @@
+{
+  "format": "stiven-catalyst-coaching",
+  "version": 2,
+  "exported": "2026-10-27T17:16:54.356Z",
+  "state": {
+    "version": 2,
+    "revision": 2,
+    "profile": {
+      "name": "Mira",
+      "sector": "logistics",
+      "experience": "beginner",
+      "ready": true
+    },
+    "projects": [
+      {
+        "id": "87a211b4-75bd-42fd-a93f-34480d0709a6",
+        "role": "pulse",
+        "title": "Fewer missed handovers at the late shift",
+        "created": "2026-10-27",
+        "updated": "2026-10-27",
+        "deadline": "2026-12-15",
+        "archived": false,
+        "brief": {
+          "goal": "Every handover has its open points",
+          "measure": "Handovers with open points missing / all handovers",
+          "scope": "",
+          "baseline": "",
+          "target": "",
+          "hypothesis": "",
+          "pilot": "",
+          "control": ""
+        },
+        "context": {
+          "sector": "logistics",
+          "experience": "beginner"
+        },
+        "workflow": {
+          "test": "",
+          "supportingEvidence": "",
+          "pilotOwner": "",
+          "reviewDate": "",
+          "criterion": "",
+          "guardrail": "",
+          "verdict": "",
+          "reviewResult": "",
+          "controlOwner": "",
+          "cadence": "",
+          "reaction": ""
+        },
+        "practice": {},
+        "actions": [],
+        "evidence": [],
+        "measurements": [],
+        "sessions": [],
+        "delegations": [],
+        "simulations": {}
+      }
+    ],
+    "active": {
+      "pulse": "87a211b4-75bd-42fd-a93f-34480d0709a6"
+    }
+  }
+}

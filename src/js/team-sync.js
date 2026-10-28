@@ -2,16 +2,36 @@
 // same on every device of the team, through one encrypted copy on the sync server (workers/sync/worker.js).
 //
 // The team code is six words. Everything else comes from it on the device, with WebCrypto:
-//   spaceId     = hex SHA-256("space:" + code)   the address of the team's copy
-//   writeToken  = hex SHA-256("write:" + code)   lets a device replace or delete it
+//   bits        = PBKDF2-SHA-256(code, "stiven-catalyst-sync-id-v2", 310000), 512 bits
+//   spaceId     = hex of the first 256 bits      the address of the team's copy
+//   writeToken  = hex of the last 256 bits       lets a device replace or delete it
 //   key         = PBKDF2-SHA-256(code, "stiven-catalyst-sync-v1", 310000) → AES-GCM 256
-// What goes up is { format: "stiven-catalyst-team", version: 1, sent, device, devices, items: { key: string } }, gzipped
+// The server sees the space id and the token: each guess of the code costs whoever holds them the same 310 000
+// rounds as a guess against the copy. Teams made before kept their copy at the "legacy" address, SHA-256("space:" +
+// code) with the token SHA-256("write:" + code), which a guesser could test with one hash; a sync reads such a copy
+// there, writes it to the new address and deletes the old one (or keeps it in "retire" to delete later). Read-only
+// codes made before carry the old address and stop working once the team's copy has moved: the box says the copy
+// is gone, and the team makes a new read-only code.
+// What goes up is { format: "stiven-catalyst-team", version: 2, sent, device, devices, items: { key: string },
+// deleted: { key: { row id: ms } } }, gzipped
 // where the browser can (a first byte says which: 1 gzip, 0 plain JSON), then encrypted with a fresh 12-byte IV. The
 // server stores ciphertext; the code and the key never leave the device. The code is kept in localStorage "sc-team",
 // what was last synced in "sc-team-state"; neither is work, so neither goes into a saved file (work-backup.js SKIP).
 //
 // A sync: GET → decrypt → merge (TeamSyncMath.merge) → a restore point, then only the changed keys are written → PUT
 // with the revision of the GET. 409 (another device saved first): once more from the GET. 429: wait 2 s, once more.
+//
+// Deletions: a row (of a log, { rows: [{ id, … }] }) that was in the team's copy at the last sync and is no longer on
+// this device was deleted here. The sync takes it out of the team's copy and leaves a tombstone in "deleted" (the
+// storage key, the row id, when this device saw it deleted); every device that reads the tombstone deletes the row
+// too, whatever it holds of it. A row deleted on one device and changed on another before either heard of the other
+// stays deleted, in whichever order they sync: what was deleted (a guest's name, a phone number) never comes back
+// from the team. The device that changed it keeps its version in the restore point made before the sync. Tombstones
+// are kept 90 days (TOMBSTONE_DAYS); after that, a device that was away and still holds the row drops it all the
+// same when it has not changed it since its last sync (the team's copy no longer has it), and brings it back only
+// when it has changed it. Rows without an id, and a whole tool's key, are never deleted by a sync. A copy written
+// before tombstones (version 1) is read as one without any; a restore point or a file put back is not a deletion
+// (rebase). This device keeps the tombstones it knows in "sc-team-state" too.
 // It runs on page load, after "Sync now", and when the page has been idle for 30 s after a change. A device that
 // found the team's copy gone (deleted, or the team changed its code) no longer syncs by itself.
 //
@@ -22,8 +42,15 @@
 // code, and only once that upload has gone through deletes the old space with the old token.
 (() => {
   const FORMAT = "stiven-catalyst-team";
-  const VERSION = 1;
+  const VERSION = 2;
+  // Version 1: the same, before tombstones.
+  const READ_VERSIONS = [1, 2];
+  const TOMBSTONE_DAYS = 90;
+  const TOMBSTONE_MS = TOMBSTONE_DAYS * 24 * 60 * 60 * 1000;
+  // At most this many tombstones in a copy, the newest kept: a few hundred kilobytes before gzip.
+  const MAX_DELETED = 20000;
   const SALT = "stiven-catalyst-sync-v1";
+  const ID_SALT = "stiven-catalyst-sync-id-v2";
   const ITERATIONS = 310000;
   const TEAM_KEY = "sc-team";
   const STATE_KEY = "sc-team-state";
@@ -131,12 +158,25 @@
   const utf8 = (text) => new TextEncoder().encode(text);
   const hex = (buffer) => [...new Uint8Array(buffer)].map((b) => b.toString(16).padStart(2, "0")).join("");
   const sha256 = async (text) => hex(await subtle().digest("SHA-256", utf8(text)));
+  // The address and the token: 512 bits of PBKDF2 with a salt that is not the key's.
+  const deriveIds = async (code, iterations = ITERATIONS) => {
+    const base = await subtle().importKey("raw", utf8(code), "PBKDF2", false, ["deriveBits"]);
+    const bits = new Uint8Array(await subtle().deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: utf8(ID_SALT), iterations }, base, 512));
+    return { spaceId: hex(bits.subarray(0, 32)), writeToken: hex(bits.subarray(32)) };
+  };
+  const legacyIds = async (code) => {
+    const [spaceId, writeToken] = await Promise.all([sha256(`space:${code}`), sha256(`write:${code}`)]);
+    return { spaceId, writeToken };
+  };
   const deriveKeys = async (text, iterations = ITERATIONS) => {
     const code = normalise(text);
-    const [spaceId, writeToken] = await Promise.all([sha256(`space:${code}`), sha256(`write:${code}`)]);
     const base = await subtle().importKey("raw", utf8(code), "PBKDF2", false, ["deriveKey"]);
-    const key = await subtle().deriveKey({ name: "PBKDF2", hash: "SHA-256", salt: utf8(SALT), iterations }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
-    return { code, spaceId, writeToken, key };
+    const [ids, legacy, key] = await Promise.all([
+      deriveIds(code, iterations),
+      legacyIds(code),
+      subtle().deriveKey({ name: "PBKDF2", hash: "SHA-256", salt: utf8(SALT), iterations }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]),
+    ]);
+    return { code, spaceId: ids.spaceId, writeToken: ids.writeToken, key, legacy };
   };
   const toBase64 = (bytes) => {
     let text = "";
@@ -219,8 +259,8 @@
   // The key is the 256 bits PBKDF2 gives the team code (deriveBits; deriveKey to AES-256 takes the very same bits, so
   // it opens what the members seal). The check is the first 4 bytes of SHA-256("scr1." ‖ space id ‖ key): a copy cut
   // short or mistyped is told apart from a code of another team. The six words and the write token are not in it:
-  // the token is SHA-256("write:" + code), which cannot be run backwards, and PBKDF2 cannot either. "1" is the
-  // version of the format; a later one gets a new number.
+  // the token is the other half of the address's PBKDF2 (deriveIds), which nothing in the code leads back to. "1" is
+  // the version of the format; a later one gets a new number.
   const VIEW_PREFIX = "scr";
   const VIEW_VERSION = 1;
   const VIEW_BYTES = 68;
@@ -229,7 +269,7 @@
   const viewerCheck = async (body) => new Uint8Array(await subtle().digest("SHA-256", concat(utf8(`${VIEW_PREFIX}${VIEW_VERSION}.`), body))).subarray(0, 4);
   const viewerCode = async (text, iterations = ITERATIONS) => {
     const code = normalise(text);
-    const spaceId = await sha256(`space:${code}`);
+    const { spaceId } = await deriveIds(code, iterations);
     const base = await subtle().importKey("raw", utf8(code), "PBKDF2", false, ["deriveBits"]);
     const key = new Uint8Array(await subtle().deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: utf8(SALT), iterations }, base, 256));
     const body = concat(fromHex(spaceId), key);
@@ -259,7 +299,7 @@
   };
 
   // ---- What may be shared ----
-  const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && !["sc-theme", "sc-print-guide-hidden", TEAM_KEY, STATE_KEY].includes(key));
+  const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && !["sc-theme", "sc-motion", "sc-print-guide-hidden", TEAM_KEY, STATE_KEY].includes(key));
   const toolSlug = (key) => (window.WorkBackup ? window.WorkBackup.toolSlug(key) : String(key).replace(/^sc-/, "").replace(/-(check|calc|ui)$/, "").replace(/-(de|sq)$/, ""));
   // Personal, never offered: the career tools, the reader's own shelf, reading and cards, coaching, and Site Compare,
   // which holds other teams' read-only codes (secrets of those teams, not work of this one).
@@ -273,7 +313,7 @@
   // A remote entry is taken only when it could have come from a tool here (work-backup.js checks the logs' shape).
   const soundItem = (key, value) => typeof value === "string" && offerable(key) && (!window.WorkBackup?.sound || window.WorkBackup.sound([key, value]));
   const readPayload = (payload) => {
-    if (!payload || typeof payload !== "object" || payload.format !== FORMAT || payload.version !== VERSION) return null;
+    if (!payload || typeof payload !== "object" || payload.format !== FORMAT || !READ_VERSIONS.includes(payload.version)) return null;
     const items = payload.items;
     if (!items || typeof items !== "object" || Array.isArray(items)) return null;
     return {
@@ -281,7 +321,19 @@
       device: payload.device && typeof payload.device === "object" ? payload.device : null,
       devices: cleanDevices(payload.devices),
       items: Object.fromEntries(Object.entries(items).filter(([key, value]) => soundItem(key, value))),
+      deleted: cleanDeleted(payload.deleted),
     };
+  };
+  // Tombstones as they may come from a team copy: keys that may be shared, ids of up to 200 characters, times in ms.
+  const cleanDeleted = (value) => {
+    const out = {};
+    if (!value || typeof value !== "object" || Array.isArray(value)) return out;
+    Object.entries(value).forEach(([key, rows]) => {
+      if (!offerable(key) || !rows || typeof rows !== "object" || Array.isArray(rows)) return;
+      const kept = Object.entries(rows).filter(([id, at]) => id.length > 0 && id.length <= 200 && Number.isFinite(at) && at > 0);
+      if (kept.length) out[key] = Object.fromEntries(kept);
+    });
+    return out;
   };
   const cleanDevices = (list) => (Array.isArray(list) ? list : [])
     .filter((d) => d && typeof d === "object" && typeof d.id === "string" && /^[0-9a-z]{4,40}$/i.test(d.id))
@@ -345,8 +397,9 @@
     return newer(local, remote) > 0 ? local : remote;
   };
   // Every row of both, once: by id where rows have one, by their whole content where they do not. A row one side lacks
-  // is kept: a sync never deletes.
-  const mergeRows = (localRows, remoteRows, synced = {}) => {
+  // is kept, except a row with a tombstone (dead: { id: ms }, deleted on some device) and a row this device holds as it
+  // was last synced that the team's copy no longer has (deleted on the team, its tombstone perhaps gone by now).
+  const mergeRows = (localRows, remoteRows, synced = {}, dead = {}) => {
     const out = [];
     const ids = new Set();
     const contents = new Set();
@@ -355,7 +408,7 @@
       const id = rowId(row);
       if (id !== null && !remoteById.has(id)) remoteById.set(id, row);
     });
-    const take = (row, other) => {
+    const take = (row, other, here = false) => {
       const id = rowId(row);
       if (id === null) {
         const text = JSON.stringify(row);
@@ -366,27 +419,50 @@
       }
       if (ids.has(id)) return;
       ids.add(id);
+      if (Object.prototype.hasOwnProperty.call(dead, id)) return;
+      if (here && other === undefined && synced[id] !== undefined && hash(JSON.stringify(row)) === synced[id]) return;
       out.push(other === undefined ? row : pickRow(row, other, synced[id]));
     };
-    localRows.forEach((row) => take(row, remoteById.get(rowId(row))));
+    localRows.forEach((row) => take(row, remoteById.get(rowId(row)), true));
     remoteRows.forEach((row) => take(row));
     return out;
+  };
+  // The text of a log without the rows that have a tombstone; the very same text when it has none of them.
+  const dropDead = (text, dead = {}) => {
+    if (typeof text !== "string" || !Object.keys(dead).length) return text;
+    const value = parse(text);
+    if (!hasRows(value)) return text;
+    const rows = value.rows.filter((row) => {
+      const id = rowId(row);
+      return id === null || !Object.prototype.hasOwnProperty.call(dead, id);
+    });
+    return rows.length === value.rows.length ? text : JSON.stringify({ ...value, rows });
+  };
+  // The ids of a log's rows that were in the team's copy at the last sync (base.r) and are no longer in it here.
+  const goneHere = (value, base) => {
+    if (!hasRows(value) || !base?.r) return [];
+    const here = new Set(value.rows.map(rowId).filter((id) => id !== null));
+    return Object.keys(base.r).filter((id) => !here.has(id));
   };
   // The fields of both, in this device's order first.
   const fieldsOf = (a, b) => [...new Set([...Object.keys(a), ...Object.keys(b)])];
   // One storage key. local / remote are the stored texts (undefined when that side has none), base what was last
   // synced (TeamSyncMath.baseOf), or nothing before the first sync.
-  const mergeValue = (local, remote, base = null) => {
-    if (local === undefined || local === null) return remote;
-    if (remote === undefined || remote === null || local === remote) return local;
+  // dead: the tombstones of this key ({ id: ms }); the rows this device deleted since the last sync count as such too.
+  const mergeValue = (local, remote, base = null, dead = {}) => {
+    if (local === undefined || local === null) return dropDead(remote, dead);
+    if (remote === undefined || remote === null || local === remote) return dropDead(local, dead);
     const l = parse(local);
     const r = parse(remote);
     let out = null;
     if (isObject(l) && isObject(r) && (hasRows(l) || hasRows(r))) {
       // A log: the rows of both; its other fields (settings, a draft) this device's unless empty here.
+      const gone = { ...dead };
+      goneHere(l, base).forEach((id) => { gone[id] = gone[id] || 1; });
       out = {};
       fieldsOf(l, r).forEach((field) => {
-        if (field === "rows") out.rows = mergeRows(Array.isArray(l.rows) ? l.rows : [], Array.isArray(r.rows) ? r.rows : [], base?.r || {});
+        // What the team's copy lacks counts as deleted on the team only where that copy is a log.
+        if (field === "rows") out.rows = mergeRows(Array.isArray(l.rows) ? l.rows : [], Array.isArray(r.rows) ? r.rows : [], hasRows(r) ? base?.r || {} : {}, gone);
         else out[field] = isEmpty(l[field]) && r[field] !== undefined ? r[field] : l[field];
       });
     } else if (isObject(l) && isObject(r)) {
@@ -409,14 +485,54 @@
     if (text === JSON.stringify(r)) return remote;
     return text;
   };
-  // local and remote: { storage key: text }; synced: { storage key: base }. Never drops a key one side lacks.
-  const merge = (local = {}, remote = {}, synced = {}) => {
+  // local and remote: { storage key: text }; synced: { storage key: base }; deleted: the tombstones, { storage key:
+  // { row id: ms } }. Never drops a key one side lacks.
+  const merge = (local = {}, remote = {}, synced = {}, deleted = {}) => {
     const out = {};
     fieldsOf(local, remote).forEach((key) => {
-      const value = mergeValue(local[key], remote[key], synced[key]);
+      const value = mergeValue(local[key], remote[key], synced[key], deleted[key] || {});
       if (typeof value === "string") out[key] = value;
     });
     return out;
+  };
+  // The rows this device deleted since the last sync, as tombstones dated `now` (ms).
+  const deletedHere = (local = {}, synced = {}, now = Date.now()) => {
+    const out = {};
+    Object.entries(local).forEach(([key, text]) => {
+      const ids = goneHere(parse(text), synced[key]);
+      if (ids.length) out[key] = Object.fromEntries(ids.map((id) => [id, now]));
+    });
+    return out;
+  };
+  // Several lists of tombstones as one, with the latest time of each row.
+  const joinDeleted = (...lists) => {
+    const out = {};
+    lists.forEach((list) => Object.entries(cleanDeleted(list)).forEach(([key, rows]) => {
+      out[key] = out[key] || {};
+      Object.entries(rows).forEach(([id, at]) => { out[key][id] = Math.max(out[key][id] || 0, at); });
+    }));
+    return out;
+  };
+  // Without the tombstones older than 90 days; the newest MAX_DELETED at most.
+  const purgeDeleted = (deleted, now = Date.now(), max = MAX_DELETED) => {
+    const all = [];
+    Object.entries(cleanDeleted(deleted)).forEach(([key, rows]) => Object.entries(rows).forEach(([id, at]) => {
+      if (now - at < TOMBSTONE_MS) all.push([key, id, at]);
+    }));
+    all.sort((a, b) => b[2] - a[2]);
+    const out = {};
+    all.slice(0, max).forEach(([key, id, at]) => {
+      out[key] = out[key] || {};
+      out[key][id] = at;
+    });
+    return out;
+  };
+  // Each text without the rows that have a tombstone.
+  const applyDeleted = (items, deleted = {}) => Object.fromEntries(Object.entries(items).map(([key, text]) => [key, dropDead(text, deleted[key] || {})]));
+  // The same tombstones, in any order.
+  const sameDeleted = (a = {}, b = {}) => {
+    const flat = (list) => Object.entries(list).flatMap(([key, rows]) => Object.entries(rows).map(([id, at]) => `${key}\n${id}\n${at}`)).sort().join("\n\n");
+    return flat(a) === flat(b);
   };
   // What a device keeps of the synced texts: a fingerprint of each, of each field of an object, of each row of a log.
   const baseOf = (items) => Object.fromEntries(Object.entries(items).map(([key, text]) => {
@@ -439,14 +555,43 @@
     return keys.length === Object.keys(b).length && keys.every((key) => b[key] === a[key]);
   };
 
-  // ---- QR code (ISO/IEC 18004): byte mode, error correction level M, versions 1 to 10 ----
-  // Enough for a team code (about 35 characters fit version 3). The matrix is an array of rows of 0 and 1.
-  const QR_M = [
+  // ---- QR code (ISO/IEC 18004): byte mode, error correction level M, versions 1 to 40 ----
+  // A team code (about 35 characters) fits version 3; a handover sent as a link (js/shift-handover.js, up to 2331
+  // bytes) may need the largest. The matrix is an array of rows of 0 and 1.
+  // Level M by version: error correction codewords in each block, and how many blocks. The codewords a version holds
+  // follow from its size (the modules left once the finders, timing, alignment, format and version areas are placed),
+  // and the data splits into the blocks as evenly as it can, the longer ones last, as the standard's table has it.
+  const QR_EC = [null, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26, 26, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28];
+  const QR_BLOCKS = [null, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16, 17, 17, 18, 20, 21, 23, 25, 26, 28, 29, 31, 33, 35, 37, 38, 40, 43, 45, 47, 49];
+  // The centres of the alignment patterns: 6, then evenly up to the last one, with an even step (version 32 is the
+  // standard's one exception to the rounding).
+  const qrAlign = (version) => {
+    if (version === 1) return [];
+    const n = version * 4 + 17;
+    const count = Math.floor(version / 7) + 2;
+    const step = version === 32 ? 26 : Math.ceil((n - 13) / (2 * count - 2)) * 2;
+    const out = [6];
+    for (let i = count - 1, at = n - 7; i >= 1; i--, at -= step) out.splice(1, 0, at);
+    return out;
+  };
+  const qrTotal = (version) => {
+    const n = version * 4 + 17;
+    const align = qrAlign(version).length;
+    const alignment = align ? (align * align - 3) * 25 - (align - 2) * 2 * 5 : 0;
+    return Math.floor((n * n - 192 - 2 * (n - 16) - alignment - 31 - (version >= 7 ? 36 : 0)) / 8);
+  };
+  const QR_M = [null];
+  const QR_ALIGN = [null];
+  for (let version = 1; version <= 40; version++) {
+    const ec = QR_EC[version];
+    const blocks = QR_BLOCKS[version];
+    const data = qrTotal(version) - ec * blocks;
+    const short = Math.floor(data / blocks);
+    const longer = data % blocks;
     // [error correction codewords per block, blocks in group 1, data codewords each, blocks in group 2, data codewords each]
-    null, [10, 1, 16, 0, 0], [16, 1, 28, 0, 0], [26, 1, 44, 0, 0], [18, 2, 32, 0, 0], [24, 2, 43, 0, 0],
-    [16, 4, 27, 0, 0], [18, 4, 31, 0, 0], [22, 2, 38, 2, 39], [22, 3, 36, 2, 37], [26, 4, 43, 1, 44],
-  ];
-  const QR_ALIGN = [null, [], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50]];
+    QR_M.push([ec, blocks - longer, short, longer, longer ? short + 1 : 0]);
+    QR_ALIGN.push(qrAlign(version));
+  }
   const GF_EXP = new Array(512);
   const GF_LOG = new Array(256);
   for (let i = 0, x = 1; i < 255; i++) {
@@ -561,8 +706,8 @@
   const qrEncode = (text, forceMask = -1) => {
     const bytes = [...utf8(String(text))];
     let version = 1;
-    while (version <= 10 && qrCapacity(version) * 8 < 4 + (version < 10 ? 8 : 16) + bytes.length * 8) version++;
-    if (version > 10) return null;
+    while (version <= 40 && qrCapacity(version) * 8 < 4 + (version < 10 ? 8 : 16) + bytes.length * 8) version++;
+    if (version > 40) return null;
     const n = version * 4 + 17;
     const m = Array.from({ length: n }, () => new Array(n).fill(0));
     const fixed = Array.from({ length: n }, () => new Array(n).fill(false));
@@ -712,15 +857,23 @@
     if (!keys.writeToken) return pullOnce(ctx);
     const now = ctx.now || (() => new Date());
     const wait = ctx.wait || ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
-    const url = `${String(ctx.endpoint).replace(/\/+$/, "")}/v1/spaces/${keys.spaceId}`;
-    const call = async (init) => {
-      try { return await ctx.fetch(url, { cache: "no-store", ...init }); } catch { return null; }
+    const url = spaceUrl(ctx.endpoint, keys.spaceId);
+    const call = async (init, at = url) => {
+      try { return await ctx.fetch(at, { cache: "no-store", ...init }); } catch { return null; }
     };
     const body = async (response) => { try { return await response.json(); } catch { return null; } };
     for (let attempt = 0; attempt < 2; attempt++) {
       const state = readState(storage);
-      const got = await call({ method: "GET" });
+      let got = await call({ method: "GET" });
       if (!got) return { status: "offline" };
+      // Nothing at the address: a team made before keeps its copy at the old one. Read there, it goes up to the
+      // new address (revision 0, a new space) and the old space is deleted once that went through.
+      let moving = false;
+      if (got.status === 404 && keys.legacy && HEX64.test(keys.legacy.spaceId)) {
+        const old = await call({ method: "GET" }, spaceUrl(ctx.endpoint, keys.legacy.spaceId));
+        if (!old) return { status: "offline" };
+        if (old.ok) { got = old; moving = true; } else if (old.status !== 404) return { status: old.status === 403 || old.status === 401 ? "refused" : "error", code: old.status };
+      }
       let rev = 0;
       let remote = null;
       let size = 0;
@@ -729,7 +882,7 @@
       } else if (got.ok) {
         const box = await body(got);
         if (!box || typeof box.data !== "string" || typeof box.iv !== "string" || !Number.isInteger(box.rev)) return { status: "unreadable" };
-        rev = box.rev;
+        rev = moving ? 0 : box.rev;
         size = box.data.length;
         try { remote = readPayload(await unseal(box, keys.key)); } catch { remote = null; }
         if (!remote) return { status: "unreadable" };
@@ -741,7 +894,11 @@
       const remoteItems = remote ? remote.items : {};
       const local = collect(storage, shared);
       const remoteShared = Object.fromEntries(Object.entries(remoteItems).filter(([key]) => shared(key)));
-      const merged = merge(local, remoteShared, state.synced || {});
+      // A copy that was gone and is back may be another team's start: nothing here is measured against the old one.
+      const base = state.gone ? {} : state.synced || {};
+      const at = now().getTime();
+      const deleted = purgeDeleted(joinDeleted(remote?.deleted, state.deleted, deletedHere(local, base, at)), at);
+      const merged = merge(local, remoteShared, base, deleted);
       const changed = Object.keys(merged).filter((key) => merged[key] !== local[key]);
       if (changed.length) {
         try { await ctx.beforeWrite?.(changed); } catch { /* written as before */ }
@@ -749,16 +906,18 @@
       }
       // This device now holds the team's copy as it was read: that is what later changes are measured against, even
       // if the upload below does not go through.
-      const synced = { ...(state.synced || {}), ...baseOf(remoteShared) };
-      const out = { ...remoteItems, ...merged };
+      const synced = { ...base, ...baseOf(remoteShared) };
+      // The tools this device does not share lose their deleted rows in the team's copy too.
+      const out = applyDeleted({ ...remoteItems, ...merged }, deleted);
       const devices = withDevice(remote?.devices, device, now());
-      const keep = (extra) => writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced, teamKeys: Object.keys(out), ...extra });
-      if (remote && sameItems(out, remoteItems) && deviceFresh(remote.devices, device, now())) {
-        keep({ rev, size, devices: remote.devices, lastSync: now().toISOString(), gone: false });
+      const keep = (extra) => writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced, deleted, teamKeys: Object.keys(out), ...extra });
+      const space = keys.spaceId;
+      if (!moving && remote && sameItems(out, remoteItems) && sameDeleted(deleted, remote.deleted) && deviceFresh(remote.devices, device, now())) {
+        keep({ rev, size, devices: remote.devices, lastSync: now().toISOString(), gone: false, space });
         return { status: "synced", changed, rev, size, devices: remote.devices, uploaded: false };
       }
       keep({ gone: false });
-      const payload = { format: FORMAT, version: VERSION, sent: now().toISOString(), device, devices, items: out };
+      const payload = { format: FORMAT, version: VERSION, sent: now().toISOString(), device, devices, items: out, deleted };
       const sealed = await seal(payload, keys.key);
       if (sealed.data.length > MAX_BYTES) return { status: "too-large", changed };
       const put = () => call({ method: "PUT", headers: { Authorization: `Bearer ${keys.writeToken}`, "Content-Type": "application/json" }, body: JSON.stringify({ rev, ...sealed }) });
@@ -775,8 +934,14 @@
       if (!response.ok) return { status: "error", code: response.status, changed };
       const saved = (await body(response)) || {};
       const newRev = Number.isInteger(saved.rev) ? saved.rev : rev + 1;
-      writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced: { ...(state.synced || {}), ...baseOf(merged) }, teamKeys: Object.keys(out), rev: newRev, size: sealed.data.length, devices, lastSync: now().toISOString(), gone: false });
-      return { status: "synced", changed, rev: newRev, size: sealed.data.length, devices, uploaded: true };
+      writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced: { ...base, ...baseOf(merged) }, deleted, teamKeys: Object.keys(out), rev: newRev, size: sealed.data.length, devices, lastSync: now().toISOString(), gone: false, space });
+      if (moving) {
+        // The copy is at its new address: the old one goes, now or at a later sync (retireOld).
+        const outcome = await deleteCopy({ endpoint: ctx.endpoint, fetch: ctx.fetch, keys: keys.legacy });
+        const saved = readJson(storage, TEAM_KEY);
+        if (outcome !== "deleted" && saved) writeJson(storage, TEAM_KEY, { ...saved, retire: [...retireList(storage), { spaceId: keys.legacy.spaceId, writeToken: keys.legacy.writeToken }].slice(-5) });
+      }
+      return { status: "synced", changed, rev: newRev, size: sealed.data.length, devices, uploaded: true, moved: moving };
     }
     return { status: "conflict" };
   };
@@ -836,12 +1001,18 @@
     // The team's device names stay out: the caller needs the work, not who carries it.
     return { status: "ok", sent: remote.sent, items: remote.items, rev: box.rev, updated: Number.isFinite(box.updated) ? box.updated : null };
   };
+  // The copy at the address of the keys and, for a team made before, the one at its old address too.
   const deleteCopy = async ({ endpoint, fetch, keys }) => {
     if (!keys?.writeToken) return "refused";
-    try {
-      const response = await fetch(spaceUrl(endpoint, keys.spaceId), { method: "DELETE", headers: { Authorization: `Bearer ${keys.writeToken}` } });
-      return response.status === 204 || response.status === 404 ? "deleted" : response.status === 403 || response.status === 401 ? "refused" : "error";
-    } catch { return "offline"; }
+    const one = async ({ spaceId, writeToken }) => {
+      try {
+        const response = await fetch(spaceUrl(endpoint, spaceId), { method: "DELETE", headers: { Authorization: `Bearer ${writeToken}` } });
+        return response.status === 204 || response.status === 404 ? "deleted" : response.status === 403 || response.status === 401 ? "refused" : "error";
+      } catch { return "offline"; }
+    };
+    const result = await one(keys);
+    if (result !== "deleted" || !keys.legacy?.writeToken) return result;
+    return one(keys.legacy);
   };
 
   // Old spaces still to delete after a change of code, kept with the team code in sc-team (never in a saved file).
@@ -898,7 +1069,7 @@
     const device = { id: state.deviceId || newDeviceId(), name: state.deviceName || "" };
     // Only this device: the others are on the list again once they have joined with the new code.
     const devices = withDevice([], device, now());
-    const sealed = await seal({ format: FORMAT, version: VERSION, sent: now().toISOString(), device, devices, items: remote.items }, next.key);
+    const sealed = await seal({ format: FORMAT, version: VERSION, sent: now().toISOString(), device, devices, items: remote.items, deleted: remote.deleted }, next.key);
     if (sealed.data.length > MAX_BYTES) return fail({ status: "too-large", stage: "upload" });
     let put = null;
     try {
@@ -906,7 +1077,7 @@
     } catch { put = null; }
     if (!put || !put.ok) {
       // The answer was lost on the way: the new space may exist all the same. Nobody else has its code; it goes.
-      if (!put) await deleteCopy({ endpoint: ctx.endpoint, fetch: ctx.fetch, keys: next });
+      if (!put) await deleteCopy({ endpoint: ctx.endpoint, fetch: ctx.fetch, keys: { spaceId: next.spaceId, writeToken: next.writeToken } });
       const status = !put ? "offline" : put.status === 413 ? "too-large" : put.status === 429 ? "busy" : put.status === 409 ? "conflict" : put.status === 403 || put.status === 401 ? "refused" : "error";
       return fail({ status, code: put?.status, stage: "upload" });
     }
@@ -914,20 +1085,40 @@
     const rev = Number.isInteger(saved.rev) ? saved.rev : 1;
     // From here this device is in the new team, whatever happens to the old copy.
     writeJson(storage, TEAM_KEY, { code, since: now().toISOString(), retire: [...retireList(storage), { spaceId: old.spaceId, writeToken: old.writeToken }].slice(-5) });
-    writeJson(storage, STATE_KEY, { ...readState(storage), deviceId: device.id, rev, size: sealed.data.length, devices, teamKeys: Object.keys(remote.items), lastSync: now().toISOString(), gone: false });
+    writeJson(storage, STATE_KEY, { ...readState(storage), deviceId: device.id, rev, size: sealed.data.length, devices, teamKeys: Object.keys(remote.items), lastSync: now().toISOString(), gone: false, space: next.spaceId });
     const deleted = await retireOld({ endpoint: ctx.endpoint, fetch: ctx.fetch, storage });
     return { status: "rotated", code, keys: next, rev, deleted, changed: first.changed || [] };
   };
 
+  // Work put back by hand (a restore point, a saved file) for these keys: the rows it lacks were not deleted here, so
+  // the next sync takes them from the team again instead of deleting them on every device. What was last synced
+  // forgets them; the tombstones this device knows stay.
+  const rebase = (storage, keys) => {
+    const state = readState(storage);
+    if (!isObject(state.synced)) return false;
+    const synced = { ...state.synced };
+    let changed = false;
+    keys.forEach((key) => {
+      const ids = goneHere(parse(storage.getItem(key)) ?? { rows: [] }, synced[key]);
+      if (!ids.length) return;
+      const r = { ...synced[key].r };
+      ids.forEach((id) => { delete r[id]; });
+      synced[key] = { ...synced[key], r };
+      changed = true;
+    });
+    return changed ? writeJson(storage, STATE_KEY, { ...state, synced }) : false;
+  };
+
   window.TeamSyncMath = {
-    FORMAT, VERSION, SALT, ITERATIONS, WORDS, BITS, DEFAULT_ON, VIEW_VERSION,
+    FORMAT, VERSION, SALT, ID_SALT, ITERATIONS, WORDS, BITS, DEFAULT_ON, VIEW_VERSION, TOMBSTONE_DAYS,
     newCode, parseCode, normalise, deriveKeys, seal, unseal, toBase64, fromBase64, toBase64Url, fromBase64Url,
     looksViewer, viewerCode, parseViewer, viewerKeys,
     offerable, isOn, readPayload, withDevice, deviceFresh,
     hash, newer, mergeRows, mergeValue, merge, baseOf, changedSince, sameItems,
+    deletedHere, joinDeleted, purgeDeleted, applyDeleted,
     qrEncode, qrSvg,
   };
-  window.TeamSync = { syncOnce, pullOnce, readTeamCopy, deleteCopy, rotate, retireOld, retireList, TEAM_KEY, STATE_KEY };
+  window.TeamSync = { syncOnce, pullOnce, readTeamCopy, deleteCopy, rotate, retireOld, retireList, rebase, TEAM_KEY, STATE_KEY };
 
   // ---- The section in the box ----
   const root = document.querySelector("[data-team-sync]");
@@ -959,6 +1150,14 @@
     $("[data-tm-summary]").textContent = text.off || "";
     $("[data-tm-off]").hidden = true;
     $("[data-tm-message]").textContent = storage ? text.noCrypto : "";
+    return;
+  }
+  // Locked for a shared computer (js/work-lock.js): the team code is in the locked record, and starting or joining a
+  // team now would bring the team's work here in plain text. Nothing until the PIN.
+  if (window.WorkLock?.locked) {
+    $("[data-tm-summary]").textContent = text.off || "";
+    $("[data-tm-off]").hidden = true;
+    $("[data-tm-message]").textContent = text.locked || "";
     return;
   }
 
@@ -1181,11 +1380,15 @@
     say(text.syncing);
     const k = viewer ? await viewerKeys(view.text) : await deriveKeys(parsed.code);
     // Join only a team that exists: a mistyped code that happens to be six real words starts nothing.
-    let exists = null;
-    try {
-      const response = await window.fetch(`${endpoint.replace(/\/+$/, "")}/v1/spaces/${k.spaceId}`, { cache: "no-store" });
-      exists = response.status === 404 ? false : response.ok ? true : null;
-    } catch { exists = null; }
+    const probe = async (spaceId) => {
+      try {
+        const response = await window.fetch(spaceUrl(endpoint, spaceId), { cache: "no-store" });
+        return response.status === 404 ? false : response.ok ? true : null;
+      } catch { return null; }
+    };
+    // A team made before may still have its copy at the old address (it moves at the next sync of a member).
+    let exists = await probe(k.spaceId);
+    if (exists === false && k.legacy) exists = await probe(k.legacy.spaceId);
     button.disabled = false;
     if (exists === false) { say(text.noTeam); return; }
     if (exists === null) { say(text.offline); return; }
@@ -1211,6 +1414,8 @@
     const button = $("[data-tm-viewer-make]");
     button.disabled = true;
     say(text.viewerMaking);
+    // The code carries the new address of the team's copy: a team made before moves there first.
+    if (!state().lastSync || state().space !== (await keys())?.spaceId) await sync({ quiet: true });
     let code = null;
     try { code = await viewerCode(current.code); } catch { code = null; }
     button.disabled = false;

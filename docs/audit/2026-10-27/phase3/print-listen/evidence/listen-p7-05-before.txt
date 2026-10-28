@@ -1,0 +1,45 @@
+TAP version 13
+# Subtest: interrupted: a speed change and a pause keep the sentence being read; "Start again" starts at the title
+ok 1 - interrupted: a speed change and a pause keep the sentence being read; "Start again" starts at the title
+  ---
+  duration_ms: 404.519006
+  type: 'test'
+  ...
+# Subtest: late-end: a speed change and a pause keep the sentence being read; "Start again" starts at the title
+not ok 2 - late-end: a speed change and a pause keep the sentence being read; "Start again" starts at the title
+  ---
+  duration_ms: 128.865542
+  type: 'test'
+  location: '/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:153:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    one utterance waiting: the sentence that was cut
+    + actual - expected
+    
+      [
+        'That is why I want to describe them the way I used them, day to day.',
+    +   'The best-documented case I have kept is a delay report from one day in August 2025, with 19 cases.'
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'That is why I want to describe them the way I used them, day to day.'
+  actual:
+    0: 'That is why I want to describe them the way I used them, day to day.'
+    1: 'The best-documented case I have kept is a delay report from one day in August 2025, with 19 cases.'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (/home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/listen-real-pages.test.cjs:167:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 1
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 809.763414

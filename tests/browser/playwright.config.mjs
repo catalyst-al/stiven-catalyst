@@ -5,7 +5,8 @@
 import { defineConfig } from "@playwright/test";
 import { existsSync } from "node:fs";
 
-const PORT = 4173;
+// BROWSER_TEST_PORT (or PW_PORT): another port, for a second checkout running on the same machine.
+const PORT = Number(process.env.BROWSER_TEST_PORT || process.env.PW_PORT) || 4173;
 // In the development container Chromium is already installed here; in CI `npx playwright install` puts it where
 // Playwright looks by itself.
 const LOCAL_CHROMIUM = "/opt/pw-browsers/chromium";
@@ -32,12 +33,24 @@ export default defineConfig({
     launchOptions,
     trace: "retain-on-failure",
   },
+  // Some specs run in one project or one width only, and the others leave them out (rather than skipping them), so a
+  // run reports no skipped tests: the photo backup journey at one width, print in one project (dark theme, with
+  // motion), the phone charts at the phone width, and the accessibility pages at 1440 px, once per theme (they check
+  // both widths themselves).
   projects: widths.flatMap((width) => themes.map((theme) => ({
     name: `${width}px ${theme}`,
+    testIgnore: [
+      ...(width === 1440 && theme === "light" ? [] : [/work-backup-photos\.spec\.mjs$/]),
+      ...(width === 390 ? [] : [/chart-labels\.spec\.mjs$/]),
+      ...(width === 1440 && theme === "dark" ? [] : [/print\.spec\.mjs$/]),
+      ...(width === 1440 ? [] : [/a11y-pages\.spec\.mjs$/]),
+    ],
     use: {
       viewport: { width, height: width < 600 ? 844 : 900 },
       theme,
-      reducedMotion: theme === "light" ? "reduce" : "no-preference",
+      // A context option, not a test option: written directly under `use` Playwright ignores it, and every project
+      // ran with motion.
+      contextOptions: { reducedMotion: theme === "light" ? "reduce" : "no-preference" },
     },
   }))),
   webServer: {

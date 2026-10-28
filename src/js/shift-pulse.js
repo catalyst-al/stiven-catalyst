@@ -274,12 +274,8 @@
 
   // 5S Audit: the overall share of the latest audit, as the audit tool shows it: per S the mean of the answered
   // questions (0–4) over 4, then the mean of the S that have an answer, so each S weighs the same.
-  const isScore = (value) => Number.isInteger(value) && value >= 0 && value <= 4;
-  const fiveSOverall = (scores) => {
-    const shares = Object.values(isObj(scores) ? scores : {}).map((list) => (Array.isArray(list) ? list.filter(isScore) : []))
-      .filter((values) => values.length).map((values) => sum(values) / values.length / 4);
-    return shares.length ? sum(shares) / shares.length : null;
-  };
+  // A partial audit (as the 5S Audit calls it) is no score here either: ToolKit.fiveSShare, one function for every reader.
+  const fiveSOverall = (scores) => window.ToolKit.fiveSShare(scores);
   const fiveS = (saved) => {
     const rows = listOf(saved?.rows).filter((row) => isObj(row) && isIso(row.date) && fiveSOverall(row.scores) !== null)
       .map((row, i) => ({ row, i })).sort((a, b) => a.row.date.localeCompare(b.row.date) || a.i - b.i).map(({ row }) => row);
@@ -432,7 +428,7 @@
   const dataEl = document.getElementById("shift-pulse-data");
   if (!root || !dataEl || !window.ToolKit) return;
 
-  const { LANG, tx, int, pct, el, showDate, today, addDays, mondayOf, shareText, read, write, isObject, str, plural, dayMonth, trendFigure, trendShares, panel, copy } = window.ToolKit;
+  const { LANG, tx, int, pct, el, showDate, today, addDays, mondayOf, shareText, read, readOwn, write, isObject, str, plural, dayMonth, trendFigure, trendShares, panel, copy } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
   const SUFFIX = LANG === "en" ? "" : `-${LANG}`;
   const PREFS = `sc-shift-pulse${SUFFIX}`;
@@ -449,12 +445,13 @@
   shiftSelect.value = data.shifts.includes(prefs.shift) ? prefs.shift : "";
 
   const logOf = (tool) => {
-    const saved = read(`sc-${tool}${SUFFIX}`, {});
+    // Read as data: an example another tool holds is left out (ToolKit readOwn).
+    const saved = readOwn(`sc-${tool}${SUFFIX}`, {});
     return isObject(saved) && Array.isArray(saved.rows) ? { ...saved, rows: saved.rows.filter(isObject) } : { rows: [] };
   };
   // The open issues of the handover in progress, most urgent first.
   const openIssues = () => {
-    const saved = read(`sc-shift-handover${SUFFIX}`, {});
+    const saved = readOwn(`sc-shift-handover${SUFFIX}`, {});
     const issues = isObject(saved) && isObject(saved.current) && Array.isArray(saved.current.issues) ? saved.current.issues.filter(isObject) : [];
     const order = (priority) => (data.priorities.indexOf(priority) + 1 || 99);
     return issues.filter((issue) => issue.done !== true && str(issue.text).trim())
@@ -509,7 +506,7 @@
     const oeeLog = logOf("oee");
     const fiveLog = logOf("five-s-audit");
     const acts = actions(read("sc-actions", {}), today());
-    const saved = (tool) => { const value = read(`sc-${tool}${SUFFIX}`, {}); return isObject(value) ? value : {}; };
+    const saved = (tool) => { const value = readOwn(`sc-${tool}${SUFFIX}`, {}); return isObject(value) ? value : {}; };
     return {
       safety: safetyLog.rows.length ? safety(safetyLog, options) : null,
       oee: oeeLog.rows.length ? oee(oeeLog, { ...options, target: window.Workplace?.target("oee") }, data.oeeReasons || []) : null,

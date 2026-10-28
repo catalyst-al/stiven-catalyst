@@ -9,7 +9,7 @@
   const {
     tx, num, showDate, lower, addDays, cleanVolumes, importVolumes, dayVolumes, shareText,
     read, write, isObject, str, loadState, el, int, euro, pct, plural, capital, today,
-    parseNumber, parseDate, parseRows, canon, sigma, sigmaText,
+    parseNumber, parseDate, parseRows, canon, sigmaText,
     inRange, dateSpan, spanText, logBook, resultLayout, periodTotal, rangeText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, focusCard, resultActions, flash, floorCheck, recentExample } = window.ToolKit;
   // Newer pieces of the kit (filter, day / week / month, the period before); a page with an older kit still works.
@@ -277,7 +277,7 @@
     lines.push("", `${capital(t.many)}: ${tx("{n} in {entries}", { n: int.format(result.total), entries: entries(result.rows.length) })}`);
     if (result.volume) {
       lines.push(`${t.volumeLabel}: ${int.format(result.volume)}`);
-      lines.push(`${t.rateLabel}: ${pct(result.rate, 2)} · DPMO: ${int.format(Math.round(result.dpmo))} · ${tx("Sigma level")}: ${num(sigma(result.rate), 2)}`);
+      lines.push(`${t.rateLabel}: ${pct(result.rate, 2)} · DPMO: ${int.format(Math.round(result.dpmo))} · ${tx("Sigma level")}: ${sigmaText(result.rate, result.volume)}`);
       if (t.complement) lines.push(`${t.complement.label}: ${pct(1 - result.rate, 2)}`);
     }
     const target = targetText(result);
@@ -605,6 +605,8 @@
       (date ? form.vvolume : form.vdate).focus();
       return;
     }
+    // A volume of the visitor's own is own work: the example leaves first, so the volume is not lost with it later.
+    book.ownWork();
     const replaced = state.volumes.some((item) => item.date === date);
     state.volumes = cleanVolumes([...state.volumes, { date, volume }]);
     volumesChanged();
@@ -620,6 +622,7 @@
       flash(volumeImportStatus, tx("No rows found. Check the order: date, volume."));
       return;
     }
+    book.ownWork();
     state.volumes = cleanVolumes([...state.volumes, ...added]);
     volumesChanged();
     volumePaste.value = "";

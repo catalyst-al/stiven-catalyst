@@ -1,0 +1,2738 @@
+[
+ {
+  "lang": "en",
+  "slug": "a3-report",
+  "paper": "420x297mm",
+  "pages": 2,
+  "tables": 1,
+  "wide": [
+   "dl-table 960px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 960>597"
+  ],
+  "missing": [
+   "th OWNER",
+   "th DUE DATE",
+   "th STATUS",
+   "td Anna K. (Area Manager)",
+   "td 2026-09-15",
+   "td Verified"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "action-tracker",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "andon",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 1150px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1150>630"
+  ],
+  "missing": [
+   "th ESCALATION LEVEL",
+   "td Supervisor",
+   "td 5 Whys"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "ats-cv",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "cost-of-quality",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "cover-letter",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "cv-builder",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "cx-control-tower",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "daily-board",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "damage-control",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "delay-analyzer",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "eight-d",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 8,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "energy-tracker",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [
+   "dl-table 780px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 780>630"
+  ],
+  "missing": [
+   "th DAYS WITH READINGS",
+   "td 112 / 112"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "fishbone",
+  "paper": "297x210mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "five-s-audit",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 2,
+  "wide": [
+   "dl-table 915px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 654>630",
+   "dl-table in div.dl-table-wrap 915>630"
+  ],
+  "missing": [
+   "td 2026-09-21",
+   "td Packing",
+   "td Clara",
+   "td Early",
+   "td 6S",
+   "td 81% · Good, hold it",
+   "td ×",
+   "th DUE DATE",
+   "th REMOVE",
+   "td 2026-09-28",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "five-whys",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "fmea",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 3,
+  "wide": [
+   "dl-table 1034px",
+   "dl-table 1172px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "gemba-walk",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 2,
+  "wide": [],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 658>630"
+  ],
+  "missing": [
+   "th REMOVE",
+   "td 2026-09-30",
+   "td LPA",
+   "td Team lead",
+   "td Inbound dock",
+   "td Anna",
+   "td 83% · 1 no",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "guest-complaints",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 2650px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th WHAT HAPPENED",
+   "th ACTION TAKEN",
+   "th COMPENSATION",
+   "th STATUS",
+   "td Doors slamming and loud voices in the co",
+   "td None",
+   "td Open · 37.3 h · ✕ past the target"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "heijunka",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 3,
+  "wide": [
+   "hj-box 1424px",
+   "dl-table 900px"
+  ],
+  "clipped": [
+   "hj-box in div.dl-table-wrap 1424>630",
+   "dl-table in div.dl-table-wrap 900>630"
+  ],
+  "missing": [
+   "th 16:00",
+   "th 16:15",
+   "th 16:30",
+   "th 16:45",
+   "th 17:00",
+   "th 17:15",
+   "th 17:30",
+   "th 18:15",
+   "th 18:30",
+   "th 18:45",
+   "th 19:00",
+   "th 19:15",
+   "th 19:30",
+   "th 19:45",
+   "th 20:00",
+   "th 20:15",
+   "th 20:30",
+   "th 20:45",
+   "th 21:00",
+   "th 21:15",
+   "th 21:30",
+   "th 21:45",
+   "td ■ 1 card, 10 units",
+   "td ■ 1 card, 10 units",
+   "td ■■ 2 cards, 10 + 10 units"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "hoshin-kanri",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 2,
+  "wide": [
+   "dl-table 983px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th TREND"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "hotel-kpis",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "housekeeping-planner",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [
+   "dl-table 807px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 807>625"
+  ],
+  "missing": [
+   "th DIFFERENCE",
+   "td 0"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "incomplete-control",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "inventory-abc",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 6,
+  "wide": [
+   "dl-table 992px",
+   "dl-table 864px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 864>630"
+  ],
+  "missing": [
+   "th STATUS",
+   "td OK"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "kaizen-board",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "kaizen-event",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "kanban-sizing",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 2,
+  "wide": [
+   "dl-table 1062px",
+   "dl-table 1399px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1062>630",
+   "dl-table in div.dl-table-wrap 1399>630"
+  ],
+  "missing": [
+   "th STATUS",
+   "th EDIT OR REMOVE",
+   "th P-1008 Air filter cartridge, carton of 4",
+   "td Kanban loop",
+   "td 2",
+   "td 15",
+   "td 4",
+   "td –",
+   "td 9",
+   "td + New loop",
+   "th MAXIMUM INVENTORY",
+   "th VALUE AT MAXIMUM",
+   "th CHANGE IN VALUE",
+   "th STATUS",
+   "td 3,222",
+   "td 3,271.80 €",
+   "td +122.40 €"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "kpi-diagnostic",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "leader-standard-work",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 2,
+  "wide": [
+   "dl-table 748px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 748>630"
+  ],
+  "missing": [
+   "th TOOL",
+   "th EDIT",
+   "td Friday 11:30",
+   "td Update the skills matrix after this week",
+   "td Weekly",
+   "td 20",
+   "td Skills Matrix",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "lean-assessment",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 2,
+  "wide": [
+   "dl-table 1423px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 659>630",
+   "dl-table in div.dl-table-wrap 1423>630"
+  ],
+  "missing": [
+   "th STATEMENT",
+   "th ELIRA",
+   "th JONAS",
+   "th MEAN",
+   "th SPREAD",
+   "td The results of improvements (time, error",
+   "td 2",
+   "td 2",
+   "td 2.0",
+   "td 0"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "lost-found",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 1,
+  "wide": [
+   "dl-table 1461px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th STORED IN",
+   "th GUEST",
+   "th STATUS",
+   "td Safe · #123",
+   "td Stored · keep until 2026-10-30"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "maintenance-planner",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 3,
+  "wide": [
+   "dl-table 1519px",
+   "dl-table 1293px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1519>630",
+   "dl-table in div.dl-table-wrap 1293>630",
+   "dl-table in div.dl-table-wrap 656>630"
+  ],
+  "missing": [
+   "th TASK",
+   "th INTERVAL",
+   "th WHO",
+   "th LAST DONE",
+   "th NEXT DUE DATE",
+   "th STATUS",
+   "th LOG OR REMOVE",
+   "td FL-03 Forklift 3 · electric 1.6 t",
+   "td Yearly inspection by a competent person ",
+   "td every year",
+   "td External",
+   "td 2026-09-03",
+   "td 2027-09-03",
+   "td Planned",
+   "th DETAILS",
+   "th DONE BY",
+   "th REMOVE",
+   "td 2026-10-08",
+   "td FL-03",
+   "td Breakdown",
+   "td Hydraulic or oil leak · 180 min of downt",
+   "td Jonas",
+   "th COST",
+   "td €260.00"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "night-audit",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "oee",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 817px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 817>630"
+  ],
+  "missing": [
+   "th BIGGEST LOSS",
+   "td Breakdowns · 2,465 min"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "ops-report",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "pareto",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "poka-yoke",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [
+   "dl-table 1492px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th THU 29 OCT",
+   "th FRI 30 OCT",
+   "th SAT 31 OCT",
+   "th SUN 1 NOV",
+   "th MON 2 NOV",
+   "th INITIALS",
+   "td ☐"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "print-pack",
+  "paper": "210x297mm",
+  "pages": 20,
+  "tables": 28,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "process-lab",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "project-portfolio",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 3,
+  "wide": [
+   "dl-table 894px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th CHECK",
+   "td ✓ OK"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "risk-assessment",
+  "paper": "297x210mm",
+  "pages": 4,
+  "tables": 4,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "room-inspection",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 1,
+  "wide": [
+   "dl-table 783px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 783>630"
+  ],
+  "missing": [
+   "th SCORE",
+   "th RESULT",
+   "th REMOVE",
+   "td 2026-10-24 09:56",
+   "td 622 · Floor 6",
+   "td Mehmet",
+   "td Elena",
+   "td After checkout",
+   "td 100%",
+   "td ✓ Pass",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "room-status",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "safety-cross",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "shift-capacity",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 3,
+  "wide": [
+   "cp-print-table 810px",
+   "cp-print-table 808px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "shift-handover",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "shift-pulse",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "sigma-control-chart",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 2,
+  "wide": [
+   "dl-table 924px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 924>630"
+  ],
+  "missing": [
+   "th SIGNAL",
+   "th NOTE",
+   "td 27 Oct",
+   "td 2,900",
+   "td 8",
+   "td 0.28%",
+   "td 0.18%",
+   "td 1.04%",
+   "td Shift (better)"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "signals",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "site-compare",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "six-sigma-dmaic",
+  "paper": "210x297mm",
+  "pages": 22,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "skills-matrix",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 3,
+  "wide": [
+   "dl-table 794px",
+   "dl-table 719px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th TASKS AT 3+",
+   "td 0"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "smed",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 2,
+  "wide": [
+   "dl-table 693px",
+   "dl-table 1161px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 693>630",
+   "dl-table in div.dl-table-wrap 1161>630"
+  ],
+  "missing": [
+   "th AFTER",
+   "td 3:00",
+   "th TIME SAVED",
+   "th COUNTERMEASURE",
+   "td 2:30"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "spaghetti-diagram",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "standard-work",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "time-study",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 838px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 838>630"
+  ],
+  "missing": [
+   "th MAX",
+   "th CV",
+   "th OUTLIERS",
+   "td 12.8",
+   "td 3%"
+  ]
+ },
+ {
+  "lang": "en",
+  "slug": "value-stream-map",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 2,
+  "wide": [
+   "dl-table 703px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "en",
+  "slug": "waste-log",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [
+   "dl-table 1222px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th NOTE"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "a3-report",
+  "paper": "420x297mm",
+  "pages": 2,
+  "tables": 1,
+  "wide": [
+   "dl-table 960px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 960>597"
+  ],
+  "missing": [
+   "th VERANTWORTLICH",
+   "th FÄLLIG AM",
+   "th STATUS",
+   "td Anna K. (Area Managerin)",
+   "td 15.09.2026",
+   "td Bestätigt"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "action-tracker",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "andon",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 1259px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1259>630"
+  ],
+  "missing": [
+   "th REAKTION",
+   "th LÖSUNG",
+   "th ESKALATIONSSTUFE",
+   "td 2 min",
+   "td 29 min ✕",
+   "td Supervisor",
+   "td 5 Whys"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "ats-cv",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "cost-of-quality",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "cover-letter",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "cv-builder",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "cx-control-tower",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "daily-board",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "damage-control",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "delay-analyzer",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "eight-d",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 8,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "energy-tracker",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [
+   "dl-table 827px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 827>630"
+  ],
+  "missing": [
+   "th TAGE MIT ZÄHLERSTÄNDEN",
+   "td 112 / 112"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "fishbone",
+  "paper": "297x210mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "five-s-audit",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 2,
+  "wide": [
+   "dl-table 728px",
+   "dl-table 1156px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 728>630",
+   "dl-table in div.dl-table-wrap 1156>630"
+  ],
+  "missing": [
+   "td 21.09.2026",
+   "td Packen",
+   "td Clara",
+   "td Früh",
+   "td 6S",
+   "td 81 % · Gut, halten",
+   "td ×",
+   "th VERANTWORTLICH",
+   "th FÄLLIG AM",
+   "th ENTFERNEN",
+   "td Anna",
+   "td 28.09.2026",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "five-whys",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "fmea",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 3,
+  "wide": [
+   "dl-table 756px",
+   "dl-table 1250px",
+   "dl-table 1353px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th RPZ NACH MASSNAHME"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "gemba-walk",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 2,
+  "wide": [
+   "dl-table 861px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 861>630",
+   "dl-table in div.dl-table-wrap 658>630"
+  ],
+  "missing": [
+   "th DURCHGEFÜHRT VON",
+   "th ERGEBNIS",
+   "th ENTFERNEN",
+   "td 30.09.2026",
+   "td LPA",
+   "td Teamleitung",
+   "td Wareneingang",
+   "td Anna",
+   "td 83 % · 1 × Nein",
+   "td ×",
+   "th STATUS",
+   "td ✓ Pünktlich"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "guest-complaints",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 3043px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th WAS PASSIERT IST",
+   "th ERGRIFFENE MASSNAHME",
+   "th KOMPENSATION",
+   "th STATUS",
+   "td Türenknallen und laute Stimmen im Flur v",
+   "td Keine",
+   "td Offen · 37,4 h · ✕ Zielzeit überschritte"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "heijunka",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 3,
+  "wide": [
+   "hj-box 1429px",
+   "dl-table 970px"
+  ],
+  "clipped": [
+   "hj-box in div.dl-table-wrap 1429>630",
+   "dl-table in div.dl-table-wrap 970>630"
+  ],
+  "missing": [
+   "th 16:00",
+   "th 16:15",
+   "th 16:30",
+   "th 16:45",
+   "th 17:00",
+   "th 17:15",
+   "th 17:30",
+   "th 18:15",
+   "th 18:30",
+   "th 18:45",
+   "th 19:00",
+   "th 19:15",
+   "th 19:30",
+   "th 19:45",
+   "th 20:00",
+   "th 20:15",
+   "th 20:30",
+   "th 20:45",
+   "th 21:00",
+   "th 21:15",
+   "th 21:30",
+   "th 21:45",
+   "td ■ 1 Karte, 10 Einheiten",
+   "td ■ 1 Karte, 10 Einheiten",
+   "td ■■ 2 Karten, 10 + 10 Einheiten",
+   "th BESTAND GEGLÄTTET",
+   "td 30"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "hoshin-kanri",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 2,
+  "wide": [
+   "dl-table 1055px",
+   "dl-table 733px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th TREND"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "hotel-kpis",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "housekeeping-planner",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [
+   "dl-table 818px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 818>625"
+  ],
+  "missing": [
+   "th DIFFERENZ",
+   "td 0"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "incomplete-control",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "inventory-abc",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 6,
+  "wide": [
+   "dl-table 1134px",
+   "dl-table 983px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 983>630",
+   "dl-table in div.dl-table-wrap 656>630"
+  ],
+  "missing": [
+   "th STATUS",
+   "td OK",
+   "th MASSNAHME"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "kaizen-board",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "kaizen-event",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "kanban-sizing",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 2,
+  "wide": [
+   "dl-table 1187px",
+   "dl-table 1681px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1187>630",
+   "dl-table in div.dl-table-wrap 1681>630"
+  ],
+  "missing": [
+   "th BENÖTIGTE KARTEN",
+   "th STATUS",
+   "th BEARBEITEN ODER ENTFERNEN",
+   "th P-1008 Luftfilterpatrone, Karton à 4 · E",
+   "td Kanban-Regelkreis",
+   "td 2",
+   "td 15",
+   "td 4",
+   "td –",
+   "td 9",
+   "td + Neuer Regelkreis",
+   "th VERÄNDERUNG",
+   "th HÖCHSTBESTAND",
+   "th WERT BEIM HÖCHSTBESTAND",
+   "th VERÄNDERUNG DES WERTS",
+   "th STATUS",
+   "td 0 Karten",
+   "td 3.222",
+   "td 3.271,80 €",
+   "td +122,40 €"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "kpi-diagnostic",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "leader-standard-work",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 2,
+  "wide": [
+   "dl-table 808px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 808>630"
+  ],
+  "missing": [
+   "th TOOL",
+   "th BEARBEITEN",
+   "td Freitag 11:30",
+   "td Qualifikationsmatrix nach dem Anlernen d",
+   "td Wöchentlich",
+   "td 20",
+   "td Qualifikationsmatrix",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "lean-assessment",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 2,
+  "wide": [
+   "dl-table 750px",
+   "dl-table 1803px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 750>630",
+   "dl-table in div.dl-table-wrap 1803>630"
+  ],
+  "missing": [
+   "th AUSSAGE",
+   "th ELIRA",
+   "th JONAS",
+   "th MITTELWERT",
+   "th SPANNWEITE",
+   "td Die Ergebnisse der Verbesserungen (Zeit,",
+   "td 2",
+   "td 2",
+   "td 2,0",
+   "td 0"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "lost-found",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 1623px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th BESCHREIBUNG",
+   "th WERT",
+   "th AUFBEWAHRT IN",
+   "th GAST",
+   "th STATUS",
+   "td Kartenetui mit einer Kreditkarte und ein",
+   "td Hoch",
+   "td Safe · #123",
+   "td Eingelagert · aufbewahren bis 30.10.2026"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "maintenance-planner",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 3,
+  "wide": [
+   "dl-table 1698px",
+   "dl-table 1406px",
+   "dl-table 684px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1698>630",
+   "dl-table in div.dl-table-wrap 1406>630",
+   "dl-table in div.dl-table-wrap 684>630"
+  ],
+  "missing": [
+   "th AUFGABE",
+   "th INTERVALL",
+   "th WER",
+   "th ZULETZT ERLEDIGT",
+   "th NÄCHSTE FÄLLIGKEIT",
+   "th STATUS",
+   "th ERFASSEN ODER ENTFERNEN",
+   "td FL-03 Stapler 3 · elektrisch 1,6 t",
+   "td Jährliche Prüfung durch eine befähigte P",
+   "td jährlich",
+   "td Extern",
+   "td 03.09.2026",
+   "td 03.09.2027",
+   "td Geplant",
+   "th DETAILS",
+   "th ERLEDIGT VON",
+   "th ENTFERNEN",
+   "td 08.10.2026",
+   "td FL-03",
+   "td Störung",
+   "td Hydraulik- oder Ölleck · 180 Min. Ausfal",
+   "td Jonas",
+   "th KOSTEN",
+   "td 260,00 €"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "night-audit",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": [
+   "th OFFENER SALDO"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "oee",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 1,
+  "wide": [
+   "dl-table 1015px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1015>630"
+  ],
+  "missing": [
+   "th GRÖSSTER VERLUST",
+   "td Ausfälle · 2.465 min"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "ops-report",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "pareto",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "poka-yoke",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [
+   "dl-table 1830px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th SO WIRD GEPRÜFT",
+   "th DI., 27. OKT.",
+   "th MI., 28. OKT.",
+   "th DO., 29. OKT.",
+   "th FR., 30. OKT.",
+   "th SA., 31. OKT.",
+   "th SO., 1. NOV.",
+   "th MO., 2. NOV.",
+   "th KÜRZEL",
+   "td Eine Zeile der Checkliste offen lassen u",
+   "td ☐"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "print-pack",
+  "paper": "210x297mm",
+  "pages": 21,
+  "tables": 28,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "process-lab",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "project-portfolio",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 3,
+  "wide": [
+   "dl-table 704px",
+   "dl-table 1045px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th PRÜFUNG",
+   "td ✓ OK"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "risk-assessment",
+  "paper": "297x210mm",
+  "pages": 4,
+  "tables": 4,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "room-inspection",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 1,
+  "wide": [
+   "dl-table 801px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 801>630"
+  ],
+  "missing": [
+   "th BEWERTUNG",
+   "th ERGEBNIS",
+   "th ENTFERNEN",
+   "td 24.10.2026 09:56",
+   "td 622 · Etage 6",
+   "td Mehmet",
+   "td Elena",
+   "td Nach Abreise",
+   "td 100 %",
+   "td ✓ OK",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "room-status",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "safety-cross",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "shift-capacity",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 3,
+  "wide": [
+   "cp-print-table 871px",
+   "cp-print-table 869px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "shift-handover",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "shift-pulse",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "sigma-control-chart",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 2,
+  "wide": [
+   "dl-table 1191px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1191>630"
+  ],
+  "missing": [
+   "th OBERGRENZE",
+   "th SIGNAL",
+   "th NOTIZ",
+   "td 27. Okt.",
+   "td 2.900",
+   "td 8",
+   "td 0,28 %",
+   "td 0,18 %",
+   "td 1,04 %",
+   "td Verschiebung (besser)"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "signals",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "site-compare",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [
+   "dl-table 701px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "six-sigma-dmaic",
+  "paper": "210x297mm",
+  "pages": 24,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "skills-matrix",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 3,
+  "wide": [
+   "dl-table 910px",
+   "dl-table 862px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th AUFGABEN AUF 3+",
+   "td 0"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "smed",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 2,
+  "wide": [
+   "dl-table 732px",
+   "dl-table 1339px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 732>630",
+   "dl-table in div.dl-table-wrap 1339>630"
+  ],
+  "missing": [
+   "th NACHHER",
+   "td 3:00",
+   "th GEWONNEN",
+   "th MASSNAHME",
+   "td 2:30"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "spaghetti-diagram",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "standard-work",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "time-study",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 1020px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1020>630"
+  ],
+  "missing": [
+   "th MAX.",
+   "th CV",
+   "th AUSREISSER",
+   "td 12,8",
+   "td 3 %"
+  ]
+ },
+ {
+  "lang": "de",
+  "slug": "value-stream-map",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 2,
+  "wide": [
+   "dl-table 849px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "de",
+  "slug": "waste-log",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [
+   "dl-table 1528px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th VERBLEIB",
+   "th NOTIZ",
+   "td Kompost oder Biogas"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "a3-report",
+  "paper": "420x297mm",
+  "pages": 2,
+  "tables": 1,
+  "wide": [
+   "dl-table 1100px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1100>597"
+  ],
+  "missing": [
+   "th ÇFARË",
+   "th PËRGJEGJËSI",
+   "th AFATI",
+   "th STATUSI",
+   "td Dhjetë minuta më shumë për orët e pikut ",
+   "td Anna K. (Area Manager)",
+   "td 15.09.2026",
+   "td Verifikuar"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "action-tracker",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "andon",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 1258px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1258>630"
+  ],
+  "missing": [
+   "th ZGJIDHJA",
+   "th NIVELI I PËRSHKALLËZIMIT",
+   "td 29 min ✕",
+   "td Supervizori",
+   "td 5 Whys"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "ats-cv",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "cost-of-quality",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "cover-letter",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "cv-builder",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "cx-control-tower",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "daily-board",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "damage-control",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "delay-analyzer",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "eight-d",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 8,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "energy-tracker",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [
+   "dl-table 794px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 794>630"
+  ],
+  "missing": [
+   "th DITË ME LEXIME",
+   "td 112 / 112"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "fishbone",
+  "paper": "297x210mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "five-s-audit",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 2,
+  "wide": [
+   "dl-table 713px",
+   "dl-table 1059px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 713>630",
+   "dl-table in div.dl-table-wrap 1059>630"
+  ],
+  "missing": [
+   "td 21.09.2026",
+   "td Paketimi",
+   "td Clara",
+   "td Mëngjes",
+   "td 6S",
+   "td 81% · Mirë, mbaje",
+   "td ×",
+   "th AFATI",
+   "th HIQ",
+   "td 28.09.2026",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "five-whys",
+  "paper": "210x297mm",
+  "pages": 2,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "fmea",
+  "paper": "210x297mm",
+  "pages": 11,
+  "tables": 3,
+  "wide": [
+   "dl-table 727px",
+   "dl-table 1174px",
+   "dl-table 1313px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th RPN PAS VEPRIMIT"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "gemba-walk",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 2,
+  "wide": [
+   "dl-table 708px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 708>630"
+  ],
+  "missing": [
+   "th REZULTATI",
+   "th HIQ",
+   "td 30.09.2026",
+   "td LPA",
+   "td Drejtuesi i ekipit",
+   "td Rampa e pranimit",
+   "td Anna",
+   "td 83% · 1 × jo",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "guest-complaints",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 2872px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th ÇFARË NDODHI",
+   "th VEPRIMI I MARRË",
+   "th KOMPENSIMI",
+   "th STATUSI",
+   "td Dyer që përplasen dhe zëra të lartë në k",
+   "td Asnjë",
+   "td E hapur · 37,4 h · ✕ përtej objektivit"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "heijunka",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 3,
+  "wide": [
+   "hj-box 1440px",
+   "dl-table 1082px"
+  ],
+  "clipped": [
+   "hj-box in div.dl-table-wrap 1440>630",
+   "dl-table in div.dl-table-wrap 1082>630"
+  ],
+  "missing": [
+   "th 16:00",
+   "th 16:15",
+   "th 16:30",
+   "th 16:45",
+   "th 17:00",
+   "th 17:15",
+   "th 17:30",
+   "th 18:15",
+   "th 18:30",
+   "th 18:45",
+   "th 19:00",
+   "th 19:15",
+   "th 19:30",
+   "th 19:45",
+   "th 20:00",
+   "th 20:15",
+   "th 20:30",
+   "th 20:45",
+   "th 21:00",
+   "th 21:15",
+   "th 21:30",
+   "th 21:45",
+   "td ■ 1 kartë, 10 njësi",
+   "td ■ 1 kartë, 10 njësi",
+   "td ■■ 2 karta, 10 + 10 njësi",
+   "th STOKU ME NIVELIM",
+   "td 30"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "hoshin-kanri",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 2,
+  "wide": [
+   "dl-table 1176px",
+   "dl-table 687px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th DHJ",
+   "th ARRITUR",
+   "th PRIRJA",
+   "td –"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "hotel-kpis",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "housekeeping-planner",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 3,
+  "wide": [
+   "dl-table 894px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 894>625"
+  ],
+  "missing": [
+   "th DIFERENCA",
+   "td 0"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "incomplete-control",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "inventory-abc",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 6,
+  "wide": [
+   "dl-table 1163px",
+   "dl-table 941px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 941>630",
+   "dl-table in div.dl-table-wrap 658>630"
+  ],
+  "missing": [
+   "th STATUSI",
+   "td OK"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "kaizen-board",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "kaizen-event",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "kanban-sizing",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 2,
+  "wide": [
+   "dl-table 1141px",
+   "dl-table 1529px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1141>630",
+   "dl-table in div.dl-table-wrap 1529>630"
+  ],
+  "missing": [
+   "th KARTAT QË DUHEN",
+   "th STATUSI",
+   "th NDRYSHO OSE HIQ",
+   "th P-1008 Filtër ajri, kuti me 4 · Magazina",
+   "td Cikël kanban",
+   "td 2",
+   "td 15",
+   "td 4",
+   "td –",
+   "td 9",
+   "td + Cikël i ri",
+   "th STOKU MAKSIMAL",
+   "th VLERA NË MAKSIMUM",
+   "th NDRYSHIMI I VLERËS",
+   "th STATUSI",
+   "td 3.222",
+   "td 3.271,80 €",
+   "td +122,40 €"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "kpi-diagnostic",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "leader-standard-work",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 2,
+  "wide": [
+   "dl-table 762px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 762>630"
+  ],
+  "missing": [
+   "th MJET",
+   "th NDRYSHO",
+   "td E premte 11:30",
+   "td Përditëso matricën e aftësive pas trajni",
+   "td Çdo javë",
+   "td 20",
+   "td Matrica e aftësive",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "lean-assessment",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 2,
+  "wide": [
+   "dl-table 709px",
+   "dl-table 1647px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 709>630",
+   "dl-table in div.dl-table-wrap 1647>630"
+  ],
+  "missing": [
+   "th POHIMI",
+   "th ELIRA",
+   "th JONAS",
+   "th MESATARJA",
+   "th SHPËRNDARJA",
+   "td Rezultatet e përmirësimeve (koha, gabime",
+   "td 2",
+   "td 2",
+   "td 2,0",
+   "td 0"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "lost-found",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 1604px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th VLERA",
+   "th RUHET NË",
+   "th MYSAFIRI",
+   "th STATUSI",
+   "td E lartë",
+   "td Kasaforta · #123",
+   "td I ruajtur · ruhet deri më 30.10.2026"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "maintenance-planner",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 3,
+  "wide": [
+   "dl-table 1607px",
+   "dl-table 1374px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1607>630",
+   "dl-table in div.dl-table-wrap 1374>630"
+  ],
+  "missing": [
+   "th DETYRA",
+   "th INTERVALI",
+   "th KUSH",
+   "th KRYER PËR HERË TË FUNDIT",
+   "th AFATI I RADHËS",
+   "th STATUSI",
+   "th REGJISTRO OSE HIQ",
+   "td FL-03 Piruni 3 · elektrik 1,6 t",
+   "td Inspektim vjetor nga një person i kualif",
+   "td çdo vit",
+   "td E jashtme",
+   "td 03.09.2026",
+   "td 03.09.2027",
+   "td Planifikuar",
+   "th DETAJET",
+   "th KRYER NGA",
+   "th HIQ",
+   "td 08.10.2026",
+   "td FL-03",
+   "td Prishje",
+   "td Rrjedhje hidraulike ose vaji · 180 min n",
+   "td Jonas"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "night-audit",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "oee",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 1,
+  "wide": [
+   "dl-table 923px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 923>630"
+  ],
+  "missing": [
+   "th HUMBJA MË E MADHE",
+   "td Prishjet · 2.465 min"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "ops-report",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "pareto",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "poka-yoke",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [
+   "dl-table 1652px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th MAR, 27 TET",
+   "th MËR, 28 TET",
+   "th ENJ, 29 TET",
+   "th PRE, 30 TET",
+   "th SHT, 31 TET",
+   "th DIE, 1 NËN",
+   "th HËN, 2 NËN",
+   "th INICIALET",
+   "td ☐"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "print-pack",
+  "paper": "210x297mm",
+  "pages": 20,
+  "tables": 28,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "process-lab",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "project-portfolio",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 3,
+  "wide": [
+   "dl-table 1071px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th KONTROLLI",
+   "td ✓ OK"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "risk-assessment",
+  "paper": "297x210mm",
+  "pages": 4,
+  "tables": 4,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "room-inspection",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 1,
+  "wide": [
+   "dl-table 873px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 873>630"
+  ],
+  "missing": [
+   "th LLOJI",
+   "th VLERËSIMI",
+   "th REZULTATI",
+   "th HIQ",
+   "td 24.10.2026 09:56",
+   "td 622 · Kati 6",
+   "td Mehmet",
+   "td Elena",
+   "td Pas largimit",
+   "td 100%",
+   "td ✓ Në rregull",
+   "td ×"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "room-status",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "safety-cross",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "shift-capacity",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 3,
+  "wide": [
+   "cp-print-table 941px",
+   "cp-print-table 940px",
+   "cp-print-table 938px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "shift-handover",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "shift-pulse",
+  "paper": "210x297mm",
+  "pages": 1,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "sigma-control-chart",
+  "paper": "210x297mm",
+  "pages": 4,
+  "tables": 2,
+  "wide": [
+   "dl-table 982px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 982>630"
+  ],
+  "missing": [
+   "th SINJAL",
+   "th SHËNIM",
+   "td 27 tet",
+   "td 2.900",
+   "td 8",
+   "td 0,28%",
+   "td 0,18%",
+   "td 1,04%",
+   "td Zhvendosje (më mirë)"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "signals",
+  "paper": "210x297mm",
+  "pages": 8,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "site-compare",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "six-sigma-dmaic",
+  "paper": "210x297mm",
+  "pages": 22,
+  "tables": 0,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "skills-matrix",
+  "paper": "210x297mm",
+  "pages": 9,
+  "tables": 3,
+  "wide": [
+   "dl-table 929px",
+   "dl-table 785px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th DETYRA NË 3+",
+   "td 0"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "smed",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 2,
+  "wide": [
+   "dl-table 701px",
+   "dl-table 1392px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 701>630",
+   "dl-table in div.dl-table-wrap 1392>630"
+  ],
+  "missing": [
+   "th KOHA E FITUAR",
+   "th KUNDËRMASA",
+   "td 2:30"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "spaghetti-diagram",
+  "paper": "210x297mm",
+  "pages": 7,
+  "tables": 3,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "standard-work",
+  "paper": "210x297mm",
+  "pages": 3,
+  "tables": 1,
+  "wide": [],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "time-study",
+  "paper": "210x297mm",
+  "pages": 5,
+  "tables": 1,
+  "wide": [
+   "dl-table 1032px"
+  ],
+  "clipped": [
+   "dl-table in div.dl-table-wrap 1032>630"
+  ],
+  "missing": [
+   "th MAKS.",
+   "th CV",
+   "th VLERAT E JASHTME",
+   "td 12,8",
+   "td 3%"
+  ]
+ },
+ {
+  "lang": "sq",
+  "slug": "value-stream-map",
+  "paper": "210x297mm",
+  "pages": 10,
+  "tables": 2,
+  "wide": [
+   "dl-table 824px"
+  ],
+  "clipped": [],
+  "missing": []
+ },
+ {
+  "lang": "sq",
+  "slug": "waste-log",
+  "paper": "210x297mm",
+  "pages": 6,
+  "tables": 1,
+  "wide": [
+   "dl-table 1376px"
+  ],
+  "clipped": [],
+  "missing": [
+   "th KU SHKOI",
+   "th SHËNIM",
+   "td Kompost ose biogaz"
+  ]
+ }
+]

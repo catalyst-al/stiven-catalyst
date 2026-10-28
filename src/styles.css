@@ -707,12 +707,7 @@ button, input, select { font: inherit; }
   .cosmos-chip-dot { animation: none; }
   .cosmos-chip:hover { transform: none; }
 }
-/* Stopped with "Pause the motion" (js/cosmos.js), as with reduced motion; so are the books of the open planet. */
-.cosmos.is-paused .cosmos-chip,
-.cosmos.is-paused .cosmos-chip::after,
-.cosmos.is-paused .cosmos-chip-dot,
-.cosmos.is-paused .book-shelf-item .book-object,
-.cosmos.is-paused .book-shelf-item .book-object-cover { animation: none; }
+/* Stopped with "Pause the motion" as with reduced motion, with every other endless animation of the site (65-motion.css). */
 
 /* Small books, as on Publications: the shelf under the homepage hero and the guide at the end of a tool page. */
 .book-shelf {
@@ -2497,7 +2492,9 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   52% { opacity: .3; }
 }
 .pulse-ring { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--family) 80%, transparent)); }
-.zenith-radar {
+/* The radar of the planet drawing turns (the radar behind a Zenith tool stands still and its own sweep turns inside it,
+   10-families-and-roles.css). */
+.family-planet .zenith-radar {
   transform-box: view-box;
   transform-origin: 200px 150px;
   animation: family-sweep 6s linear infinite;
@@ -2613,7 +2610,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 }
 @media (prefers-reduced-motion: reduce) {
   .pulse-cracks,
-  .zenith-radar,
+  .family-planet .zenith-radar,
   .lumen-ring ellipse { animation: none; }
   .family-card,
   .family-planet { transition: none; }
@@ -3650,6 +3647,15 @@ select.sh-in { cursor: pointer; }
 .sh-problems li { margin-bottom: 8px; }
 .sh-ok { margin: 0; color: var(--ink); }
 .sh-actions { gap: 10px; }
+/* Send to the next shift: the dialog with the QR code and the link; the box for a handover that arrived. */
+.sh-send { width: min(92vw, 520px); padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--card, var(--bg)); color: var(--ink); }
+.sh-send::backdrop { background: rgba(0, 0, 0, .55); }
+.sh-send h2 { margin: 0 0 8px; font-size: 20px; line-height: 1.25; }
+.sh-send .tool-actions { margin-top: 12px; }
+.sh-qr { width: min(100%, 320px); margin: 12px auto 0; }
+.sh-qr svg { display: block; width: 100%; height: auto; border-radius: 8px; }
+.sh-link { width: 100%; box-sizing: border-box; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; word-break: break-all; }
+.sh-incoming { margin: 0 0 16px; border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .sh-side > .form-note { margin: 0; }
 .sh-history { padding: 20px 0 110px; }
 .sh-history-list { display: grid; gap: 12px; margin-bottom: 20px; }
@@ -3704,6 +3710,22 @@ select.sh-in { cursor: pointer; }
   .dl-results { padding: 0; border: 0; }
   .dl-panel, .dl-stat, .dl-focus, .dl-check-item { break-inside: avoid; }
   .dl-matrix td.is-heat { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Tables on paper: no sideways scroll, so every column is on the page. The box around a table no longer scrolls or
+     cuts, the cells wrap their text (a word longer than its column breaks rather than running out of the page), the
+     type is smaller, the header repeats on each page and a row is not split between two pages. */
+  .dl-table-wrap { max-height: none !important; overflow: visible !important; border: 0; border-radius: 0; }
+  .dl-table { width: 100%; font-size: 8.5pt; }
+  .dl-table th, .dl-table td { padding: 3px 5px; white-space: normal; overflow-wrap: break-word; vertical-align: top; }
+  .dl-table thead { display: table-header-group; }
+  .dl-table thead th { position: static; font-size: 6.5pt; letter-spacing: .03em; }
+  .dl-table tr { break-inside: avoid; }
+  .dl-table .dl-note { max-width: none; overflow: visible; text-overflow: clip; }
+  /* Eight columns or more (a register): smaller still, so its longest words fit side by side. */
+  .dl-table:has(thead th:nth-child(8)) { font-size: 7.5pt; }
+  .dl-table:has(thead th:nth-child(8)) :is(th, td) { padding: 2px 3px; }
+  /* Twelve or more (an FMEA sheet, a bowling chart): a long word of a header may break, as in "VERMEIDUNGS-
+     MASSNAHME", rather than push the last columns off the sheet. */
+  .dl-table:has(thead th:nth-child(12)) thead th { overflow-wrap: anywhere; hyphens: auto; }
   .dl-check { padding: 20px 0 0; }
   /* A box prints only what fits in it, and an empty one its grey example: on paper its whole text stands in for it. */
   .has-print-text { display: none !important; }
@@ -5661,6 +5683,16 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .wk-anim.is-in .wk-arc { stroke-dasharray: var(--v) 100; transition: stroke-dasharray 1.4s cubic-bezier(.3, .7, .2, 1) .15s; }
 .wk-anim.is-in .wk-legend li { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s ease; }
 .wk-anim.is-in .wk-legend li:nth-child(2) { transition-delay: .9s; }
+/* On paper every chart is drawn, whether or not the reader scrolled to it on screen (audit PM-5), and without the
+   movement: a print is not taken halfway through it. */
+@media print {
+  .wk-anim .wk-path { stroke-dashoffset: 0; }
+  .wk-anim .wk-area { opacity: .14; }
+  .wk-anim .wk-pop, .wk-anim .wk-legend li { opacity: 1; transform: none; }
+  .wk-anim .wk-grow, .wk-anim .wk-rise { transform: none; }
+  .wk-anim .wk-arc { stroke-dasharray: var(--v) 100; }
+  .wk-anim :is(.wk-path, .wk-area, .wk-pop, .wk-grow, .wk-rise, .wk-arc, .wk-legend li) { transition: none !important; }
+}
 .wk-anim.is-in .wk-legend li:nth-child(3) { transition-delay: 1.3s; }
 .wk-anim.is-in .wk-legend li:first-child { transition-delay: .5s; }
 
@@ -5719,6 +5751,8 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 @keyframes scroll-rise { from { opacity: 0; translate: 0 26px; } }
 .weekly-n { margin-left: 8px; font-weight: 600; opacity: .7; font-variant-numeric: tabular-nums; }
 .weekly-n:empty { display: none; }
+/* The count in the chosen month, light theme: white at .7 on the blue read 3.6:1; at .85 it reads 4.57:1 (audit PM-11). */
+[data-theme="light"] .weekly-months button[aria-pressed="true"] .weekly-n { opacity: .85; }
 .weekly-filter { display: flex; flex-wrap: wrap; gap: 10px; }
 .weekly-filter button {
   transition: color .25s ease, background .25s ease, border-color .25s ease, scale .25s cubic-bezier(.22, 1, .36, 1);
@@ -6323,6 +6357,7 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .ats-chip { padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 700; }
 .ats-chip.is-missing { border: 1px solid color-mix(in srgb, var(--warn) 60%, transparent); color: var(--warn); }
 .ats-chip.is-found { background: color-mix(in srgb, var(--ok) 16%, transparent); color: var(--ok); }
+.ats-chip.is-required { box-shadow: inset 0 0 0 2px currentColor; }
 
 .ats-doc {
   --ats-ink: #1a1a1a;
@@ -6715,7 +6750,6 @@ main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label
 .cx-mini figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-size: 14px; }
 .cx-mini figcaption span { color: var(--muted); font-size: 12px; }
 .cx-mini-chart { display: block; width: 100%; height: auto; overflow: visible; }
-.cx-mini-chart circle:focus { outline: none; stroke-width: 4; }
 .cx-table-wrap { position: relative; max-height: 520px; }
 .cx-table th, .cx-table td { white-space: nowrap; }
 .cx-table tbody th { color: var(--ink); font-weight: 700; }
@@ -6769,7 +6803,6 @@ main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label
 .dl-stat.is-bad .dl-stat-value { color: var(--cx-bad); }
 .cx-kpi-dive { padding: 2px 0; font-size: 13px; }
 .cx-deep-trend figcaption { color: var(--muted); font-size: 13px; }
-.cx-mini-chart rect:focus { outline: none; opacity: 1; stroke: var(--cx-text); stroke-width: 2; }
 .cx-seg { padding: 0; border: 0; background: none; color: var(--blue); font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
 .cx-seg:hover { text-decoration: underline; text-underline-offset: 3px; }
 .cx-seg[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
@@ -6821,6 +6854,9 @@ body.in-family {
   --sky-glow: .55;
 }
 [data-theme="light"] body.in-family[data-family="atlas"] { --sky-ink: #56606b; --sky-star: #56606b; }
+/* Lumen's gold at 62% with near black (#9c824a) read 3.18:1 on a grey row and 3.68:1 on white in small text; at 48%
+   (#7b683e) it reads 4.67:1 and 5.40:1. Needs the author's approval: docs/audit/2026-10-27/phase3/ci-a11y.md. */
+[data-theme="light"] body.in-family[data-family="lumen"] { --sky-ink: color-mix(in srgb, var(--family) 48%, #0b1015); }
 .in-family main { position: relative; }
 
 .family-sky {
@@ -7219,7 +7255,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .7) 50%, transparent 65%) no-repeat;
   background-size: 250% 100%;
   pointer-events: none;
-  animation: family-sweep .8s ease-out both;
+  animation: chip-sweep .8s ease-out both;
 }
 @keyframes family-flare {
   0% { opacity: 0; transform: scale(.9); }
@@ -7227,7 +7263,9 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   100% { opacity: 1; transform: scale(1); }
 }
 @keyframes family-breathe { 50% { opacity: .5; } }
-@keyframes family-sweep {
+/* The sweep of light across a chosen chip or a hovered button (it was called family-sweep, the name of Zenith's
+   turning radar, and replaced it everywhere: audit PM-4). */
+@keyframes chip-sweep {
   from { background-position: 120% 0; opacity: 1; }
   to { background-position: -20% 0; opacity: 0; }
 }
@@ -7262,7 +7300,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   pointer-events: none;
 }
 .in-family .button-primary:hover { box-shadow: 0 0 30px -4px var(--glow), 0 0 60px -10px var(--glow-soft); }
-.in-family .button-primary:hover::after { animation: family-sweep .9s ease-out both; }
+.in-family .button-primary:hover::after { animation: chip-sweep .9s ease-out both; }
 .in-family .button-primary:active {
   transform: scale(.97);
   box-shadow: 0 0 36px 2px var(--glow), 0 0 80px 10px var(--glow-soft);
@@ -7368,19 +7406,27 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 }
 @keyframes badge-breathe { 50% { scale: 1.15; } }
 .family-badge > span { position: relative; }
-.family-badge > span::after {
+/* The glow of the beating dot lies over the dot (left 10 px in the padding, centred), on the badge itself and not inside
+   the dot: an animation inside an element that is animated too cannot run on the compositor, and kept the main thread
+   drawing every frame on every tool page (audit PM-8). It swells with the dot, so it looks as before. */
+.family-badge { position: relative; }
+.family-badge::before {
   content: "";
   position: absolute;
-  inset: 0;
+  left: 10px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin-top: -4.5px;
   border-radius: 50%;
   box-shadow: 0 0 16px 2px var(--family);
   opacity: 0;
   pointer-events: none;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .family-badge > span::after { animation: badge-glow 3.2s ease-in-out infinite; }
+  .family-badge::before { animation: badge-glow 3.2s ease-in-out infinite; }
 }
-@keyframes badge-glow { 50% { opacity: 1; } }
+@keyframes badge-glow { 50% { opacity: 1; scale: 1.15; } }
 
 /* A role page (/roles/x/): the planet's sky over the title, then its rings: use, routine, learn, grow. */
 .role-hero .eyebrow { color: var(--sky-ink); }
@@ -7903,6 +7949,12 @@ body:has([data-article]) :is(.essay-tools, .essay-notes, .essay-feedback) { back
   .share-orbit.is-resting { opacity: 0; visibility: hidden; transform: translateY(12px); }
   .share-orbit-button { width: 44px; height: 44px; }
   .share-orbit-panel { bottom: 58px; }
+  /* A control reached with Tab, or a link followed to an anchor, stops above the planet (18 px + 44 px + its focus
+     ring), never under it (audit PM-10). */
+  html { scroll-padding-bottom: 72px; }
+  /* At the end of the page nothing scrolls any more: the footer's last line ends above the planet too, wherever the
+     device's fonts break it (tests/browser/a11y-pages.spec.mjs). */
+  .site-footer { padding-bottom: 72px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .share-orbit-ring,
@@ -8523,7 +8575,7 @@ a.essay-series-next:hover em { translate: 5px 0; }
 }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .start-number { animation: step-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 35%; }
+    .start-number { animation: start-reach linear both; animation-timeline: view(); animation-range: entry 40% cover 35%; }
   }
 }
 @keyframes step-reach {
@@ -8700,6 +8752,16 @@ a.essay-series-next:hover em { translate: 5px 0; }
 /* The tightening is a horizontal scale, not letter-spacing: spacing changes the width of the words, and a title near the
    width of its column re-wrapped while it came into focus, moving everything under it (the book, 16 October 2026). */
 @keyframes lost-focus { from { opacity: 0; filter: blur(8px); scale: .98 1; } }
+/* Paper, on every page: nothing on it waits for a scroll. A reveal that follows the scroll shows its end (printing is
+   not scrolling, so its timeline would keep the start: the treatise's "How every chapter is built" printed as an
+   empty box); a title that comes into focus is simply there (a blur held at 0 turns it into a picture in the PDF,
+   neither sharp nor selectable); no glow or shadow around text (the tool pages' intro printed with a grey smear);
+   and the sheet around the page is white in the dark theme too. */
+@media print {
+  :root { color-scheme: light !important; }
+  *, *::before, *::after { animation-timeline: auto !important; text-shadow: none !important; }
+  .lost-hero h1, .book-hero h1 { animation: none !important; }
+}
 @keyframes lost-drift {
   0% { rotate: 0deg; translate: 0 0; }
   50% { rotate: 180deg; translate: 14px -10px; }
@@ -9377,7 +9439,9 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
 /* Start here: each step's number is a bulb in a gold ring that lights as the step is reached. */
 .start-number { border-color: color-mix(in srgb, var(--gold) 65%, transparent); color: var(--gold); }
 .start-step:hover .start-number { background: var(--bulb-lit); border-color: var(--gold); color: #3a2a0c; box-shadow: 0 0 6px #fff, 0 0 18px rgba(255, 214, 150, .9), 0 0 36px rgba(255, 196, 120, .45); }
-@keyframes step-reach {
+/* Start here lights its numbers in gold (its own name: under the name step-reach it also turned the podcast's blue
+   steps gold, audit PM-4). */
+@keyframes start-reach {
   0% { background: transparent; color: var(--gold); box-shadow: none; }
   60% { background: var(--bulb-lit); border-color: var(--gold); color: #3a2a0c; box-shadow: 0 0 0 6px rgba(255, 214, 150, .16), 0 0 8px #fff, 0 0 24px rgba(255, 214, 150, 1); }
   100% { background: var(--bulb-lit); border-color: var(--gold); color: #3a2a0c; box-shadow: 0 0 6px #fff, 0 0 16px rgba(255, 214, 150, .8), 0 0 32px rgba(255, 196, 120, .35); }
@@ -10404,8 +10468,12 @@ textarea.kb-in { min-height: 56px; resize: vertical; line-height: 1.4; }
   .sm-box { margin-bottom: 12px; break-inside: avoid; }
   .sm-grid-wrap, .sm-plan-wrap { overflow: visible; border: 0; }
   .sm-grid :is(.sm-corner, .sm-person, tfoot th) { position: static; }
+  /* The screen's minimum widths (a finger's width per cell) would push the last tasks off the page. */
+  .sm-grid .sm-task, .sm-person { min-width: 0; }
+  .sm-cell { width: 30px; height: 30px; }
+  .sm-icon { width: 22px; height: 22px; }
   .sm-icon .sm-fill, .sm-icon .sm-dot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .sm-plan-table select, .sm-plan-table input { border: 0; padding: 0; appearance: none; background: none; }
+  .sm-plan-table select, .sm-plan-table input { width: 100%; min-width: 0; border: 0; padding: 0; appearance: none; background: none; }
 }
 /* ===== Safety Cross (js/safety-cross.js) =====
    The cross of the month next to the talk of the day where there is room, one under the other on a phone. A day's state
@@ -12732,6 +12800,8 @@ details[open] > .rs-setup-summary::after { content: "−"; }
   .cp-print-table .num { text-align: right; white-space: nowrap; }
   .cp-print-total td { font-weight: 700; }
   .cp-print-table :is(td, th):first-child { white-space: nowrap; }
+  /* The headers and the volume ("2.600 pako jashtë sorterit") wrap, so the ten columns fit the A4 page in every language. */
+  .cp-print-table thead :is(th, .num), .cp-print-table td.num:nth-child(2) { white-space: normal; }
   .cp-print-blank { width: 10%; }
   .cp-print-options { margin: 4px 0 0; padding: 0; list-style: none; }
   .cp-print-sign { margin: 16px 0 0; }
@@ -13492,6 +13562,10 @@ details[open] > .rs-setup-summary::after { content: "−"; }
   body.hx-print-matrix .hx-xm-panel { page: hx-a3; padding: 0; border: 0; }
   body.hx-print-matrix .hx-xm { max-height: 265mm; }
   body.hx-print-bowling .hx-bowling { page: hx-a4; padding: 0; border: 0; }
+  /* With Ctrl+P (a portrait page), the bowling chart's month columns are smaller still, so the last months fit. */
+  body:not(.hx-print-bowling) .hx-bowl :is(th, td) { padding: 1px 2px; font-size: 6.5pt; letter-spacing: 0; white-space: normal; }
+  body:not(.hx-print-bowling) .hx-bowl .hx-bowl-name { min-width: 0; }
+  body:not(.hx-print-bowling) .hx-bowl-cell .hx-bowl-word { font-size: inherit; }
   body:is(.hx-print-matrix, .hx-print-bowling) :is(main, .hx-results) { min-height: 0; margin: 0; padding: 0; }
 }
 /* ===== Floor mode (js/floor-mode.js) =====
@@ -14230,14 +14304,16 @@ details[open] > .rs-setup-summary::after { content: "−"; }
   html.hj-printing .hj-print { page: hj-a4; display: block !important; padding: 0; color: #000; }
   .hj-print h2 { margin: 0 0 4px; font-size: 16px; }
   .hj-print .hj-print-meta, .hj-print .dl-panel-note { margin: 0 0 8px; color: #000; font-size: 10px; }
-  .hj-print .dl-table-wrap { overflow: visible; border: 0; max-height: none; }
-  .hj-print .hj-box { width: 100%; table-layout: fixed; font-size: 7px; }
-  .hj-print .hj-box-name { position: static; width: 26mm; min-width: 0; max-width: none; padding: 2px 4px 2px 0; background: #fff; color: #000; font-size: 8px; }
-  .hj-print .hj-box th, .hj-print .hj-box td { border-bottom: 1px solid #999; }
-  .hj-print .hj-cell { min-width: 0; height: 14mm; border-left: 1px solid #ccc; }
-  .hj-print .hj-cell.is-start { border-left: 2px solid #000; }
-  .hj-print .hj-cell.has-card { background: #e8e8e8; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .hj-print .hj-card, .hj-print .hj-box-time { color: #000; }
+  /* Printed with Ctrl+P instead of the box's own button, the box of the result is drawn the same way, its columns
+     sharing the width of the page, instead of running past its edge. */
+  :is(.hj-print, .hj-box-panel) .dl-table-wrap { overflow: visible; border: 0; max-height: none; }
+  :is(.hj-print, .hj-box-panel) .hj-box { width: 100%; table-layout: fixed; font-size: 7px; }
+  :is(.hj-print, .hj-box-panel) .hj-box-name { position: static; width: 26mm; min-width: 0; max-width: none; padding: 2px 4px 2px 0; background: #fff; color: #000; font-size: 8px; }
+  :is(.hj-print, .hj-box-panel) .hj-box th, :is(.hj-print, .hj-box-panel) .hj-box td { border-bottom: 1px solid #999; }
+  :is(.hj-print, .hj-box-panel) .hj-cell { min-width: 0; height: 14mm; border-left: 1px solid #ccc; }
+  :is(.hj-print, .hj-box-panel) .hj-cell.is-start { border-left: 2px solid #000; }
+  :is(.hj-print, .hj-box-panel) .hj-cell.has-card { background: #e8e8e8; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  :is(.hj-print, .hj-box-panel) .hj-card, :is(.hj-print, .hj-box-panel) .hj-box-time { color: #000; }
   .hj-print-sign { margin: 14px 0 0; font-size: 10px; }
   .hj-setup { display: none !important; }
   .hj-results { padding: 0; border: 0; }
@@ -14675,3 +14751,129 @@ details[open] > .rs-setup-summary::after { content: "−"; }
   .la-radar .ck-chart { min-width: 0; }
   .la-weak-card, .la-statement { background: #fff; border-color: #999; }
 }
+/* A PIN for a shared computer (partials/work-lock.njk, js/work-lock.js): the section in "All your work in one file"
+   and the dialog over a locked page. */
+.wl { display: grid; gap: 10px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+.wl .kicker { margin: 0; }
+.wl > .form-note { margin: 0; }
+.wl > .form-note:empty { display: none; }
+.wl-actions { align-items: center; gap: 10px 14px; margin: 0; }
+.wl-idle { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; }
+.wl-idle select { padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); font: inherit; font-size: 14px; }
+.wl-forget { color: var(--danger); }
+.wl-setup { display: grid; gap: 10px; margin: 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; }
+.wl-setup .form-note { margin: 0; }
+.wl-fields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 10px; align-items: end; }
+.wl-fields .field { margin: 0; }
+.wl-fields input { width: 100%; box-sizing: border-box; letter-spacing: .2em; }
+@media (max-width: 640px) { .wl-fields { grid-template-columns: 1fr; } }
+.wl-status:empty { display: none; }
+.wl-dialog {
+  width: min(calc(100% - 32px), 440px);
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.wl-dialog::backdrop { background: rgba(10, 14, 24, .72); backdrop-filter: blur(6px); }
+.wl-dialog .kicker { margin: 0 0 6px; }
+.wl-dialog h2 { margin: 0 0 8px; font-size: 22px; line-height: 1.25; }
+.wl-dialog p { margin: 0 0 14px; }
+.wl-dialog .field { margin: 0 0 14px; }
+.wl-dialog input { width: 100%; box-sizing: border-box; font-size: 20px; letter-spacing: .3em; }
+.wl-dialog .tool-actions { margin: 0; }
+.wl-error { min-height: 1.4em; margin: 10px 0 0; color: var(--danger); }
+.wl-forgot { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+.wl-forgot summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+.wl-forgot .form-note { margin: 10px 0; }
+
+/* One switch for the motion of the whole site: "Pause the motion" at the foot of every page (and beside the planets on
+   the homepage), script.js. The choice is kept in this browser ("sc-motion") and set on <html data-motion="paused"> by
+   the inline script in the head of every page (layouts/base.njk), before the first paint; with reduced motion asked
+   of the system and no choice made, the page starts paused. Paused, every endless animation of the site stops in the
+   still state reduced motion gives it, and the planets' drawing stops (js/cosmos.js); what plays once (a heading
+   rising, a card appearing as it is scrolled to) is left as it is. Each endless animation of this stylesheet is listed
+   here (tests/motion-css.test.cjs), and none runs while paused (tests/browser/motion.spec.mjs). */
+.motion-toggle {
+  display: block;
+  margin: 14px 0 0;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 72%, transparent);
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+.motion-toggle:hover, .motion-toggle:focus-visible { color: var(--ink); border-color: var(--muted); }
+/* The switches need scripts: shown with the "js" class the head script sets before the first paint, so the footer
+   never grows under the reader. Each says what it will do, from the first paint too. */
+.motion-toggle, .cosmos-pause { display: none; }
+.js .motion-toggle, .js .cosmos-pause { display: block; }
+.motion-play { display: none; }
+:root[data-motion="paused"] .motion-pause { display: none; }
+:root[data-motion="paused"] .motion-play { display: inline; }
+
+:root[data-motion="paused"] .nav-menu-link:is(:hover, :focus-visible) i.is-planet::after,
+:root[data-motion="paused"] .main-nav a.has-news,
+:root[data-motion="paused"] .main-nav a.has-news .nav-orb,
+:root[data-motion="paused"] .main-nav a.has-news::after,
+:root[data-motion="paused"] .mobile-panel a.has-news .nav-orb,
+:root[data-motion="paused"] .menu-button.has-news::after,
+:root[data-motion="paused"] .cosmos-chip,
+:root[data-motion="paused"] .cosmos-chip::after,
+:root[data-motion="paused"] .cosmos-chip-dot,
+:root[data-motion="paused"] .book-shelf-item .book-object,
+:root[data-motion="paused"] .book-shelf-item .book-object-cover,
+:root[data-motion="paused"] .hero-go,
+:root[data-motion="paused"] .hero-go::after,
+:root[data-motion="paused"] .hero-bulb,
+:root[data-motion="paused"] .pulse-cracks,
+:root[data-motion="paused"] .family-planet .zenith-radar,
+:root[data-motion="paused"] .lumen-ring ellipse,
+:root[data-motion="paused"] .reflection-hero::before,
+:root[data-motion="paused"] .about-portrait,
+:root[data-motion="paused"] .about-timeline li:first-child .about-when::before,
+:root[data-motion="paused"] .about-brand-poster .brand-bulb::after,
+:root[data-motion="paused"] .book-onward.is-shown,
+:root[data-motion="paused"] .book-onward.is-shown .book-onward-arrow svg,
+:root[data-motion="paused"] .family-sky *,
+:root[data-motion="paused"] .family-sky *::before,
+:root[data-motion="paused"] .family-sky *::after,
+:root[data-motion="paused"] .atlas-stars i,
+:root[data-motion="paused"] .in-family .scale-option input:checked + span::before,
+:root[data-motion="paused"] .in-family .chip[aria-pressed="true"]::before,
+:root[data-motion="paused"] .in-family .cv-theme:has(input:checked)::before,
+:root[data-motion="paused"] .family-badge > span,
+:root[data-motion="paused"] .family-badge::before,
+:root[data-motion="paused"] .share-orbit-ring,
+:root[data-motion="paused"] .share-orbit-mini,
+:root[data-motion="paused"] .new-badge::before,
+:root[data-motion="paused"] .series-panel .series-dots a.is-next::after,
+:root[data-motion="paused"] .series-track .series-dots a.is-next::after,
+:root[data-motion="paused"] .book-object-cover,
+:root[data-motion="paused"] .book-object::before,
+:root[data-motion="paused"] .project-card .tag.is-live::before,
+:root[data-motion="paused"] .project-card .tag.is-live::after,
+:root[data-motion="paused"] .start-intro img,
+:root[data-motion="paused"] .podcast-cover,
+:root[data-motion="paused"] .audio-player.is-playing .audio-player-play::after,
+:root[data-motion="paused"] .lost-orbit i,
+:root[data-motion="paused"] .lost-orbit b,
+:root[data-motion="paused"] .weekly-archive .weekly-card-cover,
+:root[data-motion="paused"] .contact-card-orb::after { animation: none !important; }
+/* Where reduced motion puts a still light in place of a moving one, so does the pause. */
+:root[data-motion="paused"] .main-nav a.has-news .nav-orb,
+:root[data-motion="paused"] .mobile-panel a.has-news .nav-orb,
+:root[data-motion="paused"] .menu-button.has-news::after { box-shadow: 0 0 10px var(--blue); }
+:root[data-motion="paused"] .sky-lumen .lumen-dust i { opacity: .6; }
+:root[data-motion="paused"] .sky-atlas .atlas-line { stroke-dashoffset: 0; }
+:root[data-motion="paused"] .sky-atlas .atlas-star { opacity: 1; }
+:root[data-motion="paused"] .sky-pulse .pulse-trace { stroke-dashoffset: 700; }
+:root[data-motion="paused"] .in-family .scale-option input:checked + span::before,
+:root[data-motion="paused"] .in-family .chip[aria-pressed="true"]::before,
+:root[data-motion="paused"] .in-family .cv-theme:has(input:checked)::before { opacity: .85; }

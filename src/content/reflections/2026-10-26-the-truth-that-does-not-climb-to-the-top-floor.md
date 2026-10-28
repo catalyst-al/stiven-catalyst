@@ -13,19 +13,19 @@ The night shift had spent hours correcting mistakes that should never have happe
 
 The first report said:
 
-"Repeated problems in the process. Intervention needed."
+“Repeated problems in the process. Intervention needed.”
 
 The head of department read it. The problem was real, but he did not want the report to give the impression that the situation had gone out of control. He changed the wording:
 
-"Operational difficulties identified and managed."
+“Operational difficulties identified and managed.”
 
 The manager at the next level shortened it even more. After all, the work had been completed and the customers had gone.
 
-"Operational challenges were handled successfully."
+“Operational challenges were handled successfully.”
 
 By the time the report reached the executive floor, the sentence had taken its final form:
 
-"Operations completed normally."
+“Operations completed normally.”
 
 None of the people who had touched the document considered himself a liar.
 
@@ -69,7 +69,7 @@ It is enough for people to understand what happens to the one who brings it.
 
 Then self-censorship begins.
 
-First a detail judged too negative is dropped. Later a direct word is replaced with a more diplomatic phrase. A repeated mistake becomes "a situation being monitored". A serious staff shortage is described as "resource optimisation". A process that survives only thanks to the extraordinary efforts of its employees is presented as proof of the efficiency of the structure.
+First a detail judged too negative is dropped. Later a direct word is replaced with a more diplomatic phrase. A repeated mistake becomes “a situation being monitored”. A serious staff shortage is described as “resource optimisation”. A process that survives only thanks to the extraordinary efforts of its employees is presented as proof of the efficiency of the structure.
 
 The information keeps circulating.
 
@@ -91,7 +91,7 @@ Often it begins in the office where the information is meant to arrive.
 
 There are leaders who declare constantly that they want transparency.
 
-"I want to know everything. Don't hide any problem from me."
+“I want to know everything. Don't hide any problem from me.”
 
 Admirable words.
 
@@ -209,7 +209,7 @@ When was the last time someone told me something I did not want to hear?
 
 Not trivial criticism, not an ordinary complaint, but a truth that called into question a decision of mine, a belief of mine or the way I had understood the situation.
 
-If the answer is "I don't remember", that is not necessarily proof that everything is going well.
+If the answer is “I don't remember”, that is not necessarily proof that everything is going well.
 
 It may be a sign that people have stopped trying.
 
@@ -243,7 +243,7 @@ Then an important customer leaves. A mistake becomes public. A good professional
 
 The board asks:
 
-"How is it possible that nobody informed us?"
+“How is it possible that nobody informed us?”
 
 Sometimes the answer is that somebody had.
 

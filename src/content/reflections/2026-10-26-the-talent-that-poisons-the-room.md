@@ -49,7 +49,7 @@ Yet here we have to be careful.
 
 Not every difficult person is a person who harms the team. Not every professional who opposes the manager is arrogant. There are direct people who do not know how to dress up the truth. There are employees who raise unpleasant problems and for that reason earn the reputation of disturbing the peace.
 
-In some organisations, the label "does not work well in a team" is used precisely against the one who refuses to join a pact of silence.
+In some organisations, the label “does not work well in a team” is used precisely against the one who refuses to join a pact of silence.
 
 That is why the distinction is essential.
 
@@ -77,11 +77,11 @@ The biggest problem begins when the manager knows all this and still chooses not
 
 He can justify his silence with dozens of reasons.
 
-"He's a bit difficult, but he knows the work."
+“He's a bit difficult, but he knows the work.”
 
-"The others need to learn to be tougher."
+“The others need to learn to be tougher.”
 
-"We can't lose a man like that."
+“We can't lose a man like that.”
 
 The last sentence is perhaps the most telling.
 

@@ -17,6 +17,9 @@ body.in-family {
   --sky-glow: .55;
 }
 [data-theme="light"] body.in-family[data-family="atlas"] { --sky-ink: #56606b; --sky-star: #56606b; }
+/* Lumen's gold at 62% with near black (#9c824a) read 3.18:1 on a grey row and 3.68:1 on white in small text; at 48%
+   (#7b683e) it reads 4.67:1 and 5.40:1. Needs the author's approval: docs/audit/2026-10-27/phase3/ci-a11y.md. */
+[data-theme="light"] body.in-family[data-family="lumen"] { --sky-ink: color-mix(in srgb, var(--family) 48%, #0b1015); }
 .in-family main { position: relative; }
 
 .family-sky {
@@ -415,7 +418,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .7) 50%, transparent 65%) no-repeat;
   background-size: 250% 100%;
   pointer-events: none;
-  animation: family-sweep .8s ease-out both;
+  animation: chip-sweep .8s ease-out both;
 }
 @keyframes family-flare {
   0% { opacity: 0; transform: scale(.9); }
@@ -423,7 +426,9 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   100% { opacity: 1; transform: scale(1); }
 }
 @keyframes family-breathe { 50% { opacity: .5; } }
-@keyframes family-sweep {
+/* The sweep of light across a chosen chip or a hovered button (it was called family-sweep, the name of Zenith's
+   turning radar, and replaced it everywhere: audit PM-4). */
+@keyframes chip-sweep {
   from { background-position: 120% 0; opacity: 1; }
   to { background-position: -20% 0; opacity: 0; }
 }
@@ -458,7 +463,7 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
   pointer-events: none;
 }
 .in-family .button-primary:hover { box-shadow: 0 0 30px -4px var(--glow), 0 0 60px -10px var(--glow-soft); }
-.in-family .button-primary:hover::after { animation: family-sweep .9s ease-out both; }
+.in-family .button-primary:hover::after { animation: chip-sweep .9s ease-out both; }
 .in-family .button-primary:active {
   transform: scale(.97);
   box-shadow: 0 0 36px 2px var(--glow), 0 0 80px 10px var(--glow-soft);
@@ -564,19 +569,27 @@ body.in-family { --glow: color-mix(in srgb, var(--family) 62%, transparent); --g
 }
 @keyframes badge-breathe { 50% { scale: 1.15; } }
 .family-badge > span { position: relative; }
-.family-badge > span::after {
+/* The glow of the beating dot lies over the dot (left 10 px in the padding, centred), on the badge itself and not inside
+   the dot: an animation inside an element that is animated too cannot run on the compositor, and kept the main thread
+   drawing every frame on every tool page (audit PM-8). It swells with the dot, so it looks as before. */
+.family-badge { position: relative; }
+.family-badge::before {
   content: "";
   position: absolute;
-  inset: 0;
+  left: 10px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin-top: -4.5px;
   border-radius: 50%;
   box-shadow: 0 0 16px 2px var(--family);
   opacity: 0;
   pointer-events: none;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .family-badge > span::after { animation: badge-glow 3.2s ease-in-out infinite; }
+  .family-badge::before { animation: badge-glow 3.2s ease-in-out infinite; }
 }
-@keyframes badge-glow { 50% { opacity: 1; } }
+@keyframes badge-glow { 50% { opacity: 1; scale: 1.15; } }
 
 /* A role page (/roles/x/): the planet's sky over the title, then its rings: use, routine, learn, grow. */
 .role-hero .eyebrow { color: var(--sky-ink); }

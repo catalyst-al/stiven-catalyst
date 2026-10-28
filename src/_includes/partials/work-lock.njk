@@ -1,0 +1,62 @@
+{#- A PIN for a shared computer (js/work-lock.js, loaded in the head of the tool pages): inside "All your work in one
+    file". The section shows only where the browser can lock (localStorage, IndexedDB and WebCrypto); the dialog opens
+    over a locked page. -#}
+{%- set wlText = {
+  locking: "Locked. The page reloads." | t(lang),
+  nothing: "There is no work to lock yet." | t(lang),
+  failed: "The tools could not be locked here (storage blocked or full). Nothing was changed." | t(lang),
+  short: "The PIN needs at least {n} characters." | t(lang),
+  differ: "The two PINs differ." | t(lang),
+  working: "Locking…" | t(lang),
+  unlocked: "Unlocked. The page reloads with your work." | t(lang),
+  wrong: "Wrong PIN. Nothing was changed." | t(lang),
+  renew: "Your PIN has fewer than {n} characters. Your work is open; to lock again, choose a new PIN of at least {n} characters." | t(lang),
+  kept: "Work written while the tools were locked, on a page without the lock, is kept as a restore point (Before the unlock) under All your work in one file." | t(lang),
+  idleOn: "This tab locks itself after {n} minutes without a touch." | t(lang),
+  idleNeedsKey: "This tab locks itself once you have locked or unlocked here once; until then it does not hold the key." | t(lang),
+  forgetConfirm: "Forget everything on this device? Every tool's work, the restore points, the reminders and the lock are removed from this browser. A saved file is not touched. This cannot be undone." | t(lang)
+} %}
+<div class="wl" data-work-lock data-text="{{ wlText | dump }}" hidden>
+  <p class="kicker">{{ "Shared computer" | t(lang) }}</p>
+  <p class="form-note">{{ "One browser for the whole desk? Lock the tools with a PIN: your work and the restore points are encrypted on this device, the tools open empty, and the PIN brings everything back. Team sync pauses while locked. Nothing is uploaded." | t(lang) }}</p>
+  <div class="tool-actions wl-actions" data-wl-open>
+    <button class="button-secondary" type="button" data-wl-lock>{{ "Lock the tools" | t(lang) }}</button>
+    <label class="wl-idle">{{ "Lock by itself after" | t(lang) }}
+      <select data-wl-idle>
+        <option value="0">{{ "never" | t(lang) }}</option>
+        <option value="5">{{ "5 minutes" | t(lang) }}</option>
+        <option value="15">{{ "15 minutes" | t(lang) }}</option>
+        <option value="30">{{ "30 minutes" | t(lang) }}</option>
+        <option value="60">{{ "60 minutes" | t(lang) }}</option>
+      </select>
+    </label>
+    <button class="button-ghost wl-forget" type="button" data-wl-forget>{{ "Forget everything on this device" | t(lang) }}</button>
+  </div>
+  <p class="form-note" data-wl-idle-note></p>
+  <form class="wl-setup" data-wl-setup data-wl-pin-form hidden>
+    <p class="form-note">{{ "Choose a PIN of at least 6 characters. It is kept nowhere: without it the work cannot be read, by anyone." | t(lang) }}</p>
+    <div class="wl-fields">
+      <label class="field"><span>{{ "PIN" | t(lang) }}</span><input name="pin" type="password" inputmode="numeric" autocomplete="off" minlength="6" required></label>
+      <label class="field"><span>{{ "PIN again" | t(lang) }}</span><input name="again" type="password" inputmode="numeric" autocomplete="off" minlength="6" required></label>
+      <button class="button-primary" type="submit">{{ "Lock now" | t(lang) }}</button>
+    </div>
+  </form>
+  <p class="form-note wl-status" data-wl-status role="status" aria-live="polite"></p>
+</div>
+<dialog class="wl-dialog" data-work-lock-dialog aria-labelledby="wl-title">
+  <form method="dialog">
+    <p class="kicker">{{ "Shared computer" | t(lang) }}</p>
+    <h2 id="wl-title">{{ "The tools are locked" | t(lang) }}</h2>
+    <p>{{ "Enter the PIN to open your work on this device." | t(lang) }}</p>
+    <label class="field"><span>{{ "PIN" | t(lang) }}</span><input name="pin" type="password" inputmode="numeric" autocomplete="off" required autofocus></label>
+    <div class="tool-actions">
+      <button class="button-primary" type="submit">{{ "Unlock" | t(lang) }}</button>
+    </div>
+    <p class="form-note wl-error" data-wl-error role="alert"></p>
+    <details class="wl-forgot">
+      <summary>{{ "Forgot the PIN?" | t(lang) }}</summary>
+      <p class="form-note">{{ "The PIN is kept nowhere, so the locked work cannot be opened without it. You can start again on this device: the locked work, the restore points and the reminders are removed. A saved file is not touched." | t(lang) }}</p>
+      <button class="button-ghost wl-forget" type="button" data-wl-forget>{{ "Forget everything on this device" | t(lang) }}</button>
+    </details>
+  </form>
+</dialog>

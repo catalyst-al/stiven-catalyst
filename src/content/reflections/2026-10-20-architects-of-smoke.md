@@ -27,7 +27,7 @@ The bitter truth is that you cannot build a modern economy with a feudal mindset
 
 But this reality is not a fate written in advance. It is simply the consequence of a wrong choice that we keep tolerating every day.
 
-Real leadership does not begin at the conference podium. It begins in the quiet corner of observation. It begins when a manager has the courage to sit down in front of the raw data and say: here we are failing, and the responsibility is mine. It begins when we give up the culture of the "gleaming façade" and turn our eyes to the dignity of the process.
+Real leadership does not begin at the conference podium. It begins in the quiet corner of observation. It begins when a manager has the courage to sit down in front of the raw data and say: here we are failing, and the responsibility is mine. It begins when we give up the culture of the “gleaming façade” and turn our eyes to the dignity of the process.
 
 Albania does not need more managers who know how to pose in front of the mirror of false success. This country needs people who are not afraid to go down to where the work is hard, where the system gets stuck and where the truth has no filters.
 

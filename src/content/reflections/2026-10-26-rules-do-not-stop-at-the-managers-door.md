@@ -19,13 +19,13 @@ A little later, the manager came into the office. He had a similar matter, but t
 
 The employee asked for the approval and the necessary documentation.
 
-"No need. I'm telling you."
+“No need. I'm telling you.”
 
-"Should I record the reason?"
+“Should I record the reason?”
 
 The manager looked up from the screen.
 
-"Don't complicate things. It's a special case."
+“Don't complicate things. It's a special case.”
 
 And there, within a few seconds, something happened that does not usually appear in performance reports.
 
@@ -59,13 +59,13 @@ And this temptation does not always appear in the form of open abuse.
 
 Sometimes it comes dressed in the language of responsibility.
 
-"We have to be practical."
+“We have to be practical.”
 
-"The situation calls for flexibility."
+“The situation calls for flexibility.”
 
-"We don't have time for bureaucracy."
+“We don't have time for bureaucracy.”
 
-"I'll take it on myself."
+“I'll take it on myself.”
 
 Sentences that in certain circumstances may be perfectly reasonable.
 
@@ -315,7 +315,7 @@ In many workplaces, an employee may feel unsure when he has to object to a super
 
 Especially when the request is made in a tone that leaves little room for discussion.
 
-"Do it, I take the responsibility."
+“Do it, I take the responsibility.”
 
 This sentence may be appropriate when the manager has the authority and competence to authorise a lawful action.
 
@@ -331,11 +331,11 @@ And it must not put him in front of a choice between professional integrity and 
 
 A manager who takes authority seriously must create the possibility for an employee to say to him:
 
-"This needs approval."
+“This needs approval.”
 
-"This action must be documented."
+“This action must be documented.”
 
-"This procedure does not allow us to go on in this way."
+“This procedure does not allow us to go on in this way.”
 
 Without turning a professional remark into a personal clash.
 
@@ -451,7 +451,7 @@ Every disciplinary measure risks being seen as an exercise of power, not the pro
 
 In that office at the beginning, the employee had asked a simple question.
 
-"Should I record the reason?"
+“Should I record the reason?”
 
 He had not opposed authority.
 
@@ -469,7 +469,7 @@ Or he could understand it as proof that the standard the organisation had built 
 
 He could have said:
 
-"Yes. Record it. If my approval is needed, I'll give it according to the procedure."
+“Yes. Record it. If my approval is needed, I'll give it according to the procedure.”
 
 An ordinary answer.
 

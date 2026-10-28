@@ -46,12 +46,22 @@
     const perPiece = effectiveCt(s.ct, s.operators) + (s.co * 60) / s.batch;
     return perPiece > 0 && minutes > 0 ? (minutes * 60 * (s.uptime / 100)) / perPiece : null;
   };
-  // The bottleneck: the step that releases a piece most slowly. -1 while no step has a cycle time.
+  // Seconds of the working day each piece takes at a step: its CT per operator plus its share of a changeover, over
+  // the share of the day the step is up. The working day over this is the capacity; above takt the step cannot cover
+  // the demand. A step that is never up never releases a piece (Infinity).
+  const pieceTime = (step) => {
+    const s = stepNumbers(step);
+    const perPiece = effectiveCt(s.ct, s.operators) + (s.co * 60) / s.batch;
+    return perPiece > 0 ? (s.uptime > 0 ? perPiece / (s.uptime / 100) : Infinity) : 0;
+  };
+  // The bottleneck: the step with the least capacity, the one that needs the most of the day per piece once its
+  // uptime and changeovers are counted, not only the longest CT per operator (audit of 27 October 2026, P2B-14).
+  // -1 while no step has a cycle time.
   const bottleneck = (steps) => {
     let best = -1, max = 0;
     steps.map(stepNumbers).forEach((s, i) => {
-      const eff = effectiveCt(s.ct, s.operators);
-      if (s.ct > 0 && eff > max + EPS) { best = i; max = eff; }
+      const pace = pieceTime(s);
+      if (s.ct > 0 && pace > max + EPS) { best = i; max = pace; }
     });
     return best;
   };
@@ -71,8 +81,9 @@
     const rows = steps.map(stepNumbers).map((s, index) => {
       const eff = effectiveCt(s.ct, s.operators);
       const cap = capacity(s, minutes);
+      const pace = pieceTime(s);
       return {
-        ...s, index, eff, wait: inventoryTime(s.inv, demand, minutes) * 60, capacity: cap,
+        ...s, index, eff, pace, paceGap: t ? pace - t : null, wait: inventoryTime(s.inv, demand, minutes) * 60, capacity: cap,
         utilisation: cap > 0 && demand > 0 ? demand / cap : null,
         gap: t ? eff - t : null, overTakt: Boolean(t) && s.ct > 0 && eff > t + EPS,
       };
@@ -89,6 +100,8 @@
     return {
       demand, minutes, takt: t, steps: rows, finished: finishedPieces, finishedWait, wait, process, va, lead,
       pce: pce(va, lead), yield: rolledYield(rows), bottleneck: b >= 0 ? rows[b] : null,
+      // The bottleneck cannot cover the demand: it needs more of the day per piece than takt.
+      behind: b >= 0 && t !== null && rows[b].pace > t + EPS,
       leadDays: minutes > 0 ? lead / 60 / minutes : null,
       pieces: rows.reduce((sum, row) => sum + row.inv, 0) + finishedPieces,
       over: rows.filter((row) => row.overTakt),
@@ -143,7 +156,7 @@
     return out;
   };
 
-  window.VsmMath = { takt, inventoryTime, effectiveCt, stepNumbers, processTime, valueAddedTime, rolledYield, pce, capacity, bottleneck, taktGap, leadTime, analyse, compare, cleanStep, cleanMap, fromExample, fromTemplate, moveStep, insertStep };
+  window.VsmMath = { takt, inventoryTime, effectiveCt, stepNumbers, processTime, valueAddedTime, rolledYield, pce, capacity, pieceTime, bottleneck, taktGap, leadTime, analyse, compare, cleanStep, cleanMap, fromExample, fromTemplate, moveStep, insertStep };
 
   // The page ---------------------------------------------------------------------------------------------------------
   const root = document.querySelector("[data-value-stream-map]");
@@ -621,7 +634,7 @@
     if (now.takt) lines.push(`${tx("Takt")}: ${sec(now.takt)} (${tx("{n} per day", { n: int.format(now.demand) })}, ${tx("{n} min", { n: int.format(now.minutes) })})`);
     const block = (label, result, map) => {
       lines.push("", `${label}: ${tx("lead time")} ${dur(result.lead, result.minutes)} · ${tx("process time")} ${dur(result.process, result.minutes)} · PCE ${share(result.pce)}${result.yield !== null ? ` · ${tx("rolled yield")} ${share(result.yield)}` : ""}`);
-      if (result.bottleneck) lines.push(`${tx("Bottleneck")}: ${stepName(map, result.bottleneck.index)} ${sec(result.bottleneck.eff)}${result.takt ? ` (${result.bottleneck.gap > 0 ? "+" : ""}${num(result.bottleneck.gap, 1)} s)` : ""}`);
+      if (result.bottleneck) lines.push(`${tx("Bottleneck")}: ${stepName(map, result.bottleneck.index)} ${tx("{t} per piece with uptime and changeovers", { t: sec(result.bottleneck.pace) })}${result.takt ? ` (${result.bottleneck.paceGap > 0 ? "+" : ""}${num(result.bottleneck.paceGap, 1)} s)` : ""}`);
       result.steps.forEach((step, i) => lines.push(`${step.inv > 0 ? `  ▲ ${int.format(step.inv)} ${tx("pcs")} = ${dur(step.wait, result.minutes)}\n` : ""}${i + 1}. ${stepName(map, i)} · ${tx("CT")} ${sec(step.ct)} · ${tx("operators")} ${int.format(step.operators)} · ${tx("CT/op")} ${sec(step.eff)} · ${tx("C/O")} ${tx("{n} min", { n: num(step.co, 0) })} · ${tx("Uptime")} ${num(step.uptime, 0)} % · ${tx("FPY")} ${num(step.fpy, 1)} %${step.va ? " · VA" : ""}`));
       if (result.finished > 0) lines.push(`  ▲ ${int.format(result.finished)} ${tx("pcs")} = ${dur(result.finishedWait, result.minutes)}`);
     };
@@ -666,7 +679,8 @@
     stats.append(stat(tx("Process time"), dur(result.process, result.minutes), tx("value-added {va}", { va: dur(result.va, result.minutes) })));
     stats.append(stat("PCE", share(result.pce), tx("value-added time ÷ lead time")));
     stats.append(stat(tx("Takt"), t ? sec(t) : "–", t ? tx("{demand} per day in {minutes} min", { demand: int.format(result.demand), minutes: int.format(result.minutes) }) : tx("demand and working minutes missing")));
-    if (b) stats.append(stat(tx("Bottleneck"), bName, `${sec(b.eff)} ${tx("per piece")}${t ? ` · ${b.gap > 0 ? tx("{t} above takt", { t: sec(b.gap) }) : tx("{t} under takt", { t: sec(-b.gap) })}` : ""}`));
+    // The bottleneck by its time per piece of the working day (uptime and changeovers counted), against takt.
+    if (b) stats.append(stat(tx("Bottleneck"), bName, `${tx("{t} per piece with uptime and changeovers", { t: sec(b.pace) })}${t ? ` · ${b.paceGap > 0 ? tx("{t} above takt", { t: sec(b.paceGap) }) : tx("{t} under takt", { t: sec(-b.paceGap) })}` : ""}`));
     if (result.yield !== null) stats.append(stat(tx("Rolled yield"), share(result.yield), tx("first-pass yields of all steps multiplied")));
 
     // The map itself comes right after the numbers: it is the answer, not the evidence.
@@ -682,18 +696,18 @@
     if (loaded.length) notes.push(el("p", "dl-warning", tx("{steps}: under takt on paper, but with uptime and changeovers they need more than the working day.", { steps: loaded.map((step) => stepName(map, step.index)).join(", ") })));
     if (!state.hasFuture) notes.push(el("p", "dl-panel-note", data.advice.noFuture));
 
-    // Where to start: the step above takt, or the largest wait when the flow keeps up.
+    // Where to start: the bottleneck when it cannot cover the demand, or the largest wait when the flow keeps up.
     let focus = null;
     if (b) {
       const longest = result.longestWait;
       const longestName = longest ? (longest.step >= result.steps.length ? tx("Finished goods before {customer}", { customer: customerName() }) : tx("Waiting before {name}", { name: stepName(map, longest.step) })) : "";
       focus = focusCard({
-        title: result.over.length ? bName : longest ? longestName : bName,
-        detail: result.over.length ? tx("{t} above takt", { t: sec(b.gap) }) : longest ? dur(longest.seconds, result.minutes) : sec(b.eff),
-        lede: result.over.length
-          ? tx("{name} releases a piece every {eff}, the customer takes one every {takt}. The steps after it starve, the pile in front of it grows.", { name: bName, eff: sec(b.eff), takt: sec(t) })
+        title: result.behind ? bName : longest ? longestName : bName,
+        detail: result.behind ? tx("{t} above takt", { t: sec(b.paceGap) }) : longest ? dur(longest.seconds, result.minutes) : sec(b.pace),
+        lede: result.behind
+          ? tx("{name} releases a piece every {eff}, the customer takes one every {takt}. The steps after it starve, the pile in front of it grows.", { name: bName, eff: sec(b.pace), takt: sec(t) })
           : tx("Every step keeps up with takt. The lead time is in the piles: {waits} of waiting against {work} of work.", { waits: dur(result.wait, result.minutes), work: dur(result.process, result.minutes) }),
-        advice: result.over.length ? data.advice.over : data.advice.flow,
+        advice: result.behind ? data.advice.over : data.advice.flow,
         extraLabel: longest ? tx("Largest wait") : undefined,
         extra: longest ? tx("{where}: {pieces} pcs, {time} of the lead time ({share}).", { where: longestName, pieces: int.format(Math.round(longest.pieces)), time: dur(longest.seconds, result.minutes), share: share(result.lead > 0 ? longest.seconds / result.lead : 0) }) : undefined,
         warning: [result.pce !== null && result.pce < 0.05 ? data.advice.lowPce : "", result.yield !== null && result.yield < 0.9 ? data.advice.yield : ""].filter(Boolean).join(" "),
@@ -701,7 +715,7 @@
     }
 
     // Actions: copy, print, 5 Whys on the bottleneck, the kaizen bursts to the Action Tracker, the steps as a file.
-    const problem = b && result.over.length ? tx("{name} is above takt in the value stream: {eff} per piece against {takt}", { name: bName, eff: sec(b.eff), takt: sec(t) })
+    const problem = b && result.behind ? tx("{name} is above takt in the value stream: {eff} per piece against {takt}", { name: bName, eff: sec(b.pace), takt: sec(t) })
       : tx("The lead time of {family} is {lead} for {work} of work", { family: state.family.trim() || data.title, lead: dur(result.lead, result.minutes), work: dur(result.process, result.minutes) });
     const actions = resultActions(() => summaryText(now, next), problem);
     const bursts = kaizenSteps();
@@ -710,25 +724,27 @@
       send.type = "button";
       send.addEventListener("click", () => {
         const open = window.ActionsStore.list().filter(window.ActionsStore.isOpen);
-        let added = 0, already = 0;
+        let added = 0, already = 0, unsaved = 0;
         const nowBottleneck = now.bottleneck ? now.bottleneck.index : -1;
         bursts.forEach((item) => {
           const title = `${item.name}: ${item.kaizen}`;
           if (open.some((action) => action.title === title && action.source === "value-stream-map")) { already++; return; }
-          window.ActionsStore.add({
-            title, source: "value-stream-map", area: item.name,
+          const action = window.ActionsStore.add({
+            title, example: state.example === true, source: "value-stream-map", area: item.name,
             priority: now.steps[item.i]?.overTakt || item.i === nowBottleneck ? "High" : "Medium",
             detail: tx("Kaizen burst on the future state of {family}. Lead time today {now}, planned {next}.", { family: state.family.trim() || data.title, now: dur(now.lead, now.minutes), next: dur(next.lead, next.minutes) }),
             check: tx("Map the stream again after the change: the lead time should move towards {next}.", { next: dur(next.lead, next.minutes) }),
           });
-          added++;
+          if (action) added++;
+          else if (window.ActionsStore.lastAdd === "unsaved") unsaved++;
+          else already++;
         });
         const status = actions.querySelector("[data-actions-status]") || el("p", "form-note vs-actions-status");
         status.dataset.actionsStatus = "";
         status.setAttribute("role", "status");
         const link = el("a", "inline-link", tx("Open the Action Tracker"));
         link.href = window.ActionsStore.trackerUrl().href;
-        status.replaceChildren(tx("Added {n} actions.", { n: added }), already ? ` ${tx("{n} were already open.", { n: already })}` : "", " ", link);
+        status.replaceChildren(window.ToolKit.actionsNote({ added, duplicate: already, unsaved }), " ", link);
         actions.append(status);
       });
       actions.append(send);
@@ -776,7 +792,7 @@
         [tx("Process time"), dur(now.process, now.minutes), dur(next.process, next.minutes), signed(diff.process, (v) => dur(v, now.minutes))],
         ["PCE", share(now.pce), share(next.pce), signed(diff.pce * 100, (v) => `${num(v, 2)} pp`)],
         [tx("Pieces waiting"), int.format(Math.round(now.pieces)), int.format(Math.round(next.pieces)), signed(diff.pieces, (v) => int.format(Math.round(v)))],
-        [tx("Bottleneck"), now.bottleneck ? `${stepName(state.current, now.bottleneck.index)} ${sec(now.bottleneck.eff)}` : "–", next.bottleneck ? `${stepName(state.future, next.bottleneck.index)} ${sec(next.bottleneck.eff)}` : "–", ""],
+        [tx("Bottleneck"), now.bottleneck ? `${stepName(state.current, now.bottleneck.index)} ${sec(now.bottleneck.pace)}` : "–", next.bottleneck ? `${stepName(state.future, next.bottleneck.index)} ${sec(next.bottleneck.pace)}` : "–", ""],
         [tx("Steps above takt"), int.format(now.over.length), int.format(next.over.length), signed(next.over.length - now.over.length, (v) => int.format(v))],
         [tx("Rolled yield"), share(now.yield), share(next.yield), ""],
       ].forEach(([label, a, c, d]) => {

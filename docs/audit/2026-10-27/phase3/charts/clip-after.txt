@@ -1,0 +1,1 @@
+pages 285, pages with clipped chart text 0, clipped labels 0, pages with horizontal scroll 0, pages with chart text <8px 48

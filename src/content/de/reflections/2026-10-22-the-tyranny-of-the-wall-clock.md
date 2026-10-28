@@ -7,11 +7,11 @@ deck: 'Im Denken unfähiger Führung heißen Überstunden moralische Pflicht, w�
 description: 'Über die Kultur der leeren Anwesenheit, Überstunden als Treuetest und warum pünktliches Gehen das Zeichen eines Profis ist.'
 ---
 
-Die Uhr zeigt genau die letzte Minute der Schicht. Du klappst den Computer zu, räumst den Tisch auf, nimmst den Mantel und hältst die Schlüssel bereit. In jeder Gesellschaft, die den Wert von System und Organisation versteht, ist das einfach ein erfüllter Tag: Die Arbeit ist getan, die Arbeitszeit ist vorbei, der Mensch kehrt in sein Leben zurück.
+Die Uhr zeigt genau die letzte Minute der Schicht. Sie klappen den Computer zu, räumen den Tisch auf, nehmen den Mantel und halten die Schlüssel bereit. In jeder Gesellschaft, die den Wert von System und Organisation versteht, ist das einfach ein erfüllter Tag: Die Arbeit ist getan, die Arbeitszeit ist vorbei, der Mensch kehrt in sein Leben zurück.
 
-Doch in vielen albanischen Büros, Läden und Lagern spielt sich genau in dieser Sekunde ein unerträgliches Theater ab. Es genügt, pünktlich vom Stuhl aufzustehen, und schon kreuzen sich kalte Blicke über dir. Der Manager hebt erstaunt den Kopf, als sähe er einen schweren Verstoß gegen das Strafgesetzbuch. Kollegen, die an Unterwerfung gewöhnt sind, senken mit stiller Schuld den Blick auf die Tastatur. Und fast nie fehlt die halb ironische Bemerkung, in die Luft geworfen wie ein giftiger Pfeil: „Heute einen halben Tag frei genommen?“ oder „Du gehst schon, bist du nicht fertig?“
+Doch in vielen albanischen Büros, Läden und Lagern spielt sich genau in dieser Sekunde ein unerträgliches Theater ab. Es genügt, pünktlich vom Stuhl aufzustehen, und schon kreuzen sich kalte Blicke über Ihnen. Der Manager hebt erstaunt den Kopf, als sähe er einen schweren Verstoß gegen das Strafgesetzbuch. Kollegen, die an Unterwerfung gewöhnt sind, senken mit stiller Schuld den Blick auf die Tastatur. Und fast nie fehlt die halb ironische Bemerkung, in die Luft geworfen wie ein giftiger Pfeil: „Heute einen halben Tag frei genommen?“ oder „Du gehst schon, bist du nicht fertig?“
 
-Wenn du dagegen zwei Stunden länger bleibst, wenn du deine Kraft verbrauchst, um das Chaos anderer aufzuräumen, sagt niemand Danke. Niemand fragt, wie du nach Hause kommst. Dann behandelt die Stille des Büros dein Bleiben als Selbstverständlichkeit, als heilige Pflicht, die du der Firma schuldest.
+Wenn Sie dagegen zwei Stunden länger bleiben, wenn Sie Ihre Kraft verbrauchen, um das Chaos anderer aufzuräumen, sagt niemand Danke. Niemand fragt, wie Sie nach Hause kommen. Dann behandelt die Stille des Büros Ihr Bleiben als Selbstverständlichkeit, als heilige Pflicht, die Sie der Firma schulden.
 
 Lassen Sie mich ganz deutlich sein. **Ohne Plan und ohne Bezahlung über die Arbeitszeit hinaus zu arbeiten ist keine Hingabe; es verdeckt die Unfähigkeit der Führung. Und pünktlich zu gehen ist keine Faulheit; es ist das erste Zeichen eines Profis, der die Arbeit und sich selbst zu respektieren weiß.**
 
@@ -21,7 +21,7 @@ Wenn eine Arbeit nicht in den acht Stunden des Tages fertig wird, zeigt das nich
 
 Doch statt sich vor die Daten zu setzen und zu fragen, wo die Zeit versickert, wählt der Manager den leichtesten und primitivsten Weg: emotionale Erpressung.
 
-Er macht den Feierabend zum Treuetest. Er gibt dir ein schlechtes Gewissen, weil zu Hause eine Familie auf dich wartet, weil du Kinder von der Schule abholen musst, weil du Freunde treffen willst oder einfach ein Buch lesen möchtest, ohne die Stimme der Arbeit über dem Kopf. In seiner kranken Logik sollst du im Büro bleiben, auch wenn es keinen Notfall gibt, nur um seiner Unsicherheit Gesellschaft zu leisten, nur damit er das Gefühl genießt, Menschen unter seinem Kommando zu haben.
+Er macht den Feierabend zum Treuetest. Er gibt Ihnen ein schlechtes Gewissen, weil zu Hause eine Familie auf Sie wartet, weil Sie Kinder von der Schule abholen müssen, weil Sie Freunde treffen wollen oder einfach ein Buch lesen möchten, ohne die Stimme der Arbeit über dem Kopf. In seiner kranken Logik sollen Sie im Büro bleiben, auch wenn es keinen Notfall gibt, nur um seiner Unsicherheit Gesellschaft zu leisten, nur damit er das Gefühl genießt, Menschen unter seinem Kommando zu haben.
 
 Das ist die Kultur der „leeren Anwesenheit“. Eine Kultur, die den Menschen, der bis neun Uhr abends im Büro herumsitzt und im Internet surft, höher schätzt als den, der seinen Tag mit chirurgischer Präzision organisiert und seine Arbeit pünktlich zum Feierabend fehlerfrei abgibt.
 
@@ -31,4 +31,4 @@ Diese Denkweise ist der größte Feind der Effizienz. Wenn ein Team sich daran g
 
 Wenn die Uhr das Ende der Schicht anzeigt, ist das Vertragsverhältnis für diesen Tag beendet. Die verbleibende Zeit gehört freien Menschen. Sie gehört Eltern, Kindern, persönlichen Träumen und der Ruhe, die der Kopf braucht, um am nächsten Tag frisch zurückzukommen.
 
-Wenn albanische Führungskräfte Menschen wollen, die während der Arbeitszeit ihr Bestes geben, müssen sie lernen, sich zurückzuziehen, sobald die Uhr deren Ende anzeigt. Und jeder Mitarbeiter sollte diese Wahrheit gut kennen: Mit erhobenem Kopf zur Tür hinauszugehen, wenn deine Zeit vorbei ist, braucht keine Entschuldigung. Es braucht nur das Bewusstsein, dass dein Leben weit mehr wert ist als die Laune eines Menschen, der ein Büro nicht von Sklaverei unterscheiden kann.
+Wenn albanische Führungskräfte Menschen wollen, die während der Arbeitszeit ihr Bestes geben, müssen sie lernen, sich zurückzuziehen, sobald die Uhr deren Ende anzeigt. Und jeder Mitarbeiter sollte diese Wahrheit gut kennen: Mit erhobenem Kopf zur Tür hinauszugehen, wenn die eigene Zeit vorbei ist, braucht keine Entschuldigung. Es braucht nur das Bewusstsein, dass das eigene Leben weit mehr wert ist als die Laune eines Menschen, der ein Büro nicht von Sklaverei unterscheiden kann.

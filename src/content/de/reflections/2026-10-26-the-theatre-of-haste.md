@@ -19,13 +19,13 @@ Nehmen wir die Psychologie dieser ständigen Hast auseinander.
 
 Warum lieben schwache Systeme diesen Rhythmus der Panik so sehr?
 
-Weil die Eile dir ein perfektes moralisches Alibi verschafft. Wenn du von morgens bis abends atemlos rennst, hast du keine Zeit zum Nachdenken. Du hast keine Zeit, innezuhalten und dich zu fragen, warum dieselbe Bestellung jede Woche zu spät ist, warum sich derselbe Fehler in der Rechnung jeden Montag wiederholt oder warum das Personal vor einer völlig vorhersehbaren Lage immer unvorbereitet ist.
+Weil die Eile einem ein perfektes moralisches Alibi verschafft. Wenn man von morgens bis abends atemlos rennt, hat man keine Zeit zum Nachdenken. Man hat keine Zeit, innezuhalten und sich zu fragen, warum dieselbe Bestellung jede Woche zu spät ist, warum sich derselbe Fehler in der Rechnung jeden Montag wiederholt oder warum das Personal vor einer völlig vorhersehbaren Lage immer unvorbereitet ist.
 
 Panik erzeugt das trügerische Gefühl von Bewegung. Am Ende der Schicht geht der Mitarbeiter mit gebrochenem Rücken und erschöpftem Kopf nach Hause, überzeugt, einen gewaltigen Arbeitstag hinter sich zu haben, während in Wirklichkeit nichts vorangekommen ist. Er hat nur seinen ganzen Nervenvorrat verbraucht, um die Brände zu löschen, die die Improvisation der Firma selbst wenige Stunden zuvor gelegt hat.
 
 Und hier zeigt sich die größte Ungerechtigkeit dieser Kultur: die Art, wie sie den echten Profi behandelt.
 
-Stellen Sie sich einen Vorgesetzten oder einen Mitarbeiter vor, der an Ordnung glaubt. Er beginnt die Schicht ruhig, schlägt seine Notizen auf, ordnet die Prioritäten und weigert sich, bei der allgemeinen Hysterie mitzumachen. Er weiß: Bevor du losrennst, musst du wissen, in welche Richtung du rennst.
+Stellen Sie sich einen Vorgesetzten oder einen Mitarbeiter vor, der an Ordnung glaubt. Er beginnt die Schicht ruhig, schlägt seine Notizen auf, ordnet die Prioritäten und weigert sich, bei der allgemeinen Hysterie mitzumachen. Er weiß: Bevor man losrennt, muss man wissen, in welche Richtung man rennt.
 
 In den Augen einer oberflächlichen Führungskraft wird dieser Mensch sofort mit Misstrauen betrachtet. „Warum ist der so ruhig? Warum macht er sich keine Sorgen wie die anderen? Der ist mit dem Kopf nicht bei der Arbeit.“
 
@@ -43,6 +43,6 @@ Eine Führungskraft mit Weitblick lässt nicht zu, dass Panik zur Lebensweise wi
 
 Tempo ohne Richtung ist nur ein schnellerer Weg, gegen die Wand zu fahren.
 
-Deshalb ist in einem Arbeitsumfeld, das dich mit Gewalt in sein Theater der Hast ziehen will, der größte Akt von Professionalität, deine innere Ruhe zu schützen. Die Fähigkeit, zu unterscheiden, was wirklich wichtig ist und was nur Lärm macht.
+Deshalb ist in einem Arbeitsumfeld, das einen mit Gewalt in sein Theater der Hast ziehen will, der größte Akt von Professionalität, die eigene innere Ruhe zu schützen. Die Fähigkeit, zu unterscheiden, was wirklich wichtig ist und was nur Lärm macht.
 
 Denn am Ende sind die Betriebe, die überleben und dauerhafte Spuren hinterlassen, nicht die, die ihren Atem beim sinnlosen Rennen durch den Rauch verbraucht haben, sondern die, die die Weisheit hatten, ein so klares System aufzubauen, dass jede Arbeit mit Genauigkeit, mit Würde und zu ihrer verdienten Zeit getan wird.

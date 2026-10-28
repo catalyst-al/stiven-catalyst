@@ -320,33 +320,66 @@
     out.worst = known.filter((e) => e.r === worst).map((e) => e.id);
     return out;
   };
-  // The ranking. On each rate or average that two or more sites have, the best site gets 100 points and the worst 0,
-  // the others in between by their place (n sites, place p from 1, equal values sharing the mean place: points =
-  // (n − p) / (n − 1) × 100). A site's score is the mean of its points over the rates it has; the higher, the better.
+  // What a rate must rest on before it ranks a site: the number behind it (the figure's own detail) and its minimum.
+  // Two routes on time out of two say nothing about a depot; a rate of a few units handled, a single audit or a few
+  // shifts neither. A figure without its number (none should be: every summary has kept them) does not rank.
+  const MIN_N = {
+    damageRate: { field: "volume", min: 1000 },
+    incompleteRate: { field: "volume", min: 1000 },
+    onTime: { field: "routes", min: 30 },
+    oee: { field: "entries", min: 5 },
+    pm: { field: "scheduled", min: 5 },
+    fiveS: { field: "audits", min: 2 },
+    firstPass: { field: "first", min: 30 },
+    complaintsPer100: { field: "nights", min: 300 },
+  };
+  const sampleOf = (key, figure) => (finite(figure?.[MIN_N[key]?.field]) ? figure[MIN_N[key].field] : null);
+  const enough = (key, figure) => finite(figure?.value) && Boolean(MIN_N[key]) && sampleOf(key, figure) >= MIN_N[key].min;
+  // The ranking, of the sites with enough data. A rate is compared when two or more sites have it with enough behind it
+  // (MIN_N); a site is ranked when it has enough on at least half of the rates compared (and on one at least), so a
+  // site is not ranked on a corner of what the others are ranked on. On each compared rate the best ranked site gets
+  // 100 points and the worst 0, the others in between by their place (n sites, place p from 1, equal values sharing
+  // the mean place: points = (n − p) / (n − 1) × 100), each with the number behind it (n). A site's score is the mean
+  // of its points; the higher, the better. The others follow, not ranked, with the reason (why): "volume" when none of
+  // its rates has enough behind it (short lists them, with the number and the minimum), "coverage" when it has enough
+  // on fewer than half of the rates compared (covered of compared), "shared" when it shares no rate with a ranked site.
   // sites: [{ id, name, figures }].
   const ranking = (sites) => {
+    const rated = KPIS.filter((kpi) => kpi.ranked);
+    const usable = new Map(sites.map((site) => [site.id, new Set(rated.filter((kpi) => enough(kpi.key, site.figures?.[kpi.key])).map((kpi) => kpi.key))]));
+    const compared = rated.filter((kpi) => sites.filter((site) => usable.get(site.id).has(kpi.key)).length >= 2);
+    const needed = Math.max(1, Math.ceil(compared.length / 2));
+    const coverOf = (site) => compared.filter((kpi) => usable.get(site.id).has(kpi.key)).length;
+    const eligible = new Set(sites.filter((site) => coverOf(site) >= needed).map((site) => site.id));
     const points = new Map(sites.map((site) => [site.id, []]));
-    KPIS.filter((kpi) => kpi.ranked).forEach((kpi) => {
-      const known = sites.filter((site) => finite(site.figures?.[kpi.key]?.value)).map((site) => ({ id: site.id, r: rounded(site.figures[kpi.key].value, kpi.format) }));
+    compared.forEach((kpi) => {
+      const known = sites.filter((site) => eligible.has(site.id) && usable.get(site.id).has(kpi.key))
+        .map((site) => ({ id: site.id, r: rounded(site.figures[kpi.key].value, kpi.format), n: sampleOf(kpi.key, site.figures[kpi.key]) }));
       const n = known.length;
       if (n < 2) return;
       known.forEach((e) => {
         const better = known.filter((o) => (kpi.better === "higher" ? o.r > e.r : o.r < e.r)).length;
         const same = known.filter((o) => o.r === e.r).length;
         const place = better + (same + 1) / 2;
-        points.get(e.id).push({ kpi: kpi.key, place, points: ((n - place) / (n - 1)) * 100 });
+        points.get(e.id).push({ kpi: kpi.key, place, points: ((n - place) / (n - 1)) * 100, n: e.n });
       });
     });
     return sites.map((site) => {
       const list = points.get(site.id);
-      return { id: site.id, name: site.name, kpis: list.length, score: list.length ? list.reduce((t, p) => t + p.points, 0) / list.length : null, places: list };
+      const ranked = list.length > 0;
+      const covered = coverOf(site);
+      const short = rated.filter((kpi) => finite(site.figures?.[kpi.key]?.value) && !usable.get(site.id).has(kpi.key))
+        .map((kpi) => ({ kpi: kpi.key, n: sampleOf(kpi.key, site.figures[kpi.key]), min: MIN_N[kpi.key].min }));
+      const why = ranked ? null : covered > 0 && covered < needed ? "coverage" : short.length && !covered ? "volume" : "shared";
+      return { id: site.id, name: site.name, kpis: list.length, score: ranked ? list.reduce((t, p) => t + p.points, 0) / list.length : null, places: list, ranked, why, short, covered, compared: compared.length };
     }).sort((a, b) => (b.score ?? -1) - (a.score ?? -1) || b.kpis - a.kpis || a.name.localeCompare(b.name));
   };
-  // The prompt: the rate with the largest gap between its best and its worst site, relative to the larger of the two.
+  // The prompt: the rate with the largest gap between its best and its worst site, relative to the larger of the two,
+  // among the figures with enough behind them to rank.
   const widestGap = (sites) => {
     let top = null;
     KPIS.filter((kpi) => kpi.ranked).forEach((kpi) => {
-      const entries = sites.map((site) => ({ id: site.id, value: site.figures?.[kpi.key]?.value }));
+      const entries = sites.map((site) => ({ id: site.id, value: enough(kpi.key, site.figures?.[kpi.key]) ? site.figures[kpi.key].value : null }));
       const m = marks(entries, kpi);
       if (!m.best.length || !m.worst.length) return;
       const valueOf = (id) => entries.find((e) => e.id === id).value;
@@ -464,7 +497,7 @@
 
   window.SiteCompareMath = {
     PERIODS, SUFFIXES, TOOLS, KPIS, DETAILS, WHY, PRECISION, rangeOf, latestIn, pickVariant, summarize, figures, cleanSummary, cleanSite, cleanSites,
-    checkCode, marks, ranking, widestGap, exampleItems, openAt,
+    checkCode, marks, MIN_N, ranking, widestGap, exampleItems, openAt,
   };
 
   // The page -------------------------------------------------------------------------------------------------------------
@@ -477,6 +510,11 @@
   const CK = window.ChartKit;
   const Actions = window.ActionsStore;
   const cfg = JSON.parse(dataEl.textContent);
+  // The minimum volumes before a site ranks are the data file's (minimums; docs/THRESHOLDS.md): an operation can set
+  // them to its own scale without touching the code. A missing or invalid one keeps the default above.
+  Object.entries(isObj(cfg.minimums) ? cfg.minimums : {}).forEach(([key, min]) => {
+    if (window.SiteCompareMath.MIN_N[key] && Number.isFinite(min) && min > 0) window.SiteCompareMath.MIN_N[key].min = min;
+  });
   const tools = (() => { try { return JSON.parse(document.getElementById("site-compare-tools")?.textContent || "{}") || {}; } catch { return {}; } })();
   const KEY = cfg.storageKey;
   const SUFFIX = LANG === "en" ? "" : `-${LANG}`;
@@ -535,6 +573,16 @@
     if (!template || !finite(figure?.value)) return "";
     const vars = Object.fromEntries(DETAILS.filter((name) => finite(figure[name])).map((name) => [name, int.format(figure[name])]));
     return /\{\w+\}/.test(fill(template, vars)) ? "" : fill(template, vars);
+  };
+  // The number behind a rate, in words ("2,000 routes", "4 audits"); "–" when the figure has none.
+  const sampleText = (key, n) => fill(cfg.kpis?.[key]?.sample || "{n}", { n: finite(n) ? int.format(n) : "–" });
+  // Why a site is not ranked, in words, with the rates that have too little behind them.
+  const unrankedText = (r) => {
+    const short = r.short.map((s) => fill(tx("{kpi}: {sample}, at least {min} needed"), { kpi: label(s.kpi), sample: sampleText(s.kpi, s.n), min: int.format(s.min) })).join("; ");
+    const lead = r.why === "volume" ? tx("not ranked: too little data.")
+      : r.why === "coverage" ? fill(tx("not ranked: enough data on {k} of the {m} rates compared; a site needs at least half."), { k: int.format(r.covered), m: int.format(r.compared) })
+        : tx("not ranked: no rate shared with another site");
+    return short && r.why !== "shared" ? `${lead} ${short}.` : lead;
   };
 
   // ---- Sites ----
@@ -728,15 +776,28 @@
     return box;
   };
   const rankingPanel = (sites) => {
-    const box = panel(cfg.summary.ranking, tx("On each rate or average that two or more sites have, the best site gets 100 points and the worst 0, the others in between by their place; equal values share it. A site's score is the mean over the rates it has. Counts are left out: they grow with the size of a site."));
+    const box = panel(cfg.summary.ranking, tx("A rate counts when two or more sites have it with enough data behind it (for example 30 routes, 1,000 units handled, 5 shifts or 2 audits); a site is ranked when it has enough on at least half of those rates. On each, the best site gets 100 points and the worst 0, the others in between by their place; equal values share it. A site's score is the mean over its rates, with the number behind each. Counts are left out: they grow with the size of a site."));
     const ranks = ranking(forMath(sites));
+    // The ranked sites in order, each score with the number behind every rate; the others apart, with the reason.
     const ol = el("ol", "sv-ranking");
-    ranks.forEach((r) => {
+    ranks.filter((r) => r.ranked).forEach((r) => {
       const li = el("li");
-      li.append(el("strong", null, r.name), " ", el("span", null, r.score === null ? tx("not ranked: no rate shared with another site") : fill(tx("{score} points over {n} rates"), { score: int.format(Math.round(r.score)), n: int.format(r.kpis) })));
+      li.append(el("strong", null, r.name), " ", el("span", null, fill(tx("{score} points over {n} rates"), { score: int.format(Math.round(r.score)), n: int.format(r.kpis) })));
+      li.append(el("span", "sv-detail sv-sample", r.places.map((p) => `${label(p.kpi)}: ${sampleText(p.kpi, p.n)}`).join(" · ")));
       ol.append(li);
     });
-    box.append(ol);
+    if (ol.children.length) box.append(ol);
+    const apart = ranks.filter((r) => !r.ranked);
+    if (apart.length) {
+      box.append(el("p", "result-label", tx("Not ranked")));
+      const ul = el("ul", "sv-unranked");
+      apart.forEach((r) => {
+        const li = el("li");
+        li.append(el("strong", null, r.name), " ", el("span", null, unrankedText(r)));
+        ul.append(li);
+      });
+      box.append(ul);
+    }
     return { box, ranks };
   };
   const promptCard = (sites) => {
@@ -781,7 +842,8 @@
       lines.push(`${label(kpi.key)}: ${cells.join(" · ")}`);
     });
     lines.push("", `${cfg.summary.ranking}:`);
-    ranks.forEach((r, i) => lines.push(`${i + 1}. ${r.name}${r.score === null ? "" : ` · ${int.format(Math.round(r.score))}`}`));
+    ranks.filter((r) => r.ranked).forEach((r, i) => lines.push(`${i + 1}. ${r.name} · ${int.format(Math.round(r.score))} (${r.places.map((p) => `${label(p.kpi)}: ${sampleText(p.kpi, p.n)}`).join(" · ")})`));
+    ranks.filter((r) => !r.ranked).forEach((r) => lines.push(`- ${r.name}: ${unrankedText(r)}`));
     if (gap) {
       const kpi = KPI[gap.kpi];
       const name = (id) => sites.find((site) => site.id === id)?.name || "";

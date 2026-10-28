@@ -36,15 +36,40 @@
     return Object.entries(result).sort((a, b) => b[1] - a[1]);
   };
 
-  // The causes worth naming. Below a third of the maximum there is no pattern; when every cause scores within a point
-  // of the others (every statement answered alike) the answers do not separate the causes either. A cause one point
-  // behind the leader is named with it: one notch on one statement is not a difference.
+  // The causes worth naming, as a hypothesis: the answers are one person's ratings of two statements per cause, so a
+  // cause is named only when it stands clearly apart. The leader needs more than half the maximum (4 of 6), and the
+  // named causes need two points over every cause left out. Causes one point apart are near-ties: one notch on one
+  // statement is not a difference, so they are named together (a chain: 6, 5, 4 names all three). When that takes in
+  // all five, or the leader is at half the maximum or below, no cause is named.
   const topCauses = (ranked) => {
     const best = ranked[0][1];
-    const lowest = ranked.at(-1)[1];
-    if (best <= maxPerCause / 3 || best - lowest < 2) return [];
-    return ranked.filter(([, score]) => score >= best - 1).map(([key]) => key);
+    if (best <= maxPerCause / 2) return [];
+    let k = 1;
+    while (k < ranked.length && ranked[k - 1][1] - ranked[k][1] <= 1) k++;
+    return k === ranked.length ? [] : ranked.slice(0, k).map(([key]) => key);
   };
+  // "A", "A and B", "A, B and C".
+  const joinAnd = (items) => (items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")} ${tx("and")} ${items.at(-1)}`);
+  const nameOf = (key) => data.causes[key].name;
+  const scoreOf = (ranked, key) => ranked.find(([k]) => k === key)[1];
+  // How far the named causes stand apart, in words: the margin over the next cause, and near-ties said as such. With no
+  // cause named, the lean of the answers (when they are not all alike) with why it is not named.
+  const marginText = (ranked, top) => {
+    if (!top.length) {
+      const best = ranked[0][1];
+      if (best - ranked.at(-1)[1] < 2) return "";
+      const leaning = ranked.filter(([, score]) => score === best).map(([key]) => nameOf(key));
+      return tx("Your answers lean towards {cause} ({score}/{max}), but not by enough to name it: one notch on one statement would change the picture.", { cause: leaning.join(" + "), score: best, max: maxPerCause });
+    }
+    const [next, nextScore] = ranked[top.length];
+    const lowest = scoreOf(ranked, top.at(-1));
+    if (top.length === 1) {
+      return tx("{cause} scores {score}/{max}, {gap} points ahead of the next cause ({next}, {nextScore}/{max}).", { cause: nameOf(top[0]), score: lowest, max: maxPerCause, gap: lowest - nextScore, next: nameOf(next), nextScore });
+    }
+    return `${tx("{causes} are within one point of each other: your answers do not separate them.", { causes: joinAnd(top.map((key) => `${nameOf(key)} (${scoreOf(ranked, key)}/${maxPerCause})`)) })} ${tx("Together they are {gap} points ahead of the next cause ({next}, {nextScore}/{max}).", { gap: lowest - nextScore, next: nameOf(next), nextScore, max: maxPerCause })}`;
+  };
+  const CAVEAT = "These are your own ratings, two statements per cause. They show where to look first, not the cause itself. Before you act, check it: watch the work for a shift, ask two or three people who do it to rate the same statements, and look at the data behind the KPI.";
+  const headline = (top) => tx(top.length > 1 ? "Leading hypotheses" : "Leading hypothesis");
   window.KpiDiagnostic = { topCauses };
 
   const summaryText = (kpi, ranked, top) => {
@@ -52,7 +77,7 @@
     if (kpi) lines.push(`KPI: ${kpi}`);
     lines.push("");
     if (top.length) {
-      lines.push(`${tx("Most likely cause")}: ${top.map((key) => data.causes[key].name).join(" + ")}`);
+      lines.push(`${headline(top)}: ${top.map((key) => data.causes[key].name).join(" + ")}`, marginText(ranked, top));
       top.forEach((key) => {
         const cause = data.causes[key];
         lines.push("", `${cause.name}: ${cause.meaning}`, `${tx("First moves")}:`);
@@ -61,7 +86,10 @@
       });
     } else {
       lines.push(tx("No clear pattern. Go and watch the work where the number is produced."));
+      const lean = marginText(ranked, top);
+      if (lean) lines.push(lean);
     }
+    lines.push("", tx(CAVEAT));
     lines.push("", `${tx("Scores")}:`);
     ranked.forEach(([key, score]) => lines.push(`- ${data.causes[key].name}: ${score}/${maxPerCause}`));
     return lines.join("\n");
@@ -95,13 +123,15 @@
     head.append(el("p", "kicker", kpi ? `${tx("Result")} · ${kpi}` : tx("Result")));
     const title = el("h2");
     if (top.length) {
-      title.append(`${tx("Most likely")}: `);
+      title.append(`${headline(top)}: `);
       title.append(el("span", null, top.map((key) => data.causes[key].name).join(" + ")));
     } else {
       title.append(`${tx("No single cause")} `);
       title.append(el("span", null, tx("stands out.")));
     }
     head.append(title);
+    const margin = marginText(ranked, top);
+    if (margin) head.append(el("p", "result-margin", margin));
     resultBox.append(head);
 
     const grid = el("div", "result-grid");
@@ -126,6 +156,10 @@
       card.append(el("p", null, tx("Your answers do not point strongly to one cause. That usually means the problem is not visible from where the number is reported. Spend one shift where the result is produced, follow one case from start to finish and note where it first deviates.")));
       detail.append(card);
     }
+    // Whatever the result: how sure it can be, and how to check it.
+    const check = el("article", "result-card result-caveat");
+    check.append(el("p", "result-label", tx("How sure is this?")), el("p", null, tx(CAVEAT)));
+    detail.append(check);
     grid.append(detail);
 
     const bars = el("div", "result-bars");
@@ -167,11 +201,12 @@
     const whys = el("a", "button-secondary", tx("Take it to 5 Whys"));
     const whysUrl = new URL(document.querySelector("a[data-five-whys]")?.getAttribute("href") || "../five-whys/", location.href);
     whysUrl.searchParams.set("problem", top.length
-      ? tx("{kpi} is red; the diagnostic points to {cause}.", { kpi: kpi || "KPI", cause: top.map((key) => data.causes[key].name).join(" + ") })
+      ? tx("{kpi} is red; the self-assessment points to {cause}, a hypothesis to check.", { kpi: kpi || "KPI", cause: top.map((key) => data.causes[key].name).join(" + ") })
       : tx("{kpi} is red; no single cause stands out in the diagnostic.", { kpi: kpi || "KPI" }));
     whys.href = whysUrl.href;
     actions.append(copyButton, printButton, whys);
-    if (window.ToolKit?.trackerLink) actions.append(window.ToolKit.trackerLink(tx("Add to actions"), { title: tx("First move on {kpi}: {cause}", { kpi: kpi || "KPI", cause: top.length ? top.map((key) => data.causes[key].name).join(" + ") : tx("find the cause") }), detail: whysUrl.searchParams.get("problem") || "", source: "kpi-diagnostic", priority: "High" }));
+    // A self-assessment is a reason to go and check, not a finding: the action is the check, at Medium priority.
+    if (window.ToolKit?.trackerLink) actions.append(window.ToolKit.trackerLink(tx("Add to actions"), { title: top.length ? tx("Check on the floor: {cause} behind {kpi}", { kpi: kpi || "KPI", cause: top.map((key) => data.causes[key].name).join(" + ") }) : tx("First move on {kpi}: {cause}", { kpi: kpi || "KPI", cause: tx("find the cause") }), detail: whysUrl.searchParams.get("problem") || "", source: "kpi-diagnostic", priority: "Medium" }));
     actions.append(resetButton);
     resultBox.append(actions);
 

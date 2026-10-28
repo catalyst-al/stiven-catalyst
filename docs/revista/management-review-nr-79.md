@@ -24,6 +24,12 @@ mbështetet te artikulli as te faqja e laboratorit: u hoq nga shënimi; (6) shë
 lexuan te njoftimi i Thunderbird. Të nëntë shifrat e sondazhit përputhen me artikullin. Për Shqipërinë dhe Gjermaninë nuk
 u gjet asnjë shifër e krahasueshme.
 
+Shënim (27 tetor 2026), sipas historisë së git-it: kontrolli i dytë i 11 tetorit u bë para se numri të dilte online.
+Ndryshimet e tij u bënë në degën e punës (commit 3565e02a, 11 tetor 2026) dhe numri hyri në main, nga ku botohet faqja,
+vetëm me bashkimin #177 (7b43e7c3, 11 tetor 2026, ora 20:33): versioni i parë online i ka tashmë. Prandaj këto ndryshime
+nuk kanë shënim korrigjimi dhe nuk e çojnë numrin te `checked.issues` (lib/weekly/common.js). Pas daljes online nuk
+ndryshoi në kontrollin e dytë.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |

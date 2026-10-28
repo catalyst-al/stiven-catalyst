@@ -7,7 +7,7 @@ deck: 'The idea that a society can live alongside corruption and at the same tim
 description: 'A reflection on normalised corruption, on the myth of "the thief who gets things done", and why development and theft can never share the same room.'
 ---
 
-In the cafés of Tirana, at afternoon meetings in Durrës, around family tables and in the everyday conversations of ordinary people, one sentence is heard all the time. It is said with a kind of feigned maturity, in the tone of someone who claims to know the world to the bone: "Look, corruption I understand. Everyone steals everywhere. But I don't understand why this country doesn't develop, why we never get a proper state."
+In the cafés of Tirana, at afternoon meetings in Durrës, around family tables and in the everyday conversations of ordinary people, one sentence is heard all the time. It is said with a kind of feigned maturity, in the tone of someone who claims to know the world to the bone: “Look, corruption I understand. Everyone steals everywhere. But I don't understand why this country doesn't develop, why we never get a proper state.”
 
 This is, without any doubt, one of the most self-destructive and deeply contradictory phrases our collective mindset has ever produced.
 
@@ -25,11 +25,11 @@ How can you expect development from an organism in which every cell feeds on inj
 
 A nation's development is not a magic miracle that falls from the sky. It does not come from luck, nor from good weather. Development is the inevitable result of three fundamental elements: clear rules of the game, free competition on merit, and the belief that the law protects everyone's effort.
 
-The second you say "corruption I understand", you have agreed to destroy all three of these foundations.
+The second you say “corruption I understand”, you have agreed to destroy all three of these foundations.
 
 You have agreed that the rules be made of plasticine for the strong and of iron for the weak. You have agreed that talent be defeated by servility. You have agreed that the sweat of your brow be worth nothing against the power of the envelope. And having accepted all this with a shrug of the shoulders, you turn to the screen and ask out loud: *Why can't we become like Germany? Why can't we have a state?*
 
-This contradiction also feeds another dangerous myth: the hope in "the thief who gets things done".
+This contradiction also feeds another dangerous myth: the hope in “the thief who gets things done”.
 
 For years, Albanian citizens have been sold the idea that it does not matter if a leader steals, as long as he leaves behind a few kilometres of poor-quality asphalt or a few façades painted in shiny colours. But world history knows not a single case of a country that reached lasting prosperity through enlightened thievery. Asphalt laid without standards on foundations of corruption breaks up in the first rain. A hospital built with theft becomes a cold building short of bandages and syringes. And the painted façade soon fades, leaving the real misery behind.
 

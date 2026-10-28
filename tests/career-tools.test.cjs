@@ -9,11 +9,14 @@ const context = {
   document: { querySelector: () => null, getElementById: () => null, currentScript: null },
   TextEncoder, TextDecoder, Blob, Response, DecompressionStream, URL,
 };
-for (const file of ['docx-kit', 'cv-import', 'ats-cv', 'cover-letter']) {
+for (const file of ['docx-kit', 'pdf-kit', 'cv-import', 'ats-cv', 'cover-letter']) {
   vm.runInNewContext(fs.readFileSync(`src/js/${file}.js`, 'utf8'), context);
 }
 const { CvImport, AtsCv, CoverLetter } = context.window;
 const plain = (value) => JSON.parse(JSON.stringify(value));
+// The bytes of a string as the file writes them (WinAnsi): the few characters above 127 that the tests use.
+const WIN = { 0x80: '€', 0x85: '…', 0x91: '‘', 0x92: '’', 0x93: '“', 0x94: '”', 0x95: '•', 0x96: '–', 0x97: '—' };
+const winAnsi = (hex) => [...Buffer.from(hex, 'hex')].map((b) => WIN[b] || String.fromCharCode(b)).join('');
 const atsData = JSON.parse(fs.readFileSync('src/_data/atsCv.json', 'utf8'));
 const builderData = JSON.parse(fs.readFileSync('src/_data/cvBuilder.json', 'utf8'));
 const letterData = JSON.parse(fs.readFileSync('src/_data/coverLetter.json', 'utf8'));
@@ -201,4 +204,125 @@ test('a job line above its own dates is split into title, company and place, and
     ['Shift Lead', 'DHL', 'Frankfurt'], ['Team Leader', 'Zalando', 'Berlin'], ['Dispatcher', 'Hermes', 'Hamburg'],
   ]);
   assert.deepEqual(cv.languages, [{ name: 'German', level: 'B2' }, { name: 'English', level: 'C1' }, { name: 'Albanian', level: 'native' }]);
+});
+
+test('a key word of the ad counts through another word for the same skill, and the required part weighs double', () => {
+  const skills = JSON.parse(fs.readFileSync('src/_data/atsSkills.json', 'utf8'));
+  const stop = atsData.stopwords.split(/\s+/);
+  // Every group holds at least two words, none twice across groups.
+  const seen = new Map();
+  for (const group of skills.groups) {
+    assert.ok(group.length >= 2, group.join(', '));
+    for (const word of group) {
+      assert.ok(!seen.has(word.toLowerCase()), `"${word}" in two groups`);
+      seen.set(word.toLowerCase(), group);
+    }
+  }
+  assert.deepEqual(plain(AtsCv.groupOf('Staplerschein', skills.groups)), plain(AtsCv.groupOf('forklift licence', skills.groups)));
+  assert.equal(AtsCv.groupOf('zebra', skills.groups), null);
+  const cvText = 'Staplerschein seit 2019. Teamleitung von 12 Mitarbeitenden in der Lagerlogistik. Excel-Auswertungen.';
+  assert.deepEqual(plain(AtsCv.findTerm(cvText, 'forklift', skills.groups)), { found: true, via: 'staplerschein' });
+  assert.deepEqual(plain(AtsCv.findTerm(cvText, 'staplerschein', skills.groups)), { found: true, via: null }, 'the word itself first');
+  assert.deepEqual(plain(AtsCv.findTerm(cvText, 'team leader', skills.groups)), { found: true, via: 'teamleiter' }, 'the first word of the group that the CV has');
+  assert.deepEqual(plain(AtsCv.findTerm(cvText, 'sap', skills.groups)), { found: false, via: null });
+  // The parts of an ad: a short heading line opens the required or the optional part; "Excel" in a sentence is no heading.
+  const ad = 'Wir sind ein Logistiker in Frankfurt.\nIhre Aufgaben:\nKommissionierung und Verladung.\nIhr Profil\n- Staplerschein\n- SAP Kenntnisse\n- Teamleitung\nWünschenswert:\n- Englisch\nWir bieten:\nExcel Schulungen und ein nettes Team.';
+  const parts = AtsCv.adParts(ad, skills);
+  assert.match(parts.required, /Staplerschein[\s\S]*Teamleitung/);
+  assert.ok(!parts.required.includes('Englisch') && parts.optional.includes('Englisch'));
+  assert.ok(parts.other.includes('Kommissionierung') && parts.other.includes('Excel Schulungen'));
+  const terms = AtsCv.keywords(ad, stop);
+  const result = AtsCv.match(cvText, terms, skills, ad);
+  const by = Object.fromEntries(result.items.map((item) => [item.term, item]));
+  assert.equal(by.staplerschein.weight, 2);
+  assert.equal(by.sap.weight, 2);
+  assert.equal(by.englisch.weight, 1);
+  assert.equal(by.kommissionierung.weight, 1);
+  assert.ok(result.required >= 3);
+  // Found 2-weight words count double in the score; without any heading every word weighs one.
+  const found = result.items.filter((item) => item.found).reduce((sum, item) => sum + item.weight, 0);
+  const total = result.items.reduce((sum, item) => sum + item.weight, 0);
+  assert.equal(result.score, found / total);
+  const flat = AtsCv.match(cvText, terms, skills, 'Staplerschein und SAP und Teamleitung');
+  assert.ok(flat.items.every((item) => item.weight === 1) && flat.required === 0);
+  // Without the skills file the match is the plain one.
+  assert.deepEqual(plain(AtsCv.findTerm(cvText, 'forklift')), { found: false, via: null });
+});
+
+test('the ATS CV saves as a PDF of its own: the pages of the preview in points, in the standard fonts, with the text readable', () => {
+  const cv = AtsCv.clean(AtsCv.fromBuilder(builderData.examples.de), atsData, 'de');
+  cv.docLang = 'de';
+  cv.font = 'georgia';
+  cv.accent = 'navy';
+  cv.summary += '\n\nZweiter Absatz mit **fett** und Umlauten äöüß, ëç, € 1.000.';
+  const file = AtsCv.pdf(cv, atsData, new Date(2026, 9, 26, 9, 30, 0));
+  const text = Buffer.from(file.bytes).toString('latin1');
+  assert.ok(file.pages >= 1 && file.pages <= 2, `${file.pages} pages`);
+  assert.equal((text.match(/\/Type \/Page\b/g) || []).length, file.pages);
+  assert.match(text, /\/BaseFont \/Times-Roman/, 'Georgia becomes Times');
+  assert.match(text, /\/BaseFont \/Times-Bold/);
+  assert.ok(!text.includes('/BaseFont /Helvetica'), 'no second family');
+  const strings = [...text.matchAll(/<([0-9a-f]+)> Tj/g)].map((m) => winAnsi(m[1]));
+  assert.ok(strings.includes('Elena Marku'), 'the name');
+  assert.ok(strings.includes('PROFIL'), 'the heading in capitals');
+  assert.ok(strings.join(' ').includes('Umlauten äöüß, ëç, € 1.000.'), 'German and Albanian letters and the euro sign, as written');
+  assert.ok(strings.includes('fett '), 'the bold word is a string of its own, with the space after it');
+  assert.ok(strings.includes('03.2022 – heute'), 'the period at the right of the title');
+  assert.ok(strings.includes('Elena Marku · Lebenslauf') && strings.includes(`Seite 1 von ${file.pages}`), 'the footer');
+  // The accent colour draws the name and the rules; the metadata carries the name and the language.
+  assert.match(text, /0.122 0.227 0.373 rg/);
+  assert.match(text, /0.122 0.227 0.373 RG 0.9 w/);
+  assert.match(text, /\/Lang <feff00640065>/);
+  assert.match(text, /\/CreationDate \(D:20261026093000\)/);
+  // Arial maps to Helvetica, and a CV of nothing but a name is one page.
+  const small = AtsCv.clean({ person: { name: 'Nora' } }, atsData, 'en');
+  const one = AtsCv.pdf(small, atsData);
+  assert.equal(one.pages, 1);
+  assert.match(Buffer.from(one.bytes).toString('latin1'), /\/BaseFont \/Helvetica\b/);
+});
+
+test('the ATS CV saves as a JSON Resume and opens one again, its own whole and another tool\'s sections in place', () => {
+  const cv = AtsCv.clean(AtsCv.fromBuilder(builderData.examples.en), atsData, 'en');
+  cv.experience[0].from = '03.2022';
+  cv.experience[0].to = '';
+  cv.extras = [{ title: 'Volunteering', text: 'Red Cross first aider\nSchool mentor' }];
+  const file = plain(AtsCv.toJsonResume(cv));
+  assert.equal(file.basics.name, 'Elena Marku');
+  assert.equal(file.basics.label, cv.person.headline);
+  assert.equal(file.basics.location.city, cv.person.location);
+  assert.equal(file.work[0].position, cv.experience[0].title);
+  assert.equal(file.work[0].name, cv.experience[0].company);
+  assert.equal(file.work[0].startDate, '2022-03', 'the date as the standard writes it');
+  assert.equal(file.work[0].endDate, '');
+  assert.ok(file.work[0].highlights.length >= 2 && file.work[0].highlights.every((line) => !line.includes('**')), 'bullets as plain highlights');
+  assert.deepEqual(file.skills[0].keywords, cv.skills[0].text.split(/\s*,\s*/));
+  assert.equal(file.languages[0].language, cv.languages[0].name);
+  assert.equal(file.meta.stivenCatalyst.highlights, cv.highlights);
+  assert.deepEqual(file.meta.stivenCatalyst.extras, cv.extras);
+  // Opened again: the same CV (the bold marks of the bullets and the summary are the one thing the standard drops).
+  const back = AtsCv.clean(AtsCv.fromJsonResume(file), atsData, 'en');
+  const strip = (value) => JSON.parse(JSON.stringify(value).replace(/\*\*/g, ''));
+  const same = (c) => ({ ...strip({ ...c, jobAd: '', font: '', accent: '' }) });
+  assert.deepEqual(plain(same(back)), plain(same(cv)));
+  // A file from another tool: ISO dates become the CV's, certificates join education, volunteer work becomes a section.
+  const other = {
+    basics: { name: 'Nora Hoxha', label: 'Dispatcher', email: 'nora@example.com', phone: '+355 69 000 0000', location: { city: 'Tirana', region: 'AL' }, summary: 'Plans 80 routes a day.' },
+    work: [{ company: 'Fast Parcels', position: 'Dispatcher', startDate: '2021-06-01', endDate: '2024-02', summary: 'Route planning for 80 vehicles.' }],
+    education: [{ institution: 'University of Tirana', area: 'Economics', studyType: 'Bachelor', startDate: '2014', endDate: '2017', score: '9.1' }],
+    certificates: [{ name: 'ADR', issuer: 'DEKRA', date: '2023-05' }],
+    skills: [{ name: 'Systems', keywords: ['Excel', 'SAP'] }, { name: 'Lean', level: 'Green Belt' }],
+    languages: [{ language: 'Albanian', fluency: 'Native' }],
+    volunteer: [{ organization: 'Red Cross', position: 'First aider', startDate: '2019', summary: 'Weekend shifts.' }],
+  };
+  const nora = AtsCv.clean(AtsCv.fromJsonResume(other), atsData, 'sq');
+  assert.equal(nora.docLang, 'sq', 'no language in the file: the page\'s');
+  assert.equal(nora.person.location, 'Tirana, AL');
+  assert.deepEqual(plain(nora.experience[0]), { title: 'Dispatcher', company: 'Fast Parcels', location: '', from: '06.2021', to: '02.2024', bullets: 'Route planning for 80 vehicles.' });
+  assert.deepEqual(plain(nora.education.map((e) => [e.title, e.school, e.date, e.detail])), [['Bachelor Economics', 'University of Tirana', '2014 – 2017', '9.1'], ['ADR', 'DEKRA', '05.2023', '']]);
+  assert.deepEqual(plain(nora.skills), [{ title: 'Systems', text: 'Excel, SAP' }, { title: 'Lean', text: 'Green Belt' }]);
+  assert.equal(nora.extras[0].title, 'Volunteering');
+  assert.match(nora.extras[0].text, /First aider, Red Cross \| 2019: Weekend shifts\./);
+  assert.equal(AtsCv.fromJsonResume({ hello: 1 }), null);
+  assert.equal(AtsCv.fromJsonResume([]), null);
+  assert.ok(AtsCv.looksJsonResume({ basics: {} }) && !AtsCv.looksJsonResume({ format: 'stiven-catalyst-work' }));
 });

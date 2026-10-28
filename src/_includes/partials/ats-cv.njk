@@ -8,7 +8,7 @@
       <p class="kicker" id="ats-import-title">{{ "Start from your current CV" | t(lang) }}</p>
       <p class="ats-import-lede">{{ "Drop a PDF or Word file here. It is read in this browser and sorted into the fields below; you only fix the details." | t(lang) }}</p>
       <div class="tool-actions">
-        <label class="cv-file button-primary">{{ "Choose a PDF or Word file" | t(lang) }}<input type="file" accept=".pdf,.docx,.doc,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain" data-import-file></label>
+        <label class="cv-file button-primary">{{ "Choose a PDF or Word file" | t(lang) }}<input type="file" accept=".pdf,.docx,.doc,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,.json,application/json" data-import-file></label>
         <button class="button-secondary" type="button" data-act="from-builder" hidden>{{ "Use my CV from the CV Builder" | t(lang) }}</button>
       </div>
       <details class="ats-paste">
@@ -174,13 +174,15 @@
 
   <div class="cv-preview" id="cv-preview" tabindex="-1">
     <div class="cv-toolbar">
-      <button class="button-primary" type="button" data-act="print">{{ "Download PDF" | t(lang) }}</button>
+      <button class="button-primary" type="button" data-act="pdf">{{ "Download PDF" | t(lang) }}</button>
       <button class="button-secondary" type="button" data-act="word">{{ "Word (.docx)" | t(lang) }}</button>
       <details class="cv-more">
         <summary class="button-secondary">{{ "More" | t(lang) }}</summary>
         <div class="cv-more-menu">
+          <button type="button" data-act="print">{{ "Print the preview" | t(lang) }}</button>
           <button type="button" data-act="copy">{{ "Copy as plain text" | t(lang) }}</button>
           <button type="button" data-act="text">{{ "Download as text (.txt)" | t(lang) }}</button>
+          <button type="button" data-act="jsonResume">{{ "Download as JSON Resume (.json)" | t(lang) }}</button>
           <button type="button" data-act="example">{{ "Load an example CV" | t(lang) }}</button>
           <button type="button" data-act="reset">{{ "Start a new CV" | t(lang) }}</button>
         </div>
@@ -220,8 +222,10 @@
 
 <script type="application/json" id="ats-cv-data">{{ cfg | scriptJson | safe }}</script>
 <script type="application/json" id="ats-builder-data">{{ {"examples": cvBuilder.examples, "docLangs": cvBuilder.docLangs} | scriptJson | safe }}</script>
+<script type="application/json" id="ats-skills-data">{{ {"groups": atsSkills.groups, "requirementHeadings": atsSkills.requirementHeadings, "optionalHeadings": atsSkills.optionalHeadings, "otherHeadings": atsSkills.otherHeadings, "offerHeadings": atsSkills.offerHeadings, "notKeywords": atsSkills.notKeywords, "names": atsSkills.names} | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/print-guide.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/docx-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/pdf-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/cv-import.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/ats-cv.js' | assetUrl }}" defer></script>

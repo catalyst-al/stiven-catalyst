@@ -1,0 +1,36 @@
+Running 1 test using 1 worker
+[1A[2K[1/1] [1440px dark] › tests/browser/transitions.spec.mjs:15:1 › a key pressed while the next page arrives raises no error
+[1A[2K  1) [1440px dark] › tests/browser/transitions.spec.mjs:15:1 › a key pressed while the next page arrives raises no error 
+    Error: no script error on any page of the journey
+    expect(received).toEqual(expected) // deep equality
+    - Expected  -  1
+    + Received  + 11
+    - Array []
+    + Array [
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    +   "Transition was aborted because of invalid state. Page already revealed",
+    + ]
+       at fixtures.mjs:21
+      19 |     page.on("pageerror", (error) => errors.push(error.message));
+      20 |     await use(page);
+    > 21 |     expect(errors, "no script error on any page of the journey").toEqual([]);
+         |                                                                  ^
+      22 |   },
+      23 | });
+      24 | export { expect };
+        at Object.page (/home/user/stiven-catalyst/.claude/worktrees/agent-a113fcd2e5a16742e/tests/browser/fixtures.mjs:21:66)
+    Error Context: test-results/browser/transitions-a-key-pressed--de2d0-age-arrives-raises-no-error-1440px-dark/error-context.md
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/transitions-a-key-pressed--de2d0-age-arrives-raises-no-error-1440px-dark/trace.zip
+    Usage:
+        npx playwright show-trace test-results/browser/transitions-a-key-pressed--de2d0-age-arrives-raises-no-error-1440px-dark/trace.zip
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+[1A[2K  1 failed
+    [1440px dark] › tests/browser/transitions.spec.mjs:15:1 › a key pressed while the next page arrives raises no error 

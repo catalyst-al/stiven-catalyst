@@ -25,6 +25,12 @@ burim të hapur (Doggett-i shkruan vetëm "Professor"): u hoq nga faqja 3; (6) P
 origin" dhe për termin "root cause analysis": fjalia e faqes 6 u saktësua; (7) Doggett-i është A. Mark Doggett dhe historia
 e 1943 është në f. 35, jo 34. Për Shqipërinë dhe Gjermaninë nuk u gjet asnjë shifër për përdorimin e diagramës.
 
+Shënim (27 tetor 2026), sipas historisë së git-it: kontrolli i dytë i 11 tetorit u bë para se numri të dilte online.
+Ndryshimet e tij u bënë në degën e punës (commit 3565e02a, 11 tetor 2026) dhe numri hyri në main, nga ku botohet faqja,
+vetëm me bashkimin #177 (7b43e7c3, 11 tetor 2026, ora 20:33): versioni i parë online i ka tashmë. Prandaj këto ndryshime
+nuk kanë shënim korrigjimi dhe nuk e çojnë numrin te `checked.issues` (lib/weekly/common.js). Pas daljes online nuk
+ndryshoi në kontrollin e dytë.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |

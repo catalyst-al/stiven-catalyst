@@ -160,14 +160,15 @@
   const inLast = (date, todayIso, days = 30) => isDate(date) && date <= todayIso && date > addDaysIso(todayIso, -days);
   const rowsOf = (saved) => (isObject(saved) && Array.isArray(saved.rows) ? saved.rows : Array.isArray(saved) ? saved : null);
   const dateOf = (row) => str(row.date).slice(0, 10);
-  // The Waste Log: rows with date, quantity and unitCost; the € of a row is quantity × unitCost.
+  // The Waste Log: rows as waste-log.js saves them, { date, qty, cost (€ per unit), … }; the € of a row is qty × cost,
+  // as the Waste Log itself counts it. A row without a cost is worth nothing here, as there.
   const wasteTotal = (saved, todayIso, days = 30) => {
     const rows = rowsOf(saved);
     if (!rows) return null;
     let total = 0, count = 0;
     rows.forEach((row) => {
       if (!isObject(row) || !inLast(dateOf(row), todayIso, days)) return;
-      const q = amount(row.quantity), u = amount(row.unitCost);
+      const q = amount(row.qty), u = amount(row.cost);
       if (!finite(q) || !finite(u)) return;
       total += q * u;
       count += 1;
@@ -204,7 +205,7 @@
   const root = document.querySelector("[data-cost-of-quality]");
   const dataEl = document.getElementById("cost-of-quality-data");
   if (!root || !dataEl || !window.ToolKit) return;
-  const { LANG, LOCALE, tx, num, pct, euro, el, read, write, loadState, firstVisit, today, panel, stat, focusCard, resultActions, resultLayout, renderOnPause, keepFocus, flash, undoNote, downloadCsv, downloadXlsx, copy } = window.ToolKit;
+  const { LANG, LOCALE, tx, num, pct, euro, el, read, readOwn, write, loadState, firstVisit, today, panel, stat, focusCard, resultActions, resultLayout, renderOnPause, keepFocus, flash, undoNote, downloadCsv, downloadXlsx, copy } = window.ToolKit;
   const CK = window.ChartKit;
   const AS = window.ActionsStore;
   const data = JSON.parse(dataEl.textContent);
@@ -479,8 +480,9 @@
   // Bring in from this browser: the Waste Log and the guest compensation of the last 30 days, read only.
   root.querySelector("[data-import]").addEventListener("click", () => {
     const day = today();
-    const waste = wasteTotal(read(`sc-waste-log${SUFFIX}`, null), day);
-    const comp = complaintsTotal(read(`sc-guest-complaints${SUFFIX}`, null), day);
+    // Read as data: an example either tool holds is not brought in (ToolKit readOwn).
+    const waste = wasteTotal(readOwn(`sc-waste-log${SUFFIX}`, null), day);
+    const comp = complaintsTotal(readOwn(`sc-guest-complaints${SUFFIX}`, null), day);
     const said = [];
     if (waste && waste.total > 0) {
       mergeImport(state.lines, "waste-log", "internal", data.text.wasteLine, waste.total);

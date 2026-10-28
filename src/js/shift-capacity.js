@@ -233,8 +233,8 @@
     return { ph, net, presence, mode: plan.mode, rows, totals, bottleneck, flows, options, status, unrated: rows.filter((r) => !r.rated && r.volume > 0).map((r) => r.name) };
   };
 
-  // The Time Study (js/time-study.js keeps { process, stations: [{ name, elements }], rows: [{ s, e, c, t }] }): the
-  // cycle of each station is the sum of the medians of its timed elements, the standard that tool reports.
+  // The Time Study (js/time-study.js keeps { process, rating, allowance, stations: [{ name, elements }], rows: [{ s, e,
+  // c, t }] }): the observed cycle of each station is the sum of the medians of its timed elements.
   const median = (values) => {
     const s = values.filter(isNum).sort((a, b) => a - b);
     if (!s.length) return null;
@@ -250,6 +250,15 @@
       const seconds = Math.round(timed.reduce((a, b) => a + b, 0) * 1000) / 1000;
       return { index: s, name: text(station?.name).trim(), seconds, timed: timed.length, elements: elements.length, process: text(saved.process).trim() };
     }).filter((station) => station.timed > 0 && station.seconds > 0);
+  };
+
+  // The Time Study's performance rating as a share: its rating in % (1 to 300, a decimal comma allowed), else 100 %, as
+  // in studies saved before it existed. The rate here uses the rated (normal) time, the observed cycle × rating, and
+  // adds this tool's own PF&D allowance; the Time Study's allowance is not added a second time.
+  const studyRating = (saved) => {
+    const raw = isObj(saved) && typeof saved.rating === "string" ? saved.rating.trim().replace(",", ".") : "";
+    const r = raw ? Number(raw) : NaN;
+    return Number.isFinite(r) && r >= 1 && r <= 300 ? r / 100 : 1;
   };
 
   // Rows typed or pasted from a spreadsheet: date, shift, then one volume per forecast unit in the order of the table,
@@ -316,7 +325,7 @@
 
   window.ShiftCapacityMath = {
     EPS, COVER_AT, MODES, up, addDays, mondayOf, weekStart, unitKey, fold, netHours, productiveHours, hoursNeeded, headsNeeded, grossHeads, capacity, takt, uphFromCycle,
-    factorOf, sourceOf, volumeOf, planOf, skillsModel, levelOf, taskFor, qualified, gapOptions, analyseShift, median, studyCycles, parseForecast, exampleState,
+    factorOf, sourceOf, volumeOf, planOf, skillsModel, levelOf, taskFor, qualified, gapOptions, analyseShift, median, studyCycles, studyRating, parseForecast, exampleState,
   };
 
   // The page ---------------------------------------------------------------------------------------------------------
@@ -612,7 +621,9 @@
 
   // A rate from the Time Study in this browser, offered per station; it is used only when the visitor says so.
   const renderStudy = () => {
-    const stations = studyCycles(read(STUDY_KEY, null));
+    const study = read(STUDY_KEY, null);
+    const stations = studyCycles(study);
+    const rating = studyRating(study);
     studyBox.hidden = !stations.length;
     if (!stations.length) return;
     allowanceInput.value = state.allowance;
@@ -622,10 +633,13 @@
     studyList.replaceChildren(...stations.map((station) => {
       const li = el("li", "cp-study-item");
       const name = station.name || cfg.text.station.replace("{n}", station.index + 1);
-      const uph = uphFromCycle(station.seconds, allowance, 1);
+      // The rated (normal) cycle: observed × the Time Study's rating; this tool's allowance goes on top.
+      const seconds = station.seconds * rating;
+      const uph = uphFromCycle(seconds, allowance, 1);
       const what = el("p", "cp-study-what");
-      what.append(el("strong", null, `${station.process ? `${station.process} · ` : ""}${name}`), ` · ${tx("cycle {s}", { s: tx("{n} s", { n: num(station.seconds, 1) }) })}${station.timed < station.elements ? ` · ${tx("{a} of {b} elements timed", { a: station.timed, b: station.elements })}` : ""}`);
-      const formula = el("p", "form-note cp-formula", tx("UPH = 3600 ÷ ({s} s × (1 + {a})) = {uph}", { s: num(station.seconds, 1), a: shareText(allowance), uph: num(uph, 1) }));
+      const rated = rating !== 1 ? ` · ${tx("rated {r}, observed {s}", { r: shareText(rating), s: tx("{n} s", { n: num(station.seconds, 1) }) })}` : "";
+      what.append(el("strong", null, `${station.process ? `${station.process} · ` : ""}${name}`), ` · ${tx("cycle {s}", { s: tx("{n} s", { n: num(seconds, 1) }) })}${rated}${station.timed < station.elements ? ` · ${tx("{a} of {b} elements timed", { a: station.timed, b: station.elements })}` : ""}`);
+      const formula = el("p", "form-note cp-formula", tx("UPH = 3600 ÷ ({s} s × (1 + {a})) = {uph}", { s: num(seconds, 1), a: shareText(allowance), uph: num(uph, 1) }));
       const pick = el("div", "cp-study-pick");
       const id = `cp-study-${station.index}`;
       const label = el("label", "visually-hidden", tx("Use the rate of {station} for", { station: name }));
@@ -643,7 +657,7 @@
       button.addEventListener("click", () => {
         const index = state.processes.findIndex((p) => p.id === select.value);
         const per = value(unitsInput.value, 1);
-        const rate = uphFromCycle(station.seconds, allowance, per > 0 ? per : 1);
+        const rate = uphFromCycle(seconds, allowance, per > 0 ? per : 1);
         if (index < 0 || !rate) return;
         const before = state.processes[index].uph;
         const rounded = String(Math.round(rate * (rate >= 100 ? 1 : 10)) / (rate >= 100 ? 1 : 10));

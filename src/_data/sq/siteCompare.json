@@ -1,5 +1,6 @@
 {
   "storageKey": "sc-site-compare-sq",
+  "minimums": {"damageRate": 1000, "incompleteRate": 1000, "onTime": 30, "oee": 5, "pm": 5, "fiveS": 2, "firstPass": 30, "complaintsPer100": 300},
   "periods": [
     {
       "key": "last7",
@@ -30,32 +31,37 @@
   "kpis": {
     "damageRate": {
       "label": "Përqindja e dëmeve",
-      "detail": "{units} të dëmtuara nga {volume}"
+      "detail": "{units} të dëmtuara nga {volume}",
+      "sample": "{n} njësi"
     },
     "damageUnits": {
       "label": "Njësi të dëmtuara"
     },
     "incompleteRate": {
       "label": "Përqindja e porosive të paplota",
-      "detail": "{units} të paplota nga {volume}"
+      "detail": "{units} të paplota nga {volume}",
+      "sample": "{n} porosi"
     },
     "incompleteUnits": {
       "label": "Porosi të paplota"
     },
     "onTime": {
       "label": "Linjat në kohë",
-      "detail": "{late} me vonesë nga {routes}"
+      "detail": "{late} me vonesë nga {routes}",
+      "sample": "{n} linja"
     },
     "lateRoutes": {
       "label": "Linjat me vonesë"
     },
     "oee": {
       "label": "OEE (të gjitha makineritë)",
-      "detail": "{entries} turne · makineri: {machines}"
+      "detail": "{entries} turne · makineri: {machines}",
+      "sample": "{n} turne"
     },
     "fiveS": {
       "label": "Mesatarja e 5S",
-      "detail": "auditime: {audits}"
+      "detail": "auditime: {audits}",
+      "sample": "{n} auditime"
     },
     "accidents": {
       "label": "Aksidente"
@@ -80,18 +86,21 @@
     },
     "pm": {
       "label": "Zbatimi i mirëmbajtjes parandaluese",
-      "detail": "{onTime} nga {scheduled} në kohë"
+      "detail": "{onTime} nga {scheduled} në kohë",
+      "sample": "{n} detyra të afatit"
     },
     "pmOverdue": {
       "label": "Detyra mirëmbajtjeje me afat të kaluar"
     },
     "firstPass": {
       "label": "Dhoma të kaluara herën e parë",
-      "detail": "{firstPass} nga {first}"
+      "detail": "{firstPass} nga {first}",
+      "sample": "{n} dhoma"
     },
     "complaintsPer100": {
       "label": "Ankesa për 100 net dhome të zëna",
-      "detail": "{complaints} në {nights} net dhome"
+      "detail": "{complaints} në {nights} net dhome",
+      "sample": "{n} net dhome"
     },
     "complaints": {
       "label": "Ankesat e mysafirëve"

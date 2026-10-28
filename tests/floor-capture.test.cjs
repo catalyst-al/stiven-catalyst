@@ -277,7 +277,7 @@ test('the photo control adds, shows and removes photos, and says they stay on th
   const control = w.FloorCapture.attach(w.document.querySelector('#box'), { tool: 'safety-cross', ref: '2026-10-01|Forklift' });
   await wait(w, 20);
   const box = w.document.querySelector('#box');
-  assert.equal(box.querySelector('.fc-photo-note').textContent, 'Photos stay on this device and are not in the saved file.');
+  assert.equal(box.querySelector('.fc-photo-note').textContent, 'Photos stay on this device. The file with all your work takes them along, up to 20 MB.');
   const input = box.querySelector('input[type="file"]');
   assert.equal(input.accept, 'image/*');
   assert.equal(input.getAttribute('capture'), 'environment');
@@ -378,7 +378,7 @@ test('5S Audit: photos of the walk move to the saved audit, and a new audit remo
   assert.ok(questions.length > 10);
   assert.equal(doc.querySelectorAll('[data-questions] .fs-q .fc-photos').length, questions.length, 'every question has the control');
   assert.equal(doc.querySelectorAll('[data-questions] .fc-photo-note').length, 0, 'the note is said once, above the walk');
-  assert.equal(doc.querySelector('.fs-photo-note').textContent, 'Photos stay on this device and are not in the saved file.');
+  assert.equal(doc.querySelector('.fs-photo-note').textContent, 'Photos stay on this device. The file with all your work takes them along, up to 20 MB.');
   const template = doc.querySelector('#fs-template').value;
   // A photo of the first Sort question, taken during the walk.
   const input = doc.querySelector('[data-note="sort-0"]').closest('.fs-q').querySelector('input[type="file"]');

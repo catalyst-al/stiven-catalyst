@@ -21,8 +21,8 @@
     const s = sorted(values);
     return s.length ? quantile(s, 0.5) : null;
   };
-  // The statistics of one element: the median is the standard (one dropped box does not move it), the spread says how
-  // repeatable the work is, the outliers are the cycles more than 1.5 IQR away from the middle half.
+  // The statistics of one element: the median is the observed time (one dropped box does not move it), the spread says
+  // how repeatable the work is, the outliers are the cycles more than 1.5 IQR away from the middle half.
   const stats = (values) => {
     const s = sorted(values);
     if (!s.length) return { n: 0, median: null, mean: null, min: null, max: null, spread: null, sd: null, cv: null, q1: null, q3: null, outliers: [] };
@@ -34,6 +34,10 @@
       outliers: s.filter((v) => v < q1 - 1.5 * iqr - EPS || v > q3 + 1.5 * iqr + EPS),
     };
   };
+  // The standard time of an element: the observed median × the performance rating (the observed pace against a normal
+  // pace, 1 = 100 %) × (1 + the allowance for personal needs, fatigue and unavoidable delay). With the defaults, 100 %
+  // and 0 %, it is the observed median (audit of 27 October 2026, T-23 / P2B-09).
+  const standardTime = (median, rating = 1, allowance = 0) => median * rating * (1 + allowance);
   // The next cycle to time at a station: one more than the highest cycle with a timing there.
   const nextCycle = (rows, s) => rows.filter((row) => row.s === s).reduce((max, row) => Math.max(max, row.c), 0) + 1;
 
@@ -73,8 +77,10 @@
   };
 
   // The whole study: stations [{ name, elements: [{ name, type }] }], rows [{ s, e, c, t }] (station, element, cycle,
-  // seconds) and the takt. Every number the page shows comes from here.
-  const analyse = ({ stations, rows, takt: taktSeconds }) => {
+  // seconds), the takt, the rating and the allowance (shares). Each element keeps its observed median and gets its
+  // standard time; the stations, the operators and the balancing work with the standard times. Every number the page
+  // shows comes from here.
+  const analyse = ({ stations, rows, takt: taktSeconds, rating = 1, allowance = 0 }) => {
     const byType = () => Object.fromEntries(TYPES.map((type) => [type, 0]));
     const outliers = [];
     const stationResults = stations.map((station, s) => {
@@ -83,11 +89,12 @@
         const values = mine.filter((row) => row.e === e).map((row) => row.t);
         const st = stats(values);
         st.outliers.forEach((value) => outliers.push({ station: station.name, element: element.name, value }));
-        return { name: element.name, type: TYPES.includes(element.type) ? element.type : "VA", index: e, ...st, median: st.median ?? 0 };
+        const median = st.median ?? 0;
+        return { name: element.name, type: TYPES.includes(element.type) ? element.type : "VA", index: e, ...st, median, standard: standardTime(median, rating, allowance) };
       });
       const types = byType();
-      elements.forEach((element) => { types[element.type] += element.median; });
-      const total = elements.reduce((sum, element) => sum + element.median, 0);
+      elements.forEach((element) => { types[element.type] += element.standard; });
+      const total = elements.reduce((sum, element) => sum + element.standard, 0);
       // Whole cycles: the sum of a cycle's elements when every element of the station was timed in it.
       const cycles = [...new Set(mine.map((row) => row.c))].sort((a, b) => a - b);
       const cycleTotals = cycles.map((c) => {
@@ -114,10 +121,10 @@
     const efficiency = bottleneck && bottleneck.total > 0 ? sum / (withData.length * bottleneck.total) : null;
     const operators = taktSeconds && sum > 0 ? Math.ceil(sum / taktSeconds - EPS) : null;
     const over = taktSeconds ? stationResults.filter((station) => station.total > taktSeconds + EPS) : [];
-    const moves = taktSeconds ? balance(stationResults.map((station) => ({ name: station.name, elements: station.elements.map((element) => ({ name: element.name, median: element.median, type: element.type })) })), taktSeconds) : [];
+    const moves = taktSeconds ? balance(stationResults.map((station) => ({ name: station.name, elements: station.elements.map((element) => ({ name: element.name, median: element.standard, type: element.type })) })), taktSeconds) : [];
     const observedElements = stationResults.flatMap((station) => station.elements).filter((element) => element.n > 0);
     return {
-      stations: stationResults, sum, types, shares, bottleneck, efficiency, operators, over, moves, outliers, takt: taktSeconds,
+      stations: stationResults, sum, types, shares, bottleneck, efficiency, operators, over, moves, outliers, takt: taktSeconds, rating, allowance,
       cycles: observedElements.length ? { min: Math.min(...observedElements.map((element) => element.n)), max: Math.max(...observedElements.map((element) => element.n)) } : { min: 0, max: 0 },
       unobserved: stationResults.flatMap((station) => station.unobserved.map((name) => `${station.name} · ${name}`)),
       rows: rows.length,
@@ -164,7 +171,7 @@
     return { process: String(example.process || ""), demand: String(example.demand ?? ""), available: String(example.available ?? ""), stations, rows };
   };
 
-  window.TimeStudyMath = { TYPES, takt, median, stats, nextCycle, balance, analyse, parseObservations, fromExample };
+  window.TimeStudyMath = { TYPES, takt, median, stats, standardTime, nextCycle, balance, analyse, parseObservations, fromExample };
 
   // The page ---------------------------------------------------------------------------------------------------------
   const root = document.querySelector("[data-time-study]");
@@ -206,7 +213,8 @@
   // field by field, so nothing damaged can break the page.
   const blankElement = () => ({ name: "", type: "VA" });
   const blankStation = () => ({ name: "", elements: [blankElement()] });
-  const defaults = { process: "", demand: "", available: "", stations: [], rows: [], example: false };
+  // rating and allowance are percentages as typed; blank is 100 % and 0 % (studies saved before they existed load so).
+  const defaults = { process: "", demand: "", available: "", rating: "", allowance: "", stations: [], rows: [], example: false };
   const state = loadState(KEY, defaults);
   state.stations = state.stations.filter(isObject).slice(0, MAX_STATIONS).map((station) => ({
     name: str(station.name).slice(0, 80),
@@ -225,6 +233,9 @@
   const own = () => { state.example = false; };
 
   const taktNow = () => takt(parseNumber(state.available) * 60, parseNumber(state.demand));
+  // The rating as a share (100 % = 1; from 1 to 300 %, else 100 %) and the allowance (0 to 200 %, else 0 %).
+  const ratingNow = () => { const r = parseNumber(state.rating); return String(state.rating).trim() && r >= 1 && r <= 300 ? r / 100 : 1; };
+  const allowanceNow = () => { const a = parseNumber(state.allowance); return String(state.allowance).trim() && a >= 0 && a <= 200 ? a / 100 : 0; };
   const stationName = (s) => state.stations[s]?.name.trim() || tx("Station {n}", { n: s + 1 });
   const elementName = (s, e) => state.stations[s]?.elements[e]?.name.trim() || tx("Element {n}", { n: e + 1 });
   const stationTitle = (s) => `${s + 1} · ${stationName(s)}`;
@@ -584,16 +595,16 @@
 
   // Results --------------------------------------------------------------------------------------------------------------
   const standardRows = (result) => [
-    [tx("Station"), tx("Element"), tx("Type"), "n", tx("Median (s)"), tx("Mean (s)"), tx("Min (s)"), tx("Max (s)"), tx("CV %"), tx("Outliers")],
+    [tx("Station"), tx("Element"), tx("Type"), "n", tx("Median (s)"), tx("Standard time (s)"), tx("Mean (s)"), tx("Min (s)"), tx("Max (s)"), tx("CV %"), tx("Outliers")],
     ...result.stations.flatMap((station) => station.elements.map((element) => [station.name || stationName(station.index), element.name || elementName(station.index, element.index), element.type, element.n,
-      element.n ? Math.round(element.median * 10) / 10 : "", element.n ? Math.round(element.mean * 100) / 100 : "", element.min ?? "", element.max ?? "", element.n ? Math.round(element.cv * 1000) / 10 : "", element.outliers.join(" ")])),
+      element.n ? Math.round(element.median * 10) / 10 : "", element.n ? Math.round(element.standard * 100) / 100 : "", element.n ? Math.round(element.mean * 100) / 100 : "", element.min ?? "", element.max ?? "", element.n ? Math.round(element.cv * 1000) / 10 : "", element.outliers.join(" ")])),
   ];
   // The first moves of the bottleneck: its waste first, then the element moves of the balancing, as plain lines.
   const moveLines = (result) => {
     const lines = [];
     const station = result.over[0] ? result.stations.find((item) => item.total === Math.max(...result.over.map((o) => o.total))) : null;
-    if (station) station.elements.filter((element) => element.type === "W" && element.median > 0).forEach((element) => lines.push({
-      title: tx("Remove waste at {station}: {element} ({t})", { station: station.name || stationName(station.index), element: element.name || elementName(station.index, element.index), t: sec(element.median) }),
+    if (station) station.elements.filter((element) => element.type === "W" && element.standard > 0).forEach((element) => lines.push({
+      title: tx("Remove waste at {station}: {element} ({t})", { station: station.name || stationName(station.index), element: element.name || elementName(station.index, element.index), t: sec(element.standard) }),
       station: station.name || stationName(station.index),
     }));
     result.moves.forEach((move) => lines.push({
@@ -610,21 +621,27 @@
     const lines = [`${data.title} | Stiven Catalyst`, state.process.trim(), ""];
     if (result.takt) lines.push(`${tx("Takt")}: ${sec(result.takt)} (${state.demand} / ${state.available} min)`);
     lines.push(`${tx("Cycles observed")}: ${result.cycles.min === result.cycles.max ? result.cycles.min : `${result.cycles.min}–${result.cycles.max}`} · ${tx("{n} timings", { n: result.rows })}`);
+    lines.push(standardText(result));
     if (result.bottleneck) lines.push(`${tx("Bottleneck")}: ${result.bottleneck.name || stationName(result.bottleneck.index)} ${sec(result.bottleneck.total)}${result.takt ? ` (${result.bottleneck.over > 0 ? "+" : ""}${num(result.bottleneck.over, 1)} s)` : ""}`);
     if (result.operators) lines.push(`${tx("Operators needed")}: ${result.operators} (${sec(result.sum)} / ${sec(result.takt)})`);
     if (result.efficiency) lines.push(`${tx("Line balance")}: ${pct(result.efficiency, 0)}`);
     lines.push(`${typeLabel("VA")} ${pct(result.shares.VA, 0)} · ${typeLabel("NVA")} ${pct(result.shares.NVA, 0)} · ${typeLabel("W")} ${pct(result.shares.W, 0)}`, "");
     result.stations.forEach((station) => {
       lines.push(`${station.name || stationName(station.index)}: ${sec(station.total)}${result.takt ? ` (${station.over > 0 ? "+" : ""}${num(station.over, 1)} s)` : ""}`);
-      station.elements.forEach((element) => lines.push(`  ${element.name || elementName(station.index, element.index)} [${element.type}] ${element.n ? `${sec(element.median)} (n ${element.n}, ${num(element.min, 1)}–${num(element.max, 1)})` : "–"}`));
+      station.elements.forEach((element) => lines.push(`  ${element.name || elementName(station.index, element.index)} [${element.type}] ${element.n ? `${sec(element.standard)} (${tx("Median")} ${num(element.median, 1)}, n ${element.n}, ${num(element.min, 1)}–${num(element.max, 1)})` : "–"}`));
     });
     const moves = moveLines(result);
     if (moves.length) lines.push("", `${tx("First moves")}:`, ...moves.map((move) => `- ${move.title}`));
     return lines.join("\n");
   };
 
+  // What the standard time is made of, said on the page: with 100 % and 0 % it is the observed median.
+  const standardText = (result) => {
+    const formula = tx("Standard time = observed median × rating {rating} × (1 + allowance {allowance}).", { rating: pct(result.rating, 0), allowance: pct(result.allowance, 0) });
+    return result.rating === 1 && result.allowance === 0 ? `${formula} ${tx("At 100 % and 0 % it is the observed median: rate the pace and add the allowance in step 1 before you staff from it.")}` : formula;
+  };
   const renderResults = () => {
-    const result = analyse({ stations: state.stations, rows: state.rows, takt: taktNow() });
+    const result = analyse({ stations: state.stations, rows: state.rows, takt: taktNow(), rating: ratingNow(), allowance: allowanceNow() });
     note.hidden = !state.example;
     results.replaceChildren();
     results.hidden = !state.rows.length;
@@ -654,7 +671,7 @@
     stats.append(stat(tx("Cycles observed"), result.cycles.min === result.cycles.max ? int.format(result.cycles.min) : `${result.cycles.min}–${result.cycles.max}`, tx("per element · {n} timings", { n: int.format(result.rows) })));
     stats.append(stat(tx("Waste"), pct(result.shares.W, 0), tx("{t} per unit · necessary {nva}", { t: sec(result.types.W), nva: pct(result.shares.NVA, 0) })));
 
-    const notes = [];
+    const notes = [el("p", "dl-panel-note ts-standard-note", standardText(result))];
     if (result.cycles.min < 3) notes.push(el("p", "dl-warning", data.advice.fewCycles));
     if (result.unobserved.length) notes.push(el("p", "dl-warning", tx("{n} elements have no timing yet and count as 0 s: {list}.", { n: result.unobserved.length, list: result.unobserved.slice(0, 4).join(", ") + (result.unobserved.length > 4 ? "…" : "") })));
     if (result.outliers.length) notes.push(el("p", "dl-panel-note", tx("{n} timings are outliers (more than 1.5 × IQR from the middle half). They stay in the log and are flagged in the element table; the median is not moved by them.", { n: result.outliers.length })));
@@ -696,13 +713,13 @@
       const addActions = el("button", "button-secondary", tx("Add the balance moves as actions"));
       addActions.type = "button";
       addActions.addEventListener("click", () => {
-        moves.forEach((move) => window.ActionsStore.add({ title: move.title, detail: move.detail || "", source: "time-study", area: move.station, priority: "High", check: tx("Time five cycles again after the change; the station must be under {takt}.", { takt: sec(result.takt) }) }));
+        const sent = window.ActionsStore.addAll(moves.map((move) => ({ title: move.title, detail: move.detail || "", example: state.example === true, source: "time-study", area: move.station, priority: "High", check: tx("Time five cycles again after the change; the station must be under {takt}.", { takt: sec(result.takt) }) })));
         const status = actions.querySelector("[data-actions-status]") || el("p", "form-note ts-actions-status");
         status.dataset.actionsStatus = "";
         status.setAttribute("role", "status");
         const link = el("a", "inline-link", tx("Open the Action Tracker"));
         link.href = window.ActionsStore.trackerUrl().href;
-        status.replaceChildren(tx("Added {n} actions.", { n: moves.length }), " ", link);
+        status.replaceChildren(window.ToolKit.actionsNote(sent), " ", link);
         actions.append(status);
       });
       actions.append(addActions);
@@ -724,9 +741,9 @@
       const colors = {};
       const groups = result.stations.map((station) => ({
         label: station.name || stationName(station.index),
-        parts: station.elements.filter((element) => element.median > 0).map((element) => { const key = keyOf(station, element); colors[key] = typeColor[element.type]; return { key, value: Math.round(element.median * 10) / 10 }; }),
+        parts: station.elements.filter((element) => element.standard > 0).map((element) => { const key = keyOf(station, element); colors[key] = typeColor[element.type]; return { key, value: Math.round(element.standard * 10) / 10 }; }),
       }));
-      const yamazumi = panel(tx("Yamazumi: work per station"), tx("Each column is a station, each block an element at its median time. The dashed line is the takt: a column above it cannot keep up with the demand."));
+      const yamazumi = panel(tx("Yamazumi: work per station"), tx("Each column is a station, each block an element at its standard time. The dashed line is the takt: a column above it cannot keep up with the demand."));
       yamazumi.append(CK.figure(CK.stacked(groups, { keys: Object.keys(colors), colors, title: `${data.title}: Yamazumi`, unit: "s", line: t ? { value: t, label: tx("Takt") } : undefined, format: (v) => num(v, 1) }), { fileName: `${data.csv}-yamazumi` }));
       yamazumi.append(CK.legend(TYPES.map((type) => ({ label: `${type} · ${typeLabel(type)}`, color: typeColor[type] }))));
       panels.push(yamazumi);
@@ -746,13 +763,13 @@
     }
 
     // The element table: the standard times and their spread, outliers flagged.
-    const table = panel(tx("Standard times per element"), tx("The median is the standard. CV is the spread as a share of the mean: under 10 % is repeatable work, over 25 % is a method that changes from cycle to cycle."));
+    const table = panel(tx("Standard times per element"), tx("The median is the observed time; the standard time adds the rating and the allowance. CV is the spread as a share of the mean: under 10 % is repeatable work, over 25 % is a method that changes from cycle to cycle."));
     const wrap = el("div", "dl-table-wrap");
     wrap.tabIndex = 0;
     const tbl = el("table", "dl-table ts-table");
     const thead = el("thead");
     const hr = el("tr");
-    [[tx("Station")], [tx("Element")], [tx("Type")], ["n", "num"], [tx("Median"), "num"], [tx("Mean"), "num"], [tx("Min"), "num"], [tx("Max"), "num"], ["CV", "num"], [tx("Outliers")]].forEach(([text, cls]) => { const th = el("th", cls, text); th.scope = "col"; hr.append(th); });
+    [[tx("Station")], [tx("Element")], [tx("Type")], ["n", "num"], [tx("Median"), "num"], [tx("Standard time"), "num"], [tx("Mean"), "num"], [tx("Min"), "num"], [tx("Max"), "num"], ["CV", "num"], [tx("Outliers")]].forEach(([text, cls]) => { const th = el("th", cls, text); th.scope = "col"; hr.append(th); });
     thead.append(hr);
     const tbody = el("tbody");
     result.stations.forEach((station) => station.elements.forEach((element) => {
@@ -762,8 +779,8 @@
       const typeCell = el("td");
       typeCell.append(el("span", `dl-tag ts-tag-${element.type.toLowerCase()}`, element.type));
       tr.append(typeCell, el("td", "num", int.format(element.n)));
-      if (element.n) tr.append(el("td", "num ts-strong", num(element.median, 1)), el("td", "num", num(element.mean, 1)), el("td", "num", num(element.min, 1)), el("td", "num", num(element.max, 1)), el("td", `num${element.cv > 0.25 ? " ts-high" : ""}`, pct(element.cv, 0)));
-      else tr.append(el("td", "num", "–"), el("td", "num", "–"), el("td", "num", "–"), el("td", "num", "–"), el("td", "num", "–"));
+      if (element.n) tr.append(el("td", "num", num(element.median, 1)), el("td", "num ts-strong", num(element.standard, 1)), el("td", "num", num(element.mean, 1)), el("td", "num", num(element.min, 1)), el("td", "num", num(element.max, 1)), el("td", `num${element.cv > 0.25 ? " ts-high" : ""}`, pct(element.cv, 0)));
+      else tr.append(el("td", "num", "–"), el("td", "num", "–"), el("td", "num", "–"), el("td", "num", "–"), el("td", "num", "–"), el("td", "num", "–"));
       tr.append(el("td", "ts-outliers", element.outliers.length ? `${element.outliers.map((v) => num(v, 1)).join(", ")} ${tx("(outlier)")}` : ""));
       tbody.append(tr);
     }));
@@ -771,7 +788,7 @@
     result.stations.forEach((station) => {
       const tr = el("tr", "ts-total");
       const td = el("td", null, `${station.name || stationName(station.index)} · ${tx("standard work")}`);
-      td.colSpan = 4;
+      td.colSpan = 5;
       tr.append(td, el("td", "num ts-strong", num(station.total, 1)));
       const rest = el("td", null, t ? (station.over > 0 ? tx("{t} above takt", { t: sec(station.over) }) : tx("{t} under takt", { t: sec(-station.over) })) : "");
       rest.colSpan = 5;

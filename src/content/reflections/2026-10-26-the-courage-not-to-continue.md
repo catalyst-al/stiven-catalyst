@@ -29,7 +29,7 @@ People went on working. Managers went on reporting. The board went on believing 
 
 Until the day someone asked a simple question:
 
-"What if we close it?"
+“What if we close it?”
 
 Silence fell in the room.
 
@@ -39,7 +39,7 @@ But because, for the first time, someone had dared to say it.
 
 The manager who had backed the investment leaned back in his chair.
 
-"We've spent too much to pull out now."
+“We've spent too much to pull out now.”
 
 And within that sentence lay the whole problem.
 
@@ -159,7 +159,7 @@ And how many resources are we ready to invest to get that proof?
 
 If there is a clear answer, continuing may be a reasonable decision.
 
-If the answer is constantly "we need a little more time", without defining what must change during that time, then we do not necessarily have a strategy any more.
+If the answer is constantly “we need a little more time”, without defining what must change during that time, then we do not necessarily have a strategy any more.
 
 We have a hope.
 
@@ -319,7 +319,7 @@ And that takes a form of courage far rarer than the enthusiasm of the start.
 
 To stand in front of people and say:
 
-"I believed in this project. We had reasons to try it. But the results and the information we have today no longer support continuing in this form."
+“I believed in this project. We had reasons to try it. But the results and the information we have today no longer support continuing in this form.”
 
 This is not necessarily an admission of incompetence.
 
@@ -393,7 +393,7 @@ It may be the best way of protecting it.
 
 But changing direction also needs proof.
 
-It is not enough to call a failed project a "transformation" and go on funding it without really changing it.
+It is not enough to call a failed project a “transformation” and go on funding it without really changing it.
 
 A new strategy must have a new reasoning.
 

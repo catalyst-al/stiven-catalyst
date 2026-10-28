@@ -660,6 +660,8 @@
       flash(coversStatus, tx("Enter the covers as a whole number."));
       return;
     }
+    // The visitor's own covers: the example leaves first (ToolKit logBook ownWork).
+    book.ownWork();
     if (n > 0) state.covers[date] = n;
     else delete state.covers[date];
     save();

@@ -1,0 +1,672 @@
+
+Running 10 tests using 2 workers
+
+[1A[2K[1/10] [1440px dark] › tests/browser/print.spec.mjs:107:3 › andon: every column of every table is on paper, in English, German and Albanian
+[1A[2K[2/10] [1440px dark] › tests/browser/print.spec.mjs:107:3 › guest-complaints: every column of every table is on paper, in English, German and Albanian
+[1A[2K  1) [1440px dark] › tests/browser/print.spec.mjs:107:3 › andon: every column of every table is on paper, in English, German and Albanian 
+
+    Error: en andon: no table wider than the page
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table 1150px on 717px",[39m
+    [31m+ ][39m
+
+      115 |       const found = await tagTables(page, paper);
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+    > 117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+          |                                                                                ^
+      118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:117:80
+
+    Error: en andon: no table cut by a box
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table in .dl-table-wrap",[39m
+    [31m+ ][39m
+
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+      117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+    > 118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+          |                                                                            ^
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:118:76
+
+    Error: en andon: cells not on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 5[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "th \"ESCALATION LEVEL\"",[39m
+    [31m+   "td \"Supervisor\"",[39m
+    [31m+   "td \"5 Whys\"",[39m
+    [31m+ ][39m
+
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+    > 122 |       expect(missing, `${lang} ${slug}: cells not on paper`).toEqual([]);
+          |                                                              ^
+      123 |       await page.emulateMedia({ media: "screen" });
+      124 |       await page.setViewportSize({ width: 1440, height: 900 });
+      125 |     }
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:122:62
+
+    Error Context: test-results/browser/print-andon-every-column-o-c789f-English-German-and-Albanian-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-andon-every-column-o-c789f-English-German-and-Albanian-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-andon-every-column-o-c789f-English-German-and-Albanian-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/10] [1440px dark] › tests/browser/print.spec.mjs:107:3 › waste-log: every column of every table is on paper, in English, German and Albanian
+[1A[2K  2) [1440px dark] › tests/browser/print.spec.mjs:107:3 › guest-complaints: every column of every table is on paper, in English, German and Albanian 
+
+    Error: en guest-complaints: no table wider than the page
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table 2650px on 717px",[39m
+    [31m+ ][39m
+
+      115 |       const found = await tagTables(page, paper);
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+    > 117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+          |                                                                                ^
+      118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:117:80
+
+    Error: en guest-complaints: cells not on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 9[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "th \"WHAT HAPPENED\"",[39m
+    [31m+   "th \"ACTION TAKEN\"",[39m
+    [31m+   "th \"COMPENSATION\"",[39m
+    [31m+   "th \"STATUS\"",[39m
+    [31m+   "td \"Doors slamming and loud voices in the co\"",[39m
+    [31m+   "td \"None\"",[39m
+    [31m+   "td \"Open · 37.5 h · ✕ past the target\"",[39m
+    [31m+ ][39m
+
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+    > 122 |       expect(missing, `${lang} ${slug}: cells not on paper`).toEqual([]);
+          |                                                              ^
+      123 |       await page.emulateMedia({ media: "screen" });
+      124 |       await page.setViewportSize({ width: 1440, height: 900 });
+      125 |     }
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:122:62
+
+    Error Context: test-results/browser/print-guest-complaints-eve-552f3-English-German-and-Albanian-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-guest-complaints-eve-552f3-English-German-and-Albanian-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-guest-complaints-eve-552f3-English-German-and-Albanian-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/10] [1440px dark] › tests/browser/print.spec.mjs:107:3 › lost-found: every column of every table is on paper, in English, German and Albanian
+[1A[2K  3) [1440px dark] › tests/browser/print.spec.mjs:107:3 › waste-log: every column of every table is on paper, in English, German and Albanian 
+
+    Error: en waste-log: no table wider than the page
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table 1222px on 717px",[39m
+    [31m+ ][39m
+
+      115 |       const found = await tagTables(page, paper);
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+    > 117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+          |                                                                                ^
+      118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:117:80
+
+    Error: en waste-log: cells not on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "th \"NOTE\"",[39m
+    [31m+ ][39m
+
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+    > 122 |       expect(missing, `${lang} ${slug}: cells not on paper`).toEqual([]);
+          |                                                              ^
+      123 |       await page.emulateMedia({ media: "screen" });
+      124 |       await page.setViewportSize({ width: 1440, height: 900 });
+      125 |     }
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:122:62
+
+    Error Context: test-results/browser/print-waste-log-every-colu-6f003-English-German-and-Albanian-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-waste-log-every-colu-6f003-English-German-and-Albanian-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-waste-log-every-colu-6f003-English-German-and-Albanian-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/10] [1440px dark] › tests/browser/print.spec.mjs:107:3 › oee: every column of every table is on paper, in English, German and Albanian
+[1A[2K  4) [1440px dark] › tests/browser/print.spec.mjs:107:3 › lost-found: every column of every table is on paper, in English, German and Albanian 
+
+    Error: en lost-found: no table wider than the page
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table 1461px on 717px",[39m
+    [31m+ ][39m
+
+      115 |       const found = await tagTables(page, paper);
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+    > 117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+          |                                                                                ^
+      118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:117:80
+
+    Error: en lost-found: cells not on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 7[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "th \"STORED IN\"",[39m
+    [31m+   "th \"GUEST\"",[39m
+    [31m+   "th \"STATUS\"",[39m
+    [31m+   "td \"Safe · #123\"",[39m
+    [31m+   "td \"Stored · keep until 2026-10-30\"",[39m
+    [31m+ ][39m
+
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+    > 122 |       expect(missing, `${lang} ${slug}: cells not on paper`).toEqual([]);
+          |                                                              ^
+      123 |       await page.emulateMedia({ media: "screen" });
+      124 |       await page.setViewportSize({ width: 1440, height: 900 });
+      125 |     }
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:122:62
+
+    Error Context: test-results/browser/print-lost-found-every-col-3e85f-English-German-and-Albanian-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-lost-found-every-col-3e85f-English-German-and-Albanian-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-lost-found-every-col-3e85f-English-German-and-Albanian-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[6/10] [1440px dark] › tests/browser/print.spec.mjs:107:3 › energy-tracker: every column of every table is on paper, in English, German and Albanian
+[1A[2K  5) [1440px dark] › tests/browser/print.spec.mjs:107:3 › oee: every column of every table is on paper, in English, German and Albanian 
+
+    Error: en oee: no table wider than the page
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table 817px on 717px",[39m
+    [31m+ ][39m
+
+      115 |       const found = await tagTables(page, paper);
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+    > 117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+          |                                                                                ^
+      118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:117:80
+
+    Error: en oee: no table cut by a box
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table in .dl-table-wrap",[39m
+    [31m+ ][39m
+
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+      117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+    > 118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+          |                                                                            ^
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:118:76
+
+    Error: en oee: cells not on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 4[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "th \"BIGGEST LOSS\"",[39m
+    [31m+   "td \"Breakdowns · 2,465 min\"",[39m
+    [31m+ ][39m
+
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+    > 122 |       expect(missing, `${lang} ${slug}: cells not on paper`).toEqual([]);
+          |                                                              ^
+      123 |       await page.emulateMedia({ media: "screen" });
+      124 |       await page.setViewportSize({ width: 1440, height: 900 });
+      125 |     }
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:122:62
+
+    Error Context: test-results/browser/print-oee-every-column-of--7d49e-English-German-and-Albanian-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-oee-every-column-of--7d49e-English-German-and-Albanian-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-oee-every-column-of--7d49e-English-German-and-Albanian-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[7/10] [1440px dark] › tests/browser/print.spec.mjs:107:3 › sigma-control-chart: every column of every table is on paper, in English, German and Albanian
+[1A[2K  6) [1440px dark] › tests/browser/print.spec.mjs:107:3 › energy-tracker: every column of every table is on paper, in English, German and Albanian 
+
+    Error: en energy-tracker: no table wider than the page
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table 780px on 717px",[39m
+    [31m+ ][39m
+
+      115 |       const found = await tagTables(page, paper);
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+    > 117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+          |                                                                                ^
+      118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:117:80
+
+    Error: en energy-tracker: no table cut by a box
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table in .dl-table-wrap",[39m
+    [31m+ ][39m
+
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+      117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+    > 118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+          |                                                                            ^
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:118:76
+
+    Error: en energy-tracker: cells not on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 4[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "th \"DAYS WITH READINGS\"",[39m
+    [31m+   "td \"112 / 112\"",[39m
+    [31m+ ][39m
+
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+    > 122 |       expect(missing, `${lang} ${slug}: cells not on paper`).toEqual([]);
+          |                                                              ^
+      123 |       await page.emulateMedia({ media: "screen" });
+      124 |       await page.setViewportSize({ width: 1440, height: 900 });
+      125 |     }
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:122:62
+
+    Error Context: test-results/browser/print-energy-tracker-every-c8275-English-German-and-Albanian-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-energy-tracker-every-c8275-English-German-and-Albanian-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-energy-tracker-every-c8275-English-German-and-Albanian-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[8/10] [1440px dark] › tests/browser/print.spec.mjs:107:3 › a3-report: every column of every table is on paper, in English, German and Albanian
+[1A[2K  7) [1440px dark] › tests/browser/print.spec.mjs:107:3 › sigma-control-chart: every column of every table is on paper, in English, German and Albanian 
+
+    Error: en sigma-control-chart: no table wider than the page
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table 924px on 717px",[39m
+    [31m+ ][39m
+
+      115 |       const found = await tagTables(page, paper);
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+    > 117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+          |                                                                                ^
+      118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:117:80
+
+    Error: en sigma-control-chart: no table cut by a box
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table in .dl-table-wrap",[39m
+    [31m+ ][39m
+
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+      117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+    > 118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+          |                                                                            ^
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:118:76
+
+    Error: en sigma-control-chart: cells not on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  -  1[39m
+    [31m+ Received  + 11[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "th \"SIGNAL\"",[39m
+    [31m+   "th \"NOTE\"",[39m
+    [31m+   "td \"27 Oct\"",[39m
+    [31m+   "td \"2,900\"",[39m
+    [31m+   "td \"8\"",[39m
+    [31m+   "td \"0.28%\"",[39m
+    [31m+   "td \"0.18%\"",[39m
+    [31m+   "td \"1.04%\"",[39m
+    [31m+   "td \"Shift (better)\"",[39m
+    [31m+ ][39m
+
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+    > 122 |       expect(missing, `${lang} ${slug}: cells not on paper`).toEqual([]);
+          |                                                              ^
+      123 |       await page.emulateMedia({ media: "screen" });
+      124 |       await page.setViewportSize({ width: 1440, height: 900 });
+      125 |     }
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:122:62
+
+    Error Context: test-results/browser/print-sigma-control-chart--31636-English-German-and-Albanian-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-sigma-control-chart--31636-English-German-and-Albanian-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-sigma-control-chart--31636-English-German-and-Albanian-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  8) [1440px dark] › tests/browser/print.spec.mjs:107:3 › a3-report: every column of every table is on paper, in English, German and Albanian 
+
+    Error: en a3-report: no table wider than the page
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table 960px on 1512px",[39m
+    [31m+ ][39m
+
+      115 |       const found = await tagTables(page, paper);
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+    > 117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+          |                                                                                ^
+      118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:117:80
+
+    Error: en a3-report: no table cut by a box
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 3[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "dl-table in .dl-table-wrap",[39m
+    [31m+ ][39m
+
+      116 |       expect(found.tables, `${lang} ${slug}: a table to print`).toBeGreaterThan(0);
+      117 |       expect.soft(found.wide, `${lang} ${slug}: no table wider than the page`).toEqual([]);
+    > 118 |       expect.soft(found.clipped, `${lang} ${slug}: no table cut by a box`).toEqual([]);
+          |                                                                            ^
+      119 |       const { pages } = await readPdf(browser, await printPdf(page));
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:118:76
+
+    Error: en a3-report: cells not on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 8[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "th \"OWNER\"",[39m
+    [31m+   "th \"DUE DATE\"",[39m
+    [31m+   "th \"STATUS\"",[39m
+    [31m+   "td \"Anna K. (Area Manager)\"",[39m
+    [31m+   "td \"2026-09-15\"",[39m
+    [31m+   "td \"Verified\"",[39m
+    [31m+ ][39m
+
+      120 |       const text = pages.join(" ").replace(/\s+/g, "").toLowerCase();
+      121 |       const missing = found.tags.filter(([tag]) => !text.includes(tag)).map(([, label]) => label);
+    > 122 |       expect(missing, `${lang} ${slug}: cells not on paper`).toEqual([]);
+          |                                                              ^
+      123 |       await page.emulateMedia({ media: "screen" });
+      124 |       await page.setViewportSize({ width: 1440, height: 900 });
+      125 |     }
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:122:62
+
+    Error Context: test-results/browser/print-a3-report-every-colu-e66ad-English-German-and-Albanian-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-a3-report-every-colu-e66ad-English-German-and-Albanian-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-a3-report-every-colu-e66ad-English-German-and-Albanian-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[9/10] [1440px dark] › tests/browser/print.spec.mjs:129:1 › CV Builder: a job with 70 bullet points prints all of them, the last one included
+[1A[2K[10/10] [1440px dark] › tests/browser/print.spec.mjs:153:1 › Management Review: the charts of an issue print drawn, without scrolling to them first
+[1A[2K  9) [1440px dark] › tests/browser/print.spec.mjs:153:1 › Management Review: the charts of an issue print drawn, without scrolling to them first 
+
+    Error: parts of the charts hidden on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  -  1[39m
+    [31m+ Received  + 16[39m
+
+    [32m- Array [][39m
+    [31m+ Array [[39m
+    [31m+   "wk-bar wk-grow",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+   "wk-bar wk-grow",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+   "wk-bar wk-grow is-alert",[39m
+    [31m+   "wk-value wk-pop is-key is-alert",[39m
+    [31m+   "wk-bar wk-grow",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+   "wk-col wk-rise",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+   "wk-col wk-rise",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+   "wk-col wk-rise is-alert",[39m
+    [31m+   "wk-value wk-pop",[39m
+    [31m+ ][39m
+
+      170 |     return out;
+      171 |   });
+    > 172 |   expect(hidden, "parts of the charts hidden on paper").toEqual([]);
+          |                                                         ^
+      173 |   // And the page of the first chart has its bars: coloured ink, not only its caption.
+      174 |   const caption = await page.locator("[data-weekly-chart] figcaption strong").first().innerText();
+      175 |   const { ink } = await readPdf(browser, await printPdf(page), { inkOn: caption.replace(/\s+/g, " ").slice(0, 24) });
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:172:57
+
+    Error Context: test-results/browser/print-Management-Review-th-7a17f-out-scrolling-to-them-first-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-Management-Review-th-7a17f-out-scrolling-to-them-first-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-Management-Review-th-7a17f-out-scrolling-to-them-first-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  10) [1440px dark] › tests/browser/print.spec.mjs:129:1 › CV Builder: a job with 70 bullet points prints all of them, the last one included 
+
+    Error: bullet points on paper
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m70[39m
+    Received: [31m50[39m
+
+      144 |   const text = pages.join("").replace(/\s+/g, "");
+      145 |   const printed = Array.from({ length: 70 }, (_, i) => i + 1).filter((n) => text.includes(`Bulletnumber${n}with`));
+    > 146 |   expect(printed.length, "bullet points on paper").toBe(70);
+          |                                                    ^
+      147 |   expect(text).toContain("FINAL-BULLET-MARKER");
+      148 |   // Nothing runs past its page: no page is marked as too full.
+      149 |   await page.emulateMedia({ media: "screen" });
+        at /home/user/stiven-catalyst/.claude/worktrees/agent-a31af44c167dd6709/tests/browser/print.spec.mjs:146:52
+
+    Error Context: test-results/browser/print-CV-Builder-a-job-wit-b8c02--them-the-last-one-included-1440px-dark/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/browser/print-CV-Builder-a-job-wit-b8c02--them-the-last-one-included-1440px-dark/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/browser/print-CV-Builder-a-job-wit-b8c02--them-the-last-one-included-1440px-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  10 failed
+    [1440px dark] › tests/browser/print.spec.mjs:107:3 › andon: every column of every table is on paper, in English, German and Albanian 
+    [1440px dark] › tests/browser/print.spec.mjs:107:3 › guest-complaints: every column of every table is on paper, in English, German and Albanian 
+    [1440px dark] › tests/browser/print.spec.mjs:107:3 › waste-log: every column of every table is on paper, in English, German and Albanian 
+    [1440px dark] › tests/browser/print.spec.mjs:107:3 › lost-found: every column of every table is on paper, in English, German and Albanian 
+    [1440px dark] › tests/browser/print.spec.mjs:107:3 › oee: every column of every table is on paper, in English, German and Albanian 
+    [1440px dark] › tests/browser/print.spec.mjs:107:3 › energy-tracker: every column of every table is on paper, in English, German and Albanian 
+    [1440px dark] › tests/browser/print.spec.mjs:107:3 › sigma-control-chart: every column of every table is on paper, in English, German and Albanian 
+    [1440px dark] › tests/browser/print.spec.mjs:107:3 › a3-report: every column of every table is on paper, in English, German and Albanian 
+    [1440px dark] › tests/browser/print.spec.mjs:129:1 › CV Builder: a job with 70 bullet points prints all of them, the last one included 
+    [1440px dark] › tests/browser/print.spec.mjs:153:1 › Management Review: the charts of an issue print drawn, without scrolling to them first 

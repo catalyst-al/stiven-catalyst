@@ -51,6 +51,7 @@ window.CoachingCore = (() => {
   const validWorkflow = v => object(v) && WORKFLOW.every(k => text(v[k])) && (v.reviewDate === '' || date(v.reviewDate)) && ['', 'adopt', 'adapt', 'stop'].includes(v.verdict);
   const uniqueIds = rows => new Set(rows.map(r => r.id)).size === rows.length;
   const validProject = (p, version = 2) => object(p) && validId(p.id) && ROLES.includes(p.role) && text(p.title, 200) && p.title.trim() && date(p.created) && date(p.updated) && date(p.deadline) && typeof p.archived === 'boolean'
+    && (p.copyOf === undefined || (typeof p.copyOf === 'string' && /^[0-9a-f]{8}$/.test(p.copyOf)))
     && object(p.brief) && FIELDS.every(k => text(p.brief[k])) && p.brief.goal.trim() && p.brief.measure.trim()
     && object(p.practice) && Object.entries(p.practice).every(([k, v]) => MODULES[p.role].includes(k) && validPractice(v))
     && list(p.actions, validAction) && uniqueIds(p.actions)
@@ -71,7 +72,7 @@ window.CoachingCore = (() => {
   const REVIEW_KEYS = ['date', 'result', 'reviewer'];
   const withReview = (v, keys) => { const out = pick(v, keys); if (object(out.review)) out.review = pick(out.review, REVIEW_KEYS); return out; };
   const known = p => {
-    const out = pick(p, ['id', 'role', 'title', 'created', 'updated', 'deadline', 'archived', 'brief', 'practice', 'actions', 'evidence', 'measurements', 'sessions', 'context', 'workflow', 'delegations', 'simulations']);
+    const out = pick(p, ['id', 'role', 'title', 'created', 'updated', 'deadline', 'archived', 'copyOf', 'brief', 'practice', 'actions', 'evidence', 'measurements', 'sessions', 'context', 'workflow', 'delegations', 'simulations']);
     out.brief = pick(out.brief, FIELDS);
     if (object(out.practice)) out.practice = Object.fromEntries(Object.entries(out.practice).map(([k, v]) => [k, withReview(v, ['situation', 'facts', 'decision', 'verify', 'date', 'review'])]));
     if (Array.isArray(out.actions)) out.actions = out.actions.map(a => withReview(a, ['id', 'text', 'owner', 'due', 'done', 'review']));
@@ -123,15 +124,47 @@ window.CoachingCore = (() => {
     } catch { return 'notSaved'; }
   };
   const exportBackup = state => JSON.stringify({ format: 'stiven-catalyst-coaching', version: 2, exported: new Date().toISOString(), state: migrate(state) }, null, 2);
-  const importBackup = (state, raw) => {
-    if (!validState(state) || typeof raw !== 'string' || raw.length > 5 * 1024 * 1024) throw new Error('invalidBackup');
+  // A project's content without its ids, keys sorted: the same project whatever ids an earlier import gave it.
+  const IDS = new Set(['id', 'actionId', 'previousId', 'copyOf']);
+  const canonical = v => Array.isArray(v) ? `[${v.map(canonical).join(',')}]`
+    : object(v) ? `{${Object.keys(v).filter(k => !IDS.has(k)).sort().map(k => `${JSON.stringify(k)}:${canonical(v[k])}`).join(',')}}`
+      : JSON.stringify(v);
+  // A short hash of the fingerprint (FNV-1a, 32 bit): what a labelled copy remembers of the backup project it came from.
+  const hash = text => { let h = 0x811c9dc5; for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return h.toString(16).padStart(8, '0'); };
+  const fingerprint = p => hash(canonical(known(clone(p))));
+  const BACKUP_BYTES = 5 * 1024 * 1024;
+  const MAX_PROJECTS = 100;
+  // Opening a backup never overwrites current work (a backup may be older): each of its projects is added as a copy
+  // with fresh ids. A project the workspace already holds, ids aside, is not added again, so opening the same file
+  // twice, or a backup of this very workspace, changes nothing. A project changed since the backup stays as it is,
+  // and the backup's version is added once beside it, labelled: options.copyTitle(title, date of the backup) gives its
+  // title, and the copy remembers which backup project it is (copyOf), so the same file opened again still adds
+  // nothing. Errors: backupTooLarge (over 5 MB), tooManyProjects (the new projects would pass 100) and invalidBackup
+  // (anything else).
+  const importBackup = (state, raw, options = {}) => {
+    if (typeof raw === 'string' && raw.length > BACKUP_BYTES) throw new Error('backupTooLarge');
+    if (!validState(state) || typeof raw !== 'string') throw new Error('invalidBackup');
     let backup;
     try { backup = JSON.parse(raw); } catch { throw new Error('invalidBackup'); }
-    if (!object(backup) || backup.format !== 'stiven-catalyst-coaching' || ![1, 2].includes(backup.version) || !validState(backup.state) || backup.version !== backup.state.version || state.projects.length + backup.state.projects.length > 100) throw new Error('invalidBackup');
+    if (!object(backup) || backup.format !== 'stiven-catalyst-coaching' || ![1, 2].includes(backup.version) || !validState(backup.state) || backup.version !== backup.state.version) throw new Error('invalidBackup');
     const next = migrate(state);
-    // Always copy: a backup may be older than current work. Do not overwrite it.
-    for (const original of migrate(backup.state).projects) {
+    const here = new Set(next.projects.flatMap(p => [fingerprint(p), ...(p.copyOf ? [p.copyOf] : [])]));
+    const ids = new Set(next.projects.map(p => p.id));
+    const exported = date(String(backup.exported || '').slice(0, 10)) ? String(backup.exported).slice(0, 10) : '';
+    const incoming = migrate(backup.state).projects.map(p => ({ p, print: fingerprint(p) })).filter(({ print }) => {
+      if (here.has(print)) return false;
+      here.add(print);
+      return true;
+    });
+    if (next.projects.length + incoming.length > MAX_PROJECTS) throw new Error('tooManyProjects');
+    for (const { p: original, print } of incoming) {
       const p = known(clone(original));
+      // The same project, changed here since the backup: the backup's version is a labelled copy.
+      if (ids.has(original.id)) {
+        const label = typeof options.copyTitle === 'function' ? String(options.copyTitle(p.title, exported)) : `${p.title} (${exported || 'backup'})`;
+        p.title = label.length > 200 ? `${label.slice(0, 199)}…` : label;
+        p.copyOf = print;
+      }
       p.id = id();
       const actionIds = new Map();
       for (const a of p.actions) { const old = a.id; a.id = id(); actionIds.set(old, a.id); }
@@ -212,5 +245,5 @@ window.CoachingCore = (() => {
     if (!scenario.nodes[node]) throw new Error('invalidSimulation');
     return node;
   };
-  return { KEY, ROLES, MODULES, FIELDS, WORKFLOW, id, date, today, empty, createProject, validState, migrate, load, save, exportBackup, importBackup, addMeasurement, compare, comparable, progress, nextStep, validSnapshot, addResult, simulationNode, actionStatus };
+  return { KEY, ROLES, MODULES, FIELDS, WORKFLOW, id, date, today, empty, createProject, validState, migrate, load, save, BACKUP_BYTES, exportBackup, importBackup, addMeasurement, compare, comparable, progress, nextStep, validSnapshot, addResult, simulationNode, actionStatus };
 })();

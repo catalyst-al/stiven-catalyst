@@ -48,7 +48,7 @@
   </ol>
   {%- if lang not in (issue.tight or []) %}
   <p class="block-label">{{ W.intro.how }}</p>
-  <div class="wk-legend-box">{% for item in W.legend %}<div><h4>{{ item.h }}</h4><p>{{ item.p }}</p></div>{% endfor %}</div>
+  <div class="wk-legend-box">{% for item in W.legend %}<div><h3>{{ item.h }}</h3><p>{{ item.p }}</p></div>{% endfor %}</div>
   {%- endif %}
 </section>
 {%- elif page.type == "sources" %}
@@ -68,7 +68,9 @@
   <p>{{ W.back.line }}</p>
   <p class="monthly">{{ W.back.all }}</p>
   <p class="url">stivencatalyst.com{{ W.archiveUrl | local(lang) }}</p>
-  <p class="edition">{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }} · Stiven Catalyst</p>
+  {#- The edition line, and under it the colophon: who makes the publication and how (weekly.colophon). #}
+  {%- set C = weekly[lang].colophon %}
+  <p class="edition">{{ W.name }} · {{ L.no }} {{ issue.no }} · {{ I.date }} · Stiven Catalyst<br>{{ C.text }}<br>{{ C.url }}</p>
 </section>
 {%- else %}
 <section class="pg{{ fitClass }}">

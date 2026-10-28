@@ -57,7 +57,8 @@
       const text = n.toLocaleString("en-US", { useGrouping: false, maximumFractionDigits: 10 });
       return decimalComma ? text.replace(".", ",") : text;
     };
-    const get = (name) => unzip(buffer, name).catch(() => "");
+    // A missing part is empty; a file that unpacks past the limits of unzip is refused as a whole.
+    const get = (name) => unzip(buffer, name).catch((error) => { if (error?.message === "zip-size") throw error; return ""; });
     const workbook = await get("xl/workbook.xml");
     const rels = await get("xl/_rels/workbook.xml.rels");
     const targetOf = (id) => (rels.match(new RegExp(`<Relationship\\b[^>]*Id="${id}"[^>]*Target="([^"]+)"`)) || rels.match(new RegExp(`<Relationship\\b[^>]*Target="([^"]+)"[^>]*Id="${id}"`)) || [])[1];
@@ -588,6 +589,7 @@
     } catch (error) {
       say(error.message === "xls" ? tx("Old Excel files (.xls) cannot be read here. In Excel, choose Save as and pick .xlsx or CSV.")
         : error.message === "size" ? tx("This file is larger than 30 MB. Export only the columns and weeks you need.")
+        : error.message === "zip-size" ? tx("This file would unpack to far more than any CV or table holds, so it was not read. It may be damaged; nothing was changed.")
         : error.message === "type" ? tx("Use a CSV, an Excel file (.xlsx) or a text file.")
         : tx("This file could not be read. Save it as CSV or .xlsx and try again, or paste the cells."));
     }

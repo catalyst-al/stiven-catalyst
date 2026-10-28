@@ -23,8 +23,8 @@ Ich habe dieselbe Szene in Büros und Besprechungsräumen gesehen. Wer in der Be
 
 Ich weiß. Ich schreibe das auf einer öffentlichen Website, unter meinem eigenen Namen. Die Ironie ist mir nicht entgangen. Aber Schreiben ist nicht Posieren. Es heißt, aus der Ecke des Raumes Notizen zu machen und sie mit denen zu teilen, die sehen wollen.
 
-In diesem Karneval ist Unsichtbarkeit kein Scheitern. Sie ist ein Platz in der Privatloge, hinter schweren Samtvorhängen, während der Rest der Welt auf der Bühne für einen kurzen Applaus schwitzt. Wenn du dich weigerst, nach den Regeln des Spektakels zu spielen, kann man dich nicht vermessen. Man kann dich nicht verpacken. Und vor allem weiß man nie genau, woher du kommst.
+In diesem Karneval ist Unsichtbarkeit kein Scheitern. Sie ist ein Platz in der Privatloge, hinter schweren Samtvorhängen, während der Rest der Welt auf der Bühne für einen kurzen Applaus schwitzt. Wenn Sie sich weigern, nach den Regeln des Spektakels zu spielen, kann man Sie nicht vermessen. Man kann Sie nicht verpacken. Und vor allem weiß man nie genau, woher Sie kommen.
 
-Also lass sie ihre Teller fotografieren, lass sie ihre Falten retuschieren, lass sie auf die Anerkennung der Welt warten. Du atmest tief durch, genießt in Ruhe deinen Kaffee und lächelst.
+Also sollen sie doch ihre Teller fotografieren, sollen sie ihre Falten retuschieren, sollen sie auf die Anerkennung der Welt warten. Sie aber atmen tief durch, genießen in Ruhe Ihren Kaffee und lächeln.
 
 Es ist wunderbar, ein Geist in einem Raum voller Spiegel zu sein.

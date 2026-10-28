@@ -7,9 +7,9 @@ deck: 'Freedom is not a gift your employer grants you, nor a nicely worded artic
 description: 'A reflection on obedience as a false virtue, on every forced "yes" that takes a piece of your sovereignty and why a calm "no" changes the room.'
 ---
 
-In our everyday culture, obedience has long been raised to the rank of a supreme virtue. From childhood, at school, and later, mercilessly, in the workplace, people are fed the idea that a good employee is one who does not upset anyone, who does not start arguments, who always says "yes" and who measures the worth of his character by his ability to bear in silence every weight that is loaded onto his back.
+In our everyday culture, obedience has long been raised to the rank of a supreme virtue. From childhood, at school, and later, mercilessly, in the workplace, people are fed the idea that a good employee is one who does not upset anyone, who does not start arguments, who always says “yes” and who measures the worth of his character by his ability to bear in silence every weight that is loaded onto his back.
 
-And so, over the years, the word "no" has turned into a kind of frightening taboo. Managers experience it as an unjustifiable rebellion, while the employee experiences it as a fatal risk that could cost him his livelihood, his job or that faint appraisal he barely earned after months of sacrifice.
+And so, over the years, the word “no” has turned into a kind of frightening taboo. Managers experience it as an unjustifiable rebellion, while the employee experiences it as a fatal risk that could cost him his livelihood, his job or that faint appraisal he barely earned after months of sacrifice.
 
 But let us look at this reality with calm eyes and a cool head.
 
@@ -21,15 +21,15 @@ It always starts with small things. A phone call at ten in the evening about a t
 
 In that brief second, a fierce battle takes place inside you. Your conscience tells you that this is not right, that it violates your dignity and the truth of the work. But fear, that bad adviser of survival, whispers hastily: *Do it this time too. Don't be difficult. Say yes and be done with it.*
 
-And you say "yes". You say it under your breath, with a forced smile and a hidden feeling of bitterness in your throat.
+And you say “yes”. You say it under your breath, with a forced smile and a hidden feeling of bitterness in your throat.
 
-But every forced "yes" is not just a compromise with your hours or with the physical fatigue of that day. It is a slow retreat from your sovereignty as a human being. You give up a centimetre today, a metre tomorrow, until the day comes when you find yourself completely occupied by the demands of a system that will never be satisfied.
+But every forced “yes” is not just a compromise with your hours or with the physical fatigue of that day. It is a slow retreat from your sovereignty as a human being. You give up a centimetre today, a metre tomorrow, until the day comes when you find yourself completely occupied by the demands of a system that will never be satisfied.
 
 Because such is the nature of unchecked power: it never stops where morality asks it to; it stops only where it runs into a clear and unshakeable wall.
 
 Learning the art of saying no does not mean becoming arrogant, stubborn or undisciplined. That is the greatest misunderstanding.
 
-Saying "no" with dignity does not require you to shout in the middle of the room, to slam doors or to use the language of anger. Noise and shouting are often signs of insecurity and weakness.
+Saying “no” with dignity does not require you to shout in the middle of the room, to slam doors or to use the language of anger. Noise and shouting are often signs of insecurity and weakness.
 
 The most powerful refusal in human history and in everyday professional life is the one spoken with complete calm, with good manners and with surgical precision. It is the ability to look the other person in the eye and say: *I cannot break this process because it harms the quality of the whole team. I cannot take on these hours because my time for today is over. I cannot accept this treatment because my work is based on mutual respect.*
 

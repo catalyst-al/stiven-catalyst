@@ -219,7 +219,10 @@ test('the plan goes to the Action Tracker once, owned by the trainer, in the pag
   const w = load({ lang: 'de' });
   const doc = w.document;
   click(w, doc.querySelector('[data-send]'));
-  const actions = w.ActionsStore.list();
+  // From the example, the actions arrive as the example's (ActionsStore: example: true); no other tool counts them.
+  assert.equal(w.ActionsStore.list().length, 0);
+  const actions = w.ActionsStore.all();
+  assert.ok(actions.every((a) => a.example === true));
   assert.equal(actions.length, 5);
   assert.ok(actions.every((a) => a.source === 'skills-matrix' && a.due === '2026-11-22'));
   assert.deepEqual([actions[0].title, actions[0].owner, actions[0].priority, actions[0].area], ['Train Arben on Stapler', 'Marco', 'High', 'Team Warenausgang']);
@@ -228,7 +231,7 @@ test('the plan goes to the Action Tracker once, owned by the trainer, in the pag
   assert.equal(new w.URL(doc.querySelector('[data-plan-status] a').href).pathname, '/de/tools/action-tracker/');
   assert.ok(saved(w, 'sc-skills-matrix-de').plan.every((r) => r.sent));
   click(w, doc.querySelector('[data-send]'));
-  assert.equal(w.ActionsStore.list().length, 5, 'each row is sent once');
+  assert.equal(w.ActionsStore.all().length, 5, 'each row is sent once');
   // A row removed with undo, a suggestion that adds nothing new, a row added by hand.
   click(w, doc.querySelector('[data-plan] [data-remove-row]'));
   assert.equal(doc.querySelectorAll('[data-plan] tr').length, 4);

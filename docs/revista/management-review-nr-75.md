@@ -23,6 +23,18 @@ shëndetit mendor në punë, siç thotë njoftimi. Ligji u ndryshua së fundi m�
 teksti i §§ 3–6 është i njëjtë me versionin e 2021, dhe titulli i burimit u përditësua. Numri përshkruan udhëzime, prova
 dhe një ligj; nuk jep këshilla mjekësore dhe as ligjore, dhe e thotë në shënimet e faqeve 3, 7 dhe 8.
 
+Shënim (27 tetor 2026), sipas historisë së git-it: kontrolli i dytë i 11 tetorit u bë para se numri të dilte online.
+Ndryshimet e tij u bënë në degën e punës (commit 6e50b937, 11 tetor 2026) dhe numri hyri në main, nga ku botohet faqja,
+vetëm me bashkimin #177 (7b43e7c3, 11 tetor 2026, ora 20:33): versioni i parë online i ka tashmë. Prandaj këto ndryshime
+nuk kanë shënim korrigjimi dhe nuk e çojnë numrin te `checked.issues` (lib/weekly/common.js). Pas daljes online nuk
+ndryshoi në kontrollin e dytë.
+
+Korrigjim, 27 tetor 2026 (auditimi i 27 tetorit, P5-11). Burimi "Mental health at work (fact sheet)" datohej 2024,
+ndërsa shënimi i faqes 4 përdor versionin e 15 shtatorit 2026 (16% për 2023). U rihap faqja e OBSH-së më 27 tetor: data
+"15 September 2026"; jep 16% për 2023, 12 miliardë ditë, 1 trilion dollarë, listën e rreziqeve me "discrimination and
+exclusion", të pesë përshtatjet e arsyeshme, kthimin në punë me "phased re-entry", punësimin e mbështetur dhe trajnimin
+e menaxherëve. Burimi datohet tani 2026; numri ka një shënim korrigjimi me datë në tri gjuhët.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |

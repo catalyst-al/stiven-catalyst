@@ -21,7 +21,11 @@
     try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
   };
   const write = (value) => {
-    try { localStorage.setItem(KEY, JSON.stringify(value)); } catch { /* storage unavailable */ }
+    // Locked with a PIN (js/work-lock.js): nothing of the visitor's work is written in plain text.
+    if (window.WorkLock?.locked) return;
+    // Storage full, blocked or private: the worksheet stays on the page only, and ToolKit says so once, as in the
+    // other tools.
+    try { localStorage.setItem(KEY, JSON.stringify(value)); } catch { window.ToolKit?.warnNotSaved?.(); }
   };
   const forget = () => {
     try { localStorage.removeItem(KEY); } catch { /* storage unavailable */ }

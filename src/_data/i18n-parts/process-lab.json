@@ -86,7 +86,8 @@
     "This is an example, so you can see what the tool shows. Paste your own measurements and it disappears, or clear it now.": "Das ist ein Beispiel, damit Sie sehen, was das Tool zeigt. Fügen Sie Ihre eigenen Messwerte ein, dann verschwindet es, oder löschen Sie es jetzt.",
     "Raise the Cpk of {name} from {cpk} to 1.33": "Cpk von {name} von {cpk} auf 1,33 anheben",
     "Cpk at least 1.33 over the next 20 measurements.": "Cpk mindestens 1,33 über die nächsten 20 Messwerte.",
-    "Add to actions": "Zu den Maßnahmen"
+    "Add to actions": "Zu den Maßnahmen",
+    "Check the decimal mark: “{token}” can mean {small} or {large}. Read as {read}, the way this page writes numbers ({n} values like it). If that is wrong, paste the values with their decimals or open the page in the language of your spreadsheet.": "Bitte prüfen Sie das Dezimalzeichen: „{token}“ kann {small} oder {large} bedeuten. Gelesen als {read}, so wie diese Seite Zahlen schreibt ({n} Werte dieser Art). Falls das falsch ist, fügen Sie die Werte mit ihren Nachkommastellen ein oder öffnen Sie die Seite in der Sprache Ihrer Tabelle."
   },
   "sq": {
     "Process Lab": "Laboratori i procesit",
@@ -175,6 +176,7 @@
     "This is an example, so you can see what the tool shows. Paste your own measurements and it disappears, or clear it now.": "Ky është një shembull, që të shohësh çfarë tregon mjeti. Ngjit matjet e tua dhe ai zhduket, ose fshije tani.",
     "Raise the Cpk of {name} from {cpk} to 1.33": "Ngrit Cpk-në e {name} nga {cpk} në 1,33",
     "Cpk at least 1.33 over the next 20 measurements.": "Cpk të paktën 1,33 në 20 matjet e ardhshme.",
-    "Add to actions": "Shto te veprimet"
+    "Add to actions": "Shto te veprimet",
+    "Check the decimal mark: “{token}” can mean {small} or {large}. Read as {read}, the way this page writes numbers ({n} values like it). If that is wrong, paste the values with their decimals or open the page in the language of your spreadsheet.": "Kontrollo shenjën dhjetore: „{token}“ mund të jetë {small} ose {large}. U lexua si {read}, siç i shkruan numrat kjo faqe ({n} vlera të tilla). Nëse është gabim, ngjiti vlerat me pjesën dhjetore ose hape faqen në gjuhën e tabelës sate."
   }
 }

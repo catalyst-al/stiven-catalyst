@@ -139,6 +139,69 @@ test('pasting: dates and values, a header, a single line, and a decimal-comma co
   assert.equal(en.decimals([42, 42.4, 39.95]), 2);
 });
 
+// Audit 27 Oct 2026, P2B-01: the English page read "47,2" as 2 (the comma split the line into 47 and 2). The decimal
+// mark now comes from the pasted numbers themselves, in every language; the page's own convention only decides what
+// nothing in the paste can tell, and then the page says so.
+test('pasting: decimal comma and decimal point are read the same in English, German and Albanian', () => {
+  const values = (M, text) => plain(M.parseValues(text).map((p) => p.value));
+  for (const lang of ['en', 'de', 'sq']) {
+    const M = load(lang).ProcessLabMath;
+    const at = `${lang}: `;
+    assert.deepEqual(values(M, '47,2\n48,1\n46,9\n47,5\n48,0'), [47.2, 48.1, 46.9, 47.5, 48], `${at}one decimal-comma value per line`);
+    assert.deepEqual(values(M, '47.2\n48.1\n46.9'), [47.2, 48.1, 46.9], `${at}one decimal-point value per line`);
+    assert.deepEqual(values(M, 'Messwert\r\n47,2\r\n48,1\r\n'), [47.2, 48.1], `${at}an Excel column with its header`);
+    assert.deepEqual(values(M, '47,2 48,1 46,9'), [47.2, 48.1, 46.9], `${at}one line, spaces between`);
+    assert.deepEqual(plain(M.parseValues('14.10.2026\t47,2\n15.10.2026\t48,1')), [{ date: '2026-10-14', value: 47.2 }, { date: '2026-10-15', value: 48.1 }], `${at}Excel rows, date and value`);
+    assert.deepEqual(values(M, '2026-10-14\t47.2\n2026-10-15\t48.1'), [47.2, 48.1], `${at}Excel rows with a decimal point`);
+    assert.deepEqual(values(M, 'Nr;Wert\n1;47,2\n2;48,1'), [47.2, 48.1], `${at}semicolon rows with a decimal comma`);
+    assert.deepEqual(values(M, '1;47.2\n2;48.1'), [47.2, 48.1], `${at}semicolon rows with a decimal point`);
+    assert.deepEqual(values(M, '1.234,5\n987,25'), [1234.5, 987.25], `${at}German thousands`);
+    assert.deepEqual(values(M, '1,234.5\n987.25'), [1234.5, 987.25], `${at}English thousands`);
+    assert.deepEqual(values(M, '1\u00a0234,5\n987,25'), [1234.5, 987.25], `${at}a no-break space as thousands separator`);
+    assert.deepEqual(values(M, 'Point,Minutes\n1,42\n2,43'), [42, 43], `${at}a comma-separated file with a header`);
+    assert.deepEqual(values(M, '2026-10-01,42.4\n2026-10-02,39.9'), [42.4, 39.9], `${at}comma-separated date and value`);
+    // "1,234" alone is either 1.234 or 1234; the other values of the paste settle it, without a warning.
+    assert.deepEqual(values(M, '1,234\n47,25'), [1.234, 47.25], `${at}a decimal comma elsewhere settles it`);
+    assert.deepEqual(values(M, '1,234\n47.25'), [1234, 47.25], `${at}a decimal point elsewhere settles it`);
+    assert.deepEqual(values(M, '1.234\n0,5'), [1234, 0.5], `${at}"1.234" with a decimal comma elsewhere`);
+    assert.equal(M.parseValues('1,234\n47,25').ambiguous, null, `${at}nothing to warn about`);
+    assert.equal(M.parseValues('47,2\n48,1').ambiguous, null, `${at}nothing to warn about`);
+    // Nothing settles it: read as the page writes numbers, and say so.
+    const unclear = M.parseValues('1,234\n2,345\n3,456');
+    assert.deepEqual(plain(unclear.map((p) => p.value)), lang === 'en' ? [1234, 2345, 3456] : [1.234, 2.345, 3.456], `${at}the page's convention`);
+    assert.deepEqual(plain(unclear.ambiguous), { count: 3, token: '1,234', small: 1.234, large: 1234, read: lang === 'en' ? 1234 : 1.234 }, `${at}the warning`);
+    assert.deepEqual(plain(M.parseValues('1.234\n2.345').ambiguous), { count: 2, token: '1.234', small: 1.234, large: 1234, read: lang === 'en' ? 1.234 : 1234 }, `${at}the same with a point`);
+  }
+});
+
+test('pasting on the page: the English page reads a German column and warns when the decimal mark is unclear', () => {
+  const texts = { en: /Check the decimal mark/, de: /Dezimalzeichen/, sq: /shenjën dhjetore/ };
+  for (const lang of ['en', 'de', 'sq']) {
+    const w = load(lang, { page: true });
+    const doc = w.document;
+    const input = doc.querySelector('#pl-values');
+    input.value = '47,2\n48,1\n46,9\n47,5\n48,0\n47,7\n46,8\n47,9';
+    input.dispatchEvent(new w.Event('input', { bubbles: true }));
+    const results = doc.querySelector('[data-results]');
+    assert.equal(results.hidden, false, `${lang}: results`);
+    assert.match(results.textContent, lang === 'en' ? /Mean47\.51/ : /47,51/, `${lang}: the mean is 47.51, not 5`);
+    assert.doesNotMatch(doc.querySelector('[data-values-count]').textContent, texts[lang], `${lang}: no warning for a clear column`);
+    input.value = '1,234\n1,236\n1,229\n1,241';
+    input.dispatchEvent(new w.Event('input', { bubbles: true }));
+    const note = doc.querySelector('[data-values-count]').textContent;
+    assert.match(note, texts[lang], `${lang}: the unclear decimal mark is said`);
+    assert.match(note, /1,234/, `${lang}: with the value it is about`);
+    // The before/after tab uses the same reading and the same warning.
+    const before = doc.querySelector('#pl-before');
+    before.value = '1,234\n1,236\n1,229';
+    before.dispatchEvent(new w.Event('input', { bubbles: true }));
+    const after = doc.querySelector('#pl-after');
+    after.value = '47,2\n48,1\n46,9';
+    after.dispatchEvent(new w.Event('input', { bubbles: true }));
+    assert.match(doc.querySelector('[data-means-out]').textContent, texts[lang], `${lang}: before/after warns too`);
+  }
+});
+
 test('the example sample: 60 loading times around 42, two outliers, a slight drift, not capable', () => {
   const { ProcessLabMath: M } = load();
   const data = read(dataFile('en'));

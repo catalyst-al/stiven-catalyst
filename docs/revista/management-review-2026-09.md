@@ -18,6 +18,17 @@ Të dhënat janë te `src/_data/review.js`, PDF-ja dhe faqet te `src/media/magaz
   sepse ishte shënim kontrolli, jo tekst. Mbeti fjalia e autorit për onboarding-un që do ta kishte ndihmuar.
 - Diagrami Pareto është ilustrim dhe shënohet si i tillë.
 
+## Korrigjimet e 27 tetorit 2026
+
+- Data: botimi doli online më 4 tetor 2026 (`src/_data/online.json`, nga historia e main) dhe mbante datën "Shtator
+  2026", si PDF-ja e autorit. Tani mban "Tetor 2026", muajin kur doli online; arkivi i Management Review e shënon me
+  datë (auditimi i 27 tetorit, P5-02). Adresa (`management-review-2026-09`) nuk ndryshoi, që lidhjet të mos prishen.
+- 40% e PwC-së (faqet 7 dhe 10) është raport i dy normave rritjeje, jo shifër më vete (auditimi, P5-11). Njoftimi për
+  shtyp i PwC-së i 15 qershorit 2026 (PR Newswire, i lexuar më 27 tetor): "Companies operating in the most AI-exposed
+  sectors recorded 34% productivity growth in 2025 relative to 2018 … compared to 24% for the companies least able to
+  use AI"; 34/24 ≈ 1,42. Faqja e PwC-së dhe PDF-ja e gjetjeve kthyen 403. Kartat thonë tani "2018–2025 … 34% kundrejt
+  24%", me ekspozimin sipas sektorit siç e thotë njoftimi; botimi ka një shënim korrigjimi me datë në tri gjuhët.
+
 <!--
 KONTROLLI I FAKTEVE (nuk publikohet)
 

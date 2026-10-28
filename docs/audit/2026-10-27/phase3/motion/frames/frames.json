@@ -1,0 +1,458 @@
+{
+ "date": "2026-10-27T12:58:26.837Z",
+ "a": "http://127.0.0.1:8321",
+ "b": "http://127.0.0.1:8322",
+ "path": "/",
+ "results": [
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "top-0.5s",
+   "differ": 0.11,
+   "differOver8": 0.007,
+   "maxDelta": 28,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "top-2s",
+   "differ": 0.471,
+   "differOver8": 0.015,
+   "maxDelta": 73,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "top-6s",
+   "differ": 0.528,
+   "differOver8": 0.016,
+   "maxDelta": 64,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "planets-6.2s",
+   "differ": 13.454,
+   "differOver8": 1.99,
+   "maxDelta": 221,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "planets-12s",
+   "differ": 12.773,
+   "differOver8": 1.954,
+   "maxDelta": 216,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "seq-00",
+   "differ": 12.679,
+   "differOver8": 1.963,
+   "maxDelta": 214,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "seq-01",
+   "differ": 12.563,
+   "differOver8": 1.966,
+   "maxDelta": 222,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "seq-02",
+   "differ": 12.454,
+   "differOver8": 1.966,
+   "maxDelta": 219,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "seq-03",
+   "differ": 12.357,
+   "differOver8": 1.973,
+   "maxDelta": 208,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "seq-04",
+   "differ": 12.243,
+   "differOver8": 1.963,
+   "maxDelta": 216,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "seq-05",
+   "differ": 12.179,
+   "differOver8": 1.969,
+   "maxDelta": 232,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "seq-06",
+   "differ": 12.118,
+   "differOver8": 1.967,
+   "maxDelta": 215,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "seq-07",
+   "differ": 12.028,
+   "differOver8": 1.98,
+   "maxDelta": 226,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "seq-08",
+   "differ": 11.984,
+   "differOver8": 1.978,
+   "maxDelta": 222,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "dark",
+   "frame": "seq-09",
+   "differ": 11.938,
+   "differOver8": 1.983,
+   "maxDelta": 214,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "light",
+   "frame": "top-0.5s",
+   "differ": 0.11,
+   "differOver8": 0.007,
+   "maxDelta": 28,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "light",
+   "frame": "top-2s",
+   "differ": 0.471,
+   "differOver8": 0.015,
+   "maxDelta": 73,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "light",
+   "frame": "top-6s",
+   "differ": 0.528,
+   "differOver8": 0.016,
+   "maxDelta": 64,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "light",
+   "frame": "planets-6.2s",
+   "differ": 13.448,
+   "differOver8": 1.99,
+   "maxDelta": 221,
+   "sizeMismatch": false
+  },
+  {
+   "width": 390,
+   "theme": "light",
+   "frame": "planets-12s",
+   "differ": 12.768,
+   "differOver8": 1.954,
+   "maxDelta": 216,
+   "sizeMismatch": false
+  },
+  {
+   "width": 768,
+   "theme": "dark",
+   "frame": "top-0.5s",
+   "differ": 2.554,
+   "differOver8": 0.159,
+   "maxDelta": 91,
+   "sizeMismatch": false
+  },
+  {
+   "width": 768,
+   "theme": "dark",
+   "frame": "top-2s",
+   "differ": 5.327,
+   "differOver8": 0.559,
+   "maxDelta": 104,
+   "sizeMismatch": false
+  },
+  {
+   "width": 768,
+   "theme": "dark",
+   "frame": "top-6s",
+   "differ": 5.273,
+   "differOver8": 0.559,
+   "maxDelta": 108,
+   "sizeMismatch": false
+  },
+  {
+   "width": 768,
+   "theme": "dark",
+   "frame": "planets-6.2s",
+   "differ": 13.278,
+   "differOver8": 1.571,
+   "maxDelta": 162,
+   "sizeMismatch": false
+  },
+  {
+   "width": 768,
+   "theme": "dark",
+   "frame": "planets-12s",
+   "differ": 12.705,
+   "differOver8": 1.522,
+   "maxDelta": 179,
+   "sizeMismatch": false
+  },
+  {
+   "width": 768,
+   "theme": "light",
+   "frame": "top-0.5s",
+   "differ": 2.554,
+   "differOver8": 0.159,
+   "maxDelta": 91,
+   "sizeMismatch": false
+  },
+  {
+   "width": 768,
+   "theme": "light",
+   "frame": "top-2s",
+   "differ": 5.327,
+   "differOver8": 0.559,
+   "maxDelta": 104,
+   "sizeMismatch": false
+  },
+  {
+   "width": 768,
+   "theme": "light",
+   "frame": "top-6s",
+   "differ": 5.273,
+   "differOver8": 0.559,
+   "maxDelta": 108,
+   "sizeMismatch": false
+  },
+  {
+   "width": 768,
+   "theme": "light",
+   "frame": "planets-6.2s",
+   "differ": 13.281,
+   "differOver8": 1.571,
+   "maxDelta": 162,
+   "sizeMismatch": false
+  },
+  {
+   "width": 768,
+   "theme": "light",
+   "frame": "planets-12s",
+   "differ": 12.705,
+   "differOver8": 1.522,
+   "maxDelta": 179,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "top-0.5s",
+   "differ": 5.283,
+   "differOver8": 0.179,
+   "maxDelta": 55,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "top-2s",
+   "differ": 9.92,
+   "differOver8": 0.489,
+   "maxDelta": 97,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "top-6s",
+   "differ": 10.356,
+   "differOver8": 0.474,
+   "maxDelta": 93,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "planets-6.2s",
+   "differ": 10.338,
+   "differOver8": 0.469,
+   "maxDelta": 93,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "planets-12s",
+   "differ": 9.779,
+   "differOver8": 0.454,
+   "maxDelta": 78,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "seq-00",
+   "differ": 9.689,
+   "differOver8": 0.451,
+   "maxDelta": 80,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "seq-01",
+   "differ": 9.603,
+   "differOver8": 0.453,
+   "maxDelta": 84,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "seq-02",
+   "differ": 9.515,
+   "differOver8": 0.454,
+   "maxDelta": 87,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "seq-03",
+   "differ": 9.445,
+   "differOver8": 0.46,
+   "maxDelta": 90,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "seq-04",
+   "differ": 9.368,
+   "differOver8": 0.464,
+   "maxDelta": 86,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "seq-05",
+   "differ": 9.294,
+   "differOver8": 0.46,
+   "maxDelta": 92,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "seq-06",
+   "differ": 9.227,
+   "differOver8": 0.46,
+   "maxDelta": 92,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "seq-07",
+   "differ": 9.172,
+   "differOver8": 0.46,
+   "maxDelta": 95,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "seq-08",
+   "differ": 9.137,
+   "differOver8": 0.461,
+   "maxDelta": 91,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "dark",
+   "frame": "seq-09",
+   "differ": 9.068,
+   "differOver8": 0.464,
+   "maxDelta": 102,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "light",
+   "frame": "top-0.5s",
+   "differ": 5.281,
+   "differOver8": 0.178,
+   "maxDelta": 55,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "light",
+   "frame": "top-2s",
+   "differ": 9.919,
+   "differOver8": 0.488,
+   "maxDelta": 97,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "light",
+   "frame": "top-6s",
+   "differ": 10.354,
+   "differOver8": 0.474,
+   "maxDelta": 93,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "light",
+   "frame": "planets-6.2s",
+   "differ": 10.337,
+   "differOver8": 0.468,
+   "maxDelta": 93,
+   "sizeMismatch": false
+  },
+  {
+   "width": 1440,
+   "theme": "light",
+   "frame": "planets-12s",
+   "differ": 9.777,
+   "differOver8": 0.454,
+   "maxDelta": 78,
+   "sizeMismatch": false
+  }
+ ]
+}

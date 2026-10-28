@@ -25,6 +25,12 @@ Transportit (Flyvbjerg & Cowi, 2004), dhe Edinburgun si përdorimin e parë prak
 5 thotë tani "një nga përdorimet e para". Studimi i Buehler-it, Griffin-it dhe Ross-it (1994) me temat e diplomës u
 trajtua te Nr. 44 dhe këtu vetëm përmendet. Për Shqipërinë dhe Gjermaninë nuk u kërkua dhe nuk hyn asnjë shifër.
 
+Shënim (27 tetor 2026), sipas historisë së git-it: kontrolli i dytë i 11 tetorit u bë para se numri të dilte online.
+Ndryshimet e tij u bënë në degën e punës (commit 6e50b937, 11 tetor 2026) dhe numri hyri në main, nga ku botohet faqja,
+vetëm me bashkimin #177 (7b43e7c3, 11 tetor 2026, ora 20:33): versioni i parë online i ka tashmë. Prandaj këto ndryshime
+nuk kanë shënim korrigjimi dhe nuk e çojnë numrin te `checked.issues` (lib/weekly/common.js). Pas daljes online nuk
+ndryshoi në kontrollin e dytë.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |

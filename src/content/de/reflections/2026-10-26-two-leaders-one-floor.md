@@ -3,11 +3,11 @@ title: 'Zwei Vorgesetzte auf demselben Boden: Die Ruhe der Regel gegen das Theat
 date: 2026-10-26
 status: published
 summary: 'Dasselbe Team, dasselbe Lager, zwei völlig verschiedene Schichten. Wer Lärm macht, wirkt leidenschaftlich; wer dem Prozess folgt, hält die Schicht auf den Beinen.'
-deck: 'Der Erfolg einer Schicht misst sich nicht daran, wie viel Lärm du beim Löschen der Brände machst, sondern daran, wie ruhig du ein System baust, in dem die Brände gar nicht erst entstehen.'
+deck: 'Der Erfolg einer Schicht misst sich nicht daran, wie viel Lärm man beim Löschen der Brände macht, sondern daran, wie ruhig man ein System baut, in dem die Brände gar nicht erst entstehen.'
 description: 'Über den Schichtleiter, der dem Prozess folgt, und den Improvisierer, der Brände löscht, und warum der Standard Erfolg wiederholbar macht.'
 ---
 
-Wenn Sie die Wahrheit über ein Unternehmen verstehen wollen, verschwenden Sie keine Zeit mit den Leitbildern, die in den Fluren hängen. Gehen Sie hinunter auf die Fläche, dorthin, wo die Ware bewegt wird, wo Menschen auf den Prozess treffen und wo das Schicksal eines ganzen Tages in der Hand des Schichtleiters liegt.
+Wenn Sie die Wahrheit über ein Unternehmen verstehen wollen, verschwenden Sie keine Zeit mit den Leitbildern, die in den Fluren hängen. Gehen Sie hinunter in die Halle, dorthin, wo die Ware bewegt wird, wo Menschen auf den Prozess treffen und wo das Schicksal eines ganzen Tages in der Hand des Schichtleiters liegt.
 
 Dort sehen Sie oft ein außergewöhnliches Paradox: dieselben Mitarbeiter, dasselbe Lager, dieselben Arbeitsmittel, und doch zwei völlig verschiedene Welten, getrennt nur durch den Schichtwechsel.
 
@@ -25,7 +25,7 @@ Lassen Sie mich das mit dem ganzen Gewicht operativer Erfahrung sagen. **Chaos m
 
 Sehen wir uns an, was diese beiden Modelle mit den Menschen machen, die unter ihnen arbeiten.
 
-Unter dem Schichtleiter, der den Prozess anwendet, gewinnt der Mitarbeiter Sicherheit. Er weiß genau, was von ihm erwartet wird. Er weiß, dass ihn niemand ungerecht anschreien wird, wenn er dem Standard folgt. In dieser Schicht ist kein Platz für persönliche Launen, denn das einzige Gesetz auf der Fläche ist der vereinbarte Prozess. Die Menschen lernen ihr Handwerk, werden professioneller und gehen körperlich müde, aber mit ruhiger Seele nach Hause.
+Unter dem Schichtleiter, der den Prozess anwendet, gewinnt der Mitarbeiter Sicherheit. Er weiß genau, was von ihm erwartet wird. Er weiß, dass ihn niemand ungerecht anschreien wird, wenn er dem Standard folgt. In dieser Schicht ist kein Platz für persönliche Launen, denn das einzige Gesetz in der Halle ist der vereinbarte Prozess. Die Menschen lernen ihr Handwerk, werden professioneller und gehen körperlich müde, aber mit ruhiger Seele nach Hause.
 
 Unter dem Improvisierer lebt der Mitarbeiter in ständiger Angst. Denn wo es keine Regeln gibt, hängt alles von der Laune ab, mit der der Chef an diesem Morgen aufgewacht ist. Was gestern ein Fehler war, ist heute erlaubt; was heute gelobt wird, wird morgen bestraft. Die Mitarbeiter wissen nicht, woran sie sich halten sollen, und lernen deshalb nur eines: zu überleben, indem sie wachsam beobachten, woher beim Chef der Wind weht, und nicht, wo die Arbeit Sorgfalt braucht.
 
