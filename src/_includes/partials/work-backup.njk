@@ -97,11 +97,11 @@
   </div>
 </section>
 <dialog class="wb-dialog" data-work-password-dialog aria-labelledby="wb-password-title">
-  <form method="dialog">
+  <form method="dialog" novalidate>
     <p class="kicker">{{ "All your work in one file" | t(lang) }}</p>
     <h2 id="wb-password-title" data-work-password-title></h2>
     <p class="form-note" data-work-password-help></p>
-    <label class="field"><span>{{ "Password" | t(lang) }}</span><input name="password" type="password" autocomplete="off" minlength="8" required></label>
+    <label class="field"><span>{{ "Password" | t(lang) }}</span><input name="password" type="password" autocomplete="off"></label>
     <label class="field" data-work-password-again><span>{{ "Password again" | t(lang) }}</span><input name="again" type="password" autocomplete="off"></label>
     <div class="tool-actions">
       <button class="button-primary" type="submit">{{ "Continue" | t(lang) }}</button>
