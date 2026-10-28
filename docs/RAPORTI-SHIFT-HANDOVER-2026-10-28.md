@@ -138,3 +138,7 @@ dy identike te dërguesi pa asgjë këtu, dy identike te dërguesi me njërën k
 shfletues, pajisja A me dy "Dock 4 door jams" (Facilities / Maintenance), pajisja B me një të tretën (Lena) dhe një
 turn në historik: pas marrjes tri regjistrime me përgjegjësit dhe afatet e veta, historiku i paprekur plus turni i
 mëparshëm i B-së.
+
+**Verifikimi përfundimtar (28 tetor, pas të dy raundeve të korrigjimeve):** build pa gabim; `npm test` 1346 / 1346;
+`tests/browser/handover-transfer.spec.mjs` 5 teste × 6 projekte = 30 / 30 në Chromium; CI e GitHub-it në commit-in
+përfundimtar të degës (shih PR #364).

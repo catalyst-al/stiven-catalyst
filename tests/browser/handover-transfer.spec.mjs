@@ -292,6 +292,8 @@ test("two issues with the same text but another owner and date are kept apart on
   await B.page.evaluate((state) => localStorage.setItem("sc-shift-handover", JSON.stringify(state)), { current: seed("Lena", [
     { text: "Dock 4 door jams at the top", priority: "Medium", owner: "Lena", due: "2026-10-28", done: false, carried: 1 },
   ]), history });
+  // Reloaded, so the page reads the seeded state (a link to the same page changes only the part after "#").
+  await B.page.reload();
   await B.page.goto(link);
   const box = B.page.locator("[data-incoming]");
   await box.locator("[data-incoming-unlock] [name=code]").fill(code);
