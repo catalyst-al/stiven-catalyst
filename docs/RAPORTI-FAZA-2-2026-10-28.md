@@ -41,7 +41,21 @@ Pa librari të reja, pa server, pa ndryshim të dizajnit. 22 tekste të reja nd�
 
 ## 4. Testimi
 
-TESTET
+Në degë, pas ndryshimit të fundit (`25d85b4f`), me ndërtimin e plotë (`npm run build`, 838 faqe):
+
+| Provë | Rezultat |
+| --- | --- |
+| `npm test` (node --test, 1 355 teste, 9 të reja: tabelat e `pdf-kit`, fleta PDF e dorëzimit në EN/DE/SQ, skedari i vulosur, rrjeta e gabimeve, formatet e të dhënave) | 1 355 kalojnë, 0 dështojnë |
+| `tool-pages.spec.mjs` (177 faqe mjetesh, 3 gjuhë, 1440 px i errët) + `work-backup-sealed.spec.mjs` + `handover-transfer.spec.mjs` (të gjitha projektet) | 35 kalojnë, 0 dështojnë, 6 min |
+| Gjithë suita e shfletuesit (`npx playwright test`) | në CI të këtij PR-i dhe lokalisht para hapjes së PR-it |
+
+Çfarë u gjet dhe u ndreq gjatë provës: shembulli i Site Compare jeton vetëm në kujtesën e faqes (pa çelës `sc-*`), kështu
+spec-i kontrollon mbijetesën e rifreskimit vetëm për atë që ruhet; dialogu i fjalëkalimit kishte `minlength` natyror që
+fshihte mesazhet e vetë skriptit, hiqet (`novalidate`), mesazhet "të paktën 8" dhe "nuk përputhen" dalin tani në çdo
+shfletues njësoj. Provat e para të skripteve në kontekste pa `window.addEventListener` (testet e vjetra në `vm`) kërkuan
+një kontroll `typeof` te rrjeta e gabimeve; asnjë test i vjetër nuk u ndryshua.
+
+Pa ndryshim në `main`, pa merge, pa deploy; CI e PR-it (build + unit + shfletues) është prova e fundit para shqyrtimit.
 
 ## 5. Kufizimet që mbeten
 
