@@ -121,7 +121,88 @@
     }
     return loading;
   };
-  const api = { isWork, toolSlug, readBackup, makeBackup, sound, photosFor, photoLimit: PHOTO_LIMIT };
+  // ---- A work file sealed with a password ----
+  // The same file, encrypted before it leaves the browser: { format, version: 1, exported, salt, iv, data } with the
+  // bytes in base64, AES-GCM 256 under a key from the password (PBKDF2-SHA-256, 310 000 rounds, a random salt), the
+  // format bound as additional data, the JSON gzipped where the browser can (a first byte says so). For a file that
+  // sits in the Downloads of a shared computer or goes by email. Opened with the password it is the plain file again;
+  // a wrong password or a changed byte opens nothing. The same way the PIN seals the tools (js/work-lock.js).
+  const SEALED_FORMAT = "stiven-catalyst-work-sealed";
+  const SEALED_VERSION = 1;
+  const SEAL_ITERATIONS = 310000;
+  const MIN_PASSWORD = 8;
+  const subtle = () => (typeof crypto !== "undefined" && crypto.subtle) || null;
+  const sealAad = () => new TextEncoder().encode(`${SEALED_FORMAT}/${SEALED_VERSION}`);
+  const toB64 = (bytes) => {
+    let binary = "";
+    for (let i = 0; i < bytes.length; i += 0x8000) binary += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    return btoa(binary);
+  };
+  const fromB64 = (text) => Uint8Array.from(atob(text), (ch) => ch.charCodeAt(0));
+  // The bytes through a compression stream. With a limit, the reading stops as soon as the output passes it (a tiny
+  // file that inflates to gigabytes never fills the memory) and throws.
+  const pipeThrough = async (bytes, stream, limit = Infinity) => {
+    const reader = new Blob([bytes]).stream().pipeThrough(stream).getReader();
+    const chunks = [];
+    let total = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.length;
+      if (total > limit) { await reader.cancel().catch(() => {}); throw new Error("too big"); }
+      chunks.push(value);
+    }
+    const out = new Uint8Array(total);
+    let at = 0;
+    for (const chunk of chunks) { out.set(chunk, at); at += chunk.length; }
+    return out;
+  };
+  const sealKey = async (password, salt) => {
+    const base = await subtle().importKey("raw", new TextEncoder().encode(String(password).normalize("NFKC")), "PBKDF2", false, ["deriveKey"]);
+    return subtle().deriveKey({ name: "PBKDF2", salt, iterations: SEAL_ITERATIONS, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+  };
+  const goodPassword = (value) => typeof value === "string" && value.trim().length >= MIN_PASSWORD;
+  const isSealedText = (text) => {
+    try { const file = JSON.parse(text); return Boolean(file) && file.format === SEALED_FORMAT; } catch { return false; }
+  };
+  // The plain file's text sealed: the text of the sealed file.
+  const sealBackupText = async (text, password, now = new Date()) => {
+    const json = new TextEncoder().encode(text);
+    let body = null;
+    if (typeof CompressionStream === "function") {
+      try { body = await pipeThrough(json, new CompressionStream("gzip")); } catch { body = null; }
+    }
+    const plain = new Uint8Array((body || json).length + 1);
+    plain[0] = body ? 1 : 0;
+    plain.set(body || json, 1);
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const key = await sealKey(password, salt);
+    const data = new Uint8Array(await subtle().encrypt({ name: "AES-GCM", iv, additionalData: sealAad() }, key, plain));
+    return `${JSON.stringify({ format: SEALED_FORMAT, version: SEALED_VERSION, exported: now.toISOString(), salt: toB64(salt), iv: toB64(iv), data: toB64(data) })}\n`;
+  };
+  // The plain file's text back, or { error: "invalid" | "wrong" } (a wrong password and a changed byte look the same).
+  const openSealedText = async (text, password) => {
+    let file;
+    try { file = JSON.parse(text); } catch { return { error: "invalid" }; }
+    if (!file || file.format !== SEALED_FORMAT || file.version !== SEALED_VERSION || [file.salt, file.iv, file.data].some((v) => typeof v !== "string")) return { error: "invalid" };
+    let plain;
+    try {
+      const key = await sealKey(password, fromB64(file.salt));
+      plain = new Uint8Array(await subtle().decrypt({ name: "AES-GCM", iv: fromB64(file.iv), additionalData: sealAad() }, key, fromB64(file.data)));
+    } catch {
+      return { error: "wrong" };
+    }
+    try {
+      const body = plain.subarray(1);
+      const json = plain[0] === 1 ? await pipeThrough(body, new DecompressionStream("gzip"), MAX_BYTES) : body;
+      if (json.length > MAX_BYTES) return { error: "invalid" };
+      return { text: new TextDecoder().decode(json), exported: typeof file.exported === "string" ? file.exported : "" };
+    } catch {
+      return { error: "invalid" };
+    }
+  };
+  const api = { isWork, toolSlug, readBackup, makeBackup, sound, photosFor, photoLimit: PHOTO_LIMIT, SEALED_FORMAT, MIN_PASSWORD, goodPassword, isSealedText, sealBackupText, openSealedText };
   window.WorkBackup = api;
 
   const root = document.querySelector("[data-work-backup]");
@@ -164,6 +245,47 @@
   // Locked for a shared computer (js/work-lock.js): the work is in the locked record. A file saved now would hold only
   // what pages wrote since, and one opened now would sit in plain text beside the record.
   const locked = () => Boolean(window.WorkLock?.locked);
+  const sealBox = root.querySelector("[data-work-seal]");
+  const passwordDialog = document.querySelector("[data-work-password-dialog]");
+  // The password, asked in the dialog: twice when sealing, once when opening. Null when the visitor closes it.
+  const askPassword = (mode) => new Promise((resolve) => {
+    if (!passwordDialog || typeof passwordDialog.showModal !== "function") { resolve(null); return; }
+    const form = passwordDialog.querySelector("form");
+    const again = passwordDialog.querySelector("[data-work-password-again]");
+    const error = passwordDialog.querySelector("[data-work-password-error]");
+    passwordDialog.querySelector("[data-work-password-title]").textContent = mode === "seal" ? text.sealTitle : text.unsealTitle;
+    passwordDialog.querySelector("[data-work-password-help]").textContent = mode === "seal" ? text.sealHelp : text.unsealHelp;
+    again.hidden = mode !== "seal";
+    form.elements.password.value = "";
+    form.elements.again.value = "";
+    error.textContent = "";
+    // One way out, whichever way it closes (Continue, Cancel, Esc): every listener goes, the promise settles once.
+    let settled = false;
+    const finish = (value) => {
+      if (settled) return;
+      settled = true;
+      form.removeEventListener("submit", onSubmit);
+      cancel.removeEventListener("click", onCancel);
+      passwordDialog.removeEventListener("close", onClose);
+      if (passwordDialog.open) passwordDialog.close();
+      resolve(value);
+    };
+    const onClose = () => finish(null);
+    const onSubmit = (event) => {
+      event.preventDefault();
+      const password = form.elements.password.value;
+      if (!goodPassword(password)) { error.textContent = fill(text.passwordShort, { n: MIN_PASSWORD }); form.elements.password.focus(); return; }
+      if (mode === "seal" && password !== form.elements.again.value) { error.textContent = text.passwordDiffer; form.elements.again.focus(); return; }
+      finish(password);
+    };
+    const cancel = passwordDialog.querySelector("[data-work-password-cancel]");
+    const onCancel = () => finish(null);
+    form.addEventListener("submit", onSubmit);
+    cancel.addEventListener("click", onCancel);
+    passwordDialog.addEventListener("close", onClose);
+    passwordDialog.showModal();
+    form.elements.password.focus();
+  });
   root.querySelector("[data-work-save]").addEventListener("click", async () => {
     if (locked()) { say(text.locked); return; }
     const backup = makeBackup(storage);
@@ -181,15 +303,26 @@
     if (photos.media.length) backup.media = photos.media;
     const now = new Date();
     const day = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    // Sealed with a password when asked: the file holds nothing readable without it.
+    let content = JSON.stringify(backup);
+    let sealed = false;
+    if (sealBox?.checked) {
+      if (!subtle()) { say(text.sealUnavailable); return; }
+      const password = await askPassword("seal");
+      if (password === null) return;
+      say(text.sealing);
+      try { content = await sealBackupText(content, password, now); } catch { say(text.sealFailed); return; }
+      sealed = true;
+    }
     const link = document.createElement("a");
-    link.href = URL.createObjectURL(new Blob([JSON.stringify(backup)], { type: "application/json" }));
-    link.download = `stiven-catalyst-${day}.json`;
+    link.href = URL.createObjectURL(new Blob([content], { type: "application/json" }));
+    link.download = `stiven-catalyst-${day}${sealed ? ".sealed" : ""}.json`;
     document.body.append(link);
     link.click();
     link.remove();
     setTimeout(() => URL.revokeObjectURL(link.href), 1000);
     say([
-      fill(text.saved, { file: link.download }),
+      fill(sealed ? text.savedSealed : text.saved, { file: link.download }),
       photos.media.length ? fill(text.savedPhotos, { n: photos.media.length }) : "",
       photos.left ? fill(text.photosLeft, { n: photos.left }) : "",
       unread ? text.photosUnread : "",
@@ -206,7 +339,19 @@
       say(text.large);
       return;
     }
-    const backup = readBackup(await file.text());
+    let fileText = await file.text();
+    // A sealed file asks for its password first; then it is the plain file.
+    if (isSealedText(fileText)) {
+      if (!subtle()) { say(text.sealUnavailable); return; }
+      const password = await askPassword("open");
+      if (password === null) return;
+      say(text.opening);
+      const opened = await openSealedText(fileText, password).catch(() => ({ error: "invalid" }));
+      if (opened.error === "wrong") { say(text.wrongPassword); return; }
+      if (opened.error) { say(text.invalid); return; }
+      fileText = opened.text;
+    }
+    const backup = readBackup(fileText);
     if (!backup) {
       say(text.invalid);
       return;

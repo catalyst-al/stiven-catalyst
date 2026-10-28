@@ -151,7 +151,8 @@
       <div class="tool-actions sh-actions">
         <button class="button-primary" type="button" data-copy>{{ "Copy as text" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-send>{{ "Send to the next shift" | t(lang) }}</button>
-        <button class="button-secondary" type="button" data-print>{{ "Print or save as PDF" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-pdf>{{ "Save as PDF" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-print>{{ "Print" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-close>{{ "Close shift, start the next" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-clear>{{ "Clear" | t(lang) }}</button>
       </div>
@@ -215,4 +216,5 @@
 
 <script type="application/json" id="shift-handover-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/pdf-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/shift-handover.js' | assetUrl }}" defer></script>

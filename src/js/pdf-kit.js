@@ -235,6 +235,10 @@ window.PdfKit = (() => {
   };
 
   // ---- A column of blocks laid out over pages ----
+  // A table block: { kind: "table", columns: [{ width, align, bold }], header: [texts], rows: [[cells]], size, leading,
+  // color, headerColor, rule, space }. width is a share of the column (the shares are scaled to fill it); a cell wraps
+  // inside its column; a row is never split between pages; the header row is drawn again at the top of every page
+  // the table runs on to; a hairline (rule, a colour, or null for none) closes each row.
   // Blocks: { kind: "text", runs | text, size, bold, color, leading, space, keep, indent, bullet }
   //         { kind: "row", left, right, size, color, rightColor, space, keep }   a title with a date at the right
   //         { kind: "rule", color, width, space }                                 a line across the column
@@ -260,6 +264,50 @@ window.PdfKit = (() => {
       if (block.kind === "rule") {
         const h = block.width ?? 1;
         return { ...block, lines: [{ height: h, draw: (x, y) => doc.line(x, y + h / 2, x + colWidth, y + h / 2, { color: block.color ?? "#000000", width: h }) }] };
+      }
+      if (block.kind === "table") {
+        const pad = 3;
+        const columns = (block.columns && block.columns.length ? block.columns : (block.header || block.rows?.[0] || []).map(() => ({ width: 1 })));
+        const total = columns.reduce((sum, c) => sum + (c.width || 1), 0);
+        const widths = columns.map((c) => (c.width || 1) / total * colWidth);
+        const cellLines = (cells, bold) => cells.map((cell, i) => wrap([{ text: String(cell ?? ""), bold: Boolean(bold || columns[i]?.bold) }], family, size, Math.max(8, widths[i] - 2 * pad)));
+        const rowLines = (cells, { bold = false, header = false, maxLines = Infinity } = {}) => {
+          const wrapped = cellLines(cells, bold);
+          const count = Math.max(1, ...wrapped.map((lines) => lines.length));
+          // A row is never split between pages, unless it is taller than a page: then it goes on in parts, every
+          // line of every cell drawn, rather than running off the page.
+          if (count <= maxLines) return [rowPart(wrapped, count, { bold, header })];
+          const parts = [];
+          for (let from = 0; from < count; from += maxLines) {
+            const slice = wrapped.map((lines) => lines.slice(from, from + maxLines));
+            parts.push(rowPart(slice, Math.min(maxLines, count - from), { bold, header }));
+          }
+          return parts;
+        };
+        const rowPart = (wrapped, count, { bold = false, header = false } = {}) => {
+          const height = count * leading + 2 * pad;
+          return {
+            height,
+            header,
+            draw: (x, y) => {
+              let at = x;
+              wrapped.forEach((lines, i) => {
+                lines.forEach((line, n) => {
+                  const start = columns[i]?.align === "right" ? at + widths[i] - pad - line.width : at + pad;
+                  let cx = start;
+                  line.segments.forEach((seg) => { doc.text(cx, y + pad + size + n * leading, seg.text, { font: seg.font, size, color: header ? block.headerColor ?? color : color }); cx += seg.width; });
+                });
+                at += widths[i];
+              });
+              const rule = block.rule === undefined ? "#c8c8c8" : block.rule;
+              if (rule) doc.line(x, y + height, x + colWidth, y + height, { color: rule, width: header ? 0.9 : 0.4 });
+            },
+          };
+        };
+        const headerLine = block.header ? rowLines(block.header, { bold: true, header: true })[0] : null;
+        const maxLines = Math.max(1, Math.floor((floor - top - (headerLine ? headerLine.height : 0) - 2 * pad) / leading));
+        const lines = [...(headerLine ? [headerLine] : []), ...(block.rows || []).flatMap((cells) => rowLines(cells, { maxLines }))];
+        return { ...block, lines, repeat: headerLine };
       }
       if (block.kind === "row") {
         const font = fam.bold;
@@ -314,18 +362,30 @@ window.PdfKit = (() => {
         const room = floor - y - gap;
         // Split a long text block where it still fits, at least two lines on either side; never a kept block.
         const fits = block.lines.filter((_, i) => heightOf(block.lines.slice(0, i + 1)) <= room).length;
-        if (!block.keep && block.lines.length > 3 && fits >= 2 && block.lines.length - fits >= 2) {
+        const minimum = block.kind === "table" ? (block.repeat ? 2 : 1) : 2;
+        if (!block.keep && (block.kind === "table" || block.lines.length > 3) && fits >= minimum && block.lines.length - fits >= (block.kind === "table" ? 1 : 2)) {
           let yy = y + gap;
           block.lines.slice(0, fits).forEach((line) => { placed[placed.length - 1].push({ line, x: left, y: yy }); yy += line.height; });
           newPage();
-          block.lines.slice(fits).forEach((line) => { placed[placed.length - 1].push({ line, x: left, y }); y += line.height; });
+          if (block.repeat) { placed[placed.length - 1].push({ line: block.repeat, x: left, y }); y += block.repeat.height; }
+          block.lines.slice(fits).forEach((line) => {
+            if (y + line.height > floor && placed[placed.length - 1].length) {
+              newPage();
+              if (block.repeat) { placed[placed.length - 1].push({ line: block.repeat, x: left, y }); y += block.repeat.height; }
+            }
+            placed[placed.length - 1].push({ line, x: left, y });
+            y += line.height;
+          });
           return;
         }
         newPage();
       }
       y += placed[placed.length - 1].length ? gap : 0;
       block.lines.forEach((line) => {
-        if (y + line.height > floor && placed[placed.length - 1].length) newPage();
+        if (y + line.height > floor && placed[placed.length - 1].length) {
+          newPage();
+          if (block.repeat && line !== block.repeat) { placed[placed.length - 1].push({ line: block.repeat, x: left, y }); y += block.repeat.height; }
+        }
         placed[placed.length - 1].push({ line, x: left, y });
         y += line.height;
       });

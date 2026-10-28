@@ -40,7 +40,8 @@ export default defineConfig({
   projects: widths.flatMap((width) => themes.map((theme) => ({
     name: `${width}px ${theme}`,
     testIgnore: [
-      ...(width === 1440 && theme === "light" ? [] : [/work-backup-photos\.spec\.mjs$/]),
+      ...(width === 1440 && theme === "light" ? [] : [/work-backup-photos\.spec\.mjs$/, /work-backup-sealed\.spec\.mjs$/]),
+      ...(width === 1440 && theme === "dark" ? [] : [/tool-pages\.spec\.mjs$/]),
       ...(width === 390 ? [] : [/chart-labels\.spec\.mjs$/]),
       ...(width === 1440 && theme === "dark" ? [] : [/print\.spec\.mjs$/]),
       ...(width === 1440 ? [] : [/a11y-pages\.spec\.mjs$/]),

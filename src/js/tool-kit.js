@@ -29,6 +29,41 @@ window.ToolKit = (() => {
   })();
   const tx = (text, vars = {}) => (strings[text] ?? text).replace(/\{(\w+)\}/g, (match, name) => (name in vars ? vars[name] : match));
 
+  // A tool script that fails (an error it did not expect, a promise it did not catch) would leave its panel dead
+  // without a word. One notice at the top of the page says so, with what to do: the saved work is untouched, a file
+  // keeps it, a reload starts the tool again. Only errors of this site's own scripts count (an extension's do not),
+  // and only on a tool page; the notice is shown once.
+  let toolFailed = false;
+  const ownScript = (file) => {
+    if (!file) return true;
+    try { return new URL(file, location.href).origin === location.origin; } catch { return false; }
+  };
+  const failedNotice = (event) => {
+    if (toolFailed) return;
+    const file = event?.filename || "";
+    if (event?.type === "error" && !ownScript(file)) return;
+    const main = document.querySelector("main") || document.body;
+    if (!main || !document.querySelector(".tool-panel, [data-work-backup]")) return;
+    toolFailed = true;
+    const box = document.createElement("div");
+    box.className = "tk-save-warning tk-error";
+    box.setAttribute("role", "alert");
+    box.setAttribute("data-tool-error", "");
+    const text = document.createElement("p");
+    text.textContent = tx("This tool hit an error and may not respond. Your saved work is untouched: save it as a file under “All your work in one file”, then reload the page.");
+    const reload = document.createElement("button");
+    reload.type = "button";
+    reload.className = "button-secondary";
+    reload.textContent = tx("Reload the page");
+    reload.addEventListener("click", () => location.reload());
+    box.append(text, reload);
+    main.prepend(box);
+  };
+  if (typeof window.addEventListener === "function") {
+    window.addEventListener("error", failedNotice);
+    window.addEventListener("unhandledrejection", failedNotice);
+  }
+
   // Storage (the tools work without it, for example in a private window).
   const read = (key, fallback) => {
     try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; }
