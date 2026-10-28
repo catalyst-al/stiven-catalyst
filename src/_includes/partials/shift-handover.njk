@@ -130,7 +130,7 @@
           <button class="button-secondary" type="button" data-ack>{{ "Confirm takeover" | t(lang) }}</button>
         </div>
         <div class="sh-ack-code" data-ack-code hidden>
-          <p class="form-note sh-help">{{ "Give the sender this confirmation code, by voice or in your own message. It proves on their device that you took over." | t(lang) }}</p>
+          <p class="form-note sh-help">{{ "Give the sender this confirmation code, by voice or in your own message. Typed on their device, it marks their handover as acknowledged. It is a manual confirmation, not a proof of who you are." | t(lang) }}</p>
           <p class="sh-code" data-ack-code-text aria-live="polite"></p>
           <div class="tool-actions">
             <button class="button-secondary" type="button" data-ack-code-copy>{{ "Copy the code" | t(lang) }}</button>
@@ -138,7 +138,7 @@
           </div>
         </div>
         <form class="sh-verify" data-ack-verify hidden>
-          <p class="form-note sh-help">{{ "When the next shift has taken over on their device, they get a confirmation code. Type it here." | t(lang) }}</p>
+          <p class="form-note sh-help">{{ "When the next shift has taken over on their device, they get a confirmation code. Type it here: a manual confirmation that the handover was opened with its transfer code, not a proof of who did it." | t(lang) }}</p>
           <div class="sh-verify-fields">
             <label class="field"><span>{{ "Confirmation code" | t(lang) }}</span><input name="code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC-DEF" required></label>
             <label class="field"><span>{{ "Confirmed by" | t(lang) }}</span><input name="by" type="text" autocomplete="off"></label>
@@ -168,7 +168,8 @@
           </div>
           <p class="form-note sh-help">{{ "The texts of the issues, the heads-up and the safety note travel as typed: read them once for guests’ names or card details." | t(lang) }}</p>
           <label class="field"><span>{{ "Transfer code" | t(lang) }}</span><input data-send-code type="text" autocomplete="off" autocapitalize="none" spellcheck="false"></label>
-          <p class="form-note sh-help">{{ "Tell the code to the next shift in person or by phone, never in the same message as the link. Keep it: their confirmation code is checked with it." | t(lang) }}</p>
+          <p class="form-note sh-warn-line" data-send-code-warning role="status" hidden></p>
+          <p class="form-note sh-help">{{ "Six words made for you, or a code of your own. Tell it to the next shift in person or by phone, never in the same message as the link." | t(lang) }}</p>
           <div class="tool-actions">
             <button class="button-primary" type="button" data-send-make>{{ "Seal and make the link" | t(lang) }}</button>
             <button class="button-ghost" type="button" data-send-newcode>{{ "New code" | t(lang) }}</button>

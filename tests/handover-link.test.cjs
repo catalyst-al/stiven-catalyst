@@ -89,15 +89,30 @@ test('a handover file holds the same sealed bytes; anything else is not a handov
   }
 });
 
-test('transfer codes: four words of the list when it is there, letters and digits otherwise, at least eight characters', () => {
+test('transfer codes: six words of the list when it is there, letters and digits otherwise, at least eight characters; weak codes are named', () => {
   const words = Link.newPasscode(M.WORDS);
-  assert.match(words, /^[a-z]+-[a-z]+-[a-z]+-[a-z]+$/);
+  assert.equal(Link.PASSCODE_WORDS, 6);
+  assert.match(words, /^[a-z]+(?:-[a-z]+){5}$/);
   assert.ok(words.split('-').every((w) => M.WORDS.includes(w)));
   const letters = Link.newPasscode(null);
-  assert.match(letters, /^[abcdefghjkmnpqrstuvwxyz23456789]{10}$/, 'no 0, 1, i, l or o');
+  assert.match(letters, /^[abcdefghjkmnpqrstuvwxyz23456789]{12}$/, 'no 0, 1, i, l or o');
   assert.notEqual(Link.newPasscode(M.WORDS), words);
   assert.ok(Link.goodPasscode('acid-acorn') && Link.goodPasscode('12345678') && !Link.goodPasscode('1234567') && !Link.goodPasscode('a b c') && !Link.goodPasscode(''));
   assert.equal(Link.normalisePasscode('  Acid-ACORN  acre_acts '), 'acid acorn acre acts');
+  // Weak codes typed by hand, by reason; the generated ones never are.
+  assert.equal(Link.weakPasscode('12345678'), 'sequence');
+  assert.equal(Link.weakPasscode('87654321'), 'sequence');
+  assert.equal(Link.weakPasscode('qwertyuiop'), 'sequence');
+  assert.equal(Link.weakPasscode('abcdefghij'), 'sequence');
+  assert.equal(Link.weakPasscode('20261028'), 'digits');
+  assert.equal(Link.weakPasscode('aaaaaaaaaaaa'), 'repeated');
+  assert.equal(Link.weakPasscode('Password1'), 'common');
+  assert.equal(Link.weakPasscode('handover123'), 'common');
+  assert.equal(Link.weakPasscode('dock4-lena'), 'short');
+  assert.equal(Link.weakPasscode('late-shift-docks-2026'), null);
+  assert.equal(Link.weakPasscode(words), null);
+  assert.equal(Link.weakPasscode(letters), null);
+  assert.equal(Link.weakPasscode(''), null);
 });
 
 test('the confirmation code comes from the transfer id and the code, and only from both', async () => {
@@ -145,9 +160,9 @@ test('the issues of a received handover beside the ones open here: new, the same
     { text: 'Pallet wrap running low', priority: 'Low', owner: 'Lena', due: '', done: false, carried: 0 },
   ];
   const merged = Link.mergeIssues(incoming, here);
-  assert.deepEqual(plain(merged.issues.map((issue) => [issue.text.slice(0, 12), issue.kept, issue.carried])), [['Dock 4 door ', false, 2], ['New temp nee', false, 0], ['Pallet wrap ', true, 0]]);
-  assert.deepEqual([merged.added, merged.same, merged.kept], [1, 1, 1]);
-  assert.deepEqual(plain(Link.mergeIssues(incoming, [])), { issues: incoming.map((issue) => ({ ...issue, kept: false })), added: 2, same: 0, kept: 0 });
+  assert.deepEqual(plain(merged.issues.map((issue) => [issue.text.slice(0, 12), issue.kept, issue.carried, issue.owner])), [['Dock 4 door ', false, 2, 'Maintenance'], ['New temp nee', false, 0, ''], ['Pallet wrap ', true, 0, 'Lena']]);
+  assert.deepEqual([merged.added, merged.same, merged.kept, merged.conflicts], [1, 1, 1, 0]);
+  assert.deepEqual(plain(Link.mergeIssues(incoming, [])), { issues: incoming.map((issue) => ({ ...issue, kept: false, conflicts: [] })), added: 2, same: 0, kept: 0, conflicts: 0 });
   assert.deepEqual(plain(Link.mergeIssues([], []).issues), []);
 });
 
@@ -212,4 +227,102 @@ test('a handover from an old link is shown as text: markup in its fields never b
   assert.equal(w.document.querySelectorAll('img[src="x"]').length + [...w.document.querySelectorAll('script')].filter((s) => s.textContent.includes('pwned')).length, 0, 'no element from the link');
   assert.match(w.document.querySelector('[data-handover]').textContent + [...w.document.querySelectorAll('input, textarea')].map((field) => field.value).join(' '), /<img src=x onerror=/, 'the markup is there as text');
   assert.equal(w.location.hash, '', 'the handover leaves the address once opened');
+});
+
+test('when the same issue differs on the two devices the safer state wins, nothing here is lost, and every difference is named', () => {
+  const priorities = ['High', 'Medium', 'Low'];
+  const here = [
+    { text: 'Dock 4 door jams at the top', priority: 'Medium', owner: 'Maintenance', due: '2026-10-27', done: false, carried: 2 },
+    { text: 'Scanner 7 battery swollen', priority: 'Low', owner: '', due: '', done: false, carried: 0 },
+    { text: 'Label printer 2 out of ribbon', priority: 'Low', owner: 'Lena', due: '2026-10-29', done: false, carried: 0 },
+  ];
+  const incoming = [
+    // Solved there, open here, another owner, another date, a higher priority there.
+    { text: 'Dock 4 door jams at the top', priority: 'High', owner: 'Facilities', due: '2026-10-28', done: true, carried: 0 },
+    // Solved there, open here, no owner or date on either side.
+    { text: 'Scanner 7 battery swollen', priority: 'Low', owner: '', due: '', done: true, carried: 1 },
+    // The sender left the names out: the owner and the date here are kept, the lower priority there loses.
+    { text: 'Label printer 2 out of ribbon', priority: 'Medium', owner: '', due: '', done: false, carried: 0 },
+  ];
+  const merged = plain(Link.mergeIssues(incoming, here, priorities));
+  assert.equal(merged.issues.length, 3);
+  const [dock, scanner, printer] = merged.issues;
+  assert.equal(dock.done, false, 'open here stays open');
+  assert.equal(dock.owner, 'Maintenance', 'the owner here is kept when the two differ');
+  assert.equal(dock.due, '2026-10-27', 'the due date here is kept when the two differ');
+  assert.equal(dock.priority, 'High', 'the higher priority');
+  assert.equal(dock.carried, 2);
+  assert.deepEqual(dock.conflicts, ['solvedThere', 'owner', 'due', 'priority']);
+  assert.equal(scanner.done, false);
+  assert.deepEqual(scanner.conflicts, ['solvedThere']);
+  assert.equal(scanner.carried, 1);
+  assert.equal(printer.done, false);
+  assert.equal(printer.owner, 'Lena', 'a missing owner there does not erase the one here');
+  assert.equal(printer.due, '2026-10-29');
+  assert.equal(printer.priority, 'Medium', 'Medium is higher than Low');
+  assert.deepEqual(printer.conflicts, ['priority']);
+  assert.equal(merged.conflicts, 6);
+  // Solved on both sides: solved. Open there, solved here: it is open again (the sender reopened it), said so by nothing: no conflict kind for it.
+  const both = plain(Link.mergeIssues([{ text: 'A', priority: 'Low', owner: '', due: '', done: true, carried: 0 }], [{ text: 'a', priority: 'Low', owner: '', due: '', done: true, carried: 0 }], priorities));
+  assert.equal(both.issues[0].done, true);
+  assert.deepEqual(both.issues[0].conflicts, []);
+  // Without a priority order, the sender's priority stands and only the difference is named.
+  const unordered = plain(Link.mergeIssues([{ text: 'B', priority: 'Low', owner: '', due: '', done: false, carried: 0 }], [{ text: 'B', priority: 'High', owner: '', due: '', done: false, carried: 0 }]));
+  assert.equal(unordered.issues[0].priority, 'Low');
+  assert.deepEqual(unordered.issues[0].conflicts, ['priority']);
+});
+
+test('a state saved by the version before this one loads unchanged, and taking over keeps the history as it was', { skip: !fs.existsSync('_site/tools/shift-handover/index.html') }, async () => {
+  const { JSDOM } = require('jsdom');
+  const CODE = 'acid-acorn-acre-acts-afar-affix';
+  // As the version before wrote it: no shared, ack, received, no received list.
+  const older = { template: 'hotel', date: '2026-10-25', shift: 'Night', area: 'Front office', from: 'Besa', to: 'Dritan', ackAt: '2026-10-26T06:10:00.000Z',
+    metrics: [['Arrivals', '42', ''], ['No-shows', '2', 'both prepaid']], issues: [{ text: 'Room 1204 safe does not lock', priority: 'High', owner: 'Maintenance', due: '2026-10-26', done: false, carried: 1 }],
+    headsUp: 'Group of 30 arrives 15:00.', safety: '', checks: [true, false, true, true, false, true] };
+  const legacy = { current: { ...older, date: '2026-10-26', shift: 'Early', from: 'Dritan', to: '', ackAt: '', issues: [{ text: 'Room 1204 safe does not lock', priority: 'High', owner: 'Maintenance', due: '2026-10-26', done: false, carried: 2 }] },
+    history: [{ closedAt: '2026-10-26T06:12:00.000Z', handover: older, text: 'Shift handover | Front office\n…' }] };
+  const open = async (hash = '') => {
+    const html = fs.readFileSync('_site/tools/shift-handover/index.html', 'utf8').replace(/<script\b[^>]*\bsrc=[^>]*><\/script>/g, '');
+    const dom = new JSDOM(html, { url: `https://example.test/tools/shift-handover/${hash}`, runScripts: 'outside-only', pretendToBeVisual: true });
+    const w = dom.window;
+    Object.assign(w, { CompressionStream, DecompressionStream, Blob, Response, TextEncoder, TextDecoder, crypto: globalThis.crypto });
+    w.HTMLElement.prototype.scrollIntoView = () => {};
+    w.confirm = () => true;
+    w.localStorage.setItem('sc-shift-handover', JSON.stringify(legacy));
+    for (const file of ['tool-kit', 'shift-handover']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+    return w;
+  };
+  // Loaded: the saved handover and the history read back as they were, the new records empty.
+  const w1 = await open();
+  const loaded = JSON.parse(w1.localStorage.getItem('sc-shift-handover'));
+  assert.deepEqual({ ...loaded.current, shared: undefined, ack: undefined, received: undefined }, { ...legacy.current, shared: undefined, ack: undefined, received: undefined });
+  assert.deepEqual(loaded.current.shared, []);
+  assert.equal(loaded.current.ack, null);
+  assert.equal(loaded.current.received, null);
+  assert.deepEqual(loaded.history.map((entry) => [entry.closedAt, entry.text, entry.handover.from, entry.handover.ackAt]), [['2026-10-26T06:12:00.000Z', 'Shift handover | Front office\n…', 'Besa', '2026-10-26T06:10:00.000Z']]);
+  assert.deepEqual(loaded.received, []);
+  assert.equal(w1.document.querySelector('[name=from]').value, 'Dritan');
+  // A sealed handover taken over: the old history entry is untouched, the current one joins it, the open issue here is kept with its carry count.
+  const sealed = await Link.packHandover({ template: 'hotel', date: '2026-10-26', shift: 'Early', area: 'Front office', from: '', to: '', metrics: [['Arrivals', '12', '']], issues: [{ text: 'Room 1204 safe does not lock', priority: 'Low', owner: '', due: '', done: true, carried: 0 }, { text: 'Lift B out of order', priority: 'High', owner: '', due: '', done: false, carried: 0 }], headsUp: '', safety: '', checks: [] }, CODE, { id: 'legacy-test-1' });
+  const w2 = await open(`#${sealed.fragment}`);
+  const box = w2.document.querySelector('[data-incoming]');
+  for (let i = 0; i < 100 && box.hidden; i++) await new Promise((r) => setTimeout(r, 10));
+  const unlock = box.querySelector('[data-incoming-unlock]');
+  unlock.elements.code.value = CODE;
+  unlock.dispatchEvent(new w2.Event('submit', { bubbles: true, cancelable: true }));
+  const preview = box.querySelector('[data-incoming-preview]');
+  for (let i = 0; i < 300 && preview.hidden; i++) await new Promise((r) => setTimeout(r, 20));
+  assert.equal(preview.hidden, false, 'opened with the code');
+  assert.match(preview.querySelector('.has-conflict .sh-conflict').textContent, /solved there, still open here/);
+  box.querySelector('[data-incoming-open]').click();
+  await new Promise((r) => setTimeout(r, 20));
+  const after = JSON.parse(w2.localStorage.getItem('sc-shift-handover'));
+  assert.equal(after.history.length, 2);
+  assert.deepEqual(after.history[1], loaded.history[0], 'the old entry as it was');
+  assert.equal(after.history[0].handover.from, 'Dritan', 'what was current moved to the history');
+  const safe = after.current.issues.find((issue) => issue.text === 'Room 1204 safe does not lock');
+  assert.deepEqual([safe.done, safe.owner, safe.due, safe.priority, safe.carried], [false, 'Maintenance', '2026-10-26', 'High', 2]);
+  assert.ok(after.current.issues.some((issue) => issue.text === 'Lift B out of order'));
+  assert.equal(after.current.received.id, 'legacy-test-1');
+  assert.deepEqual(after.received.map((entry) => entry.id), ['legacy-test-1']);
 });

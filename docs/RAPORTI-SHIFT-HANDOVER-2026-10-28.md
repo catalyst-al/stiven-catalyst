@@ -29,19 +29,19 @@ merr, përgjegjësit) mbeten jashtë si parazgjedhje**; një kuti i përfshin me
 çfarë duket si adresë emaili, numër telefoni, numër karte ose IBAN, me fushën ku gjendet; për emra mysafirësh brenda
 fjalive, që një shabllon s'i gjen, dialogu e thotë shkoqur. Asgjë nuk ndahet pa veprimin e përdoruesit.
 
-**Vulosja.** Një kod transferimi (katër fjalë nga lista e kodit të ekipit, ose një i shkruar, të paktën 8 shenja)
+**Vulosja.** Një kod transferimi (gjashtë fjalë nga lista e kodit të ekipit, rreth 62 bit, ose një i shkruar, të paktën 8 shenja, me paralajmërim kur është i dobët: i shkurtër, vetëm shifra, i përsëritur, varg si 12345678, fjalë e zakonshme)
 → PBKDF2-SHA-256 me 310 000 raunde dhe salt të rastit → AES-GCM 256 me formatin e lidhur si additional data.
 Bajtet `[2, salt16, iv12, shifër]` shkojnë pas `#h2=` në adresë (base64url), si QR kur hyjnë (deri në 2331 bajt), ose
 si skedar `stiven-catalyst-handover-file` kur janë më të gjata. **Kodi thuhet veçmas**, kurrë në të njëjtin mesazh:
 linku vetëm nuk lexohet. Web Crypto API e shfletuesit, asnjë kriptografi e re.
 
-**Statuset.** Draft → Ready to hand over → **Shared** (vetëm pas veprimit: kopjim, Share, skedar i ruajtur, "E tregova
+**Statuset.** Draft → Ready to hand over → **Shared** (vetëm pas veprimit që pati sukses: kopjim që clipboard-i e konfirmoi, edhe përgjigja e komandës së vjetër kontrollohet, Share që u kthye, skedar i ruajtur, "E tregova
 kodin QR"; jo thjesht sepse u gjenerua) → te marrësi **Received** → **Taken over** (konfirmim lokal) → te dërguesi
-**Acknowledged** vetëm kur shkruan kodin e konfirmimit të marrësit. Teksti nën titull thotë qartë kur diçka është
+**Acknowledged** vetëm kur dërguesi shkruan me dorë kodin e konfirmimit të marrësit: konfirmim manual se dorëzimi u hap me kodin e vet, jo provë e identitetit apo e pajisjes. Teksti nën titull thotë qartë kur diçka është
 vetëm "në këtë pajisje" dhe kur është "e konfirmuar nga pajisja tjetër". Closed = turni i mbyllur te historiku.
 
 **Marrja (pajisja tjetër).** Faqja kërkon kodin, hap dorëzimin lokalisht dhe tregon përmbledhjen dhe çështjet:
-*e re*, *tashmë e hapur këtu*, *mbajtur nga këtu* (çështjet e hapura të marrësit që dërguesi s'i kishte nuk humbasin).
+*e re*, *tashmë e hapur këtu*, *mbajtur nga këtu* (çështjet e hapura të marrësit që dërguesi s'i kishte nuk humbasin). Një çështje e hapur në të dyja pajisjet mbetet një: gjendja më e sigurt fiton (mbetet e hapur edhe kur dërguesi e ka shënuar të zgjidhur), përgjegjësi, afati dhe prioriteti më i lartë i marrësit ruhen, bartja më e lartë, dhe çdo ndryshim shfaqet nën çështje para marrjes.
 Pastaj "Merre këtë dorëzim": ajo që ishte kalon te historiku (me konfirmim), dorëzimi bëhet turni aktual me `received`
 dhe id-ja regjistrohet; **i njëjti transferim hapur përsëri njihet** ("E marrë tashmë në …") dhe butoni kryesor
 zëvendësohet me "Merre përsëri gjithsesi". Kod i gabuar ose bajt i ndryshuar: "Kod i gabuar, ose dorëzimi u ndryshua
@@ -50,7 +50,7 @@ me `hashchange`.
 
 **Konfirmimi pa server.** Pas "Konfirmo marrjen", marrësi sheh një kod 6-shenjash (SHA-256 e id-së së transferimit
 dhe kodit të transferimit, base32): e thotë me zë, e kopjon ose kopjon një link `#a=`. Dërguesi e shkruan te "Kodi i
-konfirmimit" dhe vetëm atëherë dorëzimi bëhet "Acknowledged by Lena: confirmed with the code". Dërguesi nuk ruan kodin
+konfirmimit" dhe vetëm atëherë dorëzimi bëhet "Acknowledged: confirmation code typed in by hand (Lena)". Faqja e thotë: konfirmim manual që dorëzimi u hap me kodin e vet, jo provë kush e hapi apo në cilën pajisje. Dërguesi nuk ruan kodin
 e transferimit, vetëm kodin e konfirmimit që pret. Nuk pretendohet sinkronizim automatik.
 
 **Pajtueshmëria.** Linqet e vjetra `#h=`/`#h0=` lexohen ende, me shënimin "bërë nga një version më i vjetër, pa
@@ -68,7 +68,7 @@ kurrë faqen nuk e hap linkun offline, sepse s'ka kopje; teksti i faqes dhe ky r
 
 - Turni aktual i marrësit me përmbajtje: kalon te historiku para marrjes, me konfirmim.
 - Çështjet e hapura të marrësit që dërguesi s'i ka: mbahen te turni i ri, të shënuara "mbajtur nga këtu".
-- Çështje e njëjtë (teksti i njëjtë, pa dalluar shkronjat e mëdha dhe hapësirat): mbetet një herë, me bartjen më të lartë.
+- Çështje e njëjtë (teksti i njëjtë, pa dalluar shkronjat e mëdha dhe hapësirat): mbetet një herë; e hapur këtu nuk bëhet e zgjidhur se e solli ashtu transferimi; përgjegjësi, afati dhe prioriteti më i lartë i marrësit nuk humbasin; bartja më e lartë; çdo ndryshim i dukshëm në parapamje.
 - I njëjti transferim dy herë: njihet nga id-ja, kërkon "përsëri gjithsesi".
 
 ## 6. Çfarë u testua
@@ -95,11 +95,28 @@ njëjtën makinë, jo dy pajisje fizike.
 ## 7. Kufizimet që mbeten
 
 - Linku vulos përmbajtjen, por mbetet në historikun e shfletuesit dhe të chat-it si bajt të pakuptueshëm; nëse dikush
-  merr edhe linkun edhe kodin, lexon dorëzimin. Kodi me 4 fjalë (≈ 41 bit) + PBKDF2 310 000 raunde e bën provën e
-  verbër të kushtueshme, jo të pamundur për një sulmues me GPU dhe javë kohë; për ditën e turnit mjafton.
-- Kodi i konfirmimit (30 bit) vërteton se marrësi hapi dorëzimin, jo identitetin e tij.
+  merr edhe linkun edhe kodin, lexon dorëzimin. Kodi me 6 fjalë (≈ 62 bit) + PBKDF2 310 000 raunde e bën provën e
+  verbër praktikisht të pamundur; një kod i shkruar me dorë mund të jetë më i dobët dhe faqja e paralajmëron, pa e ndaluar.
+- Kodi i konfirmimit (30 bit) është konfirmim manual: tregon se dorëzimi u hap me kodin e vet të transferimit, jo kush e hapi, as në cilën pajisje.
 - Emrat e mysafirëve brenda fjalive nuk zbulohen nga shabllonet; dialogu e kërkon leximin.
 - Konfirmimi kthehet me zë, mesazh ose link; nuk ka kanal automatik dhe nuk pretendohet.
 - Testuar në Chromium (Playwright, dy kontekste të izoluara) dhe Node; jo në Firefox, Safari apo telefona realë.
 - Faza e dytë (Problem → Evidence → … → KPI) nuk nis këtu; strukturat e reja (`id` transferimi, `received`,
   `shared`, kodi i konfirmimit) janë bërë që një çështje të mund të ndiqet më tej pa i ndryshuar.
+
+## 8. Korrigjimet e 28 tetorit pas shqyrtimit të PR-së (commit-i pasues)
+
+1. **Bashkimi i çështjeve:** një çështje e hapur te marrësi nuk bëhet më `done` se transferimi e sjell të zgjidhur;
+   përgjegjësi, afati dhe prioriteti më i lartë i marrësit ruhen kur dërguesi s'i ka ose i ka ndryshe; bartja më e
+   lartë; çdo ndryshim (`conflicts`: solvedThere, owner, due, priority) shfaqet nën çështje në parapamje.
+2. **Shared vetëm pas suksesit:** `copyText` kthen true/false (API-ja e clipboard-it, ose përgjigja e `execCommand`);
+   pa sukses, dorëzimi nuk shënohet i ndarë dhe faqja kërkon kopjim me dorë.
+3. **Acknowledged** riformulohet si konfirmim manual me kod: titulli, rreshti i gjendjes dhe dy tekstet ndihmëse e
+   thonë se nuk vërteton identitetin as pajisjen.
+4. **Kodi i transferimit** i gjeneruar: gjashtë fjalë nga lista e Team Sync (≈ 62 bit), ose 12 shenja pa lista;
+   kodet e shkruara me dorë paralajmërohen kur janë të dobëta (`weakPasscode`), pa librari të reja.
+
+Teste të shtuara: bashkimi me konflikt (6 raste), kodet e dobëta (12 raste), gjendja e ruajtur nga versioni i
+mëparshëm që ngarkohet e pandryshuar dhe historiku i paprekur pas marrjes (jsdom); në shfletues: paralajmërimi i
+kodit të dobët, konflikti i dukshëm, historiku i marrësit i paprekur, formulimi i Acknowledged, shfletues që nuk
+kopjon → jo Shared. Rezultatet: §6, rreshti i fundit.

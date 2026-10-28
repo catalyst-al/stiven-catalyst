@@ -62,9 +62,11 @@
   const newId = () => (typeof crypto.randomUUID === "function" ? crypto.randomUUID() : [...random(16)].map((b) => b.toString(16).padStart(2, "0")).join(""));
 
   // ---- The transfer code ----
-  // Four words of the team-code list when it is on the page (1296 words: about 41 bits), otherwise ten letters and
-  // digits without the ones that look alike (about 49 bits). Typed by hand, it is read without case, and spaces or
-  // hyphens between the words make no difference.
+  // Six words of the team-code list when it is on the page (1296 words: about 62 bits, as a team code), otherwise
+  // twelve letters and digits without the ones that look alike (about 59 bits). Typed by hand, it is read without
+  // case, and spaces or hyphens between the words make no difference. A code of the visitor's own is allowed from
+  // eight characters, with a warning when it is weak (short, digits only, one character repeated, a run like 12345678
+  // or a word everyone tries first).
   const ALPHABET = "abcdefghjkmnpqrstuvwxyz23456789";
   const randomBelow = (n) => {
     const limit = Math.floor(0x100000000 / n) * n;
@@ -73,11 +75,28 @@
       if (value < limit) return value % n;
     }
   };
+  const PASSCODE_WORDS = 6;
   const newPasscode = (words = globalThis.TeamSyncMath?.WORDS) => (Array.isArray(words) && words.length >= 1000
-    ? Array.from({ length: 4 }, () => words[randomBelow(words.length)]).join("-")
-    : Array.from({ length: 10 }, () => ALPHABET[randomBelow(ALPHABET.length)]).join(""));
+    ? Array.from({ length: PASSCODE_WORDS }, () => words[randomBelow(words.length)]).join("-")
+    : Array.from({ length: 12 }, () => ALPHABET[randomBelow(ALPHABET.length)]).join(""));
   const normalisePasscode = (value) => String(value ?? "").normalize("NFKC").toLowerCase().replace(/[\s\-_]+/g, " ").trim();
   const goodPasscode = (value) => normalisePasscode(value).replace(/ /g, "").length >= MIN_PASSCODE;
+  // Why a code typed by hand is weak, or null: "short" (under twelve characters), "digits" (digits only),
+  // "repeated" (one character over and over), "sequence" (a run of the keyboard or the alphabet), "common" (a word
+  // everyone tries first). The generated codes are never weak.
+  const COMMON = ["password", "passwort", "fjalekalim", "qwertyuiop", "qwertzuiop", "letmein", "welcome", "admin", "handover", "shift", "hotel", "warehouse"];
+  const weakPasscode = (value) => {
+    const flat = normalisePasscode(value).replace(/ /g, "");
+    if (!flat) return null;
+    if (/^(.)\1+$/.test(flat)) return "repeated";
+    if (/^\d+$/.test(flat)) return "digits";
+    const runs = "0123456789abcdefghijklmnopqrstuvwxyz";
+    const run = flat.length >= 6 && [runs, [...runs].reverse().join(""), "qwertyuiop", "asdfghjkl", "zxcvbnm", "qwertzuiop"].some((row) => row.includes(flat.slice(0, 6)));
+    if (run) return "sequence";
+    if (COMMON.some((word) => flat === word || flat === `${word}1` || flat === `${word}123`)) return "common";
+    if (flat.length < 12) return "short";
+    return null;
+  };
   const deriveTransferKey = async (passcode, salt) => {
     const base = await subtle().importKey("raw", new TextEncoder().encode(normalisePasscode(passcode)), "PBKDF2", false, ["deriveKey"]);
     return subtle().deriveKey({ name: "PBKDF2", salt, iterations: ITERATIONS, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
@@ -252,28 +271,49 @@
 
   // ---- New issues and the ones already here ----
   const issueKey = (text) => String(text ?? "").toLowerCase().replace(/\s+/g, " ").trim();
-  // The issues of a received handover beside the open issues of this device: the incoming ones (an incoming issue
-  // that is open here too keeps the higher carry count), then this device's open issues the sender did not have,
-  // marked as kept, so nothing open here is lost by taking over.
-  const mergeIssues = (incoming, existingOpen) => {
+  // The issues of a received handover beside the open issues of this device: the incoming ones, then this device's
+  // open issues the sender did not have, marked as kept, so nothing open here is lost by taking over. An incoming
+  // issue that is open here too is one issue, and the safer state wins: it stays open even when the sender marked it
+  // solved; an owner, a due date or a priority this device has is kept when the sender's is missing, and kept too
+  // when the two differ (the higher priority, by the order given, high first); the carry count is the higher one.
+  // Each such difference is listed in `conflicts`, so the person taking over sees it before deciding.
+  const mergeIssues = (incoming, existingOpen, priorities = []) => {
     const here = new Map((existingOpen || []).filter((issue) => issueKey(issue.text)).map((issue) => [issueKey(issue.text), issue]));
+    const rank = (p) => { const i = priorities.indexOf(p); return i < 0 ? priorities.length : i; };
     const seen = new Set();
     let same = 0;
     const issues = (incoming || []).map((issue) => {
       const key = issueKey(issue.text);
       const match = key ? here.get(key) : null;
       if (key) seen.add(key);
-      if (!match) return { ...issue, kept: false };
+      if (!match) return { ...issue, kept: false, conflicts: [] };
       same += 1;
-      return { ...issue, carried: Math.max(issue.carried || 0, match.carried || 0), kept: false };
+      const conflicts = [];
+      if (issue.done && !match.done) conflicts.push("solvedThere");
+      const owner = issue.owner || match.owner;
+      if (issue.owner && match.owner && issue.owner !== match.owner) conflicts.push("owner");
+      const due = issue.due || match.due;
+      if (issue.due && match.due && issue.due !== match.due) conflicts.push("due");
+      const priority = rank(match.priority) < rank(issue.priority) ? match.priority : issue.priority;
+      if (issue.priority !== match.priority) conflicts.push("priority");
+      return {
+        ...issue,
+        done: Boolean(issue.done && match.done),
+        owner: conflicts.includes("owner") ? match.owner : owner,
+        due: conflicts.includes("due") ? match.due : due,
+        priority,
+        carried: Math.max(issue.carried || 0, match.carried || 0),
+        kept: false,
+        conflicts,
+      };
     });
-    const kept = [...here.values()].filter((issue) => !seen.has(issueKey(issue.text))).map((issue) => ({ ...issue, kept: true }));
-    return { issues: [...issues, ...kept], added: issues.length - same, same, kept: kept.length };
+    const kept = [...here.values()].filter((issue) => !seen.has(issueKey(issue.text))).map((issue) => ({ ...issue, kept: true, conflicts: [] }));
+    return { issues: [...issues, ...kept], added: issues.length - same, same, kept: kept.length, conflicts: issues.reduce((n, issue) => n + issue.conflicts.length, 0) };
   };
 
   window.ShiftHandoverLink = {
     FORMAT, VERSION, LINK_FORMAT, LINK_VERSION, FILE_FORMAT, MAX_FRAGMENT, MAX_UNPACKED, MAX_FILE, MIN_PASSCODE, ITERATIONS,
-    toBase64Url, fromBase64Url, newId, newPasscode, normalisePasscode, goodPasscode, deriveTransferKey,
+    PASSCODE_WORDS, toBase64Url, fromBase64Url, newId, newPasscode, normalisePasscode, goodPasscode, weakPasscode, deriveTransferKey,
     packHandover, openHandover, handoverLink, parseFragment, fileText, bytesFromFile, unpackHandover,
     ackCode, showAck, readAck, ackFragment, sensitiveFindings, forTransfer, issueKey, mergeIssues,
   };
@@ -735,21 +775,21 @@
       shared: tx("Shared, not yet confirmed by the other device"),
       received: tx("Received{from}: read it, then confirm takeover", { from: h.received?.from ? ` ${tx("from {name}", { name: h.received.from })}` : "" }),
       taken: tx("Taken over by {name}", { name: h.to }),
-      acknowledged: tx("Acknowledged by {name}: confirmed with the code", { name: h.ack?.by || h.to || "?" }),
+      acknowledged: tx("Acknowledged: confirmation code typed in by hand{by}", { by: h.ack?.by ? ` (${h.ack.by})` : "" }),
     }[state];
     if (stateLine) {
       const lines = [];
       if (h.received) lines.push(tx("Received on this device at {time}.", { time: clock(h.received.at) }));
       if (last) lines.push(tx(last.mode === "file" ? "Shared at {time} as a file. The other device confirms with a code." : last.mode === "qr" ? "Shared at {time} as a QR code. The other device confirms with a code." : "Shared at {time} as a link. The other device confirms with a code.", { time: clock(last.at) }));
       if (h.ackAt && !h.ack) lines.push(tx("Confirmed on this device at {time}.", { time: clock(h.ackAt) }));
-      if (h.ack) lines.push(tx("Confirmed on the other device: code {code} checked here at {time}.", { code: window.ShiftHandoverLink.showAck(h.ack.code), time: clock(h.ack.at) }));
+      if (h.ack) lines.push(tx("Code {code} typed in here at {time}. It matches the code of a handover shared from here, so that handover was opened with its transfer code. It does not prove who opened it, or on which device.", { code: window.ShiftHandoverLink.showAck(h.ack.code), time: clock(h.ack.at) }));
       stateLine.textContent = lines.join(" ");
       stateLine.hidden = !lines.length;
     }
     ackText.textContent = h.ackAt
       ? tx("Confirmed by {name} at {time}. Close the shift to start the next handover with the open issues carried over.", { name: h.to, time: clock(h.ackAt) })
       : h.received
-        ? tx("You received this handover. Confirm takeover once you have read it; a confirmation code appears for the sender.")
+        ? tx("You received this handover. Confirm takeover once you have read it; a confirmation code appears, for you to pass to the sender by hand.")
         : tx("The person taking over confirms they have read it and asked their questions.");
     if (ackCodeBox) {
       const show = Boolean(h.ackAt && h.received?.ackCode);
@@ -794,16 +834,20 @@
     note.timer = setTimeout(() => { status.textContent = ""; }, 2600);
   };
 
+  // True when the text is on the clipboard: the clipboard API, or the older command, whose answer is checked too.
   const copyText = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
+      return true;
     } catch {
       const area = el("textarea");
       area.value = text;
       document.body.append(area);
       area.select();
-      document.execCommand("copy");
+      let done = false;
+      try { done = document.execCommand("copy") === true; } catch { done = false; }
       area.remove();
+      return done;
     }
   };
 
@@ -1108,6 +1152,7 @@
       sealed = null;
       namesBox.checked = false;
       codeField.value = Link.newPasscode();
+      showCodeWarning();
       prepareStatus.textContent = "";
       sendStatus.textContent = "";
       preview();
@@ -1116,7 +1161,21 @@
       codeField.focus();
       codeField.select();
     });
-    sendDialog.querySelector("[data-send-newcode]").addEventListener("click", () => { codeField.value = Link.newPasscode(); codeField.focus(); codeField.select(); });
+    const WEAK = {
+      short: "Weak code: under twelve characters. Use the one made for you, or a longer one with letters and digits.",
+      digits: "Weak code: digits only. Use the one made for you, or add letters.",
+      repeated: "Weak code: one character repeated. Use the one made for you.",
+      sequence: "Weak code: a run like 12345678 or qwerty. Use the one made for you.",
+      common: "Weak code: a word everyone tries first. Use the one made for you.",
+    };
+    const codeWarning = sendDialog.querySelector("[data-send-code-warning]");
+    const showCodeWarning = () => {
+      const why = Link.weakPasscode(codeField.value);
+      codeWarning.textContent = why ? tx(WEAK[why]) : "";
+      codeWarning.hidden = !why;
+    };
+    codeField.addEventListener("input", showCodeWarning);
+    sendDialog.querySelector("[data-send-newcode]").addEventListener("click", () => { codeField.value = Link.newPasscode(); showCodeWarning(); codeField.focus(); codeField.select(); });
     sendDialog.querySelector("[data-send-make]").addEventListener("click", async () => {
       const passcode = codeField.value;
       if (!Link.goodPasscode(passcode)) {
@@ -1166,9 +1225,14 @@
       } catch { /* the visitor closed the share sheet */ }
     });
     sendDialog.querySelector("[data-send-copy]").addEventListener("click", async () => {
-      await copyText(sealed.link);
-      markShared("link");
-      sendStatus.textContent = tx("Link copied. Now tell the code separately.");
+      if (await copyText(sealed.link)) {
+        markShared("link");
+        sendStatus.textContent = tx("Link copied. Now tell the code separately.");
+      } else {
+        sendStatus.textContent = tx("The browser did not copy the link. Select it in the box and copy it by hand; it counts as shared once you have.");
+        linkBox.focus();
+        linkBox.select();
+      }
     });
     sendDialog.querySelector("[data-send-file]").addEventListener("click", () => {
       download(fileName(cur()), Link.fileText(sealed.bytes, { date: sealed.date, shift: sealed.shift, sent: new Date().toISOString() }), "application/json");
@@ -1188,14 +1252,14 @@
   const incomingBox = document.querySelector("[data-incoming]");
   const clearHash = () => history.replaceState(null, "", location.pathname + location.search);
   const takeOver = (h, { id = "", ackCode = "" } = {}) => {
-    const merged = Link.mergeIssues(h.issues, openIssues(cur()));
+    const merged = Link.mergeIssues(h.issues, openIssues(cur()), data.priorities);
     if (hasContent(cur())) {
       if (!window.confirm(tx("Take over the handover that arrived? What you have here moves to the history first; your open issues the sender did not have stay with it."))) return false;
       state.history.unshift({ closedAt: new Date().toISOString(), handover: JSON.parse(JSON.stringify(cur())), text: asText(cur()) });
       state.history = state.history.slice(0, HISTORY_MAX);
     }
     const now = new Date().toISOString();
-    state.current = { ...h, issues: merged.issues.map(({ kept, ...issue }) => issue), ackAt: "", shared: [], ack: null, received: id ? { id, at: now, from: h.from, ackCode } : null };
+    state.current = { ...h, issues: merged.issues.map(({ kept, conflicts, ...issue }) => issue), ackAt: "", shared: [], ack: null, received: id ? { id, at: now, from: h.from, ackCode } : null };
     if (id) state.received = [...state.received.filter((entry) => entry.id !== id), { id, at: now }].slice(-50);
     save();
     renderAll();
@@ -1231,15 +1295,25 @@
     };
     // The handover opened: what it holds, before anything is replaced.
     const showPreview = (h, { id, legacy = false }) => {
-      const merged = Link.mergeIssues(h.issues, openIssues(cur()));
+      const merged = Link.mergeIssues(h.issues, openIssues(cur()), data.priorities);
       const already = id ? state.received.find((entry) => entry.id === id) : null;
       text.textContent = tx("A handover arrived{from}: {shift} shift of {date}, {open}.", {
         shift: h.shift, date: longDate(h.date), from: h.from ? ` ${tx("from {name}", { name: h.from })}` : "", open: tx("{n} open", { n: openIssues(h).length }),
       });
       fillList(previewSummary, summaryLines(h, { names: Boolean(h.from || h.to || h.issues.some((issue) => issue.owner)) }));
+      const CONFLICT = {
+        solvedThere: "solved there, still open here: stays open",
+        owner: "another owner there: {here} kept",
+        due: "another due date there: {here} kept",
+        priority: "another priority there: the higher one kept",
+      };
       previewIssues.replaceChildren(...merged.issues.map((issue) => {
         const line = el("li", issue.kept ? "is-kept" : issue.text && openIssues(cur()).some((own) => Link.issueKey(own.text) === Link.issueKey(issue.text)) ? "is-same" : "is-new");
         line.append(el("span", "sh-tag", issue.kept ? tx("kept from here") : line.className === "is-same" ? tx("already open here") : tx("new")), ` ${issue.text}${issue.done ? ` (${tx("solved")})` : ""}`);
+        if (issue.conflicts?.length) {
+          line.classList.add("has-conflict");
+          line.append(el("span", "sh-conflict", issue.conflicts.map((kind) => tx(CONFLICT[kind], { here: kind === "owner" ? issue.owner : issue.due })).join(" · ")));
+        }
         return line;
       }));
       const notes = [];

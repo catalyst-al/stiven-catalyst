@@ -48,12 +48,17 @@ test("device A seals and shares, device B opens with the code, takes over and co
   await dialog.locator("[data-send-names]").check();
   await expect(dialog.locator("[data-send-summary]")).toContainText("Arben → Lena");
   await dialog.locator("[data-send-names]").uncheck();
-  // The code is four words; a short one is refused.
+  // The code is six words of the team-code list; a short one is refused; a weak one of one's own is warned about.
   const code = await dialog.locator("[data-send-code]").inputValue();
-  expect(code).toMatch(/^[a-z]+-[a-z]+-[a-z]+-[a-z]+$/);
+  expect(code).toMatch(/^[a-z]+(?:-[a-z]+){5}$/);
+  await expect(dialog.locator("[data-send-code-warning]")).toBeHidden();
   await dialog.locator("[data-send-code]").fill("short");
   await dialog.locator("[data-send-make]").click();
   await expect(dialog.locator("[data-send-prepare-status]")).toContainText("at least 8");
+  await dialog.locator("[data-send-code]").fill("12345678");
+  await expect(dialog.locator("[data-send-code-warning]")).toContainText("Weak code");
+  await dialog.locator("[data-send-newcode]").click();
+  await expect(dialog.locator("[data-send-code-warning]")).toBeHidden();
   await dialog.locator("[data-send-code]").fill(code);
   await dialog.locator("[data-send-make]").click();
   const linkBox = dialog.locator("[data-send-link]");
@@ -75,9 +80,17 @@ test("device A seals and shares, device B opens with the code, takes over and co
 
   // ---- Device B: the link, the wrong code, the right code, the preview ----
   await B.page.goto("/tools/shift-handover/");
-  await B.page.locator("[data-add-issue]").click();
-  await B.page.locator("[data-issues] .sh-issue-text").last().fill("Pallet wrap running low on dock 3");
-  await expect.poll(() => stored(B.page, "sc-shift-handover").then((s) => s?.current?.issues?.length)).toBe(1);
+  // B has a closed shift in its history, one issue of its own, and the sender's "scanner 9" issue open already with an owner.
+  await B.page.evaluate(() => {
+    const own = { template: "warehouse", date: "2026-10-25", shift: "Night", area: "Inbound", from: "Mira", to: "Lena", ackAt: "2026-10-26T06:00:00.000Z", metrics: [["Units handled", "900", ""]], issues: [], headsUp: "", safety: "", checks: [] };
+    localStorage.setItem("sc-shift-handover", JSON.stringify({ current: { ...own, date: "2026-10-26", shift: "Early", from: "Lena", to: "", ackAt: "", issues: [
+      { text: "Pallet wrap running low on dock 3", priority: "Low", owner: "", due: "", done: false, carried: 0 },
+      { text: "Scanner 9 shows a blank screen after the update", priority: "Low", owner: "IT desk", due: "2026-10-30", done: false, carried: 1 },
+    ] }, history: [{ closedAt: "2026-10-26T06:05:00.000Z", handover: own, text: "Shift handover | Inbound" }] }));
+  });
+  await B.page.reload();
+  const historyBefore = (await stored(B.page, "sc-shift-handover")).history;
+  expect(historyBefore).toHaveLength(1);
   await B.page.goto(link);
   const box = B.page.locator("[data-incoming]");
   await expect(box).toBeVisible();
@@ -95,6 +108,10 @@ test("device A seals and shares, device B opens with the code, takes over and co
   await expect(preview.locator("[data-incoming-summary]")).toContainText("Names left out");
   await expect(preview.locator("[data-incoming-issues] li.is-new").first()).toBeVisible();
   await expect(preview.locator("[data-incoming-issues] li.is-kept")).toContainText("Pallet wrap");
+  // The same issue on both devices, with a higher priority there and an owner here: the difference is shown.
+  const same = preview.locator("[data-incoming-issues] li.is-same");
+  await expect(same).toContainText("Scanner 9");
+  await expect(same.locator(".sh-conflict")).toContainText("another priority there");
   await expectAccessible(B.page);
 
   // ---- Device B: take over, keep what was open here, confirm, get the code ----
@@ -106,8 +123,12 @@ test("device A seals and shares, device B opens with the code, takes over and co
   expect(stateB.current.received.id).toBe(sharedA[0].id);
   expect(stateB.current.from).toBe("");
   expect(stateB.current.issues.map((issue) => issue.text)).toContain("Pallet wrap running low on dock 3");
-  expect(stateB.current.issues.map((issue) => issue.text)).toContain("Scanner 9 shows a blank screen after the update");
-  expect(stateB.history).toHaveLength(1);
+  const scanner = stateB.current.issues.find((issue) => issue.text === "Scanner 9 shows a blank screen after the update");
+  expect([scanner.done, scanner.owner, scanner.due, scanner.priority, scanner.carried]).toEqual([false, "IT desk", "2026-10-30", "Medium", 1]);
+  // The history B had is untouched; the shift B was on joined it.
+  expect(stateB.history).toHaveLength(2);
+  expect(stateB.history[1]).toEqual(historyBefore[0]);
+  expect(stateB.history[0].handover.from).toBe("Lena");
   expect(stateB.received.map((entry) => entry.id)).toEqual([sharedA[0].id]);
   await expect(B.page.locator("[data-output-title]")).toContainText("Received");
   await fill(B.page, "[name=to]", "Lena");
@@ -127,7 +148,7 @@ test("device A seals and shares, device B opens with the code, takes over and co
   await expect(box.locator("[data-incoming-again]")).toBeVisible();
   await box.locator("[data-incoming-ignore]").click();
   await expect(box).toBeHidden();
-  expect((await stored(B.page, "sc-shift-handover")).history).toHaveLength(1);
+  expect((await stored(B.page, "sc-shift-handover")).history).toHaveLength(2);
 
   // ---- Device A: a wrong code is refused, the right one acknowledges ----
   const verify = page.locator("[data-ack-verify]");
@@ -138,7 +159,8 @@ test("device A seals and shares, device B opens with the code, takes over and co
   await verify.locator("[name=code]").fill(ackCode.toLowerCase());
   await verify.locator("[name=by]").fill("Lena");
   await verify.locator("button[type=submit]").click();
-  await expect(page.locator("[data-output-title]")).toContainText("Acknowledged by Lena");
+  await expect(page.locator("[data-output-title]")).toContainText("Acknowledged: confirmation code typed in by hand (Lena)");
+  await expect(page.locator("[data-transfer-state]")).toContainText("does not prove who opened it");
   const stateA = await stored(page, "sc-shift-handover");
   expect(stateA.current.ack.id).toBe(sharedA[0].id);
   expect(stateA.current.ack.code).toBe(ackCode.replace("-", ""));
@@ -239,6 +261,24 @@ test("a damaged link, a foreign fragment and a file: refused or opened, by keybo
 
   expect(errorsB, "no script error on device B").toEqual([]);
   await B.context.close();
+});
+
+test("a browser that cannot copy does not count the handover as shared", async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, "clipboard", { value: { writeText: () => Promise.reject(new Error("no clipboard")) } });
+    document.execCommand = () => false;
+  });
+  await page.goto("/tools/shift-handover/");
+  await page.locator("[data-example]").click();
+  await page.locator("[data-send]").click();
+  const dialog = page.locator("[data-send-dialog]");
+  await dialog.locator("[data-send-make]").click();
+  await expect(dialog.locator("[data-send-link]")).toHaveValue(/#h2=/, { timeout: 20_000 });
+  await dialog.locator("[data-send-copy]").click();
+  await expect(dialog.locator("[data-send-status]")).toContainText("did not copy the link");
+  expect((await stored(page, "sc-shift-handover")).current.shared).toEqual([]);
+  await dialog.locator("[data-send-close]").last().click();
+  await expect(page.locator("[data-output-title]")).not.toContainText("Shared");
 });
 
 test("in German and Albanian the same flow reads in its language", async ({ page, browser, theme }) => {

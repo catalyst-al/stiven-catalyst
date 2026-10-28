@@ -3685,6 +3685,9 @@ select.sh-in { cursor: pointer; }
 .sh-verify-fields .field { margin: 0; }
 @media (max-width: 640px) { .sh-verify-fields, .sh-unlock { grid-template-columns: 1fr; } }
 .sh-file-open { margin: 12px 0 0; }
+.sh-conflict { display: block; margin: 2px 0 0 4px; color: var(--warn); font-size: 13px; }
+.sh-warn-line { margin: 4px 0 0; color: var(--warn); }
+.sh-warn-line:empty { display: none; }
 .sh-side > .form-note { margin: 0; }
 .sh-history { padding: 20px 0 110px; }
 .sh-history-list { display: grid; gap: 12px; margin-bottom: 20px; }
