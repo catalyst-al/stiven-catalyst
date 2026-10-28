@@ -57,7 +57,18 @@ një kontroll `typeof` te rrjeta e gabimeve; asnjë test i vjetër nuk u ndryshu
 
 Pa ndryshim në `main`, pa merge, pa deploy; CI e PR-it (build + unit + shfletues) është prova e fundit para shqyrtimit.
 
-## 5. Kufizimet që mbeten
+## 5. Tri kontrollet e autorit para miratimit (28 tetor, pasdite)
+
+| # | Rasti | Çfarë gjeti testi në kodin e mëparshëm | Korrigjimi (vetëm shkaku) | Testi |
+| --- | --- | --- | --- | --- |
+| 1 | Dialogu i fjalëkalimit mbyllur me Esc | Esc zgjidhte premtimin, por dëgjuesit `submit` dhe `click` mbeteshin; edhe pas "Continue" mbetej dëgjuesi `close` (`once`, pa `removeEventListener`). Çdo hapje shtonte një palë të re | Një rrugëdalje e vetme `finish`: heq të tre dëgjuesit, mbyll dialogun nëse është hapur, zgjidh premtimin një herë, nga Continue, Cancel ose Esc | `work-backup-sealed.spec.mjs`: numëron dëgjuesit e gjallë të formës dhe dialogut; pas Cancel, pas Esc, pas fjalëkalimit të gabuar dhe pas të saktit janë 0; pas Esc dialogu rihapet me fushë dhe gabim bosh, "të paktën 8" dhe "Wrong password" dalin një herë. Në kodin e vjetër dështon (`close: 1`) |
+| 2 | Kufiri i madhësisë te `openSealedText` | Gzip-i shpaketohej i tëri në memorie dhe vetëm pastaj krahasohej me 40 MB | `pipeThrough` lexon rrjedhën copë-copë dhe ndalon (`reader.cancel`) sapo dalja kalon kufirin; hapja kthen `invalid` | `work-backup-sealed.test.cjs`: 48 MB zero (gzip disa dhjetëra KB) të vulosura; `DecompressionStream` që numëron çfarë jep: ndalon mes 40 dhe 48 MB; në kodin e vjetër lexon të 48 MB |
+| 3 | Rresht Shift Handover më i gjatë se faqja A4 | Një çështje me ~900 fjalë vizatohej si një rresht i vetëm që dilte nën kufirin e faqes (y 32,9 dhe 4,9 pt, pjesa tjetër jashtë faqes) | Në `pdf-kit.js` një rresht më i lartë se faqja (minus koka dhe kufijtë) vazhdon në pjesë faqe pas faqeje, me çdo rresht të çdo qelize; rreshtat normalë mbeten të pandarë | `pdf-kit.test.cjs` (1 200 fjalë në një qelizë) dhe `handover-pdf.test.cjs` (çështje me 900 fjalë): çdo fjalë e vizatuar, çdo pozicion teksti brenda faqes, koka dhe fusnota në çdo faqe, çështjet pas saj dhe seksionet e tjera të pranishme |
+
+Rezultatet në `b618fa6f`: `npm run build` 838 faqe; `npm test` 1 358 kalojnë, 0 dështojnë; gjithë suita e shfletuesit 211
+kalojnë, 0 dështojnë (18,3 min); CI e PR-it jeshile. Pa refactoring, pa librari, pa prekje të dizajnit.
+
+## 6. Kufizimet që mbeten
 
 - Skedari i vulosur mbron përmbajtjen; fjalëkalimi s'ruhet askund dhe humbja e tij është humbje e skedarit.
 - Rrjeta e gabimeve njofton, nuk shëron: një mjet që dështon mbetet për t'u korrigjuar, dhe gabimi del tani në CI
