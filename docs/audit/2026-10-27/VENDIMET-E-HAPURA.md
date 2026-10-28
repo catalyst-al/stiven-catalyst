@@ -19,7 +19,7 @@ skedarët e treguar; numrat e gjetjeve janë ato të `RAPORTI-I-KONSOLIDUAR.md`.
 | Team Sync Worker, Cloudflare | Mos publiko; mos ndrysho konfigurimin | asgjë e publikuar; plani: `docs/SYNC-WORKER-MIGRATION.md` |
 | Publikimi | Draft PR për shqyrtim; asnjë merge pa miratimin përfundimtar | `docs/RELEASE.md` |
 | Kufizimet e njohura | Pranohen siç janë | `RAPORTI-I-PUBLIKIMIT.md` §3 |
-| Teksti i privatësisë (P-01) | Shtesë faktike nga kodi, në tri gjuhët, para merge-it; pa vlerësim ligjor. Saktësimet e 28 tetorit: baza ligjore vetëm për ruajtjen që nis lexuesi; analytics pa pretenduar matje | `f5701ab4`, `53cf44bc`; teksti përfundimtar pret miratimin tënd (B.5) |
+| Teksti i privatësisë (P-01) | Shtesë faktike nga kodi, në tri gjuhët, para merge-it; pa vlerësim ligjor. Saktësimet e 28 tetorit: baza ligjore vetëm për ruajtjen që nis lexuesi; analytics pa pretenduar matje | `f5701ab4`, `53cf44bc`, e9184e06; teksti përfundimtar pret miratimin tënd (B.5) |
 
 ## B. Të hapura: kërkojnë fakte ose miratim
 
@@ -58,7 +58,7 @@ Burimi: `phase2/management-review.md` §9 dhe `phase2/tools-guide-and-pdf-check.
 - shtyllat mbi shkallë të shkurtuar pa bosht (P5-06): ndryshimi prek grafikët e publikuar dhe PDF-të.
 
 ### 5. Teksti i privatësisë (P-01): teksti përfundimtar pret miratimin tënd
-Shtesa faktike (`f5701ab4`) dhe dy saktësimet e tua të 28 tetorit (`53cf44bc`) janë në degë, te `src/datenschutz.njk`,
+Shtesa faktike (`f5701ab4`) dhe dy saktësimet e tua të 28 tetorit (`53cf44bc`, `e9184e06`, edhe titulli i pikës 3) janë në degë, te `src/datenschutz.njk`,
 në EN/DE/SQ:
 - **Baza ligjore:** § 25(2) nr. 2 TDDDG përmendet vetëm për ruajtjen që lexuesi e nis vetë. Ruajtja automatike
   (shenjat "e re" të menysë `sc-seen-*`, progresi i leximit, kopjet e service worker-it) përshkruhet pa asnjë bazë
