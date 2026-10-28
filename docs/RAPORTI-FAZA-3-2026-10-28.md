@@ -84,4 +84,14 @@ fleta në `sc-five-whys`; skedari i punës, PIN-i, PWA-ja dhe team sync i mbarti
 
 ## 7. Rezultatet e provës
 
-REZULTATET
+Në degë, commit `db1c6afa`, me ndërtim të plotë (`npm run build`, 838 faqe):
+
+| Provë | Rezultat |
+| --- | --- |
+| `npm test` (node --test, 1 367 teste, 9 të reja në `case-thread.test.cjs`, 1 i përshtatur në `action-tracker.test.cjs`) | 1 367 kalojnë, 0 dështojnë |
+| Gjithë suita e shfletuesit (`npx playwright test`, 6 projekte, 212 teste; `case-flow.spec.mjs` i ri) | 212 kalojnë, 0 dështojnë, 16,2 min |
+| CI e PR-it | në kokën përfundimtare të PR-it |
+
+Numrat e stacionit shembull, siç i jep motori: dëmtimet 31 gusht – 13 shtator 40 / 3 375 (1,19 %) → 14 – 26 shtator
+13 / 3 388 (0,38 %), vendim efektiv; vonesat 72 / 3 375 (2,13 %) → 78 / 3 388 (2,30 %), vendim jo efektiv. Të dyja
+rrugët kalojnë nëpër të njëjtin kod në teste.
