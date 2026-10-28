@@ -117,4 +117,15 @@ pending" kur veprimi është done; prapë "Investigating" kur rihapet para vendi
 | --- | --- | --- | --- |
 | 7 | Tower → Shift Handover (kontrolli i dytë i autorit) | Lidhja e re mbante tekstin e veprimit, përgjegjësin dhe afatin në `?issue=&owner=&due=` | Adresa mban vetëm `?case=`; çështja, përgjegjësi dhe afati udhëtojnë në të njëjtin shënim `sessionStorage` si te 5 Whys, i lexuar një herë nga handover-i (mesazh i vetin "Added from the CX Control Tower"); shënimi i një rasti tjetër ose i munguar nuk shton asgjë dhe faqja e thotë; `?issue=` i 5 Whys lexohet si më parë (testi `4c` në `case-integrity.test.cjs`, plus `handoffs.test.cjs` ekzistues) |
 
-REZULTATET-8
+## 9. Shqyrtimi i dytë i autorit: tri prova të integritetit KPI
+
+Testet në `tests/case-kpi.test.cjs`; të tria dështuan në commit-in e mëparshëm (`249b7e93`, provuar në një worktree)
+dhe kalojnë pas korrigjimit. Vetëm shkaku, pa funksione të reja.
+
+| # | Prova | PARA (konfirmuar) | PAS |
+| --- | --- | --- | --- |
+| 1 | "Effective" me mostër të pamjaftueshme PARA | `verdict` kontrollonte vetëm `after.n ≥ floor`: 10 rreshta para dhe 3 388 pas jepnin "effective" | Të dyja periudhat duhet të arrijnë kufirin; `verdict.short` thotë cila mungon dhe kutia e emërton ("Too few eligible rows in the before period (n of min)"); mbyllja refuzohet |
+| 2 | Hetim nga segmenti ISO Week, kundërmasa javën tjetër | `caseRows` e zbatonte javën edhe mbi rreshtat pas: periudha pas kishte 0 rreshta, matja e pamundur; periudha para ishte gjithë intervali, jo java | `beforeWindow`: për segment jave, periudha para është vetë java (brenda intervalit të snapshot-it); rreshtat pas nuk filtrohen nga java (`ignoreWeek`); mbivendosja matet ndaj fundit të javës; teksti i kutisë e shpjegon |
+| 3 | Targeti i miratuar ose të dhënat historike ndryshojnë pas hetimit | Kutia rillogariste gjithçka live: pas një riimporti ose një targeti të ri, numrat e shfaqur dhe verdikti live mund të kundërshtonin vendimin e regjistruar pa asnjë shenjë; targeti nuk ruhej me vendimin | Vendimi ruan numrat e vet dhe targetin e ditës (`verification.target`); një rast i vendosur shfaq krahasimin e regjistruar, jo atë të sotmin, dhe një paralajmërim `data-cx-changed` numëron çdo ndryshim ("before was 40 / 3 375, now …; approved maximum was 0,80 %, now 0,10 %"); vendimi nuk ndryshon vetë. Për një rast të hapur, evidenca ruhet si `snapshot.baseK/baseN` dhe një riimport që e ndryshon periudhën para shënohet para vendimit |
+
+REZULTATET-9

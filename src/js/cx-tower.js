@@ -657,24 +657,49 @@
   // The investigation (its id INV-…) is the thread. Its action lives in the Action Tracker (js/actions-store.js) with
   // the case id; "verified" is decided here, from the same failure measured before and after the change, on the rows
   // of the same filters and segment, each rate over its own eligible rows.
-  // The rows of a case's focus: the snapshot's partner, shift and zone, its segment, inside a window of dates.
-  const caseRows = (rows, snapshot, from, to, dim = snapshot.dim) => rows.filter((row) => ["DSP", "Shift", "Zone"].every((key) => !snapshot[key] || row[key] === snapshot[key])
-    && (!snapshot.segment || segmentOf(row, dim) === snapshot.segment)
-    && row.Date && (!from || row.Date >= from) && (!to || row.Date <= to));
+  // The rows of a case's focus: the snapshot's partner, shift and zone, its segment, inside a window of dates. A week
+  // segment is a slice of time, not a population: with ignoreWeek it is not applied (the rows after the change are
+  // never in the week before it).
+  const isWeekKey = (value) => /^\d{4}-W\d{2}$/.test(String(value || ""));
+  const caseRows = (rows, snapshot, from, to, { ignoreWeek = false } = {}) => {
+    const dim = snapshot.dim;
+    const bySegment = Boolean(snapshot.segment) && !(ignoreWeek && dim === "Week");
+    return rows.filter((row) => ["DSP", "Shift", "Zone"].every((key) => !snapshot[key] || row[key] === snapshot[key])
+      && (!bySegment || segmentOf(row, dim) === snapshot.segment)
+      && row.Date && (!from || row.Date >= from) && (!to || row.Date <= to));
+  };
+  // The Monday and the Sunday of an ISO week key (2026-W37).
+  const weekRange = (key) => {
+    const m = String(key || "").match(/^(\d{4})-W(\d{2})$/);
+    if (!m) return null;
+    const monday = addDays(weekMonday(`${m[1]}-01-04`), (Number(m[2]) - 1) * 7);
+    return { from: monday, to: addDays(monday, 6) };
+  };
+  // The before period of a case: the snapshot's period, or, for a case started from a week segment, that week inside it.
+  const beforeWindow = (snapshot) => {
+    const from = snapshot.from || "";
+    const to = snapshot.to || "";
+    if (snapshot.dim !== "Week" || !isWeekKey(snapshot.segment)) return { from, to };
+    const week = weekRange(snapshot.segment);
+    return { from: from && from > week.from ? from : week.from, to: to && to < week.to ? to : week.to };
+  };
   // The window after the change: from the day the change took effect to the last day with data. Null without either,
   // and null when it would start inside the before period (beforeTo): the two windows never share a day.
   const afterWindow = (from, last, beforeTo = "") => (from && last && last >= from && (!beforeTo || from > beforeTo) ? { from, to: last, days: Math.round((Date.parse(`${last}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 864e5) + 1 } : null);
-  // The verdict on an action: "effective" when the after window reaches the sample floor and the failure rate fell
-  // (and, with an approved maximum, sits within it); "not-effective" when it reaches the floor and did not fall;
-  // "insufficient" while the after window has too few eligible rows, or there is no before.
+  // The verdict on an action: "effective" when both windows reach the sample floor and the failure rate fell (and,
+  // with an approved maximum, sits within it); "not-effective" when both reach the floor and it did not fall;
+  // "insufficient" while either window has too few eligible rows (short says which), or there is no before.
   const verdict = ({ before, after, target = null, minN = 1 }) => {
-    const out = { enough: false, change: null, better: null, withinTarget: null, status: "insufficient" };
-    if (!before || !(before.n > 0) || !after || !(after.n > 0)) return out;
+    const out = { enough: false, short: null, change: null, better: null, withinTarget: null, status: "insufficient" };
+    const floor = Math.max(1, minN);
+    if (!before || !(before.n > 0)) { out.short = "before"; return out; }
+    if (before.n < floor) { out.short = "before"; return out; }
+    if (!after || !(after.n > 0)) { out.short = "after"; return out; }
     out.change = after.rate - before.rate;
     out.better = out.change < -1e-12;
     out.withinTarget = target == null ? null : after.rate <= target + 1e-9;
-    out.enough = after.n >= Math.max(1, minN);
-    if (!out.enough) return out;
+    out.enough = after.n >= floor;
+    if (!out.enough) { out.short = "after"; return out; }
     out.status = out.better && out.withinTarget !== false ? "effective" : "not-effective";
     return out;
   };
@@ -700,7 +725,7 @@
   };
 
   window.CxTower = { TABLES, FIELDS, KPIS, DEFAULT_TARGETS, EXAMPLE_TARGETS, isDelivered, bin, minutes, recognise, toRecords, readSheets, readTargets, targetValue, computeKpis, perfectOf, judge, cxScore, routeRisk, isoWeek, weekMonday, addDays, actionStatus, verification, incidentOpen, isRepeat, severityRank, example,
-    DEEP, DEEP_DIMS, deepOutcome, deepAggregate, deepSegments, deepWeekly, priorWindow, deepIncidents, deepKey, CASE_FIELDS, CASE_STATUS, ROOT_STATUS, caseCheck, capaReady, caseToAction, caseRows, afterWindow, verdict, caseToTracker, applyWhys };
+    DEEP, DEEP_DIMS, deepOutcome, deepAggregate, deepSegments, deepWeekly, priorWindow, deepIncidents, deepKey, CASE_FIELDS, CASE_STATUS, ROOT_STATUS, caseCheck, capaReady, caseToAction, caseRows, weekRange, beforeWindow, afterWindow, verdict, caseToTracker, applyWhys };
 })();
 
 // ======================================================================
@@ -783,7 +808,7 @@
     }
     const textOf = (value) => (typeof value === "string" ? value : "");
     const cleanWindow = (w) => (isObject(w) ? { from: parseDate(textOf(w.from)) || "", to: parseDate(textOf(w.to)) || "", k: Number.isInteger(w.k) ? w.k : 0, n: Number.isInteger(w.n) ? w.n : 0 } : null);
-    const cleanVerification = (v) => ({ status: ["effective", "not-effective"].includes(v.status) ? v.status : "", decided: parseDate(textOf(v.decided)) || "", minN: Number.isInteger(v.minN) && v.minN >= 1 ? v.minN : 0, before: cleanWindow(v.before), after: cleanWindow(v.after), text: textOf(v.text).slice(0, 2000) });
+    const cleanVerification = (v) => ({ status: ["effective", "not-effective"].includes(v.status) ? v.status : "", decided: parseDate(textOf(v.decided)) || "", minN: Number.isInteger(v.minN) && v.minN >= 1 ? v.minN : 0, ...("target" in v ? { target: typeof v.target === "number" && Number.isFinite(v.target) ? v.target : null } : {}), before: cleanWindow(v.before), after: cleanWindow(v.after), text: textOf(v.text).slice(0, 2000) });
     if (Array.isArray(saved.cases)) {
       base.cases = saved.cases.filter((item) => isObject(item) && typeof item.id === "string" && item.id).map((item) => ({
         id: item.id, updated: textOf(item.updated), ...Object.fromEntries(C.CASE_FIELDS.map((field) => [field, textOf(item[field])])), actionId: textOf(item.actionId),
@@ -2135,7 +2160,17 @@
     // The sample floor the verification will use: the one in force when the evidence was recorded, not the one of
     // the day the decision is made.
     minN: state.deep.minN,
+    ...baseOf({ metric: numbers.metric.id, from: numbers.range.from, to: numbers.range.to, DSP: state.filters.DSP, Shift: state.filters.Shift, Zone: state.filters.Zone, dim: state.deep.dim, segment: state.deep.segment }),
   });
+  // The failure counted on the case's own rows over its before period, as recorded with the evidence (baseK / baseN):
+  // what a later re-import is compared with.
+  const baseOf = (snapshot) => {
+    const metric = DEEP_BY[snapshot.metric];
+    if (!metric) return {};
+    const w = C.beforeWindow(snapshot);
+    const agg = C.deepAggregate(C.caseRows(deepTable(metric), snapshot, w.from, w.to), metric, settingsFor(), present());
+    return { baseK: agg.k, baseN: agg.n };
+  };
   // ---------- The case thread ----------
   const TRACKER_WORDS = () => ({ problem: tx("Problem"), root: tx("Root cause"), hypothesis: tx("Working hypothesis, not verified"), check: tx("Failure rate before and after, same filters") });
   // The case's action into the Action Tracker, once: the id of the tracker's action is kept on the case. Returns the
@@ -2183,16 +2218,31 @@
     const settings = settingsFor();
     const cols = present();
     const last = rows.map((r) => r.Date).filter(Boolean).sort().at(-1) || "";
-    const before = C.deepAggregate(C.caseRows(rows, row.snapshot, row.snapshot.from, row.snapshot.to), metric, settings, cols);
-    const overlap = Boolean(row.verifyFrom && row.snapshot.to && row.verifyFrom <= row.snapshot.to);
-    const window = C.afterWindow(row.verifyFrom, last, row.snapshot.to);
-    const after = window ? C.deepAggregate(C.caseRows(rows, row.snapshot, window.from, window.to), metric, settings, cols) : null;
+    const beforeWin = C.beforeWindow(row.snapshot);
+    const before = C.deepAggregate(C.caseRows(rows, row.snapshot, beforeWin.from, beforeWin.to), metric, settings, cols);
+    const overlap = Boolean(row.verifyFrom && beforeWin.to && row.verifyFrom <= beforeWin.to);
+    const window = C.afterWindow(row.verifyFrom, last, beforeWin.to);
+    const after = window ? C.deepAggregate(C.caseRows(rows, row.snapshot, window.from, window.to, { ignoreWeek: true }), metric, settings, cols) : null;
     // The floor saved with the evidence; a case from before it was saved uses the deep dive's.
     const minN = Number.isInteger(row.snapshot.minN) && row.snapshot.minN >= 1 ? row.snapshot.minN : state.deep.minN;
-    return { metric, before, after, window, last, minN, overlap, beforeTo: row.snapshot.to, floorDiffers: minN !== state.deep.minN, target: deepTarget(metric), verdict: C.verdict({ before, after, target: deepTarget(metric), minN }) };
+    const target = deepTarget(metric);
+    // What changed since the numbers were recorded: the evidence (baseK / baseN) for an open case, the decision's
+    // before, after and approved maximum for a decided one. Nothing here changes the decision.
+    const changes = [];
+    const count = (agg) => `${int.format(agg.k)} / ${int.format(agg.n)}`;
+    const v = row.verification;
+    if (v?.status) {
+      const afterThen = v.after?.from && v.after?.to ? C.deepAggregate(C.caseRows(rows, row.snapshot, v.after.from, v.after.to, { ignoreWeek: true }), metric, settings, cols) : null;
+      if (v.before && (v.before.k !== before.k || v.before.n !== before.n)) changes.push(tx("before was {old}, now {new}", { old: count(v.before), new: count(before) }));
+      if (afterThen && v.after && (v.after.k !== afterThen.k || v.after.n !== afterThen.n)) changes.push(tx("after was {old}, now {new}", { old: count(v.after), new: count(afterThen) }));
+      if ("target" in v && (v.target ?? null) !== (target ?? null)) changes.push(tx("approved maximum was {old}, now {new}", { old: v.target == null ? tx("none") : deepRate(v.target), new: target == null ? tx("none") : deepRate(target) }));
+    } else if (Number.isInteger(row.snapshot.baseN) && (row.snapshot.baseK !== before.k || row.snapshot.baseN !== before.n)) {
+      changes.push(tx("the evidence was recorded as {old} for the before period, the rows now give {new}", { old: `${int.format(row.snapshot.baseK)} / ${int.format(row.snapshot.baseN)}`, new: count(before) }));
+    }
+    return { metric, before, after, window, last, minN, overlap, beforeWin, changes, floorDiffers: minN !== state.deep.minN, target, verdict: C.verdict({ before, after, target, minN }) };
   };
   const windowText = (w, agg) => `${showDate(w.from)} – ${showDate(w.to)}: ${int.format(agg.k)} / ${int.format(agg.n)} (${deepRate(agg.rate)})`;
-  const verdictText = (m) => (m.verdict.status === "effective" ? tx("Effective: fewer failures after the change, with enough rows.") : m.verdict.status === "not-effective" ? tx("Not effective: the failure rate did not fall after the change.") : m.overlap ? tx("The after window must start after the before period ends ({date}): the two never share a day.", { date: showDate(m.beforeTo) }) : !m.after ? tx("No rows after the change yet. Set the day the change took effect, then import the days that follow.") : tx("Too few eligible rows after the change ({n} of {min}): wait for more days before deciding.", { n: int.format(m.after.n), min: int.format(m.minN) }));
+  const verdictText = (m) => (m.verdict.status === "effective" ? tx("Effective: fewer failures after the change, with enough rows.") : m.verdict.status === "not-effective" ? tx("Not effective: the failure rate did not fall after the change.") : m.overlap ? tx("The after window must start after the before period ends ({date}): the two never share a day.", { date: showDate(m.beforeWin.to) }) : m.verdict.short === "before" ? tx("Too few eligible rows in the before period ({n} of {min}): the evidence is too thin to compare.", { n: int.format(m.before.n), min: int.format(m.minN) }) : !m.after ? tx("No rows after the change yet. Set the day the change took effect, then import the days that follow.") : tx("Too few eligible rows after the change ({n} of {min}): wait for more days before deciding.", { n: int.format(m.after.n), min: int.format(m.minN) }));
   // The decision: close as verified effective, or reopen. Both write the numbers into the case, the tracker's action and
   // the station's action register, so the three say the same thing.
   const decide = (row, status) => {
@@ -2205,7 +2255,7 @@
       if (m.verdict.status !== "effective") { sayCase(verdictText(m), true); return false; }
       if (!String(row.evidence || "").trim() || !String(row.root || "").trim() || row.rootStatus !== "Verified") { sayCase(tx("“Verified effective” needs a root cause verified on the floor or in the records, written evidence, the process failure and a verification result."), true); return false; }
     } else if (m.verdict.status === "insufficient") { sayCase(verdictText(m), true); return false; }
-    const line = `${tx("Before")} ${windowText({ from: row.snapshot.from, to: row.snapshot.to }, m.before)} → ${tx("After")} ${windowText(m.window, m.after)}, ${deepPoints(m.verdict.change)}; ${tx("sample floor {n}", { n: int.format(m.minN) })}. ${status === "effective" ? tx("Verified effective") : tx("Not effective")}.`;
+    const line = `${tx("Before")} ${windowText(m.beforeWin, m.before)} → ${tx("After")} ${windowText(m.window, m.after)}, ${deepPoints(m.verdict.change)}; ${tx("sample floor {n}", { n: int.format(m.minN) })}${m.target == null ? "" : `; ${tx("Approved maximum")} ≤ ${deepRate(m.target)}`}. ${status === "effective" ? tx("Verified effective") : tx("Not effective")}.`;
     const today = window.ToolKit.today();
     // The tracker first: its action carries the decision as its result. Nothing here changes if the browser cannot
     // keep that write.
@@ -2218,7 +2268,7 @@
     const kept = { status: row.status, verifyResult: row.verifyResult, updated: row.updated, verification: row.verification };
     const own = state.actions.find((a) => a.Action_ID === row.actionId);
     const ownKept = own ? { Verification_Status: own.Verification_Status, Baseline: own.Baseline, Result: own.Result, Status: own.Status } : null;
-    row.verification = { status, decided: today, minN: m.minN, before: { from: row.snapshot.from, to: row.snapshot.to, k: m.before.k, n: m.before.n }, after: { from: m.window.from, to: m.window.to, k: m.after.k, n: m.after.n }, text: line };
+    row.verification = { status, decided: today, minN: m.minN, target: m.target, before: { from: m.beforeWin.from, to: m.beforeWin.to, k: m.before.k, n: m.before.n }, after: { from: m.window.from, to: m.window.to, k: m.after.k, n: m.after.n }, text: line };
     row.status = status === "effective" ? "Verified effective" : "Reopened";
     row.verifyResult = [String(row.verifyResult || "").trim(), line].filter(Boolean).join("\n");
     row.updated = today;
@@ -2635,10 +2685,11 @@
       verify.append(fromField);
       if (!current.verifyFrom && tracked?.closed) { current.verifyFrom = tracked.closed; save(); }
       const m = caseMeasure(current);
-      if (m) {
+      const decided = current.verification?.status ? current.verification : null;
+      if (m && !decided) {
         const cards = el("div", "dl-stats cx-verify-stats");
         cards.append(
-          stat(tx("Before"), deepRate(m.before.rate), `${showDate(current.snapshot.from)} – ${showDate(current.snapshot.to)} · ${int.format(m.before.k)} / ${int.format(m.before.n)} ${tx("eligible")}`),
+          stat(tx("Before"), deepRate(m.before.rate), `${showDate(m.beforeWin.from)} – ${showDate(m.beforeWin.to)} · ${int.format(m.before.k)} / ${int.format(m.before.n)} ${tx("eligible")}`),
           stat(tx("After"), m.after ? deepRate(m.after.rate) : "–", m.window ? `${showDate(m.window.from)} – ${showDate(m.window.to)} · ${int.format(m.after.k)} / ${int.format(m.after.n)} ${tx("eligible")}` : tx("No window after the change yet.")),
           stat(tx("Change"), deepPoints(m.verdict.change), m.target == null ? tx("No approved maximum") : `${tx("Approved maximum")} ≤ ${deepRate(m.target)}`),
         );
@@ -2646,9 +2697,27 @@
         const verdictLine = el("p", `dl-panel-note cx-verdict is-${m.verdict.status}`, verdictText(m));
         verdictLine.dataset.cxVerdict = m.verdict.status;
         verify.append(verdictLine);
-        verify.append(el("p", "dl-panel-note", `${tx("Same partner, shift, zone and segment as the investigation; each rate over its own eligible rows; sample floor {n}.", { n: int.format(m.minN) })} ${current.snapshot.segment ? segmentText(current.snapshot.dim, current.snapshot.segment) : tx("All segments")}.${m.floorDiffers ? ` ${tx("The floor is the one saved with the investigation; the deep dive above now uses {n}.", { n: int.format(state.deep.minN) })}` : ""}`));
+        verify.append(el("p", "dl-panel-note", `${tx("Same partner, shift, zone and segment as the investigation; each rate over its own eligible rows; sample floor {n}.", { n: int.format(m.minN) })} ${current.snapshot.segment ? segmentText(current.snapshot.dim, current.snapshot.segment) : tx("All segments")}.${current.snapshot.dim === "Week" && current.snapshot.segment ? ` ${tx("The week is the before period; the rows after the change are every row of the same filters.")}` : ""}${m.floorDiffers ? ` ${tx("The floor is the one saved with the investigation; the deep dive above now uses {n}.", { n: int.format(state.deep.minN) })}` : ""}`));
       }
-      if (current.verification?.status) verify.append(el("p", `dl-panel-note cx-decided is-${current.verification.status}`, `${tx("Decided")} ${showDate(current.verification.decided)}: ${current.verification.text}`));
+      if (decided) {
+        // The decision as it was made: its own numbers, not today's. The live rows are compared with them below.
+        const cards = el("div", "dl-stats cx-verify-stats");
+        const rate = (w) => (w && w.n ? deepRate(w.k / w.n) : "–");
+        cards.append(
+          stat(tx("Before"), rate(decided.before), `${showDate(decided.before.from)} – ${showDate(decided.before.to)} · ${int.format(decided.before.k)} / ${int.format(decided.before.n)} ${tx("eligible")}`),
+          stat(tx("After"), rate(decided.after), `${showDate(decided.after.from)} – ${showDate(decided.after.to)} · ${int.format(decided.after.k)} / ${int.format(decided.after.n)} ${tx("eligible")}`),
+          stat(tx("Change"), decided.before?.n && decided.after?.n ? deepPoints(decided.after.k / decided.after.n - decided.before.k / decided.before.n) : "–", decided.target == null ? tx("No approved maximum") : `${tx("Approved maximum")} ≤ ${deepRate(decided.target)}`),
+        );
+        verify.append(cards);
+        verify.append(el("p", `dl-panel-note cx-decided is-${decided.status}`, `${tx("Decided")} ${showDate(decided.decided)}: ${decided.text}`));
+      }
+      if (m && m.changes.length) {
+        const changed = el("p", "dl-warning cx-changed", decided
+          ? tx("Since the decision on {date} the rows or the approved maximum have changed: {changes}. The decision stands until you decide again.", { date: showDate(decided.decided), changes: m.changes.join("; ") })
+          : tx("The rows of the before period are not what the evidence recorded: {changes}. Check the import before deciding.", { changes: m.changes.join("; ") }));
+        changed.dataset.cxChanged = "";
+        verify.append(changed);
+      }
       const decideButtons = el("div", "tool-actions");
       const closeButton = el("button", "button-primary", tx("Close: verified effective"));
       closeButton.type = "button";

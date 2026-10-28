@@ -7843,5 +7843,13 @@
   "Verified is decided in the investigation, from the KPI before and after the action.": "„Geprüft“ wird in der Untersuchung entschieden, aus der Kennzahl vor und nach der Maßnahme.",
   "The whys could not be handed over in this browser; the investigation opens without them.": "Die Warums konnten in diesem Browser nicht übergeben werden; die Untersuchung öffnet sich ohne sie.",
   "Added from the CX Control Tower as an open issue: “{text}”.": "Aus dem CX Control Tower als offener Punkt aufgenommen: „{text}“.",
-  "Nothing to add: the investigation's action did not reach this page. Open it again from the CX Control Tower.": "Nichts aufzunehmen: die Maßnahme der Untersuchung ist auf dieser Seite nicht angekommen. Öffnen Sie sie erneut aus dem CX Control Tower."
+  "Nothing to add: the investigation's action did not reach this page. Open it again from the CX Control Tower.": "Nichts aufzunehmen: die Maßnahme der Untersuchung ist auf dieser Seite nicht angekommen. Öffnen Sie sie erneut aus dem CX Control Tower.",
+  "before was {old}, now {new}": "vorher war {old}, jetzt {new}",
+  "after was {old}, now {new}": "nachher war {old}, jetzt {new}",
+  "approved maximum was {old}, now {new}": "freigegebenes Maximum war {old}, jetzt {new}",
+  "the evidence was recorded as {old} for the before period, the rows now give {new}": "die Evidenz wurde für die Vorher-Periode mit {old} festgehalten, die Zeilen ergeben jetzt {new}",
+  "Too few eligible rows in the before period ({n} of {min}): the evidence is too thin to compare.": "Zu wenige gültige Zeilen in der Vorher-Periode ({n} von {min}): die Evidenz ist zu dünn für einen Vergleich.",
+  "The week is the before period; the rows after the change are every row of the same filters.": "Die Woche ist die Vorher-Periode; die Zeilen nach der Änderung sind alle Zeilen derselben Filter.",
+  "Since the decision on {date} the rows or the approved maximum have changed: {changes}. The decision stands until you decide again.": "Seit der Entscheidung am {date} haben sich die Zeilen oder das freigegebene Maximum geändert: {changes}. Die Entscheidung bleibt, bis Sie erneut entscheiden.",
+  "The rows of the before period are not what the evidence recorded: {changes}. Check the import before deciding.": "Die Zeilen der Vorher-Periode sind nicht die der festgehaltenen Evidenz: {changes}. Prüfen Sie den Import, bevor Sie entscheiden."
 }

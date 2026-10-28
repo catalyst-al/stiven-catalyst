@@ -45,10 +45,15 @@ case fields (title, status, problem, evidence, where, rootStatus, why1–why5, r
 owner, deadline, verifyMetric, verifyResult), actionId (the row of the station's own actions table), snapshot (metric,
 label, from, to, DSP, Shift, Zone, dim, segment, k, n, source), trackerId (the action in `sc-actions`), verifyFrom (the
 day the change took effect), verification ({ status: effective | not-effective, decided, before: { from, to, k, n },
-after: { from, to, k, n }, text, minN }) }]`; the snapshot also keeps `minN`, the sample floor in force when the evidence
-was saved, which the verification uses whatever the deep dive's floor is later; a case saved before October 2026 loads
-with the three last fields empty. A new case id is never one that a case, a tracker action or a register row still
-names. The after window begins strictly after the before period's last day.
+after: { from, to, k, n }, text, minN, target }) }]`; the snapshot also keeps `minN`, the sample floor in force when the
+evidence was saved, which the verification uses whatever the deep dive's floor is later, and `baseK` / `baseN`, the
+failure counted on the case's own rows over its before period when the evidence was recorded; a case saved before
+October 2026 loads with these fields empty. A new case id is never one that a case, a tracker action or a register row
+still names. The before period is the snapshot's period, or, for a case started from a week segment, that week inside
+it; the after window begins strictly after its last day and, for a week segment, is not filtered by the week. Both
+windows must reach the floor for a verdict. A decision keeps its own numbers and the approved maximum of its day
+(`verification.target`); when the rows or the maximum change later, the page shows the difference and the decision
+stands until it is made again.
 
 Hand-offs between tools through `sessionStorage`: `sc-pareto-handoff` (a log opened in Pareto), `sc-sigma-handoff`
 (days opened as a control chart); read once and cleared. Hand-offs through the address, read once and cleaned:

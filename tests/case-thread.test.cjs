@@ -207,16 +207,17 @@ test('not effective: the case is reopened, the action stays done with the result
 test('too few rows after the change is no verdict; an action done only in the register also counts; the tracker refuses verified without a result', () => {
   const t = tower();
   startCase(t, 'damage', 'Damage, small sample');
-  // A sample floor the after window cannot reach, in force when the evidence is saved.
-  t.setValue('#cx-deep-min', '5000');
+  // A sample floor the before period reaches (3 375 rows) and a late after window does not, in force when the evidence
+  // is saved.
+  t.setValue('#cx-deep-min', '2000');
   t.click(t.button('Create the linked action'));
   const id = t.stored().cases[0].id;
-  assert.equal(t.stored().cases[0].snapshot.minN, 5000, 'the floor is saved with the evidence');
+  assert.equal(t.stored().cases[0].snapshot.minN, 2000, 'the floor is saved with the evidence');
   t.S.update(t.S.forCase(id)[0].id, { status: 'done' });
   t.tab('actions');
   t.tab('deep');
   const from = t.body.querySelector('#cx-verify-from');
-  from.value = '2026-09-14';
+  from.value = '2026-09-20';
   from.dispatchEvent(new t.w.Event('change', { bubbles: true }));
   assert.equal(t.body.querySelector('[data-cx-verdict]').dataset.cxVerdict, 'insufficient');
   t.click(t.body.querySelector('[data-cx-close]'));
