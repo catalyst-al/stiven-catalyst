@@ -250,4 +250,7 @@ test('the privacy policy describes the PIN lock, the photos and every kind of re
   assert.equal(count(/I count visits|zähle ich|i numëroj vizitat/g), 0);
   assert.equal(count(/Its purpose is to count|Es dient dazu, zu zählen|Qëllimi i tij është të numërojë/g), 3);
   assert.equal(count(/script for anonymous visit counts|Skript für anonyme Besuchszahlen|skript(it)? për numërimin anonim/g), 6);
+  // The opening of section 3 claims no more than the fonts; the external services are each described below.
+  assert.equal(count(/without Google Fonts or any other external font service|ohne Google Fonts oder andere externe Schriftdienste|pa Google Fonts ose shërbime të tjera të jashtme fontesh/g), 3);
+  assert.equal(count(/The one exception is|Die einzige Ausnahme|I vetmi përjashtim/g), 0);
 });
