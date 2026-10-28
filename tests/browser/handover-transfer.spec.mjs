@@ -5,6 +5,9 @@ import { readFile } from "node:fs/promises";
 import { test, expect, expectTheme, expectAccessible } from "./fixtures.mjs";
 
 const stored = (page, key) => page.evaluate((k) => JSON.parse(localStorage.getItem(k) || "null"), key);
+// A closed shift as it matters: the page rebuilds a saved handover field by field (missing records empty, the checks
+// one per item of the template), so an entry is compared by what it says, not by its raw shape.
+const closedShift = (entry) => ({ closedAt: entry.closedAt, text: entry.text, from: entry.handover.from, to: entry.handover.to, ackAt: entry.handover.ackAt, area: entry.handover.area, metrics: entry.handover.metrics, issues: entry.handover.issues });
 const fill = async (page, selector, value) => {
   const node = page.locator(selector);
   await node.fill(value);
@@ -127,7 +130,7 @@ test("device A seals and shares, device B opens with the code, takes over and co
   expect([scanner.done, scanner.owner, scanner.due, scanner.priority, scanner.carried]).toEqual([false, "IT desk", "2026-10-30", "Medium", 1]);
   // The history B had is untouched; the shift B was on joined it.
   expect(stateB.history).toHaveLength(2);
-  expect(stateB.history[1]).toEqual(historyBefore[0]);
+  expect(closedShift(stateB.history[1])).toEqual(closedShift(historyBefore[0]));
   expect(stateB.history[0].handover.from).toBe("Lena");
   expect(stateB.received.map((entry) => entry.id)).toEqual([sharedA[0].id]);
   await expect(B.page.locator("[data-output-title]")).toContainText("Received");
@@ -308,7 +311,7 @@ test("two issues with the same text but another owner and date are kept apart on
     ["Lena", "2026-10-28", false, 1],
   ]);
   expect(state.history).toHaveLength(2);
-  expect(state.history[1]).toEqual(history[0]);
+  expect(closedShift(state.history[1])).toEqual(closedShift(history[0]));
   expect(state.history[0].handover.from).toBe("Lena");
   expect(errorsB).toEqual([]);
   await B.context.close();
