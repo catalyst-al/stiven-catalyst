@@ -95,3 +95,22 @@ Në degë, commit `db1c6afa`, me ndërtim të plotë (`npm run build`, 838 faqe)
 Numrat e stacionit shembull, siç i jep motori: dëmtimet 31 gusht – 13 shtator 40 / 3 375 (1,19 %) → 14 – 26 shtator
 13 / 3 388 (0,38 %), vendim efektiv; vonesat 72 / 3 375 (2,13 %) → 78 / 3 388 (2,30 %), vendim jo efektiv. Të dyja
 rrugët kalojnë nëpër të njëjtin kod në teste.
+
+## 8. Shqyrtimi i autorit: pesë raste integriteti (28 tetor, mbrëmje)
+
+Çdo rast ka një test në `tests/case-integrity.test.cjs` që dështon në commit-in e mëparshëm (`119dca57`, provuar në
+një worktree) dhe kalon pas korrigjimit. Pa funksione të reja, pa framework, pa prekje të Worker-it.
+
+| # | Rasti | PARA (çfarë bënte kodi) | PAS (korrigjimi) |
+| --- | --- | --- | --- |
+| 1 | Dy hetime, i njëjti tekst veprimi | Rregulli i dublikatave i store-it (titull + burim) e quante veprimin e dytë dublikatë; hetimi i dytë lidhej me veprimin e hetimit të parë | Dublikata vlen vetëm brenda të njëjtit rast (`caseId` hyn në rregull, në `add`, në `fromParams` dhe në kërkimin e binjakut te tower-i): dy veprime, secili me rastin e vet; i njëjti tekst pa rast mbetet veprim i tretë |
+| 2 | Verified në tracker vs verifikimi KPI | Me një rezultat të shtypur me dorë, një veprim rasti bëhej "verified" në tracker pa asnjë matje | `ActionsStore.update` refuzon të vendosë ose të heqë "verified" te një veprim me `caseId` nëse s'e kërkon rasti (`{ byCase: true }`, `lastUpdate = "case-verifies"`); tracker-i e gri-zon opsionin dhe e bllokon selektorin e një veprimi të verifikuar nga rasti; teksti i rezultatit mbetet i redaktueshëm; veprimet pa rast si më parë |
+| 3 | ID pas fshirjes | `newCaseId` numëronte vetëm rastet ekzistuese: pas fshirjes së `…-001` hetimi i ri merrte `…-001` dhe trashëgonte veprimet jetime | Një id është e zënë sa kohë e emërton një rast, një veprim i tracker-it ose një rresht i regjistrit (`caseIdTaken`); hetimi i ri merr `…-002` |
+| 4 | Teksti i 5 Whys në URL | Lidhja "Dërgoje shkakun" mbante problemin, pesë pse-të dhe shkakun në adresë; edhe tower → 5 Whys mbante problemin | Adresa mban vetëm `?case=`; tekstet udhëtojnë brenda shfletuesit si një shënim `sessionStorage` (`sc-case-handoff`, me `caseId` dhe `from`), i shkruar në klikim dhe i lexuar një herë nga faqja për të cilën është; shënimi i një rasti tjetër hidhet; lidhja te 5 Whys kërkon hetim të ruajtur |
+| 5 | Periudhat dhe pragu | `afterWindow` pranonte një fillim brenda periudhës para; pragu i mostrës ishte ai i çastit (`state.deep.minN`), i ndryshueshëm pas faktit | Periudha pas fillon rreptësisht pas ditës së fundit të periudhës para (mesazh i qartë kur jo); pragu ruhet me evidencën (`snapshot.minN`), përdoret në verifikim, shënohet në vendim (`verification.minN`) dhe në tekstin e rezultatit, eksportohet/importohet në regjistër (`Sample_Floor`); kur pragu i deep dive-it ndryshon, kutia e thotë |
+| + | Ruajtja dështon gjatë sinkronizimit | `update` kthente veprimin edhe kur shkrimi dështonte; vendimi shkruante rastin në kujtesë dhe tracker-in pa kontroll: pas rifreskimit të dy mund të mos përputheshin | `update` kthen null me `"unsaved"`; vendimi shkruan së pari tracker-in (nëse dështon, asgjë s'ndryshon), pastaj tower-in menjëherë (`persistNow`); nëse ky dështon, veprimi i tracker-it kthehet në gjendjen e mëparshme dhe rasti në kujtesë rikthehet; mesazh i qartë, vendimi mund të përsëritet |
+
+Një ndryshim i vogël i lidhur: faza e rastit ndjek veprimin në të dy drejtimet sa kohë s'ka vendim ("Verification
+pending" kur veprimi është done; prapë "Investigating" kur rihapet para vendimit).
+
+REZULTATET-8

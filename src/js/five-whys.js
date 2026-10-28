@@ -83,24 +83,36 @@
     trackerLink.href = window.ToolKit.trackerUrl(value("action") ? { title: value("action"), detail: value("cause") ? `${tx("Root cause")}: ${value("cause")}` : "", owner: value("owner"), due: value("due"), check: value("check"), source: "five-whys", priority: "High" } : {});
     trackerLink.dataset.ready = value("action") ? "" : "no";
   };
-  // The investigation of the CX Control Tower this worksheet belongs to (?case=INV-…): named on the page, and the
-  // whys and the cause go back to it through its address (cx-tower.js reads ?case=, ?why1=… and ?root=).
+  // The investigation of the CX Control Tower this worksheet belongs to (?case=INV-…): named on the page. The whys
+  // and the cause go back to it inside the browser (one sessionStorage note, read once by cx-tower.js); the address
+  // carries the case id alone.
+  const HANDOFF = "sc-case-handoff";
   const caseBox = form.querySelector("[data-case]");
   const caseBack = form.querySelector("[data-case-back]");
   const caseBase = caseBack?.getAttribute("href") || "../cx-control-tower/";
+  const caseId = () => form.elements.case?.value.trim() || "";
   const syncCase = () => {
     if (!caseBox) return;
-    const id = form.elements.case?.value.trim() || "";
+    const id = caseId();
     caseBox.hidden = !id;
     if (!id) return;
     caseBox.querySelector("[data-case-text]").textContent = tx("Investigation {id} of the CX Control Tower.", { id });
     const url = new URL(caseBase, location.href);
     url.searchParams.set("case", id);
-    const value = (name) => form.elements[name]?.value.trim() || "";
-    if (value("problem")) url.searchParams.set("problem", value("problem"));
-    whyInputs().forEach((input, index) => { if (input.value.trim() && index < 5) url.searchParams.set(`why${index + 1}`, input.value.trim()); });
-    if (value("cause")) url.searchParams.set("root", value("cause"));
     caseBack.href = url.href;
+  };
+  caseBack?.addEventListener("click", () => {
+    const id = caseId();
+    if (!id) return;
+    const value = (name) => form.elements[name]?.value.trim() || "";
+    const note = { caseId: id, from: "five-whys", problem: value("problem"), whys: whyInputs().slice(0, 5).map((input) => input.value.trim()), root: value("cause"), at: new Date().toISOString() };
+    try { sessionStorage.setItem(HANDOFF, JSON.stringify(note)); } catch { flash(tx("The whys could not be handed over in this browser; the investigation opens without them.")); }
+  });
+  // A note the tower left for this worksheet (the problem of the case), taken once.
+  const takeHandoff = (id) => {
+    let note = null;
+    try { note = JSON.parse(sessionStorage.getItem(HANDOFF)); sessionStorage.removeItem(HANDOFF); } catch { note = null; }
+    return note && typeof note === "object" && note.caseId === id && note.from === "cx-control-tower" ? note : null;
   };
   trackerLink?.addEventListener("click", (event) => {
     if (form.elements.action.value.trim()) return;
@@ -214,8 +226,9 @@
   // Other tools link here with ?problem=... to start a worksheet from their result; the CX Control Tower adds
   // ?case=INV-… so the whys go back to that investigation.
   const address = new URLSearchParams(location.search);
-  const incoming = address.get("problem")?.trim();
   const incomingCase = (address.get("case") || "").replace(/[^A-Za-z0-9-]/g, "").slice(0, 40);
+  const handoff = incomingCase ? takeHandoff(incomingCase) : null;
+  const incoming = address.get("problem")?.trim() || (typeof handoff?.problem === "string" ? handoff.problem.trim() : "");
   if (incoming || incomingCase) {
     const current = form.elements.problem.value.trim();
     if (incoming && current !== incoming && (!current || window.confirm(`${tx("Start a new worksheet with this problem?")}\n\n${incoming}`))) {

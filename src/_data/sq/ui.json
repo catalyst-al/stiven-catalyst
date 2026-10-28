@@ -7832,5 +7832,14 @@
   "Verified is decided there, from the KPI before and after the action.": "“I verifikuar” vendoset atje, nga treguesi para dhe pas veprimit.",
   "Verified needs a result: write what happened and what the number did, then save.": "“I verifikuar” kërkon rezultat: shkruaj çfarë ndodhi dhe çfarë bëri numri, pastaj ruaje.",
   "Investigation {id} of the CX Control Tower.": "Hetimi {id} i CX Control Tower.",
-  "Send the cause back to the investigation": "Dërgoje shkakun te hetimi"
+  "Send the cause back to the investigation": "Dërgoje shkakun te hetimi",
+  "The after window must start after the before period ends ({date}): the two never share a day.": "Periudha pas duhet të fillojë pasi mbaron periudha para ({date}): të dyja nuk ndajnë asnjë ditë.",
+  "sample floor {n}": "kufiri i mostrës {n}",
+  "The Action Tracker could not be saved in this browser: nothing was changed. Free some space or unlock the tools, then decide again.": "Gjurmuesi i Veprimeve nuk u ruajt në këtë shfletues: asgjë nuk u ndryshua. Liro hapësirë ose zhblloko mjetet, pastaj vendos sërish.",
+  "This investigation could not be saved in this browser: nothing was changed. Free some space or unlock the tools, then decide again.": "Ky hetim nuk u ruajt në këtë shfletues: asgjë nuk u ndryshua. Liro hapësirë ose zhblloko mjetet, pastaj vendos sërish.",
+  "Save the investigation first, so the whys come back to it.": "Ruaje hetimin më parë, që pse-të të kthehen tek ai.",
+  "The floor is the one saved with the investigation; the deep dive above now uses {n}.": "Kufiri është ai i ruajtur me hetimin; analiza e thellë më sipër tani përdor {n}.",
+  "Verified by the investigation; reopen it there.": "Verifikuar nga hetimi; rihape atje.",
+  "Verified is decided in the investigation, from the KPI before and after the action.": "“I verifikuar” vendoset në hetim, nga treguesi para dhe pas veprimit.",
+  "The whys could not be handed over in this browser; the investigation opens without them.": "Pse-të nuk u dorëzuan në këtë shfletues; hetimi hapet pa ato."
 }

@@ -38,18 +38,25 @@ go into the locked record so team sync pauses while locked.
 Two shapes worth naming, because other tools read them. `sc-actions` is `{ rows: [action] }`, an action being `{ id, title,
 detail, owner, due, source, check, area, priority, status (open | doing | done | verified), created, closed, result }`
 and, when it belongs to an investigation of the CX Control Tower, `caseId` (`INV-…`); `verified` is never written
-without a `result` (`ActionsStore.update`). In `sc-cx-tower` the saved investigations are `cases: [{ id, updated, the
+without a `result`, and on an action with a `caseId` it is set or unset by the case alone (`ActionsStore.update(id,
+patch, { byCase: true })`; by hand the store refuses it, `lastUpdate = "case-verifies"`). The same open title from the
+same tool is a duplicate only within the same case. An update the browser could not save returns null (`"unsaved"`). In `sc-cx-tower` the saved investigations are `cases: [{ id, updated, the
 case fields (title, status, problem, evidence, where, rootStatus, why1–why5, root, containment, corrective, preventive,
 owner, deadline, verifyMetric, verifyResult), actionId (the row of the station's own actions table), snapshot (metric,
 label, from, to, DSP, Shift, Zone, dim, segment, k, n, source), trackerId (the action in `sc-actions`), verifyFrom (the
 day the change took effect), verification ({ status: effective | not-effective, decided, before: { from, to, k, n },
-after: { from, to, k, n }, text }) }]`; a case saved before October 2026 loads with the three last fields empty.
+after: { from, to, k, n }, text, minN }) }]`; the snapshot also keeps `minN`, the sample floor in force when the evidence
+was saved, which the verification uses whatever the deep dive's floor is later; a case saved before October 2026 loads
+with the three last fields empty. A new case id is never one that a case, a tracker action or a register row still
+names. The after window begins strictly after the before period's last day.
 
 Hand-offs between tools through `sessionStorage`: `sc-pareto-handoff` (a log opened in Pareto), `sc-sigma-handoff`
 (days opened as a control chart); read once and cleared. Hand-offs through the address, read once and cleaned:
 `?action=…&owner=&due=&source=&check=&area=&priority=&case=` (the Action Tracker), `?problem=&case=` (5 Whys),
-`?issue=&owner=&due=` (Shift Handover), `?case=INV-…&problem=&why1=…&why5=&root=` (the CX Control Tower opens the
-investigation and fills its empty fields).
+`?issue=&owner=&due=` (Shift Handover), `?case=INV-…` (the CX Control Tower opens the investigation; 5 Whys names it).
+Between the tower and 5 Whys the texts never enter the address: `sessionStorage` `sc-case-handoff`, one note `{ caseId,
+from: "cx-control-tower" | "five-whys", problem, whys, root, at }`, written on the click and read once by the page it
+is for (a note for another case is dropped).
 
 **IndexedDB.** `sc-restore` (store `points`): the restore points of `js/storage-guard.js`, `{ id, created, reason,
 items, bytes }`, `id` = `<ISO time> <reason>[ n]`, reasons `daily`, `before-open`, `before-restore`, `manual`,

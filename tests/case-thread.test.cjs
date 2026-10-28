@@ -85,50 +85,7 @@ test('the case as an action of the tracker, and the whys a worksheet sends back'
 });
 
 // ---------- The pages ----------
-const cfg = fs.readFileSync('src/_data/cxTower.json', 'utf8');
-const towerHtml = `<html lang="en"><body><div data-cx class="cx"><p data-cx-example-flag hidden></p><p data-cx-note></p>
-  <div data-cx-filters hidden><input data-cx-filter="from" type="date"><input data-cx-filter="to" type="date"><select data-cx-filter="DSP"></select><select data-cx-filter="Shift"></select><select data-cx-filter="Zone"></select><button data-cx-reset-filters type="button"></button></div>
-  <div data-cx-tabs></div><div data-cx-body id="cx-panel"></div></div><script type="application/json" id="cx-data">${cfg}</script></body></html>`;
-// The tower's page, with the actions store the built page loads before it; `storage` seeds the browser (a reload).
-const tower = ({ storage = {}, search = '', now = '2026-10-28T10:00:00Z' } = {}) => {
-  const dom = new JSDOM(towerHtml, { url: `https://example.test/tools/cx-control-tower/${search}`, runScripts: 'outside-only', pretendToBeVisual: true });
-  const w = dom.window;
-  w.eval(`(() => { const Real = Date; const fixed = new Real(${JSON.stringify(now)}); Date = class extends Real { constructor(...args) { super(...(args.length ? args : [fixed])); } static now() { return fixed.getTime(); } }; })();`);
-  w.confirm = () => true;
-  w.URL.createObjectURL = () => 'blob:x';
-  w.URL.revokeObjectURL = () => {};
-  Object.entries(storage).forEach(([key, value]) => w.localStorage.setItem(key, value));
-  for (const file of ['tool-kit', 'docx-kit', 'cv-import', 'pareto', 'actions-store', 'cx-tower']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
-  const body = w.document.querySelector('[data-cx-body]');
-  const click = (node) => node.dispatchEvent(new w.Event('click', { bubbles: true }));
-  const field = (name) => body.querySelector(`#cx-case-${name}`);
-  const type = (name, value) => { const node = field(name); node.value = value; node.dispatchEvent(new w.Event(node.tagName === 'SELECT' || node.type === 'date' ? 'change' : 'input', { bubbles: true })); };
-  const button = (text) => [...body.querySelectorAll('button')].find((b) => b.textContent === text);
-  const filter = (key, value) => { const node = w.document.querySelector(`[data-cx-filter="${key}"]`); node.value = value; node.dispatchEvent(new w.Event('change', { bubbles: true })); };
-  const stored = () => { w.dispatchEvent(new w.Event('pagehide')); return JSON.parse(w.localStorage.getItem('sc-cx-tower')); };
-  const all = () => { w.dispatchEvent(new w.Event('pagehide')); const out = {}; for (let i = 0; i < w.localStorage.length; i++) { const key = w.localStorage.key(i); out[key] = w.localStorage.getItem(key); } return out; };
-  const tab = (id) => click(w.document.querySelector(`[data-tab="${id}"]`));
-  const note = () => body.querySelector('.cx-case-note').textContent;
-  const deepMetric = (id) => { const select = body.querySelector('#cx-deep-metric'); select.value = id; select.dispatchEvent(new w.Event('change', { bubbles: true })); };
-  return { w, body, click, field, type, button, filter, stored, all, tab, note, deepMetric, S: w.ActionsStore };
-};
-// The whole flow needs the example (a first visit opens on it), the deep dive on one failure, a before period.
-const startCase = (t, id, title) => {
-  t.tab('deep');
-  t.deepMetric(id);
-  t.filter('from', '2026-08-31');
-  t.filter('to', '2026-09-13');
-  t.click(t.button('New investigation'));
-  t.type('title', title);
-  t.type('problem', `${title}: too many on the evening wave`);
-  t.type('evidence', 'Deliveries table, 31 Aug – 13 Sep, every row traceable');
-  t.type('rootStatus', 'Verified');
-  t.type('root', 'No loading sequence standard');
-  t.type('corrective', 'Heavy-first loading sequence with marked shelf zones');
-  t.type('owner', 'Shift Leader');
-  t.type('deadline', '2026-09-13');
-  t.type('verifyMetric', 'Failure rate before and after');
-};
+const { tower, startCase } = require('./helpers/cx-tower-page.cjs');
 
 test('the flow on the tower page: case → action in the tracker (once) → done → before/after on the same rows → closed as verified effective', () => {
   const t = tower();
@@ -250,15 +207,14 @@ test('not effective: the case is reopened, the action stays done with the result
 test('too few rows after the change is no verdict; an action done only in the register also counts; the tracker refuses verified without a result', () => {
   const t = tower();
   startCase(t, 'damage', 'Damage, small sample');
+  // A sample floor the after window cannot reach, in force when the evidence is saved.
+  t.setValue('#cx-deep-min', '5000');
   t.click(t.button('Create the linked action'));
   const id = t.stored().cases[0].id;
+  assert.equal(t.stored().cases[0].snapshot.minN, 5000, 'the floor is saved with the evidence');
   t.S.update(t.S.forCase(id)[0].id, { status: 'done' });
   t.tab('actions');
   t.tab('deep');
-  // A sample floor the after window cannot reach.
-  const min = t.body.querySelector('#cx-deep-min');
-  min.value = '5000';
-  min.dispatchEvent(new t.w.Event('change', { bubbles: true }));
   const from = t.body.querySelector('#cx-verify-from');
   from.value = '2026-09-14';
   from.dispatchEvent(new t.w.Event('change', { bubbles: true }));
@@ -268,12 +224,14 @@ test('too few rows after the change is no verdict; an action done only in the re
   t.click(t.body.querySelector('[data-cx-reopen]'));
   assert.match(t.note(), /Too few eligible rows after the change/);
   assert.equal(t.stored().cases[0].status, 'Verification pending');
-  // The store itself: verified needs a result, whoever asks.
+  // The store itself: verified needs a result, whoever asks; and an action of a case is verified by the case alone.
   const action = t.S.forCase(id)[0];
   assert.equal(t.S.update(action.id, { status: 'verified' }), null);
   assert.equal(t.S.lastUpdate, 'needs-result');
   assert.equal(t.S.list()[0].status, 'done');
-  assert.equal(t.S.update(action.id, { status: 'verified', result: 'Damage rate 0.4% in the two weeks after' }).status, 'verified');
+  assert.equal(t.S.update(action.id, { status: 'verified', result: 'Damage rate 0.4% in the two weeks after' }), null);
+  assert.equal(t.S.lastUpdate, 'case-verifies');
+  assert.equal(t.S.update(action.id, { status: 'verified', result: 'Damage rate 0.4% in the two weeks after' }, { byCase: true }).status, 'verified');
 });
 
 test('the address opens a case and fills its empty whys from 5 Whys; an unknown case is said', () => {
@@ -283,9 +241,12 @@ test('the address opens a case and fills its empty whys from 5 Whys; an unknown 
   t.click(t.button('Save the investigation'));
   const id = t.stored().cases[0].id;
   const storage = t.all();
-  const search = `?case=${id}&problem=${encodeURIComponent('Damage on DSP B: 1.2%')}&why1=${encodeURIComponent('Other first why')}&why2=${encodeURIComponent('No loading sequence')}&why3=${encodeURIComponent('Standard never written')}&root=${encodeURIComponent('No loading standard for heavy items')}&utm=keep`;
-  const again = tower({ storage, search });
+  // 5 Whys leaves its note in sessionStorage; the address names the case alone (and the whys in it are ignored).
+  const session = { 'sc-case-handoff': { caseId: id, from: 'five-whys', problem: 'Damage on DSP B: 1.2%', whys: ['Other first why', 'No loading sequence', 'Standard never written', '', ''], root: 'No loading standard for heavy items' } };
+  const search = `?case=${id}&why1=${encodeURIComponent('from the address')}&utm=keep`;
+  const again = tower({ storage, session, search });
   const state = again.stored();
+  assert.equal(again.w.sessionStorage.getItem('sc-case-handoff'), null, 'the note is read once');
   assert.equal(state.tab, 'deep');
   assert.equal(state.caseId, id);
   const row = state.cases[0];
@@ -293,10 +254,13 @@ test('the address opens a case and fills its empty whys from 5 Whys; an unknown 
   assert.equal(row.problem, 'Damage on DSP B: too many on the evening wave', 'the problem already written is kept');
   assert.equal(again.field('why2').value, 'No loading sequence');
   assert.match(again.w.document.querySelector('[data-cx-note]').textContent, /2 fields filled from 5 Whys.*3 fields already written here were kept/);
-  assert.equal(again.w.location.search, '?utm=keep', 'the address is cleaned, the rest stays');
+  assert.equal(again.w.location.search, `?why1=${encodeURIComponent('from the address')}&utm=keep`.replace('%20', '+').replace(/%20/g, '+'), 'the case is taken from the address, the rest stays');
   const missing = tower({ storage, search: '?case=INV-20991231-009' });
   assert.match(missing.w.document.querySelector('[data-cx-note]').textContent, /INV-20991231-009 is not in this browser/);
   assert.equal(missing.w.location.search, '');
+  // A note left for another case is not applied to this one.
+  const other = tower({ storage, session: { 'sc-case-handoff': { caseId: 'INV-20991231-009', from: 'five-whys', whys: ['x'], root: 'y' } }, search: `?case=${id}` });
+  assert.equal(other.stored().cases[0].why4, '', 'nothing from the other note');
 });
 
 const built = fs.existsSync('_site/tools/five-whys/index.html') && fs.existsSync('_site/tools/action-tracker/index.html');
@@ -313,9 +277,14 @@ test('5 Whys carries the case id and sends the whys back; the tracker names the 
   typeIn(whys, form.elements.why1, 'Heavy bags on light ones');
   typeIn(whys, form.elements.why2, 'No loading sequence');
   typeIn(whys, form.elements.cause, 'No standard for heavy items');
-  const back = new URL(form.querySelector('[data-case-back]').href);
+  const backLink = form.querySelector('[data-case-back]');
+  const back = new URL(backLink.href);
   assert.equal(back.pathname, '/tools/cx-control-tower/');
-  assert.deepEqual([back.searchParams.get('case'), back.searchParams.get('problem'), back.searchParams.get('why1'), back.searchParams.get('why2'), back.searchParams.get('why3'), back.searchParams.get('root')], ['INV-20261028-001', 'Damage on DSP B', 'Heavy bags on light ones', 'No loading sequence', null, 'No standard for heavy items']);
+  assert.deepEqual([...back.searchParams.keys()], ['case'], 'the address carries the case id and nothing else');
+  assert.equal(back.searchParams.get('case'), 'INV-20261028-001');
+  clickIn(whys, backLink);
+  const note = JSON.parse(whys.sessionStorage.getItem('sc-case-handoff'));
+  assert.deepEqual([note.caseId, note.from, note.problem, note.whys, note.root], ['INV-20261028-001', 'five-whys', 'Damage on DSP B', ['Heavy bags on light ones', 'No loading sequence', '', '', ''], 'No standard for heavy items']);
   // Saved with the worksheet, so a reload keeps the thread; cleared with it.
   assert.equal(JSON.parse(whys.localStorage.getItem('sc-five-whys')).case, 'INV-20261028-001');
   const reopened = openTool('five-whys', { storage: { 'sc-five-whys': whys.localStorage.getItem('sc-five-whys') } });

@@ -18,7 +18,10 @@
 // - An action may belong to a case (caseId: the id of an investigation of the CX Control Tower). The id travels in the
 //   hand-off (?case=) and comes back with forCase(); the case decides "verified" from the KPI before and after.
 // - "verified" needs a result: update() refuses to mark an action verified while its result is empty (lastUpdate says
-//   "needs-result"). Done is a task finished; verified is a result shown.
+//   "needs-result"). Done is a task finished; verified is a result shown. An action of a case is verified by the case
+//   alone, from its KPI before and after: update() refuses to set or unset "verified" on it unless the caller says it
+//   is the case (update(id, patch, { byCase: true }); lastUpdate "case-verifies"). Two cases may hold the same action
+//   text: the same open title from the same tool is a duplicate only within the same case.
 window.ActionsStore = (() => {
   const KEY = "sc-actions";
   const STATUSES = ["open", "doing", "done", "verified"];
@@ -96,7 +99,7 @@ window.ActionsStore = (() => {
     } else {
       rows = ownOnly(rows);
     }
-    if (rows.some((row) => isOpen(row) && row.title === action.title && row.source === action.source)) {
+    if (rows.some((row) => isOpen(row) && row.title === action.title && row.source === action.source && (row.caseId || "") === (action.caseId || ""))) {
       lastAdd = "duplicate";
       return null;
     }
@@ -119,19 +122,21 @@ window.ActionsStore = (() => {
     return result;
   };
   let lastUpdate = null;
-  const update = (actionId, patch) => {
+  const update = (actionId, patch, { byCase = false } = {}) => {
     lastUpdate = "invalid";
     const rows = read();
     const index = rows.findIndex((row) => row.id === actionId);
     if (index < 0) return null;
-    const next = clean({ ...rows[index], ...patch, id: rows[index].id, created: rows[index].created });
+    const before = rows[index];
+    const next = clean({ ...before, ...patch, id: before.id, created: before.created });
     if (!next) return null;
     if (next.status === "verified" && !next.result) { lastUpdate = "needs-result"; return null; }
+    if ((before.caseId || next.caseId) && (next.status === "verified") !== (before.status === "verified") && !byCase) { lastUpdate = "case-verifies"; return null; }
     lastUpdate = null;
     if ((next.status === "done" || next.status === "verified") && !next.closed) next.closed = localIso();
     if (next.status === "open" || next.status === "doing") next.closed = "";
     rows[index] = next;
-    write(rows);
+    if (!write(rows)) { lastUpdate = "unsaved"; return null; }
     return next;
   };
   const remove = (actionId) => {
@@ -194,7 +199,7 @@ window.ActionsStore = (() => {
     if (!title) return { added: null, cleaned: false };
     const incoming = { title, detail: str(params.get("detail")), owner: str(params.get("owner")), due: str(params.get("due")), source: str(params.get("source")), check: str(params.get("check")), area: str(params.get("area")), priority: str(params.get("priority")), caseId: str(params.get("case")) };
     const rows = list();
-    const twin = rows.find((row) => isOpen(row) && row.title === title && row.source === clean({ title, source: incoming.source }).source);
+    const twin = rows.find((row) => isOpen(row) && row.title === title && row.source === clean({ title, source: incoming.source }).source && (row.caseId || "") === caseIdOf(incoming.caseId));
     const added = twin ? null : add(incoming);
     PARAMS.forEach((name) => params.delete(name));
     const rest = params.toString();

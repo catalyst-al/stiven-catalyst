@@ -171,11 +171,20 @@
     const statusBox = el("div", "at-status");
     const select = el("select");
     select.setAttribute("aria-label", `${tx("Status")}: ${a.title}`);
-    S.STATUSES.forEach((s) => { const option = el("option", null, statusName(s)); option.value = s; option.selected = s === a.status; select.append(option); });
+    S.STATUSES.forEach((s) => {
+      const option = el("option", null, statusName(s));
+      option.value = s;
+      option.selected = s === a.status;
+      // An action of a case is verified by the case, from its KPI before and after: not from here.
+      if (s === "verified" && a.caseId && a.status !== "verified") option.disabled = true;
+      select.append(option);
+    });
+    if (a.caseId && a.status === "verified") { select.disabled = true; select.title = tx("Verified by the investigation; reopen it there."); }
     select.addEventListener("change", () => {
       const updated = S.update(a.id, { status: select.value });
       // Verified needs a result: the status stays, the form opens on the result, and saving a result verifies it.
       if (!updated && S.lastUpdate === "needs-result") { editing = a.id; pending = { id: a.id, status: "verified" }; }
+      else if (!updated && S.lastUpdate === "case-verifies") { status.textContent = tx("Verified is decided in the investigation, from the KPI before and after the action."); }
       else if (select.value === "done" && !a.result) { editing = a.id; }
       render();
     });

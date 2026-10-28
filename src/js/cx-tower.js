@@ -661,8 +661,9 @@
   const caseRows = (rows, snapshot, from, to, dim = snapshot.dim) => rows.filter((row) => ["DSP", "Shift", "Zone"].every((key) => !snapshot[key] || row[key] === snapshot[key])
     && (!snapshot.segment || segmentOf(row, dim) === snapshot.segment)
     && row.Date && (!from || row.Date >= from) && (!to || row.Date <= to));
-  // The window after the change: from the day the change took effect to the last day with data. Null without either.
-  const afterWindow = (from, last) => (from && last && last >= from ? { from, to: last, days: Math.round((Date.parse(`${last}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 864e5) + 1 } : null);
+  // The window after the change: from the day the change took effect to the last day with data. Null without either,
+  // and null when it would start inside the before period (beforeTo): the two windows never share a day.
+  const afterWindow = (from, last, beforeTo = "") => (from && last && last >= from && (!beforeTo || from > beforeTo) ? { from, to: last, days: Math.round((Date.parse(`${last}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 864e5) + 1 } : null);
   // The verdict on an action: "effective" when the after window reaches the sample floor and the failure rate fell
   // (and, with an approved maximum, sits within it); "not-effective" when it reaches the floor and did not fall;
   // "insufficient" while the after window has too few eligible rows, or there is no before.
@@ -782,7 +783,7 @@
     }
     const textOf = (value) => (typeof value === "string" ? value : "");
     const cleanWindow = (w) => (isObject(w) ? { from: parseDate(textOf(w.from)) || "", to: parseDate(textOf(w.to)) || "", k: Number.isInteger(w.k) ? w.k : 0, n: Number.isInteger(w.n) ? w.n : 0 } : null);
-    const cleanVerification = (v) => ({ status: ["effective", "not-effective"].includes(v.status) ? v.status : "", decided: parseDate(textOf(v.decided)) || "", before: cleanWindow(v.before), after: cleanWindow(v.after), text: textOf(v.text).slice(0, 2000) });
+    const cleanVerification = (v) => ({ status: ["effective", "not-effective"].includes(v.status) ? v.status : "", decided: parseDate(textOf(v.decided)) || "", minN: Number.isInteger(v.minN) && v.minN >= 1 ? v.minN : 0, before: cleanWindow(v.before), after: cleanWindow(v.after), text: textOf(v.text).slice(0, 2000) });
     if (Array.isArray(saved.cases)) {
       base.cases = saved.cases.filter((item) => isObject(item) && typeof item.id === "string" && item.id).map((item) => ({
         id: item.id, updated: textOf(item.updated), ...Object.fromEntries(C.CASE_FIELDS.map((field) => [field, textOf(item[field])])), actionId: textOf(item.actionId),
@@ -802,13 +803,15 @@
       const fields = C.FIELDS[name];
       return [name, { fields, rows: state[name].map((row) => fields.map((field) => row[field])) }];
     }));
-    write(cfg.storageKey, { v: 1, tables, sources: state.sources, targets: state.targets, settings: state.settings, filters: state.filters, tab: state.tab, week: state.week, groupBy: state.groupBy, typeFilter: state.typeFilter, example: state.example, deep: state.deep, cases: state.cases, caseId: state.caseId, draft: state.draft });
+    return write(cfg.storageKey, { v: 1, tables, sources: state.sources, targets: state.targets, settings: state.settings, filters: state.filters, tab: state.tab, week: state.week, groupBy: state.groupBy, typeFilter: state.typeFilter, example: state.example, deep: state.deep, cases: state.cases, caseId: state.caseId, draft: state.draft });
   };
   let saveTimer = null;
   const save = () => {
     clearTimeout(saveTimer);
     saveTimer = setTimeout(() => { saveTimer = null; persist(); }, 300);
   };
+  // Written now, not in a moment: true when the browser took it.
+  const persistNow = () => { clearTimeout(saveTimer); saveTimer = null; return persist(); };
   // A change still waiting is written before the page goes away.
   window.addEventListener("pagehide", () => { if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; persist(); } });
 
@@ -2114,16 +2117,24 @@
     node.classList.toggle("is-bad", Boolean(bad));
   };
   const caseById = (id) => state.cases.find((item) => item.id === id);
+  // An id is taken while a case, a tracker action or a register row still names it: a deleted investigation's id is
+  // not given to a new one while its actions are around.
+  const caseIdTaken = (id) => state.cases.some((item) => item.id === id)
+    || Boolean(Actions && Actions.all().some((action) => action.caseId === id))
+    || state.actions.some((action) => String(action.Notes || "").split(/\s+/).includes(id));
   const newCaseId = () => {
     const stamp = window.ToolKit.today().replace(/-/g, "");
     let n = state.cases.length + 1;
-    while (state.cases.some((item) => item.id === `INV-${stamp}-${String(n).padStart(3, "0")}`)) n += 1;
+    while (caseIdTaken(`INV-${stamp}-${String(n).padStart(3, "0")}`)) n += 1;
     return `INV-${stamp}-${String(n).padStart(3, "0")}`;
   };
   const snapshotOf = (numbers) => ({
     metric: numbers.metric.id, label: deepLabel(numbers.metric), from: numbers.range.from, to: numbers.range.to,
     DSP: state.filters.DSP, Shift: state.filters.Shift, Zone: state.filters.Zone, dim: state.deep.dim, segment: state.deep.segment,
     k: numbers.agg.k, n: numbers.agg.n, focus: numbers.focus.length, source: state.example ? tx("Example") : [...new Set(Object.values(state.sources))].join(", "),
+    // The sample floor the verification will use: the one in force when the evidence was recorded, not the one of
+    // the day the decision is made.
+    minN: state.deep.minN,
   });
   // ---------- The case thread ----------
   const TRACKER_WORDS = () => ({ problem: tx("Problem"), root: tx("Root cause"), hypothesis: tx("Working hypothesis, not verified"), check: tx("Failure rate before and after, same filters") });
@@ -2135,8 +2146,8 @@
     const added = Actions.add(item);
     if (added) { row.trackerId = added.id; return added; }
     if (Actions.lastAdd === "duplicate") {
-      const twin = Actions.list().find((a) => Actions.isOpen(a) && a.title === item.title && a.source === item.source);
-      if (twin) { row.trackerId = twin.id; if (!twin.caseId) Actions.update(twin.id, { caseId: row.id }); }
+      const twin = Actions.list().find((a) => Actions.isOpen(a) && a.title === item.title && a.source === item.source && a.caseId === row.id);
+      if (twin) row.trackerId = twin.id;
       return "duplicate";
     }
     return null;
@@ -2152,9 +2163,14 @@
   const syncCases = () => {
     let changed = false;
     state.cases.forEach((row) => {
-      if (!["Open", "Investigating"].includes(row.status) || !trackerAction(row) || !actionDone(row)) return;
-      row.status = "Verification pending";
-      if (state.caseId === row.id) state.draft.status = "Verification pending";
+      const tracked = trackerAction(row);
+      if (!tracked) return;
+      let next = row.status;
+      if (["Open", "Investigating"].includes(row.status) && actionDone(row)) next = "Verification pending";
+      else if (row.status === "Verification pending" && !actionDone(row) && !row.verification?.status) next = "Investigating";
+      if (next === row.status) return;
+      row.status = next;
+      if (state.caseId === row.id) state.draft.status = next;
       changed = true;
     });
     if (changed) save();
@@ -2168,13 +2184,15 @@
     const cols = present();
     const last = rows.map((r) => r.Date).filter(Boolean).sort().at(-1) || "";
     const before = C.deepAggregate(C.caseRows(rows, row.snapshot, row.snapshot.from, row.snapshot.to), metric, settings, cols);
-    const window = C.afterWindow(row.verifyFrom, last);
+    const overlap = Boolean(row.verifyFrom && row.snapshot.to && row.verifyFrom <= row.snapshot.to);
+    const window = C.afterWindow(row.verifyFrom, last, row.snapshot.to);
     const after = window ? C.deepAggregate(C.caseRows(rows, row.snapshot, window.from, window.to), metric, settings, cols) : null;
-    const minN = state.deep.minN;
-    return { metric, before, after, window, last, minN, target: deepTarget(metric), verdict: C.verdict({ before, after, target: deepTarget(metric), minN }) };
+    // The floor saved with the evidence; a case from before it was saved uses the deep dive's.
+    const minN = Number.isInteger(row.snapshot.minN) && row.snapshot.minN >= 1 ? row.snapshot.minN : state.deep.minN;
+    return { metric, before, after, window, last, minN, overlap, beforeTo: row.snapshot.to, floorDiffers: minN !== state.deep.minN, target: deepTarget(metric), verdict: C.verdict({ before, after, target: deepTarget(metric), minN }) };
   };
   const windowText = (w, agg) => `${showDate(w.from)} – ${showDate(w.to)}: ${int.format(agg.k)} / ${int.format(agg.n)} (${deepRate(agg.rate)})`;
-  const verdictText = (m) => (m.verdict.status === "effective" ? tx("Effective: fewer failures after the change, with enough rows.") : m.verdict.status === "not-effective" ? tx("Not effective: the failure rate did not fall after the change.") : !m.after ? tx("No rows after the change yet. Set the day the change took effect, then import the days that follow.") : tx("Too few eligible rows after the change ({n} of {min}): wait for more days before deciding.", { n: int.format(m.after.n), min: int.format(m.minN) }));
+  const verdictText = (m) => (m.verdict.status === "effective" ? tx("Effective: fewer failures after the change, with enough rows.") : m.verdict.status === "not-effective" ? tx("Not effective: the failure rate did not fall after the change.") : m.overlap ? tx("The after window must start after the before period ends ({date}): the two never share a day.", { date: showDate(m.beforeTo) }) : !m.after ? tx("No rows after the change yet. Set the day the change took effect, then import the days that follow.") : tx("Too few eligible rows after the change ({n} of {min}): wait for more days before deciding.", { n: int.format(m.after.n), min: int.format(m.minN) }));
   // The decision: close as verified effective, or reopen. Both write the numbers into the case, the tracker's action and
   // the station's action register, so the three say the same thing.
   const decide = (row, status) => {
@@ -2187,18 +2205,33 @@
       if (m.verdict.status !== "effective") { sayCase(verdictText(m), true); return false; }
       if (!String(row.evidence || "").trim() || !String(row.root || "").trim() || row.rootStatus !== "Verified") { sayCase(tx("“Verified effective” needs a root cause verified on the floor or in the records, written evidence, the process failure and a verification result."), true); return false; }
     } else if (m.verdict.status === "insufficient") { sayCase(verdictText(m), true); return false; }
-    const line = `${tx("Before")} ${windowText({ from: row.snapshot.from, to: row.snapshot.to }, m.before)} → ${tx("After")} ${windowText(m.window, m.after)}, ${deepPoints(m.verdict.change)}. ${status === "effective" ? tx("Verified effective") : tx("Not effective")}.`;
+    const line = `${tx("Before")} ${windowText({ from: row.snapshot.from, to: row.snapshot.to }, m.before)} → ${tx("After")} ${windowText(m.window, m.after)}, ${deepPoints(m.verdict.change)}; ${tx("sample floor {n}", { n: int.format(m.minN) })}. ${status === "effective" ? tx("Verified effective") : tx("Not effective")}.`;
     const today = window.ToolKit.today();
-    row.verification = { status, decided: today, before: { from: row.snapshot.from, to: row.snapshot.to, k: m.before.k, n: m.before.n }, after: { from: m.window.from, to: m.window.to, k: m.after.k, n: m.after.n }, text: line };
+    // The tracker first: its action carries the decision as its result. Nothing here changes if the browser cannot
+    // keep that write.
+    const tracked = trackerAction(row);
+    const was = tracked ? { status: tracked.status, result: tracked.result } : null;
+    if (tracked && !Actions.update(tracked.id, status === "effective" ? { status: "verified", result: line } : { result: line }, { byCase: true })) {
+      sayCase(tx("The Action Tracker could not be saved in this browser: nothing was changed. Free some space or unlock the tools, then decide again."), true);
+      return false;
+    }
+    const kept = { status: row.status, verifyResult: row.verifyResult, updated: row.updated, verification: row.verification };
+    const own = state.actions.find((a) => a.Action_ID === row.actionId);
+    const ownKept = own ? { Verification_Status: own.Verification_Status, Baseline: own.Baseline, Result: own.Result, Status: own.Status } : null;
+    row.verification = { status, decided: today, minN: m.minN, before: { from: row.snapshot.from, to: row.snapshot.to, k: m.before.k, n: m.before.n }, after: { from: m.window.from, to: m.window.to, k: m.after.k, n: m.after.n }, text: line };
     row.status = status === "effective" ? "Verified effective" : "Reopened";
     row.verifyResult = [String(row.verifyResult || "").trim(), line].filter(Boolean).join("\n");
     row.updated = today;
-    if (state.caseId === row.id) { state.draft.status = row.status; state.draft.verifyResult = row.verifyResult; }
-    const own = state.actions.find((a) => a.Action_ID === row.actionId);
     if (own) { own.Verification_Status = status === "effective" ? "Effective" : "Not effective"; own.Baseline = deepRate(m.before.rate); own.Result = deepRate(m.after.rate); if (status === "effective") own.Status = "Completed"; }
-    const tracked = trackerAction(row);
-    if (tracked) Actions.update(tracked.id, status === "effective" ? { status: "verified", result: line } : { result: line });
-    save();
+    if (!persistNow()) {
+      // The tower could not be saved: the tracker's action goes back to what it was, so the two never disagree.
+      Object.assign(row, kept);
+      if (own) Object.assign(own, ownKept);
+      if (tracked) Actions.update(tracked.id, was, { byCase: true });
+      sayCase(tx("This investigation could not be saved in this browser: nothing was changed. Free some space or unlock the tools, then decide again."), true);
+      return false;
+    }
+    if (state.caseId === row.id) { state.draft.status = row.status; state.draft.verifyResult = row.verifyResult; save(); }
     return true;
   };
   const toolLink = (slug, params, label, className = "button-secondary") => {
@@ -2207,6 +2240,15 @@
     Object.entries(params).forEach(([key, value]) => { if (value) url.searchParams.set(key, value); });
     a.href = url.href;
     return a;
+  };
+  // The hand-off to and from 5 Whys stays inside the browser (sessionStorage, one note, read once): the address carries
+  // the case id alone, never the problem, the whys or the cause.
+  const HANDOFF = "sc-case-handoff";
+  const writeHandoff = (note) => { try { sessionStorage.setItem(HANDOFF, JSON.stringify({ ...note, at: new Date().toISOString() })); } catch { /* the page still opens on the case */ } };
+  const takeHandoff = (caseId) => {
+    let note = null;
+    try { note = JSON.parse(sessionStorage.getItem(HANDOFF)); sessionStorage.removeItem(HANDOFF); } catch { note = null; }
+    return isObject(note) && note.caseId === caseId && note.from === "five-whys" ? note : null;
   };
   // Save the draft as a case; silent: no message when nothing is wrong.
   const saveCase = (numbers, silent) => {
@@ -2230,9 +2272,9 @@
   };
   const caseRegisterRows = () => {
     const head = ["Case_ID", "Last_Updated", ...C.CASE_FIELDS, "Action_ID", "Metric", "Period_Start", "Period_End", "Partner", "Shift", "Zone", "Dimension", "Segment", "Affected", "Eligible", "Source",
-      "Tracker_ID", "Change_From", "After_Start", "After_End", "After_Affected", "After_Eligible", "Verdict", "Decided"];
+      "Tracker_ID", "Change_From", "After_Start", "After_End", "After_Affected", "After_Eligible", "Verdict", "Decided", "Sample_Floor"];
     return [head, ...state.cases.map((item) => [item.id, item.updated, ...C.CASE_FIELDS.map((field) => item[field] ?? ""), item.actionId || "", item.snapshot?.label || "", item.snapshot?.from || "", item.snapshot?.to || "", item.snapshot?.DSP || "", item.snapshot?.Shift || "", item.snapshot?.Zone || "", item.snapshot?.dim || "", item.snapshot?.segment || "", item.snapshot?.k ?? "", item.snapshot?.n ?? "", item.snapshot?.source || "",
-      item.trackerId || "", item.verifyFrom || "", item.verification?.after?.from || "", item.verification?.after?.to || "", item.verification?.after?.k ?? "", item.verification?.after?.n ?? "", item.verification?.status || "", item.verification?.decided || ""])];
+      item.trackerId || "", item.verifyFrom || "", item.verification?.after?.from || "", item.verification?.after?.to || "", item.verification?.after?.k ?? "", item.verification?.after?.n ?? "", item.verification?.status || "", item.verification?.decided || "", item.snapshot?.minN ?? ""])];
   };
   const downloadText = (name, body, type) => {
     const link = el("a");
@@ -2261,6 +2303,7 @@
         if (!C.ROOT_STATUS.includes(row.rootStatus)) row.rootStatus = "Hypothesis";
         row.deadline = parseDate(row.deadline);
         if (get("Tracker_ID").trim()) row.trackerId = get("Tracker_ID").trim();
+        if (Number.isInteger(Number(get("Sample_Floor"))) && Number(get("Sample_Floor")) >= 1) row.snapshot.minN = Number(get("Sample_Floor"));
         if (parseDate(get("Change_From"))) row.verifyFrom = parseDate(get("Change_From"));
         if (["effective", "not-effective"].includes(get("Verdict").trim())) row.verification = { status: get("Verdict").trim(), decided: parseDate(get("Decided")) || "", before: { from: parseDate(get("Period_Start")) || "", to: parseDate(get("Period_End")) || "", k: Number(get("Affected")) || 0, n: Number(get("Eligible")) || 0 }, after: { from: parseDate(get("After_Start")) || "", to: parseDate(get("After_End")) || "", k: Number(get("After_Affected")) || 0, n: Number(get("After_Eligible")) || 0 }, text: get("verifyResult") };
         const old = caseById(id);
@@ -2554,7 +2597,10 @@
     // the verification from the same failure before and after.
     const current = state.caseId ? caseById(state.caseId) : null;
     const links = el("div", "tool-actions cx-case-links");
-    links.append(toolLink("five-whys", { problem: String(state.draft.problem || state.draft.title || "").trim(), case: state.caseId }, tx("Work the whys in 5 Whys")));
+    const whysLink = toolLink("five-whys", { case: state.caseId }, tx("Work the whys in 5 Whys"));
+    whysLink.addEventListener("click", () => { if (state.caseId) writeHandoff({ caseId: state.caseId, from: "cx-control-tower", problem: String(state.draft.problem || state.draft.title || "").trim().slice(0, 2000) }); });
+    if (!state.caseId) { whysLink.setAttribute("aria-disabled", "true"); whysLink.addEventListener("click", (event) => { event.preventDefault(); sayCase(tx("Save the investigation first, so the whys come back to it."), true); }); }
+    links.append(whysLink);
     const tracked = trackerAction(current);
     if (current?.actionId || tracked) {
       links.append(toolLink("action-tracker", {}, tx("Open the Action Tracker")));
@@ -2594,7 +2640,7 @@
         const verdictLine = el("p", `dl-panel-note cx-verdict is-${m.verdict.status}`, verdictText(m));
         verdictLine.dataset.cxVerdict = m.verdict.status;
         verify.append(verdictLine);
-        verify.append(el("p", "dl-panel-note", `${tx("Same partner, shift, zone and segment as the investigation; each rate over its own eligible rows; sample floor {n}.", { n: int.format(m.minN) })} ${current.snapshot.segment ? segmentText(current.snapshot.dim, current.snapshot.segment) : tx("All segments")}.`));
+        verify.append(el("p", "dl-panel-note", `${tx("Same partner, shift, zone and segment as the investigation; each rate over its own eligible rows; sample floor {n}.", { n: int.format(m.minN) })} ${current.snapshot.segment ? segmentText(current.snapshot.dim, current.snapshot.segment) : tx("All segments")}.${m.floorDiffers ? ` ${tx("The floor is the one saved with the investigation; the deep dive above now uses {n}.", { n: int.format(state.deep.minN) })}` : ""}`));
       }
       if (current.verification?.status) verify.append(el("p", `dl-panel-note cx-decided is-${current.verification.status}`, `${tx("Decided")} ${showDate(current.verification.decided)}: ${current.verification.text}`));
       const decideButtons = el("div", "tool-actions");
@@ -2671,9 +2717,11 @@
     const id = (params.get("case") || "").trim();
     if (!id) return;
     const row = caseById(id);
+    const note = takeHandoff(id);
     if (row) {
-      const incoming = Object.fromEntries(["problem", "why1", "why2", "why3", "why4", "why5"].map((f) => [f, params.get(f) || ""]));
-      incoming.root = params.get("root") || params.get("cause") || "";
+      const whys = Array.isArray(note?.whys) ? note.whys : [];
+      const incoming = { problem: typeof note?.problem === "string" ? note.problem : "", root: typeof note?.root === "string" ? note.root : "" };
+      whys.slice(0, 5).forEach((why, i) => { incoming[`why${i + 1}`] = typeof why === "string" ? why : ""; });
       const merged = C.applyWhys(Object.fromEntries(C.CASE_FIELDS.map((field) => [field, row[field] ?? ""])), incoming);
       merged.filled.forEach((field) => { row[field] = merged.draft[field]; });
       if (merged.filled.length) row.updated = window.ToolKit.today();
@@ -2684,7 +2732,7 @@
       save();
       say(merged.filled.length ? tx("{id} opened; {n} fields filled from 5 Whys.", { id, n: int.format(merged.filled.length) }) + (merged.kept.length ? ` ${tx("{n} fields already written here were kept.", { n: int.format(merged.kept.length) })}` : "") : tx("{id} opened.", { id }));
     } else say(tx("Investigation {id} is not in this browser. Import the case register that holds it.", { id }));
-    ["case", "problem", "why1", "why2", "why3", "why4", "why5", "root", "cause"].forEach((name) => params.delete(name));
+    params.delete("case");
     history.replaceState(null, "", `${location.pathname}${params.size ? `?${params}` : ""}${location.hash}`);
   };
   openFromAddress();

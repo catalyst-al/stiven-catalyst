@@ -7832,5 +7832,14 @@
   "Verified is decided there, from the KPI before and after the action.": "„Geprüft“ wird dort entschieden, aus der Kennzahl vor und nach der Maßnahme.",
   "Verified needs a result: write what happened and what the number did, then save.": "„Geprüft“ braucht ein Ergebnis: schreiben Sie, was passiert ist und was die Zahl gemacht hat, dann speichern.",
   "Investigation {id} of the CX Control Tower.": "Untersuchung {id} des CX Control Tower.",
-  "Send the cause back to the investigation": "Die Ursache an die Untersuchung zurückgeben"
+  "Send the cause back to the investigation": "Die Ursache an die Untersuchung zurückgeben",
+  "The after window must start after the before period ends ({date}): the two never share a day.": "Das Zeitfenster danach muss nach dem Ende der Vorher-Periode beginnen ({date}): die beiden teilen sich keinen Tag.",
+  "sample floor {n}": "Mindeststichprobe {n}",
+  "The Action Tracker could not be saved in this browser: nothing was changed. Free some space or unlock the tools, then decide again.": "Der Maßnahmen-Tracker konnte in diesem Browser nicht gespeichert werden: nichts wurde geändert. Schaffen Sie Platz oder entsperren Sie die Tools, dann entscheiden Sie erneut.",
+  "This investigation could not be saved in this browser: nothing was changed. Free some space or unlock the tools, then decide again.": "Diese Untersuchung konnte in diesem Browser nicht gespeichert werden: nichts wurde geändert. Schaffen Sie Platz oder entsperren Sie die Tools, dann entscheiden Sie erneut.",
+  "Save the investigation first, so the whys come back to it.": "Speichern Sie zuerst die Untersuchung, damit die Warums zu ihr zurückkommen.",
+  "The floor is the one saved with the investigation; the deep dive above now uses {n}.": "Die Mindeststichprobe ist die mit der Untersuchung gespeicherte; die Tiefenanalyse oben nutzt jetzt {n}.",
+  "Verified by the investigation; reopen it there.": "Von der Untersuchung geprüft; dort wieder öffnen.",
+  "Verified is decided in the investigation, from the KPI before and after the action.": "„Geprüft“ wird in der Untersuchung entschieden, aus der Kennzahl vor und nach der Maßnahme.",
+  "The whys could not be handed over in this browser; the investigation opens without them.": "Die Warums konnten in diesem Browser nicht übergeben werden; die Untersuchung öffnet sich ohne sie."
 }
