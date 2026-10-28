@@ -19,7 +19,7 @@ skedarët e treguar; numrat e gjetjeve janë ato të `RAPORTI-I-KONSOLIDUAR.md`.
 | Team Sync Worker, Cloudflare | Mos publiko; mos ndrysho konfigurimin | asgjë e publikuar; plani: `docs/SYNC-WORKER-MIGRATION.md` |
 | Publikimi | Draft PR për shqyrtim; asnjë merge pa miratimin përfundimtar | `docs/RELEASE.md` |
 | Kufizimet e njohura | Pranohen siç janë | `RAPORTI-I-PUBLIKIMIT.md` §3 |
-| Teksti i privatësisë (P-01) | Shtesë faktike nga kodi, në tri gjuhët, para merge-it; pa vlerësim ligjor | `f5701ab4`; teksti pret leximin dhe miratimin tënd (B.5) |
+| Teksti i privatësisë (P-01) | Shtesë faktike nga kodi, në tri gjuhët, para merge-it; pa vlerësim ligjor. Saktësimet e 28 tetorit: baza ligjore vetëm për ruajtjen që nis lexuesi; analytics pa pretenduar matje | `f5701ab4`, `53cf44bc`; teksti përfundimtar pret miratimin tënd (B.5) |
 
 ## B. Të hapura: kërkojnë fakte ose miratim
 
@@ -57,15 +57,19 @@ Burimi: `phase2/management-review.md` §9 dhe `phase2/tools-guide-and-pdf-check.
 - emri "Monthly edition", kur 80 numra dolën online brenda katër ditëve;
 - shtyllat mbi shkallë të shkurtuar pa bosht (P5-06): ndryshimi prek grafikët e publikuar dhe PDF-të.
 
-### 5. Teksti i privatësisë (P-01): shtesa faktike pret leximin tënd
-Shtesa është në degë (`f5701ab4`, `src/datenschutz.njk`, EN/DE/SQ), e shkruar vetëm nga kodi: kyçja me PIN; çdo lloj
-pike rikthimi; fotot në IndexedDB; emrat e mysafirëve dhe të punonjësve në katër mjete; shenjat "e re" të menysë
-(`sc-seen-*`) që shkruhen në vizitën e parë; kopjet e service worker-it; analytics në çdo faqe përveç mjeteve dhe
-faqeve të roleve; lista e Local Storage si shembuj, jo si listë e plotë. Para merge-it:
-- lexoje dhe miratoje, ose më thuaj çfarë të ndryshoj;
-- fjalia e bazës ligjore ("e domosdoshme për funksionin që kërkoni ju", § 25(2) nr. 2 TDDDG) nuk u prek. Për
-  `sc-seen-*` dhe progresin e leximit, që shkruhen pa kërkesë të lexuesit, ajo mund të mos mjaftojë: kjo është
-  pyetje ligjore për ty ose për një jurist, jo për mua.
+### 5. Teksti i privatësisë (P-01): teksti përfundimtar pret miratimin tënd
+Shtesa faktike (`f5701ab4`) dhe dy saktësimet e tua të 28 tetorit (`53cf44bc`) janë në degë, te `src/datenschutz.njk`,
+në EN/DE/SQ:
+- **Baza ligjore:** § 25(2) nr. 2 TDDDG përmendet vetëm për ruajtjen që lexuesi e nis vetë. Ruajtja automatike
+  (shenjat "e re" të menysë `sc-seen-*`, progresi i leximit, kopjet e service worker-it) përshkruhet pa asnjë bazë
+  ligjore. Asnjë bazë e re nuk u shtua.
+- **Analytics:** faqja thotë cilat faqe e ngarkojnë skriptin, për çfarë shërben dhe çfarë është ndërtuar të dërgojë.
+  Nuk thotë që vizitat po numërohen, sepse konfigurimi nuk është rregulluar ende (A-01).
+
+**Kërkon verifikim më vete, jashtë këtij publikimi:** klasifikimi ligjor i ruajtjes automatike (`sc-seen-*`, progresi
+i leximit, kopjet e service worker-it) sipas § 25 TDDDG, dhe nëse nevojitet pëlqim. Kjo është pyetje për ty ose për
+një jurist. Faqja nuk pretendon asgjë për të. Kur të rregullohet Analytics (A-01), paragrafi i saj mund të rishikohet.
+
 Faktet e auditimit: `phases/p2c-career-platform.md` (P2C-07).
 
 ### 6. Të tjera

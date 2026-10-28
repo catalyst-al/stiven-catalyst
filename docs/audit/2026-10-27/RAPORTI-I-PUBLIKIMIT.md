@@ -9,8 +9,9 @@ miratimin tënd përfundimtar.
 - Fazat 1–3 të auditimit (mjetet, publikimet, shfletuesi), siç i përshkruan `RAPORTI-I-KONSOLIDUAR.md`.
 - Tre ndryshimet e miratuara më 27 tetor: radari i Zenith-it, rrota natyrale e mausit (lëvizjet e tjera të buta
   mbeten), kontrasti i arit të Lumen-it në temën e çelët.
-- Teksti i privatësisë, shtesë faktike nga kodi në tri gjuhët (`f5701ab4`): kyçja me PIN, pikat e rikthimit, fotot,
-  emrat në katër mjete, shenjat "e re" të menysë, service worker-i, fusha e saktë e analytics.
+- Teksti i privatësisë, shtesë faktike nga kodi në tri gjuhët (`f5701ab4`, `53cf44bc`): kyçja me PIN, pikat e
+  rikthimit, fotot, emrat në katër mjete, shenjat "e re" të menysë, service worker-i; baza ligjore vetëm për
+  ruajtjen që nis lexuesi; analytics sipas qëllimit, pa pretenduar matje.
 - Tre korrigjimet e rollback-ut: skedari i faqes së vjetër hapet; puna e shkruar gjatë kyçjes ruhet si pikë rikthimi
   para hapjes; shembulli i Action Tracker mbetet shembull mes versioneve.
 
@@ -47,12 +48,15 @@ asnjë fakt karriere, origjinal shqip, tekst libri apo vendim editorial që pret
 5. **Testi axe i Field Notes në CI:** në runner-in e GitHub-it rrjeti i faqes nuk qetësohet gjithmonë, edhe pse asnjë
    kërkesë e faqes nuk mbetet e hapur (log-u i CI-së te `152bd4f5`). Shkaku nuk u gjet (këtu nuk ndodhi në 72 prova).
    Testi tani pret ngarkimin dhe fontet, që janë ato që mat axe, dhe e shkruan rastin në log.
-6. **Dy hapa pas bashkimit, me dorë:** `online-dates.mjs` menjëherë pas merge-it, dhe kontrollet në faqen live
+6. **Klasifikimi ligjor i ruajtjes automatike** (`sc-seen-*`, progresi i leximit, kopjet e service worker-it) nuk u
+   verifikua; faqja e privatësisë nuk pretendon bazë ligjore për të. Kërkon verifikim më vete (`VENDIMET-E-HAPURA.md`
+   B.5). Analytics nuk mbledh ende asgjë (A-01).
+7. **Dy hapa pas bashkimit, me dorë:** `online-dates.mjs` menjëherë pas merge-it, dhe kontrollet në faqen live
    (`docs/RELEASE.md` §3–4). Midis dy publikimeve (disa minuta) datat "redaktuar" tregojnë ditët e mëparshme.
 
 ## 4. Hapat e publikimit, kur t'i miratosh
 
-1. Lexo dhe mirato shtesën e privatësisë (`VENDIMET-E-HAPURA.md` B.5).
+1. Mirato tekstin përfundimtar të privatësisë (`VENDIMET-E-HAPURA.md` B.5).
 2. PR #363 nga Draft në "Ready", pastaj **"Create a merge commit"**, jo squash e as rebase.
 3. Menjëherë pas tij: `node scripts/online-dates.mjs` në `main`, commit i dy skedarëve të datave.
 4. Kontrollet në faqen live dhe, nëse duhet, kthimi mbrapsht: `docs/RELEASE.md` §4–5.
