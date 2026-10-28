@@ -1,6 +1,8 @@
-// Shift Handover, "Send to the next shift" (src/js/shift-handover.js, window.ShiftHandoverLink): a handover packed into
-// the fragment of a link, gzipped and in base64url, opens again as the same handover; a damaged or foreign fragment is
-// refused; the link of a typical handover fits a QR code (team-sync.js, up to 2331 bytes).
+// Shift Handover, "Send to the next shift" (src/js/shift-handover.js, window.ShiftHandoverLink): a handover sealed
+// with a transfer code (PBKDF2 → AES-GCM) opens again as the same handover with that code and with no other; a
+// changed byte, a foreign fragment or a bomb is refused; the old plain links (version 1) are still read; the link of a
+// typical handover fits a QR code (team-sync.js, up to 2331 bytes); the confirmation code, what looks personal, and
+// the merge of the issues with the ones already open on the receiving device.
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -17,7 +19,10 @@ const Link = context.window.ShiftHandoverLink;
 const M = context.window.TeamSyncMath;
 const data = JSON.parse(fs.readFileSync('src/_data/shiftHandover.json', 'utf8'));
 const plain = (value) => JSON.parse(JSON.stringify(value));
+const HREF = 'https://stivencatalyst.com/tools/shift-handover/';
+const CODE = 'acid-acorn-acre-acts';
 
+// Fictional: a warehouse late shift.
 const handover = {
   template: 'warehouse', date: '2026-10-26', shift: 'Late', area: 'Outbound, docks 1–6', from: 'Arben', to: '', ackAt: '2026-10-26T13:00:00.000Z',
   metrics: [['Units handled', '4 820', ''], ['Backlog at handover', '120', 'two late trailers'], ['Damage %', '0,4', '']],
@@ -28,66 +33,183 @@ const handover = {
   checks: [true, true, false, true, false, false],
 };
 
-test('a handover packed into a fragment opens again as the same handover, gzipped', async () => {
-  const fragment = await Link.packHandover(handover, new Date('2026-10-26T14:00:00Z'));
-  assert.match(fragment, /^h=[A-Za-z0-9_-]+$/, 'gzipped, base64url, nothing to escape in an address');
-  const back = await Link.unpackHandover(`#${fragment}`);
-  assert.deepEqual(plain(back), { sent: '2026-10-26T14:00:00.000Z', handover });
-  assert.deepEqual(plain(await Link.unpackHandover(fragment)), plain(back), 'with or without the #');
-  const link = await Link.handoverLink(handover, 'https://stivencatalyst.com/sq/tools/shift-handover/?issue=old#h=older', new Date());
-  assert.ok(link.startsWith('https://stivencatalyst.com/sq/tools/shift-handover/?issue=old#h='), 'the page keeps its address, an older fragment is replaced');
+test('a sealed handover opens again with its code, and with no other; a changed byte opens nothing', async () => {
+  const made = await Link.packHandover(handover, CODE, { id: 'test-id-1', now: new Date('2026-10-26T14:00:00Z') });
+  assert.equal(made.id, 'test-id-1');
+  assert.match(made.fragment, /^h2=[A-Za-z0-9_-]+$/, 'version 2, base64url, nothing to escape in an address');
+  assert.equal(made.bytes[0], 2);
+  const text = Buffer.from(made.bytes).toString('latin1');
+  assert.ok(!/Arben|Dock 4|Carrier/.test(text) && !/stiven-catalyst/.test(text), 'nothing readable in the sealed bytes');
+  const back = await Link.openHandover(made.bytes, CODE);
+  assert.deepEqual(plain(back), { id: 'test-id-1', sent: '2026-10-26T14:00:00.000Z', handover });
+  // The code is read without case, spaces or hyphens.
+  assert.deepEqual(plain((await Link.openHandover(made.bytes, 'Acid Acorn ACRE acts')).handover), handover);
+  assert.equal((await Link.openHandover(made.bytes, 'acid-acorn-acre-act')).error, 'wrong');
+  for (const at of [5, 20, 40, made.bytes.length - 1]) {
+    const damaged = Uint8Array.from(made.bytes);
+    damaged[at] ^= 1;
+    assert.equal((await Link.openHandover(damaged, CODE)).error, 'wrong', `byte ${at} changed`);
+  }
+  assert.equal((await Link.openHandover(Uint8Array.from([1, 2, 3]), CODE)).error, 'invalid');
+  assert.equal((await Link.openHandover(Uint8Array.from([2, ...new Array(60).fill(0)]), CODE)).error, 'wrong');
+  // Two seals of the same handover differ (a fresh salt and IV each time) and both open.
+  const again = await Link.packHandover(handover, CODE);
+  assert.notEqual(again.fragment, made.fragment);
+  assert.notEqual(again.id, made.id, 'a new transfer id each time');
+  assert.deepEqual(plain((await Link.openHandover(again.bytes, CODE)).handover), handover);
 });
 
-test('the plain form is read too, and anything else is refused', async () => {
-  const plainFragment = `h0=${Link.toBase64Url(new TextEncoder().encode(JSON.stringify({ format: Link.LINK_FORMAT, version: 1, sent: 'x', handover })))}`;
-  assert.deepEqual(plain((await Link.unpackHandover(plainFragment)).handover), handover);
-  assert.deepEqual(plain([...Link.fromBase64Url(Link.toBase64Url(Uint8Array.from([0, 251, 255, 62, 63])))]), [0, 251, 255, 62, 63]);
-  for (const bad of ['', '#', '#x=abc', '#h=', '#h=not base64!', '#h0=aGVsbG8', `#h0=${Link.toBase64Url(new TextEncoder().encode('{"format":"other","version":1,"handover":{}}'))}`,
-    `#h0=${Link.toBase64Url(new TextEncoder().encode(JSON.stringify({ format: Link.LINK_FORMAT, version: 2, handover })))}`,
-    `#h0=${Link.toBase64Url(new TextEncoder().encode(JSON.stringify({ format: Link.LINK_FORMAT, version: 1, handover: [] })))}`,
-    '#h=AAAA']) {
-    assert.equal(await Link.unpackHandover(bad), null, JSON.stringify(bad));
+test('the link carries the sealed bytes after #h2=, keeps the page address and replaces an older fragment', async () => {
+  const { link, bytes, id } = await Link.handoverLink(handover, CODE, 'https://stivencatalyst.com/sq/tools/shift-handover/?issue=old#h=older');
+  assert.ok(link.startsWith('https://stivencatalyst.com/sq/tools/shift-handover/?issue=old#h2='));
+  const parsed = Link.parseFragment(new URL(link).hash);
+  assert.equal(parsed.kind, 'sealed');
+  assert.deepEqual([...parsed.bytes], [...bytes]);
+  assert.equal((await Link.openHandover(parsed.bytes, CODE)).id, id);
+  // What else an address can carry.
+  assert.equal(Link.parseFragment('#h=AAAA').kind, 'plain');
+  assert.equal(Link.parseFragment('#h0=AAAA').kind, 'plain');
+  assert.deepEqual(plain(Link.parseFragment(`#${Link.ackFragment('abc-123', 'ABC-DEF', 'Lena Krasniqi')}`)), { kind: 'ack', id: 'abc-123', code: 'ABCDEF', by: 'Lena Krasniqi' });
+  assert.deepEqual(plain(Link.parseFragment('#a=abc.abcdef')), { kind: 'ack', id: 'abc', code: 'ABCDEF', by: '' });
+  for (const bad of ['', '#', '#x=abc', '#h2=', '#h2=not base64!', `#h2=${'A'.repeat(Link.MAX_FRAGMENT + 8)}`, '#a=abc.12345']) assert.equal(Link.parseFragment(bad), null, JSON.stringify(bad));
+});
+
+test('a handover file holds the same sealed bytes; anything else is not a handover file', async () => {
+  const made = await Link.packHandover(handover, CODE);
+  const text = Link.fileText(made.bytes, { date: '2026-10-26', shift: 'Late', sent: '2026-10-26T14:00:00.000Z' });
+  const file = JSON.parse(text);
+  assert.equal(file.format, Link.FILE_FORMAT);
+  assert.equal(file.version, 2);
+  assert.equal(file.shift, 'Late');
+  assert.ok(!text.includes('Arben'), 'the file is as unreadable as the link');
+  assert.deepEqual([...Link.bytesFromFile(text)], [...made.bytes]);
+  assert.deepEqual(plain((await Link.openHandover(Link.bytesFromFile(text), CODE)).handover), handover);
+  for (const bad of ['', 'x', '{}', JSON.stringify({ format: 'other', version: 2, data: file.data }), JSON.stringify({ ...file, version: 1 }), JSON.stringify({ ...file, data: 'not base64!' }), 'x'.repeat(Link.MAX_FILE + 1)]) {
+    assert.equal(Link.bytesFromFile(bad), null, bad.slice(0, 30));
   }
 });
 
-test('the link of the example shift and of a full handover fit a QR code', async () => {
-  const ex = data.example;
-  const example = { template: ex.template, date: ex.date, shift: ex.shift, area: ex.area, from: ex.from, to: ex.to, metrics: ex.metrics, issues: ex.issues, headsUp: ex.headsUp, safety: ex.safety, checks: ex.checks, ackAt: '' };
-  for (const h of [example, handover]) {
-    const link = await Link.handoverLink(h, 'https://stivencatalyst.com/tools/shift-handover/', new Date());
-    assert.ok(link.length <= 2331, `${link.length} bytes fit version 40 at level M`);
-    const qr = M.qrEncode(link);
-    assert.ok(qr && qr.version <= 40, 'drawn as a QR code');
-  }
-  // Ten long open issues still fit.
-  const long = { ...handover, issues: Array.from({ length: 10 }, (_, i) => ({ text: `Issue ${i}: ${'a problem described in a full sentence with its context '.repeat(2)}`, priority: 'High', owner: 'Someone responsible', due: '2026-10-30', done: false, carried: 0 })) };
-  const link = await Link.handoverLink(long, 'https://stivencatalyst.com/tools/shift-handover/', new Date());
-  assert.ok(M.qrEncode(link), `${link.length} bytes still fit`);
+test('transfer codes: six words of the list when it is there, letters and digits otherwise, at least eight characters; weak codes are named', () => {
+  const words = Link.newPasscode(M.WORDS);
+  assert.equal(Link.PASSCODE_WORDS, 6);
+  assert.match(words, /^[a-z]+(?:-[a-z]+){5}$/);
+  assert.ok(words.split('-').every((w) => M.WORDS.includes(w)));
+  const letters = Link.newPasscode(null);
+  assert.match(letters, /^[abcdefghjkmnpqrstuvwxyz23456789]{12}$/, 'no 0, 1, i, l or o');
+  assert.notEqual(Link.newPasscode(M.WORDS), words);
+  assert.ok(Link.goodPasscode('acid-acorn') && Link.goodPasscode('12345678') && !Link.goodPasscode('1234567') && !Link.goodPasscode('a b c') && !Link.goodPasscode(''));
+  assert.equal(Link.normalisePasscode('  Acid-ACORN  acre_acts '), 'acid acorn acre acts');
+  // Weak codes typed by hand, by reason; the generated ones never are.
+  assert.equal(Link.weakPasscode('12345678'), 'sequence');
+  assert.equal(Link.weakPasscode('87654321'), 'sequence');
+  assert.equal(Link.weakPasscode('qwertyuiop'), 'sequence');
+  assert.equal(Link.weakPasscode('abcdefghij'), 'sequence');
+  assert.equal(Link.weakPasscode('20261028'), 'digits');
+  assert.equal(Link.weakPasscode('aaaaaaaaaaaa'), 'repeated');
+  assert.equal(Link.weakPasscode('Password1'), 'common');
+  assert.equal(Link.weakPasscode('handover123'), 'common');
+  assert.equal(Link.weakPasscode('dock4-lena'), 'short');
+  assert.equal(Link.weakPasscode('late-shift-docks-2026'), null);
+  assert.equal(Link.weakPasscode(words), null);
+  assert.equal(Link.weakPasscode(letters), null);
+  assert.equal(Link.weakPasscode(''), null);
 });
 
-test('a link that unpacks to more than a handover can hold is refused without unpacking it all', async () => {
+test('the confirmation code comes from the transfer id and the code, and only from both', async () => {
+  const code = await Link.ackCode('test-id-1', CODE);
+  assert.match(code, /^[A-Z2-7]{6}$/);
+  assert.equal(await Link.ackCode('test-id-1', 'ACID acorn-acre acts'), code, 'the code as typed, read the same way');
+  assert.notEqual(await Link.ackCode('test-id-2', CODE), code);
+  assert.notEqual(await Link.ackCode('test-id-1', 'acid-acorn-acre-acid'), code);
+  assert.equal(Link.showAck(code), `${code.slice(0, 3)}-${code.slice(3)}`);
+  assert.equal(Link.readAck(` ${code.slice(0, 3).toLowerCase()}-${code.slice(3)} `), code);
+});
+
+test('what looks personal is found: emails, phone numbers, card numbers, IBANs; room numbers and quantities are not', () => {
+  const found = Link.sensitiveFindings({
+    area: 'Reception', headsUp: 'Call Mr Hoxha back on +49 170 1234567 about room 412.', safety: 'Card 4111 1111 1111 1111 left at the desk',
+    metrics: [['Rooms', '180', 'IBAN DE89 3704 0044 0532 0130 00 on the invoice'], ['Units', '18,400', 'target 18,000']],
+    issues: [{ text: 'Guest asks for a copy: anna.m@example.com', owner: 'Front office' }, { text: 'Dock 4 door jams', owner: 'Maintenance' }],
+  });
+  assert.deepEqual(plain(found.map((f) => [f.field, f.kind])), [['headsUp', 'phone'], ['safety', 'card'], ['metrics', 'iban'], ['issues', 'email']]);
+  assert.ok(found.every((f) => f.sample.length <= 40));
+  assert.deepEqual(plain(Link.sensitiveFindings(handover)), [], 'the fictional warehouse shift: nothing');
+  assert.deepEqual(plain(Link.sensitiveFindings({ headsUp: 'Room 1204, 2 pax, 18:00; backlog 1 200 units' })), [], 'rooms, counts and times are not phone numbers');
+});
+
+test('for the transfer the names are left out unless asked, and the device\'s own records never travel', () => {
+  const h = { ...handover, shared: [{ id: 'x' }], ack: { id: 'x' }, received: { id: 'y' } };
+  const bare = Link.forTransfer(h);
+  assert.equal(bare.from, '');
+  assert.equal(bare.to, '');
+  assert.deepEqual(bare.issues.map((issue) => issue.owner), ['', '']);
+  assert.ok(!('shared' in bare) && !('ack' in bare) && !('received' in bare) && !('ackAt' in bare));
+  assert.equal(bare.headsUp, handover.headsUp);
+  const named = Link.forTransfer(h, { names: true });
+  assert.equal(named.from, 'Arben');
+  assert.deepEqual(named.issues.map((issue) => issue.owner), ['Maintenance', 'Team lead']);
+});
+
+test('the issues of a received handover beside the ones open here: new, the same, and the ones kept from here', () => {
+  const incoming = [
+    { text: 'Dock 4 door jams at the top; maintenance ticket open', priority: 'High', owner: '', due: '2026-10-27', done: false, carried: 1 },
+    { text: 'New temp needs a scanner login', priority: 'Medium', owner: '', due: '', done: false, carried: 0 },
+  ];
+  const here = [
+    { text: 'DOCK 4 door jams at the top;  maintenance ticket open', priority: 'High', owner: 'Maintenance', due: '2026-10-27', done: false, carried: 2 },
+    { text: 'Pallet wrap running low', priority: 'Low', owner: 'Lena', due: '', done: false, carried: 0 },
+  ];
+  const merged = Link.mergeIssues(incoming, here);
+  assert.deepEqual(plain(merged.issues.map((issue) => [issue.text.slice(0, 12), issue.kept, issue.carried, issue.owner])), [['Dock 4 door ', false, 2, 'Maintenance'], ['New temp nee', false, 0, ''], ['Pallet wrap ', true, 0, 'Lena']]);
+  assert.deepEqual([merged.added, merged.same, merged.kept, merged.conflicts], [1, 1, 1, 0]);
+  assert.deepEqual(plain(Link.mergeIssues(incoming, [])), { issues: incoming.map((issue) => ({ ...issue, kept: false, ambiguous: false, conflicts: [] })), added: 2, same: 0, kept: 0, ambiguous: 0, conflicts: 0 });
+  assert.deepEqual(plain(Link.mergeIssues([], []).issues), []);
+});
+
+test('the old plain link is still read, and a bomb or a foreign fragment is refused without unpacking it all', async () => {
   const zlib = require('node:zlib');
   const fragment = (json) => `#h=${Link.toBase64Url(zlib.gzipSync(Buffer.from(JSON.stringify(json))))}`;
   const wrap = (h) => ({ format: Link.LINK_FORMAT, version: 1, sent: 'x', handover: h });
-  // A real handover with many long issues still opens.
-  const many = { ...handover, issues: Array.from({ length: 40 }, (_, i) => ({ text: `Issue ${i}: ${'described in full with its context '.repeat(8)}`, priority: 'High', owner: 'Team lead', due: '2026-10-30', done: false, carried: 0 })) };
-  assert.ok(await Link.unpackHandover(fragment(wrap(many))), 'a large real handover');
-  // 50 MB of spaces gzip to about 50 KB: the link is short, what it unpacks to is not.
+  assert.deepEqual(plain((await Link.unpackHandover(fragment(wrap(handover)))).handover), handover);
+  const plainFragment = `#h0=${Link.toBase64Url(new TextEncoder().encode(JSON.stringify(wrap(handover))))}`;
+  assert.deepEqual(plain((await Link.unpackHandover(plainFragment)).handover), handover);
   const bomb = `#h=${Link.toBase64Url(zlib.gzipSync(Buffer.concat([Buffer.from(`{"format":"${Link.LINK_FORMAT}","version":1,"handover":{"headsUp":"`), Buffer.alloc(50 * 1024 * 1024, 32), Buffer.from('"}}')])))}`;
   const started = Date.now();
   assert.equal(await Link.unpackHandover(bomb), null);
   assert.ok(Date.now() - started < 2000, `refused in ${Date.now() - started} ms`);
-  assert.ok(Link.MAX_UNPACKED <= 512 * 1024, 'a cap far above any handover and far below a bomb');
   assert.equal(await Link.unpackHandover(fragment(wrap({ ...handover, headsUp: 'x'.repeat(Link.MAX_UNPACKED) }))), null);
-  // A fragment longer than any link a chat app or a QR code carries is not even decoded.
   assert.equal(await Link.unpackHandover(`#h0=${'A'.repeat(Link.MAX_FRAGMENT + 4)}`), null);
+  for (const bad of ['', '#', '#x=abc', '#h=', '#h0=aGVsbG8', `#h0=${Link.toBase64Url(new TextEncoder().encode('{"format":"other","version":1,"handover":{}}'))}`]) assert.equal(await Link.unpackHandover(bad), null, bad);
+  // A sealed bomb: the cap holds after the decryption too.
+  const sealedBomb = await Link.packHandover({ ...handover, headsUp: ' '.repeat(Link.MAX_UNPACKED + 10) }, CODE);
+  assert.ok(sealedBomb.bytes.length < 4000, 'small on the wire');
+  assert.equal((await Link.openHandover(sealedBomb.bytes, CODE)).error, 'invalid');
 });
 
-test('a handover from a link is shown as text: markup in its fields never becomes part of the page', { skip: !fs.existsSync('_site/tools/shift-handover/index.html') }, async () => {
+test('the sealed link of the example shift and of a full handover fit a QR code; a long one goes as a file', async () => {
+  const ex = data.example;
+  const example = { template: ex.template, date: ex.date, shift: ex.shift, area: ex.area, from: ex.from, to: ex.to, metrics: ex.metrics, issues: ex.issues, headsUp: ex.headsUp, safety: ex.safety, checks: ex.checks, ackAt: '' };
+  for (const h of [example, handover]) {
+    const { link } = await Link.handoverLink(Link.forTransfer(h, { names: true }), CODE, HREF);
+    assert.ok(link.length <= 2331, `${link.length} bytes fit version 40 at level M`);
+    assert.ok(M.qrEncode(link), 'drawn as a QR code');
+  }
+  const long = { ...handover, issues: Array.from({ length: 10 }, (_, i) => ({ text: `Issue ${i}: ${'a problem described in a full sentence with its context '.repeat(2)}`, priority: 'High', owner: 'Someone responsible', due: '2026-10-30', done: false, carried: 0 })) };
+  const { link } = await Link.handoverLink(long, CODE, HREF);
+  assert.ok(M.qrEncode(link), `${link.length} bytes still fit`);
+  // Forty issues of different words each (repeated text would gzip into a code).
+  const longer = { ...handover, issues: Array.from({ length: 40 }, (_, i) => ({ text: `Issue ${i}: ${M.WORDS.slice(i * 30, i * 30 + 30).join(' ')}`, priority: 'High', owner: 'Team lead', due: '2026-10-30', done: false, carried: 0 })) };
+  const big = await Link.handoverLink(longer, CODE, HREF);
+  assert.equal(M.qrEncode(big.link), null, 'too long for a code');
+  assert.ok(Link.bytesFromFile(Link.fileText(big.bytes, {})), 'but a file');
+});
+
+test('a handover from an old link is shown as text: markup in its fields never becomes part of the page', { skip: !fs.existsSync('_site/tools/shift-handover/index.html') }, async () => {
   const { JSDOM } = require('jsdom');
+  const zlib = require('node:zlib');
   const evil = '<img src=x onerror="window.pwned=1"><script>window.pwned=2</script>';
   const h = { ...handover, from: evil, shift: evil, area: evil, headsUp: evil, safety: evil, metrics: [[evil, evil, evil]], issues: [{ text: evil, priority: evil, owner: evil, due: evil, done: false, carried: 0 }] };
-  const fragmentText = await Link.packHandover(h, new Date('2026-10-26T14:00:00Z'));
+  const fragmentText = `h=${Link.toBase64Url(zlib.gzipSync(Buffer.from(JSON.stringify({ format: Link.LINK_FORMAT, version: 1, sent: 'x', handover: h }))))}`;
   const html = fs.readFileSync('_site/tools/shift-handover/index.html', 'utf8').replace(/<script\b[^>]*\bsrc=[^>]*><\/script>/g, '');
   const dom = new JSDOM(html, { url: `https://example.test/tools/shift-handover/#${fragmentText}`, runScripts: 'outside-only', pretendToBeVisual: true });
   const w = dom.window;
@@ -98,10 +220,158 @@ test('a handover from a link is shown as text: markup in its fields never become
   const box = w.document.querySelector('[data-incoming]');
   for (let i = 0; i < 100 && box.hidden; i++) await new Promise((r) => setTimeout(r, 10));
   assert.equal(box.hidden, false, 'the handover is offered');
+  assert.match(w.document.querySelector('[data-incoming-note]').textContent, /older version/, 'said to be an old plain link');
   box.querySelector('[data-incoming-open]').click();
   await new Promise((r) => setTimeout(r, 20));
   assert.equal(w.pwned, undefined);
   assert.equal(w.document.querySelectorAll('img[src="x"]').length + [...w.document.querySelectorAll('script')].filter((s) => s.textContent.includes('pwned')).length, 0, 'no element from the link');
   assert.match(w.document.querySelector('[data-handover]').textContent + [...w.document.querySelectorAll('input, textarea')].map((field) => field.value).join(' '), /<img src=x onerror=/, 'the markup is there as text');
   assert.equal(w.location.hash, '', 'the handover leaves the address once opened');
+});
+
+test('when the same issue differs on the two devices the safer state wins, nothing here is lost, and every difference is named', () => {
+  const priorities = ['High', 'Medium', 'Low'];
+  const here = [
+    { text: 'Dock 4 door jams at the top', priority: 'Medium', owner: 'Maintenance', due: '2026-10-27', done: false, carried: 2 },
+    { text: 'Scanner 7 battery swollen', priority: 'Low', owner: '', due: '', done: false, carried: 0 },
+    { text: 'Label printer 2 out of ribbon', priority: 'Low', owner: 'Lena', due: '2026-10-29', done: false, carried: 0 },
+  ];
+  const incoming = [
+    // Solved there, open here; the same owner, no date there, a higher priority there: one issue, open, with the date here.
+    { text: 'Dock 4 door jams at the top', priority: 'High', owner: 'Maintenance', due: '', done: true, carried: 0 },
+    // Solved there, open here, no owner or date on either side.
+    { text: 'Scanner 7 battery swollen', priority: 'Low', owner: '', due: '', done: true, carried: 1 },
+    // The sender left the names out: the owner and the date here are kept, the lower priority there loses.
+    { text: 'Label printer 2 out of ribbon', priority: 'Medium', owner: '', due: '', done: false, carried: 0 },
+  ];
+  const merged = plain(Link.mergeIssues(incoming, here, priorities));
+  assert.equal(merged.issues.length, 3);
+  const [dock, scanner, printer] = merged.issues;
+  assert.equal(dock.done, false, 'open here stays open');
+  assert.equal(dock.owner, 'Maintenance');
+  assert.equal(dock.due, '2026-10-27', 'the date here fills the missing one');
+  assert.equal(dock.priority, 'High', 'the higher priority');
+  assert.equal(dock.carried, 2);
+  assert.deepEqual(dock.conflicts, ['solvedThere', 'priority']);
+  assert.equal(scanner.done, false);
+  assert.deepEqual(scanner.conflicts, ['solvedThere']);
+  assert.equal(scanner.carried, 1);
+  assert.equal(printer.done, false);
+  assert.equal(printer.owner, 'Lena', 'a missing owner there does not erase the one here');
+  assert.equal(printer.due, '2026-10-29');
+  assert.equal(printer.priority, 'Medium', 'Medium is higher than Low');
+  assert.deepEqual(printer.conflicts, ['priority']);
+  assert.deepEqual([merged.same, merged.kept, merged.ambiguous, merged.conflicts], [3, 0, 0, 4]);
+  // Solved on both sides: solved, no conflict.
+  const both = plain(Link.mergeIssues([{ text: 'A', priority: 'Low', owner: '', due: '', done: true, carried: 0 }], [{ text: 'a', priority: 'Low', owner: '', due: '', done: true, carried: 0 }], priorities));
+  assert.equal(both.issues[0].done, true);
+  assert.deepEqual(both.issues[0].conflicts, []);
+  // Without a priority order, the sender's priority stands and only the difference is named.
+  const unordered = plain(Link.mergeIssues([{ text: 'B', priority: 'Low', owner: '', due: '', done: false, carried: 0 }], [{ text: 'B', priority: 'High', owner: '', due: '', done: false, carried: 0 }]));
+  assert.equal(unordered.issues[0].priority, 'Low');
+  assert.deepEqual(unordered.issues[0].conflicts, ['priority']);
+});
+
+test('the same text is not the same issue: another owner or date, or more than one candidate, keeps every record and says so', () => {
+  const priorities = ['High', 'Medium', 'Low'];
+  const issue = (text, owner, due, extra = {}) => ({ text, priority: 'Medium', owner, due, done: false, carried: 0, ...extra });
+  // Two issues here with the same text, another owner and date each; the sender has one of them, named.
+  const here = [issue('Dock 4 door jams', 'Maintenance', '2026-10-27', { carried: 2 }), issue('Dock 4 door jams', 'Facilities', '2026-10-29')];
+  const one = plain(Link.mergeIssues([issue('Dock 4 door jams', 'Facilities', '2026-10-29', { done: true })], here, priorities));
+  assert.equal(one.issues.length, 2, 'the matching one merged, the other kept');
+  assert.deepEqual(one.issues.map((i) => [i.owner, i.due, i.done, i.kept, i.ambiguous]), [['Facilities', '2026-10-29', false, false, false], ['Maintenance', '2026-10-27', false, true, false]]);
+  assert.deepEqual([one.same, one.kept, one.ambiguous], [1, 1, 0]);
+  // The sender's issue has another owner and date than the one here: both are kept, the incoming one marked.
+  const other = plain(Link.mergeIssues([issue('Dock 4 door jams', 'Facilities', '2026-10-29')], [issue('Dock 4 door jams', 'Maintenance', '2026-10-27')], priorities));
+  assert.equal(other.issues.length, 2);
+  assert.deepEqual(other.issues.map((i) => [i.owner, i.due, i.kept, i.ambiguous]), [['Facilities', '2026-10-29', false, true], ['Maintenance', '2026-10-27', true, false]]);
+  assert.deepEqual([other.same, other.kept, other.ambiguous, other.added], [0, 1, 1, 1]);
+  // The same owner, another date: not the same issue either.
+  const date = plain(Link.mergeIssues([issue('Dock 4 door jams', 'Maintenance', '2026-10-29')], [issue('Dock 4 door jams', 'Maintenance', '2026-10-27')], priorities));
+  assert.equal(date.issues.length, 2);
+  assert.ok(date.issues[0].ambiguous && date.issues[1].kept);
+  // The sender left the names out, and two issues here could be the one meant: all three stay, the incoming one marked.
+  const unnamed = plain(Link.mergeIssues([issue('Dock 4 door jams', '', '')], here, priorities));
+  assert.equal(unnamed.issues.length, 3);
+  assert.deepEqual(unnamed.issues.map((i) => [i.owner, i.kept, i.ambiguous]), [['', false, true], ['Maintenance', true, false], ['Facilities', true, false]]);
+  assert.equal(unnamed.ambiguous, 1);
+  // The sender has two issues with the same text and different owners; nothing like it here: both arrive as new.
+  const twoThere = plain(Link.mergeIssues([issue('Dock 4 door jams', 'Facilities', '2026-10-29'), issue('Dock 4 door jams', 'Maintenance', '2026-10-27')], [], priorities));
+  assert.equal(twoThere.issues.length, 2);
+  assert.ok(twoThere.issues.every((i) => !i.kept && !i.ambiguous));
+  // The sender has the same two; one is here: that one merges with its own, the other arrives as new; and two here are never collapsed into one.
+  const twoBoth = plain(Link.mergeIssues([issue('Dock 4 door jams', 'Facilities', '2026-10-29'), issue('Dock 4 door jams', 'Maintenance', '2026-10-27', { done: true })], here, priorities));
+  assert.equal(twoBoth.issues.length, 2);
+  assert.deepEqual(twoBoth.issues.map((i) => [i.owner, i.due, i.done, i.carried, i.ambiguous]), [['Facilities', '2026-10-29', false, 0, false], ['Maintenance', '2026-10-27', false, 2, false]]);
+  assert.equal(twoBoth.same, 2);
+  // Two here with the same text and no owner or date at all: still two candidates, so the incoming stays apart.
+  const bare = plain(Link.mergeIssues([issue('Spill by dock 2', '', '')], [issue('Spill by dock 2', '', ''), issue('Spill by dock 2', '', '')], priorities));
+  assert.equal(bare.issues.length, 3);
+  assert.equal(bare.issues[0].ambiguous, true);
+});
+
+test('a state saved by the version before this one loads unchanged, and taking over keeps the history as it was', { skip: !fs.existsSync('_site/tools/shift-handover/index.html') }, async () => {
+  const { JSDOM } = require('jsdom');
+  const CODE = 'acid-acorn-acre-acts-afar-affix';
+  // As the version before wrote it: no shared, ack, received, no received list.
+  const older = { template: 'hotel', date: '2026-10-25', shift: 'Night', area: 'Front office', from: 'Besa', to: 'Dritan', ackAt: '2026-10-26T06:10:00.000Z',
+    metrics: [['Arrivals', '42', ''], ['No-shows', '2', 'both prepaid']], issues: [{ text: 'Room 1204 safe does not lock', priority: 'High', owner: 'Maintenance', due: '2026-10-26', done: false, carried: 1 }],
+    headsUp: 'Group of 30 arrives 15:00.', safety: '', checks: [true, false, true, true, false, true] };
+  const legacy = { current: { ...older, date: '2026-10-26', shift: 'Early', from: 'Dritan', to: '', ackAt: '', issues: [{ text: 'Room 1204 safe does not lock', priority: 'High', owner: 'Maintenance', due: '2026-10-26', done: false, carried: 2 }] },
+    history: [{ closedAt: '2026-10-26T06:12:00.000Z', handover: older, text: 'Shift handover | Front office\n…' }] };
+  const open = async (hash = '') => {
+    const html = fs.readFileSync('_site/tools/shift-handover/index.html', 'utf8').replace(/<script\b[^>]*\bsrc=[^>]*><\/script>/g, '');
+    const dom = new JSDOM(html, { url: `https://example.test/tools/shift-handover/${hash}`, runScripts: 'outside-only', pretendToBeVisual: true });
+    const w = dom.window;
+    Object.assign(w, { CompressionStream, DecompressionStream, Blob, Response, TextEncoder, TextDecoder });
+    // jsdom's own crypto has no subtle: the page needs Node's for the key derivation.
+    Object.defineProperty(w, 'crypto', { value: globalThis.crypto, configurable: true });
+    w.HTMLElement.prototype.scrollIntoView = () => {};
+    w.confirm = () => true;
+    w.localStorage.setItem('sc-shift-handover', JSON.stringify(legacy));
+    for (const file of ['tool-kit', 'shift-handover']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+    return w;
+  };
+  // Loaded: nothing is rewritten unasked (the saved text is the same), the page shows the handover and the history.
+  const w1 = await open();
+  assert.equal(w1.localStorage.getItem('sc-shift-handover'), JSON.stringify(legacy), 'the saved state untouched by a load');
+  assert.equal(w1.document.querySelector('[name=from]').value, 'Dritan');
+  assert.equal(w1.document.querySelectorAll('[data-history] details').length, 1);
+  assert.match(w1.document.querySelector('[data-output-title]').textContent, /Almost ready|Ready to hand over/);
+  // A first save (a keystroke) writes it back whole, with the new records empty.
+  const area = w1.document.querySelector('[name=area]');
+  area.value = 'Front office, lobby';
+  area.dispatchEvent(new w1.Event('input', { bubbles: true }));
+  await new Promise((r) => setTimeout(r, 150));
+  const loaded = JSON.parse(w1.localStorage.getItem('sc-shift-handover'));
+  assert.deepEqual({ ...loaded.current, area: legacy.current.area, shared: undefined, ack: undefined, received: undefined }, { ...legacy.current, shared: undefined, ack: undefined, received: undefined });
+  assert.deepEqual(loaded.current.shared, []);
+  assert.equal(loaded.current.ack, null);
+  assert.equal(loaded.current.received, null);
+  assert.deepEqual(loaded.history.map((entry) => [entry.closedAt, entry.text, entry.handover.from, entry.handover.ackAt]), [['2026-10-26T06:12:00.000Z', 'Shift handover | Front office\n…', 'Besa', '2026-10-26T06:10:00.000Z']]);
+  assert.deepEqual(loaded.received, []);
+  // A sealed handover taken over: the old history entry is untouched, the current one joins it, the open issue here is kept with its carry count.
+  const sealed = await Link.packHandover({ template: 'hotel', date: '2026-10-26', shift: 'Early', area: 'Front office', from: '', to: '', metrics: [['Arrivals', '12', '']], issues: [{ text: 'Room 1204 safe does not lock', priority: 'Low', owner: '', due: '', done: true, carried: 0 }, { text: 'Lift B out of order', priority: 'High', owner: '', due: '', done: false, carried: 0 }], headsUp: '', safety: '', checks: [] }, CODE, { id: 'legacy-test-1' });
+  const w2 = await open(`#${sealed.fragment}`);
+  const box = w2.document.querySelector('[data-incoming]');
+  for (let i = 0; i < 100 && box.hidden; i++) await new Promise((r) => setTimeout(r, 10));
+  const unlock = box.querySelector('[data-incoming-unlock]');
+  unlock.elements.code.value = CODE;
+  unlock.dispatchEvent(new w2.Event('submit', { bubbles: true, cancelable: true }));
+  const preview = box.querySelector('[data-incoming-preview]');
+  for (let i = 0; i < 300 && preview.hidden; i++) await new Promise((r) => setTimeout(r, 20));
+  assert.equal(preview.hidden, false, 'opened with the code');
+  assert.match(preview.querySelector('.has-conflict .sh-conflict').textContent, /solved there, still open here/);
+  box.querySelector('[data-incoming-open]').click();
+  await new Promise((r) => setTimeout(r, 20));
+  const after = JSON.parse(w2.localStorage.getItem('sc-shift-handover'));
+  assert.equal(after.history.length, 2);
+  const bare = (entry) => ({ ...entry, handover: { ...entry.handover, shared: undefined, ack: undefined, received: undefined } });
+  assert.deepEqual(bare(after.history[1]), bare(legacy.history[0]), 'the old entry as it was (the new records empty beside it)');
+  assert.equal(after.history[0].handover.from, 'Dritan', 'what was current moved to the history');
+  const safe = after.current.issues.find((issue) => issue.text === 'Room 1204 safe does not lock');
+  assert.deepEqual([safe.done, safe.owner, safe.due, safe.priority, safe.carried], [false, 'Maintenance', '2026-10-26', 'High', 2]);
+  assert.ok(after.current.issues.some((issue) => issue.text === 'Lift B out of order'));
+  assert.equal(after.current.received.id, 'legacy-test-1');
+  assert.deepEqual(after.received.map((entry) => entry.id), ['legacy-test-1']);
 });

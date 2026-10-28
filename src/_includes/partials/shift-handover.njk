@@ -95,11 +95,25 @@
     <div>
       <p class="kicker">{{ "The handover" | t(lang) }}</p>
       <h2 data-output-title>{{ "Ready to hand over" | t(lang) }}</h2>
+      <p class="form-note sh-state" data-transfer-state hidden></p>
     </div>
     <div class="dl-box sh-incoming" data-incoming hidden>
       <p class="sh-ok" data-incoming-text></p>
+      <form class="sh-unlock" data-incoming-unlock hidden>
+        <label class="field"><span>{{ "Transfer code" | t(lang) }}</span><input name="code" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" required></label>
+        <button class="button-primary" type="submit">{{ "Open" | t(lang) }}</button>
+        <p class="form-note sh-error" data-incoming-error role="alert"></p>
+      </form>
+      <div class="sh-preview" data-incoming-preview hidden>
+        <p class="kicker">{{ "What it holds" | t(lang) }}</p>
+        <ul class="sh-summary" data-incoming-summary></ul>
+        <p class="kicker">{{ "Issues" | t(lang) }}</p>
+        <ul class="sh-preview-issues" data-incoming-issues></ul>
+        <p class="form-note sh-warn" data-incoming-note hidden></p>
+      </div>
       <div class="tool-actions">
-        <button class="button-primary" type="button" data-incoming-open>{{ "Open this handover" | t(lang) }}</button>
+        <button class="button-primary" type="button" data-incoming-open hidden>{{ "Take over this handover" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-incoming-again hidden>{{ "Take it over again anyway" | t(lang) }}</button>
         <button class="button-ghost" type="button" data-incoming-ignore>{{ "Not now" | t(lang) }}</button>
       </div>
     </div>
@@ -115,6 +129,24 @@
         <div class="tool-actions">
           <button class="button-secondary" type="button" data-ack>{{ "Confirm takeover" | t(lang) }}</button>
         </div>
+        <div class="sh-ack-code" data-ack-code hidden>
+          <p class="form-note sh-help">{{ "Give the sender this confirmation code, by voice or in your own message. Typed on their device, it marks their handover as acknowledged. It is a manual confirmation, not a proof of who you are." | t(lang) }}</p>
+          <p class="sh-code" data-ack-code-text aria-live="polite"></p>
+          <div class="tool-actions">
+            <button class="button-secondary" type="button" data-ack-code-copy>{{ "Copy the code" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-ack-code-link>{{ "Copy a confirmation link" | t(lang) }}</button>
+          </div>
+        </div>
+        <form class="sh-verify" data-ack-verify hidden>
+          <p class="form-note sh-help">{{ "When the next shift has taken over on their device, they get a confirmation code. Type it here: a manual confirmation that the handover was opened with its transfer code, not a proof of who did it." | t(lang) }}</p>
+          <div class="sh-verify-fields">
+            <label class="field"><span>{{ "Confirmation code" | t(lang) }}</span><input name="code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC-DEF" required></label>
+            <label class="field"><span>{{ "Confirmed by" | t(lang) }}</span><input name="by" type="text" autocomplete="off"></label>
+            <button class="button-secondary" type="submit">{{ "Check the code" | t(lang) }}</button>
+          </div>
+          <p class="form-note sh-error" data-ack-verify-status role="alert"></p>
+        </form>
+        <p class="form-note sh-file-open"><label class="button-ghost work-backup-open">{{ "Open a handover file" | t(lang) }}<input type="file" accept=".json,application/json" data-incoming-file></label></p>
       </div>
       <div class="tool-actions sh-actions">
         <button class="button-primary" type="button" data-copy>{{ "Copy as text" | t(lang) }}</button>
@@ -126,19 +158,42 @@
       <p class="form-note" data-status aria-live="polite"></p>
       <dialog class="sh-send" data-send-dialog aria-labelledby="sh-send-title">
         <h2 id="sh-send-title">{{ "Send this handover to another device" | t(lang) }}</h2>
-        <p class="form-note sh-help">{{ "The handover travels inside this link, never through a server. Open it on the other phone or computer, or scan the code." | t(lang) }}</p>
-        <div class="sh-qr" data-send-qr hidden></div>
-        <p class="form-note sh-help" data-send-qr-note></p>
-        <label class="field">
-          <span>{{ "Link" | t(lang) }}</span>
-          <textarea class="sh-link" data-send-link rows="3" readonly></textarea>
-        </label>
-        <div class="tool-actions">
-          <button class="button-primary" type="button" data-send-share hidden>{{ "Share the link" | t(lang) }}</button>
-          <button class="button-secondary" type="button" data-send-copy>{{ "Copy the link" | t(lang) }}</button>
-          <button class="button-ghost" type="button" data-send-close>{{ "Close" | t(lang) }}</button>
+        <div data-send-step="prepare">
+          <p class="form-note sh-help">{{ "This is what goes. The handover is sealed with a transfer code and travels inside a link, a QR code or a file, never through a server; without the code it cannot be read." | t(lang) }}</p>
+          <ul class="sh-summary" data-send-summary></ul>
+          <label class="sh-check"><input type="checkbox" data-send-names> {{ "Include the names of people (who hands over, who takes over, the owners of the issues)" | t(lang) }}</label>
+          <div class="sh-warn" data-send-warnings hidden>
+            <p class="form-note">{{ "Check before sending; this looks personal or confidential:" | t(lang) }}</p>
+            <ul></ul>
+          </div>
+          <p class="form-note sh-help">{{ "The texts of the issues, the heads-up and the safety note travel as typed: read them once for guests’ names or card details." | t(lang) }}</p>
+          <label class="field"><span>{{ "Transfer code" | t(lang) }}</span><input data-send-code type="text" autocomplete="off" autocapitalize="none" spellcheck="false"></label>
+          <p class="form-note sh-warn-line" data-send-code-warning role="status" hidden></p>
+          <p class="form-note sh-help">{{ "Six words made for you, or a code of your own. Tell it to the next shift in person or by phone, never in the same message as the link." | t(lang) }}</p>
+          <div class="tool-actions">
+            <button class="button-primary" type="button" data-send-make>{{ "Seal and make the link" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-send-newcode>{{ "New code" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-send-close>{{ "Close" | t(lang) }}</button>
+          </div>
+          <p class="form-note sh-error" data-send-prepare-status role="alert"></p>
         </div>
-        <p class="form-note" data-send-status aria-live="polite"></p>
+        <div data-send-step="share" hidden>
+          <p class="form-note" data-send-sealed></p>
+          <div class="sh-qr" data-send-qr hidden></div>
+          <p class="form-note sh-help" data-send-qr-note></p>
+          <label class="field">
+            <span>{{ "Link" | t(lang) }}</span>
+            <textarea class="sh-link" data-send-link rows="3" readonly></textarea>
+          </label>
+          <div class="tool-actions">
+            <button class="button-primary" type="button" data-send-share hidden>{{ "Share the link" | t(lang) }}</button>
+            <button class="button-secondary" type="button" data-send-copy>{{ "Copy the link" | t(lang) }}</button>
+            <button class="button-secondary" type="button" data-send-file>{{ "Save as a file" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-send-shown hidden>{{ "I showed the QR code" | t(lang) }}</button>
+            <button class="button-ghost" type="button" data-send-close>{{ "Close" | t(lang) }}</button>
+          </div>
+          <p class="form-note" data-send-status aria-live="polite"></p>
+        </div>
       </dialog>
     </div>
   </div>
