@@ -57,7 +57,7 @@ Edhe:
    - Libri: rreshti i botimit dhe kopertina e pasme (B-01).
    - Management Review: muaji i edicionit special, "redaksia", shënimi i 12 tetorit në PDF, emri "Monthly edition".
    - Përshkrimet e KPI Diagnostic dhe ATS CV.
-   - Faqja e privatësisë (P-01): shtesa faktike është në degë (`f5701ab4`), pret leximin tënd.
+   - Faqja e privatësisë (P-01): e miratuar nga ana editoriale dhe teknike më 28 tetor (jo certifikim ligjor i GDPR-së); klasifikimi ligjor i ruajtjes automatike kërkon verifikim më vete.
    - Analytics e Cloudflare (A-01, cilësim llogarie).
    - Podcast-i shqip nr. 1 (P-05).
    - Publikimi i Team Sync Worker (hapi 1 i planit).
@@ -141,7 +141,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | M-04 | Zenith radar broken (duplicate keyframes) | PM-4 | fixed | `22edfaff` (approved by the author on 27 Oct) · tests/motion-css.test.cjs (no two @keyframes share a name), tests/page-transitions.test.cjs; frames in phase3/motion/radar/ | — |
 | M-05 | Printed issue before scrolling: blank charts | PM-5 | fixed | `eb4b4b8c` · tests/browser/print.spec.mjs (hidden chart parts 14/35/10 → 0; also scroll reveals, hero titles, dark margins on paper) | — |
 | M-06 | Desktop wheel glide slows scrolling | PM-6 | fixed | `2d9f9906` (approved by the author on 27 Oct, on condition that the other smooth motion stays: only the wheel handler of script.js is removed; links to a place on the page still glide, every animation and transition unchanged) · tests/browser/motion.spec.mjs (a notch 393 → 54 ms on home) | — |
-| P-01 | Privacy page incomplete | P2C-07 | needs author approval | Factual addition from the code in EN/DE/SQ (`f5701ab4`); the author's clarifications of 28 Oct (`53cf44bc`): the TDDDG basis named only for storage the visitor starts, automatic storage described without a basis, the visit count by its purpose without claiming it works (A-01). Test in tests/work-lock-storage.test.cjs. The legal classification of automatic storage needs a separate check | The author approves the final text (VENDIMET-E-HAPURA.md B.5) |
+| P-01 | Privacy page incomplete | P2C-07 | approved (editorial, technical) | Factual addition from the code in EN/DE/SQ (`f5701ab4`); the author's clarifications of 28 Oct: the TDDDG basis named only for storage the visitor starts, automatic storage described without a basis, the visit count by its purpose without claiming it works (A-01) (`53cf44bc`, `e9184e06`), the opening of section 3 about the fonts only (`7a011db1`). Test in tests/work-lock-storage.test.cjs. Approved by the author on 28 Oct, editorially and technically, provided tests and CI pass; not a legal GDPR certification. The legal classification of automatic storage needs a separate check | — |
 | P-02 | Narration reads the feedback form | P7-01 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs (built pages, 3 languages; reading stops at the end of the text on 261 narrated pages) | — |
 | P-03 | Narration skips the case-box content | P7-02 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs ("What cannot be confirmed" read) | — |
 | P-04 | Narration privacy note and online voices | P7-03 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs (local voice first; the note names an online voice and says the text goes to its maker; Edge no longer recommended; privacy page in 3 languages) | — |

@@ -9,7 +9,8 @@ miratimin tënd përfundimtar.
 - Fazat 1–3 të auditimit (mjetet, publikimet, shfletuesi), siç i përshkruan `RAPORTI-I-KONSOLIDUAR.md`.
 - Tre ndryshimet e miratuara më 27 tetor: radari i Zenith-it, rrota natyrale e mausit (lëvizjet e tjera të buta
   mbeten), kontrasti i arit të Lumen-it në temën e çelët.
-- Teksti i privatësisë, shtesë faktike nga kodi në tri gjuhët (`f5701ab4`, `53cf44bc`): kyçja me PIN, pikat e
+- Teksti i privatësisë, shtesë faktike nga kodi në tri gjuhët (`f5701ab4`, `53cf44bc`, `e9184e06`, `7a011db1`; i
+  miratuar nga ana editoriale dhe teknike më 28 tetor, jo certifikim ligjor i GDPR-së): kyçja me PIN, pikat e
   rikthimit, fotot, emrat në katër mjete, shenjat "e re" të menysë, service worker-i; baza ligjore vetëm për
   ruajtjen që nis lexuesi; analytics sipas qëllimit, pa pretenduar matje.
 - Tre korrigjimet e rollback-ut: skedari i faqes së vjetër hapet; puna e shkruar gjatë kyçjes ruhet si pikë rikthimi
@@ -56,9 +57,8 @@ asnjë fakt karriere, origjinal shqip, tekst libri apo vendim editorial që pret
 
 ## 4. Hapat e publikimit, kur t'i miratosh
 
-1. Mirato tekstin përfundimtar të privatësisë (`VENDIMET-E-HAPURA.md` B.5).
-2. PR #363 nga Draft në "Ready", pastaj **"Create a merge commit"**, jo squash e as rebase.
-3. Menjëherë pas tij: `node scripts/online-dates.mjs` në `main`, commit i dy skedarëve të datave.
-4. Kontrollet në faqen live dhe, nëse duhet, kthimi mbrapsht: `docs/RELEASE.md` §4–5.
+1. PR #363 nga Draft në "Ready", pastaj **"Create a merge commit"**, jo squash e as rebase.
+2. Menjëherë pas tij: `node scripts/online-dates.mjs` në `main`, commit i dy skedarëve të datave.
+3. Kontrollet në faqen live dhe, nëse duhet, kthimi mbrapsht: `docs/RELEASE.md` §4–5.
 
 Vendimet që presin faktet ose miratimin tënd janë në `VENDIMET-E-HAPURA.md`.

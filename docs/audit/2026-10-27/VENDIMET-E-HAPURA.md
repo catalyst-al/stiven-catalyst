@@ -19,7 +19,7 @@ skedarët e treguar; numrat e gjetjeve janë ato të `RAPORTI-I-KONSOLIDUAR.md`.
 | Team Sync Worker, Cloudflare | Mos publiko; mos ndrysho konfigurimin | asgjë e publikuar; plani: `docs/SYNC-WORKER-MIGRATION.md` |
 | Publikimi | Draft PR për shqyrtim; asnjë merge pa miratimin përfundimtar | `docs/RELEASE.md` |
 | Kufizimet e njohura | Pranohen siç janë | `RAPORTI-I-PUBLIKIMIT.md` §3 |
-| Teksti i privatësisë (P-01) | Shtesë faktike nga kodi, në tri gjuhët, para merge-it; pa vlerësim ligjor. Saktësimet e 28 tetorit: baza ligjore vetëm për ruajtjen që nis lexuesi; analytics pa pretenduar matje | `f5701ab4`, `53cf44bc`, e9184e06; teksti përfundimtar pret miratimin tënd (B.5) |
+| Teksti i privatësisë (P-01) | Shtesë faktike nga kodi, në tri gjuhët, me saktësimet e 28 tetorit (baza ligjore vetëm për ruajtjen që nis lexuesi; analytics pa pretenduar matje; fjalia hyrëse vetëm për fontet). **Miratuar nga ana editoriale dhe teknike më 28 tetor**, me kushtin që testet dhe CI të kalojnë te commit-i i fundit. Nuk është certifikim ligjor i GDPR-së | `f5701ab4`, `53cf44bc`, `e9184e06`, `7a011db1` (B.5) |
 
 ## B. Të hapura: kërkojnë fakte ose miratim
 
@@ -57,14 +57,19 @@ Burimi: `phase2/management-review.md` §9 dhe `phase2/tools-guide-and-pdf-check.
 - emri "Monthly edition", kur 80 numra dolën online brenda katër ditëve;
 - shtyllat mbi shkallë të shkurtuar pa bosht (P5-06): ndryshimi prek grafikët e publikuar dhe PDF-të.
 
-### 5. Teksti i privatësisë (P-01): teksti përfundimtar pret miratimin tënd
-Shtesa faktike (`f5701ab4`) dhe dy saktësimet e tua të 28 tetorit (`53cf44bc`, `e9184e06`, edhe titulli i pikës 3) janë në degë, te `src/datenschutz.njk`,
+### 5. Teksti i privatësisë (P-01): i miratuar nga ana editoriale dhe teknike (28 tetor)
+Miratimi vlen me kushtin që testet dhe CI të kalojnë te commit-i i fundit. Nuk është certifikim ligjor i GDPR-së.
+
+Shtesa faktike (`f5701ab4`) dhe saktësimet e tua të 28 tetorit (`53cf44bc`, `e9184e06` për titullin e pikës 3,
+`7a011db1` për fjalinë hyrëse) janë në degë, te `src/datenschutz.njk`,
 në EN/DE/SQ:
 - **Baza ligjore:** § 25(2) nr. 2 TDDDG përmendet vetëm për ruajtjen që lexuesi e nis vetë. Ruajtja automatike
   (shenjat "e re" të menysë `sc-seen-*`, progresi i leximit, kopjet e service worker-it) përshkruhet pa asnjë bazë
   ligjore. Asnjë bazë e re nuk u shtua.
 - **Analytics:** faqja thotë cilat faqe e ngarkojnë skriptin, për çfarë shërben dhe çfarë është ndërtuar të dërgojë.
   Nuk thotë që vizitat po numërohen, sepse konfigurimi nuk është rregulluar ende (A-01).
+- **Fjalia hyrëse e pikës 3:** fontet ngarkohen nga vetë faqja, pa Google Fonts ose shërbime të jashtme fontesh;
+  shërbimet e tjera të jashtme dhe rastet kur përdoren shpjegohen më poshtë.
 
 **Kërkon verifikim më vete, jashtë këtij publikimi:** klasifikimi ligjor i ruajtjes automatike (`sc-seen-*`, progresi
 i leximit, kopjet e service worker-it) sipas § 25 TDDDG, dhe nëse nevojitet pëlqim. Kjo është pyetje për ty ose për
