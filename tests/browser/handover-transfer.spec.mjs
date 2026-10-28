@@ -191,11 +191,16 @@ test("a damaged link, a foreign fragment and a file: refused or opened, by keybo
   await unlock.locator("[name=code]").fill(code);
   await unlock.locator("button[type=submit]").click();
   await expect(box.locator("[data-incoming-error]")).toContainText(/Wrong code, or the handover was changed/, { timeout: 20_000 });
-  // A foreign fragment is said so, and leaves the address.
+  // Bytes that are not a sealed handover: the code is asked for, then the page says what this is not.
   await B.page.goto("/tools/shift-handover/#h2=notvalid");
+  await expect(box).toBeVisible();
+  await unlock.locator("[name=code]").fill(code);
+  await unlock.locator("button[type=submit]").click();
+  await expect(box.locator("[data-incoming-error]")).toContainText("not a handover that this page can open", { timeout: 20_000 });
+  // A fragment that is not even a link of this page is said so, and leaves the address.
+  await B.page.goto("/tools/shift-handover/#h2=not%20valid!");
   await expect(B.page.locator("[data-status]")).toContainText("does not hold a handover");
   expect(await B.page.evaluate(() => location.hash)).toBe("");
-  await B.page.goto("/tools/shift-handover/#h2=");
   await expect(box).toBeHidden();
 
   // Offline, once the app is kept: from another page, with no network, the link still opens the tool from the copy

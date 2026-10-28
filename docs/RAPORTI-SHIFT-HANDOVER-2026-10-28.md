@@ -73,7 +73,24 @@ kurrë faqen nuk e hap linkun offline, sepse s'ka kopje; teksti i faqes dhe ky r
 
 ## 6. Çfarë u testua
 
-TESTET
+| Kontroll | Si | Rezultati |
+| --- | --- | --- |
+| Build | `npx eleventy` | pa gabim |
+| Testet unit | `npm test` | **1343 / 1343**, 0 të anashkaluara (ishin 1337; `tests/handover-link.test.cjs` u rishkrua me 11 teste) |
+| Vulosja dhe hapja | Node, `tests/handover-link.test.cjs` | hapet me kodin e vet, me shkronja/hapësira/viza të ndryshme; kod i gabuar → `wrong`; çdo bajt i ndryshuar (salt, iv, shifër, fundi) → `wrong`; bajte të huaja → `invalid`; dy vulosje të së njëjtës dorëzim ndryshojnë dhe hapen të dyja |
+| Kufijtë | Node | fragment > 64 KB i refuzuar pa dekodim; skedar > 1 MB i refuzuar; bombë gzip 50 MB (link i vjetër) e refuzuar nën 2 s; bombë e vulosur (256 KB hapësira) → `invalid` pas deshifrimit |
+| Linqet e vjetra | Node + jsdom me faqen e ndërtuar | `#h=` dhe `#h0=` hapen me shënimin "version më i vjetër, pa enkriptim"; markup në fusha mbetet tekst (asnjë element nga linku) |
+| Kodi i transferimit dhe i konfirmimit | Node | 4 fjalë nga lista / 10 shenja pa 0-1-i-l-o; ≥ 8 shenja; kodi i konfirmimit varet nga id-ja dhe nga kodi, i njëjtë sido që shkruhet kodi |
+| Përmbajtja personale | Node | email, telefon (≥ 9 shifra), kartë (≥ 13 shifra), IBAN gjenden me fushën; numrat e dhomave, sasitë dhe oraret jo |
+| Bashkimi i çështjeve | Node | e re / e njëjtë (bartja më e lartë) / e mbajtur nga këtu; listat bosh |
+| Rrjedha A → B → konfirmim → A | Playwright, Chromium, dy kontekste të izoluara, **18 / 18** (3 teste × 390/768/1440 px × temë e errët me lëvizje / e çelët me lëvizje të reduktuar), `tests/browser/handover-transfer.spec.mjs` | ruajtja automatike dhe rikthimi pas rifreskimit; përmbledhja me emrat jashtë dhe brenda; kod i shkurtër i refuzuar; linku pa emra, nën 2331 bajt, me QR; "Shared" vetëm pas kopjimit; B: kod i gabuar nuk ndryshon asgjë, kodi i saktë hap parapamjen me *e re* / *mbajtur nga këtu*; marrja ruan çështjen e hapur të B-së dhe çon turnin e vjetër te historiku; "Received" → "Taken over by Lena" me kod konfirmimi; i njëjti link përsëri → "Already received"; A: kod i gabuar i refuzuar, i sakti → "Acknowledged by Lena"; mbyllja e turnit mban kodin te historiku dhe pastron të dhënat e transferimit |
+| Link i dëmtuar, fragment i huaj, skedar, offline, tastierë | Playwright, i njëjti spec | bajt i ndryshuar → "Kod i gabuar, ose dorëzimi u ndryshua"; bajte jo-dorëzim → "nuk është dorëzim që kjo faqe e hap"; fragment i pavlefshëm → shënim dhe adresa pastrohet; skedari ruhet pa emra dhe hapet; "nuk është skedar dorëzimi"; "Jo tani" nuk ndryshon gjë; **offline**: pasi B e ka hapur mjetin një herë dhe service worker-i e kontrollon faqen, nga një faqe tjetër dhe pa rrjet linku hapet dhe kodi punon; vetëm me tastierë: fusha e kodit me fokus, Enter hap, "Merre" me fokus, Enter merr |
+| EN / DE / SQ | Playwright | A në gjermanisht ("Geteilt"), B në shqip ("dorëzim i vulosur", "Emrat jashtë", "E marrë") |
+| Aksesueshmëria | axe-core në faqen e A-së pas ndarjes dhe te B me parapamjen | 0 shkelje serioze ose kritike |
+| Pa gabime skripti | fixtures.mjs për A, `pageerror` për B | 0 |
+
+Nuk u testua: Firefox, Safari, telefona realë. Dy kontekstet e Playwright janë dy profile të izoluara shfletuesi në të
+njëjtën makinë, jo dy pajisje fizike.
 
 ## 7. Kufizimet që mbeten
 

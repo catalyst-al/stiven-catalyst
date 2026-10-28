@@ -1311,9 +1311,13 @@
       const field = ackVerify?.elements.code;
       if (field) { field.value = Link.showAck(parsed.code); if (parsed.by) ackVerify.elements.by.value = parsed.by; ackVerify.requestSubmit(); }
       clearHash();
-    } else if (/^#(h|h0|h2|a)=/.test(location.hash)) {
-      note(tx("This link does not hold a handover."));
-      clearHash();
+    } else {
+      // Nothing to offer: a box left from an earlier fragment of this tab closes.
+      if (/^#(h|h0|h2|a)=/.test(location.hash)) {
+        note(tx("This link does not hold a handover."));
+        clearHash();
+      }
+      if (pending?.source !== "file") { reset(); incomingBox.hidden = true; }
     }
     };
     handleAddress();
