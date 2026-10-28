@@ -1,12 +1,27 @@
 (() => {
   // ---- Sending a handover to the next shift's device, without a server ----
-  // The handover travels inside the address of this page, after "#h=": { format, version, sent, handover } as JSON,
-  // gzipped where the browser can (CompressionStream; "#h0=" and plain JSON otherwise) and written in base64url. The
-  // part of an address after "#" never leaves the browser, so the link can go through any chat or email and holds
-  // nothing a server sees; shown as a QR code (team-sync.js draws it, up to 2331 bytes) it moves from one screen to
-  // the next phone without any connection at all. Opened, the link offers the handover; nothing is replaced unasked.
-  const LINK_FORMAT = "stiven-catalyst-handover";
+  // The handover travels sealed: { format, version: 2, id, sent, handover } as JSON, gzipped where the browser can,
+  // encrypted with AES-GCM 256 under a key derived from a transfer code (PBKDF2-SHA-256, 310 000 rounds, a random
+  // salt), with the format bound as additional data, so a changed or damaged byte opens nothing. The bytes
+  // [2, salt(16), iv(12), ciphertext] go after "#h2=" in the address of this page (base64url), into a QR code (team-
+  // sync.js draws it, up to 2331 bytes), or into a small file for a handover too long for a code. The transfer code
+  // is told separately (in person or by phone), never in the same message as the link: the link alone, in a chat
+  // history or a screenshot, is unreadable without it. The part of an address after "#" never reaches a server, but
+  // it does sit in browser histories and chats, which is why nothing readable is put there any more.
+  // Opened, the sealed handover asks for the code, shows what it holds, and replaces nothing unasked; a transfer
+  // received once is recognised the second time. The receiver's confirmation comes back as a short code derived from
+  // the transfer id and the transfer code (no server): the sender types it, and only then is the handover
+  // "acknowledged" on the sender's device too. The old plain links ("#h=", gzip; "#h0=") are still read, with a note
+  // that they were made without encryption; they are no longer made.
+  const FORMAT = "stiven-catalyst-handover";
+  const VERSION = 2;
+  const LINK_FORMAT = FORMAT;
   const LINK_VERSION = 1;
+  const FILE_FORMAT = "stiven-catalyst-handover-file";
+  const ITERATIONS = 310000;
+  const MIN_PASSCODE = 8;
+  // The format and version bound into the seal (made when needed: a page without TextEncoder still loads).
+  const aad = () => new TextEncoder().encode(`${FORMAT}/${VERSION}`);
   const toBase64Url = (bytes) => {
     let binary = "";
     bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
@@ -18,18 +33,13 @@
   };
   const pipe = async (bytes, stream) => new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer());
   const canZip = () => typeof CompressionStream === "function" && typeof DecompressionStream === "function";
-  // The fragment (without "#") that carries a handover.
-  const packHandover = async (handover, now = new Date()) => {
-    const bytes = new TextEncoder().encode(JSON.stringify({ format: LINK_FORMAT, version: LINK_VERSION, sent: now.toISOString(), handover }));
-    if (canZip()) {
-      try { return `h=${toBase64Url(await pipe(bytes, new CompressionStream("gzip")))}`; } catch { /* plain below */ }
-    }
-    return `h0=${toBase64Url(bytes)}`;
-  };
+  const subtle = () => (typeof crypto !== "undefined" && crypto.subtle) || null;
+  const random = (n) => crypto.getRandomValues(new Uint8Array(n));
   // A link anyone can send: a fragment longer than any handover makes, or one that unpacks past MAX_UNPACKED (a few
   // kilobytes of gzip can hold gigabytes of spaces), is refused, and the unpacking stops at the cap.
   const MAX_FRAGMENT = 64 * 1024;
   const MAX_UNPACKED = 256 * 1024;
+  const MAX_FILE = 1024 * 1024;
   const inflate = async (bytes) => {
     const reader = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip")).getReader();
     const chunks = [];
@@ -49,7 +59,113 @@
     chunks.forEach((chunk) => { out.set(chunk, at); at += chunk.length; });
     return out;
   };
-  // The handover a fragment carries (as saved, to be cleaned by the page), or null when it carries none.
+  const newId = () => (typeof crypto.randomUUID === "function" ? crypto.randomUUID() : [...random(16)].map((b) => b.toString(16).padStart(2, "0")).join(""));
+
+  // ---- The transfer code ----
+  // Four words of the team-code list when it is on the page (1296 words: about 41 bits), otherwise ten letters and
+  // digits without the ones that look alike (about 49 bits). Typed by hand, it is read without case, and spaces or
+  // hyphens between the words make no difference.
+  const ALPHABET = "abcdefghjkmnpqrstuvwxyz23456789";
+  const randomBelow = (n) => {
+    const limit = Math.floor(0x100000000 / n) * n;
+    for (;;) {
+      const value = crypto.getRandomValues(new Uint32Array(1))[0];
+      if (value < limit) return value % n;
+    }
+  };
+  const newPasscode = (words = globalThis.TeamSyncMath?.WORDS) => (Array.isArray(words) && words.length >= 1000
+    ? Array.from({ length: 4 }, () => words[randomBelow(words.length)]).join("-")
+    : Array.from({ length: 10 }, () => ALPHABET[randomBelow(ALPHABET.length)]).join(""));
+  const normalisePasscode = (value) => String(value ?? "").normalize("NFKC").toLowerCase().replace(/[\s\-_]+/g, " ").trim();
+  const goodPasscode = (value) => normalisePasscode(value).replace(/ /g, "").length >= MIN_PASSCODE;
+  const deriveTransferKey = async (passcode, salt) => {
+    const base = await subtle().importKey("raw", new TextEncoder().encode(normalisePasscode(passcode)), "PBKDF2", false, ["deriveKey"]);
+    return subtle().deriveKey({ name: "PBKDF2", salt, iterations: ITERATIONS, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+  };
+
+  // ---- Sealing and opening ----
+  // The bytes of a sealed handover: version 2, the salt, the IV, then the ciphertext of [1 + gzip(json)] or [0 + json].
+  const packHandover = async (handover, passcode, { id = newId(), now = new Date() } = {}) => {
+    const json = new TextEncoder().encode(JSON.stringify({ format: FORMAT, version: VERSION, id, sent: now.toISOString(), handover }));
+    let body = null;
+    if (canZip()) {
+      try { body = await pipe(json, new CompressionStream("gzip")); } catch { body = null; }
+    }
+    const plain = new Uint8Array((body || json).length + 1);
+    plain[0] = body ? 1 : 0;
+    plain.set(body || json, 1);
+    const salt = random(16);
+    const iv = random(12);
+    const key = await deriveTransferKey(passcode, salt);
+    const sealed = new Uint8Array(await subtle().encrypt({ name: "AES-GCM", iv, additionalData: aad() }, key, plain));
+    const bytes = new Uint8Array(1 + 16 + 12 + sealed.length);
+    bytes[0] = VERSION;
+    bytes.set(salt, 1);
+    bytes.set(iv, 17);
+    bytes.set(sealed, 29);
+    return { id, bytes, fragment: `h2=${toBase64Url(bytes)}` };
+  };
+  // { handover, id, sent } from sealed bytes and the code; { error: "invalid" } when the bytes are not a sealed
+  // handover, { error: "wrong" } when the code is wrong or a byte was changed (AES-GCM cannot tell the two apart).
+  const openHandover = async (bytes, passcode) => {
+    if (!ArrayBuffer.isView(bytes) || bytes.BYTES_PER_ELEMENT !== 1 || bytes[0] !== VERSION || bytes.length < 1 + 16 + 12 + 16 + 1 || bytes.length > MAX_FRAGMENT) return { error: "invalid" };
+    let plain;
+    try {
+      const key = await deriveTransferKey(passcode, bytes.subarray(1, 17));
+      plain = new Uint8Array(await subtle().decrypt({ name: "AES-GCM", iv: bytes.subarray(17, 29), additionalData: aad() }, key, bytes.subarray(29)));
+    } catch {
+      return { error: "wrong" };
+    }
+    try {
+      const body = plain.subarray(1);
+      const json = plain[0] === 1 ? await inflate(body) : body;
+      if (!json || json.length > MAX_UNPACKED) return { error: "invalid" };
+      const payload = JSON.parse(new TextDecoder().decode(json));
+      if (!payload || payload.format !== FORMAT || payload.version !== VERSION || typeof payload.id !== "string" || !payload.id
+        || !payload.handover || typeof payload.handover !== "object" || Array.isArray(payload.handover)) return { error: "invalid" };
+      return { id: payload.id, sent: typeof payload.sent === "string" ? payload.sent : "", handover: payload.handover };
+    } catch {
+      return { error: "invalid" };
+    }
+  };
+  const handoverLink = async (handover, passcode, href, options) => {
+    const packed = await packHandover(handover, passcode, options);
+    return { ...packed, link: `${String(href).split("#")[0]}#${packed.fragment}` };
+  };
+  // What is in the address: a sealed handover, an old plain one, a confirmation, or nothing.
+  const parseFragment = (fragment) => {
+    const text = String(fragment ?? "").trim().replace(/^#/, "");
+    if (text.length > MAX_FRAGMENT + 4) return null;
+    let m = /^h2=([A-Za-z0-9_-]+)$/.exec(text);
+    if (m) {
+      try { return { kind: "sealed", bytes: fromBase64Url(m[1]) }; } catch { return null; }
+    }
+    if (/^h0?=[A-Za-z0-9_-]+$/.test(text)) return { kind: "plain", fragment: text };
+    m = /^a=([A-Za-z0-9-]+)\.([a-z2-7]{6})(?:\.([A-Za-z0-9_-]*))?$/i.exec(text);
+    if (m) {
+      let by = "";
+      try { by = m[3] ? new TextDecoder().decode(fromBase64Url(m[3])) : ""; } catch { by = ""; }
+      return { kind: "ack", id: m[1], code: m[2].toUpperCase(), by };
+    }
+    return null;
+  };
+
+  // ---- A file, for a handover too long for a code, or when there is no chat to send a link ----
+  const fileText = (bytes, { date = "", shift = "", sent = "" } = {}) =>
+    `${JSON.stringify({ format: FILE_FORMAT, version: VERSION, date, shift, sent, data: toBase64Url(bytes) }, null, 2)}\n`;
+  const bytesFromFile = (text) => {
+    if (typeof text !== "string" || text.length > MAX_FILE) return null;
+    try {
+      const file = JSON.parse(text);
+      if (!file || file.format !== FILE_FORMAT || file.version !== VERSION || typeof file.data !== "string" || !/^[A-Za-z0-9_-]+$/.test(file.data)) return null;
+      const bytes = fromBase64Url(file.data);
+      return bytes.length > MAX_FRAGMENT ? null : bytes;
+    } catch {
+      return null;
+    }
+  };
+
+  // ---- The old plain link (version 1), still read ----
   const unpackHandover = async (fragment) => {
     const text = String(fragment ?? "").trim();
     if (text.length > MAX_FRAGMENT + 4) return null;
@@ -69,8 +185,98 @@
       return null;
     }
   };
-  const handoverLink = async (handover, href, now) => `${String(href).split("#")[0]}#${await packHandover(handover, now)}`;
-  window.ShiftHandoverLink = { LINK_FORMAT, LINK_VERSION, MAX_FRAGMENT, MAX_UNPACKED, toBase64Url, fromBase64Url, packHandover, unpackHandover, handoverLink };
+
+  // ---- The confirmation code ----
+  // Six characters of base32 from SHA-256("ack:" + id + ":" + code): only a device that opened the handover (so knew
+  // the transfer code) can make it, and the sender, who knows both, checks it without any server. Shown as ABC-DEF.
+  const BASE32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+  const ackCode = async (id, passcode) => {
+    const digest = new Uint8Array(await subtle().digest("SHA-256", new TextEncoder().encode(`ack:${id}:${normalisePasscode(passcode)}`)));
+    let bits = 0;
+    let value = 0;
+    let out = "";
+    for (const byte of digest) {
+      value = (value << 8) | byte;
+      bits += 8;
+      while (bits >= 5 && out.length < 6) { out += BASE32[(value >>> (bits - 5)) & 31]; bits -= 5; }
+      if (out.length === 6) break;
+    }
+    return out;
+  };
+  const showAck = (code) => `${code.slice(0, 3)}-${code.slice(3)}`;
+  const readAck = (value) => String(value ?? "").toUpperCase().replace(/[^A-Z2-7]/g, "");
+  const ackFragment = (id, code, by = "") => `a=${id}.${readAck(code).toLowerCase()}${by ? `.${toBase64Url(new TextEncoder().encode(by))}` : ""}`;
+
+  // ---- What a handover carries that may be personal or confidential ----
+  // Names of people are a choice (left out unless asked for). The texts travel as typed; these patterns catch what a
+  // pattern can catch (an email address, a phone number, a card number, an IBAN), so the sender is told before
+  // sharing. A guest's name in a sentence is not something a pattern finds: the summary says so.
+  const SENSITIVE = [
+    ["email", /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/],
+    ["iban", /\b[A-Z]{2}\d{2}(?: ?[A-Z0-9]){11,30}\b/],
+    ["card", /\b(?:\d[ -]?){13,19}\b/],
+    ["phone", /(?:\+|00)?\d(?:[\d ().\/-]{7,}\d)/],
+  ];
+  const digitsOf = (text) => (text.match(/\d/g) || []).length;
+  const sensitiveFindings = (h) => {
+    const out = [];
+    const look = (field, text) => {
+      const value = String(text ?? "");
+      if (!value.trim()) return;
+      for (const [kind, pattern] of SENSITIVE) {
+        const m = pattern.exec(value);
+        if (!m) continue;
+        if ((kind === "phone" && digitsOf(m[0]) < 9) || (kind === "card" && digitsOf(m[0]) < 13)) continue;
+        out.push({ field, kind, sample: m[0].trim().slice(0, 40) });
+        return;
+      }
+    };
+    look("area", h.area);
+    look("headsUp", h.headsUp);
+    look("safety", h.safety);
+    (h.metrics || []).forEach((row) => look("metrics", Array.isArray(row) ? row[2] : ""));
+    (h.issues || []).forEach((issue) => { look("issues", issue?.text); look("issues", issue?.owner); });
+    return out;
+  };
+  // The handover as shared: without the names of people unless asked, without what the other device decides for
+  // itself (the takeover, the sharing and receiving records).
+  const forTransfer = (h, { names = false } = {}) => {
+    const { ackAt, shared, ack, received, ...rest } = h;
+    return {
+      ...rest,
+      from: names ? rest.from : "",
+      to: names ? rest.to : "",
+      issues: (rest.issues || []).map((issue) => ({ ...issue, owner: names ? issue.owner : "" })),
+    };
+  };
+
+  // ---- New issues and the ones already here ----
+  const issueKey = (text) => String(text ?? "").toLowerCase().replace(/\s+/g, " ").trim();
+  // The issues of a received handover beside the open issues of this device: the incoming ones (an incoming issue
+  // that is open here too keeps the higher carry count), then this device's open issues the sender did not have,
+  // marked as kept, so nothing open here is lost by taking over.
+  const mergeIssues = (incoming, existingOpen) => {
+    const here = new Map((existingOpen || []).filter((issue) => issueKey(issue.text)).map((issue) => [issueKey(issue.text), issue]));
+    const seen = new Set();
+    let same = 0;
+    const issues = (incoming || []).map((issue) => {
+      const key = issueKey(issue.text);
+      const match = key ? here.get(key) : null;
+      if (key) seen.add(key);
+      if (!match) return { ...issue, kept: false };
+      same += 1;
+      return { ...issue, carried: Math.max(issue.carried || 0, match.carried || 0), kept: false };
+    });
+    const kept = [...here.values()].filter((issue) => !seen.has(issueKey(issue.text))).map((issue) => ({ ...issue, kept: true }));
+    return { issues: [...issues, ...kept], added: issues.length - same, same, kept: kept.length };
+  };
+
+  window.ShiftHandoverLink = {
+    FORMAT, VERSION, LINK_FORMAT, LINK_VERSION, FILE_FORMAT, MAX_FRAGMENT, MAX_UNPACKED, MAX_FILE, MIN_PASSCODE, ITERATIONS,
+    toBase64Url, fromBase64Url, newId, newPasscode, normalisePasscode, goodPasscode, deriveTransferKey,
+    packHandover, openHandover, handoverLink, parseFragment, fileText, bytesFromFile, unpackHandover,
+    ackCode, showAck, readAck, ackFragment, sensitiveFindings, forTransfer, issueKey, mergeIssues,
+  };
 
   const form = document.querySelector("[data-handover]");
   const dataEl = document.getElementById("shift-handover-data");
@@ -115,6 +321,12 @@
     safety: "",
     checks: template(key).checklist.map(() => false),
     ackAt: "",
+    // Sent to another device: { id, at, mode: "link" | "qr" | "file", ack: the confirmation code expected } (last 10).
+    shared: [],
+    // Confirmed by the other device: { id, at, by, code }, once its code was typed or its link opened here.
+    ack: null,
+    // Opened here from another device: { id, at, from, ackCode: the code to give back once taken over }.
+    received: null,
   });
 
   // Rebuild a saved handover field by field, so damaged data cannot break the page.
@@ -131,7 +343,11 @@
       carried: Number.isInteger(issue.carried) && issue.carried > 0 ? issue.carried : 0,
     })) : [];
     const checks = base.checks.map((_, i) => Array.isArray(h.checks) && h.checks[i] === true);
-    return { ...base, area: str(h.area), from: str(h.from), to: str(h.to), headsUp: str(h.headsUp), safety: str(h.safety), ackAt: str(h.ackAt), metrics, issues, checks };
+    const MODES = ["link", "qr", "file"];
+    const shared = Array.isArray(h.shared) ? h.shared.filter(isObject).map((entry) => ({ id: str(entry.id), at: str(entry.at), mode: MODES.includes(entry.mode) ? entry.mode : "link", ack: str(entry.ack) })).filter((entry) => entry.id).slice(-10) : [];
+    const ack = isObject(h.ack) && str(h.ack.id) ? { id: str(h.ack.id), at: str(h.ack.at), by: str(h.ack.by), code: str(h.ack.code) } : null;
+    const received = isObject(h.received) && str(h.received.id) ? { id: str(h.received.id), at: str(h.received.at), from: str(h.received.from), ackCode: str(h.received.ackCode) } : null;
+    return { ...base, area: str(h.area), from: str(h.from), to: str(h.to), headsUp: str(h.headsUp), safety: str(h.safety), ackAt: str(h.ackAt), metrics, issues, checks, shared, ack, received };
   };
   const saved = read(KEY, {});
   const state = {
@@ -139,6 +355,9 @@
     history: isObject(saved) && Array.isArray(saved.history)
       ? saved.history.filter((entry) => isObject(entry) && isObject(entry.handover) && typeof entry.text === "string")
         .map((entry) => ({ ...entry, handover: clean(entry.handover) }))
+      : [],
+    received: isObject(saved) && Array.isArray(saved.received)
+      ? saved.received.filter(isObject).map((entry) => ({ id: str(entry.id), at: str(entry.at) })).filter((entry) => entry.id).slice(-50)
       : [],
   };
   const save = () => write(KEY, state);
@@ -500,12 +719,44 @@
     quality.append(ul);
   };
 
+  // Where a handover stands. "draft" and "ready" are this device's own; "shared", "received" and "taken" are what this
+  // device did; only "acknowledged" says what the other device did, because its code was typed here.
+  const transferState = (h) => (!hasContent(h) ? "draft" : h.ack ? "acknowledged" : h.shared.length ? "shared" : h.ackAt ? "taken" : h.received ? "received" : "ready");
+  const stateLine = output.querySelector("[data-transfer-state]");
+  const ackCodeBox = output.querySelector("[data-ack-code]");
+  const ackVerify = output.querySelector("[data-ack-verify]");
   const renderOutput = () => {
     const h = cur();
-    outputTitle.textContent = !hasContent(h) ? tx("Start with the numbers") : h.ackAt ? tx("Taken over by {name}", { name: h.to }) : problems(h).length ? tx("Almost ready") : tx("Ready to hand over");
+    const state = transferState(h);
+    const last = h.shared[h.shared.length - 1];
+    outputTitle.textContent = {
+      draft: tx("Start with the numbers"),
+      ready: problems(h).length ? tx("Almost ready") : tx("Ready to hand over"),
+      shared: tx("Shared, not yet confirmed by the other device"),
+      received: tx("Received{from}: read it, then confirm takeover", { from: h.received?.from ? ` ${tx("from {name}", { name: h.received.from })}` : "" }),
+      taken: tx("Taken over by {name}", { name: h.to }),
+      acknowledged: tx("Acknowledged by {name}: confirmed with the code", { name: h.ack?.by || h.to || "?" }),
+    }[state];
+    if (stateLine) {
+      const lines = [];
+      if (h.received) lines.push(tx("Received on this device at {time}.", { time: clock(h.received.at) }));
+      if (last) lines.push(tx(last.mode === "file" ? "Shared at {time} as a file. The other device confirms with a code." : last.mode === "qr" ? "Shared at {time} as a QR code. The other device confirms with a code." : "Shared at {time} as a link. The other device confirms with a code.", { time: clock(last.at) }));
+      if (h.ackAt && !h.ack) lines.push(tx("Confirmed on this device at {time}.", { time: clock(h.ackAt) }));
+      if (h.ack) lines.push(tx("Confirmed on the other device: code {code} checked here at {time}.", { code: window.ShiftHandoverLink.showAck(h.ack.code), time: clock(h.ack.at) }));
+      stateLine.textContent = lines.join(" ");
+      stateLine.hidden = !lines.length;
+    }
     ackText.textContent = h.ackAt
       ? tx("Confirmed by {name} at {time}. Close the shift to start the next handover with the open issues carried over.", { name: h.to, time: clock(h.ackAt) })
-      : tx("The person taking over confirms they have read it and asked their questions.");
+      : h.received
+        ? tx("You received this handover. Confirm takeover once you have read it; a confirmation code appears for the sender.")
+        : tx("The person taking over confirms they have read it and asked their questions.");
+    if (ackCodeBox) {
+      const show = Boolean(h.ackAt && h.received?.ackCode);
+      ackCodeBox.hidden = !show;
+      if (show) ackCodeBox.querySelector("[data-ack-code-text]").textContent = window.ShiftHandoverLink.showAck(h.received.ackCode);
+    }
+    if (ackVerify) ackVerify.hidden = !(h.shared.length && !h.ack);
     emptyNote.hidden = hasContent(h);
     renderSheet();
     renderQuality();
@@ -783,87 +1034,316 @@
   if (!cur().date) cur().date = today();
   renderAll();
 
-  // "Send to the next shift": the handover as a link and, when it fits, a QR code, in a dialog.
+  const Link = window.ShiftHandoverLink;
+  const download = (name, content, type) => {
+    const url = URL.createObjectURL(new Blob([content], { type }));
+    const a = el("a");
+    a.href = url;
+    a.download = name;
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  const fileName = (h) => `handover-${h.date || "shift"}-${lower(h.shift).replace(/[^a-z0-9]+/gi, "-")}.json`;
+  // What a handover holds, as lines for the sender before sharing and for the receiver before taking over.
+  const summaryLines = (h, { names }) => {
+    const open = openIssues(h);
+    const solved = solvedIssues(h);
+    const numbers = h.metrics.filter(([label, value]) => label && value).length;
+    const heads = h.headsUp.split("\n").map((line) => line.trim()).filter(Boolean).length;
+    const lines = [
+      `${longDate(h.date)} · ${tx("{shift} shift", { shift: h.shift })}${h.area ? ` · ${h.area}` : ""}`,
+      tx("{n} numbers", { n: numbers }),
+      `${tx("{n} open", { n: open.length })} · ${tx("{n} solved", { n: solved.length })}`,
+      tx("{n} heads-up lines", { n: heads }),
+      h.safety.trim() ? tx("A safety note") : tx("No safety note"),
+      tx("{a} of {b} checks done", { a: h.checks.filter(Boolean).length, b: h.checks.length }),
+    ];
+    lines.push(names
+      ? tx("Names included: {people}", { people: [h.from, h.to].filter(Boolean).join(" → ") || tx("owners only") })
+      : tx("Names left out: who hands over, who takes over and the owners of the issues"));
+    return lines;
+  };
+  const KINDS = { email: "an email address", card: "a card number", iban: "an IBAN", phone: "a phone number" };
+  const FIELDS = { area: "Area or team", headsUp: "Heads-up", safety: "Safety", metrics: "Numbers", issues: "Issues" };
+  const warningLines = (h) => Link.sensitiveFindings(h).map((f) => tx("{field}: looks like {kind} ({sample}…)", { field: tx(FIELDS[f.field]), kind: tx(KINDS[f.kind]), sample: f.sample.slice(0, 6) }));
+  const fillList = (list, lines, className = "") => {
+    list.replaceChildren(...lines.map((line) => el("li", className || null, line)));
+  };
+
+  // "Send to the next shift": first what goes and the transfer code, then the sealed link, the QR code or a file.
   const sendDialog = output.querySelector("[data-send-dialog]");
   const sendButton = output.querySelector("[data-send]");
   if (sendDialog && sendButton && typeof HTMLDialogElement !== "undefined") {
+    const steps = { prepare: sendDialog.querySelector('[data-send-step="prepare"]'), share: sendDialog.querySelector('[data-send-step="share"]') };
+    const summary = sendDialog.querySelector("[data-send-summary]");
+    const warnings = sendDialog.querySelector("[data-send-warnings]");
+    const warningList = warnings.querySelector("ul");
+    const namesBox = sendDialog.querySelector("[data-send-names]");
+    const codeField = sendDialog.querySelector("[data-send-code]");
+    const prepareStatus = sendDialog.querySelector("[data-send-prepare-status]");
+    const sealedNote = sendDialog.querySelector("[data-send-sealed]");
     const linkBox = sendDialog.querySelector("[data-send-link]");
     const qrBox = sendDialog.querySelector("[data-send-qr]");
     const qrNote = sendDialog.querySelector("[data-send-qr-note]");
     const shareButton = sendDialog.querySelector("[data-send-share]");
+    const shownButton = sendDialog.querySelector("[data-send-shown]");
     const sendStatus = sendDialog.querySelector("[data-send-status]");
-    let link = "";
-    sendButton.addEventListener("click", async () => {
-      const h = cur();
-      if (!hasContent(h)) {
+    let sealed = null;
+    const showStep = (name) => { Object.entries(steps).forEach(([key, node]) => { node.hidden = key !== name; }); };
+    const preview = () => {
+      const h = Link.forTransfer(cur(), { names: namesBox.checked });
+      fillList(summary, summaryLines(h, { names: namesBox.checked }));
+      const warn = warningLines(h);
+      fillList(warningList, warn);
+      warnings.hidden = !warn.length;
+    };
+    namesBox.addEventListener("change", preview);
+    sendButton.addEventListener("click", () => {
+      if (!hasContent(cur())) {
         note(tx("There is nothing to send yet."));
         return;
       }
-      link = await handoverLink({ ...h, ackAt: "" }, location.href);
-      linkBox.value = link;
+      sealed = null;
+      namesBox.checked = false;
+      codeField.value = Link.newPasscode();
+      prepareStatus.textContent = "";
+      sendStatus.textContent = "";
+      preview();
+      showStep("prepare");
+      sendDialog.showModal();
+      codeField.focus();
+      codeField.select();
+    });
+    sendDialog.querySelector("[data-send-newcode]").addEventListener("click", () => { codeField.value = Link.newPasscode(); codeField.focus(); codeField.select(); });
+    sendDialog.querySelector("[data-send-make]").addEventListener("click", async () => {
+      const passcode = codeField.value;
+      if (!Link.goodPasscode(passcode)) {
+        prepareStatus.textContent = tx("The transfer code needs at least {n} letters or digits.", { n: Link.MIN_PASSCODE });
+        codeField.focus();
+        return;
+      }
+      prepareStatus.textContent = tx("Sealing…");
+      const h = Link.forTransfer(cur(), { names: namesBox.checked });
+      try {
+        const made = await Link.handoverLink(h, passcode, location.href);
+        sealed = { ...made, passcode, ack: await Link.ackCode(made.id, passcode), date: cur().date, shift: cur().shift };
+      } catch {
+        prepareStatus.textContent = tx("The handover could not be sealed in this browser.");
+        return;
+      }
+      prepareStatus.textContent = "";
+      sealedNote.textContent = tx("Sealed with the code {code}. Tell the code to the next shift separately; keep it to check their confirmation.", { code: passcode });
+      linkBox.value = sealed.link;
       qrBox.replaceChildren();
-      const qr = window.TeamSyncMath?.qrEncode ? window.TeamSyncMath.qrEncode(link) : null;
+      const qr = window.TeamSyncMath?.qrEncode ? window.TeamSyncMath.qrEncode(sealed.link) : null;
       if (qr) {
         qrBox.innerHTML = window.TeamSyncMath.qrSvg(qr.matrix, tx("Scan the code with the next shift's phone"));
         qrNote.textContent = tx("Scan the code with the next shift's phone");
       } else {
-        qrNote.textContent = window.TeamSyncMath?.qrEncode ? tx("The handover is too long for a code: share or copy the link.") : tx("Share or copy the link.");
+        qrNote.textContent = window.TeamSyncMath?.qrEncode ? tx("The handover is too long for a QR code: share the link, or save it as a file.") : tx("Share the link, or save it as a file.");
       }
       qrBox.hidden = !qr;
+      shownButton.hidden = !qr;
       shareButton.hidden = typeof navigator.share !== "function";
-      sendStatus.textContent = "";
-      sendDialog.showModal();
+      showStep("share");
+      (qr ? shownButton : sendDialog.querySelector("[data-send-copy]")).focus();
     });
+    // Shared only on the visitor's own act: a copied or shared link, a saved file, a code shown to a phone.
+    const markShared = (mode) => {
+      if (!sealed) return;
+      const h = cur();
+      h.shared = [...h.shared.filter((entry) => entry.id !== sealed.id), { id: sealed.id, at: new Date().toISOString(), mode, ack: sealed.ack }].slice(-10);
+      h.ack = null;
+      commit();
+    };
     shareButton.addEventListener("click", async () => {
       try {
-        await navigator.share({ title: tx("Shift handover"), text: `${tx("Shift handover")} · ${shiftLine(cur())}`, url: link });
+        await navigator.share({ title: tx("Shift handover"), text: `${tx("Shift handover")} · ${shiftLine(cur())}`, url: sealed.link });
+        markShared("link");
+        sendStatus.textContent = tx("Shared. Now tell the code separately.");
       } catch { /* the visitor closed the share sheet */ }
     });
     sendDialog.querySelector("[data-send-copy]").addEventListener("click", async () => {
-      await copyText(link);
-      sendStatus.textContent = tx("Link copied.");
+      await copyText(sealed.link);
+      markShared("link");
+      sendStatus.textContent = tx("Link copied. Now tell the code separately.");
     });
-    sendDialog.querySelector("[data-send-close]").addEventListener("click", () => sendDialog.close());
+    sendDialog.querySelector("[data-send-file]").addEventListener("click", () => {
+      download(fileName(cur()), Link.fileText(sealed.bytes, { date: sealed.date, shift: sealed.shift, sent: new Date().toISOString() }), "application/json");
+      markShared("file");
+      sendStatus.textContent = tx("File saved. The other device opens it under “Open a handover file” and needs the code.");
+    });
+    shownButton.addEventListener("click", () => {
+      markShared("qr");
+      sendStatus.textContent = tx("Marked as shared. The other device confirms with a code once it has taken over.");
+    });
+    sendDialog.querySelectorAll("[data-send-close]").forEach((button) => button.addEventListener("click", () => sendDialog.close()));
   }
 
-  // A handover that arrived in the address (#h=…): offered, never opened unasked. What is here moves to the history
-  // first, and the person taking over confirms on their own device.
+  // A handover that arrived: sealed in the address ("#h2="), in a file, or an old plain link ("#h=", "#h0="). It
+  // asks for the transfer code, shows what it holds, and replaces nothing unasked: what is here moves to the history,
+  // this device's open issues the sender did not have stay, and the person taking over confirms here.
   const incomingBox = document.querySelector("[data-incoming]");
-  const offerIncoming = async () => {
-    if (!incomingBox || !/^#h0?=/.test(location.hash)) return;
-    const arrived = await unpackHandover(location.hash);
-    const clearHash = () => history.replaceState(null, "", location.pathname + location.search);
-    if (!arrived) {
+  const clearHash = () => history.replaceState(null, "", location.pathname + location.search);
+  const takeOver = (h, { id = "", ackCode = "" } = {}) => {
+    const merged = Link.mergeIssues(h.issues, openIssues(cur()));
+    if (hasContent(cur())) {
+      if (!window.confirm(tx("Take over the handover that arrived? What you have here moves to the history first; your open issues the sender did not have stay with it."))) return false;
+      state.history.unshift({ closedAt: new Date().toISOString(), handover: JSON.parse(JSON.stringify(cur())), text: asText(cur()) });
+      state.history = state.history.slice(0, HISTORY_MAX);
+    }
+    const now = new Date().toISOString();
+    state.current = { ...h, issues: merged.issues.map(({ kept, ...issue }) => issue), ackAt: "", shared: [], ack: null, received: id ? { id, at: now, from: h.from, ackCode } : null };
+    if (id) state.received = [...state.received.filter((entry) => entry.id !== id), { id, at: now }].slice(-50);
+    save();
+    renderAll();
+    if (incomingBox) incomingBox.hidden = true;
+    clearHash();
+    note(merged.kept
+      ? tx(merged.kept === 1 ? "Taken over, with {n} open issue of yours kept. Read it, then confirm takeover." : "Taken over, with {n} open issues of yours kept. Read it, then confirm takeover.", { n: merged.kept })
+      : tx("Taken over. Read it, then confirm takeover."));
+    output.scrollIntoView({ behavior: "smooth", block: "start" });
+    return true;
+  };
+  if (incomingBox) {
+    const text = incomingBox.querySelector("[data-incoming-text]");
+    const unlock = incomingBox.querySelector("[data-incoming-unlock]");
+    const unlockError = incomingBox.querySelector("[data-incoming-error]");
+    const previewBox = incomingBox.querySelector("[data-incoming-preview]");
+    const previewSummary = incomingBox.querySelector("[data-incoming-summary]");
+    const previewIssues = incomingBox.querySelector("[data-incoming-issues]");
+    const previewNote = incomingBox.querySelector("[data-incoming-note]");
+    const openButton = incomingBox.querySelector("[data-incoming-open]");
+    const againButton = incomingBox.querySelector("[data-incoming-again]");
+    let pending = null;
+    const reset = () => { pending = null; unlock.hidden = true; previewBox.hidden = true; openButton.hidden = true; againButton.hidden = true; unlockError.textContent = ""; };
+    // Sealed bytes from the address or a file: ask for the code.
+    const offerSealed = (bytes, source) => {
+      reset();
+      pending = { bytes, source };
+      text.textContent = source === "file" ? tx("A sealed handover file. Enter the transfer code you were told.") : tx("A sealed handover arrived. Enter the transfer code you were told.");
+      unlock.hidden = false;
+      incomingBox.hidden = false;
+      unlock.elements.code.value = "";
+      unlock.elements.code.focus();
+    };
+    // The handover opened: what it holds, before anything is replaced.
+    const showPreview = (h, { id, legacy = false }) => {
+      const merged = Link.mergeIssues(h.issues, openIssues(cur()));
+      const already = id ? state.received.find((entry) => entry.id === id) : null;
+      text.textContent = tx("A handover arrived{from}: {shift} shift of {date}, {open}.", {
+        shift: h.shift, date: longDate(h.date), from: h.from ? ` ${tx("from {name}", { name: h.from })}` : "", open: tx("{n} open", { n: openIssues(h).length }),
+      });
+      fillList(previewSummary, summaryLines(h, { names: Boolean(h.from || h.to || h.issues.some((issue) => issue.owner)) }));
+      previewIssues.replaceChildren(...merged.issues.map((issue) => {
+        const line = el("li", issue.kept ? "is-kept" : issue.text && openIssues(cur()).some((own) => Link.issueKey(own.text) === Link.issueKey(issue.text)) ? "is-same" : "is-new");
+        line.append(el("span", "sh-tag", issue.kept ? tx("kept from here") : line.className === "is-same" ? tx("already open here") : tx("new")), ` ${issue.text}${issue.done ? ` (${tx("solved")})` : ""}`);
+        return line;
+      }));
+      const notes = [];
+      if (legacy) notes.push(tx("This link was made by an older version, without encryption."));
+      if (already) notes.push(tx("Already received here at {time}. Taking it over again replaces what came of it.", { time: clock(already.at) }));
+      previewNote.textContent = notes.join(" ");
+      previewNote.hidden = !notes.length;
+      previewBox.hidden = false;
+      unlock.hidden = true;
+      openButton.hidden = Boolean(already);
+      againButton.hidden = !already;
+      incomingBox.hidden = false;
+      (already ? againButton : openButton).focus();
+    };
+    unlock.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!pending) return;
+      unlockError.textContent = tx("Opening…");
+      const result = await Link.openHandover(pending.bytes, unlock.elements.code.value).catch(() => ({ error: "invalid" }));
+      if (result.error === "wrong") { unlockError.textContent = tx("Wrong code, or the handover was changed on the way. Nothing was opened."); unlock.elements.code.select(); return; }
+      if (result.error) { unlockError.textContent = tx("This is not a handover that this page can open."); return; }
+      unlockError.textContent = "";
+      const h = clean(result.handover);
+      h.ackAt = "";
+      h.shared = [];
+      h.ack = null;
+      h.received = null;
+      pending = { ...pending, id: result.id, handover: h, ackCode: await Link.ackCode(result.id, unlock.elements.code.value) };
+      showPreview(h, { id: result.id });
+    });
+    const take = () => { if (pending?.handover) takeOver(pending.handover, { id: pending.id, ackCode: pending.ackCode }); };
+    openButton.addEventListener("click", take);
+    againButton.addEventListener("click", take);
+    incomingBox.querySelector("[data-incoming-ignore]").addEventListener("click", () => {
+      reset();
+      incomingBox.hidden = true;
+      clearHash();
+    });
+    const fileInput = document.querySelector("[data-incoming-file]");
+    if (fileInput) fileInput.addEventListener("change", async (event) => {
+      const file = event.target.files?.[0];
+      event.target.value = "";
+      if (!file) return;
+      if (file.size > Link.MAX_FILE) { note(tx("This file is larger than a handover file can be.")); return; }
+      const bytes = Link.bytesFromFile(await file.text());
+      if (!bytes) { note(tx("This is not a handover file.")); return; }
+      offerSealed(bytes, "file");
+      incomingBox.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    // The address on arrival, and again when a link is opened in a tab that already shows this page (the browser
+    // then changes only the part after "#" and loads nothing).
+    const handleAddress = () => {
+    const parsed = Link.parseFragment(location.hash);
+    if (parsed?.kind === "sealed") offerSealed(parsed.bytes, "link");
+    else if (parsed?.kind === "plain") {
+      Link.unpackHandover(location.hash).then((arrived) => {
+        if (!arrived) { note(tx("This link does not hold a handover.")); clearHash(); return; }
+        const h = clean(arrived.handover);
+        h.ackAt = "";
+        h.shared = [];
+        h.ack = null;
+        h.received = null;
+        pending = { handover: h, id: "", ackCode: "" };
+        showPreview(h, { id: "", legacy: true });
+      });
+    } else if (parsed?.kind === "ack") {
+      // The receiver's confirmation link, opened on the sender's device.
+      const field = ackVerify?.elements.code;
+      if (field) { field.value = Link.showAck(parsed.code); if (parsed.by) ackVerify.elements.by.value = parsed.by; ackVerify.requestSubmit(); }
+      clearHash();
+    } else if (/^#(h|h0|h2|a)=/.test(location.hash)) {
       note(tx("This link does not hold a handover."));
       clearHash();
-      return;
     }
-    const h = clean(arrived.handover);
-    h.ackAt = "";
-    incomingBox.querySelector("[data-incoming-text]").textContent = tx("A handover arrived{from}: {shift} shift of {date}, {open}.", {
-      shift: h.shift, date: longDate(h.date), from: h.from ? ` ${tx("from {name}", { name: h.from })}` : "", open: tx("{n} open", { n: openIssues(h).length }),
+    };
+    handleAddress();
+    window.addEventListener("hashchange", handleAddress);
+  }
+
+  // The sender checks the receiver's confirmation code: it matches the code expected for one of the transfers shared.
+  if (ackVerify) ackVerify.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const h = cur();
+    const code = Link.readAck(ackVerify.elements.code.value);
+    const match = h.shared.find((entry) => entry.ack && entry.ack === code);
+    const status = ackVerify.querySelector("[data-ack-verify-status]");
+    if (!match) { status.textContent = tx("This code does not match any handover shared from here."); return; }
+    h.ack = { id: match.id, at: new Date().toISOString(), by: ackVerify.elements.by.value.trim(), code };
+    status.textContent = "";
+    commit();
+    note(tx("Confirmed by the other device."));
+  });
+  if (ackCodeBox) {
+    ackCodeBox.querySelector("[data-ack-code-copy]").addEventListener("click", async () => {
+      await copyText(Link.showAck(cur().received?.ackCode || ""));
+      note(tx("Code copied. Give it to the sender."));
     });
-    incomingBox.hidden = false;
-    incomingBox.querySelector("[data-incoming-open]").addEventListener("click", () => {
-      if (hasContent(cur())) {
-        if (!window.confirm(tx("Open the handover that arrived? What you have here moves to the history first."))) return;
-        state.history.unshift({ closedAt: new Date().toISOString(), handover: JSON.parse(JSON.stringify(cur())), text: asText(cur()) });
-        state.history = state.history.slice(0, HISTORY_MAX);
-      }
-      state.current = h;
-      save();
-      renderAll();
-      incomingBox.hidden = true;
-      clearHash();
-      note(tx("Opened the handover. Read it, then confirm takeover."));
-      output.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, { once: true });
-    incomingBox.querySelector("[data-incoming-ignore]").addEventListener("click", () => {
-      incomingBox.hidden = true;
-      clearHash();
-    }, { once: true });
-  };
-  offerIncoming();
+    ackCodeBox.querySelector("[data-ack-code-link]").addEventListener("click", async () => {
+      const h = cur();
+      await copyText(`${location.href.split("#")[0]}#${Link.ackFragment(h.received.id, h.received.ackCode, h.to)}`);
+      note(tx("Confirmation link copied. The sender opens it on their device."));
+    });
+  }
 
   // 5 Whys hands its countermeasure over with ?issue=, ?owner= and ?due=: it becomes an open issue of this handover,
   // once (the same text open already is not added twice). The address is cleaned so a reload does not add it again.

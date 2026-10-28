@@ -796,6 +796,35 @@ select.sh-in { cursor: pointer; }
 .sh-qr svg { display: block; width: 100%; height: auto; border-radius: 8px; }
 .sh-link { width: 100%; box-sizing: border-box; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; word-break: break-all; }
 .sh-incoming { margin: 0 0 16px; border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
+.sh-incoming .kicker { margin: 12px 0 4px; }
+.sh-unlock { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: end; margin: 10px 0 0; }
+.sh-unlock .field { margin: 0; }
+.sh-unlock .sh-error { grid-column: 1 / -1; margin: 0; }
+.sh-summary { margin: 0; padding-left: 18px; font-size: 14px; }
+.sh-summary li { margin-bottom: 3px; }
+.sh-preview-issues { margin: 0; padding-left: 0; list-style: none; font-size: 14px; }
+.sh-preview-issues li { margin-bottom: 6px; }
+.sh-tag { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.sh-preview-issues .is-new .sh-tag { background: color-mix(in srgb, var(--ok) 18%, transparent); color: var(--ok); }
+.sh-preview-issues .is-same .sh-tag { background: color-mix(in srgb, var(--blue) 18%, transparent); color: var(--blue); }
+.sh-preview-issues .is-kept .sh-tag { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+.sh-warn { margin: 0; padding: 10px 12px; border: 1px solid color-mix(in srgb, var(--warn) 60%, var(--line)); border-radius: 10px; font-size: 14px; }
+.sh-warn ul { margin: 6px 0 0; padding-left: 18px; }
+.sh-warn .form-note { margin: 0; color: var(--ink); }
+.sh-error { margin: 6px 0 0; color: var(--danger); }
+.sh-error:empty { display: none; }
+.sh-state { margin: 6px 0 0; }
+.sh-check { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; font-size: 14px; }
+.sh-check input { margin-top: 3px; }
+.sh-send .field { margin: 12px 0 6px; }
+.sh-send [data-send-step] > .sh-help { margin: 6px 0; }
+.sh-ack-code { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.sh-code { margin: 6px 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 26px; font-weight: 700; letter-spacing: .12em; }
+.sh-verify { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.sh-verify-fields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 10px; align-items: end; }
+.sh-verify-fields .field { margin: 0; }
+@media (max-width: 640px) { .sh-verify-fields, .sh-unlock { grid-template-columns: 1fr; } }
+.sh-file-open { margin: 12px 0 0; }
 .sh-side > .form-note { margin: 0; }
 .sh-history { padding: 20px 0 110px; }
 .sh-history-list { display: grid; gap: 12px; margin-bottom: 20px; }
