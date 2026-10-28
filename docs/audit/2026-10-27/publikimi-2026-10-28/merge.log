@@ -1,0 +1,117 @@
+PASS page /: 200
+PASS page /insights/the-tools-you-build-yourself/: 200
+PASS page /reflections/architects-of-smoke/: 200
+PASS page /magazine/management-review-nr-80.html: 200
+PASS page /magazine/management-review.html: 200
+PASS page /field-notes.html: 200
+PASS page /tools.html: 200
+PASS page /how-this-is-made.html: 200
+PASS page /guides/tools-guide.html: 200
+PASS page /books/mall-per-durresin.html: 200
+PASS page /datenschutz.html: 200
+PASS page /search.html: 200
+PASS page /publications.html: 200
+PASS page /tools/action-tracker/: 200
+PASS page /tools/andon/: 200
+PASS page /tools/five-s-audit/: 200
+PASS page /tools/room-inspection/: 200
+PASS page /tools/cv-builder/: 200
+PASS page /tools/ats-cv/: 200
+PASS page /tools/cx-control-tower/: 200
+PASS page /tools/eight-d/: 200
+PASS page /tools/damage-control/: 200
+PASS page /tools/kpi-diagnostic/: 200
+PASS page /tools/pareto/: 200
+PASS page /tools/lost-found/: 200
+PASS page /tools/skills-matrix/: 200
+PASS page /tools/fmea/: 200
+PASS page /de/: 200
+PASS page /de/insights/the-tools-you-build-yourself/: 200
+PASS page /de/reflections/architects-of-smoke/: 200
+PASS page /de/magazine/management-review-nr-80.html: 200
+PASS page /de/magazine/management-review.html: 200
+PASS page /de/field-notes.html: 200
+PASS page /de/tools.html: 200
+PASS page /de/how-this-is-made.html: 200
+PASS page /de/guides/tools-guide.html: 200
+PASS page /de/books/mall-per-durresin.html: 200
+PASS page /de/datenschutz.html: 200
+PASS page /de/search.html: 200
+PASS page /de/publications.html: 200
+PASS page /de/tools/action-tracker/: 200
+PASS page /de/tools/andon/: 200
+PASS page /de/tools/five-s-audit/: 200
+PASS page /de/tools/room-inspection/: 200
+PASS page /de/tools/cv-builder/: 200
+PASS page /de/tools/ats-cv/: 200
+PASS page /de/tools/cx-control-tower/: 200
+PASS page /de/tools/eight-d/: 200
+PASS page /de/tools/damage-control/: 200
+PASS page /de/tools/kpi-diagnostic/: 200
+PASS page /de/tools/pareto/: 200
+PASS page /de/tools/lost-found/: 200
+PASS page /de/tools/skills-matrix/: 200
+PASS page /de/tools/fmea/: 200
+PASS page /sq/: 200
+PASS page /sq/insights/the-tools-you-build-yourself/: 200
+PASS page /sq/reflections/architects-of-smoke/: 200
+PASS page /sq/magazine/management-review-nr-80.html: 200
+PASS page /sq/magazine/management-review.html: 200
+PASS page /sq/field-notes.html: 200
+PASS page /sq/tools.html: 200
+PASS page /sq/how-this-is-made.html: 200
+PASS page /sq/guides/tools-guide.html: 200
+PASS page /sq/books/mall-per-durresin.html: 200
+PASS page /sq/datenschutz.html: 200
+PASS page /sq/search.html: 200
+PASS page /sq/publications.html: 200
+PASS page /sq/tools/action-tracker/: 200
+PASS page /sq/tools/andon/: 200
+PASS page /sq/tools/five-s-audit/: 200
+PASS page /sq/tools/room-inspection/: 200
+PASS page /sq/tools/cv-builder/: 200
+PASS page /sq/tools/ats-cv/: 200
+PASS page /sq/tools/cx-control-tower/: 200
+PASS page /sq/tools/eight-d/: 200
+PASS page /sq/tools/damage-control/: 200
+PASS page /sq/tools/kpi-diagnostic/: 200
+PASS page /sq/tools/pareto/: 200
+PASS page /sq/tools/lost-found/: 200
+PASS page /sq/tools/skills-matrix/: 200
+PASS page /sq/tools/fmea/: 200
+PASS planets /: drawn and moving: 3 canvas
+PASS motion /: pause stops the planets
+PASS motion /: pause remembered after a reload
+PASS home /: no script error with motion
+PASS planets /de: drawn and moving: 3 canvas
+PASS motion /de: pause stops the planets
+PASS motion /de: pause remembered after a reload
+PASS home /de: no script error with motion
+PASS planets /sq: drawn and moving: 3 canvas
+PASS motion /sq: pause stops the planets
+PASS motion /sq: pause remembered after a reload
+PASS home /sq: no script error with motion
+PASS motion: reduced motion starts paused
+FAIL search /: keyboard opens a result: /search.html?q=handover
+FAIL search /de: keyboard opens a result: /de/search.html?q=handover
+FAIL search /sq: keyboard opens a result: /sq/search.html?q=handover
+PASS Management Review No. 41: October 2026
+PASS Management Review No. 6: dated correction note
+PASS Management Review archive: corrections register
+PASS How this is made: Albanian originals
+PASS Tools Guide: edition 8
+PASS PDF /media/magazine/management-review-nr-80/management-review-nr-80-en.pdf: 200, 526508 bytes
+PASS PDF /media/magazine/management-review-nr-80/management-review-nr-80-de.pdf: 200, 549589 bytes
+PASS PDF /media/magazine/management-review-nr-80/management-review-nr-80-sq.pdf: 200, 547927 bytes
+PASS PDF /media/guides/tools-guide/tools-guide-en.pdf: 200, 3238796 bytes
+PASS PDF /media/guides/tools-guide/tools-guide-de.pdf: 200, 3269978 bytes
+PASS PDF /media/guides/tools-guide/tools-guide-sq.pdf: 200, 3251521 bytes
+PASS print /tools/andon/: no table or chart past the page edge, no empty chart: 0 wide, 0 empty
+PASS print /magazine/management-review-nr-80.html: no table or chart past the page edge, no empty chart: 0 wide, 0 empty
+PASS read aloud: player and its voice note on an essay
+PASS privacy /datenschutz.html: the approved text
+PASS privacy /de/datenschutz.html: the approved text
+PASS privacy /sq/datenschutz.html: the approved text
+PASS sitemap: lastmod of issue 80: 2026-10-27
+
+merge: 112 / 115 checks pass
