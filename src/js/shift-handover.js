@@ -1502,19 +1502,31 @@
   }
 
   // 5 Whys hands its countermeasure over with ?issue=, ?owner= and ?due=: it becomes an open issue of this handover,
-  // once (the same text open already is not added twice). The address is cleaned so a reload does not add it again.
+  // once (the same text open already is not added twice). The CX Control Tower hands the action of an investigation
+  // over with ?case=INV-… alone: the issue, its owner and its date wait in one sessionStorage note (sc-case-handoff,
+  // read once; a note for another case is dropped), so nothing operational stands in the address. Either way the
+  // address is cleaned so a reload does not add it again.
   const incoming = new URLSearchParams(location.search);
-  const issueText = incoming.get("issue")?.trim();
+  const caseParam = (incoming.get("case") || "").replace(/[^A-Za-z0-9-]/g, "").slice(0, 40);
+  const fromTower = (() => {
+    if (!caseParam) return null;
+    let found = null;
+    try { found = JSON.parse(sessionStorage.getItem("sc-case-handoff")); sessionStorage.removeItem("sc-case-handoff"); } catch { found = null; }
+    return isObject(found) && found.caseId === caseParam && found.from === "cx-control-tower" && str(found.issue).trim() ? { issue: str(found.issue).trim(), owner: str(found.owner).trim(), due: str(found.due).trim() } : null;
+  })();
+  const issueText = fromTower ? fromTower.issue : incoming.get("issue")?.trim();
   if (issueText) {
     const open = cur().issues.find((issue) => !issue.done && issue.text.trim() === issueText);
     if (!open) {
-      cur().issues.push({ text: issueText, priority: data.priorities[0], owner: incoming.get("owner")?.trim() || "", due: incoming.get("due")?.trim() || "", done: false, carried: 0 });
+      cur().issues.push({ text: issueText, priority: data.priorities[0], owner: fromTower ? fromTower.owner : incoming.get("owner")?.trim() || "", due: fromTower ? fromTower.due : incoming.get("due")?.trim() || "", done: false, carried: 0 });
       save();
       renderAll();
     }
-    note(open ? tx("“{text}” is already an open issue here.", { text: issueText }) : tx("Added from 5 Whys as an open issue: “{text}”.", { text: issueText }));
-    ["issue", "owner", "due"].forEach((name) => incoming.delete(name));
-    history.replaceState(null, "", location.pathname + (incoming.size ? `?${incoming}` : "") + location.hash);
+    note(open ? tx("“{text}” is already an open issue here.", { text: issueText }) : fromTower ? tx("Added from the CX Control Tower as an open issue: “{text}”.", { text: issueText }) : tx("Added from 5 Whys as an open issue: “{text}”.", { text: issueText }));
     form.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else if (caseParam) note(tx("Nothing to add: the investigation's action did not reach this page. Open it again from the CX Control Tower."));
+  if (issueText || caseParam) {
+    ["issue", "owner", "due", "case"].forEach((name) => incoming.delete(name));
+    history.replaceState(null, "", location.pathname + (incoming.size ? `?${incoming}` : "") + location.hash);
   }
 })();

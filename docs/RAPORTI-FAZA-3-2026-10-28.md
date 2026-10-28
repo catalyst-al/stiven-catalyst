@@ -113,4 +113,8 @@ një worktree) dhe kalon pas korrigjimit. Pa funksione të reja, pa framework, p
 Një ndryshim i vogël i lidhur: faza e rastit ndjek veprimin në të dy drejtimet sa kohë s'ka vendim ("Verification
 pending" kur veprimi është done; prapë "Investigating" kur rihapet para vendimit).
 
+| # | Rasti | PARA | PAS |
+| --- | --- | --- | --- |
+| 7 | Tower → Shift Handover (kontrolli i dytë i autorit) | Lidhja e re mbante tekstin e veprimit, përgjegjësin dhe afatin në `?issue=&owner=&due=` | Adresa mban vetëm `?case=`; çështja, përgjegjësi dhe afati udhëtojnë në të njëjtin shënim `sessionStorage` si te 5 Whys, i lexuar një herë nga handover-i (mesazh i vetin "Added from the CX Control Tower"); shënimi i një rasti tjetër ose i munguar nuk shton asgjë dhe faqja e thotë; `?issue=` i 5 Whys lexohet si më parë (testi `4c` në `case-integrity.test.cjs`, plus `handoffs.test.cjs` ekzistues) |
+
 REZULTATET-8

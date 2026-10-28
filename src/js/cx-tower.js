@@ -2605,7 +2605,13 @@
     if (current?.actionId || tracked) {
       links.append(toolLink("action-tracker", {}, tx("Open the Action Tracker")));
       const actionText = C.caseToTracker(state.draft, state.caseId).title;
-      if (actionText) links.append(toolLink("shift-handover", { issue: `${state.caseId}: ${actionText}`, owner: String(state.draft.owner || ""), due: String(state.draft.deadline || "") }, tx("Put the action on the shift handover")));
+      if (actionText) {
+        // The issue, its owner and its date go to the handover inside the browser (the same note as for 5 Whys); the
+        // address names the case alone.
+        const handoverLink = toolLink("shift-handover", { case: state.caseId }, tx("Put the action on the shift handover"));
+        handoverLink.addEventListener("click", () => writeHandoff({ caseId: state.caseId, from: "cx-control-tower", issue: `${state.caseId}: ${actionText}`.slice(0, 500), owner: String(state.draft.owner || "").trim().slice(0, 120), due: parseDate(String(state.draft.deadline || "")) || "" }));
+        links.append(handoverLink);
+      }
     }
     work.append(links);
     if (current && current.snapshot?.metric) {

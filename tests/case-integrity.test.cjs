@@ -236,3 +236,42 @@ test('6. when the browser cannot save during a decision, the tower and the track
   assert.equal(t.S.lastUpdate, 'unsaved');
   refuse();
 });
+
+test('4c. the action goes to the shift handover inside the browser: the address names the case, the note carries the issue, its owner and its date', { skip: !fs.existsSync('_site/tools/shift-handover/index.html') && 'run npm run build first' }, () => {
+  const { openTool } = require('./helpers/tool-page.cjs');
+  const t = tower();
+  startCase(t, 'damage', 'Damage on the evening wave');
+  t.click(t.button('Create the linked action'));
+  const id = t.stored().cases[0].id;
+  const link = [...t.body.querySelectorAll('a')].find((a) => a.textContent === 'Put the action on the shift handover');
+  const url = new URL(link.href);
+  assert.equal(url.pathname, '/tools/shift-handover/');
+  assert.deepEqual([...url.searchParams.keys()], ['case'], 'no issue text, owner or date in the address');
+  t.click(link);
+  const note = JSON.parse(t.w.sessionStorage.getItem('sc-case-handoff'));
+  assert.deepEqual([note.caseId, note.from, note.issue, note.owner, note.due], [id, 'cx-control-tower', `${id}: Heavy-first loading sequence with marked shelf zones`, 'Shift Leader', '2026-09-13']);
+  // The handover page takes the note once, as an open issue with the owner and the date, and cleans its address.
+  const seed = (w) => w.sessionStorage.setItem('sc-case-handoff', JSON.stringify(note));
+  const h = openTool('shift-handover', { search: `?case=${id}`, before: seed });
+  const issues = () => JSON.parse(h.localStorage.getItem('sc-shift-handover')).current.issues.filter((issue) => issue.text.startsWith(`${id}: `));
+  assert.equal(issues().length, 1);
+  assert.deepEqual([issues()[0].owner, issues()[0].due, issues()[0].done], ['Shift Leader', '2026-09-13', false]);
+  assert.equal(h.sessionStorage.getItem('sc-case-handoff'), null, 'read once');
+  assert.equal(h.location.search, '');
+  assert.match(h.document.querySelector('[data-status]').textContent, /Added from the CX Control Tower/);
+  // Opened again with the same note: the issue is there once, and the page says so.
+  const again = openTool('shift-handover', { storage: { 'sc-shift-handover': h.localStorage.getItem('sc-shift-handover') }, search: `?case=${id}`, before: seed });
+  assert.equal(JSON.parse(again.localStorage.getItem('sc-shift-handover')).current.issues.filter((issue) => issue.text.startsWith(`${id}: `)).length, 1);
+  assert.match(again.document.querySelector('[data-status]').textContent, /already an open issue here/);
+  // A note for another case, or no note at all: nothing is added, and the page says what happened.
+  const other = openTool('shift-handover', { search: `?case=${id}`, before: (w) => w.sessionStorage.setItem('sc-case-handoff', JSON.stringify({ ...note, caseId: 'INV-20991231-009' })) });
+  assert.equal(JSON.parse(other.localStorage.getItem('sc-shift-handover') || '{"current":{"issues":[]}}').current.issues.filter((issue) => issue.text.startsWith(`${id}: `)).length, 0);
+  assert.match(other.document.querySelector('[data-status]').textContent, /did not reach this page/);
+  assert.equal(other.location.search, '');
+  // The existing hand-off of 5 Whys through the address still works as before.
+  const legacy = openTool('shift-handover', { search: '?issue=Stacking%20rule%20as%20one%20picture&owner=Ana&due=2026-10-30' });
+  const old = JSON.parse(legacy.localStorage.getItem('sc-shift-handover')).current.issues.find((issue) => issue.text === 'Stacking rule as one picture');
+  assert.deepEqual([old.owner, old.due], ['Ana', '2026-10-30']);
+  assert.match(legacy.document.querySelector('[data-status]').textContent, /Added from 5 Whys/);
+  assert.equal(legacy.location.search, '');
+});

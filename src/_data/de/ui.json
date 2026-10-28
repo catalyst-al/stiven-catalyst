@@ -7841,5 +7841,7 @@
   "The floor is the one saved with the investigation; the deep dive above now uses {n}.": "Die Mindeststichprobe ist die mit der Untersuchung gespeicherte; die Tiefenanalyse oben nutzt jetzt {n}.",
   "Verified by the investigation; reopen it there.": "Von der Untersuchung geprüft; dort wieder öffnen.",
   "Verified is decided in the investigation, from the KPI before and after the action.": "„Geprüft“ wird in der Untersuchung entschieden, aus der Kennzahl vor und nach der Maßnahme.",
-  "The whys could not be handed over in this browser; the investigation opens without them.": "Die Warums konnten in diesem Browser nicht übergeben werden; die Untersuchung öffnet sich ohne sie."
+  "The whys could not be handed over in this browser; the investigation opens without them.": "Die Warums konnten in diesem Browser nicht übergeben werden; die Untersuchung öffnet sich ohne sie.",
+  "Added from the CX Control Tower as an open issue: “{text}”.": "Aus dem CX Control Tower als offener Punkt aufgenommen: „{text}“.",
+  "Nothing to add: the investigation's action did not reach this page. Open it again from the CX Control Tower.": "Nichts aufzunehmen: die Maßnahme der Untersuchung ist auf dieser Seite nicht angekommen. Öffnen Sie sie erneut aus dem CX Control Tower."
 }

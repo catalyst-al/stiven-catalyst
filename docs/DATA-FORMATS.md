@@ -53,10 +53,11 @@ names. The after window begins strictly after the before period's last day.
 Hand-offs between tools through `sessionStorage`: `sc-pareto-handoff` (a log opened in Pareto), `sc-sigma-handoff`
 (days opened as a control chart); read once and cleared. Hand-offs through the address, read once and cleaned:
 `?action=…&owner=&due=&source=&check=&area=&priority=&case=` (the Action Tracker), `?problem=&case=` (5 Whys),
-`?issue=&owner=&due=` (Shift Handover), `?case=INV-…` (the CX Control Tower opens the investigation; 5 Whys names it).
-Between the tower and 5 Whys the texts never enter the address: `sessionStorage` `sc-case-handoff`, one note `{ caseId,
-from: "cx-control-tower" | "five-whys", problem, whys, root, at }`, written on the click and read once by the page it
-is for (a note for another case is dropped).
+`?issue=&owner=&due=` (Shift Handover, from 5 Whys), `?case=INV-…` (the CX Control Tower opens the investigation; 5 Whys
+and the Shift Handover name it). From the tower to 5 Whys and back, and from the tower to the handover, the texts never
+enter the address: `sessionStorage` `sc-case-handoff`, one note `{ caseId, from: "cx-control-tower" | "five-whys",
+problem, whys, root | issue, owner, due, at }`, written on the click and read once by the page it is for (a note for
+another case is dropped, and the page says nothing arrived).
 
 **IndexedDB.** `sc-restore` (store `points`): the restore points of `js/storage-guard.js`, `{ id, created, reason,
 items, bytes }`, `id` = `<ISO time> <reason>[ n]`, reasons `daily`, `before-open`, `before-restore`, `manual`,

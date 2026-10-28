@@ -7841,5 +7841,7 @@
   "The floor is the one saved with the investigation; the deep dive above now uses {n}.": "Kufiri është ai i ruajtur me hetimin; analiza e thellë më sipër tani përdor {n}.",
   "Verified by the investigation; reopen it there.": "Verifikuar nga hetimi; rihape atje.",
   "Verified is decided in the investigation, from the KPI before and after the action.": "“I verifikuar” vendoset në hetim, nga treguesi para dhe pas veprimit.",
-  "The whys could not be handed over in this browser; the investigation opens without them.": "Pse-të nuk u dorëzuan në këtë shfletues; hetimi hapet pa ato."
+  "The whys could not be handed over in this browser; the investigation opens without them.": "Pse-të nuk u dorëzuan në këtë shfletues; hetimi hapet pa ato.",
+  "Added from the CX Control Tower as an open issue: “{text}”.": "U shtua nga CX Control Tower si çështje e hapur: “{text}”.",
+  "Nothing to add: the investigation's action did not reach this page. Open it again from the CX Control Tower.": "Asgjë për të shtuar: veprimi i hetimit nuk mbërriti në këtë faqe. Hape sërish nga CX Control Tower."
 }
