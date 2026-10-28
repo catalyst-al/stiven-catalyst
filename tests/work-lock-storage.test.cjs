@@ -241,4 +241,12 @@ test('the privacy policy describes the PIN lock, the photos and every kind of re
   assert.equal(count(/made smaller on your device|auf Ihrem Gerät verkleinert|zvogëlohen në pajisjen tuaj/g), 3);
   assert.equal(count(/quarter of an hour|Viertelstunde|çerek ore/g), 3);
   assert.equal(count(/unlocked with the PIN|Entsperren mit der PIN|hapen me PIN/g), 3);
+  // The legal basis is claimed only for the storage the visitor starts; what is written without an action (the
+  // menu's marks, the reading progress, the service worker's copies) is named, with no legal basis claimed for it.
+  assert.equal(count(/storage you start yourself|Speicherung, die Sie selbst auslösen|ruajtjen që e nisni vetë/g), 3);
+  assert.equal(count(/Without any action of yours|Ohne Ihr Zutun|Pa veprimin tuaj/g), 3);
+  assert.equal(count(/strictly necessary for the feature you asked for|für die von Ihnen gewünschte Funktion unbedingt erforderlich|e domosdoshme për funksionin që kërkoni ju/g), 0);
+  // The visit count: the script, where it loads and what it is for; no claim that visits are being counted.
+  assert.equal(count(/I count visits|zähle ich|i numëroj vizitat/g), 0);
+  assert.equal(count(/Its purpose is to count|Es dient dazu, zu zählen|Qëllimi i tij është të numërojë/g), 3);
 });
