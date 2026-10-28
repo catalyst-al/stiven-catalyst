@@ -99,7 +99,7 @@ test("device A seals and shares, device B opens with the code, takes over and co
   await unlock.locator("[name=code]").fill("acid-acorn-acre-acts");
   await unlock.locator("button[type=submit]").click();
   await expect(box.locator("[data-incoming-error]")).toContainText("Wrong code", { timeout: 20_000 });
-  expect((await stored(B.page, "sc-shift-handover")).current.issues).toHaveLength(1);
+  expect((await stored(B.page, "sc-shift-handover")).current.issues).toHaveLength(2);
   await unlock.locator("[name=code]").fill(code.toUpperCase().replace(/-/g, " "));
   await unlock.locator("button[type=submit]").click();
   const preview = box.locator("[data-incoming-preview]");

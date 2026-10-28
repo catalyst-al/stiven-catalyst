@@ -89,10 +89,10 @@
     const flat = normalisePasscode(value).replace(/ /g, "");
     if (!flat) return null;
     if (/^(.)\1+$/.test(flat)) return "repeated";
-    if (/^\d+$/.test(flat)) return "digits";
     const runs = "0123456789abcdefghijklmnopqrstuvwxyz";
     const run = flat.length >= 6 && [runs, [...runs].reverse().join(""), "qwertyuiop", "asdfghjkl", "zxcvbnm", "qwertzuiop"].some((row) => row.includes(flat.slice(0, 6)));
     if (run) return "sequence";
+    if (/^\d+$/.test(flat)) return "digits";
     if (COMMON.some((word) => flat === word || flat === `${word}1` || flat === `${word}123`)) return "common";
     if (flat.length < 12) return "short";
     return null;

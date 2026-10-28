@@ -285,23 +285,33 @@ test('a state saved by the version before this one loads unchanged, and taking o
     const html = fs.readFileSync('_site/tools/shift-handover/index.html', 'utf8').replace(/<script\b[^>]*\bsrc=[^>]*><\/script>/g, '');
     const dom = new JSDOM(html, { url: `https://example.test/tools/shift-handover/${hash}`, runScripts: 'outside-only', pretendToBeVisual: true });
     const w = dom.window;
-    Object.assign(w, { CompressionStream, DecompressionStream, Blob, Response, TextEncoder, TextDecoder, crypto: globalThis.crypto });
+    Object.assign(w, { CompressionStream, DecompressionStream, Blob, Response, TextEncoder, TextDecoder });
+    // jsdom's own crypto has no subtle: the page needs Node's for the key derivation.
+    Object.defineProperty(w, 'crypto', { value: globalThis.crypto, configurable: true });
     w.HTMLElement.prototype.scrollIntoView = () => {};
     w.confirm = () => true;
     w.localStorage.setItem('sc-shift-handover', JSON.stringify(legacy));
     for (const file of ['tool-kit', 'shift-handover']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
     return w;
   };
-  // Loaded: the saved handover and the history read back as they were, the new records empty.
+  // Loaded: nothing is rewritten unasked (the saved text is the same), the page shows the handover and the history.
   const w1 = await open();
+  assert.equal(w1.localStorage.getItem('sc-shift-handover'), JSON.stringify(legacy), 'the saved state untouched by a load');
+  assert.equal(w1.document.querySelector('[name=from]').value, 'Dritan');
+  assert.equal(w1.document.querySelectorAll('[data-history] details').length, 1);
+  assert.match(w1.document.querySelector('[data-output-title]').textContent, /Almost ready|Ready to hand over/);
+  // A first save (a keystroke) writes it back whole, with the new records empty.
+  const area = w1.document.querySelector('[name=area]');
+  area.value = 'Front office, lobby';
+  area.dispatchEvent(new w1.Event('input', { bubbles: true }));
+  await new Promise((r) => setTimeout(r, 150));
   const loaded = JSON.parse(w1.localStorage.getItem('sc-shift-handover'));
-  assert.deepEqual({ ...loaded.current, shared: undefined, ack: undefined, received: undefined }, { ...legacy.current, shared: undefined, ack: undefined, received: undefined });
+  assert.deepEqual({ ...loaded.current, area: legacy.current.area, shared: undefined, ack: undefined, received: undefined }, { ...legacy.current, shared: undefined, ack: undefined, received: undefined });
   assert.deepEqual(loaded.current.shared, []);
   assert.equal(loaded.current.ack, null);
   assert.equal(loaded.current.received, null);
   assert.deepEqual(loaded.history.map((entry) => [entry.closedAt, entry.text, entry.handover.from, entry.handover.ackAt]), [['2026-10-26T06:12:00.000Z', 'Shift handover | Front office\n…', 'Besa', '2026-10-26T06:10:00.000Z']]);
   assert.deepEqual(loaded.received, []);
-  assert.equal(w1.document.querySelector('[name=from]').value, 'Dritan');
   // A sealed handover taken over: the old history entry is untouched, the current one joins it, the open issue here is kept with its carry count.
   const sealed = await Link.packHandover({ template: 'hotel', date: '2026-10-26', shift: 'Early', area: 'Front office', from: '', to: '', metrics: [['Arrivals', '12', '']], issues: [{ text: 'Room 1204 safe does not lock', priority: 'Low', owner: '', due: '', done: true, carried: 0 }, { text: 'Lift B out of order', priority: 'High', owner: '', due: '', done: false, carried: 0 }], headsUp: '', safety: '', checks: [] }, CODE, { id: 'legacy-test-1' });
   const w2 = await open(`#${sealed.fragment}`);
@@ -318,7 +328,8 @@ test('a state saved by the version before this one loads unchanged, and taking o
   await new Promise((r) => setTimeout(r, 20));
   const after = JSON.parse(w2.localStorage.getItem('sc-shift-handover'));
   assert.equal(after.history.length, 2);
-  assert.deepEqual(after.history[1], loaded.history[0], 'the old entry as it was');
+  const bare = (entry) => ({ ...entry, handover: { ...entry.handover, shared: undefined, ack: undefined, received: undefined } });
+  assert.deepEqual(bare(after.history[1]), bare(legacy.history[0]), 'the old entry as it was (the new records empty beside it)');
   assert.equal(after.history[0].handover.from, 'Dritan', 'what was current moved to the history');
   const safe = after.current.issues.find((issue) => issue.text === 'Room 1204 safe does not lock');
   assert.deepEqual([safe.done, safe.owner, safe.due, safe.priority, safe.carried], [false, 'Maintenance', '2026-10-26', 'High', 2]);
