@@ -139,7 +139,24 @@
     return btoa(binary);
   };
   const fromB64 = (text) => Uint8Array.from(atob(text), (ch) => ch.charCodeAt(0));
-  const pipeThrough = async (bytes, stream) => new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer());
+  // The bytes through a compression stream. With a limit, the reading stops as soon as the output passes it (a tiny
+  // file that inflates to gigabytes never fills the memory) and throws.
+  const pipeThrough = async (bytes, stream, limit = Infinity) => {
+    const reader = new Blob([bytes]).stream().pipeThrough(stream).getReader();
+    const chunks = [];
+    let total = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      total += value.length;
+      if (total > limit) { await reader.cancel().catch(() => {}); throw new Error("too big"); }
+      chunks.push(value);
+    }
+    const out = new Uint8Array(total);
+    let at = 0;
+    for (const chunk of chunks) { out.set(chunk, at); at += chunk.length; }
+    return out;
+  };
   const sealKey = async (password, salt) => {
     const base = await subtle().importKey("raw", new TextEncoder().encode(String(password).normalize("NFKC")), "PBKDF2", false, ["deriveKey"]);
     return subtle().deriveKey({ name: "PBKDF2", salt, iterations: SEAL_ITERATIONS, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
@@ -178,7 +195,7 @@
     }
     try {
       const body = plain.subarray(1);
-      const json = plain[0] === 1 ? await pipeThrough(body, new DecompressionStream("gzip")) : body;
+      const json = plain[0] === 1 ? await pipeThrough(body, new DecompressionStream("gzip"), MAX_BYTES) : body;
       if (json.length > MAX_BYTES) return { error: "invalid" };
       return { text: new TextDecoder().decode(json), exported: typeof file.exported === "string" ? file.exported : "" };
     } catch {
@@ -242,7 +259,18 @@
     form.elements.password.value = "";
     form.elements.again.value = "";
     error.textContent = "";
-    const finish = (value) => { passwordDialog.close(); form.removeEventListener("submit", onSubmit); cancel.removeEventListener("click", onCancel); resolve(value); };
+    // One way out, whichever way it closes (Continue, Cancel, Esc): every listener goes, the promise settles once.
+    let settled = false;
+    const finish = (value) => {
+      if (settled) return;
+      settled = true;
+      form.removeEventListener("submit", onSubmit);
+      cancel.removeEventListener("click", onCancel);
+      passwordDialog.removeEventListener("close", onClose);
+      if (passwordDialog.open) passwordDialog.close();
+      resolve(value);
+    };
+    const onClose = () => finish(null);
     const onSubmit = (event) => {
       event.preventDefault();
       const password = form.elements.password.value;
@@ -254,7 +282,7 @@
     const onCancel = () => finish(null);
     form.addEventListener("submit", onSubmit);
     cancel.addEventListener("click", onCancel);
-    passwordDialog.addEventListener("close", () => resolve(null), { once: true });
+    passwordDialog.addEventListener("close", onClose);
     passwordDialog.showModal();
     form.elements.password.focus();
   });

@@ -76,3 +76,24 @@ test('in German and Albanian the sheet is translated and the file carries the la
     assert.match(Buffer.from(file.bytes).toString('latin1'), new RegExp(`/Lang <feff${[...lang].map((c) => c.charCodeAt(0).toString(16).padStart(4, '0')).join('')}>`));
   }
 });
+
+test('an issue with a very long text, taller than an A4 page: the sheet goes on over the pages and nothing is cut', { skip: !fs.existsSync(built('en')) }, () => {
+  const w = open('en', { current: handover, history: [] });
+  const long = Array.from({ length: 900 }, (_, i) => `detail${i}`).join(' ');
+  const tall = { ...handover, issues: [handover.issues[0], { text: long, priority: 'Medium', owner: 'Night team', due: '', done: false, carried: 0 }, handover.issues[1], handover.issues[2]] };
+  const file = w.ShiftHandoverPdf.sheetPdf(tall, new Date(2026, 9, 27, 7, 0, 0));
+  assert.ok(file.pages >= 2, `${file.pages} pages`);
+  const text = Buffer.from(file.bytes).toString('latin1');
+  const streams = [...text.matchAll(/stream\n([\s\S]*?)\nendstream/g)].map((m) => m[1]);
+  const drawn = streams.flatMap((s) => [...s.matchAll(/<([0-9a-f]+)> Tj/g)].map((x) => [...Buffer.from(x[1], 'hex')].map((b) => WIN[b] || String.fromCharCode(b)).join(''))).join(' ');
+  for (const i of [0, 450, 899]) assert.ok(new RegExp(`\\bdetail${i}\\b`).test(drawn), `detail${i} drawn`);
+  assert.ok(drawn.includes('Lift B out of order since 23:00, technician called') || /Lift B out of order/.test(drawn), 'the issue after the long one');
+  assert.ok(drawn.includes('Wet floor by the pool entrance; sign is out.'), 'the sections after the table');
+  // Every piece of text inside the A4 page (PDF y runs upward): the footer near the bottom edge, the rest above the
+  // bottom margin and below the top margin.
+  const ys = streams.flatMap((s) => [...s.matchAll(/[\d.]+ ([\d.]+) Td </g)].map((m) => Number(m[1])));
+  const inside = (y) => (y >= 15 && y <= 30) || (y >= 40 && y <= 842 - 40);
+  assert.ok(ys.every(inside), `a line outside the page: ${ys.filter((y) => !inside(y)).slice(0, 3)}`);
+  const pageWords = (n) => [...streams[n].matchAll(/<([0-9a-f]+)> Tj/g)].map((x) => Buffer.from(x[1], 'hex').toString('latin1'));
+  for (let n = 0; n < file.pages; n++) assert.ok(pageWords(n).includes(`Page ${n + 1} of ${file.pages}`), `the footer of page ${n + 1}`);
+});

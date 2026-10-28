@@ -136,3 +136,25 @@ test('a table: cells wrap in their columns, a row is never split, the header com
   const small = PdfKit.flow([{ kind: 'table', rows: [['a', 'b']], size: 10 }], {});
   assert.equal(small.pages, 1);
 });
+
+test('a row taller than a page goes on over the pages, every line drawn inside the page, nothing cut', () => {
+  // One cell of 1 200 words: far taller than an A4 page in its column.
+  const long = Array.from({ length: 1200 }, (_, i) => `word${i}`).join(' ');
+  const out = PdfKit.flow([
+    { kind: 'table', columns: [{ width: 1 }, { width: 4 }, { width: 1.5 }], header: ['#', 'Issue', 'Owner'], rows: [['Row 0', 'short one', 'Lena'], ['Row 1', long, 'Maintenance'], ['Row 2', 'after it', 'Lena']], size: 9, leading: 12, space: 8 },
+  ], { footer: (n, total) => ['Sheet', `Page ${n} of ${total}`] });
+  const { text, pages } = parse(out.bytes);
+  assert.ok(pages >= 2, `${pages} pages`);
+  const streams = [...text.matchAll(/stream\n([\s\S]*?)\nendstream/g)].map((m) => m[1]);
+  const words = streams.flatMap((s) => [...s.matchAll(/<([0-9a-f]+)> Tj/g)].map((x) => winAnsi(x[1])));
+  const drawn = words.join(' ');
+  for (const i of [0, 1, 599, 1199]) assert.ok(new RegExp(`\\bword${i}\\b`).test(drawn), `word${i} is drawn`);
+  assert.ok(drawn.includes('Row 0') && drawn.includes('Row 2') && drawn.includes('Maintenance'), 'the rows around it and the other cells');
+  streams.forEach((s, n) => assert.ok(/<4973737565> Tj/.test(s), `the header on page ${n + 1}`));
+  // Every piece of text sits inside the page (A4 is 842 pt high, PDF y runs upward): the footer at 20 pt, the rows
+  // above the bottom margin of 48 pt and below the top margin of 45 pt.
+  const ys = streams.flatMap((s) => [...s.matchAll(/[\d.]+ ([\d.]+) Td </g)].map((m) => Number(m[1])));
+  assert.ok(ys.length > 100, `${ys.length} text runs`);
+  const inside = (y) => Math.abs(y - 20) < 0.01 || (y >= 48 && y <= 842 - 45);
+  assert.ok(ys.every(inside), `a line outside the page: ${ys.filter((y) => !inside(y)).slice(0, 3)}`);
+});

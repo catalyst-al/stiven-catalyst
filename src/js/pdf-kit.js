@@ -271,9 +271,20 @@ window.PdfKit = (() => {
         const total = columns.reduce((sum, c) => sum + (c.width || 1), 0);
         const widths = columns.map((c) => (c.width || 1) / total * colWidth);
         const cellLines = (cells, bold) => cells.map((cell, i) => wrap([{ text: String(cell ?? ""), bold: Boolean(bold || columns[i]?.bold) }], family, size, Math.max(8, widths[i] - 2 * pad)));
-        const rowLine = (cells, { bold = false, header = false } = {}) => {
+        const rowLines = (cells, { bold = false, header = false, maxLines = Infinity } = {}) => {
           const wrapped = cellLines(cells, bold);
           const count = Math.max(1, ...wrapped.map((lines) => lines.length));
+          // A row is never split between pages, unless it is taller than a page: then it goes on in parts, every
+          // line of every cell drawn, rather than running off the page.
+          if (count <= maxLines) return [rowPart(wrapped, count, { bold, header })];
+          const parts = [];
+          for (let from = 0; from < count; from += maxLines) {
+            const slice = wrapped.map((lines) => lines.slice(from, from + maxLines));
+            parts.push(rowPart(slice, Math.min(maxLines, count - from), { bold, header }));
+          }
+          return parts;
+        };
+        const rowPart = (wrapped, count, { bold = false, header = false } = {}) => {
           const height = count * leading + 2 * pad;
           return {
             height,
@@ -293,8 +304,9 @@ window.PdfKit = (() => {
             },
           };
         };
-        const headerLine = block.header ? rowLine(block.header, { bold: true, header: true }) : null;
-        const lines = [...(headerLine ? [headerLine] : []), ...(block.rows || []).map((cells) => rowLine(cells))];
+        const headerLine = block.header ? rowLines(block.header, { bold: true, header: true })[0] : null;
+        const maxLines = Math.max(1, Math.floor((floor - top - (headerLine ? headerLine.height : 0) - 2 * pad) / leading));
+        const lines = [...(headerLine ? [headerLine] : []), ...(block.rows || []).flatMap((cells) => rowLines(cells, { maxLines }))];
         return { ...block, lines, repeat: headerLine };
       }
       if (block.kind === "row") {

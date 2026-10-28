@@ -52,3 +52,23 @@ test('a wrong password, a changed byte, or a text that is not a sealed file: ref
   assert.ok(WorkBackup.goodPassword('12345678') && !WorkBackup.goodPassword('1234567') && !WorkBackup.goodPassword('   ') && !WorkBackup.goodPassword(null));
   assert.equal(WorkBackup.MIN_PASSWORD, 8);
 });
+
+test('a sealed file that inflates past the limit is refused while it is read, not after it fills the memory', async () => {
+  // 48 MB of zeros gzip to a few tens of KB; the limit is 40 MB. A DecompressionStream that counts what it hands on
+  // shows the reading stopped before the end.
+  let handed = 0;
+  class Counting extends DecompressionStream {
+    get readable() { return super.readable.pipeThrough(new TransformStream({ transform(chunk, controller) { handed += chunk.length; controller.enqueue(chunk); } })); }
+  }
+  const counting = { ...context, window: {}, DecompressionStream: Counting };
+  vm.runInNewContext(fs.readFileSync('src/js/work-backup.js', 'utf8'), counting);
+  const big = 48 * 1024 * 1024;
+  const sealed = await counting.window.WorkBackup.sealBackupText('\0'.repeat(big), 'night-shift-2026');
+  assert.ok(sealed.length < 1024 * 1024, `the sealed file is small (${sealed.length} bytes)`);
+  const opened = await counting.window.WorkBackup.openSealedText(sealed, 'night-shift-2026');
+  assert.equal(opened.error, 'invalid');
+  assert.ok(handed > 40 * 1024 * 1024 && handed < big, `stopped after ${handed} of ${big} bytes`);
+  // The same stream opens a file within the limit as before.
+  const fine = await counting.window.WorkBackup.sealBackupText(plainFile, 'night-shift-2026');
+  assert.equal((await counting.window.WorkBackup.openSealedText(fine, 'night-shift-2026')).text, plainFile);
+});

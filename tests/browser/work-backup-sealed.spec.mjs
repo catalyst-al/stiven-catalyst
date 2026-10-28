@@ -38,6 +38,23 @@ test("a work file sealed with a password: unreadable, refused with the wrong pas
   await page.evaluate(() => localStorage.removeItem("sc-shift-handover"));
   await page.reload();
   expect(await stored(page, "sc-shift-handover")).toBeNull();
+  // Count the dialog's live listeners: each way of closing it (Esc, Cancel, Continue) must leave none behind.
+  await page.evaluate(() => {
+    const dialog = document.querySelector("[data-work-password-dialog]");
+    const form = dialog.querySelector("form");
+    const live = { submit: 0, close: 0, click: 0 };
+    const watch = (target, type) => {
+      const add = target.addEventListener.bind(target);
+      const remove = target.removeEventListener.bind(target);
+      target.addEventListener = (kind, ...rest) => { if (kind === type) live[type] += 1; return add(kind, ...rest); };
+      target.removeEventListener = (kind, ...rest) => { if (kind === type) live[type] -= 1; return remove(kind, ...rest); };
+    };
+    watch(form, "submit");
+    watch(dialog, "close");
+    watch(dialog.querySelector("[data-work-password-cancel]"), "click");
+    window.__wbLive = live;
+  });
+  const live = () => page.evaluate(() => ({ ...window.__wbLive }));
   const open = async (password) => {
     await page.locator("[data-work-open]").setInputFiles({ name: "work.sealed.json", mimeType: "application/json", buffer: Buffer.from(text) });
     await expect(dialog).toBeVisible();
@@ -48,12 +65,37 @@ test("a work file sealed with a password: unreadable, refused with the wrong pas
   await open("night-shift-2027");
   await expect(page.locator("[data-work-status]")).toContainText("Wrong password", { timeout: 20_000 });
   expect(await stored(page, "sc-shift-handover")).toBeNull();
+  expect(await live()).toEqual({ submit: 0, close: 0, click: 0 });
   // Cancelled: nothing happens.
   await page.locator("[data-work-open]").setInputFiles({ name: "work.sealed.json", mimeType: "application/json", buffer: Buffer.from(text) });
   await expect(dialog).toBeVisible();
+  expect(await live()).toEqual({ submit: 1, close: 1, click: 1 });
   await dialog.locator("[data-work-password-cancel]").click();
   await expect(dialog).toBeHidden();
   expect(await stored(page, "sc-shift-handover")).toBeNull();
+  expect(await live()).toEqual({ submit: 0, close: 0, click: 0 });
+  // Closed with Esc: nothing happens, no listener stays, and the dialog opens again clean.
+  await page.locator("[data-work-open]").setInputFiles({ name: "work.sealed.json", mimeType: "application/json", buffer: Buffer.from(text) });
+  await expect(dialog).toBeVisible();
+  await dialog.locator("[name=password]").fill("night-shift-2026");
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  expect(await stored(page, "sc-shift-handover")).toBeNull();
+  expect(await live()).toEqual({ submit: 0, close: 0, click: 0 });
+  // After Esc, the wrong password is still refused once, with a clean field; then the right one works.
+  await page.locator("[data-work-open]").setInputFiles({ name: "work.sealed.json", mimeType: "application/json", buffer: Buffer.from(text) });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator("[name=password]")).toHaveValue("");
+  await expect(dialog.locator("[data-work-password-error]")).toHaveText("");
+  await dialog.locator("[name=password]").fill("short");
+  await dialog.locator("button[type=submit]").click();
+  await expect(dialog.locator("[data-work-password-error]")).toContainText("at least 8");
+  await dialog.locator("[name=password]").fill("night-shift-2027");
+  await dialog.locator("button[type=submit]").click();
+  await expect(page.locator("[data-work-status]")).toContainText("Wrong password", { timeout: 20_000 });
+  await expect(dialog).toBeHidden();
+  expect(await stored(page, "sc-shift-handover")).toBeNull();
+  expect(await live()).toEqual({ submit: 0, close: 0, click: 0 });
   // The right password: the usual confirmation, then the work is back and the page reloads with it.
   page.once("dialog", (d) => d.accept());
   await open("night-shift-2026");
