@@ -15,17 +15,22 @@
 //   not add it twice. lastAdd says why an add gave null: "duplicate", "unsaved" (the browser could not save) or
 //   "invalid", or "example" (an example's action offered to a list that holds the visitor's own: it stays out).
 // - add() returns the action only when it was saved.
+// - An action may belong to a case (caseId: the id of an investigation of the CX Control Tower). The id travels in the
+//   hand-off (?case=) and comes back with forCase(); the case decides "verified" from the KPI before and after.
+// - "verified" needs a result: update() refuses to mark an action verified while its result is empty (lastUpdate says
+//   "needs-result"). Done is a task finished; verified is a result shown.
 window.ActionsStore = (() => {
   const KEY = "sc-actions";
   const STATUSES = ["open", "doing", "done", "verified"];
   const PRIORITIES = ["High", "Medium", "Low"];
-  const PARAMS = ["action", "detail", "owner", "due", "source", "check", "area", "priority"];
+  const PARAMS = ["action", "detail", "owner", "due", "source", "check", "area", "priority", "case"];
   const str = (value) => (typeof value === "string" ? value.trim() : "");
   const isObject = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   const localIso = (date = new Date()) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
   const isDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(value);
   const id = () => `a${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
 
+  const caseIdOf = (value) => str(value).replace(/[^A-Za-z0-9-]/g, "").slice(0, 40);
   const clean = (item) => {
     if (!isObject(item) || !str(item.title)) return null;
     return {
@@ -42,6 +47,7 @@ window.ActionsStore = (() => {
       created: isDate(str(item.created)) ? str(item.created) : localIso(),
       closed: isDate(str(item.closed)) ? str(item.closed) : "",
       result: str(item.result).slice(0, 1000),
+      ...(caseIdOf(item.caseId) ? { caseId: caseIdOf(item.caseId) } : {}),
       ...(item.example === true ? { example: true } : {}),
     };
   };
@@ -112,12 +118,16 @@ window.ActionsStore = (() => {
     });
     return result;
   };
+  let lastUpdate = null;
   const update = (actionId, patch) => {
+    lastUpdate = "invalid";
     const rows = read();
     const index = rows.findIndex((row) => row.id === actionId);
     if (index < 0) return null;
     const next = clean({ ...rows[index], ...patch, id: rows[index].id, created: rows[index].created });
     if (!next) return null;
+    if (next.status === "verified" && !next.result) { lastUpdate = "needs-result"; return null; }
+    lastUpdate = null;
     if ((next.status === "done" || next.status === "verified") && !next.closed) next.closed = localIso();
     if (next.status === "open" || next.status === "doing") next.closed = "";
     rows[index] = next;
@@ -139,6 +149,8 @@ window.ActionsStore = (() => {
   };
   const replaceAll = (rows) => write(rows.map(clean).filter(Boolean));
   const isOpen = (action) => action.status === "open" || action.status === "doing";
+  // The actions of a case, newest last.
+  const forCase = (caseId) => (caseIdOf(caseId) ? list().filter((action) => action.caseId === caseIdOf(caseId)) : []);
   const isOverdue = (action, today = localIso()) => isOpen(action) && action.due !== "" && action.due < today;
   const open = () => list().filter(isOpen);
   const overdue = (today = localIso()) => list().filter((action) => isOverdue(action, today));
@@ -169,7 +181,8 @@ window.ActionsStore = (() => {
     const url = trackerUrl();
     if (str(action?.title)) {
       url.searchParams.set("action", str(action.title));
-      PARAMS.slice(1).forEach((name) => { if (str(action[name])) url.searchParams.set(name, str(action[name])); });
+      PARAMS.slice(1, -1).forEach((name) => { if (str(action[name])) url.searchParams.set(name, str(action[name])); });
+      if (caseIdOf(action.caseId)) url.searchParams.set("case", caseIdOf(action.caseId));
     }
     return url.href;
   };
@@ -179,7 +192,7 @@ window.ActionsStore = (() => {
     const params = new URLSearchParams(url.search);
     const title = str(params.get("action"));
     if (!title) return { added: null, cleaned: false };
-    const incoming = { title, detail: str(params.get("detail")), owner: str(params.get("owner")), due: str(params.get("due")), source: str(params.get("source")), check: str(params.get("check")), area: str(params.get("area")), priority: str(params.get("priority")) };
+    const incoming = { title, detail: str(params.get("detail")), owner: str(params.get("owner")), due: str(params.get("due")), source: str(params.get("source")), check: str(params.get("check")), area: str(params.get("area")), priority: str(params.get("priority")), caseId: str(params.get("case")) };
     const rows = list();
     const twin = rows.find((row) => isOpen(row) && row.title === title && row.source === clean({ title, source: incoming.source }).source);
     const added = twin ? null : add(incoming);
@@ -233,5 +246,5 @@ window.ActionsStore = (() => {
     return `${lines.map(icsFold).join("\r\n")}\r\n`;
   };
 
-  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, trackerUrl, link, linkButton, fromParams, ics, icsText, icsFold, get failed() { return failed; }, get lastAdd() { return lastAdd; } };
+  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, forCase, trackerUrl, link, linkButton, fromParams, ics, icsText, icsFold, get failed() { return failed; }, get lastAdd() { return lastAdd; }, get lastUpdate() { return lastUpdate; } };
 })();

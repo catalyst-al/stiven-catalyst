@@ -46,6 +46,11 @@
       <a class="button-secondary" href="{{ '/tools/shift-handover/' | local(lang) }}" data-handover>{{ "Put the countermeasure on the handover" | t(lang) }}</a>
       <a class="button-secondary" href="{{ '/tools/action-tracker/' | local(lang) }}" data-tracker>{{ "Add the countermeasure to the Action Tracker" | t(lang) }}</a>
     </div>
+    <input type="hidden" name="case" data-store>
+    <p class="form-note ws-case" data-case hidden>
+      <span data-case-text></span>
+      <a href="{{ '/tools/cx-control-tower/' | local(lang) }}" data-case-back>{{ "Send the cause back to the investigation" | t(lang) }}</a>
+    </p>
     <p class="form-note" data-status aria-live="polite">{{ "Your draft is kept only in this browser." | t(lang) }}</p>
   </form>
 

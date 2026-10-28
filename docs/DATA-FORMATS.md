@@ -35,8 +35,21 @@ Keys that are settings of the page and never travel in a file or a lock: `sc-the
 `OPEN` in `js/work-lock.js`). `sc-team` (the team code) and `sc-team-state` stay on the device and out of files, but
 go into the locked record so team sync pauses while locked.
 
+Two shapes worth naming, because other tools read them. `sc-actions` is `{ rows: [action] }`, an action being `{ id, title,
+detail, owner, due, source, check, area, priority, status (open | doing | done | verified), created, closed, result }`
+and, when it belongs to an investigation of the CX Control Tower, `caseId` (`INV-…`); `verified` is never written
+without a `result` (`ActionsStore.update`). In `sc-cx-tower` the saved investigations are `cases: [{ id, updated, the
+case fields (title, status, problem, evidence, where, rootStatus, why1–why5, root, containment, corrective, preventive,
+owner, deadline, verifyMetric, verifyResult), actionId (the row of the station's own actions table), snapshot (metric,
+label, from, to, DSP, Shift, Zone, dim, segment, k, n, source), trackerId (the action in `sc-actions`), verifyFrom (the
+day the change took effect), verification ({ status: effective | not-effective, decided, before: { from, to, k, n },
+after: { from, to, k, n }, text }) }]`; a case saved before October 2026 loads with the three last fields empty.
+
 Hand-offs between tools through `sessionStorage`: `sc-pareto-handoff` (a log opened in Pareto), `sc-sigma-handoff`
-(days opened as a control chart); read once and cleared.
+(days opened as a control chart); read once and cleared. Hand-offs through the address, read once and cleaned:
+`?action=…&owner=&due=&source=&check=&area=&priority=&case=` (the Action Tracker), `?problem=&case=` (5 Whys),
+`?issue=&owner=&due=` (Shift Handover), `?case=INV-…&problem=&why1=…&why5=&root=` (the CX Control Tower opens the
+investigation and fills its empty fields).
 
 **IndexedDB.** `sc-restore` (store `points`): the restore points of `js/storage-guard.js`, `{ id, created, reason,
 items, bytes }`, `id` = `<ISO time> <reason>[ n]`, reasons `daily`, `before-open`, `before-restore`, `manual`,
