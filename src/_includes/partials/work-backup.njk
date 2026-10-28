@@ -11,6 +11,18 @@
   confirm: "Open the work saved on {date}? For these tools the work in this browser is replaced: {tools}. Other tools stay as they are." | t(lang),
   full: "This browser ran out of space, so nothing was changed. Free some space and open the file again." | t(lang),
   opened: "Opened. The page reloads to show your work." | t(lang),
+  sealTitle: "A password for this file" | t(lang),
+  sealHelp: "Choose a password of at least 8 characters and keep it: without it the file cannot be opened, by anyone. The file is encrypted in this browser before it is saved." | t(lang),
+  unsealTitle: "This file is sealed" | t(lang),
+  unsealHelp: "Enter the password it was saved with." | t(lang),
+  passwordShort: "The password needs at least {n} characters." | t(lang),
+  passwordDiffer: "The two passwords differ." | t(lang),
+  sealing: "Sealing the file…" | t(lang),
+  opening: "Opening the file…" | t(lang),
+  sealFailed: "The file could not be sealed in this browser. Nothing was saved." | t(lang),
+  sealUnavailable: "This browser cannot encrypt here (no WebCrypto). Save the file without a password, or use another browser." | t(lang),
+  savedSealed: "Saved sealed as {file}. It opens only with the password, here or on another device with “Open a saved file”." | t(lang),
+  wrongPassword: "Wrong password, or the file was changed. Nothing was opened." | t(lang),
   savedPhotos: "Photos in the file: {n}." | t(lang),
   photosLeft: "Left out so that the file stays under 20 MB: {n} older photos. They stay on this device." | t(lang),
   photosUnread: "The photos could not be read here, so the file holds the work without them." | t(lang),
@@ -75,6 +87,7 @@
     <div class="tool-actions work-backup-actions">
       <button class="button-primary" type="button" data-work-save>{{ "Save all my work" | t(lang) }}</button>
       <label class="button-secondary work-backup-open">{{ "Open a saved file" | t(lang) }}<input type="file" accept="application/json,.json" data-work-open></label>
+      <label class="work-backup-seal"><input type="checkbox" data-work-seal> {{ "Protect the file with a password" | t(lang) }}</label>
     </div>
     <p class="form-note work-backup-status" data-work-status role="status" aria-live="polite"></p>
 {%- if site.sync.endpoint %}
@@ -83,6 +96,20 @@
     {% include "partials/work-lock.njk" %}
   </div>
 </section>
+<dialog class="wb-dialog" data-work-password-dialog aria-labelledby="wb-password-title">
+  <form method="dialog">
+    <p class="kicker">{{ "All your work in one file" | t(lang) }}</p>
+    <h2 id="wb-password-title" data-work-password-title></h2>
+    <p class="form-note" data-work-password-help></p>
+    <label class="field"><span>{{ "Password" | t(lang) }}</span><input name="password" type="password" autocomplete="off" minlength="8" required></label>
+    <label class="field" data-work-password-again><span>{{ "Password again" | t(lang) }}</span><input name="again" type="password" autocomplete="off"></label>
+    <div class="tool-actions">
+      <button class="button-primary" type="submit">{{ "Continue" | t(lang) }}</button>
+      <button class="button-ghost" type="button" data-work-password-cancel>{{ "Cancel" | t(lang) }}</button>
+    </div>
+    <p class="form-note wb-error" data-work-password-error role="alert"></p>
+  </form>
+</dialog>
 <script type="application/json" id="work-backup-names">{
 {%- for tool in wbTools %}{% if tool.url %}{% set parts = tool.url.split("/") %}{{ parts[parts.length - 2] | scriptJson | safe }}: {{ tool.name | scriptJson | safe }}, {% endif %}{% endfor -%}
 {#- The reader's own keys (js/shelf.js, js/article.js) travel in the same file. -#}

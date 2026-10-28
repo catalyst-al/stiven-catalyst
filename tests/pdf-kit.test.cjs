@@ -114,3 +114,25 @@ test('flow fills pages in order, keeps a heading with what follows, splits a lon
   assert.ok(/\bbeta0\b/.test(splitStreams[0]) && /\bbeta59\b/.test(splitStreams[1]), 'the second paragraph starts on page 1 and ends on page 2');
   assert.equal(((splitStreams[0] + ' ' + splitStreams[1]).match(/\bbeta\d+\b/g) || []).length, 60);
 });
+
+test('a table: cells wrap in their columns, a row is never split, the header comes again on every page it runs on to', () => {
+  const rows = Array.from({ length: 60 }, (_, i) => [`Row ${i}`, `A fairly long description of the issue number ${i} that wraps over a line or two in its column`, i % 2 ? 'Lena' : 'Maintenance', '2026-10-30']);
+  const out = PdfKit.flow([
+    { kind: 'text', text: 'Title', size: 14, bold: true, leading: 18 },
+    { kind: 'table', columns: [{ width: 1 }, { width: 4 }, { width: 1.5 }, { width: 1.3, align: 'right' }], header: ['#', 'Issue', 'Owner', 'By'], rows, size: 9, leading: 12, space: 8 },
+  ], { footer: (n, total) => ['Sheet', `Page ${n} of ${total}`] });
+  const { text, pages } = parse(out.bytes);
+  assert.equal(out.pages, pages);
+  assert.ok(pages >= 2, 'more than a page of rows');
+  const streams = [...text.matchAll(/stream\n([\s\S]*?)\nendstream/g)].map((m) => [...m[1].matchAll(/<([0-9a-f]+)> Tj/g)].map((x) => winAnsi(x[1])));
+  streams.forEach((words, n) => assert.ok(words.includes('Issue') && words.includes('Owner'), `the header on page ${n + 1}`));
+  assert.equal(streams.flat().filter((w) => /^Row \d+$/.test(w)).length, 60, 'every row once');
+  // A row's cells stand on one page: the row number and its date are always in the same stream.
+  streams.forEach((words) => assert.equal(words.filter((w) => /^Row \d+$/.test(w)).length, words.filter((w) => w === '2026-10-30').length));
+  // Right-aligned cells end at the column's right edge: two dates of different widths share no left x.
+  const right = [...text.matchAll(/([\d.]+) ([\d.]+) Td <(323032362d31302d3330)> Tj/g)].map((m) => Number(m[1]));
+  assert.ok(right.length === 60 && right.every((x) => Math.abs(x - right[0]) < 0.01), 'the same right edge for every date');
+  // Without a header: no repeat, and a one-row table on one page.
+  const small = PdfKit.flow([{ kind: 'table', rows: [['a', 'b']], size: 10 }], {});
+  assert.equal(small.pages, 1);
+});

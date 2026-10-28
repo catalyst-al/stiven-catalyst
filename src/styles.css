@@ -3766,6 +3766,10 @@ select.sh-in { cursor: pointer; }
 }
 @media screen { .print-text { display: none; } }
 
+
+/* A tool script that failed (tool-kit.js, failedNotice): one notice at the top of the main content. */
+.tk-error { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 16px auto 0; max-width: 1120px; padding: 12px 16px; border: 1px solid color-mix(in srgb, var(--danger) 55%, var(--line)); border-radius: 12px; background: color-mix(in srgb, var(--danger) 8%, var(--bg)); color: var(--ink); }
+.tk-error p { margin: 0; flex: 1 1 320px; }
 /* Search and filters */
 html:not(.js) .filter-bar { display: none; }
 .filter-bar {
@@ -9487,6 +9491,18 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
 .series-dots a.is-next::after { box-shadow: 0 0 0 3px rgba(255, 214, 150, .12), 0 0 14px rgba(255, 214, 150, .7); }
 .series-dots a:hover { box-shadow: 0 0 6px #fff, 0 0 14px rgba(255, 214, 150, .9); }
 [data-theme="light"] .series-dots a:is(.is-read, [aria-current="page"]) { box-shadow: 0 0 0 1px rgba(11, 16, 21, .25), 0 0 10px rgba(240, 180, 90, .8); }
+
+/* A work file sealed with a password (partials/work-backup.njk, js/work-backup.js): the choice beside the buttons and the password dialog. */
+.work-backup-seal { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; cursor: pointer; }
+.wb-dialog { width: min(calc(100% - 32px), 440px); padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: var(--ink); box-shadow: var(--shadow); }
+.wb-dialog::backdrop { background: rgba(10, 14, 24, .62); }
+.wb-dialog .kicker { margin: 0 0 6px; }
+.wb-dialog h2 { margin: 0 0 8px; font-size: 22px; line-height: 1.25; }
+.wb-dialog .form-note { margin: 0 0 14px; }
+.wb-dialog .field { margin: 0 0 12px; }
+.wb-dialog input { width: 100%; box-sizing: border-box; }
+.wb-dialog .tool-actions { margin: 4px 0 0; }
+.wb-error { min-height: 1.4em; margin: 10px 0 0 !important; color: var(--danger); }
 /* ===== Shared charts (js/chart-kit.js) and the workplace profile (js/workplace.js) =====
    Every chart is an <svg class="ck-chart"> in a .ck-figure: one tooltip per figure, the SVG and PNG buttons under it.
    The colours come from the --tr-* variables of the tools (06-tools.css) and the state colours. */

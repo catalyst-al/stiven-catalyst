@@ -753,6 +753,61 @@
     sheet.append(foot);
   };
 
+  // The sheet as a PDF of its own (pdf-kit.js): the same content as the sheet on the page, A4, the page's language,
+  // the same in every reader and on every printer. Blocks for PdfKit.flow; exposed for the tests.
+  const sheetBlocks = (h) => {
+    const PT = 0.75;
+    const INK = "#1a1a1a";
+    const MUTED = "#4a4a4a";
+    const ACCENT = "#1f3a5f";
+    const body = 10;
+    const leading = 14;
+    const blocks = [];
+    const section = (title) => {
+      blocks.push({ kind: "text", text: title.toUpperCase(), size: 9.5, bold: true, color: ACCENT, leading: 13, space: 16, keep: true, spacing: 0.5 });
+      blocks.push({ kind: "rule", color: ACCENT, width: 0.8, space: 2, keep: true });
+    };
+    const bullets = (text, first = 5) => text.split("\n").map((line) => line.trim()).filter(Boolean)
+      .forEach((line, i) => blocks.push({ kind: "text", text: line, size: body, leading, color: INK, space: i ? 2 : first, bullet: "•", indent: 14 * PT }));
+    blocks.push({ kind: "text", text: h.area || tx("Shift handover"), size: 20, bold: true, color: ACCENT, leading: 24, space: 0 });
+    blocks.push({ kind: "text", text: shiftLine(h), size: 11, bold: true, color: INK, leading: 15, space: 3 });
+    if (h.from || h.to) blocks.push({ kind: "text", text: people(h), size: body, color: MUTED, leading, space: 2 });
+    const numbers = h.metrics.filter(([label, value]) => label && value);
+    if (numbers.length) {
+      section(tx("Numbers"));
+      blocks.push({ kind: "table", columns: [{ width: 2.2 }, { width: 1, align: "right", bold: true }, { width: 2.4 }], rows: numbers.map(([label, value, note]) => [label, value, note || ""]), size: body, leading, color: INK, space: 6 });
+    }
+    const open = openIssues(h);
+    section(`${tx("Open issues")} (${open.length})`);
+    if (!open.length) blocks.push({ kind: "text", text: tx("No open issues."), size: body, color: MUTED, leading, space: 6 });
+    else blocks.push({
+      kind: "table",
+      columns: [{ width: 0.9 }, { width: 3.6 }, { width: 1.3 }, { width: 1.1 }, { width: 0.8, align: "right" }],
+      header: [tx("Priority"), tx("Issue"), tx("Owner"), tx("By"), tx("Carried")],
+      rows: open.map((issue) => [issue.priority, issue.text, issue.owner || tx("none"), issue.due || tx("no time"), issue.carried ? `${issue.carried}×` : ""]),
+      size: body, leading, color: INK, headerColor: ACCENT, space: 6,
+    });
+    const solved = solvedIssues(h);
+    if (solved.length) { section(tx("Solved this shift")); bullets(solved.map((issue) => issue.text).join("\n")); }
+    if (h.headsUp.trim()) { section(tx("Heads-up")); bullets(h.headsUp); }
+    if (h.safety.trim()) { section(tx("Safety and people")); bullets(h.safety); }
+    const foot = [`${tx("Handover check")}: ${tx("{a} of {b}", { a: h.checks.filter(Boolean).length, b: h.checks.length })}`];
+    if (h.received) foot.push(tx("Received on this device at {time}.", { time: clock(h.received.at) }));
+    if (h.ackAt) foot.push(tx("Taken over by {name} at {time}", { name: h.to, time: clock(h.ackAt) }));
+    if (h.ack) foot.push(tx("Code {code} typed in here at {time}. It matches the code of a handover shared from here, so that handover was opened with its transfer code. It does not prove who opened it, or on which device.", { code: window.ShiftHandoverLink.showAck(h.ack.code), time: clock(h.ack.at) }));
+    blocks.push({ kind: "rule", color: "#c8c8c8", width: 0.6, space: 14 });
+    foot.forEach((line, i) => blocks.push({ kind: "text", text: line, size: 9, color: MUTED, leading: 12.5, space: i ? 1 : 6 }));
+    return blocks;
+  };
+  const sheetPdf = (h, now = new Date()) => window.PdfKit.flow(sheetBlocks(h), {
+    family: "helvetica",
+    margins: { top: 48, bottom: 52, left: 54, right: 54 },
+    footer: (n, total) => [`${tx("Shift handover")} · ${shiftLine(h)}`, tx("Page {n} of {total}", { n, total })],
+    footerSize: 8, footerColor: "#666666", footerAt: 24,
+    title: `${tx("Shift handover")} · ${shiftLine(h)}`, author: h.from || "", subject: h.area || "", lang: window.ToolKit.LANG, date: now,
+  });
+  window.ShiftHandoverPdf = { sheetBlocks, sheetPdf };
+
   const renderQuality = () => {
     const list = problems(cur());
     quality.replaceChildren(el("p", "kicker", tx("Before you hand over")));
@@ -1038,6 +1093,14 @@
   });
 
   output.querySelector("[data-print]").addEventListener("click", () => window.print());
+  output.querySelector("[data-pdf]")?.addEventListener("click", () => {
+    const h = cur();
+    if (!hasContent(h)) { note(tx("There is nothing to save yet.")); return; }
+    if (!window.PdfKit) { window.print(); return; }
+    const file = sheetPdf(h);
+    download(`handover-${h.date || "shift"}-${lower(h.shift).replace(/[^a-z0-9]+/gi, "-")}.pdf`, file.bytes, "application/pdf");
+    note(tx(file.pages === 1 ? "PDF saved: one page, laid out the same in every reader and on every printer." : "PDF saved: {n} pages, laid out the same in every reader and on every printer.", { n: file.pages }));
+  });
 
   output.querySelector("[data-close]").addEventListener("click", () => {
     const h = cur();

@@ -1718,3 +1718,15 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
 .series-dots a.is-next::after { box-shadow: 0 0 0 3px rgba(255, 214, 150, .12), 0 0 14px rgba(255, 214, 150, .7); }
 .series-dots a:hover { box-shadow: 0 0 6px #fff, 0 0 14px rgba(255, 214, 150, .9); }
 [data-theme="light"] .series-dots a:is(.is-read, [aria-current="page"]) { box-shadow: 0 0 0 1px rgba(11, 16, 21, .25), 0 0 10px rgba(240, 180, 90, .8); }
+
+/* A work file sealed with a password (partials/work-backup.njk, js/work-backup.js): the choice beside the buttons and the password dialog. */
+.work-backup-seal { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; cursor: pointer; }
+.wb-dialog { width: min(calc(100% - 32px), 440px); padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: var(--ink); box-shadow: var(--shadow); }
+.wb-dialog::backdrop { background: rgba(10, 14, 24, .62); }
+.wb-dialog .kicker { margin: 0 0 6px; }
+.wb-dialog h2 { margin: 0 0 8px; font-size: 22px; line-height: 1.25; }
+.wb-dialog .form-note { margin: 0 0 14px; }
+.wb-dialog .field { margin: 0 0 12px; }
+.wb-dialog input { width: 100%; box-sizing: border-box; }
+.wb-dialog .tool-actions { margin: 4px 0 0; }
+.wb-error { min-height: 1.4em; margin: 10px 0 0 !important; color: var(--danger); }
