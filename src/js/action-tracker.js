@@ -122,6 +122,8 @@
   const sourceFilter = root.querySelector('[data-filter="source"]');
   const textFilter = root.querySelector('[data-filter="text"]');
   let editing = null;
+  // A status the visitor chose that waits for a result (verified): applied when the result is saved.
+  let pending = null;
 
   const filtered = (rows, day) => rows.filter((a) => {
     if (ui.status === "live" && !S.isOpen(a)) return false;
@@ -169,10 +171,21 @@
     const statusBox = el("div", "at-status");
     const select = el("select");
     select.setAttribute("aria-label", `${tx("Status")}: ${a.title}`);
-    S.STATUSES.forEach((s) => { const option = el("option", null, statusName(s)); option.value = s; option.selected = s === a.status; select.append(option); });
+    S.STATUSES.forEach((s) => {
+      const option = el("option", null, statusName(s));
+      option.value = s;
+      option.selected = s === a.status;
+      // An action of a case is verified by the case, from its KPI before and after: not from here.
+      if (s === "verified" && a.caseId && a.status !== "verified") option.disabled = true;
+      select.append(option);
+    });
+    if (a.caseId && a.status === "verified") { select.disabled = true; select.title = tx("Verified by the investigation; reopen it there."); }
     select.addEventListener("change", () => {
-      S.update(a.id, { status: select.value });
-      if ((select.value === "done" || select.value === "verified") && !a.result) { editing = a.id; }
+      const updated = S.update(a.id, { status: select.value });
+      // Verified needs a result: the status stays, the form opens on the result, and saving a result verifies it.
+      if (!updated && S.lastUpdate === "needs-result") { editing = a.id; pending = { id: a.id, status: "verified" }; }
+      else if (!updated && S.lastUpdate === "case-verifies") { status.textContent = tx("Verified is decided in the investigation, from the KPI before and after the action."); }
+      else if (select.value === "done" && !a.result) { editing = a.id; }
       render();
     });
     statusBox.append(select);
@@ -189,6 +202,15 @@
     if (a.detail) main.append(el("p", "at-detail", a.detail));
     if (a.check) main.append(el("p", "at-detail", `${tx("Check")}: ${a.check}`));
     if (a.result) main.append(el("p", "at-detail", `${tx("Result")}: ${a.result}`));
+    if (a.caseId) {
+      const caseLine = el("p", "at-detail at-case");
+      const caseLink = el("a", null, `${tx("Investigation")} ${a.caseId}`);
+      const caseUrl = new URL("../cx-control-tower/", location.href);
+      caseUrl.searchParams.set("case", a.caseId);
+      caseLink.href = caseUrl.href;
+      caseLine.append(caseLink, " · ", tx("Verified is decided there, from the KPI before and after the action."));
+      main.append(caseLine);
+    }
     // The edit form, open on request.
     const edit = el("div", "at-edit");
     const fields = {
@@ -198,6 +220,7 @@
     fields.owner.setAttribute("list", "at-owners");
     fields.area.setAttribute("list", "at-areas");
     Object.entries(data.priorities).forEach(([key, label]) => { const option = el("option", null, label); option.value = key; option.selected = key === a.priority; fields.priority.append(option); });
+    if (pending?.id === a.id) edit.append(el("p", "form-note at-pending dl-wide", tx("Verified needs a result: write what happened and what the number did, then save.")));
     edit.append(
       field(`at-e-title-${a.id}`, tx("Action"), fields.title, true),
       field(`at-e-owner-${a.id}`, tx("Owner"), fields.owner), field(`at-e-due-${a.id}`, tx("Due date"), fields.due),
@@ -211,13 +234,15 @@
     saveEdit.addEventListener("click", () => {
       const patch = Object.fromEntries(Object.entries(fields).map(([name, node]) => [name, node.value]));
       if (!patch.title.trim()) { fields.title.focus(); return; }
+      if (pending?.id === a.id && patch.result.trim()) patch.status = pending.status;
       S.update(a.id, patch);
+      if (pending?.id === a.id) pending = null;
       editing = null;
       render();
     });
     const cancelEdit = el("button", "button-ghost", tx("Cancel"));
     cancelEdit.type = "button";
-    cancelEdit.addEventListener("click", () => { editing = null; render(); });
+    cancelEdit.addEventListener("click", () => { editing = null; if (pending?.id === a.id) pending = null; render(); });
     const editActions = el("div", "tool-actions dl-wide");
     editActions.append(saveEdit, cancelEdit);
     edit.append(editActions);

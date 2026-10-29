@@ -81,7 +81,8 @@ test("a work file sealed with a password: unreadable, refused with the wrong pas
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
   expect(await stored(page, "sc-shift-handover")).toBeNull();
-  expect(await live()).toEqual({ submit: 0, close: 0, click: 0 });
+  // The dialog's close event is dispatched a moment after it closes: the listeners go with it.
+  await expect.poll(() => live()).toEqual({ submit: 0, close: 0, click: 0 });
   // After Esc, the wrong password is still refused once, with a clean field; then the right one works.
   await page.locator("[data-work-open]").setInputFiles({ name: "work.sealed.json", mimeType: "application/json", buffer: Buffer.from(text) });
   await expect(dialog).toBeVisible();

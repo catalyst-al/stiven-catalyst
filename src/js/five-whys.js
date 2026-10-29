@@ -83,6 +83,37 @@
     trackerLink.href = window.ToolKit.trackerUrl(value("action") ? { title: value("action"), detail: value("cause") ? `${tx("Root cause")}: ${value("cause")}` : "", owner: value("owner"), due: value("due"), check: value("check"), source: "five-whys", priority: "High" } : {});
     trackerLink.dataset.ready = value("action") ? "" : "no";
   };
+  // The investigation of the CX Control Tower this worksheet belongs to (?case=INV-…): named on the page. The whys
+  // and the cause go back to it inside the browser (one sessionStorage note, read once by cx-tower.js); the address
+  // carries the case id alone.
+  const HANDOFF = "sc-case-handoff";
+  const caseBox = form.querySelector("[data-case]");
+  const caseBack = form.querySelector("[data-case-back]");
+  const caseBase = caseBack?.getAttribute("href") || "../cx-control-tower/";
+  const caseId = () => form.elements.case?.value.trim() || "";
+  const syncCase = () => {
+    if (!caseBox) return;
+    const id = caseId();
+    caseBox.hidden = !id;
+    if (!id) return;
+    caseBox.querySelector("[data-case-text]").textContent = tx("Investigation {id} of the CX Control Tower.", { id });
+    const url = new URL(caseBase, location.href);
+    url.searchParams.set("case", id);
+    caseBack.href = url.href;
+  };
+  caseBack?.addEventListener("click", () => {
+    const id = caseId();
+    if (!id) return;
+    const value = (name) => form.elements[name]?.value.trim() || "";
+    const note = { caseId: id, from: "five-whys", problem: value("problem"), whys: whyInputs().slice(0, 5).map((input) => input.value.trim()), root: value("cause"), at: new Date().toISOString() };
+    try { sessionStorage.setItem(HANDOFF, JSON.stringify(note)); } catch { flash(tx("The whys could not be handed over in this browser; the investigation opens without them.")); }
+  });
+  // A note the tower left for this worksheet (the problem of the case), taken once.
+  const takeHandoff = (id) => {
+    let note = null;
+    try { note = JSON.parse(sessionStorage.getItem(HANDOFF)); sessionStorage.removeItem(HANDOFF); } catch { note = null; }
+    return note && typeof note === "object" && note.caseId === id && note.from === "cx-control-tower" ? note : null;
+  };
   trackerLink?.addEventListener("click", (event) => {
     if (form.elements.action.value.trim()) return;
     event.preventDefault();
@@ -103,6 +134,7 @@
     suggestCause();
     syncHandover();
     syncTracker();
+    syncCase();
     changed();
   };
 
@@ -120,6 +152,7 @@
     suggestCause();
     syncHandover();
     syncTracker();
+    syncCase();
   };
 
   const asText = () => {
@@ -174,12 +207,15 @@
   form.querySelector("[data-clear]").addEventListener("click", () => {
     if (!window.confirm(tx("Clear the whole worksheet?"))) return;
     form.reset();
+    // A hidden field is not reset by the form: the case goes with the worksheet.
+    if (form.elements.case) form.elements.case.value = "";
     whyInputs().slice(5).forEach((input) => input.closest("li").remove());
     addButton.hidden = false;
     forget();
     suggestCause();
     syncHandover();
     syncTracker();
+    syncCase();
     changed();
     flash(tx("Worksheet cleared."));
     form.elements.problem.focus();
@@ -187,19 +223,27 @@
 
   restore();
 
-  // Other tools link here with ?problem=... to start a worksheet from their result.
-  const incoming = new URLSearchParams(location.search).get("problem")?.trim();
-  if (incoming) {
+  // Other tools link here with ?problem=... to start a worksheet from their result; the CX Control Tower adds
+  // ?case=INV-… so the whys go back to that investigation.
+  const address = new URLSearchParams(location.search);
+  const incomingCase = (address.get("case") || "").replace(/[^A-Za-z0-9-]/g, "").slice(0, 40);
+  const handoff = incomingCase ? takeHandoff(incomingCase) : null;
+  const incoming = address.get("problem")?.trim() || (typeof handoff?.problem === "string" ? handoff.problem.trim() : "");
+  if (incoming || incomingCase) {
     const current = form.elements.problem.value.trim();
-    if (current !== incoming && (!current || window.confirm(`${tx("Start a new worksheet with this problem?")}\n\n${incoming}`))) {
+    if (incoming && current !== incoming && (!current || window.confirm(`${tx("Start a new worksheet with this problem?")}\n\n${incoming}`))) {
       form.reset();
       whyInputs().slice(5).forEach((input) => input.closest("li").remove());
       addButton.hidden = false;
       form.elements.problem.value = incoming;
+      if (form.elements.case) form.elements.case.value = incomingCase;
       save();
       form.elements.why1.focus();
+    } else if (incomingCase && form.elements.case && (!current || current === incoming) && !form.elements.case.value) {
+      form.elements.case.value = incomingCase;
+      save();
     }
-    const query = new URLSearchParams(location.search); query.delete('problem');
+    const query = new URLSearchParams(location.search); query.delete('problem'); query.delete('case');
     history.replaceState(null, "", location.pathname + (query.size ? `?${query}` : '') + location.hash);
   }
 })();

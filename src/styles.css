@@ -6872,6 +6872,16 @@ main :where(p, li, h1, h2, h3, h4, h5, h6, dd, dt, blockquote, figcaption, label
   .cx-action:not([open]) .cx-action-form { display: none; }
 }
 
+
+/* The case thread of the CX Control Tower: the verification box and the links of an investigation. */
+.cx-case-links { margin-top: 12px; }
+.cx-verify { margin-top: 18px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; }
+.cx-verify h4 { margin: 0 0 8px; font-size: 16px; }
+.cx-verify .field { max-width: 240px; margin: 8px 0; }
+.cx-verify-stats { margin: 10px 0; }
+.cx-verdict.is-effective, .cx-decided.is-effective { color: var(--cx-good); font-weight: 700; }
+.cx-verdict.is-not-effective, .cx-decided.is-not-effective { color: var(--cx-bad); font-weight: 700; }
+.ws-case a { margin-left: 6px; }
 /* ---------------------------------------------------------------------------
    Tool pages: each family has its own drawn background above the title
    (partials/family-stage.njk, js/family-sky.js). It lives only around the

@@ -142,9 +142,16 @@ test('the page: the example opens on a first visit, the week is summed, the list
   assert.equal(w.document.querySelectorAll('.at-item').length, 0);
   w.document.querySelector('[data-status="all"]').click();
   assert.equal(w.document.querySelectorAll('.at-item').length, 1);
-  // Closing it through the status select stamps the day.
+  // "Verified" without a result is refused: the action stays open, the form opens on the result; with a result saved,
+  // it is verified and the day is stamped. "Done" closes at once.
   const select = w.document.querySelector('.at-item select');
   select.value = 'verified';
   select.dispatchEvent(new w.Event('change', { bubbles: true }));
-  assert.equal(w.ActionsStore.list()[0].closed, '2026-10-23');
+  assert.equal(w.ActionsStore.list()[0].status, 'open', 'not verified without a result');
+  assert.equal(w.ActionsStore.lastUpdate, 'needs-result');
+  assert.ok(w.document.querySelector('.at-item.is-editing .at-pending'), 'the form says why');
+  const result = w.document.querySelector('.at-item.is-editing [name=result], .at-item.is-editing input[id$="-result"], .at-item.is-editing textarea[id$="-result"]');
+  result.value = 'Zero late check-outs in the week after';
+  [...w.document.querySelectorAll('.at-item.is-editing button')].find((b) => b.textContent === 'Ruaj ndryshimet' || b.textContent === 'Save changes').click();
+  assert.deepEqual([w.ActionsStore.list()[0].status, w.ActionsStore.list()[0].closed, w.ActionsStore.list()[0].result], ['verified', '2026-10-23', 'Zero late check-outs in the week after']);
 });

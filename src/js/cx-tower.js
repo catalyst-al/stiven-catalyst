@@ -653,8 +653,79 @@
     Notes: `${words.investigation || "Investigation"} ${caseId}`,
   });
 
+  // ---------- The case thread: one investigation from the problem to the verified KPI ----------
+  // The investigation (its id INV-…) is the thread. Its action lives in the Action Tracker (js/actions-store.js) with
+  // the case id; "verified" is decided here, from the same failure measured before and after the change, on the rows
+  // of the same filters and segment, each rate over its own eligible rows.
+  // The rows of a case's focus: the snapshot's partner, shift and zone, its segment, inside a window of dates. A week
+  // segment is a slice of time, not a population: with ignoreWeek it is not applied (the rows after the change are
+  // never in the week before it).
+  const isWeekKey = (value) => /^\d{4}-W\d{2}$/.test(String(value || ""));
+  const caseRows = (rows, snapshot, from, to, { ignoreWeek = false } = {}) => {
+    const dim = snapshot.dim;
+    const bySegment = Boolean(snapshot.segment) && !(ignoreWeek && dim === "Week");
+    return rows.filter((row) => ["DSP", "Shift", "Zone"].every((key) => !snapshot[key] || row[key] === snapshot[key])
+      && (!bySegment || segmentOf(row, dim) === snapshot.segment)
+      && row.Date && (!from || row.Date >= from) && (!to || row.Date <= to));
+  };
+  // The Monday and the Sunday of an ISO week key (2026-W37).
+  const weekRange = (key) => {
+    const m = String(key || "").match(/^(\d{4})-W(\d{2})$/);
+    if (!m) return null;
+    const monday = addDays(weekMonday(`${m[1]}-01-04`), (Number(m[2]) - 1) * 7);
+    return { from: monday, to: addDays(monday, 6) };
+  };
+  // The before period of a case: the snapshot's period, or, for a case started from a week segment, that week inside it.
+  const beforeWindow = (snapshot) => {
+    const from = snapshot.from || "";
+    const to = snapshot.to || "";
+    if (snapshot.dim !== "Week" || !isWeekKey(snapshot.segment)) return { from, to };
+    const week = weekRange(snapshot.segment);
+    return { from: from && from > week.from ? from : week.from, to: to && to < week.to ? to : week.to };
+  };
+  // The window after the change: from the day the change took effect to the last day with data. Null without either,
+  // and null when it would start inside the before period (beforeTo): the two windows never share a day.
+  const afterWindow = (from, last, beforeTo = "") => (from && last && last >= from && (!beforeTo || from > beforeTo) ? { from, to: last, days: Math.round((Date.parse(`${last}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 864e5) + 1 } : null);
+  // The verdict on an action: "effective" when both windows reach the sample floor and the failure rate fell (and,
+  // with an approved maximum, sits within it); "not-effective" when both reach the floor and it did not fall;
+  // "insufficient" while either window has too few eligible rows (short says which), or there is no before.
+  const verdict = ({ before, after, target = null, minN = 1 }) => {
+    const out = { enough: false, short: null, change: null, better: null, withinTarget: null, status: "insufficient" };
+    const floor = Math.max(1, minN);
+    if (!before || !(before.n > 0)) { out.short = "before"; return out; }
+    if (before.n < floor) { out.short = "before"; return out; }
+    if (!after || !(after.n > 0)) { out.short = "after"; return out; }
+    out.change = after.rate - before.rate;
+    out.better = out.change < -1e-12;
+    out.withinTarget = target == null ? null : after.rate <= target + 1e-9;
+    out.enough = after.n >= floor;
+    if (!out.enough) { out.short = "after"; return out; }
+    out.status = out.better && out.withinTarget !== false ? "effective" : "not-effective";
+    return out;
+  };
+  // The case's action as the Action Tracker keeps it: the action, the owner, the deadline, the check that closes it.
+  const caseToTracker = (draft, caseId, words = {}) => ({
+    title: caseAction(draft).slice(0, 300),
+    detail: [text(draft.problem) ? `${words.problem || "Problem"}: ${text(draft.problem)}` : "", text(draft.root) ? `${draft.rootStatus === "Verified" ? words.root || "Root cause" : words.hypothesis || "Working hypothesis, not verified"}: ${text(draft.root)}` : ""].filter(Boolean).join("\n"),
+    owner: text(draft.owner), due: text(draft.deadline), source: "cx-control-tower", check: text(draft.verifyMetric) || `${words.check || "Failure rate before and after, same filters"}`,
+    area: text(draft.where), priority: "High", caseId,
+  });
+  // The whys a 5 Whys worksheet sends back (?why1=…&root=…): an empty field of the draft is filled, a field that already
+  // says something else is kept. { draft, filled, kept }.
+  const applyWhys = (draft, incoming) => {
+    const next = { ...draft };
+    const filled = [];
+    const kept = [];
+    ["problem", "why1", "why2", "why3", "why4", "why5", "root"].forEach((field) => {
+      const value = text(incoming[field]).slice(0, 2000);
+      if (!value) return;
+      if (!text(next[field])) { next[field] = value; filled.push(field); } else if (text(next[field]) !== value) kept.push(field);
+    });
+    return { draft: next, filled, kept };
+  };
+
   window.CxTower = { TABLES, FIELDS, KPIS, DEFAULT_TARGETS, EXAMPLE_TARGETS, isDelivered, bin, minutes, recognise, toRecords, readSheets, readTargets, targetValue, computeKpis, perfectOf, judge, cxScore, routeRisk, isoWeek, weekMonday, addDays, actionStatus, verification, incidentOpen, isRepeat, severityRank, example,
-    DEEP, DEEP_DIMS, deepOutcome, deepAggregate, deepSegments, deepWeekly, priorWindow, deepIncidents, deepKey, CASE_FIELDS, CASE_STATUS, ROOT_STATUS, caseCheck, capaReady, caseToAction };
+    DEEP, DEEP_DIMS, deepOutcome, deepAggregate, deepSegments, deepWeekly, priorWindow, deepIncidents, deepKey, CASE_FIELDS, CASE_STATUS, ROOT_STATUS, caseCheck, capaReady, caseToAction, caseRows, weekRange, beforeWindow, afterWindow, verdict, caseToTracker, applyWhys };
 })();
 
 // ======================================================================
@@ -665,6 +736,8 @@
   if (!app || !dataEl || !window.ToolKit || !window.CxTower || !window.Pareto) return;
   const C = window.CxTower;
   const P = window.Pareto;
+  // The Action Tracker's store (js/actions-store.js): the case's action lives there with the case id.
+  const Actions = window.ActionsStore || null;
   const { LANG, tx, el, num, pct, int, lower, parseDate, parseRows, showDate, read, write, isObject, stat, panel, barList, copy, flash, downloadCsv, firstVisit } = window.ToolKit;
   const cfg = JSON.parse(dataEl.textContent);
   const NAMES = ["deliveries", "routes", "incidents", "actions"];
@@ -734,10 +807,15 @@
       if (typeof d.segment === "string") base.deep.segment = d.segment;
     }
     const textOf = (value) => (typeof value === "string" ? value : "");
+    const cleanWindow = (w) => (isObject(w) ? { from: parseDate(textOf(w.from)) || "", to: parseDate(textOf(w.to)) || "", k: Number.isInteger(w.k) ? w.k : 0, n: Number.isInteger(w.n) ? w.n : 0 } : null);
+    const cleanVerification = (v) => ({ status: ["effective", "not-effective"].includes(v.status) ? v.status : "", decided: parseDate(textOf(v.decided)) || "", minN: Number.isInteger(v.minN) && v.minN >= 1 ? v.minN : 0, ...("target" in v ? { target: typeof v.target === "number" && Number.isFinite(v.target) ? v.target : null } : {}), before: cleanWindow(v.before), after: cleanWindow(v.after), text: textOf(v.text).slice(0, 2000) });
     if (Array.isArray(saved.cases)) {
       base.cases = saved.cases.filter((item) => isObject(item) && typeof item.id === "string" && item.id).map((item) => ({
         id: item.id, updated: textOf(item.updated), ...Object.fromEntries(C.CASE_FIELDS.map((field) => [field, textOf(item[field])])), actionId: textOf(item.actionId),
         snapshot: isObject(item.snapshot) ? Object.fromEntries(Object.entries(item.snapshot).filter(([, v]) => typeof v === "string" || typeof v === "number")) : {},
+        // The thread: the tracker's action, the day the change took effect, and the verification as decided.
+        trackerId: textOf(item.trackerId), verifyFrom: parseDate(textOf(item.verifyFrom)) || "",
+        verification: isObject(item.verification) ? cleanVerification(item.verification) : null,
       }));
     }
     if (typeof saved.caseId === "string" && base.cases.some((item) => item.id === saved.caseId)) base.caseId = saved.caseId;
@@ -750,13 +828,15 @@
       const fields = C.FIELDS[name];
       return [name, { fields, rows: state[name].map((row) => fields.map((field) => row[field])) }];
     }));
-    write(cfg.storageKey, { v: 1, tables, sources: state.sources, targets: state.targets, settings: state.settings, filters: state.filters, tab: state.tab, week: state.week, groupBy: state.groupBy, typeFilter: state.typeFilter, example: state.example, deep: state.deep, cases: state.cases, caseId: state.caseId, draft: state.draft });
+    return write(cfg.storageKey, { v: 1, tables, sources: state.sources, targets: state.targets, settings: state.settings, filters: state.filters, tab: state.tab, week: state.week, groupBy: state.groupBy, typeFilter: state.typeFilter, example: state.example, deep: state.deep, cases: state.cases, caseId: state.caseId, draft: state.draft });
   };
   let saveTimer = null;
   const save = () => {
     clearTimeout(saveTimer);
     saveTimer = setTimeout(() => { saveTimer = null; persist(); }, 300);
   };
+  // Written now, not in a moment: true when the browser took it.
+  const persistNow = () => { clearTimeout(saveTimer); saveTimer = null; return persist(); };
   // A change still waiting is written before the page goes away.
   window.addEventListener("pagehide", () => { if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; persist(); } });
 
@@ -2062,17 +2142,164 @@
     node.classList.toggle("is-bad", Boolean(bad));
   };
   const caseById = (id) => state.cases.find((item) => item.id === id);
+  // An id is taken while a case, a tracker action or a register row still names it: a deleted investigation's id is
+  // not given to a new one while its actions are around.
+  const caseIdTaken = (id) => state.cases.some((item) => item.id === id)
+    || Boolean(Actions && Actions.all().some((action) => action.caseId === id))
+    || state.actions.some((action) => String(action.Notes || "").split(/\s+/).includes(id));
   const newCaseId = () => {
     const stamp = window.ToolKit.today().replace(/-/g, "");
     let n = state.cases.length + 1;
-    while (state.cases.some((item) => item.id === `INV-${stamp}-${String(n).padStart(3, "0")}`)) n += 1;
+    while (caseIdTaken(`INV-${stamp}-${String(n).padStart(3, "0")}`)) n += 1;
     return `INV-${stamp}-${String(n).padStart(3, "0")}`;
   };
   const snapshotOf = (numbers) => ({
     metric: numbers.metric.id, label: deepLabel(numbers.metric), from: numbers.range.from, to: numbers.range.to,
     DSP: state.filters.DSP, Shift: state.filters.Shift, Zone: state.filters.Zone, dim: state.deep.dim, segment: state.deep.segment,
     k: numbers.agg.k, n: numbers.agg.n, focus: numbers.focus.length, source: state.example ? tx("Example") : [...new Set(Object.values(state.sources))].join(", "),
+    // The sample floor the verification will use: the one in force when the evidence was recorded, not the one of
+    // the day the decision is made.
+    minN: state.deep.minN,
+    ...baseOf({ metric: numbers.metric.id, from: numbers.range.from, to: numbers.range.to, DSP: state.filters.DSP, Shift: state.filters.Shift, Zone: state.filters.Zone, dim: state.deep.dim, segment: state.deep.segment }),
   });
+  // The failure counted on the case's own rows over its before period, as recorded with the evidence (baseK / baseN):
+  // what a later re-import is compared with.
+  const baseOf = (snapshot) => {
+    const metric = DEEP_BY[snapshot.metric];
+    if (!metric) return {};
+    const w = C.beforeWindow(snapshot);
+    const agg = C.deepAggregate(C.caseRows(deepTable(metric), snapshot, w.from, w.to), metric, settingsFor(), present());
+    return { baseK: agg.k, baseN: agg.n };
+  };
+  // ---------- The case thread ----------
+  const TRACKER_WORDS = () => ({ problem: tx("Problem"), root: tx("Root cause"), hypothesis: tx("Working hypothesis, not verified"), check: tx("Failure rate before and after, same filters") });
+  // The case's action into the Action Tracker, once: the id of the tracker's action is kept on the case. Returns the
+  // action, "duplicate" when the same open action was already there (then linked), or null without the store.
+  const trackAction = (row) => {
+    if (!Actions) return null;
+    const item = C.caseToTracker(state.draft, row.id, TRACKER_WORDS());
+    const added = Actions.add(item);
+    if (added) { row.trackerId = added.id; return added; }
+    if (Actions.lastAdd === "duplicate") {
+      const twin = Actions.list().find((a) => Actions.isOpen(a) && a.title === item.title && a.source === item.source && a.caseId === row.id);
+      if (twin) row.trackerId = twin.id;
+      return "duplicate";
+    }
+    return null;
+  };
+  const trackerAction = (row) => (Actions && row?.trackerId ? Actions.list().find((a) => a.id === row.trackerId) || null : null);
+  const actionDone = (row) => {
+    const tracked = trackerAction(row);
+    if (tracked) return tracked.status === "done" || tracked.status === "verified";
+    const own = state.actions.find((a) => a.Action_ID === row.actionId);
+    return Boolean(own && own.Status === "Completed");
+  };
+  // A case whose tracker action is done waits for its verification: the stage says so by itself.
+  const syncCases = () => {
+    let changed = false;
+    state.cases.forEach((row) => {
+      const tracked = trackerAction(row);
+      if (!tracked) return;
+      let next = row.status;
+      if (["Open", "Investigating"].includes(row.status) && actionDone(row)) next = "Verification pending";
+      else if (row.status === "Verification pending" && !actionDone(row) && !row.verification?.status) next = "Investigating";
+      if (next === row.status) return;
+      row.status = next;
+      if (state.caseId === row.id) state.draft.status = next;
+      changed = true;
+    });
+    if (changed) save();
+  };
+  // The failure of the case measured before and after the change, on the rows of the case's own filters and segment.
+  const caseMeasure = (row) => {
+    const metric = DEEP_BY[row.snapshot?.metric];
+    if (!metric) return null;
+    const rows = deepTable(metric);
+    const settings = settingsFor();
+    const cols = present();
+    const last = rows.map((r) => r.Date).filter(Boolean).sort().at(-1) || "";
+    const beforeWin = C.beforeWindow(row.snapshot);
+    const before = C.deepAggregate(C.caseRows(rows, row.snapshot, beforeWin.from, beforeWin.to), metric, settings, cols);
+    const overlap = Boolean(row.verifyFrom && beforeWin.to && row.verifyFrom <= beforeWin.to);
+    const window = C.afterWindow(row.verifyFrom, last, beforeWin.to);
+    const after = window ? C.deepAggregate(C.caseRows(rows, row.snapshot, window.from, window.to, { ignoreWeek: true }), metric, settings, cols) : null;
+    // The floor saved with the evidence; a case from before it was saved uses the deep dive's.
+    const minN = Number.isInteger(row.snapshot.minN) && row.snapshot.minN >= 1 ? row.snapshot.minN : state.deep.minN;
+    const target = deepTarget(metric);
+    // What changed since the numbers were recorded: the evidence (baseK / baseN) for an open case, the decision's
+    // before, after and approved maximum for a decided one. Nothing here changes the decision.
+    const changes = [];
+    const count = (agg) => `${int.format(agg.k)} / ${int.format(agg.n)}`;
+    const v = row.verification;
+    if (v?.status) {
+      const afterThen = v.after?.from && v.after?.to ? C.deepAggregate(C.caseRows(rows, row.snapshot, v.after.from, v.after.to, { ignoreWeek: true }), metric, settings, cols) : null;
+      if (v.before && (v.before.k !== before.k || v.before.n !== before.n)) changes.push(tx("before was {old}, now {new}", { old: count(v.before), new: count(before) }));
+      if (afterThen && v.after && (v.after.k !== afterThen.k || v.after.n !== afterThen.n)) changes.push(tx("after was {old}, now {new}", { old: count(v.after), new: count(afterThen) }));
+      if ("target" in v && (v.target ?? null) !== (target ?? null)) changes.push(tx("approved maximum was {old}, now {new}", { old: v.target == null ? tx("none") : deepRate(v.target), new: target == null ? tx("none") : deepRate(target) }));
+    } else if (Number.isInteger(row.snapshot.baseN) && (row.snapshot.baseK !== before.k || row.snapshot.baseN !== before.n)) {
+      changes.push(tx("the evidence was recorded as {old} for the before period, the rows now give {new}", { old: `${int.format(row.snapshot.baseK)} / ${int.format(row.snapshot.baseN)}`, new: count(before) }));
+    }
+    return { metric, before, after, window, last, minN, overlap, beforeWin, changes, floorDiffers: minN !== state.deep.minN, target, verdict: C.verdict({ before, after, target, minN }) };
+  };
+  const windowText = (w, agg) => `${showDate(w.from)} – ${showDate(w.to)}: ${int.format(agg.k)} / ${int.format(agg.n)} (${deepRate(agg.rate)})`;
+  const verdictText = (m) => (m.verdict.status === "effective" ? tx("Effective: fewer failures after the change, with enough rows.") : m.verdict.status === "not-effective" ? tx("Not effective: the failure rate did not fall after the change.") : m.overlap ? tx("The after window must start after the before period ends ({date}): the two never share a day.", { date: showDate(m.beforeWin.to) }) : m.verdict.short === "before" ? tx("Too few eligible rows in the before period ({n} of {min}): the evidence is too thin to compare.", { n: int.format(m.before.n), min: int.format(m.minN) }) : !m.after ? tx("No rows after the change yet. Set the day the change took effect, then import the days that follow.") : tx("Too few eligible rows after the change ({n} of {min}): wait for more days before deciding.", { n: int.format(m.after.n), min: int.format(m.minN) }));
+  // The decision: close as verified effective, or reopen. Both write the numbers into the case, the tracker's action and
+  // the station's action register, so the three say the same thing.
+  const decide = (row, status) => {
+    const m = caseMeasure(row);
+    if (!m) { sayCase(tx("This investigation has no failure measured: it was imported without its metric."), true); return false; }
+    if (!actionDone(row)) { sayCase(tx("The action is not done yet. Verification comes after the change, not before."), true); return false; }
+    // The form's fields are the case's: what is written there when the decision is made is what the case keeps.
+    if (state.caseId === row.id) C.CASE_FIELDS.forEach((field) => { if (field !== "status") row[field] = String(state.draft[field] ?? ""); });
+    if (status === "effective") {
+      if (m.verdict.status !== "effective") { sayCase(verdictText(m), true); return false; }
+      if (!String(row.evidence || "").trim() || !String(row.root || "").trim() || row.rootStatus !== "Verified") { sayCase(tx("“Verified effective” needs a root cause verified on the floor or in the records, written evidence, the process failure and a verification result."), true); return false; }
+    } else if (m.verdict.status === "insufficient") { sayCase(verdictText(m), true); return false; }
+    const line = `${tx("Before")} ${windowText(m.beforeWin, m.before)} → ${tx("After")} ${windowText(m.window, m.after)}, ${deepPoints(m.verdict.change)}; ${tx("sample floor {n}", { n: int.format(m.minN) })}${m.target == null ? "" : `; ${tx("Approved maximum")} ≤ ${deepRate(m.target)}`}. ${status === "effective" ? tx("Verified effective") : tx("Not effective")}.`;
+    const today = window.ToolKit.today();
+    // The tracker first: its action carries the decision as its result. Nothing here changes if the browser cannot
+    // keep that write.
+    const tracked = trackerAction(row);
+    const was = tracked ? { status: tracked.status, result: tracked.result } : null;
+    if (tracked && !Actions.update(tracked.id, status === "effective" ? { status: "verified", result: line } : { result: line }, { byCase: true })) {
+      sayCase(tx("The Action Tracker could not be saved in this browser: nothing was changed. Free some space or unlock the tools, then decide again."), true);
+      return false;
+    }
+    const kept = { status: row.status, verifyResult: row.verifyResult, updated: row.updated, verification: row.verification };
+    const own = state.actions.find((a) => a.Action_ID === row.actionId);
+    const ownKept = own ? { Verification_Status: own.Verification_Status, Baseline: own.Baseline, Result: own.Result, Status: own.Status } : null;
+    row.verification = { status, decided: today, minN: m.minN, target: m.target, before: { from: m.beforeWin.from, to: m.beforeWin.to, k: m.before.k, n: m.before.n }, after: { from: m.window.from, to: m.window.to, k: m.after.k, n: m.after.n }, text: line };
+    row.status = status === "effective" ? "Verified effective" : "Reopened";
+    row.verifyResult = [String(row.verifyResult || "").trim(), line].filter(Boolean).join("\n");
+    row.updated = today;
+    if (own) { own.Verification_Status = status === "effective" ? "Effective" : "Not effective"; own.Baseline = deepRate(m.before.rate); own.Result = deepRate(m.after.rate); if (status === "effective") own.Status = "Completed"; }
+    if (!persistNow()) {
+      // The tower could not be saved: the tracker's action goes back to what it was, so the two never disagree.
+      Object.assign(row, kept);
+      if (own) Object.assign(own, ownKept);
+      if (tracked) Actions.update(tracked.id, was, { byCase: true });
+      sayCase(tx("This investigation could not be saved in this browser: nothing was changed. Free some space or unlock the tools, then decide again."), true);
+      return false;
+    }
+    if (state.caseId === row.id) { state.draft.status = row.status; state.draft.verifyResult = row.verifyResult; save(); }
+    return true;
+  };
+  const toolLink = (slug, params, label, className = "button-secondary") => {
+    const a = el("a", className, label);
+    const url = new URL(`../${slug}/`, location.href);
+    Object.entries(params).forEach(([key, value]) => { if (value) url.searchParams.set(key, value); });
+    a.href = url.href;
+    return a;
+  };
+  // The hand-off to and from 5 Whys stays inside the browser (sessionStorage, one note, read once): the address carries
+  // the case id alone, never the problem, the whys or the cause.
+  const HANDOFF = "sc-case-handoff";
+  const writeHandoff = (note) => { try { sessionStorage.setItem(HANDOFF, JSON.stringify({ ...note, at: new Date().toISOString() })); } catch { /* the page still opens on the case */ } };
+  const takeHandoff = (caseId) => {
+    let note = null;
+    try { note = JSON.parse(sessionStorage.getItem(HANDOFF)); sessionStorage.removeItem(HANDOFF); } catch { note = null; }
+    return isObject(note) && note.caseId === caseId && note.from === "five-whys" ? note : null;
+  };
   // Save the draft as a case; silent: no message when nothing is wrong.
   const saveCase = (numbers, silent) => {
     const errors = C.caseCheck(state.draft);
@@ -2094,8 +2321,10 @@
     save();
   };
   const caseRegisterRows = () => {
-    const head = ["Case_ID", "Last_Updated", ...C.CASE_FIELDS, "Action_ID", "Metric", "Period_Start", "Period_End", "Partner", "Shift", "Zone", "Dimension", "Segment", "Affected", "Eligible", "Source"];
-    return [head, ...state.cases.map((item) => [item.id, item.updated, ...C.CASE_FIELDS.map((field) => item[field] ?? ""), item.actionId || "", item.snapshot?.label || "", item.snapshot?.from || "", item.snapshot?.to || "", item.snapshot?.DSP || "", item.snapshot?.Shift || "", item.snapshot?.Zone || "", item.snapshot?.dim || "", item.snapshot?.segment || "", item.snapshot?.k ?? "", item.snapshot?.n ?? "", item.snapshot?.source || ""])];
+    const head = ["Case_ID", "Last_Updated", ...C.CASE_FIELDS, "Action_ID", "Metric", "Period_Start", "Period_End", "Partner", "Shift", "Zone", "Dimension", "Segment", "Affected", "Eligible", "Source",
+      "Tracker_ID", "Change_From", "After_Start", "After_End", "After_Affected", "After_Eligible", "Verdict", "Decided", "Sample_Floor"];
+    return [head, ...state.cases.map((item) => [item.id, item.updated, ...C.CASE_FIELDS.map((field) => item[field] ?? ""), item.actionId || "", item.snapshot?.label || "", item.snapshot?.from || "", item.snapshot?.to || "", item.snapshot?.DSP || "", item.snapshot?.Shift || "", item.snapshot?.Zone || "", item.snapshot?.dim || "", item.snapshot?.segment || "", item.snapshot?.k ?? "", item.snapshot?.n ?? "", item.snapshot?.source || "",
+      item.trackerId || "", item.verifyFrom || "", item.verification?.after?.from || "", item.verification?.after?.to || "", item.verification?.after?.k ?? "", item.verification?.after?.n ?? "", item.verification?.status || "", item.verification?.decided || "", item.snapshot?.minN ?? ""])];
   };
   const downloadText = (name, body, type) => {
     const link = el("a");
@@ -2123,6 +2352,10 @@
         if (!C.CASE_STATUS.includes(row.status)) row.status = "Open";
         if (!C.ROOT_STATUS.includes(row.rootStatus)) row.rootStatus = "Hypothesis";
         row.deadline = parseDate(row.deadline);
+        if (get("Tracker_ID").trim()) row.trackerId = get("Tracker_ID").trim();
+        if (Number.isInteger(Number(get("Sample_Floor"))) && Number(get("Sample_Floor")) >= 1) row.snapshot.minN = Number(get("Sample_Floor"));
+        if (parseDate(get("Change_From"))) row.verifyFrom = parseDate(get("Change_From"));
+        if (["effective", "not-effective"].includes(get("Verdict").trim())) row.verification = { status: get("Verdict").trim(), decided: parseDate(get("Decided")) || "", before: { from: parseDate(get("Period_Start")) || "", to: parseDate(get("Period_End")) || "", k: Number(get("Affected")) || 0, n: Number(get("Eligible")) || 0 }, after: { from: parseDate(get("After_Start")) || "", to: parseDate(get("After_End")) || "", k: Number(get("After_Affected")) || 0, n: Number(get("After_Eligible")) || 0 }, text: get("verifyResult") };
         const old = caseById(id);
         if (old) state.cases[state.cases.indexOf(old)] = { ...old, ...row };
         else state.cases.push(row);
@@ -2154,6 +2387,7 @@
   };
   const renderDeep = () => {
     const out = [];
+    syncCases();
     const hasRows = state.deliveries.length || state.routes.length;
     if (!hasRows) return [emptyPanel(hasData() ? tx("The deep dive needs the delivery or the route table.") : tx("No data yet. Load the example to see the control tower at work, or import your own files."))];
     const numbers = deepNumbers();
@@ -2378,15 +2612,21 @@
       if (!C.capaReady(state.draft)) { sayCase(tx("The action needs a containment, corrective or preventive action, an owner and a deadline."), true); return; }
       const row = saveCase(deepNumbers(), true);
       if (!row) return;
-      if (row.actionId && state.actions.some((a) => a.Action_ID === row.actionId)) { sayCase(tx("{id} is already linked to action {action}. Update it under Actions instead of adding another.", { id: row.id, action: row.actionId }), true); return; }
+      const reopened = row.status === "Reopened" && row.verification?.status === "not-effective";
+      if (row.actionId && state.actions.some((a) => a.Action_ID === row.actionId) && !reopened) { sayCase(tx("{id} is already linked to action {action}. Update it under Actions instead of adding another.", { id: row.id, action: row.actionId }), true); return; }
       const id = nextActionId();
       state.actions.push(C.caseToAction(state.draft, id, view().asOf, row.id, { hypothesis: tx("Working hypothesis, not verified"), investigation: tx("Investigation") }));
       state.columns.actions = [...C.FIELDS.actions];
       row.actionId = id;
+      // A reopened case starts a new verification with its new action.
+      if (reopened) { row.verification = null; row.verifyFrom = ""; row.status = "Investigating"; state.draft.status = "Investigating"; }
       openAction = state.actions.length - 1;
+      const tracked = trackAction(row);
       save();
       renderPanel();
-      sayCase(tx("Action {action} created and linked to {id}. Close it only after the result shows it worked.", { action: id, id: row.id }));
+      if (tracked === "duplicate") sayCase(tx("Action {action} created and linked to {id}; the Action Tracker already had this open action, it is linked.", { action: id, id: row.id }));
+      else if (tracked) sayCase(tx("Action {action} created, linked to {id} and added to the Action Tracker with its owner and deadline. Close it only after the result shows it worked.", { action: id, id: row.id }));
+      else sayCase(tx("Action {action} created and linked to {id}. Close it only after the result shows it worked.", { action: id, id: row.id }));
     });
     const fresh = el("button", "button-ghost", tx("New investigation"));
     fresh.type = "button";
@@ -2403,6 +2643,94 @@
     importLabel.append(importInput);
     caseButtons.append(saveButton, capa, fresh, register, importLabel);
     work.append(caseButtons);
+    // The thread of the open case: 5 Whys for the cause, the tracker for the action, the handover for the shift, and
+    // the verification from the same failure before and after.
+    const current = state.caseId ? caseById(state.caseId) : null;
+    const links = el("div", "tool-actions cx-case-links");
+    const whysLink = toolLink("five-whys", { case: state.caseId }, tx("Work the whys in 5 Whys"));
+    whysLink.addEventListener("click", () => { if (state.caseId) writeHandoff({ caseId: state.caseId, from: "cx-control-tower", problem: String(state.draft.problem || state.draft.title || "").trim().slice(0, 2000) }); });
+    if (!state.caseId) { whysLink.setAttribute("aria-disabled", "true"); whysLink.addEventListener("click", (event) => { event.preventDefault(); sayCase(tx("Save the investigation first, so the whys come back to it."), true); }); }
+    links.append(whysLink);
+    const tracked = trackerAction(current);
+    if (current?.actionId || tracked) {
+      links.append(toolLink("action-tracker", {}, tx("Open the Action Tracker")));
+      const actionText = C.caseToTracker(state.draft, state.caseId).title;
+      if (actionText) {
+        // The issue, its owner and its date go to the handover inside the browser (the same note as for 5 Whys); the
+        // address names the case alone.
+        const handoverLink = toolLink("shift-handover", { case: state.caseId }, tx("Put the action on the shift handover"));
+        handoverLink.addEventListener("click", () => writeHandoff({ caseId: state.caseId, from: "cx-control-tower", issue: `${state.caseId}: ${actionText}`.slice(0, 500), owner: String(state.draft.owner || "").trim().slice(0, 120), due: parseDate(String(state.draft.deadline || "")) || "" }));
+        links.append(handoverLink);
+      }
+    }
+    work.append(links);
+    if (current && current.snapshot?.metric) {
+      const verify = el("div", "cx-verify");
+      verify.dataset.cxVerify = "";
+      verify.append(el("h4", null, tx("Verification: the same failure before and after the change")));
+      const actionLine = el("p", "dl-panel-note");
+      if (tracked) actionLine.textContent = `${tx("Action in the tracker")}: ${tracked.title} · ${tracked.owner || tx("no owner")} · ${tracked.due ? showDate(tracked.due) : tx("no deadline")} · ${({ open: tx("Open"), doing: tx("In progress"), done: tx("Done"), verified: tx("Verified") })[tracked.status]}${tracked.closed ? ` ${showDate(tracked.closed)}` : ""}`;
+      else if (current.actionId) actionLine.textContent = `${tx("Action")} ${current.actionId} ${tx("in the station's register; not in the Action Tracker.")}`;
+      else actionLine.textContent = tx("No action yet: create the linked action first.");
+      verify.append(actionLine);
+      const fromField = el("div", "field");
+      const fromLab = el("label", null, tx("Day the change took effect"));
+      fromLab.htmlFor = "cx-verify-from";
+      const fromInput = el("input");
+      fromInput.id = "cx-verify-from";
+      fromInput.type = "date";
+      fromInput.value = current.verifyFrom || (tracked && tracked.closed) || "";
+      fromInput.addEventListener("change", () => { current.verifyFrom = parseDate(fromInput.value) || ""; save(); renderPanel(); });
+      fromField.append(fromLab, fromInput);
+      verify.append(fromField);
+      if (!current.verifyFrom && tracked?.closed) { current.verifyFrom = tracked.closed; save(); }
+      const m = caseMeasure(current);
+      const decided = current.verification?.status ? current.verification : null;
+      if (m && !decided) {
+        const cards = el("div", "dl-stats cx-verify-stats");
+        cards.append(
+          stat(tx("Before"), deepRate(m.before.rate), `${showDate(m.beforeWin.from)} – ${showDate(m.beforeWin.to)} · ${int.format(m.before.k)} / ${int.format(m.before.n)} ${tx("eligible")}`),
+          stat(tx("After"), m.after ? deepRate(m.after.rate) : "–", m.window ? `${showDate(m.window.from)} – ${showDate(m.window.to)} · ${int.format(m.after.k)} / ${int.format(m.after.n)} ${tx("eligible")}` : tx("No window after the change yet.")),
+          stat(tx("Change"), deepPoints(m.verdict.change), m.target == null ? tx("No approved maximum") : `${tx("Approved maximum")} ≤ ${deepRate(m.target)}`),
+        );
+        verify.append(cards);
+        const verdictLine = el("p", `dl-panel-note cx-verdict is-${m.verdict.status}`, verdictText(m));
+        verdictLine.dataset.cxVerdict = m.verdict.status;
+        verify.append(verdictLine);
+        verify.append(el("p", "dl-panel-note", `${tx("Same partner, shift, zone and segment as the investigation; each rate over its own eligible rows; sample floor {n}.", { n: int.format(m.minN) })} ${current.snapshot.segment ? segmentText(current.snapshot.dim, current.snapshot.segment) : tx("All segments")}.${current.snapshot.dim === "Week" && current.snapshot.segment ? ` ${tx("The week is the before period; the rows after the change are every row of the same filters.")}` : ""}${m.floorDiffers ? ` ${tx("The floor is the one saved with the investigation; the deep dive above now uses {n}.", { n: int.format(state.deep.minN) })}` : ""}`));
+      }
+      if (decided) {
+        // The decision as it was made: its own numbers, not today's. The live rows are compared with them below.
+        const cards = el("div", "dl-stats cx-verify-stats");
+        const rate = (w) => (w && w.n ? deepRate(w.k / w.n) : "–");
+        cards.append(
+          stat(tx("Before"), rate(decided.before), `${showDate(decided.before.from)} – ${showDate(decided.before.to)} · ${int.format(decided.before.k)} / ${int.format(decided.before.n)} ${tx("eligible")}`),
+          stat(tx("After"), rate(decided.after), `${showDate(decided.after.from)} – ${showDate(decided.after.to)} · ${int.format(decided.after.k)} / ${int.format(decided.after.n)} ${tx("eligible")}`),
+          stat(tx("Change"), decided.before?.n && decided.after?.n ? deepPoints(decided.after.k / decided.after.n - decided.before.k / decided.before.n) : "–", decided.target == null ? tx("No approved maximum") : `${tx("Approved maximum")} ≤ ${deepRate(decided.target)}`),
+        );
+        verify.append(cards);
+        verify.append(el("p", `dl-panel-note cx-decided is-${decided.status}`, `${tx("Decided")} ${showDate(decided.decided)}: ${decided.text}`));
+      }
+      if (m && m.changes.length) {
+        const changed = el("p", "dl-warning cx-changed", decided
+          ? tx("Since the decision on {date} the rows or the approved maximum have changed: {changes}. The decision stands until you decide again.", { date: showDate(decided.decided), changes: m.changes.join("; ") })
+          : tx("The rows of the before period are not what the evidence recorded: {changes}. Check the import before deciding.", { changes: m.changes.join("; ") }));
+        changed.dataset.cxChanged = "";
+        verify.append(changed);
+      }
+      const decideButtons = el("div", "tool-actions");
+      const closeButton = el("button", "button-primary", tx("Close: verified effective"));
+      closeButton.type = "button";
+      closeButton.dataset.cxClose = "";
+      closeButton.addEventListener("click", () => { if (decide(current, "effective")) { renderPanel(); sayCase(tx("{id} closed as verified effective; the action is verified in the tracker.", { id: current.id })); } });
+      const reopenButton = el("button", "button-secondary", tx("Reopen: not effective"));
+      reopenButton.type = "button";
+      reopenButton.dataset.cxReopen = "";
+      reopenButton.addEventListener("click", () => { if (decide(current, "not-effective")) { renderPanel(); sayCase(tx("{id} reopened: the action stays done in the tracker, the case needs a new action.", { id: current.id })); } });
+      decideButtons.append(closeButton, reopenButton);
+      verify.append(decideButtons);
+      work.append(verify);
+    }
     out.push(work);
     // Saved cases
     const saved = section(tx("Saved investigations"), tx("Kept in this browser. Export the register as a backup before you change browser or device."));
@@ -2457,6 +2785,32 @@
   // A first visit opens on the example station, so the control tower is visible at once (the flag says so).
   // Nothing is written to the browser until the visitor acts.
   if (!hasData() && firstVisit(cfg.storageKey)) showExample();
+  // Another page opens an investigation by its id (the Action Tracker, 5 Whys with the whys it worked: ?case=INV-…
+  // &why1=…&root=…). The whys fill the empty fields of the case; the address is cleaned so a reload changes nothing.
+  const openFromAddress = () => {
+    const params = new URLSearchParams(location.search);
+    const id = (params.get("case") || "").trim();
+    if (!id) return;
+    const row = caseById(id);
+    const note = takeHandoff(id);
+    if (row) {
+      const whys = Array.isArray(note?.whys) ? note.whys : [];
+      const incoming = { problem: typeof note?.problem === "string" ? note.problem : "", root: typeof note?.root === "string" ? note.root : "" };
+      whys.slice(0, 5).forEach((why, i) => { incoming[`why${i + 1}`] = typeof why === "string" ? why : ""; });
+      const merged = C.applyWhys(Object.fromEntries(C.CASE_FIELDS.map((field) => [field, row[field] ?? ""])), incoming);
+      merged.filled.forEach((field) => { row[field] = merged.draft[field]; });
+      if (merged.filled.length) row.updated = window.ToolKit.today();
+      state.caseId = id;
+      state.draft = merged.draft;
+      state.tab = "deep";
+      if (DEEP_BY[row.snapshot?.metric]) state.deep.metric = row.snapshot.metric;
+      save();
+      say(merged.filled.length ? tx("{id} opened; {n} fields filled from 5 Whys.", { id, n: int.format(merged.filled.length) }) + (merged.kept.length ? ` ${tx("{n} fields already written here were kept.", { n: int.format(merged.kept.length) })}` : "") : tx("{id} opened.", { id }));
+    } else say(tx("Investigation {id} is not in this browser. Import the case register that holds it.", { id }));
+    params.delete("case");
+    history.replaceState(null, "", `${location.pathname}${params.size ? `?${params}` : ""}${location.hash}`);
+  };
+  openFromAddress();
   render();
   app.classList.add("is-ready");
 })();
