@@ -128,4 +128,27 @@ dhe kalojnë pas korrigjimit. Vetëm shkaku, pa funksione të reja.
 | 2 | Hetim nga segmenti ISO Week, kundërmasa javën tjetër | `caseRows` e zbatonte javën edhe mbi rreshtat pas: periudha pas kishte 0 rreshta, matja e pamundur; periudha para ishte gjithë intervali, jo java | `beforeWindow`: për segment jave, periudha para është vetë java (brenda intervalit të snapshot-it); rreshtat pas nuk filtrohen nga java (`ignoreWeek`); mbivendosja matet ndaj fundit të javës; teksti i kutisë e shpjegon |
 | 3 | Targeti i miratuar ose të dhënat historike ndryshojnë pas hetimit | Kutia rillogariste gjithçka live: pas një riimporti ose një targeti të ri, numrat e shfaqur dhe verdikti live mund të kundërshtonin vendimin e regjistruar pa asnjë shenjë; targeti nuk ruhej me vendimin | Vendimi ruan numrat e vet dhe targetin e ditës (`verification.target`); një rast i vendosur shfaq krahasimin e regjistruar, jo atë të sotmin, dhe një paralajmërim `data-cx-changed` numëron çdo ndryshim ("before was 40 / 3 375, now …; approved maximum was 0,80 %, now 0,10 %"); vendimi nuk ndryshon vetë. Për një rast të hapur, evidenca ruhet si `snapshot.baseK/baseN` dhe një riimport që e ndryshon periudhën para shënohet para vendimit |
 
-REZULTATET-9
+## 10. Rezultatet e provës pas shqyrtimeve
+
+Në degë, commit `6c427084` (kodi i fundit; pas tij vetëm ky raport), me ndërtim të plotë (`npm run build`, 838 faqe):
+
+| Provë | Rezultat |
+| --- | --- |
+| `npm test` (node --test, 1 379 teste; të reja në këtë degë: 9 në `case-thread`, 9 në `case-integrity`, 3 në `case-kpi`, 1 i përshtatur në `action-tracker`) | 1 379 kalojnë, 0 dështojnë |
+| Gjithë suita e shfletuesit (`npx playwright test`, 6 projekte, 212 teste; `case-flow.spec.mjs` nëpër tower → 5 Whys → tower → tracker → tower → handover, rifreskim, rikthim nga skedari i punës) | 212 kalojnë, 0 dështojnë, 20,3 min |
+| CI e PR-it | kokat e ndërmjetme `fa3096e2`, `249b7e93`, `722f2c46` dështuan vetëm te `case-flow.spec.mjs` sepse spec-i i vjetër klikonte "verified" te një veprim rasti, opsion që tani është i grizuar me qëllim; `6c427084` e ndreq spec-in (asnjë ndryshim kodi); rezultati i CI-së mbi të në përshkrimin e PR-it |
+
+Çdo test i ri i shqyrtimeve (seksionet 8 dhe 9) u ekzekutua edhe kundër commit-it para korrigjimit të vet, në një
+worktree, dhe dështoi aty: 6 nga 6 te `case-integrity` (kundër `119dca57`), 3 nga 3 te `case-kpi` (kundër `249b7e93`).
+
+## 11. Kufizimet reale që mbeten
+
+- Rrjedha matet nga të dhënat e CX Control Tower; jashtë tij (handover, 5 Whys pa të dhëna në tower) verifikimi mbetet
+  tekstual.
+- Krahasimi para/pas është i përshkruar, jo shkakësor: periudha, filtra, segment dhe kufi mostre të shkruar e bëjnë
+  të lexueshëm, jo provë të shkakut.
+- Shënimi `sessionStorage` jeton në të njëjtin shfletues dhe skedë-grup; një lidhje e hapur në pajisje tjetër hap
+  rastin (ose faqen) pa të dhënat, dhe faqja e thotë.
+- Evidenca e një rasti të ruajtur para kësaj faze s'ka `baseK/baseN` as `target` të vendimit: për to kutia nuk mund të
+  thotë çfarë ndryshoi; vendimi mbetet ai që është.
+- Vendimi mbetet njerëzor; numrat mund ta ndalojnë, jo ta marrin.
