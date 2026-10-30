@@ -248,3 +248,86 @@ test('German and Albanian: the action, the messages and the log tag in the page\
     assert.equal(w.document.querySelector('.ri-maint').dataset.maintenance, '1/0/0/0/0');
   }
 });
+
+test('the link that cannot be saved: the actions are in the tracker, the faults read as not sent at once, the message is honest, and a resend links the same actions without a reload', () => {
+  // (a) While saving an inspection: the row is written, the action is written, the write that carries the link fails.
+  const w = load({ storage: { 'sc-room-inspection': SETUP } });
+  const restore = refusing(w, 'sc-room-inspection', { when: (value) => value.includes('"bathroom-5":true') });
+  inspect(w, '412');
+  assert.equal(actions(w).length, 1, 'the action is in the tracker');
+  const row = saved(w).rows[0];
+  assert.deepEqual(plain(row.sent), {}, 'nothing linked in storage');
+  assert.match(status(w), /could not save their link to the inspection/);
+  assert.doesNotMatch(status(w), /added to actions/, 'no false success');
+  // In memory too: the log says not sent and the results offer the resend, without a reload.
+  assert.equal(w.document.querySelector('.ri-maint').dataset.maintenance, '0/0/0/0/1');
+  const send = [...w.document.querySelectorAll('button')].find((b) => /maintenance items to actions/.test(b.textContent));
+  assert.ok(send, 'the resend is offered at once');
+  // Still failing: the same state, the same honesty.
+  click(w, send);
+  assert.equal(actions(w).length, 1);
+  assert.deepEqual(plain(saved(w).rows[0].sent), {});
+  assert.equal(w.document.querySelector('.ri-maint').dataset.maintenance, '0/0/0/0/1');
+  assert.match(w.document.querySelector('[data-log-status]').textContent, /could not save their link/);
+  // The storage is back: the same action is linked, nothing added.
+  restore();
+  click(w, [...w.document.querySelectorAll('button')].find((b) => /maintenance items to actions/.test(b.textContent)));
+  assert.equal(actions(w).length, 1);
+  assert.equal(actions(w)[0].id, `ri-${row.id}-bathroom-5`);
+  assert.equal(saved(w).rows[0].sent['bathroom-5'], true);
+  assert.equal(w.document.querySelector('.ri-maint').dataset.maintenance, '1/0/0/0/0');
+  assert.match(w.document.querySelector('[data-log-status]').textContent, /1 were already in the Action Tracker/);
+  // (b) During a manual send: the fault was never sent (the tracker refused at first); now the tracker takes it, the link does not.
+  const w2 = load({ storage: { 'sc-room-inspection': SETUP } });
+  let block = refusing(w2, 'sc-actions');
+  inspect(w2, '413');
+  block();
+  assert.equal(actions(w2).length, 0);
+  block = refusing(w2, 'sc-room-inspection', { when: (value) => value.includes('"bathroom-5":true') });
+  click(w2, [...w2.document.querySelectorAll('button')].find((b) => /maintenance items to actions/.test(b.textContent)));
+  assert.equal(actions(w2).length, 1, 'the action went in');
+  assert.deepEqual(plain(saved(w2).rows[0].sent), {}, 'the link did not');
+  assert.match(w2.document.querySelector('[data-log-status]').textContent, /could not save their link/);
+  assert.equal(w2.document.querySelector('.ri-maint').dataset.maintenance, '0/0/0/0/1');
+  block();
+  click(w2, [...w2.document.querySelectorAll('button')].find((b) => /maintenance items to actions/.test(b.textContent)));
+  assert.equal(actions(w2).length, 1, 'no duplicate');
+  assert.equal(saved(w2).rows[0].sent['bathroom-5'], true);
+});
+
+test('an action under the same id but another reference or tool is a conflict: the fault is not marked sent, nothing is added, and the page says so', () => {
+  // The fault could not be sent at first (the tracker refused), so its id is known before anything is in the tracker.
+  const w = load({ storage: { 'sc-room-inspection': SETUP } });
+  let block = refusing(w, 'sc-actions');
+  inspect(w, '412');
+  block();
+  const row = saved(w).rows[0];
+  const id = `ri-${row.id}-bathroom-5`;
+  const send = () => click(w, [...w.document.querySelectorAll('button')].find((b) => /maintenance items to actions/.test(b.textContent)));
+  // (a) The same id held by another reference of this tool.
+  w.ActionsStore.replaceAll([{ id, title: 'Room 999: Something else', source: 'room-inspection', ref: 'otherrow|bathroom-5', status: 'open', created: '2026-10-20' }]);
+  send();
+  assert.equal(actions(w).length, 1, 'nothing added');
+  assert.deepEqual(plain(saved(w).rows[0].sent), {}, 'not marked sent');
+  assert.match(w.document.querySelector('[data-log-status]').textContent, /not marked as sent: the Action Tracker holds another action under the same id/);
+  assert.equal(w.document.querySelector('.ri-maint').dataset.maintenance, '0/0/0/0/1');
+  assert.ok([...w.document.querySelectorAll('button')].find((b) => /maintenance items to actions/.test(b.textContent)), 'the fault stays under Open maintenance');
+  // (b) The same id held by another tool.
+  w.ActionsStore.replaceAll([{ id, title: 'Room 412: Tap, drain and flush work', source: 'manual', ref: `${row.id}|bathroom-5`, status: 'open', created: '2026-10-20' }]);
+  send();
+  assert.deepEqual(plain(saved(w).rows[0].sent), {});
+  assert.match(w.document.querySelector('[data-log-status]').textContent, /another action under the same id/);
+  // (c) The same id, this tool, no ref (an older page's update dropped it): this defect's action, linked.
+  w.ActionsStore.replaceAll([{ id, title: 'Room 412: Tap, drain and flush work', source: 'room-inspection', status: 'done', result: 'fixed', closed: '2026-10-22', created: '2026-10-20' }]);
+  send();
+  assert.equal(actions(w).length, 1);
+  assert.equal(saved(w).rows[0].sent['bathroom-5'], true);
+  assert.equal(w.document.querySelector('.ri-maint').dataset.maintenance, '0/1/0/0/0');
+  // (d) Another id, this tool, this ref (an action made on another device before ids were deterministic): linked by ref.
+  const again = saved(w); again.rows[0].sent = {};
+  w.localStorage.setItem('sc-room-inspection', JSON.stringify(again));
+  const w2 = load({ storage: { ...all(w), 'sc-actions': JSON.stringify({ rows: [{ id: 'a9z8y7', title: 'Room 412: Tap, drain and flush work', source: 'room-inspection', ref: `${row.id}|bathroom-5`, status: 'open', created: '2026-10-20' }] }) } });
+  click(w2, [...w2.document.querySelectorAll('button')].find((b) => /maintenance items to actions/.test(b.textContent)));
+  assert.equal(actions(w2).length, 1, 'found by ref, nothing added');
+  assert.equal(saved(w2).rows[0].sent['bathroom-5'], true);
+});

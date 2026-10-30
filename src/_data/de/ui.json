@@ -7857,5 +7857,7 @@
   "{n} verified": "{n} geprüft",
   "{n} not sent": "{n} nicht gesendet",
   "This browser could not save the inspection: nothing was sent to actions. Free some space or unlock the tools, then save again.": "Dieser Browser konnte die Kontrolle nicht speichern: nichts wurde an die Maßnahmen gesendet. Schaffen Sie Platz oder entsperren Sie die Tools, dann speichern Sie erneut.",
-  "{n} sent": "{n} gesendet"
+  "{n} sent": "{n} gesendet",
+  "{n} actions are in the Action Tracker, but this browser could not save their link to the inspection. They stay under Open maintenance; send them again and the same actions are linked, not added twice.": "{n} Maßnahmen stehen im Maßnahmen-Tracker, aber dieser Browser konnte ihre Verknüpfung mit der Kontrolle nicht speichern. Sie bleiben unter Offene Instandhaltung; senden Sie sie erneut, dann werden dieselben Maßnahmen verknüpft, nicht doppelt angelegt.",
+  "{n} not marked as sent: the Action Tracker holds another action under the same id (another reference or tool). Check it there.": "{n} nicht als gesendet markiert: der Maßnahmen-Tracker hält unter derselben ID eine andere Maßnahme (andere Referenz oder anderes Tool). Prüfen Sie sie dort."
 }

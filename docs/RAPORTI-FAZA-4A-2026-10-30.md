@@ -61,8 +61,8 @@ ruaj, mesazhet, shenja e mirëmbajtjes në log), 6 tekste DE/SQ, `docs/DATA-FORM
 
 ## 6. Testet e pranimit
 
-`tests/room-inspection-identity.test.cjs` (7 teste; që të shtatë dështojnë në `90f7d524`, provuar në worktree: 1–4
-janë defektet, 5–7 sjellje që kodi i vjetër s'e kishte):
+`tests/room-inspection-identity.test.cjs` (9 teste; 1–7 dështojnë në `90f7d524`, provuar në worktree: 1–4 janë
+defektet, 5–7 sjellje që kodi i vjetër s'e kishte; 8–9 u shtuan pas shqyrtimit të diff-it, §7a):
 
 1. Dy defekte me tekst identik → dy veprime, id `ri-<row.id>-bathroom-5` dhe `ref` të vetat, `sent` boolean.
 2. Ridërgim i të njëjtit defekt (lidhje e humbur) → asnjë kopje, rilidhur, mesazh "already in the Action Tracker";
@@ -74,25 +74,26 @@ janë defektet, 5–7 sjellje që kodi i vjetër s'e kishte):
 5. Të dhëna të vjetra: `sent: true` lexohet si i dërguar, veprimi i vjetër pa `ref`/id i paprekur, asgjë për të dërguar.
 6. Team Sync me dy pajisje (shih §3).
 7. DE/SQ: titulli "Zimmer 412: …" / "Dhoma 412: …", mesazhet dhe shenja e logut në gjuhën e faqes.
+8. Lidhja që nuk ruhet, gjatë ruajtjes së inspektimit dhe gjatë dërgimit manual: veprimi në tracker, defekti "not sent"
+   menjëherë, mesazh i sinqertë, riprovim pa reload që lidh të njëjtin veprim.
+9. Konflikt identiteti: id e njëjtë me referencë tjetër ose mjet tjetër → i padërguar, asgjë e shtuar, mesazh; id e njëjtë
+   pa `ref` → i lidhur; id tjetër me `ref` të njëjtë → i lidhur sipas `ref`.
 
 `tests/browser/room-inspection-actions.spec.mjs` (Chromium): inspektim real me defekt mirëmbajtje → veprim me
 identitet → inspektim i dytë me të njëjtat fjalë → dy veprime në tracker → lidhje e humbur → ridërgim pa kopje.
 
 ## 7. Rezultatet
 
-Dega pas bashkimit të `origin/main` `e22f3bdd` (PR #368, dy skedarë CSS të logos, identikë me `main` pas bashkimit;
-commit-i `02ca5aa2` i ruajtur, merge commit `d7bc0225`, pa rebase, pa force-push), me ndërtim të plotë (838 faqe):
+REZULTATET-FINAL
 
-| Provë | Para bashkimit (`02ca5aa2`) | Pas bashkimit (`d7bc0225`) |
-| --- | --- | --- |
-| `npm test` (1 386 teste; 7 të reja në `room-inspection-identity.test.cjs`) | 1 386 kalojnë, 0 dështojnë | 1 386 kalojnë, 0 dështojnë |
-| Gjithë suita e shfletuesit (6 projekte, 213 teste; `room-inspection-actions.spec.mjs` i ri) | 213 kalojnë, 0 dështojnë, 18,3 min | 213 kalojnë, 0 dështojnë, 17,4 min |
+## 7a. Shqyrtimi i autorit mbi diff-in: dy korrigjime të fokusuara
 
-Kontrollet e kërkuara, me testin që i provon: dublikatë `source + ref` në çdo status (identity 2, store-i: open, done,
-verified); `sent` boolean i përputhshëm (identity 1, 5); asnjë detyrë e humbur kur ruajtja dështon (identity 3, 4);
-rregullat `byCase` të Pilotit 1 të paprekura (`case-thread`, `case-integrity`, `case-kpi`, 21 teste, kalojnë pa
-ndryshim); procesi i ri i verifikimit (4B) **nuk** është aktivizuar: asnjë `bySource`, asnjë thirrje `Actions.update`
-nga Room Inspection.
+| # | Rasti | PARA (`ad550a26`) | PAS |
+| --- | --- | --- | --- |
+| 1 | Ruajtja e dytë (lidhja `sent`) | `changed()` ruante pa kontrolluar rezultatin: me veprimin në `sc-actions` dhe lidhjen e paruajtur, kujtesa mbante `sent: true`, mesazhi thoshte sukses dhe riprovimi ishte i mundur vetëm pas reload | `saveLinks(out)`: kur `write` dështon, defektet e shënuara nga kjo thirrje çshënohen në kujtesë (`marked`), logu i tregon "not sent", butoni "Send … to actions" shfaqet menjëherë, mesazhi thotë "veprimet janë në tracker, lidhja nuk u ruajt; dërgoji sërish dhe lidhen të njëjtat"; riprovimi gjen veprimin sipas id/ref dhe e lidh pa kopje. E njëjta rrjedhë në ruajtjen e inspektimit dhe në dërgimin manual (test 8a, 8b) |
+| 2 | Validimi i dublikatës | `lastAdd === "duplicate"` mjaftonte për `sent: true`, edhe kur id-ja i përkiste një referencë ose mjeti tjetër | Veprimi ekzistues gjendet sipas id ose `ref` dhe pranohet vetëm me `source === "room-inspection"` dhe `ref` të pritshme (ose pa `ref`, rasti i faqes së vjetër që e hoqi); ndryshe `conflict`: defekti mbetet i padërguar, asgjë nuk shtohet, mesazhi emërton konfliktin (test 9a–d: id e njëjtë me referencë tjetër, me mjet tjetër, pa `ref`, dhe id tjetër me `ref` të njëjtë) |
+
+Pa prekje të Team Sync, Worker, Cloudflare, formatit boolean të `sent`, `byCase` apo procesit Verified (4B).
 
 ## 8. Rreziqet e mbetura
 

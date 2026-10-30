@@ -7857,5 +7857,7 @@
   "{n} verified": "{n} të verifikuara",
   "{n} not sent": "{n} të padërguara",
   "This browser could not save the inspection: nothing was sent to actions. Free some space or unlock the tools, then save again.": "Ky shfletues nuk e ruajti inspektimin: asgjë nuk u dërgua te veprimet. Liro hapësirë ose zhblloko mjetet, pastaj ruaje sërish.",
-  "{n} sent": "{n} të dërguara"
+  "{n} sent": "{n} të dërguara",
+  "{n} actions are in the Action Tracker, but this browser could not save their link to the inspection. They stay under Open maintenance; send them again and the same actions are linked, not added twice.": "{n} veprime janë në Gjurmuesin e Veprimeve, por ky shfletues nuk e ruajti lidhjen e tyre me inspektimin. Mbeten te Mirëmbajtje e hapur; dërgoji sërish dhe lidhen të njëjtat veprime, pa u shtuar dy herë.",
+  "{n} not marked as sent: the Action Tracker holds another action under the same id (another reference or tool). Check it there.": "{n} nuk u shënuan si të dërguara: Gjurmuesi i Veprimeve mban një veprim tjetër nën të njëjtën id (referencë ose mjet tjetër). Kontrolloje atje."
 }
