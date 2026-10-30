@@ -84,7 +84,21 @@ identitet → inspektim i dytë me të njëjtat fjalë → dy veprime në tracke
 
 ## 7. Rezultatet
 
-REZULTATET-FINAL
+Dega pas bashkimit të `origin/main` `e22f3bdd` (PR #368, dy skedarë CSS të logos, identikë me `main`; commit-i
+`02ca5aa2` i ruajtur, merge commit `d7bc0225`, pa rebase, pa force-push), pastaj dy korrigjimet e §7a (`dab63149`).
+Çdo rresht me ndërtim të plotë (838 faqe):
+
+| Provë | `02ca5aa2` (para bashkimit) | `d7bc0225` (pas bashkimit) | `dab63149` (korrigjimet e §7a) |
+| --- | --- | --- | --- |
+| `npm test` | 1 386 kalojnë, 0 dështojnë | 1 386 kalojnë, 0 dështojnë | 1 388 kalojnë, 0 dështojnë (9 teste identiteti) |
+| Gjithë suita e shfletuesit (6 projekte, 213 teste) | 213 kalojnë, 18,3 min | 213 kalojnë, 17,4 min | 213 kalojnë, 17,2 min |
+| CI e PR-it | — | run 799 mbi `ad550a26` (raporti mbi `d7bc0225`): jeshile | run 800 mbi `dab63149`: shih përshkrimin e PR-it |
+
+Kontrollet e kërkuara, me testin që i provon: dublikatë `source + ref` në çdo status (identity 2: open, done, verified);
+`sent` boolean i përputhshëm (identity 1, 5); asnjë detyrë e humbur kur ruajtja dështon, në të dy drejtimet, e
+përsëritur, dhe tani edhe për lidhjen e paruajtur pa reload (identity 3, 4, 8); konflikt identiteti (identity 9);
+rregullat `byCase` të Pilotit 1 të paprekura (`case-thread`, `case-integrity`, `case-kpi`, 21 teste, pa ndryshim);
+procesi i verifikimit i 4B **nuk** është aktivizuar: asnjë `bySource`, asnjë `Actions.update` nga Room Inspection.
 
 ## 7a. Shqyrtimi i autorit mbi diff-in: dy korrigjime të fokusuara
 
