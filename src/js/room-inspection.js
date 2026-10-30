@@ -1113,10 +1113,14 @@
     };
     state.rows.push(row);
     state.rows.sort(byTime);
-    // The inspection is kept before anything leaves this page: when the browser cannot keep it, nothing is sent, the
-    // draft stays, and the message says so.
+    // The inspection and the draft it consumes are written together, before anything leaves this page: when the
+    // browser cannot keep them, nothing is sent, the draft stays as it was, and the message says so. Written apart, a
+    // later failed write (the link) would leave the finished inspection next to its own draft, to be saved twice.
+    const draft = state.draft;
+    state.draft = blankDraft(draft);
     if (!save()) {
       state.rows.splice(state.rows.indexOf(row), 1);
+      state.draft = draft;
       flash(walkStatus, tx("This browser could not save the inspection: nothing was sent to actions. Free some space or unlock the tools, then save again."));
       return;
     }
@@ -1125,7 +1129,6 @@
     const maintenance = s.failed.filter((qid) => row.flags[qid] === "maintenance").map((qid) => ({ row, qid }));
     const sent = sendMaintenance(maintenance);
     const open = s.open;
-    state.draft = blankDraft(state.draft);
     if (state.inspectors.length === 0 && row.inspector) state.inspectors = [row.inspector];
     if (row.attendant && !state.attendants.some((a) => a.name.toLowerCase() === row.attendant.toLowerCase())) state.attendants.push({ name: row.attendant, floors: [] });
     renderDraftFields();

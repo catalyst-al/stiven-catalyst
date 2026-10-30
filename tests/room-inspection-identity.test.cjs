@@ -331,3 +331,46 @@ test('an action under the same id but another reference or tool is a conflict: t
   assert.equal(actions(w2).length, 1, 'found by ref, nothing added');
   assert.equal(saved(w2).rows[0].sent['bathroom-5'], true);
 });
+
+test('the inspection and the consumed draft are saved together: when the link write fails and the page reloads, the draft is blank and the inspection cannot be saved twice; when the first save fails, the draft is intact', () => {
+  // (a) The first save passes, the action goes in the tracker, the second write of sc-room-inspection (the link) fails, the page reloads.
+  const w = load({ storage: { 'sc-room-inspection': SETUP } });
+  const restore = refusing(w, 'sc-room-inspection', { when: (value) => value.includes('"bathroom-5":true') });
+  inspect(w, '412');
+  assert.equal(saved(w).rows.length, 1, 'the inspection is saved');
+  assert.equal(actions(w).length, 1, 'the action is in the tracker');
+  assert.deepEqual(plain(saved(w).rows[0].sent), {}, 'the link is not');
+  assert.deepEqual(plain(saved(w).draft.answers), {}, 'the saved draft is consumed with the inspection, not left behind');
+  restore();
+  const w2 = load({ storage: all(w) });
+  assert.equal(w2.document.querySelector('#ri-room').value, '', 'no room in the draft after the reload');
+  assert.equal(w2.document.querySelectorAll('.ri-item input:checked').length, 0, 'no answers in the draft after the reload');
+  assert.equal(w2.document.querySelector('[data-save]').disabled, true, 'nothing to save by mistake');
+  click(w2, w2.document.querySelector('[data-save]'));
+  assert.equal(saved(w2).rows.length, 1, 'the same inspection is not saved as a new one');
+  assert.equal(actions(w2).length, 1, 'no second action for the same defect');
+  // The fault still reads as not sent and the resend links the same action.
+  assert.equal(w2.document.querySelector('.ri-maint').dataset.maintenance, '0/0/0/0/1');
+  click(w2, sendButton(w2));
+  assert.equal(actions(w2).length, 1);
+  assert.equal(saved(w2).rows[0].sent['bathroom-5'], true);
+  // (b) The first save fails: nothing is sent, and the draft is intact in memory, in storage and after a reload.
+  const w3 = load({ storage: { 'sc-room-inspection': SETUP } });
+  const block = refusing(w3, 'sc-room-inspection', { when: (value) => value.includes('"rows":[{') });
+  inspect(w3, '413');
+  assert.match(status(w3), /could not save the inspection: nothing was sent/);
+  assert.equal(saved(w3).rows.length, 0);
+  assert.equal(actions(w3).length, 0);
+  assert.equal(w3.document.querySelector('#ri-room').value, '413', 'the draft is still on the page');
+  assert.equal(w3.document.querySelector('input[name="ri-bathroom-5"][value="fail"]').checked, true);
+  assert.equal(saved(w3).draft.room, '413', 'the draft in storage is the one before the save');
+  assert.equal(saved(w3).draft.answers['bathroom-5'], 'fail');
+  block();
+  const w4 = load({ storage: all(w3) });
+  assert.equal(w4.document.querySelector('#ri-room').value, '413', 'the draft survives a reload');
+  assert.equal(w4.document.querySelector('[data-save]').disabled, false);
+  click(w4, w4.document.querySelector('[data-save]'));
+  assert.equal(saved(w4).rows.length, 1, 'saved once the browser can keep it');
+  assert.equal(actions(w4).length, 1);
+  assert.equal(saved(w4).rows[0].sent['bathroom-5'], true);
+});

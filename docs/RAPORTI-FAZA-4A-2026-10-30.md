@@ -61,8 +61,9 @@ ruaj, mesazhet, shenja e mirëmbajtjes në log), 6 tekste DE/SQ, `docs/DATA-FORM
 
 ## 6. Testet e pranimit
 
-`tests/room-inspection-identity.test.cjs` (9 teste; 1–7 dështojnë në `90f7d524`, provuar në worktree: 1–4 janë
-defektet, 5–7 sjellje që kodi i vjetër s'e kishte; 8–9 u shtuan pas shqyrtimit të diff-it, §7a):
+`tests/room-inspection-identity.test.cjs` (10 teste; 1–7 dështojnë në `90f7d524`, provuar në worktree: 1–4 janë
+defektet, 5–7 sjellje që kodi i vjetër s'e kishte; 8–9 u shtuan pas shqyrtimit të diff-it, §7a; 10 pas shqyrtimit të
+`2a68be4a`, §7b, dështon në `dab63149`):
 
 1. Dy defekte me tekst identik → dy veprime, id `ri-<row.id>-bathroom-5` dhe `ref` të vetat, `sent` boolean.
 2. Ridërgim i të njëjtit defekt (lidhje e humbur) → asnjë kopje, rilidhur, mesazh "already in the Action Tracker";
@@ -78,6 +79,10 @@ defektet, 5–7 sjellje që kodi i vjetër s'e kishte; 8–9 u shtuan pas shqyrt
    menjëherë, mesazh i sinqertë, riprovim pa reload që lidh të njëjtin veprim.
 9. Konflikt identiteti: id e njëjtë me referencë tjetër ose mjet tjetër → i padërguar, asgjë e shtuar, mesazh; id e njëjtë
    pa `ref` → i lidhur; id tjetër me `ref` të njëjtë → i lidhur sipas `ref`.
+10. Drafti i konsumuar dhe inspektimi ruhen bashkë: ruajtja e parë kalon, veprimi në tracker, ruajtja e dytë e
+    `sc-room-inspection` dështon, faqja rifreskohet → drafti bosh, butoni Save i çaktivizuar, i njëjti inspektim nuk
+    ruhet dy herë, asnjë veprim i dytë, ridërgimi lidh të njëjtin veprim; ruajtja e parë dështon → asnjë veprim, drafti
+    i paprekur në kujtesë, në storage dhe pas rifreskimit, ruhet një herë kur shfletuesi mundet.
 
 `tests/browser/room-inspection-actions.spec.mjs` (Chromium): inspektim real me defekt mirëmbajtje → veprim me
 identitet → inspektim i dytë me të njëjtat fjalë → dy veprime në tracker → lidhje e humbur → ridërgim pa kopje.
@@ -85,14 +90,14 @@ identitet → inspektim i dytë me të njëjtat fjalë → dy veprime në tracke
 ## 7. Rezultatet
 
 Dega pas bashkimit të `origin/main` `e22f3bdd` (PR #368, dy skedarë CSS të logos, identikë me `main`; commit-i
-`02ca5aa2` i ruajtur, merge commit `d7bc0225`, pa rebase, pa force-push), pastaj dy korrigjimet e §7a (`dab63149`).
+`02ca5aa2` i ruajtur, merge commit `d7bc0225`, pa rebase, pa force-push), pastaj dy korrigjimet e §7a (`dab63149`) dhe korrigjimi i §7b.
 Çdo rresht me ndërtim të plotë (838 faqe):
 
-| Provë | `02ca5aa2` (para bashkimit) | `d7bc0225` (pas bashkimit) | `dab63149` (korrigjimet e §7a) |
-| --- | --- | --- | --- |
-| `npm test` | 1 386 kalojnë, 0 dështojnë | 1 386 kalojnë, 0 dështojnë | 1 388 kalojnë, 0 dështojnë (9 teste identiteti) |
-| Gjithë suita e shfletuesit (6 projekte, 213 teste) | 213 kalojnë, 18,3 min | 213 kalojnë, 17,4 min | 213 kalojnë, 17,2 min |
-| CI e PR-it | — | run 799 mbi `ad550a26` (raporti mbi `d7bc0225`): jeshile | run 800 mbi `dab63149`: shih përshkrimin e PR-it |
+| Provë | `02ca5aa2` (para bashkimit) | `d7bc0225` (pas bashkimit) | `dab63149` (korrigjimet e §7a) | korrigjimi i §7b (ky commit) |
+| --- | --- | --- | --- | --- |
+| `npm test` | 1 386 kalojnë, 0 dështojnë | 1 386 kalojnë, 0 dështojnë | 1 388 kalojnë, 0 dështojnë (9 teste identiteti) | 1 389 kalojnë, 0 dështojnë (10 teste identiteti) |
+| Gjithë suita e shfletuesit (6 projekte, 213 teste) | 213 kalojnë, 18,3 min | 213 kalojnë, 17,4 min | 213 kalojnë, 17,2 min | 213 kalojnë, 16,4 min |
+| CI e PR-it | — | run 799 mbi `ad550a26` (raporti mbi `d7bc0225`): jeshile | run 800 mbi `dab63149` dhe run 801 mbi `2a68be4a` (raporti): jeshile | shih përshkrimin e PR-it |
 
 Kontrollet e kërkuara, me testin që i provon: dublikatë `source + ref` në çdo status (identity 2: open, done, verified);
 `sent` boolean i përputhshëm (identity 1, 5); asnjë detyrë e humbur kur ruajtja dështon, në të dy drejtimet, e
@@ -108,6 +113,15 @@ procesi i verifikimit i 4B **nuk** është aktivizuar: asnjë `bySource`, asnjë
 | 2 | Validimi i dublikatës | `lastAdd === "duplicate"` mjaftonte për `sent: true`, edhe kur id-ja i përkiste një referencë ose mjeti tjetër | Veprimi ekzistues gjendet sipas id ose `ref` dhe pranohet vetëm me `source === "room-inspection"` dhe `ref` të pritshme (ose pa `ref`, rasti i faqes së vjetër që e hoqi); ndryshe `conflict`: defekti mbetet i padërguar, asgjë nuk shtohet, mesazhi emërton konfliktin (test 9a–d: id e njëjtë me referencë tjetër, me mjet tjetër, pa `ref`, dhe id tjetër me `ref` të njëjtë) |
 
 Pa prekje të Team Sync, Worker, Cloudflare, formatit boolean të `sent`, `byCase` apo procesit Verified (4B).
+
+## 7b. Shqyrtimi i `2a68be4a`: drafti i konsumuar ruhej më vonë se inspektimi
+
+| Rasti | PARA (`dab63149`) | PAS |
+| --- | --- | --- |
+| Ruajtja e parë kalon, veprimi hyn në tracker, ruajtja e dytë (lidhja) dështon, faqja rifreskohet | `save()` i parë shkruante rreshtin e përfunduar me `state.draft` ende plot; drafti zbrazej vetëm në kujtesë dhe shkruhej me ruajtjen e dytë. Me atë të dështuar, storage mbante inspektimin **dhe** draftin e tij: pas rifreskimit drafti rikthehej me përgjigjet, butoni Save aktiv, dhe një klikim e ruante të njëjtin inspektim si të ri (rresht i dytë me id tjetër, veprim i dytë me `ref` tjetër). Riprodhuar nga testi 10 në `dab63149` | Drafti zbrazet **para** ruajtjes së parë, në të njëjtin shkrim me rreshtin; nëse ai shkrim dështon, rreshti hiqet dhe drafti i mëparshëm rikthehet në kujtesë (storage e ka ende të paprekur). Kështu ose të dy ruhen, ose asnjëri. Ruajtja e dytë (`saveLinks`) ndryshon vetëm `sent`, si në §7a |
+
+Ndryshimi: 4 rreshta në mbajtësin e Save të `room-inspection.js`; asnjë ndryshim në Team Sync, Work Backup, Action
+Tracker apo procesin Verified.
 
 ## 8. Rreziqet e mbetura
 
