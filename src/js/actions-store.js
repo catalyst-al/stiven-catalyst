@@ -22,6 +22,11 @@
 //   alone, from its KPI before and after: update() refuses to set or unset "verified" on it unless the caller says it
 //   is the case (update(id, patch, { byCase: true }); lastUpdate "case-verifies"). Two cases may hold the same action
 //   text: the same open title from the same tool is a duplicate only within the same case.
+// - A tool may name the thing an action is about (ref: Room Inspection gives "<inspection id>|<item id>"). With a ref,
+//   the same source and ref is the same action whatever its status (open, done or verified), so a defect sent again is
+//   never a second action, and two defects with the same words are two actions. Without a ref the rule above holds.
+//   A tool may also give the action its id (Room Inspection: "ri-<inspection id>-<item id>"), the same on every
+//   device, so two devices that send the same defect make one row for team sync to merge, not two.
 window.ActionsStore = (() => {
   const KEY = "sc-actions";
   const STATUSES = ["open", "doing", "done", "verified"];
@@ -34,6 +39,7 @@ window.ActionsStore = (() => {
   const id = () => `a${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
 
   const caseIdOf = (value) => str(value).replace(/[^A-Za-z0-9-]/g, "").slice(0, 40);
+  const refOf = (value) => str(value).replace(/[^A-Za-z0-9|_-]/g, "").slice(0, 80);
   const clean = (item) => {
     if (!isObject(item) || !str(item.title)) return null;
     return {
@@ -51,6 +57,7 @@ window.ActionsStore = (() => {
       closed: isDate(str(item.closed)) ? str(item.closed) : "",
       result: str(item.result).slice(0, 1000),
       ...(caseIdOf(item.caseId) ? { caseId: caseIdOf(item.caseId) } : {}),
+      ...(refOf(item.ref) ? { ref: refOf(item.ref) } : {}),
       ...(item.example === true ? { example: true } : {}),
     };
   };
@@ -99,7 +106,12 @@ window.ActionsStore = (() => {
     } else {
       rows = ownOnly(rows);
     }
-    if (rows.some((row) => isOpen(row) && row.title === action.title && row.source === action.source && (row.caseId || "") === (action.caseId || ""))) {
+    // The same id, or the same source and ref in any status, is the same action; without a ref, the same open title
+    // from the same tool (and case) is.
+    const same = rows.some((row) => row.id === action.id)
+      || (action.ref ? rows.some((row) => row.source === action.source && row.ref === action.ref)
+        : rows.some((row) => isOpen(row) && row.title === action.title && row.source === action.source && (row.caseId || "") === (action.caseId || "")));
+    if (same) {
       lastAdd = "duplicate";
       return null;
     }
@@ -156,6 +168,9 @@ window.ActionsStore = (() => {
   const isOpen = (action) => action.status === "open" || action.status === "doing";
   // The actions of a case, newest last.
   const forCase = (caseId) => (caseIdOf(caseId) ? list().filter((action) => action.caseId === caseIdOf(caseId)) : []);
+  // The action a tool named (source and ref), in any status; and an action by its id. Null when there is none.
+  const byRef = (source, ref) => (refOf(ref) ? list().find((action) => action.source === clean({ title: "x", source }).source && action.ref === refOf(ref)) || null : null);
+  const byId = (actionId) => list().find((action) => action.id === str(actionId)) || null;
   const isOverdue = (action, today = localIso()) => isOpen(action) && action.due !== "" && action.due < today;
   const open = () => list().filter(isOpen);
   const overdue = (today = localIso()) => list().filter((action) => isOverdue(action, today));
@@ -251,5 +266,5 @@ window.ActionsStore = (() => {
     return `${lines.map(icsFold).join("\r\n")}\r\n`;
   };
 
-  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, forCase, trackerUrl, link, linkButton, fromParams, ics, icsText, icsFold, get failed() { return failed; }, get lastAdd() { return lastAdd; }, get lastUpdate() { return lastUpdate; } };
+  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, forCase, byRef, byId, trackerUrl, link, linkButton, fromParams, ics, icsText, icsFold, get failed() { return failed; }, get lastAdd() { return lastAdd; }, get lastUpdate() { return lastUpdate; } };
 })();

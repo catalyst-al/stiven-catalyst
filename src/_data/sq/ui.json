@@ -7851,5 +7851,11 @@
   "Too few eligible rows in the before period ({n} of {min}): the evidence is too thin to compare.": "Shumë pak rreshta të vlefshëm në periudhën para ({n} nga {min}): evidenca është shumë e hollë për krahasim.",
   "The week is the before period; the rows after the change are every row of the same filters.": "Java është periudha para; rreshtat pas ndryshimit janë çdo rresht i të njëjtëve filtra.",
   "Since the decision on {date} the rows or the approved maximum have changed: {changes}. The decision stands until you decide again.": "Që nga vendimi më {date} rreshtat ose maksimumi i miratuar kanë ndryshuar: {changes}. Vendimi qëndron derisa të vendosësh sërish.",
-  "The rows of the before period are not what the evidence recorded: {changes}. Check the import before deciding.": "Rreshtat e periudhës para nuk janë ato që regjistroi evidenca: {changes}. Kontrollo importin para se të vendosësh."
+  "The rows of the before period are not what the evidence recorded: {changes}. Check the import before deciding.": "Rreshtat e periudhës para nuk janë ato që regjistroi evidenca: {changes}. Kontrollo importin para se të vendosësh.",
+  "{n} were already in the Action Tracker.": "{n} ishin tashmë në Gjurmuesin e Veprimeve.",
+  "{n} could not be added: this browser could not save the Action Tracker. They stay under Open maintenance; send them again.": "{n} nuk u shtuan: ky shfletues nuk e ruajti Gjurmuesin e Veprimeve. Mbeten te Mirëmbajtje e hapur; dërgoji sërish.",
+  "{n} verified": "{n} të verifikuara",
+  "{n} not sent": "{n} të padërguara",
+  "This browser could not save the inspection: nothing was sent to actions. Free some space or unlock the tools, then save again.": "Ky shfletues nuk e ruajti inspektimin: asgjë nuk u dërgua te veprimet. Liro hapësirë ose zhblloko mjetet, pastaj ruaje sërish.",
+  "{n} sent": "{n} të dërguara"
 }
