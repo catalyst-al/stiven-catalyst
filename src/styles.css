@@ -9401,6 +9401,11 @@ a.essay-series-next:hover em { translate: 5px 0; }
    reads as part of the page's own background (the reflections use the same fade). */
 :root { --logo-fade: radial-gradient(ellipse 46% 47% at 55% 48%, #000 58%, rgba(0, 0, 0, .55) 78%, transparent 100%); }
 .article-hero-media.is-logo { border-radius: 0; -webkit-mask-image: var(--logo-fade); mask-image: var(--logo-fade); }
+/* On the dark page the logo's near-black background gives way to the page itself (lighten keeps whichever is
+   brighter), so only the bulb, its glow and the letters show, and no box is drawn against the page's blue glow. The
+   light page keeps the picture as it is, faded. */
+:root:not([data-theme="light"]) .page-hero:not(.tool-hero)::after,
+:root:not([data-theme="light"]) .article-hero-media.is-logo { mix-blend-mode: lighten; }
 @media (min-width: 901px) {
   .page-hero:not(.tool-hero) {
     display: grid;
