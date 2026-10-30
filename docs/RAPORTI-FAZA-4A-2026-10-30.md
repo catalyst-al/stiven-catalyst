@@ -80,7 +80,19 @@ identitet → inspektim i dytë me të njëjtat fjalë → dy veprime në tracke
 
 ## 7. Rezultatet
 
-REZULTATET
+Dega pas bashkimit të `origin/main` `e22f3bdd` (PR #368, dy skedarë CSS të logos, identikë me `main` pas bashkimit;
+commit-i `02ca5aa2` i ruajtur, merge commit `d7bc0225`, pa rebase, pa force-push), me ndërtim të plotë (838 faqe):
+
+| Provë | Para bashkimit (`02ca5aa2`) | Pas bashkimit (`d7bc0225`) |
+| --- | --- | --- |
+| `npm test` (1 386 teste; 7 të reja në `room-inspection-identity.test.cjs`) | 1 386 kalojnë, 0 dështojnë | 1 386 kalojnë, 0 dështojnë |
+| Gjithë suita e shfletuesit (6 projekte, 213 teste; `room-inspection-actions.spec.mjs` i ri) | 213 kalojnë, 0 dështojnë, 18,3 min | 213 kalojnë, 0 dështojnë, 17,4 min |
+
+Kontrollet e kërkuara, me testin që i provon: dublikatë `source + ref` në çdo status (identity 2, store-i: open, done,
+verified); `sent` boolean i përputhshëm (identity 1, 5); asnjë detyrë e humbur kur ruajtja dështon (identity 3, 4);
+rregullat `byCase` të Pilotit 1 të paprekura (`case-thread`, `case-integrity`, `case-kpi`, 21 teste, kalojnë pa
+ndryshim); procesi i ri i verifikimit (4B) **nuk** është aktivizuar: asnjë `bySource`, asnjë thirrje `Actions.update`
+nga Room Inspection.
 
 ## 8. Rreziqet e mbetura
 
