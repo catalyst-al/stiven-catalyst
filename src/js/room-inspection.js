@@ -77,7 +77,9 @@
       // A re-inspection opened from an inspection (kind "recheck") is one whatever the day; so is the same room again
       // on the day it failed, as before.
       const recheck = failedRooms.has(key) || row.kind === "recheck";
-      if (v.pass === false) failedRooms.add(key);
+      // Only an ordinary inspection that fails makes the room's next inspection that day a re-check: a re-inspection
+      // that fails is a verdict on an old defect, not on the room as it was released.
+      if (v.pass === false && row.kind !== "recheck") failedRooms.add(key);
       const flags = row.flags || {};
       const recleans = s.failed.filter((qid) => flags[qid] !== "maintenance").length;
       const maintenance = s.failed.filter((qid) => flags[qid] === "maintenance").length;
@@ -319,13 +321,16 @@
   const cleanAnswers = (map) => cleanMap(map, (v) => ANSWERS.includes(v));
   const cleanNotes = (map) => Object.fromEntries(Object.entries(cleanMap(map, (v) => typeof v === "string" && v.trim())).map(([k, v]) => [k, v.trim().slice(0, 300)]));
   const cleanFlags = (map) => cleanMap(map, (v) => FIXES.includes(v));
+  // What a re-inspection saw of a defect's action when it was made: { id, status, closed }, kept whole or not at all.
+  const cleanCheck = (raw) => (isObject(raw) && str(raw.id) && Actions && Actions.STATUSES.includes(raw.status) ? { id: str(raw.id).slice(0, 80), status: raw.status, closed: parseDate(raw.closed) || "" } : null);
+  const cleanChecks = (map) => Object.fromEntries(Object.entries(isObject(map) ? map : {}).map(([qid, raw]) => [qid, cleanCheck(raw)]).filter(([qid, check]) => /^[a-z]+-\d+$/.test(qid) && check));
   state.rows = state.rows.filter(isObject).map((row) => ({
     id: str(row.id) || id("r"), date: parseDate(row.date) || "", time: isTime(row.time) ? row.time : "", room: str(row.room).trim().slice(0, 40), floor: str(row.floor).slice(0, 4),
     roomType: TYPES.includes(row.roomType) ? row.roomType : "", attendant: str(row.attendant).slice(0, 60), inspector: str(row.inspector).slice(0, 60),
     kind: KINDS.includes(row.kind) ? row.kind : KINDS[0], template: isTemplate(row.template) ? row.template : TEMPLATES[0],
     answers: cleanAnswers(row.answers), notes: cleanNotes(row.notes), flags: cleanFlags(row.flags), sent: cleanMap(row.sent, (v) => v === true),
-    // A re-inspection names the inspection it checks.
-    ...(rowIdOf(row.recheckOf) && row.kind === "recheck" ? { recheckOf: rowIdOf(row.recheckOf) } : {}),
+    // A re-inspection names the inspection it checks and, per defect checked, the action and its state at the check.
+    ...(rowIdOf(row.recheckOf) && row.kind === "recheck" ? { recheckOf: rowIdOf(row.recheckOf), checks: cleanChecks(row.checks) } : {}),
   })).filter((row) => row.date && row.room).sort(byTime);
   const saved = isObject(state.draft) ? state.draft : {};
   state.draft = { ...blankDraft(saved), room: str(saved.room).slice(0, 40), time: isTime(saved.time) ? saved.time : nowTime(), attendant: str(saved.attendant).slice(0, 60), auto: saved.auto === true, answers: cleanAnswers(saved.answers), notes: cleanNotes(saved.notes), flags: cleanFlags(saved.flags) };
@@ -556,7 +561,7 @@
       live.textContent = parts.join(" · ");
     }
     saveButton.disabled = !draftStarted();
-    restButton.disabled = !s.open;
+    restButton.disabled = !bulkItems().length;
   };
   const refreshZone = (zone) => {
     const head = zonesBox.querySelector(`[data-zone="${zone}"] .ri-zone-progress`);
@@ -697,15 +702,20 @@
   // The re-inspection (phase 4B). One defect of the checked inspection = (origin.id, qid); its action is the one 4A
   // sent, found by id or ref and matched by source, ref and the item's text before anything is written to it.
   const originOf = (row) => (row.recheckOf ? state.rows.find((r) => r.id === row.recheckOf) || null : null);
-  const defectsOf = (row) => Object.keys(row.answers).filter((qid) => row.answers[qid] === "fail" && row.flags[qid] === "maintenance");
+  // The maintenance defects of a row that are its own: every failed maintenance item of an ordinary inspection; of a
+  // re-inspection, only the items that are not the checked inspection's own defect (those it found anew, or found
+  // failed again after they had been verified). A re-inspection of a re-inspection checks these, and only these.
+  const defectsOf = (row, seen = new Set()) => Object.keys(row.answers).filter((qid) => row.answers[qid] === "fail" && row.flags[qid] === "maintenance" && !sameDefect(row, qid, seen));
   const isVerifiedBefore = (action, row) => {
     if (!action || action.status !== "verified") return false;
     if (!action.proof) return true;
     return `${action.proof.date} ${action.proof.time}` < `${row.date} ${row.time || ""}`;
   };
-  const sameDefect = (row, qid) => {
+  const sameDefect = (row, qid, seen = new Set()) => {
     const origin = originOf(row);
-    if (!origin || !defectsOf(origin).includes(qid)) return false;
+    if (!origin || seen.has(row.id)) return false;
+    seen.add(row.id);
+    if (!defectsOf(origin, seen).includes(qid)) return false;
     return !isVerifiedBefore(linkedAction(origin, qid), row);
   };
   // The defects a re-inspection of `origin` checks, with where each action stands.
@@ -715,29 +725,41 @@
     const matched = action && action.source === TOOL && action.ref === refFor(origin, qid) && item && action.title.endsWith(`: ${item.text}`);
     return { qid, item, action, state: !action ? "none" : !matched ? "other" : action.status === "verified" ? "verified" : action.status === "done" ? "done" : "open" };
   });
+  // The record a re-inspection keeps of each action as it stood when the check was made, written with the row.
+  const checksOf = (origin) => Object.fromEntries(recheckTargets(origin).filter((t) => t.action).map((t) => [t.qid, { id: t.action.id, status: t.action.status, closed: t.action.closed || "" }]));
   // What a saved re-inspection does, or did, to each defect of the inspection it checks:
   //   verify / reopen: waits to be written to the action (done, and the item passed or failed);
   //   verified / reopened: written by this re-inspection (its proof is on the action); changed-since: written, then
-  //   the action changed again; unchecked: the item was not judged (or n.a.); still-open: the action is open or doing
-  //   (the work was not reported done, so nothing is verified); kept: the action was verified before and the item
+  //   the action changed again, or the repair was redone since the check; unchecked: the item was not judged (or n.a.);
+  //   still-open: the action was open or doing when checked (the work was not reported done, so nothing is verified,
+  //   then or later); unrecorded: the row has no record of the action at the check; kept: the action was verified before and the item
   //   passes; new-defect: it was verified before and the item fails (a new defect, the re-inspection's own); later: a
   //   later re-inspection verified it (this one's verdict is history); no-action:
   //   the defect is not in the tracker; other: the action under that id or ref is another's, or has no ref, or the
   //   checklist's item changed since it was sent, so it is not touched.
+  // A verdict is eligible by what the re-inspection saw when it was made (checks[qid]: the action was done then), not by
+  // what the action is now: a check made while the work was still open says nothing about a repair reported later, and a
+  // verdict waiting to be written is written only while the action is still the one that was checked (same status, same
+  // closed date); a repair redone since is another repair (changed-since). A row without that record (unrecorded) is
+  // never applied by itself.
   const recheckOutcomes = (row) => {
     const origin = originOf(row);
     if (!origin) return { origin: null, items: [] };
+    const checks = isObject(row.checks) ? row.checks : {};
     const items = recheckTargets(origin).map((t) => {
       const answer = row.answers[t.qid];
       const judged = answer === "pass" || answer === "fail";
+      const seen = checks[t.qid] || null;
       let state;
       if (t.state === "none") state = "no-action";
       else if (t.state === "other") state = "other";
       else if (t.action.proof && t.action.proof.recheck === row.id) state = t.action.status === "verified" ? "verified" : Actions.isOpen(t.action) ? "reopened" : "changed-since";
       else if (!judged) state = "unchecked";
-      else if (t.state === "verified") state = !isVerifiedBefore(t.action, row) ? "later" : answer === "pass" ? "kept" : "new-defect";
-      else if (t.state === "done") state = answer === "pass" ? "verify" : "reopen";
-      else state = "still-open";
+      else if (!seen || seen.id !== t.action.id) state = "unrecorded";
+      else if (seen.status === "verified") state = !isVerifiedBefore(t.action, row) ? "later" : answer === "pass" ? "kept" : "new-defect";
+      else if (seen.status !== "done") state = "still-open";
+      else if (t.action.status !== "done" || (t.action.closed || "") !== seen.closed) state = "changed-since";
+      else state = answer === "pass" ? "verify" : "reopen";
       return { ...t, answer, state };
     });
     return { origin, items };
@@ -782,9 +804,9 @@
         count.unchanged++;
         const name = e.item ? e.item.text : e.qid;
         reasons.push(`${name}: ${({
-          unchecked: () => tx("not checked"), "still-open": () => tx("the action is not done yet"), kept: () => tx("verified before, passes"),
+          unchecked: () => tx("not checked"), "still-open": () => tx("the action was not done when checked"), kept: () => tx("verified before, passes"), unrecorded: () => tx("no record of the action's state when checked"),
           "new-defect": () => tx("verified before, fails: a new defect"), later: () => tx("verified by a later re-inspection"), "no-action": () => tx("not in the Action Tracker"), other: () => tx("the action cannot be matched"),
-          "changed-since": () => tx("written, then changed in the tracker"),
+          "changed-since": () => tx("the action changed since the check"),
         })[e.state]()}`);
       }
     });
@@ -1054,8 +1076,9 @@
         resultCell.append(" ", tag);
       }
       const tools = el("td", "ri-row-tools");
-      // An inspection with a maintenance defect in the tracker can be checked in the room again, a verified one too.
-      if (Actions && row.kind !== "recheck" && count.open + count.done + count.verified > 0) {
+      // An inspection with a maintenance defect of its own in the tracker can be checked in the room again, a verified
+      // one too; so can a re-inspection for the new defects it found (not for the defects it checked).
+      if (Actions && count.open + count.done + count.verified > 0) {
         const again = el("button", "button-ghost ri-row-recheck", tx("Reinspect"));
         again.type = "button";
         again.dataset.reinspect = row.id;
@@ -1277,12 +1300,14 @@
     if (value) state.draft.notes[input.dataset.note] = value; else delete state.draft.notes[input.dataset.note];
     save();
   });
+  // In a re-inspection the defects to check are never answered in bulk: each takes the supervisor's own pass or fail.
+  const bulkItems = () => draftItems().filter((item) => !state.draft.answers[item.qid] && !verifyMap.has(item.qid));
   restButton.addEventListener("click", () => {
-    const open = draftItems().filter((item) => !state.draft.answers[item.qid]);
+    const open = bulkItems();
     open.forEach((item) => { state.draft.answers[item.qid] = "pass"; });
     renderZones();
     save();
-    flash(walkStatus, tx("{n} items marked as pass.", { n: int.format(open.length) }));
+    flash(walkStatus, verifyMap.size ? tx("{n} items marked as pass; the defects to check wait for your own answer.", { n: int.format(open.length) }) : tx("{n} items marked as pass.", { n: int.format(open.length) }));
   });
 
   saveButton.addEventListener("click", async () => {
@@ -1300,7 +1325,8 @@
       id: id("r"), date: state.draft.date || today(), time: state.draft.time || nowTime(), room: origin ? origin.room : room ? room.number : state.draft.room, floor: origin ? origin.floor : room ? room.floor : floorOf(state.draft.room),
       roomType: origin ? origin.roomType : room ? room.type : "", attendant: state.draft.attendant, inspector: state.draft.inspector, kind: origin ? "recheck" : state.draft.kind, template: origin ? origin.template : state.template,
       answers, notes: keep(state.draft.notes), flags: Object.fromEntries(Object.entries(keep(state.draft.flags)).filter(([qid]) => answers[qid] === "fail")), sent: {},
-      ...(origin ? { recheckOf: origin.id } : {}),
+      // A re-inspection records, with its own row, how each defect's action stood when the check was made.
+      ...(origin ? { recheckOf: origin.id, checks: checksOf(origin) } : {}),
     };
     state.rows.push(row);
     state.rows.sort(byTime);

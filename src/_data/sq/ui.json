@@ -7879,12 +7879,10 @@
   "{n} reopened in the Action Tracker: the fix did not hold.": "{n} të rihapura në Gjurmuesin e Veprimeve: riparimi nuk qëndroi.",
   "{n} could not be written to the Action Tracker: this browser could not save it. The re-inspection is saved; apply it again from the log.": "{n} nuk u shkruan në Gjurmuesin e Veprimeve: ky shfletues nuk e ruajti. Riinspektimi është i ruajtur; zbatoje sërish nga logu.",
   "not checked": "i pakontrolluar",
-  "the action is not done yet": "veprimi nuk është kryer ende",
   "verified before, passes": "i verifikuar më parë, kalon",
   "verified before, fails: a new defect": "i verifikuar më parë, dështon: defekt i ri",
   "not in the Action Tracker": "jo në Gjurmuesin e Veprimeve",
   "the action cannot be matched": "veprimi nuk përputhet",
-  "written, then changed in the tracker": "i shkruar, pastaj i ndryshuar në gjurmues",
   "re-inspection of {date}": "riinspektim i {date}",
   "re-inspection; the inspection it checked is gone": "riinspektim; inspektimi që kontrolloi nuk është më",
   "{n} reopened": "{n} të rihapura",
@@ -7906,5 +7904,9 @@
   "Checked in the room on {date}: {item} passes.": "Kontrolluar në dhomë më {date}: {item} kalon.",
   "Checked in the room on {date}: {item} fails again.": "Kontrolluar në dhomë më {date}: {item} dështon sërish.",
   "Verified by a re-inspection of the room, once the fix is checked there.": "Verifikohet nga një riinspektim i dhomës, sapo riparimi kontrollohet atje.",
-  "verified by a later re-inspection": "i verifikuar nga një riinspektim i mëvonshëm"
+  "verified by a later re-inspection": "i verifikuar nga një riinspektim i mëvonshëm",
+  "the action was not done when checked": "veprimi nuk ishte i kryer në çastin e kontrollit",
+  "no record of the action's state when checked": "asnjë shënim për gjendjen e veprimit në çastin e kontrollit",
+  "the action changed since the check": "veprimi ndryshoi që nga kontrolli",
+  "{n} items marked as pass; the defects to check wait for your own answer.": "{n} artikuj të shënuar si kalon; defektet për kontroll presin përgjigjen tënde."
 }

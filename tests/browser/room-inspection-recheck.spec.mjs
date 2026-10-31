@@ -45,6 +45,11 @@ test("a done maintenance action is verified by a re-inspection that sees the ite
   await expect(toVerify).toHaveCount(1);
   await expect(toVerify).toHaveAttribute("data-qid", "bathroom-5");
   await expect(toVerify.locator(".ri-verify-tag")).toContainText("Maintenance done: pass verifies it, fail reopens it");
+  // "Mark the rest as pass" answers every other item, never the defect to check.
+  await page.locator("[data-rest-pass]").click();
+  await expect(page.locator('input[name="ri-bathroom-5"]:checked')).toHaveCount(0);
+  await expect(page.locator("[data-walk-status]")).toContainText("the defects to check wait for your own answer");
+  await expect(page.locator("[data-rest-pass]")).toBeDisabled();
   // The tap passes: saved, verified, with the proof.
   await page.locator('input[name="ri-bathroom-5"][value="pass"]').check();
   await page.locator("[data-save]").click();
@@ -52,7 +57,8 @@ test("a done maintenance action is verified by a re-inspection that sees the ite
   const state = await stored(page, "sc-room-inspection");
   const re = state.rows.find((r) => r.kind === "recheck");
   expect(re.recheckOf).toBe(row.id);
-  expect(re.answers).toEqual({ "bathroom-5": "pass" });
+  expect(re.answers["bathroom-5"]).toBe("pass");
+  expect(re.checks["bathroom-5"]).toMatchObject({ id, status: "done" });
   const actions = (await stored(page, "sc-actions")).rows.filter((a) => a.source === "room-inspection");
   expect(actions).toHaveLength(1);
   expect(actions[0].status).toBe("verified");

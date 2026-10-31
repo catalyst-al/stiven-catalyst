@@ -21,17 +21,17 @@ në dhomë. Verified vjen vetëm nga një riinspektim real i defektit origjinal.
 
 | Pika | Zgjidhja |
 | --- | --- |
-| Riinspektimi | Butoni **Reinspect** te çdo inspektim me defekt mirëmbajtjeje në tracker (open, done ose verified). Drafti bëhet riinspektim i **atij rreshti**: `kind: "recheck"`, `recheckOf: <row.id>`, e njëjta dhomë, kat, tip dhe checklist (fushat e kyçura), data sot, **asgjë e shënuar pass vetvetiu**. Shënimi mbi draft emërton inspektimin dhe defektet për kontroll; çdo artikull për kontroll mban shenjën e gjendjes së veprimit (done / still open / verified / not in tracker / cannot be matched). Riinspektimi në vazhdim ruhet në draft dhe mbijeton rifreskimin |
+| Riinspektimi | Butoni **Reinspect** te çdo rresht me defekt mirëmbajtjeje **të vetin** në tracker (open, done ose verified), përfshirë një riinspektim për defektet e reja që gjeti (§10, rasti 2). Drafti bëhet riinspektim i **atij rreshti**: `kind: "recheck"`, `recheckOf: <row.id>`, e njëjta dhomë, kat, tip dhe checklist (fushat e kyçura), data sot, **asgjë e shënuar pass vetvetiu**. Shënimi mbi draft emërton inspektimin dhe defektet për kontroll; çdo artikull për kontroll mban shenjën e gjendjes së veprimit (done / still open / verified / not in tracker / cannot be matched). Riinspektimi në vazhdim ruhet në draft dhe mbijeton rifreskimin |
 | Identiteti dhe përputhja | Para çdo shkrimi në veprim: veprimi gjendet sipas id/`ref` (4A) dhe duhet të ketë `source: "room-inspection"`, `ref === "<origin.id>|<qid>"` dhe titull që mbaron me tekstin **aktual** të artikullit të checklist-it. Checklist i ndryshuar, artikull i zhdukur, id e mbajtur nga referencë/mjet tjetër, veprim pa `ref` → **asnjë ndryshim**, arsyeja në log |
 | Rasti A: Done + Pass | `ActionsStore.update(id, { status: "verified", closed: <data e riinspektimit>, result: <rezultati i mëparshëm> · "Verified by the re-inspection of room 412 on …: <artikulli> passes.", proof }, { byRecheck: true })` |
 | Rasti B: Done + Fail | `{ status: "open", result: … · "Re-inspection …: <artikulli> fails again; reopened.", proof }`; asnjë veprim i dytë për të njëjtin defekt (gabimi i riinspektimit nuk dërgohet si defekt i ri) |
-| Rasti C: Open / Doing | Asgjë nuk verifikohet (puna s'është raportuar Done); fail = i njëjti defekt, pa kopje; arsyeja "the action is not done yet" |
+| Rasti C: Open / Doing | Asgjë nuk verifikohet (puna s'është raportuar Done), **as më vonë** kur veprimi bëhet Done: gjendja e veprimit në çastin e kontrollit ruhet me rreshtin (`checks`, §10 rasti 1); fail = i njëjti defekt, pa kopje; arsyeja "the action was not done when checked" |
 | Rasti D: Verified | Prova e vjetër **nuk preket**. Pass → "verified before, passes". Fail → **defekt i ri** me identitetin e riinspektimit (`ri-<recheck.id>-<qid>`, `ref "<recheck.id>|<qid>"`), i dërguar si çdo defekt i 4A; veprimi i vjetër mbetet Verified me provën e tij |
 | Rasti E: i pakontrolluar / N/A | Statusi i pandryshuar; arsyeja "not checked" |
 | Prova | `proof: { recheck, date, time, qid, item, answer }` mbi veprim, e pastruar e plotë ose aspak (`proofOf`), e shkruar vetëm me `byRecheck`; çdo thirrës tjetër e ruan atë ekzistuese. Tracker-i e shfaq ("Checked in the room on …: … passes / fails again") |
 | Mbrojtja e Verified | `ActionsStore.update`: për veprim me `source: "room-inspection"` dhe `ref` të vlefshëm (`byRecheckOnly`), kalimi në Verified pa `byRecheck` refuzohet (`lastUpdate = "recheck-verifies"`). Tracker-i e çaktivizon opsionin dhe e thotë. `byCase` (Pilot 1), verifikimi manual i veprimeve të zakonshme dhe i veprimeve të vjetra pa `ref` **të pandryshuara**. Rihapja me dorë e një veprimi të verifikuar lejohet (mirëmbajtja thotë s'u rregullua); prova mbetet si histori |
 | Logu | Rreshti i riinspektimit: "re-inspection of {datë}" + shenja `Re-inspection: n verified · n reopened · n to apply · n unchanged` (`data-recheck="v/r/p/u"`, arsyet në `title`) dhe butoni **Apply to actions** kur ka verdikte të pashkruara. Rreshti origjinal: shenja e 4A tregon verified/open |
-| KPI | `annotate`: `recheck = e njëjta dhomë sërish ditën që dështoi (si më parë) OSE row.kind === "recheck"`. `rateBy` e pandryshuar: riinspektimi as në numerues as në emërues të First-Time Pass; mesatarja merr çdo inspektim me rezultat të plotë (riinspektim i plotë përfshirë); i paploti në asnjërën. Mjetet e tjera (Shift Pulse, Daily Board, Operations Report, Site Compare, Print Pack) lexojnë përmes `RoomInspectionMath.annotate/rateBy`, kështu përjashtimi vlen edhe atje pa ndryshuar përkufizimet e tyre |
+| KPI | `annotate`: `recheck = e njëjta dhomë sërish ditën që dështoi (si më parë) OSE row.kind === "recheck"`; vetëm një inspektim i zakonshëm që dështon e shënon dhomën për rregullin e ditës (§10 rasti 3). `rateBy` e pandryshuar: riinspektimi as në numerues as në emërues të First-Time Pass; mesatarja merr çdo inspektim me rezultat të plotë (riinspektim i plotë përfshirë); i paploti në asnjërën. Mjetet e tjera (Shift Pulse, Daily Board, Operations Report, Site Compare, Print Pack) lexojnë përmes `RoomInspectionMath.annotate/rateBy`, kështu përjashtimi vlen edhe atje pa ndryshuar përkufizimet e tyre |
 | Gjuhët | 47 tekste të reja EN me përkthim DE dhe SQ (`ui.json`); lloji "Re-inspection / Nachkontrolle / Riinspektim" në tri skedarët e të dhënave; testi ekzistues i mbulimit të përkthimeve kalon |
 
 ## 3. Integriteti i ruajtjes (renditja e shkrimeve)
@@ -55,6 +55,8 @@ transaksion. Renditja e zgjedhur e bën çdo gjendje të ndërmjetme **të rikup
 | Rollback dështon | s'ka rollback të nevojshëm: asnjë shkrim i dytë i detyrueshëm pas update-it | — |
 | Rifreskim në mes | ose rreshti s'u ruajt (drafti riinspektim i plotë, me `recheckOf`) ose u ruajt dhe verdiktet llogariten live nga prova mbi veprim: të pashkruarat dalin "to apply" | Apply |
 | I njëjti riinspektim përpunohet sërish | `recheckOutcomes` sheh `action.proof.recheck === row.id` → "verified/reopened", asgjë për të shkruar; rezultati nuk shtohet dy herë | — |
+| Veprimi ndryshon pas kontrollit (riparim i ribërë: open → done me `closed` tjetër) para se verdikti të shkruhet | verdikti i vjetër **nuk** shkruhet mbi riparimin e ri: "the action changed since the check" (`checks[qid]` krahasohet me status + `closed` aktual) | riinspektim i ri |
+| Kontroll kur veprimi ishte Open, veprimi bëhet Done më vonë | asgjë, as atëherë as më vonë: "the action was not done when checked" | riinspektim i ri |
 | PIN Lock / quota | `ActionsStore.write` kthen false → si "përditësimi dështon" | Apply pas zhbllokimit |
 
 "Verified" shfaqet si sukses **vetëm** kur `update` ktheu veprimin (prova e ruajtur në `sc-actions`); mesazhet e
@@ -142,23 +144,23 @@ media-store, work-lock.
 - Tracker-i (faqja): opsioni Verified i çaktivizuar me `title`, refuzimi me mesazh, rreshti i provës pas verifikimit,
   veprimi i zakonshëm verifikohet me dorë.
 - Team Sync (test "two devices"): §4 a–c.
+- Auditimi i `28d3a357` (§10), teste 14–17, që dështojnë në `28d3a357` (provuar në worktree) dhe kalojnë pas korrigjimeve.
 
 ## 8. Rezultatet
 
-Çdo provë me ndërtim të plotë, mbi gjendjen përfundimtare të degës (ky commit):
+Çdo provë me ndërtim të plotë (838 faqe), mbi dy kokat e degës:
 
-| Provë | Rezultati |
-| --- | --- |
-| `npm run build` | 838 faqe, pa gabim |
-| `npm test` | **1 402 kalojnë, 0 dështojnë** (1 389 të `main` + 13 të `room-inspection-recheck`) |
-| Gjithë suita e shfletuesit (6 projekte) | **216 kalojnë, 0 dështojnë**, 17,1 min (213 të `main` + 3 të `room-inspection-recheck.spec`: EN, DE, SQ) |
-| Pilot 1 (`case-thread`, `case-integrity`, `case-kpi`) | 21 teste, pa ndryshim |
-| Faza 4A (`room-inspection-identity`) | 10 teste, kalojnë; testi 2 verifikon me `byRecheck` (rregulli i ri) |
-| Mbulimi i përkthimeve (`room-inspection.test`, "every text … has a German and an Albanian translation") | kalon me 47 tekstet e reja |
-| CI e PR-it | shih përshkrimin e PR-it: raportohet vetëm kur ka përfunduar |
+| Provë | `28d3a357` (Draft PR i hapur) | korrigjimet e §10 (ky commit) |
+| --- | --- | --- |
+| `npm test` | 1 402 kalojnë, 0 dështojnë (1 389 të `main` + 13) | **1 406 kalojnë, 0 dështojnë** (+ testet 14–17) |
+| Gjithë suita e shfletuesit (6 projekte) | 216 kalojnë, 0 dështojnë, 17,1 min | **216 kalojnë, 0 dështojnë**, 15,8 min (spec-i EN i zgjeruar me bulk pass dhe `checks`) |
+| CI e PR-it | run 804: jeshile | shih përshkrimin e PR-it: raportohet vetëm kur ka përfunduar |
+| Pilot 1 (`case-thread`, `case-integrity`, `case-kpi`) | 21 teste, pa ndryshim | pa ndryshim |
+| Faza 4A (`room-inspection-identity`) | 10 teste; testi 2 verifikon me `byRecheck` (rregulli i ri) | pa ndryshim |
+| Mbulimi i përkthimeve (`room-inspection.test`) | kalon me 47 tekstet e reja | kalon me 49 (2 të zëvendësuara, 4 të reja) |
 
-Numrat e testeve janë ata të daljes reale të `node --test` dhe `playwright test` (`# tests 1402 / # pass 1402 / # fail 0`;
-`216 passed`).
+Numrat e testeve janë ata të daljes reale të `node --test` dhe `playwright test` (`# tests 1406 / # pass 1406 / # fail 0`;
+`216 passed`). Testet 14–17 dështojnë në `28d3a357` (4/4, provuar në worktree me të njëjtin skedar testesh).
 
 ## 9. Rreziqet e mbetura
 
@@ -167,6 +169,24 @@ Numrat e testeve janë ata të daljes reale të `node --test` dhe `playwright te
 - PWA e vjetër: humbja e `recheckOf`/llojit në ruajtjen e radhës të faqes së vjetër (§5), deri në përditësim.
 - Veprim i verifikuar me dorë para 4B ose nga tracker i vjetër: Verified pa provë; faqja e trajton si "verified
   before".
-- Riinspektimi nuk kufizon kohën: një kontroll i datuar para provës ekzistuese lexohet si histori ("later"), jo si
-  defekt i ri; supervizori mund ta ndryshojë datën para ruajtjes.
+- Riinspektimi nuk kufizon kohën: një kontroll i datuar para provës ekzistuese lexohet si histori, jo si defekt i ri;
+  supervizori mund ta ndryshojë datën para ruajtjes.
+- Gjendja e ruajtur në `checks` është ajo e pajisjes që bëri kontrollin: një ndryshim i njëkohshëm i veprimit në një
+  pajisje tjetër (Done i ribërë atje) nuk shihet derisa sync-u ta sjellë; pas sync-ut krahasimi status + `closed` e
+  kap si "changed since" vetëm nëse `closed` ndryshoi (riparim i ribërë ditë tjetër); dy riparime të raportuara Done
+  **të njëjtën ditë** në dy pajisje nuk dallohen (§10 rasti 1, kufizim i vulës ditore).
 - Mbetet jashtë: fotografi e detyrueshme si provë, nënshkrim, kufi kohor Done → Verified, raport i verifikimeve.
+
+## 10. Auditimi i autorit mbi `28d3a357`: katër zbrazëti, katër teste, korrigjime minimale
+
+| # | Rasti | PARA (`28d3a357`) | PAS |
+| --- | --- | --- | --- |
+| 1 | Kontroll historik mbi riparim të mëvonshëm | `recheckOutcomes` nxirrte pranueshmërinë nga **statusi aktual** i veprimit: kontroll pass bërë kur veprimi ishte Open → asgjë atëherë, por sapo veprimi bëhej Done, kontrolli i vjetër dilte "to apply" dhe Apply e verifikonte riparimin e ri; po kështu një fail i vjetër mund ta rihapte një riparim të ri. Riprodhuar nga testi 14 | Rreshti i riinspektimit ruan, **në të njëjtin shkrim** me veten, `checks[qid] = { id, status, closed }` të veprimit në çastin e kontrollit (`checksOf(origin)`). Verdikti pranohet vetëm nga ky regjistrim: `status` i ruajtur `done` → verify/reopen, **nëse** veprimi është ende i njëjti (status `done` dhe `closed` e njëjtë), përndryshe "the action changed since the check"; i ruajtur open/doing → "the action was not done when checked", përgjithmonë; pa regjistrim (`unrecorded`) → asgjë. Rikuperimi ruhet: Done në çastin e kontrollit + shkrim i dështuar i `sc-actions` → "to apply" dhe Apply e shkruan, derisa riparimi të mos ribëhet. Kufizimi i Team Sync: shih §9 |
+| 2 | Cikli i defektit të ri | `renderLog` kërkonte `row.kind !== "recheck"` për butonin Reinspect: rreshti i riinspektimit që zotëronte defektin e ri (Rasti D) s'kishte si të riinspektohej, dhe veprimi i tij s'arrinte kurrë Verified. Riprodhuar nga testi 15 | `defectsOf(row)` kthen vetëm defektet **e veta** të rreshtit (për një riinspektim: artikujt që nuk janë defekti i inspektimit të kontrolluar, me rojë kundër cikleve); butoni Reinspect del për çdo rresht me defekt të vetin në tracker, edhe një riinspektim. Riinspektimi i një riinspektimi kontrollon vetëm defektet e veta të tij, jo ato që ai kontrolloi. Testi 15 kalon dy gjenerata: origjinali Verified me provën e paprekur, defekti i ri Done → Verified nga kontrolli i vet, asnjë veprim i tretë |
+| 3 | Klasifikimi i First-Time Pass | `annotate` shtonte dhomën te `failedRooms` edhe për një riinspektim që dështonte: inspektimi i zakonshëm i radhës i së njëjtës dhomë atë ditë dilte "re-check" dhe binte nga norma. Riprodhuar nga testi 16 | `if (v.pass === false && row.kind !== "recheck") failedRooms.add(key)`: vetëm inspektimi i zakonshëm që dështon shënon dhomën. Riinspektimet mbeten jashtë First-Time Pass dhe në mesatare vetëm kur janë të plota; rregulli i ditës për inspektimet e zakonshme i pandryshuar. Testi 16: total, punonjës, kat, javë, dhe figura e faqes |
+| 4 | Përgjigje e detyrueshme për defektet nën kontroll | "Mark the rest as pass" shënonte pass **edhe defektin që verifikohej**: Reinspect → rest pass → Save e verifikonte një defekt që askush s'e pa. Riprodhuar nga testi 17 | `bulkItems()` përjashton artikujt në `verifyMap` (defektet për kontroll): ata presin pass/fail/N/A të supervizorit; mesazhi e thotë; butoni çaktivizohet kur mbeten vetëm ata. Inspektimi i zakonshëm ruan sjelljen e vjetër. Testi 17 + spec i shfletuesit |
+
+Ndryshimet e §10: `src/js/room-inspection.js` (annotate, `cleanChecks`, `defectsOf/sameDefect` me rojë, `checksOf`,
+`recheckOutcomes` nga `checks`, `bulkItems`, butoni Reinspect), 4 tekste DE/SQ (2 të zëvendësuara), `docs/DATA-FORMATS.md`,
+README, testet 14–17, spec-i i shfletuesit (bulk pass dhe `checks` në rrjedhën EN). Pa prekje të 4A, `byCase`,
+tracker-it për veprimet e zakonshme, `pickRow`, Worker, deploy.

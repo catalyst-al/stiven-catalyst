@@ -198,7 +198,7 @@ test('defect → action → done → reinspect fail → reopened, the failed che
   assert.match(a[0].result, /Cartridge replaced again · Verified by the re-inspection/);
   assert.equal(recheckTag(w2, re2.id).dataset.recheck, '1/0/0/0');
   assert.equal(recheckTag(w2, re1.id).dataset.recheck, '0/0/0/1', 'the first check is unchanged history');
-  assert.match(recheckTag(w2, re1.id).title, /verified by a later re-inspection/);
+  assert.match(recheckTag(w2, re1.id).title, /the action changed since the check/);
   assert.equal(maintTag(w2, re1.id), null, 'and still not a new defect');
 });
 
@@ -326,7 +326,7 @@ test('an item not judged or n.a. changes nothing; an action still open or doing 
   click(w1, w1.document.querySelector('[data-save]'));
   assert.equal(actions(w1)[0].status, 'open');
   assert.equal(actions(w1)[0].proof, undefined);
-  assert.match(recheckTag(w1, recheckRows(w1)[0].id).title, /the action is not done yet/);
+  assert.match(recheckTag(w1, recheckRows(w1)[0].id).title, /the action was not done when checked/);
   await reinspect(w1, open.id);
   answer(w1, 'bathroom-5', 'fail');
   click(w1, w1.document.querySelector('[data-save]'));
@@ -683,4 +683,182 @@ test('two devices with team sync: a re-inspection made on one device verifies th
     assert.equal(actions(wC2)[0].status, 'open');
     assert.equal(actions(wC2)[0].proof.recheck, reC.id);
   }
+});
+
+// Audit of 28d3a357: four gaps, each with the test that failed on it.
+test('gap 1: a re-inspection replays only the verdict that was eligible when it was made; a later repair is not verified or reopened by an old check, and a verdict whose action changed since is not written', async () => {
+  // (a) Pass while the action was open: nothing then, nothing after the action is done later.
+  const w0 = load({ storage: { 'sc-room-inspection': SETUP } });
+  inspect(w0, '412');
+  const row = saved(w0).rows[0];
+  const id = `ri-${row.id}-bathroom-5`;
+  const w = load({ storage: all(w0) });
+  await reinspect(w, row.id);
+  answer(w, 'bathroom-5', 'pass');
+  click(w, w.document.querySelector('[data-save]'));
+  const re = recheckRows(w)[0];
+  assert.equal(actions(w)[0].status, 'open', 'open when checked: nothing verified');
+  assert.deepEqual(plain(re.checks['bathroom-5']).status, 'open', 'the state of the action at the check is kept with the re-inspection');
+  done(w, id);
+  const w2 = load({ storage: all(w) });
+  assert.equal(applyButton(w2, re.id), null, 'the old check does not become a verdict on the later repair');
+  assert.equal(recheckTag(w2, re.id).dataset.recheck, '0/0/0/1');
+  assert.match(recheckTag(w2, re.id).title, /the action was not done when checked/);
+  assert.equal(actions(w2)[0].status, 'done');
+  assert.equal(actions(w2)[0].proof, undefined);
+  // (b) Fail while open, then done: the old failure does not reopen the newer repair.
+  const w3 = load({ storage: { 'sc-room-inspection': SETUP } });
+  inspect(w3, '413');
+  const row3 = saved(w3).rows[0];
+  const w4 = load({ storage: all(w3) });
+  await reinspect(w4, row3.id);
+  answer(w4, 'bathroom-5', 'fail');
+  click(w4, w4.document.querySelector('[data-save]'));
+  const re4 = recheckRows(w4)[0];
+  done(w4, `ri-${row3.id}-bathroom-5`);
+  const w5 = load({ storage: all(w4) });
+  assert.equal(applyButton(w5, re4.id), null);
+  assert.equal(actions(w5)[0].status, 'done', 'the later repair stands');
+  assert.equal(recheckTag(w5, re4.id).dataset.recheck, '0/0/0/1');
+  // (c) Done when checked, the tracker could not be written: the verdict waits and is applied; but once the action
+  // changed materially since (reopened and done again, a new closed date), the old verdict is not written over it.
+  const { w: w6, row: row6, id: id6 } = defectDone();
+  await reinspect(w6, row6.id);
+  answer(w6, 'bathroom-5', 'pass');
+  const block = refusing(w6, 'sc-actions');
+  click(w6, w6.document.querySelector('[data-save]'));
+  block();
+  const re6 = recheckRows(w6)[0];
+  assert.equal(plain(re6.checks['bathroom-5']).status, 'done');
+  const w7 = load({ storage: all(w6) });
+  assert.ok(applyButton(w7, re6.id), 'the same repair: the verdict waits');
+  // The repair is redone before anyone applies it.
+  assert.ok(w7.ActionsStore.update(id6, { status: 'open' }));
+  assert.ok(w7.ActionsStore.update(id6, { status: 'done', result: 'Whole tap replaced', closed: '2026-10-30' }));
+  const w8 = load({ storage: all(w7) });
+  assert.equal(applyButton(w8, re6.id), null, 'another repair: the old check says nothing about it');
+  assert.match(recheckTag(w8, re6.id).title, /the action changed since the check/);
+  assert.equal(actions(w8)[0].status, 'done');
+  assert.equal(actions(w8)[0].proof, undefined);
+  // A re-inspection saved without the record of the action's state (an older row): nothing is applied by it.
+  const w9 = load({ storage: all(w6) });
+  const s9 = saved(w9); delete s9.rows.find((r) => r.id === re6.id).checks;
+  const w10 = load({ storage: { ...all(w9), 'sc-room-inspection': s9 } });
+  assert.equal(applyButton(w10, re6.id), null);
+  assert.match(recheckTag(w10, re6.id).title, /no record of the action's state when checked/);
+});
+
+test('gap 2: a new defect found by a re-inspection has its own lifecycle: its row offers Reinspect, the check verifies its own action, and the original proof stands', async () => {
+  const { w, row, id } = defectDone();
+  await reinspect(w, row.id);
+  answer(w, 'bathroom-5', 'pass');
+  click(w, w.document.querySelector('[data-save]'));
+  const re1 = recheckRows(w)[0];
+  const proof1 = plain(actions(w)[0].proof);
+  // Generation two: a later check fails → a new defect under the re-inspection's identity.
+  const w2 = load({ storage: all(w), now: '2026-10-31T10:00:00Z' });
+  await reinspect(w2, row.id);
+  answer(w2, 'bathroom-5', 'fail');
+  click(w2, w2.document.querySelector('[data-save]'));
+  const re2 = recheckRows(w2).find((r) => r.id !== re1.id);
+  const id2 = `ri-${re2.id}-bathroom-5`;
+  assert.equal(actions(w2).length, 2);
+  assert.equal(actions(w2).find((a) => a.id === id2).status, 'open');
+  // Maintenance fixes it: done. The row that owns the new defect offers Reinspect.
+  done(w2, id2, 'Second cartridge');
+  const w3 = load({ storage: all(w2), now: '2026-11-01T10:00:00Z' });
+  assert.equal(maintTag(w3, re2.id), '0/1/0/0/0');
+  assert.ok(reinspectButton(w3, re2.id), 'the re-inspection row with its own defect can be re-inspected');
+  await reinspect(w3, re2.id);
+  assert.equal(saved(w3).draft.recheckOf, re2.id, 'the check is of the row that owns the new defect');
+  assert.match(w3.document.querySelector('[data-recheck-note]').textContent, /1 maintenance defect to check/);
+  assert.equal(w3.document.querySelector('.ri-item[data-qid="bathroom-5"]').dataset.verify, 'done');
+  answer(w3, 'bathroom-5', 'pass');
+  click(w3, w3.document.querySelector('[data-save]'));
+  const re3 = recheckRows(w3).find((r) => r.recheckOf === re2.id);
+  assert.ok(re3);
+  const list = actions(w3);
+  const second = list.find((a) => a.id === id2);
+  const first = list.find((a) => a.id === id);
+  assert.equal(second.status, 'verified', 'the new defect is verified by its own check');
+  assert.equal(second.proof.recheck, re3.id);
+  assert.equal(first.status, 'verified', 'the original stands');
+  assert.deepEqual(plain(first.proof), proof1, 'with its own proof untouched');
+  assert.equal(list.length, 2, 'no third action');
+  assert.equal(recheckTag(w3, re3.id).dataset.recheck, '1/0/0/0');
+  assert.equal(maintTag(w3, re2.id), '0/0/1/0/0');
+  assert.equal(maintTag(w3, row.id), '0/0/1/0/0');
+  // The second-generation re-inspection has no defect of its own, and the first generation is unchanged history.
+  assert.equal(maintTag(w3, re3.id), null);
+  assert.equal(recheckTag(w3, re2.id).dataset.recheck, '0/0/0/1');
+});
+
+test('gap 3: a failed re-inspection does not turn the next ordinary inspection of the room that day into a same-day re-check; the ordinary rule and the KPIs stay', () => {
+  const M = load({ storage: {} }).RoomInspectionMath;
+  const items = M.itemsOf({ questions: { bed: [{ text: 'Linen', weight: 3, critical: true }, { text: 'Made', weight: 2 }], bathroom: [{ text: 'Tap', weight: 2, fix: 'maintenance' }] } }, ['bed', 'bathroom']);
+  const row = (id, date, time, room, floor, attendant, answers, extra = {}) => ({ id, date, time, room, floor, attendant, template: 't', kind: 'checkout', answers, flags: { 'bathroom-0': 'maintenance' }, sent: {}, ...extra });
+  const rows = [
+    row('r1', '2026-10-20', '10:00', '412', '4', 'Ana', { 'bed-0': 'pass', 'bed-1': 'pass', 'bathroom-0': 'fail' }),
+    // Today: the re-inspection of r1 fails (the tap still drips), then the room is cleaned and inspected as usual.
+    row('c1', '2026-10-24', '09:00', '412', '4', 'Ana', { 'bathroom-0': 'fail' }, { kind: 'recheck', recheckOf: 'r1' }),
+    row('r2', '2026-10-24', '11:00', '412', '4', 'Ana', { 'bed-0': 'pass', 'bed-1': 'pass', 'bathroom-0': 'pass' }),
+    // Another room: an ordinary fail, then the same room again that day: the rule of before.
+    row('r3', '2026-10-24', '12:00', '413', '4', 'Ben', { 'bed-0': 'pass', 'bed-1': 'fail', 'bathroom-0': 'pass' }),
+    row('r4', '2026-10-24', '12:40', '413', '4', 'Ben', { 'bed-0': 'pass', 'bed-1': 'pass', 'bathroom-0': 'pass' }),
+    // A complete re-inspection that fails: excluded from the rate, in the average; and the room's next-day inspection is a first one.
+    row('c2', '2026-10-25', '09:00', '413', '4', 'Ben', { 'bed-0': 'pass', 'bed-1': 'fail', 'bathroom-0': 'pass' }, { kind: 'recheck', recheckOf: 'r3' }),
+    row('r5', '2026-10-25', '11:00', '413', '4', 'Ben', { 'bed-0': 'pass', 'bed-1': 'pass', 'bathroom-0': 'pass' }),
+  ];
+  const a = M.annotate(rows, () => items, 0.9);
+  assert.deepEqual(plain(a.map((r) => [r.id, r.recheck, r.pass])), [['r1', false, false], ['c1', true, null], ['r2', false, true], ['r3', false, false], ['r4', true, true], ['c2', true, false], ['r5', false, true]],
+    'r2 is a first inspection (only a re-inspection failed before it); r4 is a same-day re-check as before; r5 is a first inspection');
+  const all = plain(M.overall(a));
+  assert.deepEqual([all.n, all.first, all.firstPass, all.incomplete], [7, 4, 2, 1], 'first: r1, r2, r3, r5; passed at first: r2, r5');
+  assert.equal(all.rate, 0.5);
+  // The average: r1 5/7, r2 1, r3 5/7, r4 1, c2 5/7, r5 1; c1 incomplete.
+  assert.ok(Math.abs(all.avg - (5 / 7 + 1 + 5 / 7 + 1 + 5 / 7 + 1) / 6) < 1e-12);
+  const ana = plain(M.rateBy(a, (r) => r.attendant).find((g) => g.key === 'Ana'));
+  assert.deepEqual([ana.n, ana.first, ana.firstPass, ana.rate], [3, 2, 1, 0.5]);
+  const ben = plain(M.rateBy(a, (r) => r.attendant).find((g) => g.key === 'Ben'));
+  assert.deepEqual([ben.n, ben.first, ben.firstPass], [4, 2, 1]);
+  const floor4 = plain(M.rateBy(a, (r) => r.floor).find((g) => g.key === '4'));
+  assert.deepEqual([floor4.first, floor4.firstPass], [4, 2]);
+  assert.deepEqual(plain(M.weekly(a)).map((wk) => [wk.week, wk.n, wk.first, wk.firstPass]), [['2026-10-19', 7, 4, 2]]);
+  // On the page: a re-inspection that fails, then an ordinary inspection of the room that passes: a first-time pass.
+  const { w, row: orig } = defectDone();
+  return (async () => {
+    await reinspect(w, orig.id);
+    answer(w, 'bathroom-5', 'fail');
+    click(w, w.document.querySelector('[data-save]'));
+    const figure = () => w.document.querySelector('.ri-stats').textContent.match(/(\d+) of (\d+) rooms passed at the first inspection/).slice(1, 3).map(Number);
+    const before = figure();
+    inspect(w, '412');
+    assert.deepEqual(figure(), [before[0] + 1, before[1] + 1], 'the ordinary inspection after the failed re-inspection counts as a first inspection that passed');
+    assert.equal(w.document.querySelectorAll('tr[data-row] .dl-tag:not(.ri-maint):not(.ri-recheck):not(.ri-verify-tag)').length, 0, 'no same-day re-check tag on it');
+  })();
+});
+
+test('gap 4: in a re-inspection "Mark the rest as pass" leaves the defects to check for the supervisor\'s own answer, so an unchecked defect is never verified; the ordinary inspection keeps bulk pass', async () => {
+  const { w, row, id } = defectDone();
+  await reinspect(w, row.id);
+  const rest = w.document.querySelector('[data-rest-pass]');
+  click(w, rest);
+  assert.equal(w.document.querySelector('input[name="ri-bathroom-5"]:checked'), null, 'the defect to check is not answered by the bulk pass');
+  assert.ok(checkedCount(w) > 0, 'the other items are');
+  assert.match(status(w), /the defects to check wait for your own answer/);
+  assert.equal(rest.disabled, true, 'nothing left for the bulk pass but the defects');
+  click(w, w.document.querySelector('[data-save]'));
+  const re = recheckRows(w)[0];
+  assert.equal(re.answers['bathroom-5'], undefined);
+  assert.equal(actions(w)[0].status, 'done', 'not verified');
+  assert.equal(actions(w)[0].proof, undefined);
+  assert.equal(recheckTag(w, re.id).dataset.recheck, '0/0/0/1');
+  assert.match(recheckTag(w, re.id).title, /not checked/);
+  assert.equal(applyButton(w, re.id), null);
+  assert.equal(id, `ri-${row.id}-bathroom-5`);
+  // An ordinary inspection: bulk pass answers every open item, as before.
+  type(w, w.document.querySelector('#ri-room'), '413');
+  click(w, w.document.querySelector('[data-rest-pass]'));
+  assert.equal(w.document.querySelectorAll('.ri-item input[data-answer]:not(:checked)').length, w.document.querySelectorAll('.ri-item').length * 2, 'every item has one answer');
+  assert.match(status(w), /items marked as pass\./);
 });

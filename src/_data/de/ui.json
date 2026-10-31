@@ -7879,12 +7879,10 @@
   "{n} reopened in the Action Tracker: the fix did not hold.": "{n} im Maßnahmen-Tracker wieder geöffnet: die Reparatur hat nicht gehalten.",
   "{n} could not be written to the Action Tracker: this browser could not save it. The re-inspection is saved; apply it again from the log.": "{n} konnten nicht in den Maßnahmen-Tracker geschrieben werden: dieser Browser konnte ihn nicht speichern. Die Nachkontrolle ist gespeichert; übernehmen Sie sie erneut aus dem Protokoll.",
   "not checked": "nicht geprüft",
-  "the action is not done yet": "die Maßnahme ist noch nicht erledigt",
   "verified before, passes": "zuvor geprüft, in Ordnung",
   "verified before, fails: a new defect": "zuvor geprüft, mangelhaft: ein neuer Mangel",
   "not in the Action Tracker": "nicht im Maßnahmen-Tracker",
   "the action cannot be matched": "die Maßnahme lässt sich nicht zuordnen",
-  "written, then changed in the tracker": "geschrieben, dann im Tracker geändert",
   "re-inspection of {date}": "Nachkontrolle vom {date}",
   "re-inspection; the inspection it checked is gone": "Nachkontrolle; die geprüfte Kontrolle ist nicht mehr da",
   "{n} reopened": "{n} wieder geöffnet",
@@ -7906,5 +7904,9 @@
   "Checked in the room on {date}: {item} passes.": "Im Zimmer geprüft am {date}: {item} in Ordnung.",
   "Checked in the room on {date}: {item} fails again.": "Im Zimmer geprüft am {date}: {item} erneut mangelhaft.",
   "Verified by a re-inspection of the room, once the fix is checked there.": "Geprüft wird durch eine Nachkontrolle des Zimmers, sobald die Reparatur dort geprüft ist.",
-  "verified by a later re-inspection": "durch eine spätere Nachkontrolle geprüft"
+  "verified by a later re-inspection": "durch eine spätere Nachkontrolle geprüft",
+  "the action was not done when checked": "die Maßnahme war bei der Prüfung nicht erledigt",
+  "no record of the action's state when checked": "kein Eintrag zum Stand der Maßnahme bei der Prüfung",
+  "the action changed since the check": "die Maßnahme hat sich seit der Prüfung geändert",
+  "{n} items marked as pass; the defects to check wait for your own answer.": "{n} Punkte als in Ordnung markiert; die zu prüfenden Mängel warten auf Ihre eigene Antwort."
 }
