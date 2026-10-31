@@ -157,7 +157,7 @@ None found.
   references it; or on each `keep` and on `activate` re-fetch the cached documents (`ignoreSearch`) before evicting;
   or keep the last two versions of each path. Each needs the regression test above and a migration note for caches
   built by today's worker.
-- **Status (Phase 5A, Draft PR [catalyst-al/stiven-catalyst#371](https://github.com/catalyst-al/stiven-catalyst/pull/371), commit `b0887a0b`):** implemented as reference-aware retention with an index,
+- **Status (Phase 5A, Draft PR [catalyst-al/stiven-catalyst#371](https://github.com/catalyst-al/stiven-catalyst/pull/371), commits `b0887a0b` and, after the round-3 audit, `27046d52`):** implemented as reference-aware retention with an index,
   batched collection, atomic refresh and one lock (`docs/audit/2026-10-31-phase-5a-proposal.md` §3 and §10). The
   regression tests fail on `0b995e82` (5 of 10 unit scenarios; the browser spec at the first offline check after D2)
   and pass on the branch. Awaiting the independent code audit and the owner's approval; not merged.
@@ -657,3 +657,8 @@ through old addresses, atomic refresh, one lock, the message origin test describ
 version limit, and the privacy claims of this report corrected). The proposal's §3 holds the design; its §10 the
 results; §1 and §2 of this report now state the Action Tracker exception where they spoke of "nothing leaving the
 device" (P1-02 stays open for Phase 5B).
+
+Round 3 (31 October 2026, ChatGPT's independent code audit of PR #371 at `05f26949`): two further offline-integrity
+defects reproduced against the worker's code (query variants sharing one index entry; an interrupted index write
+leaving stale references) and the lifetime of the loose-record write; all three fixed with the tests that failed on
+`05f26949` (proposal §11). P1-01's status line names the corrected commit.

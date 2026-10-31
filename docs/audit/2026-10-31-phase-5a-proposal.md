@@ -239,4 +239,45 @@ On the final code of the branch, full production build:
 | Six browser projects (390/768/1 440 × dark/light) | **218 pass, 0 fail**, 17.5 min (216 of `main` + the 2 offline tests) |
 | Focused: `tests/sw-eviction.test.cjs` + `tests/offline.test.cjs` + `tests/reminders.test.cjs` | 25 pass |
 | Focused: `tests/browser/sw-offline.spec.mjs` (1 440 px light) | 2 pass; with `SW_JS` at the worker of `0b995e82`: fails at the first offline check after D2 |
-| CI | see the Draft PR: reported only once it has finished |
+| CI | run 808 (`b0887a0b`) and run 809 (`05f26949`): success |
+
+## 11. Independent code audit of `05f26949` (round 3): two offline-integrity defects, fixed
+
+ChatGPT ran the worker of `05f26949` against an isolated Cache API simulation and reproduced two defects that the
+D1 → D2 → D3 tests did not reach. Both are real; both are fixed in commit `27046d52` with the tests that failed on
+`05f26949`.
+
+| # | Finding | Cause in `05f26949` | Correction |
+| --- | --- | --- | --- |
+| F1 | Query variants shared one index entry: `/tools/a/` (D1) and `/tools/a/?action=…` (D2) are two cached documents, but `refs.docs` was keyed by pathname; the D2 variant overwrote the entry and collection deleted the D1 files the plain copy still named; offline, the plain address opened without them | index keyed by `pathname`; "already in the copy" judged with `ignoreSearch` | the index is keyed by the **cache address, query and all** (`v: 2`); every cached HTML document has its own entry; `navigation` judges "already in the copy" by the exact address and, offline, answers from the copy under the exact address before any copy of the path (the browser spec showed the variant address answered by the plain copy otherwise); `keep` treats each cached variant of a kept page as its own document and repairs each incomplete one by its own address |
+| F2 | An interrupted index write left stale references: `storePage` cached the new HTML, then wrote the index; a failure between the two left an entry naming the old files while the cached page named the new ones, and the next collection deleted the new files; `reconcile` trusted any existing entry | one write after the page, no mark | **two-step write around a mark**: the entry is first widened to the old and the new files and marked `pending`, then the HTML is written, then the entry is narrowed to the new files and the mark removed. At any interruption the entry names at least what the cached HTML names, so collection cannot delete a needed file; the next `reconcile` reads only the pages still marked (and those with no entry) and settles them. No full-cache parsing on file requests |
+| R8 | `noteLoose()` ran outside the fetch event's lifetime: a worker stopped right after serving a script-loaded versioned file could lose its loose record, and a later collection could delete that file's latest version | `cacheFirst` did not hold the event | `cacheFirst` takes the event and registers the loose write with `event.waitUntil` |
+
+Regression tests (`tests/sw-eviction.test.cjs`): **T12** (F1: plain copy and variant are two documents; D1 files
+kept while the plain copy names them; the plain address opens whole offline; both refreshed later → the D1 files go)
+and **T13** (F2, with a fault-injecting cache: (a) the write after the new HTML fails → the new file survives the next
+collection, the page is complete offline, the index heals and the old file is collected at the following collection;
+(b) the write before the new HTML fails → nothing changes, the complete old copy stays; (c) a keep whose index write
+fails → the repaired page is complete after a collection). Both fail on `05f26949` (worktree, same file: 2 of 12) and
+pass on the branch (12 of 12; 27 with the offline and reminders files). The browser spec now reopens the kept page
+under a query variant after D2 and checks, offline, the plain D1 copy, the D2 variant and the other kept pages; after
+D3 the same three plus the D3 page; pointed at the worker of `05f26949` it fails at the plain copy's offline check.
+
+Cost after the change (T11): still 1 `keys()` per page update; a keep over complete pages still makes 0 requests; at
+212 entries one page update costs 1 `keys()`, 10 `match()` (one more: the two index reads of the two-step write) and
+about 2 ms of logic in the fake. One more index write per page store (the marked entry); no more parsing.
+
+### Results of the corrected code (`27046d52`, full production build, this machine)
+
+| Step | Result |
+| --- | --- |
+| `npm run build` | 838 files written (818 HTML pages), no error |
+| `npm test` | **1 419 pass, 0 fail** (1 407 of `main` + the 12 worker tests) |
+| Six browser projects (390/768/1 440 × dark/light) | **218 pass, 0 fail**, 18.1 min |
+| Focused: `tests/sw-eviction.test.cjs` + `tests/offline.test.cjs` + `tests/reminders.test.cjs` | 27 pass |
+| Before-proof, unit: the final `tests/sw-eviction.test.cjs` against the worker of `05f26949` (worktree) | **T12 and T13 fail, the other 10 pass** |
+| Before-proof, browser: `tests/browser/sw-offline.spec.mjs` with `SW_JS` at the worker of `05f26949` | fails at the plain copy's offline check after D2 (`/tools/room-inspection/: no versioned file failed`: its own script gone) |
+| After, browser: the same spec with the worker of the branch (1 440 px light) | 2 pass |
+| CI | the run on `27046d52` and the documents commit: reported in the Draft PR once finished |
+
+Open for the next audit: nothing known. Phase 5B (privacy hand-offs) is not touched by this PR.
