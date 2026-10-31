@@ -25,7 +25,7 @@ class FakeResponse {
 }
 const urlOf = (request) => (typeof request === 'string' ? abs(request) : request.url);
 class FakeCache {
-  constructor() { this.store = new Map(); this.calls = { keys: 0, match: 0, put: 0, delete: 0 }; }
+  constructor() { this.store = new Map(); this.calls = { keys: 0, match: 0, put: 0, delete: 0 }; this.failPut = null; }
   async match(request, { ignoreSearch = false } = {}) {
     this.calls.match++;
     const url = urlOf(request);
@@ -34,7 +34,8 @@ class FakeCache {
     for (const [key, value] of this.store) if (pathOf(key) === want) return value.clone();
     return undefined;
   }
-  async put(request, response) { this.calls.put++; this.store.set(urlOf(request), response.clone()); }
+  // failPut(url, store) → true makes this one write fail (a quota error, a worker stopped); it is asked once per write.
+  async put(request, response) { this.calls.put++; if (this.failPut && this.failPut(urlOf(request), this.store)) throw new Error('write failed'); this.store.set(urlOf(request), response.clone()); }
   async delete(request) { this.calls.delete++; return this.store.delete(urlOf(request)); }
   async keys() { this.calls.keys++; return [...this.store.keys()].map((url) => ({ url })); }
   async addAll(urls) { for (const url of urls) await this.put(url, await this.fetch(url)); }
@@ -102,7 +103,7 @@ const worker = ({ source = fs.readFileSync('src/sw.js', 'utf8'), current = build
   const activate = async () => { await listeners.activate({ waitUntil: (p) => waits.push(p) }); await settle(); };
   const install = async () => { await listeners.install({ waitUntil: (p) => waits.push(p) }); await settle(); };
   const cached = (path) => cache.store.has(abs(path));
-  const cachedHtml = (path) => { for (const [key, value] of cache.store) if (pathOf(key) === path) return value.body; return null; };
+  const cachedHtml = (path) => { if (cache.store.has(abs(path))) return cache.store.get(abs(path)).body; for (const [key, value] of cache.store) if (pathOf(key) === path) return value.body; return null; };
   // A page is complete when every versioned asset its cached HTML names is in the cache.
   const complete = (path) => { const html = cachedHtml(path); if (!html) return false; return [...html.matchAll(/(?:href|src)="([^"]+\?v=[^"]+)"/g)].every((m) => cache.store.has(abs(m[1]))); };
   const deploy = (n) => { state.build = build(n); };
@@ -309,4 +310,84 @@ test('precache, offline page and unversioned files behave as before', async () =
   let a;
   w.listeners.fetch({ request: { url: abs('/favicon.svg'), mode: 'no-cors', method: 'GET', destination: 'image' }, respondWith: (p) => { a = p; }, waitUntil: () => {} });
   assert.equal(await (await a).text(), '<svg/>');
+});
+
+// Independent audit of 05f26949 (ChatGPT, 31 October 2026): two more offline-integrity defects, each with the test
+// that failed on that head.
+test('T12 (audit F1): a page cached under its plain address and under a query variant are two documents; refreshing the variant keeps the files the plain copy names', async () => {
+  const w = worker();
+  await w.navigate('/tools/a/');
+  assert.ok(w.complete('/tools/a/'));
+  w.deploy(2);
+  await w.navigate('/tools/a/?action=synthetic');
+  assert.ok(w.cached('/tools/a/?action=synthetic'), 'the variant is cached under its own address');
+  assert.match(w.cachedHtml('/tools/a/?action=synthetic'), /build 2/);
+  assert.match(w.cachedHtml('/tools/a/'), /build 1/, 'the plain copy is still the D1 page');
+  assert.ok(w.cached(`/js/tool-kit.js?${versionOf(1)}`) && w.cached(`/styles-tool.css?${versionOf(1)}`) && w.cached(`/js/a.js?${versionOf(1)}`), 'the files the plain D1 copy names are kept');
+  assert.ok(w.complete('/tools/a/'), 'the plain copy is complete');
+  assert.ok(w.complete('/tools/a/?action=synthetic'), 'and so is the variant');
+  // Offline, the plain address opens whole.
+  w.state.offline = true;
+  const { response } = await w.navigate('/tools/a/');
+  assert.ok(response.ok);
+  assert.match(await response.text(), /build 1/);
+  assert.ok(w.complete('/tools/a/'));
+  w.state.offline = false;
+  // Both refreshed to D2 later: the D1 files go.
+  await w.navigate('/tools/a/');
+  assert.ok(w.complete('/tools/a/') && w.complete('/tools/a/?action=synthetic'));
+  assert.ok(!w.cached(`/js/a.js?${versionOf(1)}`), 'nothing names the D1 files any more');
+});
+
+test('T13 (audit F2): an interrupted index write never lets collection delete a file a cached page names; the index heals at the next collection', async () => {
+  // (a) The write after the new HTML is stored fails: the index still protects the new files.
+  const w = worker();
+  await w.navigate('/tools/a/');
+  await w.navigate('/tools/b/');
+  w.deploy(2);
+  let failed = 0;
+  w.cache.failPut = (url, store) => { if (url.endsWith('/__sw/refs') && failed === 0 && [...store.values()].some((r) => /A build 2/.test(r.body))) { failed++; return true; } return false; };
+  await w.navigate('/tools/a/');
+  assert.equal(failed, 1, 'the index write after the new page was stored failed once');
+  w.cache.failPut = null;
+  assert.match(w.cachedHtml('/tools/a/'), /build 2/, 'the new page is in the copy');
+  // Another page's update runs a collection.
+  await w.navigate('/tools/b/');
+  assert.ok(w.cached(`/js/a.js?${versionOf(2)}`), 'the new file of the page whose index write failed is not collected');
+  assert.ok(w.cached(`/js/tool-kit.js?${versionOf(2)}`));
+  assert.ok(w.complete('/tools/a/'), 'the page is complete');
+  w.state.offline = true;
+  const { response } = await w.navigate('/tools/a/');
+  assert.ok(response.ok && /build 2/.test(await response.text()));
+  assert.ok(w.complete('/tools/a/'), 'and complete offline');
+  w.state.offline = false;
+  // The index has healed: after one more collection nothing stale is left and the old files are gone.
+  const refs = JSON.parse(w.cache.store.get(abs('/__sw/refs')).body);
+  assert.ok(Object.values(refs.docs).some((list) => list.some((href) => href.includes(`a.js?${versionOf(2)}`))), 'the entry names the new file');
+  assert.ok(!w.cached(`/js/a.js?${versionOf(1)}`), 'the old file, named by no page, is collected');
+  // (b) The write before the new HTML is stored fails: nothing changes, the complete old copy stays.
+  const w2 = worker();
+  await w2.navigate('/tools/a/');
+  w2.deploy(2);
+  let first = 0;
+  w2.cache.failPut = (url) => { if (url.endsWith('/__sw/refs') && first === 0) { first++; return true; } return false; };
+  await w2.navigate('/tools/a/');
+  w2.cache.failPut = null;
+  assert.equal(first, 1);
+  assert.match(w2.cachedHtml('/tools/a/'), /build 1/, 'the page was not replaced');
+  assert.ok(w2.complete('/tools/a/'));
+  await w2.navigate('/tools/b/');
+  assert.ok(w2.complete('/tools/a/'), 'still complete after a collection');
+  // (c) A keep whose index write fails: the kept page is either the old complete one or the new complete one, never a broken one.
+  const w3 = worker();
+  await w3.navigate('/tools/a/');
+  await w3.keep(kept);
+  w3.deploy(2);
+  await w3.cache.delete(abs(`/js/b.js?${versionOf(1)}`));
+  let n = 0;
+  w3.cache.failPut = (url) => { if (url.endsWith('/__sw/refs')) { n++; return n === 2; } return false; };
+  await w3.keep(kept);
+  w3.cache.failPut = null;
+  await w3.navigate('/tools/c/');
+  assert.ok(w3.complete('/tools/b/'), 'the repaired page is complete after the failed write and a collection');
 });

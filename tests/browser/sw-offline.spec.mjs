@@ -91,7 +91,7 @@ const requests = (phase) => state.log.filter((r) => r.phase === phase);
 test.describe.configure({ mode: "serial" });
 let d2, d3;
 test.beforeAll(async () => {
-  d2 = await makeOverlay(null, [["js/tool-kit.js", (js) => `${js}\n;window.__swBuild="D2";`]]);
+  d2 = await makeOverlay(null, [["js/tool-kit.js", (js) => `${js}\n;window.__swBuild="D2";`], ["js/room-inspection.js", (js) => `${js}\n;window.__swPageBuild="D2";`]]);
   d3 = await makeOverlay(d2.dir, [["styles-tool.css", (css) => `${css}\n.sw-build-marker{--sw-build:"D3"}`]]);
   await serve();
 });
@@ -112,7 +112,7 @@ const waitForKept = async (page, paths) => {
     await expect.poll(async () => page.evaluate(async (want) => {
       const cache = await caches.open("sc-offline-v1");
       const refs = await cache.match("/__sw/refs").then((r) => (r ? r.json() : null)).catch(() => null);
-      return Boolean(refs) && want.every((p) => Array.isArray(refs.docs[p]));
+      return Boolean(refs) && want.every((p) => Array.isArray(refs.docs[location.origin + p] || refs.docs[p.split("?")[0]]));
     }, paths), { timeout: 30000 }).toBe(true);
   } else {
     let last = -1;
@@ -127,7 +127,8 @@ const waitForRefresh = async (page, path, asset) => {
   await expect.poll(async () => page.evaluate(async ([p, a]) => {
     const cache = await caches.open("sc-offline-v1");
     const refs = await cache.match("/__sw/refs").then((r) => (r ? r.json() : null)).catch(() => null);
-    return Boolean(refs && refs.docs[p] && refs.docs[p].some((x) => x.endsWith(a)) && (await cache.match(location.origin + "/" + a)));
+    const entry = refs && (refs.docs[location.origin + p] || refs.docs[p.split("?")[0]]);
+    return Boolean(entry && entry.some((x) => x.endsWith(a)) && (await cache.match(location.origin + "/" + a)));
   }, [path, asset]), { timeout: 30000 }).toBe(true);
 };
 // The page whole: its scripts ran and its stylesheet is applied, and no versioned file failed to load.
@@ -137,18 +138,22 @@ const expectWhole = async (page, path, { build = null } = {}) => {
   page.on("requestfailed", onFailed);
   const response = await page.goto(`${BASE}${path}`, { waitUntil: "load" });
   expect(response?.ok(), `${path} answers`).toBe(true);
-  const facts = await page.evaluate(() => ({
+  const facts = await page.evaluate(async () => ({
     toolKit: Boolean(window.ToolKit && window.ToolKit.tx), build: window.__swBuild || null,
     sheet: [...document.styleSheets].some((s) => s.href && s.href.includes("styles-tool.css") && s.cssRules && s.cssRules.length > 100),
     firstField: Boolean(document.querySelector("main input, main select, main textarea, main button.button-primary")),
     marker: (() => { const el = document.createElement("i"); el.className = "sw-build-marker"; document.body.append(el); const v = getComputedStyle(el).getPropertyValue("--sw-build").trim(); el.remove(); return v; })(),
     heading: Boolean(document.querySelector("main h1")),
+    pageBuild: window.__swPageBuild || null,
+    missing: await (async () => { const cache = await caches.open("sc-offline-v1"); const out = []; for (const el of document.querySelectorAll('script[src*="?v="], link[rel="stylesheet"][href*="?v="]')) { const href = el.src || el.href; if (!(await cache.match(href))) out.push(new URL(href).pathname + new URL(href).search); } return out; })(),
   }));
   page.off("requestfailed", onFailed);
+  if (process.env.SW_DEBUG) console.log(`  facts ${path}: ${JSON.stringify(facts)}`);
   expect(facts.toolKit, `${path}: tool-kit.js ran`).toBe(true);
   expect(facts.sheet, `${path}: styles-tool.css applied`).toBe(true);
   expect(facts.firstField && facts.heading, `${path}: the tool is drawn`).toBe(true);
   expect(failed, `${path}: no versioned file failed`).toEqual([]);
+  expect(facts.missing, `${path}: every file the page names is in the copy`).toEqual([]);
   if (build !== null) expect(facts.build, `${path}: tool-kit build`).toBe(build);
   return facts;
 };
@@ -166,21 +171,28 @@ test("the tools of a role stay whole offline through D1 → D2 → D3 when only 
   state.phase = "d1-offline";
   for (const path of [home, ...kept]) await expectWhole(page, path, { build: null });
   expect(requests("d1-offline"), "offline means offline: the server saw nothing").toEqual([]);
-  // D2: a shared script changed. One kept page reopened online.
+  // D2: a shared script changed. One kept page reopened online, under a query variant of its address (as a hand-off
+  // or a shared link opens it): the variant is a document of its own; the plain copy keeps its D1 files.
   await goOnline();
   state.overlay = d2.dir;
   state.phase = "d2-online";
-  const reopened = kept[0];
-  const facts = await expectWhole(page, reopened, { build: "D2" });
+  const reopened = home;
+  const variant = `${reopened}?sw-variant=1`;
+  const facts = await expectWhole(page, variant, { build: "D2" });
   expect(facts.build).toBe("D2");
-  // The worker refreshes the reopened page whole in the background: its index entry names the new script.
-  await waitForRefresh(page, reopened, d2.rewrites[0][1]);
-  // D2 offline: the pages that were NOT reopened still open whole with their D1 files; the reopened one with D2.
+  expect(facts.pageBuild, "the variant runs the D2 page script").toBe("D2");
+  // The worker stores the variant whole: its index entry names the new script.
+  await waitForRefresh(page, variant, d2.rewrites[0][1]);
+  // D2 offline: the pages that were NOT reopened, the plain copy of the reopened one among them, still open whole
+  // with their D1 files; the variant with D2.
   await goOffline();
   state.phase = "d2-offline";
-  await expectWhole(page, home, { build: null });
+  const plainD2 = await expectWhole(page, reopened, { build: null });
+  expect(plainD2.pageBuild, "the plain copy still runs its own D1 page script").toBe(null);
+  await expectWhole(page, kept[0], { build: null });
   await expectWhole(page, kept[1], { build: null });
-  await expectWhole(page, reopened, { build: "D2" });
+  const variantD2 = await expectWhole(page, variant, { build: "D2" });
+  expect(variantD2.pageBuild).toBe("D2");
   expect(requests("d2-offline")).toEqual([]);
   // D3: a shared stylesheet changed as well. Another kept page reopened online.
   await goOnline();
@@ -192,10 +204,13 @@ test("the tools of a role stay whole offline through D1 → D2 → D3 when only 
   await waitForRefresh(page, second, d3.rewrites[0][1]);
   await goOffline();
   state.phase = "d3-offline";
-  const h = await expectWhole(page, home, { build: null });
+  const h = await expectWhole(page, kept[0], { build: null });
   expect(h.marker, "a page never reopened keeps its own D1 stylesheet, whole").toBe("");
-  const r = await expectWhole(page, reopened, { build: "D2" });
-  expect(r.marker, "the D2 page keeps its D2 files").toBe("");
+  const r = await expectWhole(page, variant, { build: "D2" });
+  expect(r.marker, "the D2 variant keeps its D2 files").toBe("");
+  const plain = await expectWhole(page, reopened, { build: null });
+  expect(plain.marker, "the plain D1 copy beside it is whole too").toBe("");
+  expect(plain.pageBuild).toBe(null);
   const s3 = await expectWhole(page, second, { build: "D2" });
   expect(s3.marker, "the D3 page has its D3 stylesheet offline").toBe('"D3"');
   expect(requests("d3-offline")).toEqual([]);
@@ -209,7 +224,7 @@ test("the tools of a role stay whole offline through D1 → D2 → D3 when only 
   console.log(`  d2 online: ${newInD2.length} page(s) not kept before (fetched by the keep of the reopened page), versioned files: ${requests("d2-online").map((x) => x.url).filter((u) => /\?v=/.test(u)).join(" ")}`);
   // Cleanup within the context: the cache holds three versions of tool-kit only while three pages name them.
   const versions = await page.evaluate(async () => (await (await caches.open("sc-offline-v1")).keys()).map((k) => k.url).filter((u) => u.includes("tool-kit.js?v=")).length);
-  expect(versions, "two versions of tool-kit.js: D1 (pages never reopened) and D2 (the reopened ones)").toBe(2);
+  expect(versions, "two versions of tool-kit.js: D1 (the pages never reopened, the plain copy among them) and D2 (the variant)").toBe(2);
 });
 
 test("a kept page made incomplete is repaired from fresh HTML on the next keep, and a complete one is not fetched again", async ({ page }) => {
@@ -226,8 +241,9 @@ test("a kept page made incomplete is repaired from fresh HTML on the next keep, 
   const removed = await page.evaluate(async ([p, others]) => {
     const cache = await caches.open("sc-offline-v1");
     const refs = await (await cache.match("/__sw/refs")).json();
-    const elsewhere = new Set(others.flatMap((o) => refs.docs[o] || []));
-    const asset = refs.docs[p].find((a) => /\.js\?v=/.test(a) && !elsewhere.has(a));
+    const named = (path) => refs.docs[location.origin + path] || refs.docs[path] || [];
+    const elsewhere = new Set(others.flatMap(named));
+    const asset = named(p).find((a) => /\.js\?v=/.test(a) && !elsewhere.has(a));
     if (asset) await cache.delete(asset);
     return asset || null;
   }, [victim, [home, kept[1]]]);
