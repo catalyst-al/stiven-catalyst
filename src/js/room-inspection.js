@@ -569,9 +569,17 @@
     map: { category: 3, count: 4, value: -1, date: 0, filter: 1 },
     measure: "count",
   });
+  // One defect = one inspection and one item: the action in the tracker carries that identity as its ref
+  // ("<inspection id>|<item id>") and as its id ("ri-<inspection id>-<item id>", the same on every device), so the
+  // same defect is never two actions and two defects with the same words are two. `sent[qid] = true` stays the record
+  // that the defect left this page; the action is found again by its id, then by its ref.
+  const actionIdFor = (row, qid) => `ri-${row.id}-${qid}`.replace(/[^A-Za-z0-9|_-]/g, "");
+  const refFor = (row, qid) => `${row.id}|${qid}`;
+  const linkedAction = (row, qid) => (Actions ? Actions.byId(actionIdFor(row, qid)) || Actions.byRef(TOOL, refFor(row, qid)) : null);
   const maintenanceAction = (row, qid) => {
     const item = itemByKey(row.template, qid) || { text: qid, weight: 2, critical: false };
     return {
+      id: actionIdFor(row, qid), ref: refFor(row, qid),
       title: `${tx("Room {room}", { room: row.room })}: ${item.text}`,
       detail: [row.notes[qid] || "", `${cfg.text.tool} · ${showDate(row.date)}${row.time ? ` ${row.time}` : ""}${row.inspector ? ` · ${row.inspector}` : ""}`].filter(Boolean).join(" · "),
       owner: cfg.text.maintenanceOwner,
@@ -581,16 +589,41 @@
       priority: priorityOf(item),
     };
   };
+  // The maintenance faults to the tracker. A fault is marked sent only when its own action is there: added now, or
+  // already there in any status (the same defect sent again, say after a link that was not saved), which is checked:
+  // the action found by the defect's id or ref must be this tool's and carry this defect's ref (an action of an older
+  // page may have none). An id held by another reference or tool is a conflict: the fault stays unsent and is said.
+  // One the browser could not save stays unsent too, under "Open maintenance", to be sent again.
+  // { added, linked, conflict, failed, marked: the faults marked sent by this call }.
   const sendMaintenance = (pairs) => {
-    if (!Actions) return 0;
-    let n = 0;
+    const out = { added: 0, linked: 0, conflict: 0, failed: 0, marked: [] };
+    if (!Actions) return out;
     pairs.forEach(({ row, qid }) => {
-      if (Actions.add(maintenanceAction(row, qid))) n++;
       const stored = state.rows.find((r) => r.id === row.id);
-      if (stored) stored.sent[qid] = true;
+      if (!stored) return;
+      if (Actions.add(maintenanceAction(row, qid))) { out.added++; stored.sent[qid] = true; out.marked.push({ row: stored, qid }); return; }
+      if (Actions.lastAdd !== "duplicate") { out.failed++; return; }
+      const existing = linkedAction(row, qid);
+      const ours = existing && existing.source === TOOL && (!existing.ref || existing.ref === refFor(row, qid));
+      if (ours) { out.linked++; stored.sent[qid] = true; out.marked.push({ row: stored, qid }); } else out.conflict++;
     });
-    return n;
+    return out;
   };
+  // The link (sent) written to this browser; when it cannot be, the faults marked by this call are unmarked again, so
+  // they show as not sent and can be sent again at once, without a reload. True when saved.
+  const saveLinks = (out) => {
+    if (save()) return true;
+    out.marked.forEach(({ row, qid }) => { delete row.sent[qid]; });
+    out.marked = [];
+    return false;
+  };
+  const sentText = (out, linkSaved = true) => [
+    linkSaved && out.added ? tx("{n} maintenance items added to actions.", { n: int.format(out.added) }) : "",
+    linkSaved && out.linked ? tx("{n} were already in the Action Tracker.", { n: int.format(out.linked) }) : "",
+    !linkSaved && (out.added || out.linked) ? tx("{n} actions are in the Action Tracker, but this browser could not save their link to the inspection. They stay under Open maintenance; send them again and the same actions are linked, not added twice.", { n: int.format(out.added + out.linked) }) : "",
+    out.conflict ? tx("{n} not marked as sent: the Action Tracker holds another action under the same id (another reference or tool). Check it there.", { n: int.format(out.conflict) }) : "",
+    out.failed ? tx("{n} could not be added: this browser could not save the Action Tracker. They stay under Open maintenance; send them again.", { n: int.format(out.failed) }) : "",
+  ].filter(Boolean).join(" ");
   const trackerNote = (node, message) => {
     const link = el("a", "inline-link", tx("Open the Action Tracker"));
     link.href = Actions.trackerUrl().href;
@@ -738,10 +771,11 @@
       const send = el("button", "button-secondary", tx("Send {n} maintenance items to actions", { n: int.format(r.unsent.length) }));
       send.type = "button";
       send.addEventListener("click", () => {
-        const n = sendMaintenance(unsent(annotate(state.rows, itemsFor, state.threshold)));
-        save();
+        const out = sendMaintenance(unsent(annotate(state.rows, itemsFor, state.threshold)));
+        const linkSaved = saveLinks(out);
         renderResults();
-        trackerNote(logStatus, tx("Added {n} actions.", { n: int.format(n) }));
+        renderLog();
+        if (linkSaved && (out.added || out.linked)) trackerNote(logStatus, sentText(out, true)); else flash(logStatus, sentText(out, linkSaved));
       });
       actions.append(send);
     }
@@ -824,6 +858,21 @@
       const resultCell = el("td");
       resultCell.append(el("span", row.pass === false ? "ri-result is-fail" : row.pass ? "ri-result is-pass" : "ri-result", row.pass === false ? `✗ ${tx("Fail")}` : row.pass ? `✓ ${tx("Pass")}` : row.incomplete ? `… ${tx("Incomplete")}` : "–"));
       if (row.recheck) resultCell.append(" ", el("span", "dl-tag", tx("re-check")));
+      // The maintenance faults of the row and where their actions stand in the tracker.
+      const faults = row.s.failed.filter((qid) => row.flags[qid] === "maintenance");
+      if (faults.length && Actions) {
+        // A fault sent by an older version of this page has no action to find by id or ref: it counts as sent.
+        const count = { open: 0, done: 0, verified: 0, sent: 0, unsent: 0 };
+        faults.forEach((qid) => {
+          if (!row.sent[qid]) { count.unsent++; return; }
+          const action = linkedAction(row, qid);
+          if (!action) count.sent++; else count[action.status === "verified" ? "verified" : action.status === "done" ? "done" : "open"]++;
+        });
+        const parts = [count.open ? tx("{n} open", { n: int.format(count.open) }) : "", count.done ? tx("{n} done", { n: int.format(count.done) }) : "", count.verified ? tx("{n} verified", { n: int.format(count.verified) }) : "", count.sent ? tx("{n} sent", { n: int.format(count.sent) }) : "", count.unsent ? tx("{n} not sent", { n: int.format(count.unsent) }) : ""].filter(Boolean);
+        const tag = el("span", `dl-tag ri-maint${count.unsent ? " is-unsent" : ""}`, `${tx("Maintenance")}: ${parts.join(" · ")}`);
+        tag.dataset.maintenance = `${count.open}/${count.done}/${count.verified}/${count.sent}/${count.unsent}`;
+        resultCell.append(" ", tag);
+      }
       const tools = el("td", "ri-row-tools");
       const print = el("button", "button-ghost ri-row-print", tx("Sheet"));
       print.type = "button";
@@ -1064,22 +1113,34 @@
     };
     state.rows.push(row);
     state.rows.sort(byTime);
+    // The inspection and the draft it consumes are written together, before anything leaves this page: when the
+    // browser cannot keep them, nothing is sent, the draft stays as it was, and the message says so. Written apart, a
+    // later failed write (the link) would leave the finished inspection next to its own draft, to be saved twice.
+    const draft = state.draft;
+    state.draft = blankDraft(draft);
+    if (!save()) {
+      state.rows.splice(state.rows.indexOf(row), 1);
+      state.draft = draft;
+      flash(walkStatus, tx("This browser could not save the inspection: nothing was sent to actions. Free some space or unlock the tools, then save again."));
+      return;
+    }
     const s = score(answers, items);
     const v = verdict(s, state.threshold);
     const maintenance = s.failed.filter((qid) => row.flags[qid] === "maintenance").map((qid) => ({ row, qid }));
     const sent = sendMaintenance(maintenance);
     const open = s.open;
-    state.draft = blankDraft(state.draft);
     if (state.inspectors.length === 0 && row.inspector) state.inspectors = [row.inspector];
     if (row.attendant && !state.attendants.some((a) => a.name.toLowerCase() === row.attendant.toLowerCase())) state.attendants.push({ name: row.attendant, floors: [] });
     renderDraftFields();
     renderZones();
-    changed();
+    // The link to the actions written now; when the browser cannot, the faults read as not sent and can be sent again.
+    const linkSaved = saveLinks(sent);
+    render();
     const summary = v.reason === "incomplete" || v.pass === null
       ? tx("Saved: room {room}, incomplete: {n} items were not checked. It counts in neither the first-time pass rate nor the average score.", { room: row.room, n: int.format(open) })
       : [tx("Saved: room {room}, {score}, {result}.", { room: row.room, score: s.pct === null ? "–" : pct(s.pct, 0), result: v.pass ? tx("Pass") : tx("Fail") }), open ? tx("{n} items were not checked.", { n: int.format(open) }) : ""].filter(Boolean).join(" ");
-    const message = [summary, sent ? tx("{n} maintenance items added to actions.", { n: int.format(sent) }) : ""].filter(Boolean).join(" ");
-    if (sent && Actions) trackerNote(walkStatus, message); else flash(walkStatus, message);
+    const message = [summary, sentText(sent, linkSaved)].filter(Boolean).join(" ");
+    if (linkSaved && (sent.added || sent.linked) && Actions) trackerNote(walkStatus, message); else flash(walkStatus, message);
     await movePhotos(row.id);
     dropControls();
     renderZones();

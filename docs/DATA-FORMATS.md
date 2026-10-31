@@ -40,7 +40,14 @@ detail, owner, due, source, check, area, priority, status (open | doing | done |
 and, when it belongs to an investigation of the CX Control Tower, `caseId` (`INV-…`); `verified` is never written
 without a `result`, and on an action with a `caseId` it is set or unset by the case alone (`ActionsStore.update(id,
 patch, { byCase: true })`; by hand the store refuses it, `lastUpdate = "case-verifies"`). The same open title from the
-same tool is a duplicate only within the same case. An update the browser could not save returns null (`"unsaved"`). In `sc-cx-tower` the saved investigations are `cases: [{ id, updated, the
+same tool is a duplicate only within the same case. An update the browser could not save returns null (`"unsaved"`).
+An action may name what it is about with `ref` (Room Inspection: `"<inspection id>|<item id>"`, e.g.
+`rm3k9x1ab|bathroom-5`); with a `ref`, the same `source` and `ref` is the same action in any status, so a defect sent
+again is never a second action and two defects with the same words are two. Room Inspection also gives its actions
+their id, `ri-<inspection id>-<item id>`, the same on every device, so team sync merges two devices' copies of one
+defect into one row. In `sc-room-inspection` a row's `sent[qid] = true` stays the record that the fault left the page;
+the action is found again by that id, then by its `ref`; a row from an older page (`true` without an action to find)
+reads as sent. In `sc-cx-tower` the saved investigations are `cases: [{ id, updated, the
 case fields (title, status, problem, evidence, where, rootStatus, why1–why5, root, containment, corrective, preventive,
 owner, deadline, verifyMetric, verifyResult), actionId (the row of the station's own actions table), snapshot (metric,
 label, from, to, DSP, Shift, Zone, dim, segment, k, n, source), trackerId (the action in `sc-actions`), verifyFrom (the
