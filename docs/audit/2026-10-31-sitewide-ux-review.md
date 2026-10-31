@@ -157,7 +157,7 @@ None found.
   references it; or on each `keep` and on `activate` re-fetch the cached documents (`ignoreSearch`) before evicting;
   or keep the last two versions of each path. Each needs the regression test above and a migration note for caches
   built by today's worker.
-- **Status (Phase 5A, Draft PR __PR__, commit __SHA__):** implemented as reference-aware retention with an index,
+- **Status (Phase 5A, Draft PR [catalyst-al/stiven-catalyst#371](https://github.com/catalyst-al/stiven-catalyst/pull/371), commit `b0887a0b`):** implemented as reference-aware retention with an index,
   batched collection, atomic refresh and one lock (`docs/audit/2026-10-31-phase-5a-proposal.md` §3 and §10). The
   regression tests fail on `0b995e82` (5 of 10 unit scenarios; the browser spec at the first offline check after D2)
   and pass on the branch. Awaiting the independent code audit and the owner's approval; not merged.
@@ -595,6 +595,8 @@ the reference, nothing more.
 
 Checked after the report was written, on `main` at `0b995e82`:
 
+At the time of the audit (before Phase 5A), on `main` at `0b995e82`:
+
 ```
 $ git status --short
 ?? docs/audit/2026-10-31-phase-5a-proposal.md
@@ -607,8 +609,11 @@ $ git status --short --ignored | grep -v "node_modules\|_site"
 !! test-results/        (Playwright's ignored output folder from the Phase 4B test runs)
 ```
 
-**No application source file was changed**: `git diff` is empty and the only untracked files are the two audit
-documents. Nothing was committed, pushed or deployed.
+**No application source file was changed by the audit**: `git diff` was empty and the only untracked files were the
+two audit documents. Nothing was committed, pushed or deployed by the audit. The two documents entered the repository
+afterwards with the Phase 5A branch (`feature/phase-5a-offline-reliability`, commit `b0887a0b`, Draft PR
+[catalyst-al/stiven-catalyst#371](https://github.com/catalyst-al/stiven-catalyst/pull/371)), together with the one
+source change that phase makes (`src/sw.js`) and its tests.
 
 Files this audit generated, all outside the repository except the two documents:
 

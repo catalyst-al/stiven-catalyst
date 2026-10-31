@@ -166,9 +166,9 @@ criterion 1: that is the proof the defect was reproduced in a real browser befor
    first release? (Proposal: the spec, because the defect is in the interaction of real cache semantics.)
 3. Is a visible line on the Tools page ("Offline copies: N pages, updated …") wanted later? Not part of 5A.
 
-## 10. Implementation results (branch `feature/phase-5a-offline-reliability`, Draft PR __PR__)
+## 10. Implementation results (branch `feature/phase-5a-offline-reliability`, Draft PR [catalyst-al/stiven-catalyst#371](https://github.com/catalyst-al/stiven-catalyst/pull/371))
 
-Commit __SHA__ on `main` `0b995e82`. Files: `src/sw.js` (the offline part rewritten between the `PHASE5A` markers;
+Commit `b0887a0b` on `main` `0b995e82`. Files: `src/sw.js` (the offline part rewritten between the `PHASE5A` markers;
 the reminders part, the precache, the fetch routing and the message shape unchanged), `tests/sw-eviction.test.cjs`
 (new, 10 tests, 11 scenarios), `tests/browser/sw-offline.spec.mjs` (new, 2 tests), `tests/browser/playwright.config.mjs`
 (the spec in the 1 440 px light project only), `README.md`, `docs/RELEASE.md` (§5a), this proposal and the audit
