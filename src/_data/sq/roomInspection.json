@@ -49,6 +49,10 @@
     {
       "key": "arrival",
       "name": "Para mbërritjes"
+    },
+    {
+      "key": "recheck",
+      "name": "Riinspektim"
     }
   ],
   "zones": [

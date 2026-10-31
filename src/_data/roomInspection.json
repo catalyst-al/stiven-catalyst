@@ -49,6 +49,10 @@
     {
       "key": "arrival",
       "name": "Pre-arrival"
+    },
+    {
+      "key": "recheck",
+      "name": "Re-inspection"
     }
   ],
   "zones": [

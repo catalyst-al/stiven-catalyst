@@ -175,16 +175,19 @@
       const option = el("option", null, statusName(s));
       option.value = s;
       option.selected = s === a.status;
-      // An action of a case is verified by the case, from its KPI before and after: not from here.
-      if (s === "verified" && a.caseId && a.status !== "verified") option.disabled = true;
+      // An action of a case is verified by the case, from its KPI before and after: not from here. A defect of Room
+      // Inspection is verified by a re-inspection of the room: not from here either.
+      if (s === "verified" && (a.caseId || S.byRecheckOnly(a)) && a.status !== "verified") option.disabled = true;
       select.append(option);
     });
     if (a.caseId && a.status === "verified") { select.disabled = true; select.title = tx("Verified by the investigation; reopen it there."); }
+    else if (S.byRecheckOnly(a) && a.status !== "verified") select.title = tx("Verified comes from a re-inspection of the room in Room Inspection.");
     select.addEventListener("change", () => {
       const updated = S.update(a.id, { status: select.value });
       // Verified needs a result: the status stays, the form opens on the result, and saving a result verifies it.
       if (!updated && S.lastUpdate === "needs-result") { editing = a.id; pending = { id: a.id, status: "verified" }; }
       else if (!updated && S.lastUpdate === "case-verifies") { status.textContent = tx("Verified is decided in the investigation, from the KPI before and after the action."); }
+      else if (!updated && S.lastUpdate === "recheck-verifies") { status.textContent = tx("Verified comes from a re-inspection of the room in Room Inspection."); }
       else if (select.value === "done" && !a.result) { editing = a.id; }
       render();
     });
@@ -202,6 +205,11 @@
     if (a.detail) main.append(el("p", "at-detail", a.detail));
     if (a.check) main.append(el("p", "at-detail", `${tx("Check")}: ${a.check}`));
     if (a.result) main.append(el("p", "at-detail", `${tx("Result")}: ${a.result}`));
+    // A defect of Room Inspection: its proof is the re-inspection that saw it fixed (or not); until then, how it is verified.
+    if (a.proof) main.append(el("p", "at-detail at-proof", a.proof.answer === "pass"
+      ? tx("Checked in the room on {date}: {item} passes.", { date: `${showDate(a.proof.date)}${a.proof.time ? ` ${a.proof.time}` : ""}`, item: a.proof.item })
+      : tx("Checked in the room on {date}: {item} fails again.", { date: `${showDate(a.proof.date)}${a.proof.time ? ` ${a.proof.time}` : ""}`, item: a.proof.item })));
+    else if (S.byRecheckOnly(a) && a.status !== "verified") main.append(el("p", "at-detail at-proof", tx("Verified by a re-inspection of the room, once the fix is checked there.")));
     if (a.caseId) {
       const caseLine = el("p", "at-detail at-case");
       const caseLink = el("a", null, `${tx("Investigation")} ${a.caseId}`);

@@ -27,6 +27,12 @@
 //   never a second action, and two defects with the same words are two actions. Without a ref the rule above holds.
 //   A tool may also give the action its id (Room Inspection: "ri-<inspection id>-<item id>"), the same on every
 //   device, so two devices that send the same defect make one row for team sync to merge, not two.
+// - An action of Room Inspection with a ref (a defect) is verified by a re-inspection of that defect, not by hand:
+//   update() refuses to set "verified" on it unless the caller is the re-inspection (update(id, patch, { byRecheck:
+//   true }); lastUpdate "recheck-verifies"). The re-inspection leaves its proof on the action (proof: { recheck: the
+//   re-inspection's id, date, time, qid, item, answer: pass | fail }), the record of the check that verified or
+//   reopened it; only the re-inspection writes or changes it. Done is a task reported finished; verified is the
+//   defect seen fixed in the room. Actions of older pages without a ref are verified by hand as before.
 window.ActionsStore = (() => {
   const KEY = "sc-actions";
   const STATUSES = ["open", "doing", "done", "verified"];
@@ -40,6 +46,19 @@ window.ActionsStore = (() => {
 
   const caseIdOf = (value) => str(value).replace(/[^A-Za-z0-9-]/g, "").slice(0, 40);
   const refOf = (value) => str(value).replace(/[^A-Za-z0-9|_-]/g, "").slice(0, 80);
+  const isTime = (value) => /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+  const isQid = (value) => /^[a-z]+-\d+$/.test(value);
+  // The proof a re-inspection leaves: kept only whole (its re-inspection, item and answer), so a damaged one is not read.
+  const proofOf = (value) => {
+    if (!isObject(value)) return null;
+    const recheck = str(value.recheck).replace(/[^A-Za-z0-9_-]/g, "").slice(0, 40);
+    const qid = str(value.qid);
+    const answer = str(value.answer);
+    if (!recheck || !isQid(qid) || !["pass", "fail"].includes(answer)) return null;
+    return { recheck, date: isDate(str(value.date)) ? str(value.date) : "", time: isTime(str(value.time)) ? str(value.time) : "", qid, item: str(value.item).slice(0, 300), answer };
+  };
+  // An action a re-inspection verifies: Room Inspection's, naming its defect (ref "<inspection id>|<item id>").
+  const byRecheckOnly = (action) => isObject(action) && action.source === "room-inspection" && /^[A-Za-z0-9_-]+\|[a-z]+-\d+$/.test(str(action.ref));
   const clean = (item) => {
     if (!isObject(item) || !str(item.title)) return null;
     return {
@@ -58,6 +77,7 @@ window.ActionsStore = (() => {
       result: str(item.result).slice(0, 1000),
       ...(caseIdOf(item.caseId) ? { caseId: caseIdOf(item.caseId) } : {}),
       ...(refOf(item.ref) ? { ref: refOf(item.ref) } : {}),
+      ...(proofOf(item.proof) ? { proof: proofOf(item.proof) } : {}),
       ...(item.example === true ? { example: true } : {}),
     };
   };
@@ -134,16 +154,18 @@ window.ActionsStore = (() => {
     return result;
   };
   let lastUpdate = null;
-  const update = (actionId, patch, { byCase = false } = {}) => {
+  const update = (actionId, patch, { byCase = false, byRecheck = false } = {}) => {
     lastUpdate = "invalid";
     const rows = read();
     const index = rows.findIndex((row) => row.id === actionId);
     if (index < 0) return null;
     const before = rows[index];
-    const next = clean({ ...before, ...patch, id: before.id, created: before.created });
+    // The proof is the re-inspection's to write; any other caller keeps the one that is there.
+    const next = clean({ ...before, ...(isObject(patch) ? patch : {}), ...(byRecheck ? {} : { proof: before.proof }), id: before.id, created: before.created });
     if (!next) return null;
     if (next.status === "verified" && !next.result) { lastUpdate = "needs-result"; return null; }
     if ((before.caseId || next.caseId) && (next.status === "verified") !== (before.status === "verified") && !byCase) { lastUpdate = "case-verifies"; return null; }
+    if (byRecheckOnly(before) && next.status === "verified" && before.status !== "verified" && !byRecheck) { lastUpdate = "recheck-verifies"; return null; }
     lastUpdate = null;
     if ((next.status === "done" || next.status === "verified") && !next.closed) next.closed = localIso();
     if (next.status === "open" || next.status === "doing") next.closed = "";
@@ -266,5 +288,5 @@ window.ActionsStore = (() => {
     return `${lines.map(icsFold).join("\r\n")}\r\n`;
   };
 
-  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, forCase, byRef, byId, trackerUrl, link, linkButton, fromParams, ics, icsText, icsFold, get failed() { return failed; }, get lastAdd() { return lastAdd; }, get lastUpdate() { return lastUpdate; } };
+  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, forCase, byRef, byId, byRecheckOnly, trackerUrl, link, linkButton, fromParams, ics, icsText, icsFold, get failed() { return failed; }, get lastAdd() { return lastAdd; }, get lastUpdate() { return lastUpdate; } };
 })();
