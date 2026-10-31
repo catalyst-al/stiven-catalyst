@@ -47,7 +47,25 @@ again is never a second action and two defects with the same words are two. Room
 their id, `ri-<inspection id>-<item id>`, the same on every device, so team sync merges two devices' copies of one
 defect into one row. In `sc-room-inspection` a row's `sent[qid] = true` stays the record that the fault left the page;
 the action is found again by that id, then by its `ref`; a row from an older page (`true` without an action to find)
-reads as sent. In `sc-cx-tower` the saved investigations are `cases: [{ id, updated, the
+reads as sent. A re-inspection (phase 4B) is a row of its own with `kind: "recheck"` and `recheckOf: <the inspection's
+id>` (kept only together: a `recheckOf` on another kind, or one that is not a plain id, is dropped); it takes the room,
+floor, type and `template` of that inspection, and its `answers` hold what was judged (nothing is marked pass by
+itself; the bulk "mark the rest as pass" skips the defects it checks). With it travel `checks: { [qid]: { id, status,
+closed } }`, the defect's action as it stood when the check was made (kept whole or not at all). A verdict is eligible
+by that record, not by the action's later state: it verifies a defect's action when the action was `done` at the check
+and the item passes, reopens it when the item fails, and leaves it as it is otherwise; a verdict waiting to be written
+(the browser could not save the tracker) is written only while the action is still the one checked (same status, same
+`closed` date), never over a repair redone since; a check made while the action was open says nothing about a repair
+reported later; a row without `checks` applies nothing by itself. A re-inspection's own defects (items the checked
+inspection had not failed, or found failed again after they were verified) can be re-inspected in turn from its row. On such an action (`source: "room-inspection"` with a `ref`) `verified` is written by
+the re-inspection alone (`ActionsStore.update(id, patch, { byRecheck: true })`; by hand the store refuses it,
+`lastUpdate = "recheck-verifies"`), with the proof on the action: `proof: { recheck: <the re-inspection's id>, date,
+time, qid, item, answer: pass | fail }`, kept whole or not at all and written by the re-inspection only (another
+caller's `proof` is dropped). A verification sets `closed` to the re-inspection's date; a reopening clears it. A
+re-inspection's fault that is the checked inspection's own defect (still open, or done and now reopened) is never sent
+as a second action; an item the inspection had not failed, or a defect verified before the check, is a new defect
+sent under the re-inspection's identity (`ri-<re-inspection id>-<item id>`). Actions of older pages without a `ref`
+are verified by hand as before. In `sc-cx-tower` the saved investigations are `cases: [{ id, updated, the
 case fields (title, status, problem, evidence, where, rootStatus, why1–why5, root, containment, corrective, preventive,
 owner, deadline, verifyMetric, verifyResult), actionId (the row of the station's own actions table), snapshot (metric,
 label, from, to, DSP, Shift, Zone, dim, segment, k, n, source), trackerId (the action in `sc-actions`), verifyFrom (the

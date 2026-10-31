@@ -49,6 +49,10 @@
     {
       "key": "arrival",
       "name": "Vor Anreise"
+    },
+    {
+      "key": "recheck",
+      "name": "Nachkontrolle"
     }
   ],
   "zones": [

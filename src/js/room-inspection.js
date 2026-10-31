@@ -3,6 +3,11 @@
 // the pass mark (90 % by default). Failed items go back to the attendant (re-clean) or to maintenance (the Action
 // Tracker). The trend per attendant, floor, room type and week shows where to coach. The arithmetic lives in
 // window.RoomInspectionMath, so tests can call it.
+// A maintenance defect is closed by proof, not by report (phase 4B): "Reinspect" on a saved inspection opens a
+// re-inspection of that inspection (kind "recheck", recheckOf: its id, the same room and checklist, nothing marked
+// pass by itself). Saved, it verifies the defect's action in the tracker when the action is done and the item passes,
+// reopens it when the item fails again, and leaves it as it is in every other case, saying why. The re-inspection is
+// the proof: the action keeps its id, date, time, item and answer. A re-inspection counts in no first-time pass rate.
 (() => {
   const ANSWERS = ["pass", "fail", "na"];
   const FIXES = ["reclean", "maintenance"];
@@ -69,8 +74,12 @@
       const s = score(row.answers, itemsFor(row));
       const v = verdict(s, threshold);
       const key = `${row.date}|${String(row.room).toLowerCase()}`;
-      const recheck = failedRooms.has(key);
-      if (v.pass === false) failedRooms.add(key);
+      // A re-inspection opened from an inspection (kind "recheck") is one whatever the day; so is the same room again
+      // on the day it failed, as before.
+      const recheck = failedRooms.has(key) || row.kind === "recheck";
+      // Only an ordinary inspection that fails makes the room's next inspection that day a re-check: a re-inspection
+      // that fails is a verdict on an old defect, not on the room as it was released.
+      if (v.pass === false && row.kind !== "recheck") failedRooms.add(key);
       const flags = row.flags || {};
       const recleans = s.failed.filter((qid) => flags[qid] !== "maintenance").length;
       const maintenance = s.failed.filter((qid) => flags[qid] === "maintenance").length;
@@ -281,7 +290,9 @@
 
   // State: the rooms, the team, the pass mark, the chosen checklist and the team's own ones (custom, keyed "custom-…"),
   // the inspection in progress (draft) and the saved inspections (rows).
-  const blankDraft = (keep = {}) => ({ room: "", date: parseDate(keep.date) || today(), time: nowTime(), attendant: "", auto: false, inspector: str(keep.inspector), kind: KINDS.includes(keep.kind) ? keep.kind : KINDS[0], answers: {}, notes: {}, flags: {} });
+  // A re-inspection (kind "recheck") is started from the log and never carried into the next draft.
+  const blankDraft = (keep = {}) => ({ room: "", date: parseDate(keep.date) || today(), time: nowTime(), attendant: "", auto: false, inspector: str(keep.inspector), kind: KINDS.includes(keep.kind) && keep.kind !== "recheck" ? keep.kind : KINDS[0], answers: {}, notes: {}, flags: {} });
+  const rowIdOf = (value) => str(value).replace(/[^A-Za-z0-9_-]/g, "").slice(0, 40);
   const state = loadState(KEY, { rooms: [], attendants: [], inspectors: [], threshold: cfg.threshold, template: "", custom: {}, draft: {}, rows: [], period: "30", example: {} });
   // An own checklist (saved here or opened from a template file): items per zone with a text, a weight and a flag.
   const cleanItem = (raw) => {
@@ -310,14 +321,23 @@
   const cleanAnswers = (map) => cleanMap(map, (v) => ANSWERS.includes(v));
   const cleanNotes = (map) => Object.fromEntries(Object.entries(cleanMap(map, (v) => typeof v === "string" && v.trim())).map(([k, v]) => [k, v.trim().slice(0, 300)]));
   const cleanFlags = (map) => cleanMap(map, (v) => FIXES.includes(v));
+  // What a re-inspection saw of a defect's action when it was made: { id, status, closed }, kept whole or not at all.
+  const cleanCheck = (raw) => (isObject(raw) && str(raw.id) && Actions && Actions.STATUSES.includes(raw.status) ? { id: str(raw.id).slice(0, 80), status: raw.status, closed: parseDate(raw.closed) || "" } : null);
+  const cleanChecks = (map) => Object.fromEntries(Object.entries(isObject(map) ? map : {}).map(([qid, raw]) => [qid, cleanCheck(raw)]).filter(([qid, check]) => /^[a-z]+-\d+$/.test(qid) && check));
   state.rows = state.rows.filter(isObject).map((row) => ({
     id: str(row.id) || id("r"), date: parseDate(row.date) || "", time: isTime(row.time) ? row.time : "", room: str(row.room).trim().slice(0, 40), floor: str(row.floor).slice(0, 4),
     roomType: TYPES.includes(row.roomType) ? row.roomType : "", attendant: str(row.attendant).slice(0, 60), inspector: str(row.inspector).slice(0, 60),
     kind: KINDS.includes(row.kind) ? row.kind : KINDS[0], template: isTemplate(row.template) ? row.template : TEMPLATES[0],
     answers: cleanAnswers(row.answers), notes: cleanNotes(row.notes), flags: cleanFlags(row.flags), sent: cleanMap(row.sent, (v) => v === true),
+    // A re-inspection names the inspection it checks and, per defect checked, the action and its state at the check.
+    ...(rowIdOf(row.recheckOf) && row.kind === "recheck" ? { recheckOf: rowIdOf(row.recheckOf), checks: cleanChecks(row.checks) } : {}),
   })).filter((row) => row.date && row.room).sort(byTime);
   const saved = isObject(state.draft) ? state.draft : {};
   state.draft = { ...blankDraft(saved), room: str(saved.room).slice(0, 40), time: isTime(saved.time) ? saved.time : nowTime(), attendant: str(saved.attendant).slice(0, 60), auto: saved.auto === true, answers: cleanAnswers(saved.answers), notes: cleanNotes(saved.notes), flags: cleanFlags(saved.flags) };
+  // A re-inspection in progress stays one across a reload, as long as the inspection it checks is still there.
+  if (rowIdOf(saved.recheckOf) && state.rows.some((row) => row.id === rowIdOf(saved.recheckOf))) { state.draft.recheckOf = rowIdOf(saved.recheckOf); state.draft.kind = "recheck"; }
+  const recheckOrigin = () => (state.draft.recheckOf ? state.rows.find((row) => row.id === state.draft.recheckOf) || null : null);
+  if (state.draft.recheckOf && recheckOrigin()) state.template = recheckOrigin().template;
   const save = () => write(KEY, state);
 
   const templateOf = (name) => state.custom[name] || cfg.templates[name] || cfg.templates[TEMPLATES[0]];
@@ -378,16 +398,43 @@
     fillList(q("#ri-attendant-list"), state.attendants.map((a) => a.name));
     fillList(q("#ri-inspector-list"), state.inspectors);
   };
+  const recheckOption = [...kindSelect.options].find((option) => option.value === "recheck") || null;
   const renderDraftFields = () => {
     if (packs) packs.syncOptions();
+    const origin = recheckOrigin();
     templateSelect.value = state.template;
     roomInput.value = state.draft.room;
     dateInput.value = state.draft.date;
     timeInput.value = state.draft.time;
     attendantInput.value = state.draft.attendant;
     inspectorInput.value = state.draft.inspector;
+    // The kind "re-inspection" is given by "Reinspect", not chosen: its option shows only then.
+    if (recheckOption) { recheckOption.hidden = !origin; recheckOption.disabled = !origin; }
     kindSelect.value = state.draft.kind;
+    // A re-inspection keeps the room and the checklist of the inspection it checks: its identity depends on them.
+    roomInput.disabled = Boolean(origin);
+    templateSelect.disabled = Boolean(origin);
+    kindSelect.disabled = Boolean(origin);
     renderRoomNote();
+    renderRecheckNote(origin);
+  };
+  // The note above a re-inspection: which inspection it checks and which defects wait for the check.
+  const recheckNote = q("[data-recheck-note]");
+  const renderRecheckNote = (origin) => {
+    if (!recheckNote) return;
+    recheckNote.hidden = !origin;
+    if (!origin) { recheckNote.replaceChildren(); return; }
+    const targets = recheckTargets(origin);
+    const names = targets.map((t) => (t.item ? t.item.text : t.qid));
+    const head = el("p", "ri-recheck-head");
+    head.append(el("strong", null, tx("Re-inspection of room {room}", { room: origin.room })), ` · ${tx("inspected {date}", { date: `${showDate(origin.date)}${origin.time ? ` ${origin.time}` : ""}` })}${origin.inspector ? ` · ${origin.inspector}` : ""}`);
+    const body = el("p", "form-note", targets.length
+      ? `${targets.length === 1 ? tx("1 maintenance defect to check: {items}", { items: names.join("; ") }) : tx("{n} maintenance defects to check: {items}", { n: int.format(targets.length), items: names.join("; ") })} ${tx("Mark each one pass or fail as you find it. A defect whose action is done is verified when it passes and reopened when it fails; nothing is marked pass by itself.")}`
+      : tx("This inspection has no maintenance defect to check; the re-inspection is saved as one all the same."));
+    const cancel = el("button", "button-ghost", tx("Cancel the re-inspection"));
+    cancel.type = "button";
+    cancel.dataset.recheckCancel = "";
+    recheckNote.replaceChildren(head, body, cancel);
   };
   const renderRoomNote = () => {
     const room = roomOf(state.draft.room);
@@ -447,6 +494,12 @@
     const head = el("p", "ri-item-text");
     head.append(el("span", "ri-item-n", String(item.index + 1)), el("span", null, item.text));
     head.append(el("span", item.critical ? "ri-weight is-critical" : "ri-weight", item.critical ? tx("Critical") : tx("Weight {n}", { n: item.weight })));
+    const target = verifyMap.get(item.qid);
+    if (target) {
+      row.classList.add("is-to-verify");
+      row.dataset.verify = target.state;
+      head.append(el("span", "dl-tag ri-verify-tag", targetText(target)));
+    }
     const group = el("div", "ri-answers");
     group.setAttribute("role", "radiogroup");
     group.setAttribute("aria-label", item.text);
@@ -465,9 +518,20 @@
     if (answer === "fail" || state.draft.notes[item.qid]) detailFor(row, item);
     return row;
   };
+  // In a re-inspection, the defects of the inspection it checks, by item: what the check will do to each action.
+  let verifyMap = new Map();
+  const targetText = (target) => ({
+    done: () => tx("Maintenance done: pass verifies it, fail reopens it"),
+    open: () => tx("Maintenance still open in the Action Tracker"),
+    verified: () => tx("Maintenance already verified"),
+    none: () => tx("Maintenance not in the Action Tracker"),
+    other: () => tx("Maintenance: the action cannot be matched"),
+  })[target.state]();
   const renderZones = () => {
     dropControls();
     zonesBox.replaceChildren();
+    const origin = recheckOrigin();
+    verifyMap = new Map(origin ? recheckTargets(origin).map((t) => [t.qid, t]) : []);
     if (photos) zonesBox.append(el("p", "form-note fc-photo-note ri-photo-note", Capture.NOTE()));
     const items = draftItems();
     ZONES.forEach((zone) => {
@@ -497,7 +561,7 @@
       live.textContent = parts.join(" · ");
     }
     saveButton.disabled = !draftStarted();
-    restButton.disabled = !s.open;
+    restButton.disabled = !bulkItems().length;
   };
   const refreshZone = (zone) => {
     const head = zonesBox.querySelector(`[data-zone="${zone}"] .ri-zone-progress`);
@@ -515,8 +579,11 @@
   const incompleteText = (n) => (n === 1 ? tx("1 incomplete inspection, not counted") : tx("{n} incomplete inspections, not counted", { n: int.format(n) }));
   const typeLabel = (row) => typeName(row.roomType) || templateOf(row.template).name;
   const floorLabel = (floor) => tx("Floor {n}", { n: floor });
-  // Open maintenance: the tracker's open actions from this tool, and the maintenance faults not yet sent there.
-  const unsent = (list) => list.flatMap((row) => row.s.failed.filter((qid) => row.flags[qid] === "maintenance" && !row.sent[qid]).map((qid) => ({ row, qid })));
+  // Open maintenance: the tracker's open actions from this tool, and the maintenance faults not yet sent there. A fault
+  // of a re-inspection that is the checked inspection's own defect (still open, or done and now reopened) is not a
+  // second defect: it is never sent as one; a defect verified before the check, or an item the inspection had not
+  // failed, is a new defect with the re-inspection's identity.
+  const unsent = (list) => list.flatMap((row) => row.s.failed.filter((qid) => row.flags[qid] === "maintenance" && !row.sent[qid] && !sameDefect(row, qid)).map((qid) => ({ row, qid })));
   const openInTracker = () => (Actions ? Actions.list().filter((a) => a.source === TOOL && Actions.isOpen(a)).length : 0);
   const analysis = () => {
     const all = annotate(state.rows, itemsFor, state.threshold);
@@ -632,6 +699,121 @@
     node.timer = setTimeout(() => { node.textContent = ""; }, 8000);
   };
 
+  // The re-inspection (phase 4B). One defect of the checked inspection = (origin.id, qid); its action is the one 4A
+  // sent, found by id or ref and matched by source, ref and the item's text before anything is written to it.
+  const originOf = (row) => (row.recheckOf ? state.rows.find((r) => r.id === row.recheckOf) || null : null);
+  // The maintenance defects of a row that are its own: every failed maintenance item of an ordinary inspection; of a
+  // re-inspection, only the items that are not the checked inspection's own defect (those it found anew, or found
+  // failed again after they had been verified). A re-inspection of a re-inspection checks these, and only these.
+  const defectsOf = (row, seen = new Set()) => Object.keys(row.answers).filter((qid) => row.answers[qid] === "fail" && row.flags[qid] === "maintenance" && !sameDefect(row, qid, seen));
+  const isVerifiedBefore = (action, row) => {
+    if (!action || action.status !== "verified") return false;
+    if (!action.proof) return true;
+    return `${action.proof.date} ${action.proof.time}` < `${row.date} ${row.time || ""}`;
+  };
+  const sameDefect = (row, qid, seen = new Set()) => {
+    const origin = originOf(row);
+    if (!origin || seen.has(row.id)) return false;
+    // The rows walked so far, for this item alone: a sibling item of the same row starts from the caller's path again.
+    const path = new Set(seen).add(row.id);
+    if (!defectsOf(origin, path).includes(qid)) return false;
+    return !isVerifiedBefore(linkedAction(origin, qid), row);
+  };
+  // The defects a re-inspection of `origin` checks, with where each action stands.
+  const recheckTargets = (origin) => defectsOf(origin).map((qid) => {
+    const item = itemByKey(origin.template, qid);
+    const action = linkedAction(origin, qid);
+    const matched = action && action.source === TOOL && action.ref === refFor(origin, qid) && item && action.title.endsWith(`: ${item.text}`);
+    return { qid, item, action, state: !action ? "none" : !matched ? "other" : action.status === "verified" ? "verified" : action.status === "done" ? "done" : "open" };
+  });
+  // The record a re-inspection keeps of each action as it stood when the check was made, written with the row.
+  const checksOf = (origin) => Object.fromEntries(recheckTargets(origin).filter((t) => t.action).map((t) => [t.qid, { id: t.action.id, status: t.action.status, closed: t.action.closed || "" }]));
+  // What a saved re-inspection does, or did, to each defect of the inspection it checks:
+  //   verify / reopen: waits to be written to the action (done, and the item passed or failed);
+  //   verified / reopened: written by this re-inspection (its proof is on the action); changed-since: written, then
+  //   the action changed again, or the repair was redone since the check; unchecked: the item was not judged (or n.a.);
+  //   still-open: the action was open or doing when checked (the work was not reported done, so nothing is verified,
+  //   then or later); unrecorded: the row has no record of the action at the check; kept: the action was verified before and the item
+  //   passes; new-defect: it was verified before and the item fails (a new defect, the re-inspection's own); later: a
+  //   later re-inspection verified it (this one's verdict is history); no-action:
+  //   the defect is not in the tracker; other: the action under that id or ref is another's, or has no ref, or the
+  //   checklist's item changed since it was sent, so it is not touched.
+  // A verdict is eligible by what the re-inspection saw when it was made (checks[qid]: the action was done then), not by
+  // what the action is now: a check made while the work was still open says nothing about a repair reported later, and a
+  // verdict waiting to be written is written only while the action is still the one that was checked (same status, same
+  // closed date); a repair redone since is another repair (changed-since). A row without that record (unrecorded) is
+  // never applied by itself.
+  const recheckOutcomes = (row) => {
+    const origin = originOf(row);
+    if (!origin) return { origin: null, items: [] };
+    const checks = isObject(row.checks) ? row.checks : {};
+    const items = recheckTargets(origin).map((t) => {
+      const answer = row.answers[t.qid];
+      const judged = answer === "pass" || answer === "fail";
+      const seen = checks[t.qid] || null;
+      let state;
+      if (t.state === "none") state = "no-action";
+      else if (t.state === "other") state = "other";
+      else if (t.action.proof && t.action.proof.recheck === row.id) state = t.action.status === "verified" ? "verified" : Actions.isOpen(t.action) ? "reopened" : "changed-since";
+      else if (!judged) state = "unchecked";
+      else if (!seen || seen.id !== t.action.id) state = "unrecorded";
+      else if (seen.status === "verified") state = !isVerifiedBefore(t.action, row) ? "later" : answer === "pass" ? "kept" : "new-defect";
+      else if (seen.status !== "done") state = "still-open";
+      else if (t.action.status !== "done" || (t.action.closed || "") !== seen.closed) state = "changed-since";
+      else state = answer === "pass" ? "verify" : "reopen";
+      return { ...t, answer, state };
+    });
+    return { origin, items };
+  };
+  // Writes the re-inspection's verdicts to the tracker: each is one update of the action, with the proof on it, so a
+  // second run finds them written and writes nothing twice. { verified, reopened: written now; already: written before;
+  // failed: the browser could not save the tracker; unchanged: left as they are; missing: the inspection is gone }.
+  const applyRecheck = (row) => {
+    const out = { verified: 0, reopened: 0, already: 0, failed: 0, unchanged: 0, missing: false };
+    const r = recheckOutcomes(row);
+    if (!r.origin) { out.missing = true; return out; }
+    r.items.forEach((e) => {
+      if (e.state === "verified" || e.state === "reopened" || e.state === "changed-since") { out.already++; return; }
+      if (e.state !== "verify" && e.state !== "reopen") { out.unchanged++; return; }
+      const when = `${showDate(row.date)}${row.time ? ` ${row.time}` : ""}`;
+      const line = e.state === "verify"
+        ? tx("Verified by the re-inspection of room {room} on {when}: {item} passes.", { room: r.origin.room, when, item: e.item.text })
+        : tx("Re-inspection of room {room} on {when}: {item} fails again; reopened.", { room: r.origin.room, when, item: e.item.text });
+      const proof = { recheck: row.id, date: row.date, time: row.time, qid: e.qid, item: e.item.text, answer: e.answer };
+      const result = [e.action.result, line].filter(Boolean).join(" · ");
+      const patch = e.state === "verify" ? { status: "verified", closed: row.date, result, proof } : { status: "open", result, proof };
+      if (Actions.update(e.action.id, patch, { byRecheck: true })) out[e.state === "verify" ? "verified" : "reopened"]++;
+      else out.failed++;
+    });
+    return out;
+  };
+  const recheckText = (out) => [
+    out.missing ? tx("The inspection this re-inspection checks is no longer in the log: no action was changed.") : "",
+    out.verified ? tx("{n} defects verified in the Action Tracker, with this re-inspection as the proof.", { n: int.format(out.verified) }) : "",
+    out.reopened ? tx("{n} reopened in the Action Tracker: the fix did not hold.", { n: int.format(out.reopened) }) : "",
+    out.failed ? tx("{n} could not be written to the Action Tracker: this browser could not save it. The re-inspection is saved; apply it again from the log.", { n: int.format(out.failed) }) : "",
+  ].filter(Boolean).join(" ");
+  // The log tag of a re-inspection: how many defects it verified, reopened, still has to write, or left as they are.
+  const recheckSummary = (row) => {
+    const r = recheckOutcomes(row);
+    const count = { verified: 0, reopened: 0, pending: 0, unchanged: 0 };
+    const reasons = [];
+    r.items.forEach((e) => {
+      if (e.state === "verified" || e.state === "reopened") count[e.state]++;
+      else if (e.state === "verify" || e.state === "reopen") count.pending++;
+      else {
+        count.unchanged++;
+        const name = e.item ? e.item.text : e.qid;
+        reasons.push(`${name}: ${({
+          unchecked: () => tx("not checked"), "still-open": () => tx("the action was not done when checked"), kept: () => tx("verified before, passes"), unrecorded: () => tx("no record of the action's state when checked"),
+          "new-defect": () => tx("verified before, fails: a new defect"), later: () => tx("verified by a later re-inspection"), "no-action": () => tx("not in the Action Tracker"), other: () => tx("the action cannot be matched"),
+          "changed-since": () => tx("the action changed since the check"),
+        })[e.state]()}`);
+      }
+    });
+    return { ...count, missing: !r.origin, reasons };
+  };
+
   // Printing: the inspection sheet of a room (A4, for the clipboard) or the summary of one day; the rest of the page
   // is hidden while it prints.
   const printOnly = (build) => {
@@ -710,7 +892,7 @@
     rows.forEach((row) => {
       const tr = el("tr");
       const faults = row.s.failed.map((qid) => `${itemText(row.template, qid)} (${fixText[row.flags[qid] || "reclean"]()})`).join("; ");
-      tr.append(el("td", null, row.time), el("td", null, row.room), el("td", null, row.attendant), el("td", null, row.inspector), el("td", null, `${kindName(row.kind)}${row.recheck ? ` · ${tx("re-check")}` : ""}`),
+      tr.append(el("td", null, row.time), el("td", null, row.room), el("td", null, row.attendant), el("td", null, row.inspector), el("td", null, `${kindName(row.kind)}${row.recheck && row.kind !== "recheck" ? ` · ${tx("re-check")}` : ""}`),
         el("td", "num", row.s.pct === null ? "–" : pct(row.s.pct, 0)), el("td", null, resultText(row)), el("td", "ri-print-note", faults));
       tbody.append(tr);
     });
@@ -857,12 +1039,33 @@
       const scoreCell = el("td", "num", row.s.pct === null ? "–" : pct(row.s.pct, 0));
       const resultCell = el("td");
       resultCell.append(el("span", row.pass === false ? "ri-result is-fail" : row.pass ? "ri-result is-pass" : "ri-result", row.pass === false ? `✗ ${tx("Fail")}` : row.pass ? `✓ ${tx("Pass")}` : row.incomplete ? `… ${tx("Incomplete")}` : "–"));
-      if (row.recheck) resultCell.append(" ", el("span", "dl-tag", tx("re-check")));
+      if (row.recheck && row.kind !== "recheck") resultCell.append(" ", el("span", "dl-tag", tx("re-check")));
+      // A re-inspection names the inspection it checks and what it did to each of its defects.
+      const origin = originOf(row);
+      if (row.kind === "recheck") {
+        roomCell.append(el("span", "ri-recheck-of", origin ? ` · ${tx("re-inspection of {date}", { date: `${showDate(origin.date)}${origin.time ? ` ${origin.time}` : ""}` })}` : ` · ${tx("re-inspection; the inspection it checked is gone")}`));
+        if (Actions && row.recheckOf) {
+          const sum = recheckSummary(row);
+          const parts = [sum.verified ? tx("{n} verified", { n: int.format(sum.verified) }) : "", sum.reopened ? tx("{n} reopened", { n: int.format(sum.reopened) }) : "", sum.pending ? tx("{n} to apply", { n: int.format(sum.pending) }) : "", sum.unchanged ? tx("{n} unchanged", { n: int.format(sum.unchanged) }) : ""].filter(Boolean);
+          const tag = el("span", `dl-tag ri-recheck${sum.pending ? " is-pending" : ""}`, `${tx("Re-inspection")}: ${sum.missing ? tx("inspection not found") : parts.length ? parts.join(" · ") : tx("no defect to check")}`);
+          tag.dataset.recheck = `${sum.verified}/${sum.reopened}/${sum.pending}/${sum.unchanged}`;
+          if (sum.reasons.length) tag.title = sum.reasons.join("\n");
+          resultCell.append(" ", tag);
+          if (sum.pending) {
+            // The verdicts not yet written (the browser could not save the tracker, or the page was left): one click.
+            const apply = el("button", "button-ghost ri-row-apply", tx("Apply to actions"));
+            apply.type = "button";
+            apply.dataset.apply = row.id;
+            apply.setAttribute("aria-label", tx("Apply the re-inspection of room {room} on {date} to the Action Tracker", { room: row.room, date: showDate(row.date) }));
+            resultCell.append(" ", apply);
+          }
+        }
+      }
       // The maintenance faults of the row and where their actions stand in the tracker.
-      const faults = row.s.failed.filter((qid) => row.flags[qid] === "maintenance");
+      const faults = row.s.failed.filter((qid) => row.flags[qid] === "maintenance" && !sameDefect(row, qid));
+      const count = { open: 0, done: 0, verified: 0, sent: 0, unsent: 0 };
       if (faults.length && Actions) {
         // A fault sent by an older version of this page has no action to find by id or ref: it counts as sent.
-        const count = { open: 0, done: 0, verified: 0, sent: 0, unsent: 0 };
         faults.forEach((qid) => {
           if (!row.sent[qid]) { count.unsent++; return; }
           const action = linkedAction(row, qid);
@@ -874,6 +1077,15 @@
         resultCell.append(" ", tag);
       }
       const tools = el("td", "ri-row-tools");
+      // An inspection with a maintenance defect of its own in the tracker can be checked in the room again, a verified
+      // one too; so can a re-inspection for the new defects it found (not for the defects it checked).
+      if (Actions && count.open + count.done + count.verified > 0) {
+        const again = el("button", "button-ghost ri-row-recheck", tx("Reinspect"));
+        again.type = "button";
+        again.dataset.reinspect = row.id;
+        again.setAttribute("aria-label", tx("Reinspect room {room}: check the maintenance defects of {date}", { room: row.room, date: showDate(row.date) }));
+        tools.append(again);
+      }
       const print = el("button", "button-ghost ri-row-print", tx("Sheet"));
       print.type = "button";
       print.dataset.printRow = row.id;
@@ -1089,12 +1301,14 @@
     if (value) state.draft.notes[input.dataset.note] = value; else delete state.draft.notes[input.dataset.note];
     save();
   });
+  // In a re-inspection the defects to check are never answered in bulk: each takes the supervisor's own pass or fail.
+  const bulkItems = () => draftItems().filter((item) => !state.draft.answers[item.qid] && !verifyMap.has(item.qid));
   restButton.addEventListener("click", () => {
-    const open = draftItems().filter((item) => !state.draft.answers[item.qid]);
+    const open = bulkItems();
     open.forEach((item) => { state.draft.answers[item.qid] = "pass"; });
     renderZones();
     save();
-    flash(walkStatus, tx("{n} items marked as pass.", { n: int.format(open.length) }));
+    flash(walkStatus, verifyMap.size ? tx("{n} items marked as pass; the defects to check wait for your own answer.", { n: int.format(open.length) }) : tx("{n} items marked as pass.", { n: int.format(open.length) }));
   });
 
   saveButton.addEventListener("click", async () => {
@@ -1106,10 +1320,14 @@
     const keep = (map) => Object.fromEntries(Object.entries(map).filter(([qid]) => valid.has(qid)));
     const room = roomOf(state.draft.room);
     const answers = keep(state.draft.answers);
+    // A re-inspection takes the room, floor, type and checklist of the inspection it checks, so the defects match.
+    const origin = recheckOrigin();
     const row = {
-      id: id("r"), date: state.draft.date || today(), time: state.draft.time || nowTime(), room: room ? room.number : state.draft.room, floor: room ? room.floor : floorOf(state.draft.room),
-      roomType: room ? room.type : "", attendant: state.draft.attendant, inspector: state.draft.inspector, kind: state.draft.kind, template: state.template,
+      id: id("r"), date: state.draft.date || today(), time: state.draft.time || nowTime(), room: origin ? origin.room : room ? room.number : state.draft.room, floor: origin ? origin.floor : room ? room.floor : floorOf(state.draft.room),
+      roomType: origin ? origin.roomType : room ? room.type : "", attendant: state.draft.attendant, inspector: state.draft.inspector, kind: origin ? "recheck" : state.draft.kind, template: origin ? origin.template : state.template,
       answers, notes: keep(state.draft.notes), flags: Object.fromEntries(Object.entries(keep(state.draft.flags)).filter(([qid]) => answers[qid] === "fail")), sent: {},
+      // A re-inspection records, with its own row, how each defect's action stood when the check was made.
+      ...(origin ? { recheckOf: origin.id, checks: checksOf(origin) } : {}),
     };
     state.rows.push(row);
     state.rows.sort(byTime);
@@ -1126,7 +1344,10 @@
     }
     const s = score(answers, items);
     const v = verdict(s, state.threshold);
-    const maintenance = s.failed.filter((qid) => row.flags[qid] === "maintenance").map((qid) => ({ row, qid }));
+    // A re-inspection writes its verdicts to the defects' actions first (each one update of the tracker, with the
+    // proof on it); then its own new defects go to the tracker like any inspection's.
+    const checked = origin ? applyRecheck(row) : null;
+    const maintenance = s.failed.filter((qid) => row.flags[qid] === "maintenance" && !sameDefect(row, qid)).map((qid) => ({ row, qid }));
     const sent = sendMaintenance(maintenance);
     const open = s.open;
     if (state.inspectors.length === 0 && row.inspector) state.inspectors = [row.inspector];
@@ -1136,11 +1357,13 @@
     // The link to the actions written now; when the browser cannot, the faults read as not sent and can be sent again.
     const linkSaved = saveLinks(sent);
     render();
-    const summary = v.reason === "incomplete" || v.pass === null
-      ? tx("Saved: room {room}, incomplete: {n} items were not checked. It counts in neither the first-time pass rate nor the average score.", { room: row.room, n: int.format(open) })
-      : [tx("Saved: room {room}, {score}, {result}.", { room: row.room, score: s.pct === null ? "–" : pct(s.pct, 0), result: v.pass ? tx("Pass") : tx("Fail") }), open ? tx("{n} items were not checked.", { n: int.format(open) }) : ""].filter(Boolean).join(" ");
-    const message = [summary, sentText(sent, linkSaved)].filter(Boolean).join(" ");
-    if (linkSaved && (sent.added || sent.linked) && Actions) trackerNote(walkStatus, message); else flash(walkStatus, message);
+    const summary = origin
+      ? (s.open ? tx("Re-inspection of room {room} saved: {a} of {b} items checked. It counts in no first-time pass rate.", { room: row.room, a: int.format(s.pass + s.fail + s.na), b: int.format(items.length) }) : tx("Re-inspection of room {room} saved, {score}. It counts in no first-time pass rate.", { room: row.room, score: s.pct === null ? "–" : pct(s.pct, 0) }))
+      : v.reason === "incomplete" || v.pass === null
+        ? tx("Saved: room {room}, incomplete: {n} items were not checked. It counts in neither the first-time pass rate nor the average score.", { room: row.room, n: int.format(open) })
+        : [tx("Saved: room {room}, {score}, {result}.", { room: row.room, score: s.pct === null ? "–" : pct(s.pct, 0), result: v.pass ? tx("Pass") : tx("Fail") }), open ? tx("{n} items were not checked.", { n: int.format(open) }) : ""].filter(Boolean).join(" ");
+    const message = [summary, checked ? recheckText(checked) : "", sentText(sent, linkSaved)].filter(Boolean).join(" ");
+    if (Actions && ((linkSaved && (sent.added || sent.linked)) || (checked && (checked.verified || checked.reopened)))) trackerNote(walkStatus, message); else flash(walkStatus, message);
     await movePhotos(row.id);
     dropControls();
     renderZones();
@@ -1159,10 +1382,50 @@
     return sheet({ ...state.draft, room: room ? room.number : state.draft.room, floor: room ? room.floor : floorOf(state.draft.room), roomType: room ? room.type : "", template: state.template });
   }));
 
-  // The log: print a sheet, remove one (with undo), the period, the example, the exports and clearing.
+  // "Reinspect": the draft becomes a re-inspection of that inspection, with its room and checklist and nothing
+  // answered; a draft under way is kept unless the supervisor lets it go.
+  const startRecheck = async (origin) => {
+    const n = await draftPhotoCount();
+    if ((draftStarted() || n) && !window.confirm(n ? tx("Start a new inspection? Its answers and {n} photos are removed.", { n }) : tx("Start a new inspection? The answers of this one are discarded."))) return false;
+    await dropDraftPhotos();
+    // Dated now: the check is made as it is recorded (the date and time can still be changed before it is saved).
+    state.draft = { ...blankDraft(state.draft), date: today(), room: origin.room, attendant: origin.attendant, kind: "recheck", recheckOf: origin.id };
+    state.template = origin.template;
+    renderDraftFields();
+    renderZones();
+    save();
+    q(".ri-walk").scrollIntoView({ behavior: "smooth", block: "start" });
+    (zonesBox.querySelector(".is-to-verify input") || zonesBox.querySelector("input"))?.focus({ preventScroll: true });
+    return true;
+  };
+  recheckNote?.addEventListener("click", async (event) => {
+    if (!event.target.closest("[data-recheck-cancel]")) return;
+    const n = await draftPhotoCount();
+    if ((draftStarted() || n) && !window.confirm(tx("Cancel the re-inspection? Its answers are discarded."))) return;
+    await dropDraftPhotos();
+    state.draft = blankDraft(state.draft);
+    renderDraftFields();
+    renderZones();
+    save();
+  });
+  // The log: print a sheet, re-inspect, apply a re-inspection, remove one (with undo), the period, the example, the
+  // exports and clearing.
   logBody.addEventListener("click", (event) => {
     const print = event.target.closest("[data-print-row]");
     if (print) { const row = state.rows.find((item) => item.id === print.dataset.printRow); if (row) printOnly(() => sheet(row)); return; }
+    const reinspect = event.target.closest("[data-reinspect]");
+    if (reinspect) { const row = state.rows.find((item) => item.id === reinspect.dataset.reinspect); if (row) startRecheck(row); return; }
+    const apply = event.target.closest("[data-apply]");
+    if (apply) {
+      const row = state.rows.find((item) => item.id === apply.dataset.apply);
+      if (!row) return;
+      const out = applyRecheck(row);
+      renderLog();
+      renderResults();
+      const text = recheckText(out) || tx("Nothing to apply: every verdict of this re-inspection is written.");
+      if (out.verified || out.reopened) trackerNote(logStatus, text); else flash(logStatus, text);
+      return;
+    }
     const button = event.target.closest("[data-remove]");
     if (!button) return;
     const index = state.rows.findIndex((row) => row.id === button.dataset.remove);
@@ -1191,12 +1454,13 @@
     changed();
   });
   const csvRows = () => {
-    const rows = [[tx("Date"), tx("Time"), tx("Room"), tx("Floor"), tx("Room type"), tx("Room attendant"), tx("Inspector"), tx("Inspection type"), tx("Room checklist"), tx("Zone"), tx("No."), tx("Check item"), tx("Weight"), tx("Critical"), tx("Answer"), tx("Goes back to"), tx("Note"), tx("Score"), tx("Result"), tx("Re-check")]];
+    const rows = [[tx("Date"), tx("Time"), tx("Room"), tx("Floor"), tx("Room type"), tx("Room attendant"), tx("Inspector"), tx("Inspection type"), tx("Room checklist"), tx("Zone"), tx("No."), tx("Check item"), tx("Weight"), tx("Critical"), tx("Answer"), tx("Goes back to"), tx("Note"), tx("Score"), tx("Result"), tx("Re-check"), tx("Re-inspection of")]];
     annotate(state.rows, itemsFor, state.threshold).forEach((row) => itemsFor(row).forEach((item) => {
       const answer = row.answers[item.qid];
+      const origin = originOf(row);
       rows.push([row.date, row.time, row.room, row.floor, typeName(row.roomType), row.attendant, row.inspector, kindName(row.kind), templateOf(row.template).name, zoneOf[item.zone].name, item.index + 1, item.text, item.weight,
         item.critical ? tx("yes") : tx("no"), answer ? answerText[answer]() : "", answer === "fail" ? fixText[row.flags[item.qid] || item.fix]() : "", row.notes[item.qid] || "",
-        row.s.pct === null ? "" : Math.round(row.s.pct * 1000) / 10, resultText(row), row.recheck ? tx("yes") : tx("no")]);
+        row.s.pct === null ? "" : Math.round(row.s.pct * 1000) / 10, resultText(row), row.recheck ? tx("yes") : tx("no"), origin ? `${origin.date} ${origin.time || ""}`.trim() : ""]);
     }));
     return rows;
   };

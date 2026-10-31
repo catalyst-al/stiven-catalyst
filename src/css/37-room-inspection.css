@@ -56,6 +56,16 @@
 .ri-flag span { min-width: 0; min-height: 36px; font-size: 13px; font-weight: 700; }
 .ri-walk [data-walk-status]:empty { display: none; }
 .ri-walk [data-walk-status] { margin: 0; }
+/* A re-inspection: the note names the inspection it checks; the items it checks carry a tag and a mark. */
+.ri-recheck-note { display: grid; gap: 8px; justify-items: start; margin-top: 12px; padding: 12px 14px; border: 1px solid color-mix(in srgb, var(--blue) 55%, var(--line)); border-radius: var(--radius); background: color-mix(in srgb, var(--blue) 6%, var(--card)); }
+.ri-recheck-note[hidden] { display: none; }
+.ri-recheck-note p { margin: 0; }
+.ri-recheck-head { font-size: 15px; }
+.ri-item.is-to-verify { border-left-color: var(--blue); }
+.ri-item.is-to-verify[data-answer="fail"] { border-left-color: var(--danger); }
+.ri-verify-tag { grid-column: 2; justify-self: start; }
+.ri-item[data-verify="verified"] .ri-verify-tag { border-color: color-mix(in srgb, var(--ok) 60%, var(--line)); color: var(--ok); }
+.ri-item[data-verify="none"] .ri-verify-tag, .ri-item[data-verify="other"] .ri-verify-tag { border-color: var(--line); color: var(--muted); }
 
 /* Log. */
 .ri-period { max-width: 260px; }
@@ -64,7 +74,9 @@
 .ri-result.is-pass { color: var(--ok); }
 .ri-result.is-fail { color: var(--danger); }
 .ri-row-tools { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-.ri-row-print { min-height: 32px; padding: 4px 10px; font-size: 13px; }
+.ri-row-print, .ri-row-recheck, .ri-row-apply { min-height: 32px; padding: 4px 10px; font-size: 13px; }
+.ri-recheck-of { color: var(--muted); font-size: 13px; }
+.ri-maint.is-unsent, .ri-recheck.is-pending { border-color: color-mix(in srgb, var(--warn) 70%, var(--line)); color: var(--ink); }
 
 /* Results. */
 .ri-head h2 span { color: var(--muted); font-weight: 700; }

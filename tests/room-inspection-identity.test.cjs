@@ -107,9 +107,10 @@ test('the same defect sent again is never a second action: not while open, not a
   assert.equal(saved(w2).rows[0].sent['bathroom-5'], true, 'linked again');
   assert.match(w2.document.querySelector('[data-log-status]').textContent, /already in the Action Tracker/);
   assert.equal(w2.document.querySelector('.ri-maint').dataset.maintenance, '1/0/0/0/0');
-  // Done, then verified: the link lost each time, the resend finds the action in its status and adds nothing.
+  // Done, then verified: the link lost each time, the resend finds the action in its status and adds nothing. Since
+  // phase 4B a defect's action is verified only by a re-inspection (byRecheck), as the store is told here.
   for (const patch of [{ status: 'done', result: 'Cartridge replaced' }, { status: 'verified', result: 'Re-inspected: passes' }]) {
-    assert.ok(w2.ActionsStore.update(id, patch));
+    assert.ok(w2.ActionsStore.update(id, patch, { byRecheck: patch.status === 'verified' }));
     const again = saved(w2);
     again.rows[0].sent = {};
     const w3 = load({ storage: { ...all(w2), 'sc-room-inspection': again } });
