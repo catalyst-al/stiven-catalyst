@@ -68,7 +68,7 @@ test('the worker keeps only this site, never sw.js itself, and tells versioned f
   // Only GET requests of this site are answered; sw.js and other sites are left to the network.
   const seen = [];
   const answers = [];
-  const event = (url, mode = 'navigate', method = 'GET') => ({ request: { url, mode, method, destination: mode === 'navigate' ? 'document' : '' }, respondWith: (p) => { seen.push(url); answers.push(p); } });
+  const event = (url, mode = 'navigate', method = 'GET') => ({ request: { url, mode, method, destination: mode === 'navigate' ? 'document' : '' }, respondWith: (p) => { seen.push(url); answers.push(p); }, waitUntil: (p) => answers.push(p.catch(() => undefined)) });
   listeners.fetch(event('https://stivencatalyst.com/tools/pareto/'));
   listeners.fetch(event('https://stivencatalyst.com/sw.js', 'no-cors'));
   listeners.fetch(event('https://static.cloudflareinsights.com/beacon.min.js', 'no-cors'));

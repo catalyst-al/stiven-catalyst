@@ -117,6 +117,25 @@ In a current Chrome, EN, DE and SQ:
     the work stays on every device, and the new page finds the team again (tests/sync-compat.test.cjs); details in
     `docs/SYNC-WORKER-MIGRATION.md`.
 
+## 5a. Phase 5A (the offline copies through a deploy): what to check and how to go back
+
+The worker of phase 5A (`src/sw.js`, PR of `feature/phase-5a-offline-reliability`) changes how the offline copies are
+kept, nothing else: the cache name stays `sc-offline-v1`, the precache, the registration (`js/offline.js`), the keep
+list, the update policy (`skipWaiting`, `clients.claim`) and every page are as before.
+
+- Before the merge: the full chain (build, `npm test`, the six browser projects) and the two-build spec
+  (`tests/browser/sw-offline.spec.mjs`), which serves the built site as D1, then D2 and D3 with a changed shared
+  script and stylesheet, and checks that the tools of a role open whole offline after each deploy when only one page
+  was reopened online. On one phone: install the app, keep a role, deploy, open one tool online, go offline, open two
+  others.
+- After the deploy: on a device that had the old worker, the first online visit of a tool page installs the new one;
+  its `activate` indexes the pages already in the cache and collects only the versions no page names. Pages the old
+  worker left incomplete (their files evicted) keep opening offline as they do today and are repaired at the next
+  keep (the kept tools, when any tool page is opened online) or at their next online visit. No cache is dropped.
+- The way back: `git revert -m 1 <merge commit>` as in §5. The old worker installs at the next online load; the cache
+  is valid for it (the index entry `/__sw/refs` is an ordinary cached file it never asks for, so it ignores it), and
+  the old eviction rule returns, with its defect.
+
 ## 6. Not in this release
 
 - The Team Sync Worker (`workers/sync/worker.js`): only after its own approval, by `docs/SYNC-WORKER-MIGRATION.md`.
