@@ -144,23 +144,24 @@ media-store, work-lock.
 - Tracker-i (faqja): opsioni Verified i çaktivizuar me `title`, refuzimi me mesazh, rreshti i provës pas verifikimit,
   veprimi i zakonshëm verifikohet me dorë.
 - Team Sync (test "two devices"): §4 a–c.
-- Auditimi i `28d3a357` (§10), teste 14–17, që dështojnë në `28d3a357` (provuar në worktree) dhe kalojnë pas korrigjimeve.
+- Auditimi i `28d3a357` (§10), teste 14–17, që dështojnë në `28d3a357` (provuar në worktree) dhe kalojnë pas korrigjimeve;
+  testi 18 (roja e cikleve, §10 rasti 5) dështon në `ce937438` (worktree) dhe kalon pas korrigjimit.
 
 ## 8. Rezultatet
 
 Çdo provë me ndërtim të plotë (838 faqe), mbi dy kokat e degës:
 
-| Provë | `28d3a357` (Draft PR i hapur) | korrigjimet e §10 (ky commit) |
-| --- | --- | --- |
-| `npm test` | 1 402 kalojnë, 0 dështojnë (1 389 të `main` + 13) | **1 406 kalojnë, 0 dështojnë** (+ testet 14–17) |
-| Gjithë suita e shfletuesit (6 projekte) | 216 kalojnë, 0 dështojnë, 17,1 min | **216 kalojnë, 0 dështojnë**, 15,8 min (spec-i EN i zgjeruar me bulk pass dhe `checks`) |
-| CI e PR-it | run 804: jeshile | shih përshkrimin e PR-it: raportohet vetëm kur ka përfunduar |
-| Pilot 1 (`case-thread`, `case-integrity`, `case-kpi`) | 21 teste, pa ndryshim | pa ndryshim |
-| Faza 4A (`room-inspection-identity`) | 10 teste; testi 2 verifikon me `byRecheck` (rregulli i ri) | pa ndryshim |
-| Mbulimi i përkthimeve (`room-inspection.test`) | kalon me 47 tekstet e reja | kalon me 49 (2 të zëvendësuara, 4 të reja) |
+| Provë | `28d3a357` (Draft PR i hapur) | `ce937438` (§10, rastet 1–4) | roja e cikleve (§10 rasti 5, ky commit) |
+| --- | --- | --- | --- |
+| `npm test` | 1 402 kalojnë, 0 dështojnë (1 389 të `main` + 13) | 1 406 kalojnë, 0 dështojnë (+ testet 14–17) | **1 407 kalojnë, 0 dështojnë** (+ testi 18) |
+| Gjithë suita e shfletuesit (6 projekte) | 216 kalojnë, 0 dështojnë, 17,1 min | 216 kalojnë, 0 dështojnë, 15,8 min | **216 kalojnë, 0 dështojnë**, 15,6 min |
+| CI e PR-it | run 804: jeshile | run 805: jeshile | shih përshkrimin e PR-it: raportohet vetëm kur ka përfunduar |
+| Pilot 1 (`case-thread`, `case-integrity`, `case-kpi`) | 21 teste, pa ndryshim | pa ndryshim | pa ndryshim |
+| Faza 4A (`room-inspection-identity`) | 10 teste; testi 2 verifikon me `byRecheck` (rregulli i ri) | pa ndryshim | pa ndryshim |
+| Mbulimi i përkthimeve (`room-inspection.test`) | kalon me 47 tekstet e reja | kalon me 49 (2 të zëvendësuara, 4 të reja) | pa ndryshim |
 
-Numrat e testeve janë ata të daljes reale të `node --test` dhe `playwright test` (`# tests 1406 / # pass 1406 / # fail 0`;
-`216 passed`). Testet 14–17 dështojnë në `28d3a357` (4/4, provuar në worktree me të njëjtin skedar testesh).
+Numrat e testeve janë ata të daljes reale të `node --test` dhe `playwright test`. Testet 14–17 dështojnë në `28d3a357`
+(4/4) dhe testi 18 në `ce937438` (1/1), provuar në worktree me të njëjtin skedar testesh.
 
 ## 9. Rreziqet e mbetura
 
@@ -186,7 +187,9 @@ Numrat e testeve janë ata të daljes reale të `node --test` dhe `playwright te
 | 3 | Klasifikimi i First-Time Pass | `annotate` shtonte dhomën te `failedRooms` edhe për një riinspektim që dështonte: inspektimi i zakonshëm i radhës i së njëjtës dhomë atë ditë dilte "re-check" dhe binte nga norma. Riprodhuar nga testi 16 | `if (v.pass === false && row.kind !== "recheck") failedRooms.add(key)`: vetëm inspektimi i zakonshëm që dështon shënon dhomën. Riinspektimet mbeten jashtë First-Time Pass dhe në mesatare vetëm kur janë të plota; rregulli i ditës për inspektimet e zakonshme i pandryshuar. Testi 16: total, punonjës, kat, javë, dhe figura e faqes |
 | 4 | Përgjigje e detyrueshme për defektet nën kontroll | "Mark the rest as pass" shënonte pass **edhe defektin që verifikohej**: Reinspect → rest pass → Save e verifikonte një defekt që askush s'e pa. Riprodhuar nga testi 17 | `bulkItems()` përjashton artikujt në `verifyMap` (defektet për kontroll): ata presin pass/fail/N/A të supervizorit; mesazhi e thotë; butoni çaktivizohet kur mbeten vetëm ata. Inspektimi i zakonshëm ruan sjelljen e vjetër. Testi 17 + spec i shfletuesit |
 
-Ndryshimet e §10: `src/js/room-inspection.js` (annotate, `cleanChecks`, `defectsOf/sameDefect` me rojë, `checksOf`,
+| 5 | Roja e cikleve e përbashkët mes artikujve | `defectsOf(row, seen)` i jepte **të njëjtin** `Set` çdo artikulli të rreshtit; `sameDefect` i shtonte id-në e rreshtit që te artikulli i parë, dhe artikulli i dytë (B) dilte "defekt i ri" i riinspektimit: shenja e mirëmbajtjes dhe kontrolli pasues e merrnin B si të vetin. Riprodhuar nga testi 18 në `ce937438` (dy defekte A, B që dështojnë sërish + C i ri: kontrolli pasues ofronte B dhe C) | `sameDefect` ecën me një kopje të rrugës për artikullin e vet (`new Set(seen).add(row.id)`); rruga e thirrësit nuk ndryshon, artikujt vëllezër nisin nga e njëjta pikë. `defectsOf(riinspektim)` kthen vetëm C; A dhe B rihapen pa kopje; kontrolli pasues ka vetëm C; C Done → pass → Verified pa prekur A dhe B |
+
+Ndryshimet e §10: `src/js/room-inspection.js` (annotate, `cleanChecks`, `defectsOf/sameDefect` me rojë rruge për artikull, `checksOf`,
 `recheckOutcomes` nga `checks`, `bulkItems`, butoni Reinspect), 4 tekste DE/SQ (2 të zëvendësuara), `docs/DATA-FORMATS.md`,
-README, testet 14–17, spec-i i shfletuesit (bulk pass dhe `checks` në rrjedhën EN). Pa prekje të 4A, `byCase`,
+README, testet 14–18, spec-i i shfletuesit (bulk pass dhe `checks` në rrjedhën EN). Pa prekje të 4A, `byCase`,
 tracker-it për veprimet e zakonshme, `pickRow`, Worker, deploy.

@@ -714,8 +714,9 @@
   const sameDefect = (row, qid, seen = new Set()) => {
     const origin = originOf(row);
     if (!origin || seen.has(row.id)) return false;
-    seen.add(row.id);
-    if (!defectsOf(origin, seen).includes(qid)) return false;
+    // The rows walked so far, for this item alone: a sibling item of the same row starts from the caller's path again.
+    const path = new Set(seen).add(row.id);
+    if (!defectsOf(origin, path).includes(qid)) return false;
     return !isVerifiedBefore(linkedAction(origin, qid), row);
   };
   // The defects a re-inspection of `origin` checks, with where each action stands.
