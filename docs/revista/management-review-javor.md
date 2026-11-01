@@ -31,6 +31,12 @@ Vendosur nga autori më 8 tetor 2026; më 9 tetor 2026 botimi u quajt mujor (shi
   (`.bottom` është e pozicionuar absolutisht dhe `.pg` ka `overflow: hidden`). Nr. 73–80 kanë nga gjashtë burime dhe
   u kontrolluan në tri gjuhët që asnjë faqe të mos kalojë kutinë e poshtme.
 
+- **Seria e tretë (81–120, nëntor 2026):** Nr. 81–90 u shkruan më 1 nëntor 2026: 81 Turnet e parashikueshme,
+  82 Kthimi drejt mesatares, 83 Vlerëso më parë, pastaj diskuto, 84 Nxehtësia në punë, 85 Listat e kontrollit, 86 AI pa
+  e humbur aftësinë, 87 Norma e lëndimeve, 88 Efekti i kamxhikut, 89 Orët pa gjumë, 90 Dorëzimi i turnit. Datën e
+  marrin nga muaji kur dolën online (nëntor 2026), jo nga dhjetori i planifikuar më 10 tetor. Temat dhe burimet:
+  `docs/revista/seria-e-trete-temat.md`; tabelat e fakteve: `nr-81.md` … `nr-90.md`.
+
 Një numër i ri: `lib/weekly/issues/NN.js` me `date` të muajit të serisë së vet, pastaj `node scripts/weekly.mjs NN` dhe
 `node scripts/thumbnails.mjs`.
 
@@ -162,4 +168,5 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | 11 | 49–56 | U botua (seria e dytë, nëntor 2026) |
 | 12 | 57–64 | U botua (seria e dytë, nëntor 2026) |
 | 13 | 65–72 | U botua (seria e dytë, nëntor 2026) |
-| 14 | 73–80 | Në PR (seria e dytë, nëntor 2026; e mbyll serinë) |
+| 14 | 73–80 | U botua (seria e dytë; e mbyll serinë) |
+| 15 | 81–90 | Në PR (seria e tretë, nëntor 2026) |

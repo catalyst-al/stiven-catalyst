@@ -1,0 +1,63 @@
+# Management Review Nr. 88 · Efekti i kamxhikut: valë të vogla, lëkundje të mëdha
+
+Blloku: Strategjia. Seria e tretë, Nëntor 2026. Të dhënat janë te `lib/weekly/issues/88.js`.
+
+Shkruar më 1 nëntor 2026. Të tri burimet u lexuan të plota, asnjë nuk mban `via`:
+
+- **Sterman (1989)**, Management Science 35(3), 321–339: skanimi i JSTOR-it (20 faqe) në bibliotekën e José M. Vidal-it
+  (jmvidal.cse.sc.edu/library/sterman89a.pdf). PDF-ja nuk ka shtresë teksti; faqet u kthyen në imazhe dhe u lexuan një
+  nga një, f. 321–337. Kopja e punës së MIT-it (DSpace, WP-1933-87) ktheu 429 dhe nuk u përdor. Lidhja në numër është
+  DOI-ja e botuesit.
+- **Lee, Padmanabhan & Whang (1997)**, "Information Distortion in a Supply Chain: The Bullwhip Effect", Management
+  Science 43(4), 546–558: kopja e JSTOR-it në faqen e një kursi të Universitetit Bilkent, teksti i plotë me pymupdf.
+  Artikulli i shkurtër i Sloan Management Review (1997) nuk u hap (kopja e Temple-it nuk ishte PDF) dhe nuk u përdor.
+- **Croson & Donohue (2006)**, Management Science 52(3), 323–336: versioni i botuesit në faqen e Wharton-it
+  (faculty.wharton.upenn.edu), teksti i plotë me pymupdf.
+
+Forrester-i (1958, HBR) nuk u hap; numri e përmend vetëm siç e citojnë Lee et al. ("Forrester (1961) illustrates the
+effect in a series of case studies"), pa kartë burimi. Cachon, Randall & Schmidt (2007) dhe Fransoo & Wouters (2000) u
+kërkuan, por nuk u gjet kopje e hapur; nuk hynë.
+
+Teoria e kufizimeve është te Nr. 54, ligji i Little-it te Nr. 58, S&OP te Nr. 59, parashikimi i kërkesës te Nr. 77: nuk
+përsëriten, përmenden te shënimi i faqes 5. Lidhja me esenë "Mistakes get lost between departments" (faqja 5)
+mbështetet te eseja: "A mistake can be measured in one place and born in another", dhe informacioni i dërguar nuk është
+gjithmonë informacion i marrë. Mjeti `/tools/inventory-abc/` klasifikon artikujt sipas qëndrueshmërisë së kërkesës (XYZ)
+dhe cakton pikat e riporositjes.
+
+## Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Beer Distribution Game: lojë me role e krijuar në MIT për mësimin e menaxhimit; katër sektorë: shitës me pakicë, me shumicë, shpërndarës, fabrikë; një person për sektor | Sterman (1989), f. 326 | U konfirmua te teksti i plotë: "a role-playing simulation of an industrial production and distribution system developed at MIT to introduce students of management to the concepts of economic dynamics"; "Each brewery consists of four sectors: retailer, wholesaler, distributor, and factory (R, W, D, F). One person manages each sector." |
+| I vetmi vendim është porosia; vonesa e furnizimit të paktën 4 javë; qëllimi kostoja totale më e ulët | Sterman (1989), f. 326–327 | U konfirmua: "only step 5, Place Orders, involves a decision on the part of the subject"; "that lag is never less than 4 weeks but may be longer if upstream inventories are insufficient"; "The subjects' objective is to minimize total company costs" |
+| Fillimi: stok 12, kërkesa 4 kuti në javë, secili porosit 4 gjatë katër javëve të para | Sterman (1989), f. 327 | U konfirmua: "Each inventory contains 12 cases and initial throughput is four cases per week … Customer demand likewise begins at four cases per week … each player is directed to order four cases" |
+| Java 5: kërkesa ngrihet në 8 dhe mbetet; askujt nuk i thuhet | Sterman (1989), f. 327–328 | U konfirmua: "There is an unannounced, one-time increase in customer demand to eight cases per week in week 5"; "Customer demand is not known to any of the subjects in advance" |
+| 48 prova (192 lojtarë) gjatë katër vjetëve; u mbajtën 11 (44 lojtarë); studentë të MIT-it dhe drejtues | Sterman (1989), f. 328 | U konfirmua: "drawn from 48 trials (192 subjects) collected over a period of four years … Eleven trials were retained (44 subjects). That sample consists of undergraduate, MBA, and Ph.D. students at MIT's Sloan School of Management, executives from a variety of firms … and senior executives of a major computer firm." |
+| Të gjitha provat u lëkundën; rikthimi te stoku fillestar zgjati mesatarisht 21 javë | Sterman (1989), f. 329 | U konfirmua: "The trials are all characterized by instability and oscillation … with an average of 21 weeks required to recover initial inventory levels." |
+| Porositë e pambushura arrijnë mesatarisht 35 kuti, javët 20–25; stoku arrin mesatarisht 40, javët 25–30; porositë bien | Sterman (1989), f. 329–330 | U konfirmua: "The maximum backlog averages 35 cases, and occurs between weeks 20 and 25"; "The inventory peak averages 40 cases and occurs between weeks 25 and 30. Orders fall off rapidly as inventory builds up." |
+| Kostot e ekipeve rreth dhjetë herë pikën e krahasimit të simuluar ($2.028 kundrejt $204, raporti 9,9) | Sterman (1989), tabela 2, f. 329 | U konfirmua: "The average team cost is ten times greater than the benchmark" |
+| Pas lojës, shumica e lojtarëve vizatuan kërkesën si valë (ngritje e pastaj rënie) | Sterman (1989), f. 335 | U konfirmua: "Invariably the majority of subjects judge that customer demand was oscillatory, first rising from the initial level of 4 cases per week to a peak anywhere from 12 to 40 cases, and then dropping". "Valë" është fjala jonë |
+| Kulmi i porosive (kuti/javë): klienti 8, pakicë 15, shumicë 19, shpërndarësi 27, fabrika 32 | Sterman (1989), tabela 3 | U konfirmua te tabela: "Peak Order Rate (cases/week) 8 15 19 27 32" |
+| Fabrika: kulmi mbi dyfishin e kulmit te pakica; përforcimi 700% = (32 − 4)/(8 − 4) | Sterman (1989), f. 330 dhe shënimi 3 | U konfirmua: "The peak order rate at the factory is on average more than double the peak order rate at retail … the order rate averages a peak of 32 cases, an amplification factor of 700%"; "Δ(Factory Orders)/Δ(Customer Orders) = (32 − 4)/(8 − 4) = 7" |
+| Varianca e porosive: klienti 1,6, pakicë 13, fabrika 72 | Sterman (1989), tabela 3 | U konfirmua: "Variance of Order Rate (cases/week)² 1.6 13 23 45 72" |
+| Kulmet më vonë lart në zinxhir: pakica java 16, fabrika java 20 | Sterman (1989), f. 330 | U konfirmua: "Retailer orders do not reach their peak until week 16, on average. Factory orders lag behind still further, peaking at week 20 on average." (Te tabela 3 shpërndarësi ka javën 21; në faqe japim vetëm dy skajet) |
+| Lojtarët i dhanë pak peshë linjës së furnizimit: β mesatare 0,34, e drejta 1; vetëm 5 nga 44 (11%) llogaritën më shumë se dy të tretat | Sterman (1989), f. 334 dhe tabela 4 | U konfirmua: "The optimal value of β is unity … But the mean value of β is just 0.34; only five subjects (11%) accounted for more than two-thirds of the supply line." |
+| Përkufizimi: porositë te furnitori kanë variancë më të madhe se shitjet te blerësi, dhe shtrembërimi përhapet lart i përforcuar | Lee et al. (1997), f. 546 | U konfirmua: "the bullwhip effect or whiplash effect refers to the phenomenon where orders to the supplier tend to have larger variance than sales to the buyer (i.e., demand distortion), and the distortion propagates upstream in an amplified form (i.e., variance amplification)" |
+| Efekti lind edhe kur anëtarët janë racionalë, nga katër shkaqe: leximi i sinjalit të kërkesës, loja e racionimit, porositë në grup, ndryshimet e çmimit | Lee et al. (1997), abstrakti dhe f. 548 | U konfirmua: "four sources of the bullwhip effect: demand signal processing, rationing game, order batching, and price variations"; "We demonstrate through the models that the bullwhip effect is an outcome of the strategic interactions among rational supply chain members." |
+| Sinjali i kërkesës: një javë e fortë lexohet si kërkesë e lartë në të ardhmen dhe porosia rritet; afatet e gjata e përkeqësojnë | Lee et al. (1997), f. 549 dhe teorema 1(b) | U konfirmua: "She will interpret it as a signal of high future demand, adjust the demand forecast, and place a large order"; "a long lead time in replenishing orders from upstream tends to aggravate the distortion even further" |
+| Racionimi: në mungesë, blerësit porosisin më shumë se do të porosisnin pa kufizim | Lee et al. (1997), f. 551 | U konfirmua: "To try to secure more units, each retailer will issue an order which exceeds in quantity what the retailer would order if the supply of the product is unlimited." |
+| Porositë në grup: nga kontrolli periodik dhe kostoja e transaksionit | Lee et al. (1997), f. 557 | U konfirmua: "Batching of orders is a consequence of two factors: the periodic review process and the processing cost of a purchase transaction." |
+| Çmimet: me çmim të ulët blerësi mbush stokun, me çmim të lartë nuk porosit derisa stoku bie nën nivelin e ulët; promocionet çojnë në blerje të përparshme ("forward-buying") | Lee et al. (1997), f. 554–555 dhe 557 | U konfirmua (shembulli SH = 30, SL = 100; "the retailer does not order any until the inventory level hits below 30"; "the excessive costs associated with forward-buying"). "Pastaj vjen një qetësi" është përmbledhja jonë e këtij shembulli |
+| Forrester (1961) e tregoi efektin në studime rastesh | Lee et al. (1997), f. 547 | U konfirmua: "Forrester (1961) illustrates the effect in a series of case studies". Libri i Forrester-it nuk u lexua |
+| Kundërmasat te karta: ndarja e të dhënave të shitjeve (sell-through), porosi më të vogla e më të shpeshta me kosto më të ulët porosie, shpërndarje sipas shitjeve të kaluara në mungesë | Lee et al. (1997), f. 556–557 | U konfirmua: "One clear solution is to grant the manufacturer access to the demand data at the retail outlet"; "more frequent replenishment in small batches"; "allocate the supply in proportion to the retailer's market share in the previous period (i.e., retailer's share of total sales of the product)" |
+| Croson & Donohue: u hoqën shkaqet operacionale (porositë në grup, ndryshimet e çmimit, vlerësimi i kërkesës); kërkesa uniforme 0–8, e shkruar në tabelë | Croson & Donohue (2006), abstrakti dhe §2 | U konfirmua: "we find the bullwhip effect still exists when normal operational causes (e.g., batching, price fluctuations, demand estimation, etc.) are removed"; "Demand is U[0,8] meaning (0, 1, 2, 3, 4, 5, 6, 7, or 8) is equally likely in each period … in large letters on the front board" |
+| 44 studentë në studimin I (4 role × 11 grupe), 44 në studimin II, të dyja më 30 prill 2002 | Croson & Donohue (2006), §2.3 dhe §3.2.2 | U konfirmua: "Study I and II used 44 subjects each and were both performed on the same day (April 30, 2002)"; "each of the 44 participants in our study (4 roles × 11 groups)" |
+| Studimi II: të katër stoqet e grupit në një grafik me shtylla, i përditësuar çdo periudhë | Croson & Donohue (2006), §4.1 | U konfirmua: "This information was displayed in a bar chart with four bars representing the inventory positions of the four members of their group." |
+| Varianca mesatare e porosive: pakicë 10,73 → 10,13; shumicë 18,56 → 16,98; shpërndarësi 47,83 → 23,18; prodhuesi 57,95 → 36,37 | Croson & Donohue (2006), tabela 1 | U konfirmua te tabela 1 (përmirësimi 5,6%, 8,5%, 51,5%, 37,2%). Në grafik me një shifër dhjetore. "Ra afërsisht përgjysmë" për shpërndarësin: 51,5% |
+| Varianca e kërkesës 5,33 | Croson & Donohue (2006), shënimi i tabelës 1 | U konfirmua: "the variance of customer demand (which is 5.33 for our uniform [0,8] distribution)" |
+| Të 44 lojtarët i dhanë më pak peshë linjës së furnizimit se stokut | Croson & Donohue (2006), §3.2.2 | U konfirmua: "All of the 44 participants placed less weight on their supply line than on their inventory positions" |
+| Pesë ekipe profesionistësh të logjistikës (CLM, 20 vetë), i njëjti model, më pak i fortë | Croson & Donohue (2006), §2.3 dhe §3.2.1 | U konfirmua: "five teams (20 people)" të degës Twin Cities të Council of Logistics Management; "Results are consistent with those from the student population"; "the magnitude of the effect is less significant for this group (success rate of 75%…)" |
+| Matja: varianca e porosive përballë variancës së kërkesës | Lee et al. (1997); Croson & Donohue (2006) | Përkufizimi i Lee et al. (më sipër); Croson & Donohue: "the bullwhip effect is defined as an increase in the variance of orders placed at a given echelon level, relative to the orders received at that level". Hapat janë të redaksisë |
+| Shembulli i faqes 7 (kërkesa 36–44, varianca 8; porositë 0/40/80, varianca 1.200; raporti 150) | Redaksia | Shembull i shpikur, i shënuar si i tillë. Kërkesa 40, 44, 36, 40, 44, 36, 40, 40; porositë 0, 80, 0, 80, 40, 40, 0, 80; të dyja me mesatare 40; variancat pjesëtuar me 8 |
+| "I pesti" si emër për gjetjen e Sterman-it | Redaksia | Zgjedhje editoriale; shënimi i faqes 5 e thotë |
+| Karta e faqes 8 | Redaksia | Propozim, jo kërkim; shënimi e thotë |

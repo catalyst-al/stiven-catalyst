@@ -74,7 +74,7 @@ test('the publications say when they went online, and tell search engines the sa
     assert.match(published, /^2026-\d\d-\d\d$/, slug);
     assert.ok(modified >= published, slug);
   }
-  assert.equal(Object.keys(online).filter((slug) => slug.startsWith('management-review-nr-')).length, 80);
+  assert.equal(Object.keys(online).filter((slug) => slug.startsWith('management-review-nr-')).length, 90);
   for (const [, prefix] of LANGS) assert.doesNotMatch(read(`${prefix}magazine/management-review.html`), /every month brings|çdo muaj vjen|jeden Monat kommt/);
 });
 

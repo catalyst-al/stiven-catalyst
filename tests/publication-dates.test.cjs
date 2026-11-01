@@ -44,7 +44,8 @@ test('the three languages give the same month', async () => {
 
 test('issue 41, From the Floor No. 2 and the special edition: the cover, the running head, the page and its data agree', { skip: !hasSite }, () => {
   for (const [prefix, month] of [['', 'October 2026'], ['sq/', 'Tetor 2026'], ['de/', 'Oktober 2026']]) {
-    for (const slug of ['management-review-nr-41', 'management-review-nr-80', 'nga-terreni-02', 'management-review-2026-09']) {
+    // No. 79, not 80: since 1 November 2026 the page of No. 80 links to No. 81 as the next issue, dated November 2026.
+    for (const slug of ['management-review-nr-41', 'management-review-nr-79', 'nga-terreni-02', 'management-review-2026-09']) {
       const html = fs.readFileSync(`_site/${prefix}magazine/${slug}.html`, 'utf8');
       assert.ok(html.includes(month), `${prefix}${slug}: ${month}`);
       assert.doesNotMatch(html, /November 2026|Nëntor 2026|September 2026|Shtator 2026/, `${prefix}${slug}: no former month`);
