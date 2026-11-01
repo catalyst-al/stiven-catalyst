@@ -1,0 +1,86 @@
+# Management Review Nr. 81 · Turnet e parashikueshme: plani i turneve si mjet drejtimi
+
+Blloku: Roli. Të dhënat janë te `lib/weekly/issues/81.js`. Ky numër hap serinë e tretë (81–120), me datën "Nëntor 2026".
+
+Shkruar më 1 nëntor 2026. Të katër burimet u lexuan të plota, asnjëri nuk mban `via`:
+
+- **Schneider & Harknett (2019)**, American Sociological Review 84(1), f. 82–114: dorëshkrimi i autorëve (NIHMS1040362)
+  në PubMed Central, PMC7730535, i shkarkuar si XML përmes E-utilities të NCBI dhe i lexuar i tëri (hyrja, metoda,
+  rezultatet, diskutimi, shënimet dhe shtojca). Faqet e versionit të botuar nuk u panë; shifrat janë të dorëshkrimit.
+- **Williams, Lambert, Kesavan et al. (2018)**, *Stable Scheduling Increases Productivity and Sales: The Stable
+  Scheduling Study*, WorkLife Law, UC Hastings College of the Law: PDF-ja e plotë (52 faqe) nga worklifelaw.org, e
+  lexuar me pymupdf. Raporti nuk e shtyp vitin; faqja e WorkLife Law e jep "datePublished" 28 mars 2018 dhe PDF-ja është
+  krijuar më 27 mars 2018.
+- **Direktiva (BE) 2019/1152** e 20 qershorit 2019 (Gazeta Zyrtare L 186): EUR-Lex i ktheu ambientit të punës një faqe
+  bosh (HTTP 202 pa përmbajtje, edhe te WebFetch). Teksti i plotë i direktivës u lexua te kopja e tekstit të Gazetës
+  Zyrtare në legislation.gov.uk (`/eudr/2019/1152/data.xml`, me lidhjet CELEX 32019L1152 dhe ELI dir/2019/1152/oj). Në
+  burime jepet adresa ELI e EUR-Lex-it, si te burimet e tjera ligjore të BE-së.
+- **TzBfG § 12** (Arbeit auf Abruf): teksti i paragrafit në gesetze-im-internet.de, siç shfaqej më 1 nëntor 2026. Faqja
+  e ligjit të plotë (datat e ndryshimeve) ktheu 503; viti 2000 i burimit është viti i ligjit (BGBl. 2000, sipas
+  identifikuesit BJNR196610000), jo i formulimit të sotëm të § 12.
+
+Puna me turne dhe natën, ora biologjike dhe pushimi 11-orësh i Direktivës
+2003/88/KE janë te Nr. 45; S&OP (kërkesa dhe kapaciteti në një plan) te Nr. 59; menaxhimi algoritmik te Nr. 61. Nuk
+përsëriten.
+
+## Tabela e fakteve
+
+| Shifra ose fakti | Burimi | Statusi |
+|---|---|---|
+| Gap-i, që nga 1 tetori 2015, u kërkoi të gjitha dyqaneve në SHBA t'i botonin planet dy javë përpara dhe hoqi turnet me thirrje | Williams et al. (2018), f. 5–6 dhe 12 | U konfirmua te teksti i plotë: "Gap decided to roll out two of our proposed practices to all of their U.S. stores as of October 1, 2015: 1. Two-week Advance Notice … 2. Elimination of On-calls" |
+| Studiues nga tri universitete (UC Hastings, Universiteti i Çikagos, UNC Kenan-Flagler) | Williams et al. (2018), f. 5 | U konfirmua: "Principal Investigator (PI) Joan C. Williams of the University of California, Hastings College of the Law; Co-PI Susan Lambert of the University of Chicago …; and Co-PI Saravanan Kesavan of the University of North Carolina, Kenan-Flagler Business School" |
+| Pilot i plotë me 28 dyqane në San Francisko dhe Çikago, nëntor 2015 – gusht 2016; 19 dyqane me praktikat, 9 kontroll | Williams et al. (2018), f. 6 dhe 13 | U konfirmua: "The full pilot, which included 28 stores in the San Francisco and Chicago metropolitan areas, ran from November 2015 to August 2016. For the full pilot, we randomly assigned 19 of these stores to the treatment condition and 9 of them to the control condition." Te f. 13: 25 dyqanet jashtë provës paraprake u caktuan me short, 3 dyqanet e provës paraprake mbetën te trajtimi. Prandaj kopertina thotë "eksperiment i rastësishëm" (si raporti), dhe faqja 3 nuk thotë që të 19 u zgjodhën me short |
+| Pesë praktikat: ndërrimi i turneve me aplikacion (Shift Messenger, pa përfshirjen e menaxherit; menaxheri poston turne shtesë); strukturë e qëndrueshme e turneve (orë standarde fillimi dhe mbarimi); turne bazë (të njëjtat ditë dhe orë javë pas jave); Part-time Plus ("soft guarantee" prej 20 ose më shumë orësh në javë për një ekip bazë); staf shtesë i synuar | Williams et al. (2018), f. 6 dhe 13 | U konfirmua te teksti i plotë, me fjalët tona |
+| Stafi shtesë i synuar: 13 nga 19 dyqanet, orë shtesë të paguara nga Gap-i, në kohë të caktuara | Williams et al. (2018), f. 13 dhe 28 | U konfirmua: "Of the 19 treatment stores, 13 received additional staffing hours"; "(funded by Gap) at no cost to the store's labor budget"; "adding 1 or 2 sales associates for a 4-hour window, 7 days a week" |
+| Shitjet mesatare (mediana) +7% në dyqanet me praktikat; produktiviteti i punës (shitje për orë) +5% | Williams et al. (2018), f. 6–7 dhe 28 | U konfirmua: "Stable scheduling sharply increased median sales by 7% in treatment stores during the intervention period"; "labor productivity (sales per hour) increased by 5% as a result of our intervention". Kopertina, hyrja dhe faqja 3 |
+| Metoda: difference-in-difference; 35 javë; 2,9 milionë $ të ardhura shtesë; e vetmja kosto e drejtpërdrejtë rreth 31.200 $ | Williams et al. (2018), f. 28 | U konfirmua: "We performed a difference-in-difference analysis"; "Over the 35 weeks of the pilot, we estimate that shifting to more stable scheduling yielded $2.9 million". 2,9 milionë dhe 31.200 $ nuk hynë për vend |
+| Gap-i dha një grant fillestar prej 50.000 $ dhe mori pjesë në studim | Williams et al. (2018), f. 3 | U konfirmua: "Gap made significant investments in the study, beginning with a $50,000 seed grant to help fund it." Hyri në shënimin e faqes 3 si kufizim |
+| Në fund të studimit Gap-i e uli paralajmërimin nga dy javë në dhjetë ditë | Williams et al. (2018), f. 7 dhe shënimi 2 | U konfirmua: "Ultimately, Gap reduced the Advance Notice policy from two weeks to ten days at the study's conclusion." (Shënimi 2: dyqanet e mbuluara nga ligji i San Franciskos u përjashtuan) |
+| Shift Project: 27.792 punonjës me orë në 80 firma të mëdha të tregtisë me pakicë dhe të ushqimit në SHBA; rekrutuar me reklama në Facebook; të dhëna të mbledhura në 2016 dhe 2017; të peshuara | Schneider & Harknett (2019), "Survey Methodology" | U konfirmua: "survey data from this study collected from 27,792 retail and food service workers employed at 80 large companies"; "Survey respondents were recruited using targeted advertisements on Facebook"; "Survey data was collected in June, September, and October 2016; March, May, and June 2017; and late August, September, and October 2017"; "all our results use these weights" (pesha sipas ACS) |
+| Paralajmërimi: 16% më pak se tri ditë (0–2 ditë), 18% tri deri gjashtë ditë, 30% një deri dy javë, 37% më shumë se dy javë; 34% më pak se një javë, 63% më pak se dy javë | Schneider & Harknett (2019), "Descriptive Results" | U konfirmua: "Sixteen percent received fewer than three days of notice, and 18 percent received three to six days' notice. Thirty percent of workers received one to two weeks' notice, and 37 percent received more than two weeks' advance notice. Overall, 34 percent of workers had less than one week of advance notice, and 63 percent had less than two weeks." Shiritat e faqes 4; shuma 101% nga rrumbullakimi, e thënë në shënim. Pyetja ndan "zero to two days" (metoda) |
+| 50% punuan një "clopening" (turn mbylljeje, pastaj turni i hapjes me më pak se 11 orë pushim) në muajin e fundit; 26% punuan me thirrje; 14% patën një turn të anuluar me më pak se 24 orë paralajmërim | Schneider & Harknett (2019), "Key Measures" dhe "Descriptive Results" | U konfirmua: "A minority of workers, 14 percent, reported they had a work shift canceled on short-notice within the past month. About twice as many (26 percent) reported they work on-call shifts. A much larger share of workers, 50 percent, reported working a clopening shift." Pyetjet: "in the last month, was one of your scheduled shifts canceled with less than 24 hours notice?"; "in the last month, you worked on call?"; "in the past month or so, have you ever worked a closing shift and then worked the very next opening shift with less than 11 hours off in between" |
+| Gjysma pa asnjë fjalë për planin; luhatja mesatare e orëve 32% (orët më të shumta minus më të paktat në katër javët e fundit, pjesëtuar me më të shumtat) | Schneider & Harknett (2019) | U konfirmua: "with half reporting no input at all"; "The mean percent variation was 32 percent"; përkufizimi: "asking respondents to report the most and the fewest weekly hours they worked over the past four weeks and taking the difference in hours divided by the maximum weekly hours" (edhe rreshti "Luhatja e orëve" i faqes 7) |
+| Çdo masë e paqëndrueshmërisë shoqërohej me stres psikologjik; për gjumin dhe lumturinë, shumica (për lumturinë, luhatja e orëve nuk kishte lidhje të rëndësishme) | Schneider & Harknett (2019), "Regression Results" | U konfirmua: "each of our measures of unstable and unpredictable scheduling is positively associated with psychological distress"; "Although there is no significant relationship with week-to-week variability in work hours, the other measures of scheduling show similar patterning". Prandaj hyrja e faqes 6 thotë "dhe shumica me gjumë më të keq dhe më pak lumturi" |
+| 65% e atyre që patën një turn të anuluar raportuan stres, përballë më pak se 45% e të tjerëve | Schneider & Harknett (2019) | U konfirmua: "65 percent of workers who have had shifts canceled reported psychological distress, compared to less than 45 percent of those who had not" |
+| Rënia e vlerësuar e stresit për punonjësit e prekur: heqja e turneve me thirrje 15 pikë përqindjeje; 72 orë paralajmërim (përballë 0–2 ditëve) 4,5 pikë; rritje page 4 $ 2 pikë; paga bazë 7,25 $ | Schneider & Harknett (2019), "The Relative Roles of Time and Money" dhe metoda | U konfirmua: "eliminating on-call shifts would reduce psychological distress by 15 percentage points for affected workers, and requiring 72 hours of advanced notice would reduce psychological distress by 4.5 percentage points for affected workers. Wage increases also reduce distress, but the magnitudes are smaller: a $4 increase would reduce distress by 2 percentage points." Krahasimi është me "zero to two days' advance notice" dhe me rritje "from $7.25". Grafiku i faqes 6; "më shumë se shtatë herë" (15/2 = 7,5) te hyrja |
+| "Efektet" janë dallime në probabilitetet e parashikuara, jo efekte shkakësore; anketa është në një moment të vetëm | Schneider & Harknett (2019), shënimi 4 dhe diskutimi | U konfirmua: "we use the terms 'effect' and 'effect size' informally to describe the difference in predicted probabilities"; "Our analyses are cross-sectional". Në shënimin e faqes 6 |
+| Konflikti punë-jetë ndërmjetëson 76% të efektit total të paqëndrueshmërisë mbi stresin; pasiguria ekonomike e familjes 42% | Schneider & Harknett (2019), "Mediation" | U konfirmua: "accounting for 42 percent of the total effect (95 percent CI: 40 percent, 44 percent)"; "We are able to mediate 76 percent of the total effect of schedule instability on psychological distress (95 percent CI: 73 percent, 79 percent)". Të dyja janë matur veç e veç (prandaj shuma kalon 100%); kështu thuhet në tekst |
+| Katër dimensionet e qëndrueshmërisë: qëndrueshmëria (consistency), parashikueshmëria, mjaftueshmëria (adequacy), fjala e punonjësit (input) | Williams et al. (2018), f. 5 | U konfirmua: "1. Consistency … 2. Predictability … 3. Adequacy … 4. Input" |
+| Qëndrueshmëria: shanset që një turn i planifikuar të fillojë ose të mbarojë në të njëjtën orë: "better than 3 in 9" në javët me praktikat, "less than 3 in 10" në javët pa to | Williams et al. (2018), f. 21 | U konfirmua te teksti i plotë. **U korrigjua** gjatë shkrimit: drafti thoshte "e njëjta orë fillimi"; burimi thotë "start or end in the same hour" |
+| Parashikueshmëria: turnet e ndryshuara me 15 minuta ose më shumë nga plani i botuar: 41% në javët me praktikat, 46% në javët pa to | Williams et al. (2018), tabela 1, f. 23–24 | U konfirmua: "Percentage of shifts with any change 41% 46% <.01"; "A significantly lower percentage of shifts were changed from the original schedule during intervention (41%) versus non-intervention (46%, p<.01) weeks" |
+| Mjaftueshmëria: Part-time Plus, orë të punuara 21 në 8 javët para, 26 në 8 javët pas; mesatarja e orëve nuk u rrit | Williams et al. (2018), f. 24–25 | U konfirmua: "associates averaged 26 hours in the 8 weeks subsequent to entering Part-time Plus status, compared to an average of 21 hours in the prior 8 weeks (p<.05)"; "The Intervention did not increase number of work hours for the average hourly associate" |
+| Fjala e punonjësit: 75% në dyqanet me praktikat dhe 66% në dyqanet e kontrollit thanë se kanë fjalë për ditët e punës | Williams et al. (2018), f. 26 | U konfirmua: "75% of respondents from treatment stores agreed that they have input into the days they worked each week, compared to 66% of control store respondents (p<.05)" |
+| Lëvizja e klientëve nga java në javë shpjegonte vetëm 30% të luhatjes së orëve javore të pagave | Williams et al. (2018), f. 7 dhe 31 | U konfirmua: "only 30% of the variability in weekly payroll hours is explained by changes in traffic from week to week" |
+| Tri shkaqe nga qendra: dërgesat (data ose sasi), promocionet e ndryshuara në minutën e fundit, vizitat e drejtuesve | Williams et al. (2018), f. 32–34 | U konfirmua: "The HQ drivers of scheduling instability identified by managers fell into three categories: 1) changes in shipment dates or number of units; 2) changes in promotions; and 3) leadership visits." |
+| Të dhënat e studimit: planet e botuara, regjistrimet e orarit (time-clock), dy anketa me punonjësit | Williams et al. (2018), f. 14 | U konfirmua: "Time-clock data", "Weekly posted schedules", "Employee surveys. Baseline and post-intervention surveys" |
+| Direktiva (BE) 2019/1152, neni 10(1)–(2): kur modeli i punës është tërësisht ose kryesisht i paparashikueshëm, punonjësi nuk detyrohet të punojë pa dy kushte: puna brenda orëve dhe ditëve të referencës të paracaktuara dhe njoftim brenda një afati të arsyeshëm; përndryshe ka të drejtë ta refuzojë pa pasoja të pafavorshme | Direktiva (BE) 2019/1152, neni 10 | U konfirmua te teksti i plotë: "the worker shall not be required to work by the employer unless both of the following conditions are fulfilled: (a) the work takes place within predetermined reference hours and days …; and (b) the worker is informed by his or her employer of a work assignment within a reasonable notice period"; "a worker shall have the right to refuse a work assignment without adverse consequences" |
+| Neni 10(3) (kompensim për anulim pas një afati të arsyeshëm), neni 4(2)(m) (informimi për orët e referencës dhe afatin minimal të njoftimit), neni 21 (transpozimi deri më 1 gusht 2022) | Direktiva (BE) 2019/1152 | U konfirmuan te teksti i plotë; nuk hynë në faqe për vend, përveç kartës (orët dhe ditët e referencës) |
+| Gjermani, § 12(3) TzBfG: punëdhënësi cakton kornizën kohore me orë dhe ditë reference; punonjësi detyrohet të punojë vetëm nëse i njoftohet orari të paktën katër ditë përpara dhe brenda asaj kornize | TzBfG § 12 | U konfirmua: "Der Arbeitnehmer ist nur zur Arbeitsleistung verpflichtet, wenn der Arbeitgeber ihm die Lage seiner Arbeitszeit jeweils mindestens vier Tage im Voraus mitteilt und die Arbeitsleistung im Zeitrahmen nach Satz 1 zu erfolgen hat." § 12(6) lejon devijim me marrëveshje kolektive; faqja thotë "përmbledhur, jo këshillë ligjore" |
+
+## Çfarë nuk hyri
+
+- 2,9 milionë $ të ardhura shtesë dhe kostoja e drejtpërdrejtë rreth 31.200 $ (Williams et al., f. 28): të konfirmuara,
+  jashtë për vend.
+- Rreth 90% e planeve u botuan të paktën dy javë përpara gjatë tre tremujorëve të parë të 2016-s, pa tri dyqanet me
+  ndërrim të shpeshtë menaxherësh (f. 16): e konfirmuar, jashtë për vend.
+- Shifrat e anketës së përgjithshme të SHBA-së të 2016-s (40% e punonjësve me orë e dinin planin një javë ose më pak
+  përpara, 28% tri ditë ose më pak; Williams et al., f. 9, sipas GSS 2016): u panë vetëm si citim te raporti, jo te
+  burimi primar; nuk hynë.
+- Kohëzgjatja e përgatitjes së planit (nga 3–4 orë në një orë e gjysmë, sipas një menaxheri; f. 38): citim i vetëm,
+  jashtë.
+
+## Çfarë është editoriale
+
+- Leximet te kutitë "Leximi ynë": plani si kosto që e pagoi veten; dy javë paralajmërim si përjashtim; orët që dëmtojnë
+  më shumë përmes jetës përreth sesa përmes parave; paqëndrueshmëria që prodhohet më lart dhe bie te plani.
+- Shkurtimi i pesë praktikave dhe i katër dimensioneve me fjalët tona.
+- Pesë shifrat e faqes 7: përkufizimet janë të burimeve (Williams et al. për turnet e ndryshuara me 15 minuta; Schneider
+  & Harknett për paralajmërimin, luhatjen e orëve, anulimet nën 24 orë dhe clopening); përzgjedhja si "pesë shifra për
+  një plan" dhe rreshti i paralajmërimit si "ditët nga botimi deri te turni i parë" janë të redaksisë.
+- Karta e faqes 8 është praktikë e redaksisë, sipas dy studimeve dhe nenit 10 të direktivës.
+- Lidhja me esenë "Ditët me volum të lartë" (`high-volume-days`, faqja 6): eseja tregon ditët kur kërkesa kaloi
+  parashikimin dhe shoferët u thirrën në çast, dhe kërkon një plan për mungesat dhe vonesat para ditës së madhe. Kjo
+  lidhet me faqen për ku lind paqëndrueshmëria. Faqja nuk pretendon asgjë për rastin e autorit.
+- Lidhja me mjetin Shift Capacity (`/tools/shift-capacity/`, faqja 8): mjeti e kthen parashikimin e volumit në numër
+  njerëzish për turn, me lejim për mungesat, para se të shkruhet plani. Nuk mat qëndrueshmërinë e planit; është mjeti i
+  faqes që i paraprin.
