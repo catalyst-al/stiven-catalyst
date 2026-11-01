@@ -157,7 +157,7 @@ None found.
   references it; or on each `keep` and on `activate` re-fetch the cached documents (`ignoreSearch`) before evicting;
   or keep the last two versions of each path. Each needs the regression test above and a migration note for caches
   built by today's worker.
-- **Status (Phase 5A, Draft PR [catalyst-al/stiven-catalyst#371](https://github.com/catalyst-al/stiven-catalyst/pull/371), commits `b0887a0b`, after the round-3 audit `27046d52` and after the round-4 audit `27dd6231`):** implemented as reference-aware retention with an index,
+- **Status (Phase 5A, Draft PR [catalyst-al/stiven-catalyst#371](https://github.com/catalyst-al/stiven-catalyst/pull/371), commits `b0887a0b`, after the round-3 audit `27046d52`, after the round-4 audit `27dd6231` and after the round-5 audit `e601345d`):** implemented as reference-aware retention with an index,
   batched collection, atomic refresh and one lock (`docs/audit/2026-10-31-phase-5a-proposal.md` §3 and §10). The
   regression tests fail on `0b995e82` (5 of 10 unit scenarios; the browser spec at the first offline check after D2)
   and pass on the branch. Awaiting the independent code audit and the owner's approval; not merged.
@@ -673,3 +673,8 @@ Round 4 (1 November 2026, ChatGPT's independent audit of PR #371 at `6ee3ea4d`):
 for a plain address cached only under a query variant fetching nothing); both fixed with the tests that failed on
 `6ee3ea4d`, the first of them an actual old-worker-to-new-worker upgrade (proposal §12). The index's query-bearing
 addresses recorded under P1-02 for Phase 5B. P1-01's status line names the corrected commit.
+
+Round 5 (1 November 2026, ChatGPT's independent audit of PR #371 at `5a3343ba`): one regression reproduced with the
+production worker followed by the PR's (a cached Search page losing the index version its `data-index` names once a
+later build had fetched a newer one); fixed with a reference-only table for lazily fetched files and the test that
+fails on `5a3343ba` (proposal §13). P1-01's status line names the corrected commit.

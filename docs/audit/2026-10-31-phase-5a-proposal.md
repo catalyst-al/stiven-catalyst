@@ -321,4 +321,40 @@ from both places at once; until then a hand-off address kept offline persists as
 | Cost (T11) | 1 `keys()` per page update, 0 requests for a keep over complete pages, 10 `match()` at 212 entries: unchanged |
 | CI | the run on `27dd6231` and the documents commit: reported in the Draft PR once finished |
 
-Open for the next audit: nothing known. Phase 5B (privacy hand-offs) is not touched by this PR beyond the note above.
+## 13. Independent audit of `5a3343ba` (round 5): the Search index a cached page still needs, fixed
+
+ChatGPT reproduced one regression with the production worker of `main` followed by the worker of `5a3343ba` over the
+same cache: the Search page's index, which its script fetches on its own (`data-index`, `js/search.js`), survived the
+upgrade (F3) but was deleted once a later build's Search page, opened under a query, had fetched a newer index: the
+cached D1 Search page still named the old one through `data-index`, and nothing in the index knew that. Offline, the
+D1 page opened and its index was gone. Fixed in commit `e601345d` with the test that fails on `5a3343ba`.
+
+| # | Finding | Cause in `5a3343ba` | Correction |
+| --- | --- | --- | --- |
+| F5 | A cached Search page lost the index version its markup names after a later build fetched a newer one | `assetsOf` reads stylesheets and scripts only; the loose record protects the latest fetched version of a path only, whatever a cached document still names | a **reference-only** table in the index (`v: 3`, `lazy`): for each cached document, the versioned files named by `data-index` in its markup. They count as named for collection (kept as long as the document is kept, dropped with it), are **never downloaded** for the page (`gather` and the keep read `docs` only), and their absence **never makes the page incomplete** (`whole` reads `docs` only). Written in the same two steps as the page's entry, re-read by `reconcile` with the page. Only `data-index` is read: the one lazily fetched versioned file the site has |
+
+Regression test (`tests/sw-eviction.test.cjs`): **T16**: D1 under the worker of `0b995e82` (Search page and index) →
+the new worker over the same cache → D2 Search opened under a query (another document; the plain copy stays D1) → the
+script fetches the D2 index → another page's visit collects → the D1 index is still there and the D1 page fetches it
+offline, the D2 document its own; the worker fetched the index zero times; a keep of both Search documents with the
+index deleted fetches nothing (an absent lazy file is not incompleteness); once the plain Search page is reopened online
+at D2 nothing names the D1 index and it is collected; no old index address was ever fetched. Fails on `5a3343ba` at
+"the D1 index is kept" (worktree, same files: 1 of 15 fails) and passes on the branch (15 of 15). **T14** now uses
+Search pages whose `data-index` changes with the build (the old index retires once no cached document names it) and
+checks the adoption of F3 on a file no page names at all. T1–T13 and T15 unchanged and passing; cost unchanged (1
+`keys()` per page update, 10 `match()` at 212 entries; the `lazy` table adds one short list per document).
+
+### Results of the corrected code (`e601345d`, full production build, this machine)
+
+| Step | Result |
+| --- | --- |
+| `npm run build` | 838 files written (818 HTML pages), no error |
+| `npm test` | **1 422 pass, 0 fail** (1 407 of `main` + the 15 worker tests) |
+| Six browser projects (390/768/1 440 × dark/light) | **218 pass, 0 fail**, 17.8 min |
+| Focused: `tests/sw-eviction.test.cjs` + `tests/offline.test.cjs` + `tests/reminders.test.cjs` | 30 pass |
+| Before-proof, unit: the final `tests/sw-eviction.test.cjs` and the fixture against the worker of `5a3343ba` (worktree) | **T16 fails ("the D1 index is kept"), the other 14 pass** |
+| Browser: `tests/browser/sw-offline.spec.mjs` (D1 → D2 → D3 with the query variant, the repair) with the worker of the branch | 2 pass |
+| Cost (T11) | 1 `keys()` per page update, 0 requests for a keep over complete pages, 10 `match()` at 212 entries: unchanged |
+| CI | the run on `e601345d` and the documents commit: reported in the Draft PR once finished |
+
+Open for the next audit: nothing known. Phase 5B (privacy hand-offs) is not touched by this PR beyond the note in §12.
