@@ -280,4 +280,45 @@ about 2 ms of logic in the fake. One more index write per page store (the marked
 | After, browser: the same spec with the worker of the branch (1 440 px light) | 2 pass |
 | CI | the run on `27046d52` and the documents commit: reported in the Draft PR once finished |
 
-Open for the next audit: nothing known. Phase 5B (privacy hand-offs) is not touched by this PR.
+## 12. Independent audit of `6ee3ea4d` (round 4): the upgrade and the plain address, fixed
+
+ChatGPT reproduced two further problems against the worker of `6ee3ea4d`, one of them with the production worker of
+`main` (`0b995e82`) and the new one run in turn against the same simulated cache. Both are real; both are fixed in
+commit `27dd6231` with the tests that failed on `6ee3ea4d`.
+
+| # | Finding | Cause in `6ee3ea4d` | Correction |
+| --- | --- | --- | --- |
+| F3 (blocking) | A versioned file a script loads itself, cached by the old worker (the search index `/search-index.json?v=…`, fetched by `js/search.js`), was deleted at the new worker's first collection: no page names it (`assetsOf` reads stylesheets and scripts) and the old worker kept no loose record, so nothing protected it. Search offline lost its index | collection kept an unnamed versioned file only when a loose record named it; migration started with no records | collection **adopts** an unnamed versioned file no record knows: the only cached version of its path becomes its loose record and is kept; a path with several unrecorded versions keeps them all until the script fetches one again, which records it and retires the others. No old address is fetched; the copy still cannot grow past one version per path once the path is fetched again |
+| F4 | A keep for a plain address cached only under a query variant fetched nothing: the variant with the same pathname stood for the address asked for, which was never kept (the `ignoreSearch` offline fallback hid it) | `keep` built its targets from the cached variants alone | the address asked for is fetched when it is not in the copy, variant or no variant; the cached variants keep their entries; a complete page is still left alone; a repeated keep makes no request |
+
+Regression tests (`tests/sw-eviction.test.cjs`): **T14**, the actual upgrade: the worker of `0b995e82` enters the
+repository verbatim as `tests/fixtures/sw-0b995e82.js`; it caches the Search page, the versioned index its script
+fetches and one tool page; the new worker takes over the same fake cache, installs and activates; the index and the
+pages survive, Search answers offline, no old address is fetched, and a newer index version fetched later retires the
+old one. **T15**: only a variant cached; a keep of the plain address fetches exactly that page, keeps the variant, both
+have their entries, and a second keep fetches nothing. The harness can hand one worker's cache to another and send a
+script's own request. Both fail on `6ee3ea4d` (worktree, same files: 2 of 14) and pass on the branch (14 of 14).
+T1–T13 are unchanged and pass; the cost is unchanged (1 `keys()` per page update, 10 `match()` at 212 entries).
+
+**For Phase 5B (recorded, not addressed here):** the index keys cached pages by their full address, query included.
+A page kept under an Action Tracker hand-off address therefore leaves that address, with the user-entered text it
+carries (P1-02), in two places of the cache: the cached document's own key (as with the worker of `main`) and the
+index entry. Both go when the page's cached copy goes (the entry of an absent document is dropped at the next
+reconciliation) and the cache is cleared by "Forget everything on this device" as before; nothing leaves the device
+through them. The 5B rewrite of the hand-off (a browser note, a meaningless token in the address) removes the text
+from both places at once; until then a hand-off address kept offline persists as long as its cached copy.
+
+### Results of the corrected code (`27dd6231`, full production build, this machine)
+
+| Step | Result |
+| --- | --- |
+| `npm run build` | 838 files written (818 HTML pages), no error |
+| `npm test` | **1 421 pass, 0 fail** (1 407 of `main` + the 14 worker tests) |
+| Six browser projects (390/768/1 440 × dark/light) | **218 pass, 0 fail**, 17.0 min |
+| Focused: `tests/sw-eviction.test.cjs` + `tests/offline.test.cjs` + `tests/reminders.test.cjs` | 29 pass |
+| Before-proof, unit: the final `tests/sw-eviction.test.cjs` and the fixture against the worker of `6ee3ea4d` (worktree) | **T14 and T15 fail, the other 12 pass** |
+| Browser: `tests/browser/sw-offline.spec.mjs` (D1 → D2 → D3 with the query variant, the repair) with the worker of the branch | 2 pass |
+| Cost (T11) | 1 `keys()` per page update, 0 requests for a keep over complete pages, 10 `match()` at 212 entries: unchanged |
+| CI | the run on `27dd6231` and the documents commit: reported in the Draft PR once finished |
+
+Open for the next audit: nothing known. Phase 5B (privacy hand-offs) is not touched by this PR beyond the note above.

@@ -157,7 +157,7 @@ None found.
   references it; or on each `keep` and on `activate` re-fetch the cached documents (`ignoreSearch`) before evicting;
   or keep the last two versions of each path. Each needs the regression test above and a migration note for caches
   built by today's worker.
-- **Status (Phase 5A, Draft PR [catalyst-al/stiven-catalyst#371](https://github.com/catalyst-al/stiven-catalyst/pull/371), commits `b0887a0b` and, after the round-3 audit, `27046d52`):** implemented as reference-aware retention with an index,
+- **Status (Phase 5A, Draft PR [catalyst-al/stiven-catalyst#371](https://github.com/catalyst-al/stiven-catalyst/pull/371), commits `b0887a0b`, after the round-3 audit `27046d52` and after the round-4 audit `27dd6231`):** implemented as reference-aware retention with an index,
   batched collection, atomic refresh and one lock (`docs/audit/2026-10-31-phase-5a-proposal.md` §3 and §10). The
   regression tests fail on `0b995e82` (5 of 10 unit scenarios; the browser spec at the first offline check after D2)
   and pass on the branch. Awaiting the independent code audit and the owner's approval; not merged.
@@ -187,6 +187,11 @@ behaviour · privacy · S (ID was P2-04 in the first version; promoted by the re
   meaningless token in the address; keep the address form as a fallback for a link opened later or in another tab,
   with the text omitted when a note exists. Extend `tests/action-tracker.test.cjs` (hand-off arrives through the
   note; the address carries no title) and the 37 callers' tests where they check the link.
+- Phase 5A implication (recorded for 5B, PR #371 round 4): the service worker's reference index keys cached pages by
+  their full address, query included, so a tracker page kept under a hand-off address holds that address, text and
+  all, in its cache key (as before Phase 5A) and in the index entry. Both go with the page's cached copy and with
+  "Forget everything on this device"; nothing leaves the device through them. The 5B note hand-off removes the text
+  from both at once (proposal §12).
 
 **P1-03 · The Tools page cannot be searched or narrowed, and is thirty phone screens long** · Confirmed (measured) ·
 usability · M
@@ -662,3 +667,9 @@ Round 3 (31 October 2026, ChatGPT's independent code audit of PR #371 at `05f269
 defects reproduced against the worker's code (query variants sharing one index entry; an interrupted index write
 leaving stale references) and the lifetime of the loose-record write; all three fixed with the tests that failed on
 `05f26949` (proposal §11). P1-01's status line names the corrected commit.
+
+Round 4 (1 November 2026, ChatGPT's independent audit of PR #371 at `6ee3ea4d`): two further problems reproduced
+(the upgrade from the production worker deleting a versioned file a script fetched itself, the search index; a keep
+for a plain address cached only under a query variant fetching nothing); both fixed with the tests that failed on
+`6ee3ea4d`, the first of them an actual old-worker-to-new-worker upgrade (proposal §12). The index's query-bearing
+addresses recorded under P1-02 for Phase 5B. P1-01's status line names the corrected commit.
