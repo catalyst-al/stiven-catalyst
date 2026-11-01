@@ -25,15 +25,29 @@ const assetsOf = (html, pageUrl) => {
   }
   return [...found];
 };
+// The versioned files a page's script fetches on its own when it needs them, named in the page's markup: the Search
+// page's index (data-index, read by js/search.js). Kept as long as the page is kept, never downloaded for the page,
+// and their absence never makes the page incomplete.
+const lazyOf = (html, pageUrl) => {
+  const found = new Set();
+  for (const match of html.matchAll(/\bdata-index="([^"]+)"/g)) {
+    try {
+      const url = new URL(match[1].replace(/&amp;/g, "&"), pageUrl);
+      if (url.origin === self.location.origin && isVersioned(url)) found.add(url.href);
+    } catch { /* not an address */ }
+  }
+  return [...found];
+};
 
 // PHASE5A-START
 // Offline copies that survive a deploy (phase 5A). A versioned file (?v=…) is kept as long as any cached page names
 // it: the pages' references are kept in an index entry inside this cache (REFS, the page's cache address, query and
-// all, → the files its HTML names; a page kept under two addresses is two documents with two entries), completed from
-// the cached HTML of any page the index does not know. A page is written in two steps around its index entry: first
-// the entry widened to the old and the new files, then the HTML, then the entry narrowed to the new files; so at any
-// interruption the entry names at least what the cached HTML names, and the next collection, seeing the entry still
-// marked as in progress, reads that one page again and settles it. Collection runs once per page update,
+// all, → the files its HTML names, and apart the files its script fetches on its own; a page kept under two addresses
+// is two documents with two entries), completed from the cached HTML of any page the index does not know. A page is
+// written in two steps around its index entry: first the entry widened to the old and the new files, then the HTML,
+// then the entry narrowed to the new files; so at any interruption the entry names at least what the cached HTML
+// names, and the next collection, seeing the entry still marked as in progress, reads that one page again and settles
+// it. Collection runs once per page update,
 // never on a file request: it lists the cache once and deletes only the versioned files no cached page names (and,
 // for files no page names at all, such as a script loaded by another script, the versions older than the one last
 // fetched). A page that is already cached is refreshed whole or not at all: the new HTML and every file it names are
@@ -55,18 +69,22 @@ const put = async (cache, request, response) => {
   await cache.put(request, response.clone());
   return true;
 };
-// The index: { v: 2, docs: { "https://…/tools/pareto/": [file hrefs], "https://…/tools/pareto/?x=1": […], … },
-// pending: { "<page address>": true } (a page whose two-step write was not finished), loose: { "/js/x.js":
-// "https://…/js/x.js?v=…" } }. An index of another shape is started afresh: every cached page is read once again.
+// The index: { v: 3, docs: { "https://…/tools/pareto/": [file hrefs], "https://…/tools/pareto/?x=1": […], … },
+// lazy: { "<page address>": [the versioned files its script fetches on its own] }, pending: { "<page address>": true }
+// (a page whose two-step write was not finished), loose: { "/js/x.js": "https://…/js/x.js?v=…" } }. An index of
+// another shape is started afresh: every cached page is read once again.
 const readRefs = async (cache) => {
   try {
     const kept = await cache.match(REFS);
     if (kept) {
       const data = await kept.json();
-      if (data && data.v === 2 && data.docs && typeof data.docs === "object") return { v: 2, docs: data.docs, pending: data.pending && typeof data.pending === "object" ? data.pending : {}, loose: data.loose && typeof data.loose === "object" ? data.loose : {} };
+      if (data && data.v === 3 && data.docs && typeof data.docs === "object") {
+        const table = (name) => (data[name] && typeof data[name] === "object" ? data[name] : {});
+        return { v: 3, docs: data.docs, lazy: table("lazy"), pending: table("pending"), loose: table("loose") };
+      }
     }
   } catch { /* a fresh index */ }
-  return { v: 2, docs: {}, pending: {}, loose: {} };
+  return { v: 3, docs: {}, lazy: {}, pending: {}, loose: {} };
 };
 const writeRefs = (cache, refs) => cache.put(REFS, new Response(JSON.stringify(refs), { headers: { "content-type": "application/json" } }));
 // The index completed from the cached pages it does not know (a page stored before this index existed, or a worker
@@ -83,12 +101,13 @@ const reconcile = async (cache, keys) => {
     if (refs.docs[key.url] && !refs.pending[key.url]) continue;
     const response = await cache.match(key);
     if (!response || !isHtml(response)) continue;
-    refs.docs[key.url] = assetsOf(await response.text(), key.url);
+    const html = await response.text();
+    refs.docs[key.url] = assetsOf(html, key.url);
+    refs.lazy[key.url] = lazyOf(html, key.url);
     delete refs.pending[key.url];
     changed = true;
   }
-  for (const href of Object.keys(refs.docs)) if (!present.has(href)) { delete refs.docs[href]; changed = true; }
-  for (const href of Object.keys(refs.pending)) if (!present.has(href)) { delete refs.pending[href]; changed = true; }
+  for (const table of [refs.docs, refs.lazy, refs.pending]) for (const href of Object.keys(table)) if (!present.has(href)) { delete table[href]; changed = true; }
   if (changed) await writeRefs(cache, refs);
   return refs;
 };
@@ -99,6 +118,7 @@ const hold = (assets) => { const token = {}; pending.set(token, new Set(assets))
 const named = (refs) => {
   const set = new Set();
   for (const list of Object.values(refs.docs)) for (const href of list) set.add(href);
+  for (const list of Object.values(refs.lazy)) for (const href of list) set.add(href);
   for (const list of pending.values()) for (const href of list) set.add(href);
   return set;
 };
@@ -149,7 +169,7 @@ const fetchPage = async (href) => {
   const response = await fetch(href);
   if (!response.ok || !isHtml(response)) return null;
   const html = await response.clone().text();
-  return { response, html, assets: assetsOf(html, href) };
+  return { response, html, assets: assetsOf(html, href), lazy: lazyOf(html, href) };
 };
 const gather = async (cache, assets) => {
   for (const asset of assets) {
@@ -167,16 +187,18 @@ const storePage = async (cache, request, page) => {
   const href = hrefOf(request);
   const before = await readRefs(cache);
   before.docs[href] = [...new Set([...(before.docs[href] || []), ...page.assets])];
+  before.lazy[href] = [...new Set([...(before.lazy[href] || []), ...page.lazy])];
   before.pending[href] = true;
   await writeRefs(cache, before);
   if (!(await put(cache, request, page.response))) return false;
   const after = await readRefs(cache);
   after.docs[href] = page.assets;
+  after.lazy[href] = page.lazy;
   delete after.pending[href];
   await writeRefs(cache, after);
   return true;
 };
-// True when every file the cached page names is in the copy.
+// True when every file the cached page names is in the copy (the files its script fetches on its own do not count).
 const whole = async (cache, refs, href) => {
   for (const asset of refs.docs[href] || []) if (!(await cache.match(asset))) return false;
   return true;
@@ -197,7 +219,7 @@ const navigation = async (event, request) => {
   // to gather, nothing to index.
   if (!isHtml(response)) { event.waitUntil(put(cache, request, response.clone()).catch(() => undefined)); return response; }
   const html = await response.clone().text();
-  const page = { response: response.clone(), html, assets: assetsOf(html, request.url) };
+  const page = { response: response.clone(), html, assets: assetsOf(html, request.url), lazy: lazyOf(html, request.url) };
   const release = hold(page.assets);
   // "Already in the copy" is this exact address (a page kept under another query is another document).
   const job = cache.match(request).then((existing) => (existing
@@ -248,6 +270,7 @@ const keep = (urls) => exclusive(async () => {
         if (!page || !(await gather(cache, page.assets))) continue;
         await storePage(cache, target, page);
         refs.docs[target] = page.assets;
+        refs.lazy[target] = page.lazy;
         delete refs.pending[target];
       }
     } catch { /* next page */ }
@@ -382,5 +405,5 @@ self.onnotificationclick = (event) => {
 };
 
 // For the tests (tests/offline.test.cjs, tests/reminders.test.cjs).
-self.SwKit = { CACHE, PRECACHE, KEPT, REFS, isVersioned, assetsOf, settings, idle: () => chain, readRefs, collect, keep };
+self.SwKit = { CACHE, PRECACHE, KEPT, REFS, isVersioned, assetsOf, lazyOf, settings, idle: () => chain, readRefs, collect, keep };
 self.SwReminders = { REMIND, remindCounts, remindUrl, remind };

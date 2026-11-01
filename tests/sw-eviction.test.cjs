@@ -62,7 +62,8 @@ const versionOf = (n) => `v=${n}${n}${n}`;
 // The worker in a bare scope: its listeners recorded, the network and the cache fake, the build switchable.
 // `cache` lets a second worker (an upgrade) take over the cache a first one left; `source` lets the first one be the
 // worker of an earlier commit (tests/fixtures/sw-0b995e82.js is the worker of main at 0b995e82, verbatim).
-const worker = ({ source = fs.readFileSync('src/sw.js', 'utf8'), current = build(1), cache = new FakeCache() } = {}) => {
+// `extra(n)` adds pages and files to every build the worker sees (a deploy included).
+const worker = ({ source = fs.readFileSync('src/sw.js', 'utf8'), extra = () => ({}), current = build(1, { extraPages: extra(1) }), cache = new FakeCache() } = {}) => {
   const state = { build: current, offline: false, failing: new Set(), requests: [] };
   const fetch = async (request) => {
     const url = urlOf(request);
@@ -117,7 +118,7 @@ const worker = ({ source = fs.readFileSync('src/sw.js', 'utf8'), current = build
   const cachedHtml = (path) => { if (cache.store.has(abs(path))) return cache.store.get(abs(path)).body; for (const [key, value] of cache.store) if (pathOf(key) === path) return value.body; return null; };
   // A page is complete when every versioned asset its cached HTML names is in the cache.
   const complete = (path) => { const html = cachedHtml(path); if (!html) return false; return [...html.matchAll(/(?:href|src)="([^"]+\?v=[^"]+)"/g)].every((m) => cache.store.has(abs(m[1]))); };
-  const deploy = (n) => { state.build = build(n); };
+  const deploy = (n) => { state.build = build(n, { extraPages: extra(n) }); };
   const requestsSince = (from) => state.requests.slice(from);
   return { self, listeners, cache, state, navigate, request, keep, activate, install, cached, cachedHtml, complete, deploy, requestsSince, settle };
 };
@@ -404,42 +405,53 @@ test('T13 (audit F2): an interrupted index write never lets collection delete a 
 });
 
 const OLD_WORKER = fs.readFileSync('tests/fixtures/sw-0b995e82.js', 'utf8');
-const searchPages = { '/search.html': '<!doctype html><html><head><title>Search</title></head><body><main data-index="/search-index.json?v=abc123">search</main></body></html>', '/search-index.json': '[{"t":"a"}]' };
+// The Search page as built: its script fetches the index named by data-index (js/search.js, fetch(root.dataset.index)),
+// a versioned file no <link> or <script> names. A build changes the index's version with its content.
+const searchPages = (n) => ({ '/search.html': `<!doctype html><html><head><title>Search</title></head><body><main data-index="/search-index.json?${versionOf(n)}">search build ${n}</main></body></html>`, '/search-index.json': `[{"build":${n}}]`, '/js/extra.js': `extra${n}` });
 
-test('T14 (audit F3): the upgrade from the worker of 0b995e82 keeps a versioned file a script fetched itself (the search index), which no page names; a newer version fetched later still retires it', async () => {
-  // The old worker, as deployed: the Search page and the index its script fetches (fetch(root.dataset.index)).
-  const old = worker({ source: OLD_WORKER, current: build(1, { extraPages: searchPages }) });
+test('T14 (audit F3): the upgrade from the worker of 0b995e82 keeps the versioned files a script fetched itself (the search index; a file no page names at all); each is retired only once nothing needs it', async () => {
+  // The old worker, as deployed: the Search page and the index its script fetches; a file no page names (a script's own import); one tool page.
+  const old = worker({ source: OLD_WORKER, extra: searchPages });
   await old.navigate('/search.html');
-  const answer = await old.request('/search-index.json?v=abc123');
-  assert.ok(answer && answer.ok && old.cached('/search-index.json?v=abc123'), 'the old worker caches the versioned index');
-  // One tool page too, with its files, as the old worker kept them.
+  const answer = await old.request(`/search-index.json?${versionOf(1)}`);
+  assert.ok(answer && answer.ok && old.cached(`/search-index.json?${versionOf(1)}`), 'the old worker caches the versioned index');
+  await old.request(`/js/extra.js?${versionOf(1)}`);
+  assert.ok(old.cached(`/js/extra.js?${versionOf(1)}`));
   await old.navigate('/tools/a/');
   assert.ok(old.complete('/tools/a/'));
   // The new worker takes over the same cache: installed, activated, no index entry yet.
-  const w = worker({ cache: old.cache, current: build(1, { extraPages: searchPages }) });
+  const w = worker({ cache: old.cache, extra: searchPages });
   await w.install();
   await w.activate();
   assert.ok(w.cached('/search.html'), 'the Search page survives the upgrade');
-  assert.ok(w.cached('/search-index.json?v=abc123'), 'so does the index its script fetched: no page names it, no record knows it, yet it is the only version of its path');
+  assert.ok(w.cached(`/search-index.json?${versionOf(1)}`), 'so does the index its script fetched: no <link> or <script> names it, no record knows it');
+  assert.ok(w.cached(`/js/extra.js?${versionOf(1)}`), 'and the file no page names at all: the only version of its path, adopted');
   assert.ok(w.complete('/tools/a/'), 'the tool page is still complete');
   // Offline, Search works as before: the page and the index both answer from the copy.
   w.state.offline = true;
   assert.ok((await w.navigate('/search.html')).response.ok);
-  const offlineIndex = await w.request('/search-index.json?v=abc123');
+  const offlineIndex = await w.request(`/search-index.json?${versionOf(1)}`);
   assert.ok(offlineIndex && offlineIndex.ok, 'the index answers offline');
   w.state.offline = false;
-  // Nothing old was fetched to achieve this.
-  assert.ok(!w.state.requests.some((r) => r.includes('v=abc123')), 'the old version address was not fetched');
-  // Later a build changes the index: once the script fetches the new version, a page update retires the old one.
+  assert.ok(!w.state.requests.some((r) => r.includes(versionOf(1))), 'no old version address was fetched to achieve this');
+  // A build changes the index. The Search page reopened online is replaced whole (its index is not downloaded for that:
+  // the script fetches it when it needs it); once the script has fetched the new index, a page update retires the old
+  // one, which no cached document names any more. The adopted file retires once a newer version of it is fetched.
+  w.deploy(2);
   const from = w.state.requests.length;
-  await w.request('/search-index.json?v=def456');
+  await w.navigate('/search.html');
+  assert.match(w.cachedHtml('/search.html'), /build 2/);
+  assert.equal(w.requestsSince(from).filter((r) => r.startsWith('/search-index.json')).length, 0, 'the index was not downloaded for the page');
+  await w.request(`/search-index.json?${versionOf(2)}`);
+  await w.request(`/js/extra.js?${versionOf(2)}`);
   await w.navigate('/tools/b/');
-  assert.ok(w.cached('/search-index.json?v=def456'), 'the new version is kept');
-  assert.ok(!w.cached('/search-index.json?v=abc123'), 'the old version, superseded by a fetched one, is collected: the copy does not grow without bound');
-  assert.equal(w.requestsSince(from).filter((r) => r.startsWith('/search-index.json')).length, 1, 'the index was fetched once');
+  assert.ok(w.cached(`/search-index.json?${versionOf(2)}`), 'the new index is kept');
+  assert.ok(!w.cached(`/search-index.json?${versionOf(1)}`), 'the old index, named by no cached document, is collected: the copy does not grow without bound');
+  assert.ok(w.cached(`/js/extra.js?${versionOf(2)}`) && !w.cached(`/js/extra.js?${versionOf(1)}`), 'the adopted file keeps its latest fetched version only');
+  assert.equal(w.requestsSince(from).filter((r) => r.startsWith('/search-index.json')).length, 1, 'the index was fetched once, by the script');
   // A second upgrade-shaped collection changes nothing more.
   await w.activate();
-  assert.ok(w.cached('/search-index.json?v=def456') && w.cached('/search.html'));
+  assert.ok(w.cached(`/search-index.json?${versionOf(2)}`) && w.cached('/search.html'));
 });
 
 test('T15 (audit F4): a keep for a plain address cached only under a query variant fetches the plain page, keeps the variant, and a second keep fetches nothing', async () => {
@@ -459,4 +471,50 @@ test('T15 (audit F4): a keep for a plain address cached only under a query varia
   const again = w.state.requests.length;
   await w.keep(['/tools/a/']);
   assert.equal(w.requestsSince(again).length, 0, 'a repeated keep makes no request');
+});
+
+test('T16 (audit F5): a cached Search page keeps the index version its data-index names, through the upgrade and after a later build fetched a newer one; the index is never downloaded for the page, its absence never makes the page incomplete', async () => {
+  // D1 under the old worker: the Search page and its index.
+  const old = worker({ source: OLD_WORKER, extra: searchPages });
+  await old.navigate('/search.html');
+  await old.request(`/search-index.json?${versionOf(1)}`);
+  // The new worker over the same cache.
+  const w = worker({ cache: old.cache, extra: searchPages });
+  await w.install();
+  await w.activate();
+  assert.ok(w.cached('/search.html') && w.cached(`/search-index.json?${versionOf(1)}`), 'both survive the upgrade');
+  // D2: Search opened online under a query (another document); the plain copy stays the D1 page. The script fetches
+  // the D2 index; another page's visit collects.
+  w.deploy(2);
+  const from = w.state.requests.length;
+  await w.navigate('/search.html?q=new');
+  assert.ok(w.cached('/search.html?q=new') && /build 2/.test(w.cachedHtml('/search.html?q=new')));
+  assert.match(w.cachedHtml('/search.html'), /build 1/, 'the plain copy is still the D1 page');
+  await w.request(`/search-index.json?${versionOf(2)}`);
+  await w.navigate('/tools/a/');
+  assert.ok(w.cached(`/search-index.json?${versionOf(2)}`), 'the D2 index is kept for the D2 document');
+  assert.ok(w.cached(`/search-index.json?${versionOf(1)}`), 'the D1 index is kept: the cached D1 Search page names it through data-index');
+  assert.equal(w.requestsSince(from).filter((r) => r.startsWith('/search-index.json')).length, 1, 'the index was fetched once, by the script: never downloaded for a page');
+  // Offline: the D1 Search page opens and finds its index; the D2 document finds its own.
+  w.state.offline = true;
+  const d1 = await w.navigate('/search.html');
+  assert.ok(d1.response.ok && /build 1/.test(d1.html));
+  const i1 = await w.request(`/search-index.json?${versionOf(1)}`);
+  assert.ok(i1 && i1.ok && /"build":1/.test(await i1.text()), 'the D1 page fetches its index offline');
+  const i2 = await w.request(`/search-index.json?${versionOf(2)}`);
+  assert.ok(i2 && i2.ok && /"build":2/.test(await i2.text()));
+  w.state.offline = false;
+  // A missing index is not incompleteness: a keep of the Search page fetches nothing for it.
+  await w.cache.delete(abs(`/search-index.json?${versionOf(2)}`));
+  const before = w.state.requests.length;
+  await w.keep(['/search.html', '/search.html?q=new']);
+  assert.equal(w.requestsSince(before).length, 0, 'an absent lazy file is not a reason to fetch the page again, nor is the file fetched');
+  await w.request(`/search-index.json?${versionOf(2)}`);
+  // Once the plain Search page is reopened online at D2, nothing names the D1 index: it is collected normally.
+  await w.navigate('/search.html');
+  assert.match(w.cachedHtml('/search.html'), /build 2/);
+  await w.navigate('/tools/b/');
+  assert.ok(!w.cached(`/search-index.json?${versionOf(1)}`), 'the D1 index, named by no cached document, is collected');
+  assert.ok(w.cached(`/search-index.json?${versionOf(2)}`));
+  assert.ok(!w.state.requests.some((r) => r === `/search-index.json?${versionOf(1)}` && w.state.requests.indexOf(r) >= from), 'the old index address was never fetched by the worker');
 });
