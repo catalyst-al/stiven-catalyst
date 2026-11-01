@@ -357,4 +357,38 @@ checks the adoption of F3 on a file no page names at all. T1–T13 and T15 uncha
 | Cost (T11) | 1 `keys()` per page update, 0 requests for a keep over complete pages, 10 `match()` at 212 entries: unchanged |
 | CI | the run on `e601345d` and the documents commit: reported in the Draft PR once finished |
 
-Open for the next audit: nothing known. Phase 5B (privacy hand-offs) is not touched by this PR beyond the note in §12.
+## 14. Independent audit of `6244ce11` (round 6): the index of a refresh in flight, fixed
+
+ChatGPT reproduced one concurrency regression against the worker of `6244ce11` with controlled timing: the Search
+page reopened online after a deploy goes to the browser at once while its refresh in the copy waits the grace period;
+the new page's script fetches the new index meanwhile; a collection run by another page's visit before the refresh
+resumes saw the old index named (by the cached D1 page) and the new one named by nothing (the loose record of a named
+path is dropped), and deleted it; the refresh then stored the D2 page, which names the missing index. Fixed in commit
+`aa98f487` with the test that fails on `6244ce11`.
+
+| # | Finding | Cause in `6244ce11` | Correction |
+| --- | --- | --- | --- |
+| F6 | The index the new Search page fetched during the grace period was collected before the refresh stored the page | the refresh in flight held only the files the browser fetches for the new page (`hold(page.assets)`), not the files its script loads on its own | the hold covers both: `hold([...page.assets, ...page.lazy])`. One line; the hold is released as before when the refresh ends or is dropped. The candidate ChatGPT tested in memory, verified here against T17 and the whole suite |
+
+Regression test (`tests/sw-eviction.test.cjs`): **T17**, the exact interleaving: D1 Search page and index; D2 deployed;
+the same address reopened online with the worker's timers held (the harness can now hold the worker's timers and
+release them later); the script fetches the D2 index; another page's visit collects: the D2 index survives and the D1
+index stays; the timers released, the refresh stores the D2 page and its index is there for it; offline, the D2 page
+and its index answer; after the next collection the D1 index, named by nothing, is gone; the index was fetched once,
+by the script, never for a page. Fails on `6244ce11` at "the D2 index survives the collection" (worktree, same file:
+1 of 16 fails) and passes on the branch (16 of 16). T1–T16 unchanged and passing; cost unchanged.
+
+### Results of the corrected code (`aa98f487`, full production build, this machine)
+
+| Step | Result |
+| --- | --- |
+| `npm run build` | 838 files written (818 HTML pages), no error |
+| `npm test` | **1 423 pass, 0 fail** (1 407 of `main` + the 16 worker tests) |
+| Six browser projects (390/768/1 440 × dark/light) | **218 pass, 0 fail**, 16.3 min |
+| Focused: `tests/sw-eviction.test.cjs` + `tests/offline.test.cjs` + `tests/reminders.test.cjs` | 31 pass |
+| Before-proof, unit: the final `tests/sw-eviction.test.cjs` against the worker of `6244ce11` (worktree) | **T17 fails ("the D2 index survives the collection"), the other 15 pass** |
+| Browser: `tests/browser/sw-offline.spec.mjs` (D1 → D2 → D3 with the query variant, the repair) with the worker of the branch | 2 pass |
+| Cost (T11) | 1 `keys()` per page update, 0 requests for a keep over complete pages, 10 `match()` at 212 entries: unchanged |
+| CI | the run on `aa98f487` and the documents commit: reported in the Draft PR once finished |
+
+Open for the release-readiness review: nothing known. Phase 5B (privacy hand-offs) is not touched by this PR beyond the note in §12.
