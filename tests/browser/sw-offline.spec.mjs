@@ -86,6 +86,8 @@ const serve = () => new Promise((ok) => {
 const goOffline = () => new Promise((ok) => { state.server.closeAllConnections(); state.server.close(() => { state.online = false; ok(); }); });
 const goOnline = () => serve();
 const requests = (phase) => state.log.filter((r) => r.phase === phase);
+// No request has reached the server for two seconds: the worker's background work (a keep, a refresh) is over.
+const quiet = async () => { let seen = -1; await expect.poll(async () => { const same = state.log.length === seen; seen = state.log.length; return same; }, { timeout: 60000, intervals: [2000] }).toBe(true); };
 
 // One worker, one server, the tests in order: the second test starts from a fresh context but the same build.
 test.describe.configure({ mode: "serial" });
@@ -233,28 +235,35 @@ test("a kept page made incomplete is repaired from fresh HTML on the next keep, 
   state.phase = "repair-setup";
   const home = "/tools/room-inspection/";
   await page.goto(`${BASE}${home}`, { waitUntil: "load" });
-  const kept = await page.evaluate(() => [...document.querySelectorAll(".family-more-list a[href]")].map((a) => new URL(a.getAttribute("href"), location.href).pathname).slice(0, 2));
-  await waitForKept(page, [home, ...kept]);
-  // Damage the copy of one kept page the way the old worker did: delete a file only that page names (its own
-  // script), so nothing but a repair of that page can bring it back.
-  const victim = kept[0];
-  const removed = await page.evaluate(async ([p, others]) => {
+  const kept = await page.evaluate(() => [...document.querySelectorAll(".family-more-list a[href]")].map((a) => new URL(a.getAttribute("href"), location.href).pathname));
+  await waitForKept(page, [home, ...kept.slice(0, 2)]);
+  // The whole keep (every tool of the role) must be over before the copy is damaged: otherwise a page still being
+  // stored could bring the deleted file back on its own, and the repair would have nothing to do (CI run 813).
+  await quiet();
+  // Damage the copy of one kept page the way the old worker did: delete a file that page alone names among every
+  // cached document (its own script), so nothing but a repair of that page can bring it back. The victim is the first
+  // kept page with such a file; the control is another kept page, left complete.
+  const { victim, removed } = await page.evaluate(async (candidates) => {
     const cache = await caches.open("sc-offline-v1");
     const refs = await (await cache.match("/__sw/refs")).json();
-    const named = (path) => refs.docs[location.origin + path] || refs.docs[path] || [];
-    const elsewhere = new Set(others.flatMap(named));
-    const asset = named(p).find((a) => /\.js\?v=/.test(a) && !elsewhere.has(a));
-    if (asset) await cache.delete(asset);
-    return asset || null;
-  }, [victim, [home, kept[1]]]);
-  expect(removed, "the page has a script of its own").toMatch(/\.js\?v=/);
+    const entry = (path) => location.origin + path;
+    const named = (path) => [...(refs.docs[entry(path)] || []), ...((refs.lazy || {})[entry(path)] || [])];
+    for (const p of candidates) {
+      const elsewhere = new Set(Object.keys(refs.docs).filter((d) => d !== entry(p)).flatMap((d) => [...(refs.docs[d] || []), ...((refs.lazy || {})[d] || [])]));
+      const asset = named(p).find((a) => /\.js\?v=/.test(a) && !elsewhere.has(a));
+      if (asset) { await cache.delete(asset); return { victim: p, removed: asset }; }
+    }
+    return { victim: null, removed: null };
+  }, kept);
+  expect(removed, "a kept page has a script of its own").toMatch(/\.js\?v=/);
+  const control = kept.find((p) => p !== victim);
   state.phase = "repair-keep";
   // A new tool page visit sends the keep again.
   await page.goto(`${BASE}${home}`, { waitUntil: "load" });
   await expect.poll(async () => page.evaluate(async (a) => Boolean(await (await caches.open("sc-offline-v1")).match(a)), removed), { timeout: 30000 }).toBe(true);
   const fetched = requests("repair-keep").map((r) => r.url);
   expect(fetched.filter((u) => u.split("?")[0] === victim).length, "the incomplete page was fetched again").toBe(1);
-  expect(fetched.filter((u) => u.split("?")[0] === kept[1]).length, "the complete page was not").toBe(0);
+  expect(fetched.filter((u) => u.split("?")[0] === control).length, "the complete page was not").toBe(0);
   await goOffline();
   state.phase = "repair-offline";
   await expectWhole(page, victim);
