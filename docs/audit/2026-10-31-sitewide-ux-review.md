@@ -684,3 +684,8 @@ reproduced with controlled timing (the index a reopened Search page fetched duri
 collected by another page's visit before the refresh stored the page); fixed by holding the lazy references of a
 refresh in flight, with the test that fails on `6244ce11` (proposal §14). P1-01's status line names the corrected
 commit.
+
+Release preflight (1 November 2026): CI run 813 on `b4df8961` failed in one browser test of the new offline spec,
+whose setup could race the worker's first keep on a slow runner (the worker behaved correctly); the test fixed in
+`92bce18e`, no worker change (proposal §14). The dates step dry-run on the merge changes nothing: this branch touches
+no essay or publication.

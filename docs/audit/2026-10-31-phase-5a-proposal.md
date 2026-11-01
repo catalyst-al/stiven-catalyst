@@ -389,6 +389,16 @@ by the script, never for a page. Fails on `6244ce11` at "the D2 index survives t
 | Before-proof, unit: the final `tests/sw-eviction.test.cjs` against the worker of `6244ce11` (worktree) | **T17 fails ("the D2 index survives the collection"), the other 15 pass** |
 | Browser: `tests/browser/sw-offline.spec.mjs` (D1 → D2 → D3 with the query variant, the repair) with the worker of the branch | 2 pass |
 | Cost (T11) | 1 `keys()` per page update, 0 requests for a keep over complete pages, 10 `match()` at 212 entries: unchanged |
-| CI | the run on `aa98f487` and the documents commit: reported in the Draft PR once finished |
+| CI | run 813 on `b4df8961`: **failure**, 217 of 218 browser tests passed; the one failure is in the test suite, not the worker (below). Run 814 on the test fix: reported in the Draft PR once finished |
+
+**Run 813, the one failing browser test (`sw-offline.spec.mjs`, "a kept page made incomplete is repaired…"):** the
+test deleted a kept page's own script and expected the next keep to fetch that page once; the script came back but the
+page was fetched zero times, and the test ended in 1.3 s. The test's setup waited only until its three named pages had
+index entries, while the worker's first keep (every tool of the role) could still be running on the slower runner; a
+page stored by that keep after the deletion gathers the missing file itself, so the later keep found the victim whole
+and, correctly, fetched nothing. The worker behaved as specified; the test left a window. Fixed in the test only
+(commit `92bce18e`): the test waits until the server has had no request for two seconds before damaging the copy, and
+chooses a script that no other cached document names (every entry of the index, not just two pages). Locally the test
+passed in every run before and after (5 of 5 after the fix in a row); the race was not reproduced here. No worker change.
 
 Open for the release-readiness review: nothing known. Phase 5B (privacy hand-offs) is not touched by this PR beyond the note in §12.
