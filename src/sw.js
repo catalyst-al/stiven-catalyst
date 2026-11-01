@@ -111,8 +111,8 @@ const reconcile = async (cache, keys) => {
   if (changed) await writeRefs(cache, refs);
   return refs;
 };
-// Files of refreshes still in flight: the browser already holds the new HTML and may be fetching them while another
-// job collects. Each job holds its own set until it is done.
+// Files of refreshes still in flight: the browser already holds the new HTML and may be fetching them, or its script
+// the files it loads on its own, while another job collects. Each job holds its own set until it is done.
 const pending = new Map();
 const hold = (assets) => { const token = {}; pending.set(token, new Set(assets)); return () => pending.delete(token); };
 const named = (refs) => {
@@ -220,7 +220,9 @@ const navigation = async (event, request) => {
   if (!isHtml(response)) { event.waitUntil(put(cache, request, response.clone()).catch(() => undefined)); return response; }
   const html = await response.clone().text();
   const page = { response: response.clone(), html, assets: assetsOf(html, request.url), lazy: lazyOf(html, request.url) };
-  const release = hold(page.assets);
+  // Held until the refresh is done or dropped: the files the browser is fetching for the new page, and the files its
+  // script may fetch meanwhile (the Search index), which no cached document names yet.
+  const release = hold([...page.assets, ...page.lazy]);
   // "Already in the copy" is this exact address (a page kept under another query is another document).
   const job = cache.match(request).then((existing) => (existing
     ? wait(settings.graceMs).then(() => exclusive(async () => { if (await gather(cache, page.assets)) { await storePage(cache, request, page); await collect(cache); } }))

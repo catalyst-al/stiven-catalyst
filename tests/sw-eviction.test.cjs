@@ -79,10 +79,22 @@ const worker = ({ source = fs.readFileSync('src/sw.js', 'utf8'), extra = () => (
   const listeners = {};
   const self = { location: { origin: ORIGIN }, addEventListener: (name, fn) => { listeners[name] = fn; }, skipWaiting: async () => {}, clients: { claim: async () => {} }, registration: {} };
   const caches = { open: async () => cache, keys: async () => ['sc-offline-v1'], delete: async () => true };
-  new Function('self', 'caches', 'fetch', 'Response', 'setTimeout', source)(self, caches, fetch, FakeResponse, (fn) => fn());
+  // The worker's timers run at once, unless a test holds them (state.holdTimers) to interleave work with a delayed refresh.
+  state.holdTimers = false; state.timers = [];
+  const setTimeout = (fn) => { if (state.holdTimers) state.timers.push(fn); else fn(); };
+  new Function('self', 'caches', 'fetch', 'Response', 'setTimeout', source)(self, caches, fetch, FakeResponse, setTimeout);
   if (self.SwKit && self.SwKit.settings) self.SwKit.settings.graceMs = 0;
   const waits = [];
-  const settle = async () => { while (waits.length) await waits.shift(); if (self.SwKit && self.SwKit.idle) await self.SwKit.idle(); };
+  const idle = async () => { if (self.SwKit && self.SwKit.idle) await self.SwKit.idle(); };
+  // While timers are held, a delayed refresh cannot finish: only the chain is drained, twice, with the pending
+  // microtasks between (a job enters the chain a tick after its event).
+  const settle = async () => {
+    if (state.holdTimers) { for (let i = 0; i < 2; i++) { await new Promise((resolve) => setImmediate(resolve)); await idle(); } return; }
+    while (waits.length) await waits.shift();
+    await idle();
+  };
+  // The held timers fire (the delayed refreshes go on), then everything settles.
+  const releaseTimers = async () => { state.holdTimers = false; while (state.timers.length) state.timers.shift()(); await settle(); };
   // A navigation as the browser makes it: the response, then the browser's own requests for the page's assets.
   const navigate = async (path, { assets = true } = {}) => {
     let answer;
@@ -120,7 +132,7 @@ const worker = ({ source = fs.readFileSync('src/sw.js', 'utf8'), extra = () => (
   const complete = (path) => { const html = cachedHtml(path); if (!html) return false; return [...html.matchAll(/(?:href|src)="([^"]+\?v=[^"]+)"/g)].every((m) => cache.store.has(abs(m[1]))); };
   const deploy = (n) => { state.build = build(n, { extraPages: extra(n) }); };
   const requestsSince = (from) => state.requests.slice(from);
-  return { self, listeners, cache, state, navigate, request, keep, activate, install, cached, cachedHtml, complete, deploy, requestsSince, settle };
+  return { self, listeners, cache, state, navigate, request, keep, activate, install, cached, cachedHtml, complete, deploy, requestsSince, settle, releaseTimers };
 };
 const kept = ['/tools/a/', '/tools/b/', '/tools/c/', '/tools.html'];
 
@@ -517,4 +529,43 @@ test('T16 (audit F5): a cached Search page keeps the index version its data-inde
   assert.ok(!w.cached(`/search-index.json?${versionOf(1)}`), 'the D1 index, named by no cached document, is collected');
   assert.ok(w.cached(`/search-index.json?${versionOf(2)}`));
   assert.ok(!w.state.requests.some((r) => r === `/search-index.json?${versionOf(1)}` && w.state.requests.indexOf(r) >= from), 'the old index address was never fetched by the worker');
+});
+
+test('T17 (audit F6): while a Search refresh waits its grace period, the index the new page fetched is protected from a collection run by another page', async () => {
+  const w = worker({ extra: searchPages });
+  // D1: the Search page and its index, as the script fetched it.
+  await w.navigate('/search.html');
+  await w.request(`/search-index.json?${versionOf(1)}`);
+  assert.ok(w.cached('/search.html') && w.cached(`/search-index.json?${versionOf(1)}`));
+  // D2: the same Search address reopened online. The page goes to the browser at once; its refresh in the copy waits
+  // the grace period (held here). The new page's script fetches the D2 index meanwhile.
+  w.deploy(2);
+  w.state.holdTimers = true;
+  const from = w.state.requests.length;
+  const { html } = await w.navigate('/search.html');
+  assert.match(html, /build 2/, 'the browser has the D2 page');
+  assert.match(w.cachedHtml('/search.html'), /build 1/, 'the copy still holds D1: the refresh is waiting');
+  assert.equal(w.state.timers.length, 1, 'one grace timer is pending');
+  await w.request(`/search-index.json?${versionOf(2)}`);
+  assert.ok(w.cached(`/search-index.json?${versionOf(2)}`), 'the script stored the D2 index');
+  // Another page's visit collects before the Search refresh resumes.
+  await w.navigate('/tools/a/');
+  assert.ok(w.cached(`/search-index.json?${versionOf(2)}`), 'the D2 index survives the collection: the refresh in flight holds it');
+  assert.ok(w.cached(`/search-index.json?${versionOf(1)}`), 'the D1 index stays while the cached D1 page names it');
+  // The refresh resumes and stores the D2 page, which names the D2 index.
+  await w.releaseTimers();
+  assert.match(w.cachedHtml('/search.html'), /build 2/, 'the D2 page is in the copy');
+  assert.ok(w.cached(`/search-index.json?${versionOf(2)}`), 'and its index is there for it');
+  // Offline, Search works with the D2 page and its index.
+  w.state.offline = true;
+  const offline = await w.navigate('/search.html');
+  assert.ok(offline.response.ok && /build 2/.test(offline.html));
+  const index = await w.request(`/search-index.json?${versionOf(2)}`);
+  assert.ok(index && index.ok && /"build":2/.test(await index.text()), 'the D2 page fetches its index offline');
+  w.state.offline = false;
+  // Eventual removal: nothing names the D1 index any more; the next collection drops it. No eager download anywhere.
+  await w.navigate('/tools/b/');
+  assert.ok(!w.cached(`/search-index.json?${versionOf(1)}`), 'the D1 index, named by no cached document, is collected');
+  assert.ok(w.cached(`/search-index.json?${versionOf(2)}`));
+  assert.deepEqual(w.requestsSince(from).filter((r) => r.startsWith('/search-index.json')), [`/search-index.json?${versionOf(2)}`], 'the index was fetched once, by the script, and never for a page');
 });
