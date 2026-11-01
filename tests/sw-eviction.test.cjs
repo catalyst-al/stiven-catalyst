@@ -60,9 +60,10 @@ const build = (n, { extraPages = {} } = {}) => {
 const versionOf = (n) => `v=${n}${n}${n}`;
 
 // The worker in a bare scope: its listeners recorded, the network and the cache fake, the build switchable.
-const worker = ({ source = fs.readFileSync('src/sw.js', 'utf8'), current = build(1) } = {}) => {
+// `cache` lets a second worker (an upgrade) take over the cache a first one left; `source` lets the first one be the
+// worker of an earlier commit (tests/fixtures/sw-0b995e82.js is the worker of main at 0b995e82, verbatim).
+const worker = ({ source = fs.readFileSync('src/sw.js', 'utf8'), current = build(1), cache = new FakeCache() } = {}) => {
   const state = { build: current, offline: false, failing: new Set(), requests: [] };
-  const cache = new FakeCache();
   const fetch = async (request) => {
     const url = urlOf(request);
     const path = pathOf(url);
@@ -99,6 +100,16 @@ const worker = ({ source = fs.readFileSync('src/sw.js', 'utf8'), current = build
     await settle();
     return { response, html };
   };
+  // A request a script makes itself (fetch(): destination ""), as the browser routes it through the worker.
+  const request = async (path, { destination = '' } = {}) => {
+    let answer;
+    const event = { request: { url: abs(path), mode: 'cors', method: 'GET', destination }, respondWith: (p) => { answer = p; }, waitUntil: (p) => waits.push(p.catch(() => {})) };
+    listeners.fetch(event);
+    let response = null;
+    try { response = await answer; } catch { /* offline */ }
+    await settle();
+    return response;
+  };
   const keep = async (urls) => { await listeners.message({ data: { type: 'keep', urls: urls.map(abs) }, waitUntil: (p) => waits.push(p.catch(() => {})) }); await settle(); };
   const activate = async () => { await listeners.activate({ waitUntil: (p) => waits.push(p) }); await settle(); };
   const install = async () => { await listeners.install({ waitUntil: (p) => waits.push(p) }); await settle(); };
@@ -108,7 +119,7 @@ const worker = ({ source = fs.readFileSync('src/sw.js', 'utf8'), current = build
   const complete = (path) => { const html = cachedHtml(path); if (!html) return false; return [...html.matchAll(/(?:href|src)="([^"]+\?v=[^"]+)"/g)].every((m) => cache.store.has(abs(m[1]))); };
   const deploy = (n) => { state.build = build(n); };
   const requestsSince = (from) => state.requests.slice(from);
-  return { self, listeners, cache, state, navigate, keep, activate, install, cached, cachedHtml, complete, deploy, requestsSince, settle };
+  return { self, listeners, cache, state, navigate, request, keep, activate, install, cached, cachedHtml, complete, deploy, requestsSince, settle };
 };
 const kept = ['/tools/a/', '/tools/b/', '/tools/c/', '/tools.html'];
 
@@ -390,4 +401,62 @@ test('T13 (audit F2): an interrupted index write never lets collection delete a 
   w3.cache.failPut = null;
   await w3.navigate('/tools/c/');
   assert.ok(w3.complete('/tools/b/'), 'the repaired page is complete after the failed write and a collection');
+});
+
+const OLD_WORKER = fs.readFileSync('tests/fixtures/sw-0b995e82.js', 'utf8');
+const searchPages = { '/search.html': '<!doctype html><html><head><title>Search</title></head><body><main data-index="/search-index.json?v=abc123">search</main></body></html>', '/search-index.json': '[{"t":"a"}]' };
+
+test('T14 (audit F3): the upgrade from the worker of 0b995e82 keeps a versioned file a script fetched itself (the search index), which no page names; a newer version fetched later still retires it', async () => {
+  // The old worker, as deployed: the Search page and the index its script fetches (fetch(root.dataset.index)).
+  const old = worker({ source: OLD_WORKER, current: build(1, { extraPages: searchPages }) });
+  await old.navigate('/search.html');
+  const answer = await old.request('/search-index.json?v=abc123');
+  assert.ok(answer && answer.ok && old.cached('/search-index.json?v=abc123'), 'the old worker caches the versioned index');
+  // One tool page too, with its files, as the old worker kept them.
+  await old.navigate('/tools/a/');
+  assert.ok(old.complete('/tools/a/'));
+  // The new worker takes over the same cache: installed, activated, no index entry yet.
+  const w = worker({ cache: old.cache, current: build(1, { extraPages: searchPages }) });
+  await w.install();
+  await w.activate();
+  assert.ok(w.cached('/search.html'), 'the Search page survives the upgrade');
+  assert.ok(w.cached('/search-index.json?v=abc123'), 'so does the index its script fetched: no page names it, no record knows it, yet it is the only version of its path');
+  assert.ok(w.complete('/tools/a/'), 'the tool page is still complete');
+  // Offline, Search works as before: the page and the index both answer from the copy.
+  w.state.offline = true;
+  assert.ok((await w.navigate('/search.html')).response.ok);
+  const offlineIndex = await w.request('/search-index.json?v=abc123');
+  assert.ok(offlineIndex && offlineIndex.ok, 'the index answers offline');
+  w.state.offline = false;
+  // Nothing old was fetched to achieve this.
+  assert.ok(!w.state.requests.some((r) => r.includes('v=abc123')), 'the old version address was not fetched');
+  // Later a build changes the index: once the script fetches the new version, a page update retires the old one.
+  const from = w.state.requests.length;
+  await w.request('/search-index.json?v=def456');
+  await w.navigate('/tools/b/');
+  assert.ok(w.cached('/search-index.json?v=def456'), 'the new version is kept');
+  assert.ok(!w.cached('/search-index.json?v=abc123'), 'the old version, superseded by a fetched one, is collected: the copy does not grow without bound');
+  assert.equal(w.requestsSince(from).filter((r) => r.startsWith('/search-index.json')).length, 1, 'the index was fetched once');
+  // A second upgrade-shaped collection changes nothing more.
+  await w.activate();
+  assert.ok(w.cached('/search-index.json?v=def456') && w.cached('/search.html'));
+});
+
+test('T15 (audit F4): a keep for a plain address cached only under a query variant fetches the plain page, keeps the variant, and a second keep fetches nothing', async () => {
+  const w = worker();
+  await w.navigate('/tools/a/?action=synthetic');
+  assert.ok(w.cached('/tools/a/?action=synthetic') && !w.cached('/tools/a/'), 'only the variant is cached');
+  const from = w.state.requests.length;
+  await w.keep(['/tools/a/']);
+  assert.ok(w.cached('/tools/a/'), 'the plain address asked for is now in the copy under its exact address');
+  assert.ok(w.cached('/tools/a/?action=synthetic'), 'the variant stays');
+  assert.ok(w.complete('/tools/a/') && w.complete('/tools/a/?action=synthetic'));
+  const pages = w.requestsSince(from).filter((r) => r.startsWith('/tools/a/'));
+  assert.deepEqual(pages, ['/tools/a/'], 'exactly the plain page was fetched; its files were already in the copy');
+  const refs = JSON.parse(w.cache.store.get(abs('/__sw/refs')).body);
+  assert.ok(refs.docs[abs('/tools/a/')] && refs.docs[abs('/tools/a/?action=synthetic')], 'both documents have their own entry');
+  // A second keep: everything complete, nothing fetched.
+  const again = w.state.requests.length;
+  await w.keep(['/tools/a/']);
+  assert.equal(w.requestsSince(again).length, 0, 'a repeated keep makes no request');
 });

@@ -103,20 +103,34 @@ const named = (refs) => {
   return set;
 };
 // Collection: the versioned files no cached page names are deleted; a file no page names at all (fetched by a script)
-// keeps the version last fetched and loses the older ones.
+// keeps the version last fetched and loses the older ones. A versioned file no page names and no record knows (left
+// by the worker before this index, which kept no records, or fetched while this one was stopped before it noted it)
+// is adopted: the only cached version of its path becomes its record; a path with several unrecorded versions keeps
+// them all until the script fetches one again, which records it and retires the others. So an upgrade deletes nothing
+// a script may still ask for, and the copy still cannot grow past one version per path once the path is fetched.
 const collect = async (cache) => {
   const keys = await cache.keys();
   const refs = await reconcile(cache, keys);
   const used = named(refs);
   // A loose record counts only for a path no page names; the records of named paths are dropped.
   const namedPaths = new Set([...used].map((href) => new URL(href).pathname));
-  let pruned = false;
-  for (const path of Object.keys(refs.loose)) if (namedPaths.has(path)) { delete refs.loose[path]; pruned = true; }
-  if (pruned) await writeRefs(cache, refs);
+  let changed = false;
+  for (const path of Object.keys(refs.loose)) if (namedPaths.has(path)) { delete refs.loose[path]; changed = true; }
+  const unrecorded = new Map();
+  for (const key of keys) {
+    const url = new URL(key.url);
+    if (!isVersioned(url) || namedPaths.has(url.pathname) || refs.loose[url.pathname]) continue;
+    unrecorded.set(url.pathname, [...(unrecorded.get(url.pathname) || []), key.url]);
+  }
+  const spared = new Set();
+  for (const [path, hrefs] of unrecorded) {
+    if (hrefs.length === 1) { refs.loose[path] = hrefs[0]; changed = true; } else for (const href of hrefs) spared.add(href);
+  }
+  if (changed) await writeRefs(cache, refs);
   const latest = new Set(Object.values(refs.loose));
   for (const key of keys) {
     const url = new URL(key.url);
-    if (!isVersioned(url) || used.has(key.url) || latest.has(key.url)) continue;
+    if (!isVersioned(url) || used.has(key.url) || latest.has(key.url) || spared.has(key.url)) continue;
     await cache.delete(key);
   }
 };
@@ -211,8 +225,9 @@ const staleWhileRevalidate = async (request) => {
 // fetched with its files; one in the copy but incomplete (a file it names is missing) is fetched again whole, from
 // fresh HTML, never through an old file address; one in the copy and complete is left as it is, newer build or not,
 // since it still opens whole offline and is refreshed when it is visited online.
-// A page kept under several addresses (its plain address and query variants) is several documents: each incomplete one
-// is fetched again by its own address.
+// A page kept under several addresses (its plain address and query variants) is several documents: the address asked
+// for is fetched when it is missing even if a variant is there, and each incomplete one is fetched again by its own
+// address.
 const keep = (urls) => exclusive(async () => {
   const cache = await caches.open(CACHE);
   let keys = null;
@@ -223,7 +238,10 @@ const keep = (urls) => exclusive(async () => {
       if (url.origin !== self.location.origin) continue;
       if (!keys) { keys = await cache.keys(); refs = await reconcile(cache, keys); }
       const variants = keys.map((key) => key.url).filter((other) => new URL(other).pathname === url.pathname && looksLikePage(new URL(other)));
-      const targets = variants.length ? variants.filter((other) => !refs.docs[other]) : [url.href];
+      // The address asked for, when it is not in the copy (a variant of it may be: that is another document); then
+      // every cached variant with no entry; then every cached variant that is incomplete.
+      const targets = variants.includes(url.href) ? [] : [url.href];
+      for (const other of variants) if (!refs.docs[other]) targets.push(other);
       for (const other of variants) if (refs.docs[other] && !(await whole(cache, refs, other))) targets.push(other);
       for (const target of targets) {
         const page = await fetchPage(target);
