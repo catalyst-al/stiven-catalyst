@@ -3934,5 +3934,415 @@
     }
    ]
   }
+ },
+ "management-review-nr-81": {
+  "en": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-81/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-81/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-81/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-81/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-81/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-81/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
+ },
+ "management-review-nr-82": {
+  "en": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-82/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-82/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-82/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-82/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-82/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-82/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
+ },
+ "management-review-nr-83": {
+  "en": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-83/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-83/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-83/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-83/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-83/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-83/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
+ },
+ "management-review-nr-84": {
+  "en": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-84/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-84/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-84/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-84/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-84/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-84/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
+ },
+ "management-review-nr-85": {
+  "en": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-85/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-85/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-85/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-85/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-85/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-85/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
+ },
+ "management-review-nr-86": {
+  "en": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-86/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-86/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-86/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-86/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-86/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-86/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
+ },
+ "management-review-nr-87": {
+  "en": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-87/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-87/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-87/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-87/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-87/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-87/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
+ },
+ "management-review-nr-88": {
+  "en": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-88/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-88/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-88/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-88/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-88/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-88/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
+ },
+ "management-review-nr-89": {
+  "en": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-89/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-89/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-89/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-89/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-89/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-89/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
+ },
+ "management-review-nr-90": {
+  "en": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-90/en/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-90/en/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "sq": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-90/sq/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-90/sq/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  },
+  "de": {
+   "pageCount": 10,
+   "pages": [
+    {
+     "number": 1,
+     "image": "/media/magazine/management-review-nr-90/de/page-01.webp",
+     "width": 1000,
+     "height": 1417,
+     "large": "/media/magazine/management-review-nr-90/de/page-01-2000.webp",
+     "largeWidth": 2000
+    }
+   ]
+  }
  }
 }
