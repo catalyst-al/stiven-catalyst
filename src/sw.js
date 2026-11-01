@@ -3,7 +3,8 @@
 // js/tool-kit.js?v=…) never changes, so it is served from the copy and fetched once; a picture or font without one
 // is served from the copy and refreshed in the background. Nothing but this site's own files is ever kept, and no
 // work of a tool: that stays in localStorage, as before. Pages it was asked to keep (the tools of a role, from
-// js/offline.js) are fetched with their stylesheets and scripts, so they open whole.
+// js/offline.js) are fetched with their stylesheets and scripts, so they open whole, and a versioned file stays as
+// long as any kept page names it, so a deploy never leaves a kept page without its files (phase 5A, below).
 const CACHE = "sc-offline-v1";
 const OFFLINE_PAGE = "/offline.html";
 const PRECACHE = [OFFLINE_PAGE, "/manifest.webmanifest", "/favicon.svg"];
@@ -24,36 +25,218 @@ const assetsOf = (html, pageUrl) => {
   }
   return [...found];
 };
+// The versioned files a page's script fetches on its own when it needs them, named in the page's markup: the Search
+// page's index (data-index, read by js/search.js). Kept as long as the page is kept, never downloaded for the page,
+// and their absence never makes the page incomplete.
+const lazyOf = (html, pageUrl) => {
+  const found = new Set();
+  for (const match of html.matchAll(/\bdata-index="([^"]+)"/g)) {
+    try {
+      const url = new URL(match[1].replace(/&amp;/g, "&"), pageUrl);
+      if (url.origin === self.location.origin && isVersioned(url)) found.add(url.href);
+    } catch { /* not an address */ }
+  }
+  return [...found];
+};
+
+// PHASE5A-START
+// Offline copies that survive a deploy (phase 5A). A versioned file (?v=…) is kept as long as any cached page names
+// it: the pages' references are kept in an index entry inside this cache (REFS, the page's cache address, query and
+// all, → the files its HTML names, and apart the files its script fetches on its own; a page kept under two addresses
+// is two documents with two entries), completed from the cached HTML of any page the index does not know. A page is
+// written in two steps around its index entry: first the entry widened to the old and the new files, then the HTML,
+// then the entry narrowed to the new files; so at any interruption the entry names at least what the cached HTML
+// names, and the next collection, seeing the entry still marked as in progress, reads that one page again and settles
+// it. Collection runs once per page update,
+// never on a file request: it lists the cache once and deletes only the versioned files no cached page names (and,
+// for files no page names at all, such as a script loaded by another script, the versions older than the one last
+// fetched). A page that is already cached is refreshed whole or not at all: the new HTML and every file it names are
+// gathered first, the page is written last, so a failed download never replaces a complete copy with a broken one.
+// Every job that deletes or writes in several steps runs through one chain, so two refreshes, or a refresh and a
+// collection, never interleave; a file request stores its file outside the chain and deletes nothing.
+const REFS = "/__sw/refs";
+const settings = { graceMs: 1500 };
+let chain = Promise.resolve();
+const exclusive = (job) => { const run = chain.then(job, job); chain = run.then(() => undefined, () => undefined); return run; };
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const hrefOf = (request) => (typeof request === "string" ? new URL(request, self.location.origin).href : request.url);
+const pathOf = (request) => new URL(hrefOf(request)).pathname;
+const looksLikePage = (url) => (url.pathname.endsWith("/") || url.pathname.endsWith(".html")) && !url.pathname.startsWith("/__sw/");
+const isHtml = (response) => /text\/html/i.test((response && response.headers && response.headers.get("content-type")) || "");
 
 const put = async (cache, request, response) => {
-  if (!response || !response.ok || response.type === "opaque") return;
+  if (!response || !response.ok || response.type === "opaque") return false;
   await cache.put(request, response.clone());
-  // A versioned file replaces the older versions of the same file.
-  const url = new URL(typeof request === "string" ? request : request.url);
-  if (!isVersioned(url)) return;
-  for (const key of await cache.keys()) {
-    const other = new URL(key.url);
-    if (other.pathname === url.pathname && other.search !== url.search) await cache.delete(key);
+  return true;
+};
+// The index: { v: 3, docs: { "https://…/tools/pareto/": [file hrefs], "https://…/tools/pareto/?x=1": […], … },
+// lazy: { "<page address>": [the versioned files its script fetches on its own] }, pending: { "<page address>": true }
+// (a page whose two-step write was not finished), loose: { "/js/x.js": "https://…/js/x.js?v=…" } }. An index of
+// another shape is started afresh: every cached page is read once again.
+const readRefs = async (cache) => {
+  try {
+    const kept = await cache.match(REFS);
+    if (kept) {
+      const data = await kept.json();
+      if (data && data.v === 3 && data.docs && typeof data.docs === "object") {
+        const table = (name) => (data[name] && typeof data[name] === "object" ? data[name] : {});
+        return { v: 3, docs: data.docs, lazy: table("lazy"), pending: table("pending"), loose: table("loose") };
+      }
+    }
+  } catch { /* a fresh index */ }
+  return { v: 3, docs: {}, lazy: {}, pending: {}, loose: {} };
+};
+const writeRefs = (cache, refs) => cache.put(REFS, new Response(JSON.stringify(refs), { headers: { "content-type": "application/json" } }));
+// The index completed from the cached pages it does not know (a page stored before this index existed, or a worker
+// stopped between two writes) and from the pages whose two-step write was left in progress (read once again, then
+// settled), and cleared of pages no longer in the cache.
+const reconcile = async (cache, keys) => {
+  const refs = await readRefs(cache);
+  const present = new Set();
+  let changed = false;
+  for (const key of keys) {
+    const url = new URL(key.url);
+    if (!looksLikePage(url)) continue;
+    present.add(key.url);
+    if (refs.docs[key.url] && !refs.pending[key.url]) continue;
+    const response = await cache.match(key);
+    if (!response || !isHtml(response)) continue;
+    const html = await response.text();
+    refs.docs[key.url] = assetsOf(html, key.url);
+    refs.lazy[key.url] = lazyOf(html, key.url);
+    delete refs.pending[key.url];
+    changed = true;
   }
+  for (const table of [refs.docs, refs.lazy, refs.pending]) for (const href of Object.keys(table)) if (!present.has(href)) { delete table[href]; changed = true; }
+  if (changed) await writeRefs(cache, refs);
+  return refs;
+};
+// Files of refreshes still in flight: the browser already holds the new HTML and may be fetching them, or its script
+// the files it loads on its own, while another job collects. Each job holds its own set until it is done.
+const pending = new Map();
+const hold = (assets) => { const token = {}; pending.set(token, new Set(assets)); return () => pending.delete(token); };
+const named = (refs) => {
+  const set = new Set();
+  for (const list of Object.values(refs.docs)) for (const href of list) set.add(href);
+  for (const list of Object.values(refs.lazy)) for (const href of list) set.add(href);
+  for (const list of pending.values()) for (const href of list) set.add(href);
+  return set;
+};
+// Collection: the versioned files no cached page names are deleted; a file no page names at all (fetched by a script)
+// keeps the version last fetched and loses the older ones. A versioned file no page names and no record knows (left
+// by the worker before this index, which kept no records, or fetched while this one was stopped before it noted it)
+// is adopted: the only cached version of its path becomes its record; a path with several unrecorded versions keeps
+// them all until the script fetches one again, which records it and retires the others. So an upgrade deletes nothing
+// a script may still ask for, and the copy still cannot grow past one version per path once the path is fetched.
+const collect = async (cache) => {
+  const keys = await cache.keys();
+  const refs = await reconcile(cache, keys);
+  const used = named(refs);
+  // A loose record counts only for a path no page names; the records of named paths are dropped.
+  const namedPaths = new Set([...used].map((href) => new URL(href).pathname));
+  let changed = false;
+  for (const path of Object.keys(refs.loose)) if (namedPaths.has(path)) { delete refs.loose[path]; changed = true; }
+  const unrecorded = new Map();
+  for (const key of keys) {
+    const url = new URL(key.url);
+    if (!isVersioned(url) || namedPaths.has(url.pathname) || refs.loose[url.pathname]) continue;
+    unrecorded.set(url.pathname, [...(unrecorded.get(url.pathname) || []), key.url]);
+  }
+  const spared = new Set();
+  for (const [path, hrefs] of unrecorded) {
+    if (hrefs.length === 1) { refs.loose[path] = hrefs[0]; changed = true; } else for (const href of hrefs) spared.add(href);
+  }
+  if (changed) await writeRefs(cache, refs);
+  const latest = new Set(Object.values(refs.loose));
+  for (const key of keys) {
+    const url = new URL(key.url);
+    if (!isVersioned(url) || used.has(key.url) || latest.has(key.url) || spared.has(key.url)) continue;
+    await cache.delete(key);
+  }
+};
+// A versioned file fetched for a page that is not a cached document (a script's own import): remembered as the
+// latest of its path, so collection keeps it and drops its older versions.
+const noteLoose = (cache, request) => exclusive(async () => {
+  const refs = await readRefs(cache);
+  const href = hrefOf(request);
+  if (refs.loose[pathOf(request)] === href) return;
+  refs.loose[pathOf(request)] = href;
+  await writeRefs(cache, refs);
+});
+// A page from the network with the files it names, and the files gathered (from the copy where the browser already
+// stored them, else fetched); the page is written only when every file is there.
+const fetchPage = async (href) => {
+  const response = await fetch(href);
+  if (!response.ok || !isHtml(response)) return null;
+  const html = await response.clone().text();
+  return { response, html, assets: assetsOf(html, href), lazy: lazyOf(html, href) };
+};
+const gather = async (cache, assets) => {
+  for (const asset of assets) {
+    if (await cache.match(asset)) continue;
+    let response;
+    try { response = await fetch(asset); } catch { return false; }
+    if (!(await put(cache, asset, response))) return false;
+  }
+  return true;
+};
+// The page written in two steps around its index entry (see above): the entry widened and marked, the HTML, the
+// entry narrowed and unmarked. A failure before the HTML changes nothing; one after it leaves the mark, which the next
+// collection settles by reading the page again. Never a cached page whose files the index does not protect.
+const storePage = async (cache, request, page) => {
+  const href = hrefOf(request);
+  const before = await readRefs(cache);
+  before.docs[href] = [...new Set([...(before.docs[href] || []), ...page.assets])];
+  before.lazy[href] = [...new Set([...(before.lazy[href] || []), ...page.lazy])];
+  before.pending[href] = true;
+  await writeRefs(cache, before);
+  if (!(await put(cache, request, page.response))) return false;
+  const after = await readRefs(cache);
+  after.docs[href] = page.assets;
+  after.lazy[href] = page.lazy;
+  delete after.pending[href];
+  await writeRefs(cache, after);
+  return true;
+};
+// True when every file the cached page names is in the copy (the files its script fetches on its own do not count).
+const whole = async (cache, refs, href) => {
+  for (const asset of refs.docs[href] || []) if (!(await cache.match(asset))) return false;
+  return true;
 };
 
-const networkFirst = async (request) => {
+// A navigation: the network first, the copy when there is none. A page not yet in the copy is stored at once (the
+// browser fetches its files itself); one already there is refreshed whole in the background, after a moment for the
+// browser's own requests to land, and only when every file of the new page is there.
+const navigation = async (event, request) => {
   const cache = await caches.open(CACHE);
-  try {
-    const response = await fetch(request);
-    await put(cache, request, response);
-    return response;
-  } catch {
-    const kept = await cache.match(request, { ignoreSearch: true });
-    return kept || (await cache.match(OFFLINE_PAGE)) || Response.error();
+  let response;
+  try { response = await fetch(request); } catch {
+    // Offline: the copy stored under this exact address first (a query variant has its own), then any copy of the path.
+    return (await cache.match(request)) || (await cache.match(request, { ignoreSearch: true })) || (await cache.match(OFFLINE_PAGE)) || Response.error();
   }
+  if (!response.ok) return response;
+  // A navigation to something other than a page (a PDF, a sound file) is kept as before: stored as it comes, nothing
+  // to gather, nothing to index.
+  if (!isHtml(response)) { event.waitUntil(put(cache, request, response.clone()).catch(() => undefined)); return response; }
+  const html = await response.clone().text();
+  const page = { response: response.clone(), html, assets: assetsOf(html, request.url), lazy: lazyOf(html, request.url) };
+  // Held until the refresh is done or dropped: the files the browser is fetching for the new page, and the files its
+  // script may fetch meanwhile (the Search index), which no cached document names yet.
+  const release = hold([...page.assets, ...page.lazy]);
+  // "Already in the copy" is this exact address (a page kept under another query is another document).
+  const job = cache.match(request).then((existing) => (existing
+    ? wait(settings.graceMs).then(() => exclusive(async () => { if (await gather(cache, page.assets)) { await storePage(cache, request, page); await collect(cache); } }))
+    : exclusive(async () => { await storePage(cache, request, page); await collect(cache); })));
+  event.waitUntil(job.catch(() => undefined).then(release, release));
+  return response;
 };
-const cacheFirst = async (request) => {
+// A versioned file: from the copy, else fetched and stored; the loose record is written within the event's lifetime.
+const cacheFirst = async (event, request) => {
   const cache = await caches.open(CACHE);
   const kept = await cache.match(request);
   if (kept) return kept;
   const response = await fetch(request);
-  await put(cache, request, response);
+  if (await put(cache, request, response)) event.waitUntil(noteLoose(cache, request).catch(() => undefined));
   return response;
 };
 const staleWhileRevalidate = async (request) => {
@@ -62,48 +245,69 @@ const staleWhileRevalidate = async (request) => {
   const refresh = fetch(request).then(async (response) => { await put(cache, request, response); return response; }).catch(() => null);
   return kept || (await refresh) || Response.error();
 };
-
-// A page and the files it links, kept so the tool opens whole without a connection.
-const keepPage = async (cache, href) => {
-  const response = await fetch(href);
-  if (!response.ok) return;
-  await put(cache, href, response.clone());
-  const html = await response.text();
-  for (const asset of assetsOf(html, href)) {
-    if (!(await cache.match(asset))) {
-      try { await put(cache, asset, await fetch(asset)); } catch { /* next file */ }
-    }
+// The pages a tool page asks to keep (itself, the other tools of its role, the Tools page): one not in the copy is
+// fetched with its files; one in the copy but incomplete (a file it names is missing) is fetched again whole, from
+// fresh HTML, never through an old file address; one in the copy and complete is left as it is, newer build or not,
+// since it still opens whole offline and is refreshed when it is visited online.
+// A page kept under several addresses (its plain address and query variants) is several documents: the address asked
+// for is fetched when it is missing even if a variant is there, and each incomplete one is fetched again by its own
+// address.
+const keep = (urls) => exclusive(async () => {
+  const cache = await caches.open(CACHE);
+  let keys = null;
+  let refs = null;
+  for (const href of urls.slice(0, 40)) {
+    try {
+      const url = new URL(href);
+      if (url.origin !== self.location.origin) continue;
+      if (!keys) { keys = await cache.keys(); refs = await reconcile(cache, keys); }
+      const variants = keys.map((key) => key.url).filter((other) => new URL(other).pathname === url.pathname && looksLikePage(new URL(other)));
+      // The address asked for, when it is not in the copy (a variant of it may be: that is another document); then
+      // every cached variant with no entry; then every cached variant that is incomplete.
+      const targets = variants.includes(url.href) ? [] : [url.href];
+      for (const other of variants) if (!refs.docs[other]) targets.push(other);
+      for (const other of variants) if (refs.docs[other] && !(await whole(cache, refs, other))) targets.push(other);
+      for (const target of targets) {
+        const page = await fetchPage(target);
+        if (!page || !(await gather(cache, page.assets))) continue;
+        await storePage(cache, target, page);
+        refs.docs[target] = page.assets;
+        refs.lazy[target] = page.lazy;
+        delete refs.pending[target];
+      }
+    } catch { /* next page */ }
   }
-};
+  await collect(cache);
+});
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(PRECACHE)).then(() => self.skipWaiting()));
 });
 self.addEventListener("activate", (event) => {
-  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))).then(() => self.clients.claim()));
+  // Other caches go; this one is reconciled (pages indexed, files no page names collected) and kept whole.
+  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))
+    .then(() => exclusive(async () => collect(await caches.open(CACHE))).catch(() => undefined))
+    .then(() => self.clients.claim()));
 });
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   if (request.method !== "GET") return;
   const url = new URL(request.url);
-  if (url.origin !== self.location.origin || url.pathname === "/sw.js") return;
+  if (url.origin !== self.location.origin || url.pathname === "/sw.js" || url.pathname.startsWith("/__sw/")) return;
   if (request.mode === "navigate" || request.destination === "document") {
-    event.respondWith(networkFirst(request));
+    event.respondWith(navigation(event, request));
   } else if (KEPT.test(url.pathname)) {
-    event.respondWith(isVersioned(url) ? cacheFirst(request) : staleWhileRevalidate(request));
+    event.respondWith(isVersioned(url) ? cacheFirst(event, request) : staleWhileRevalidate(request));
   }
 });
+// The addresses in a "keep" message are each checked against this origin; the sender is a page of this origin by
+// construction (a worker only receives messages from its own clients), so there is no event.origin check.
 self.addEventListener("message", (event) => {
   const data = event.data;
   if (!data || data.type !== "keep" || !Array.isArray(data.urls)) return;
-  event.waitUntil(caches.open(CACHE).then(async (cache) => {
-    for (const href of data.urls.slice(0, 40)) {
-      try {
-        if (new URL(href).origin === self.location.origin && !(await cache.match(href, { ignoreSearch: true }))) await keepPage(cache, href);
-      } catch { /* next page */ }
-    }
-  }));
+  event.waitUntil(keep(data.urls).catch(() => undefined));
 });
+// PHASE5A-END
 
 // Reminders without a page open. js/reminders.js keeps, in IndexedDB "sc-reminders" on this device, whether they
 // are on, the day one was last shown, their words, and a summary of the open actions (counts per due day, the three
@@ -203,5 +407,5 @@ self.onnotificationclick = (event) => {
 };
 
 // For the tests (tests/offline.test.cjs, tests/reminders.test.cjs).
-self.SwKit = { CACHE, PRECACHE, KEPT, isVersioned, assetsOf };
+self.SwKit = { CACHE, PRECACHE, KEPT, REFS, isVersioned, assetsOf, lazyOf, settings, idle: () => chain, readRefs, collect, keep };
 self.SwReminders = { REMIND, remindCounts, remindUrl, remind };

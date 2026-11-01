@@ -1,0 +1,404 @@
+# Phase 5A proposal: offline copies that survive a deploy (service worker asset eviction)
+
+Status: approved for a Draft PR after review round 2 (31 October 2026), with the ten corrections of that round
+worked into §3; implementation results are appended in §10 when they exist. Source of
+the finding: `docs/audit/2026-10-31-sitewide-ux-review.md`, P1-01. Code read at `main` `0b995e82`.
+
+## 1. The defect in one paragraph
+
+`src/sw.js` caches each tool page a device "keeps" together with its versioned assets (`?v=<hash>`). When a newer
+version of a versioned file is cached, `put` (`sw.js:28-37`) deletes every other version of the same path. Pages are
+refreshed only when visited online (`networkFirst`, `sw.js:40-50`), and the `keep` message skips pages already in the
+cache (`sw.js:96-106`). After a deploy, opening one kept page online evicts the old asset versions that every other
+kept page still references; offline, those pages open without scripts and styles until each is reopened online.
+
+## 2. Goal and non-goals
+
+Goal: after any deploy, every page a device kept offline keeps opening whole offline, whether or not it was reopened
+online since; the first online visit of any page updates what it can without breaking the rest.
+
+Non-goals: no change to what is cached (pages and their assets only; tool work stays out of the cache), no change to
+the precache list, to the manifest, to `offline.js`'s keep list, to the `skipWaiting`/`clients.claim` update policy, to
+the CSP, to Team Sync, to the worker on Cloudflare, or to any tool. No new library. No "new version available" UI
+(a separate decision, not needed for this fix).
+
+## 3. Design (revised after review round 2)
+
+The review's ten corrections (31 October 2026) change the design from "reference-counted eviction in `put`" to a
+**reference index with batched collection, atomic page refresh and a single lock**. The principles, each tied to a
+review point:
+
+1. **Reference-aware retention (R1).** A versioned asset (`?v=`) is deleted only when no cached HTML document
+   references it. References are kept in an index entry inside the same cache (`/__sw/refs`, a JSON map
+   `pathname → [asset URLs]`), written whenever a document is cached, and rebuilt from the cached HTML for any
+   document that has no entry (migration, or a worker stopped between two writes).
+2. **All cached HTML counts (R2, R3).** The index is not bounded to the kept list: `networkFirst` caches ordinary
+   navigations too, and they are indexed the same way. A cached entry is treated as a document by its address (a
+   path ending in `/` or `.html`) and, when in doubt, by the `Content-Type` of the cached response, never by
+   `Request.destination`, which is empty for requests stored from URL strings.
+3. **No eviction in `put` (R9).** `put` only stores. Collection runs as one batched job after a document is cached
+   or refreshed and once on `activate`: read the index, list the cache's keys, delete the versioned assets no
+   document references. Cost per run: one `keys()`, one index read, set arithmetic, and the parse of documents that
+   have no index entry (none in steady state). Individual asset requests (`cacheFirst`, `staleWhileRevalidate`)
+   never scan the cache.
+4. **Selective repair, controlled refresh (R4).** The `keep` message no longer skips cached pages blindly, nor
+   refreshes them all: a kept page that is not cached is fetched; one that is cached but **incomplete** (an asset of
+   its index entry missing) is re-fetched whole; one that is cached and complete is left alone, even if newer HTML
+   exists, because it still works offline with the assets it references. Stale pages are refreshed when they are
+   visited online (see 6), one page per visit, nothing else.
+5. **Never repair with old addresses (R5).** A repair never fetches an asset address taken from an old cached page
+   (`?v=D1` fetched after D2 returns D2 bytes). Repair and refresh always start from freshly fetched HTML and fetch
+   the asset addresses that HTML names, so HTML and assets match.
+6. **Atomic refresh of a cached page (R6).** When a page that is already cached is visited online, the network
+   response is returned to the browser at once (as today), but the cached document is **not** overwritten inline.
+   A refresh job then collects every asset the new HTML names: from the cache if the browser's own requests already
+   stored it, else fetched. Only when all assets are present is the new document written and indexed; if any asset
+   fails, the previous complete document and its assets stay untouched (the assets already stored are harmless and
+   are collected later if nothing references them). A page with no cached copy is stored at once, as today: there
+   is nothing complete to protect.
+7. **One lock (R7).** Every job that deletes or writes in several steps (first-time document store, refresh, keep,
+   collection, the `activate` reconciliation) runs through one promise chain in the worker, so two refreshes, or a
+   refresh and a collection, never interleave. Asset stores from `cacheFirst` run outside the lock; they delete
+   nothing. The one race that remains, a collection running between the moment the browser receives new HTML and
+   the moment the refresh job has read it, is closed by reading the HTML and recording its assets as *pending*
+   before the response is handed to the browser; collection spares pending assets.
+8. **Garbage collection without a version limit (R9).** No "keep two versions" rule: an old version lives exactly
+   as long as a cached document names it, and is deleted at the next collection after the last such document is
+   refreshed or dropped.
+9. **The message handler's origin check (R8).** Today the worker checks the **origin of each requested URL** in the
+   `keep` message against its own, not `event.origin`. That stays; the tests describe it as it is.
+
+What does not change: the cache name `sc-offline-v1`; the precache; `networkFirst` for navigations with the offline
+page as the last fallback; `cacheFirst` for versioned and `staleWhileRevalidate` for unversioned files; the
+`skipWaiting` + `clients.claim` update policy; the registration and keep list in `offline.js`; the reminders part of
+the worker; anything outside the worker (tool data, PIN lock, backups, Team Sync, CSP).
+
+Options considered and not taken: eviction inside `put` with a reference check (a cache scan on every asset
+request; rejected by R9); "keep the last two versions" (breaks after two deploys; rejected by R9); a cache per build
+(a new layout and a migration; out of proportion).
+
+## 4. Acceptance criteria
+
+1. **D1 → D2:** after D2 and after reopening one kept page online, every other kept page opens offline with its
+   scripts running (`window.ToolKit` and the tool's own `*Math` object defined, the tool's first field present) and
+   its stylesheet applied (the tool stylesheet is among `document.styleSheets` with rules, and a rule only it sets is
+   in effect), with no failed request for a `?v=` asset.
+2. **D1 → D2 → D3:** the same holds after a second deploy that changes another shared asset.
+3. **Two pages, one asset:** refreshing one of two cached pages that share an asset version keeps that version
+   until the other is refreshed too; then it is collected.
+4. **Partial failure:** a refresh whose asset download fails leaves the previously complete document and its
+   assets untouched and serves them offline.
+5. **Offline keep:** a `keep` message while offline deletes nothing and changes nothing.
+6. **Concurrency:** two refreshes and a collection started together end with every cached document complete.
+7. **Cleanup:** after the last document naming an old version is refreshed, that version is gone at the next
+   collection; versions still named stay.
+8. **Migration:** a cache built by today's worker (documents whose assets were evicted) is indexed on `activate`,
+   serves its documents offline as before, and is repaired on the next `keep` (kept pages) or the next online visit
+   (any page) without fetching old asset addresses.
+9. **Overhead:** per online navigation, the extra network requests are only the assets of that page the browser
+   did not request itself (normally none); per `keep`, only incomplete or missing pages are fetched; collection does
+   one `keys()` per document update. Measured in the tests and reported.
+10. Today's four `tests/offline.test.cjs` tests pass with their wording updated where behaviour changed (a kept page
+    that is cached and complete is still not fetched again); the full unit suite and the six browser projects pass.
+
+## 5. Regression scenarios and the tests that encode them
+
+Unit tests (`tests/sw-eviction.test.cjs`) run the worker's functions against a fake Cache API and a fake network
+that serves "builds": each build is a map of address → body, versioned assets by their `?v=`, pages naming them.
+
+| # | Scenario | On `0b995e82` | After |
+| --- | --- | --- | --- |
+| T1 | P1 and P2 cached naming `a.js?v=1`; P2 refreshed to a build naming `?v=2` | `?v=1` deleted while P1 names it | `?v=1` kept |
+| T2 | then P1 refreshed too | — | `?v=1` collected |
+| T3 | D1 → D2 → D3, three shared assets, one kept page reopened online per deploy | other kept pages broken offline | every kept page complete offline after each deploy |
+| T4 | `keep` with a cached but incomplete page | skipped | re-fetched from fresh HTML; no old `?v=` address fetched |
+| T5 | `keep` with a cached complete page | skipped | skipped (no network) |
+| T6 | `keep` while offline (fetch rejects) | — | nothing deleted, nothing changed |
+| T7 | refresh with one asset failing | — | old document and assets intact |
+| T8 | two refreshes and a collection started together | — | both documents complete, no shared asset lost |
+| T9 | migration: cache of the old worker with evicted assets | — | indexed on activate; repaired on keep from fresh HTML |
+| T10 | `keep` message: a URL of another origin | ignored | ignored (the URL's origin is checked, not `event.origin`) |
+| T11 | cost: counts of `keys()`, `match()` and `fetch()` per operation | — | reported, bounded as in criterion 9 |
+
+Browser spec (`tests/browser/sw-offline.spec.mjs`, the 1 440 px light project): a spec-local static server with a
+switchable overlay serves build D1 (the real `_site`), then D2 (an overlay with a changed `tool-kit.js` and the
+pages that name it rewritten to its new version), then D3 (a changed `styles-tool.css`). Each test runs in its own
+browser context with its own storage. It registers the real worker from `/tools/room-inspection/`, waits for the
+keep, goes offline and checks the kept pages; switches to D2, goes online, opens one kept page, goes offline and
+checks the others (criterion 1); the same for D3 (criterion 2); and counts the requests the server saw in each step
+(criterion 9). The same spec, pointed at the worker of `0b995e82` through an environment variable, fails at
+criterion 1: that is the proof the defect was reproduced in a real browser before the change.
+
+## 6. Backward compatibility
+
+- Cache name unchanged; nothing dropped on update. The first `activate` of the new worker indexes the cached
+  documents and collects only versions no document names. Documents the old worker left incomplete keep serving
+  offline as they do today and are repaired at the next keep or online visit.
+- The index entry is an ordinary cache entry under a path no page requests; an old worker that is reinstalled by a
+  rollback ignores it.
+- No change to the versioning scheme, the build, the deploy, `offline.js`, or any page.
+- Storage grows only while two cached pages name different versions of an asset; it shrinks at the next collection
+  after a refresh.
+
+## 7. Rollback
+
+- Reverting the merge commit restores today's worker at the next online load (`skipWaiting`). The cache stays
+  valid for either worker; the index entry is ignored by the old one.
+- The failure mode of the new worker is the same as today's when the cache misses online: the page comes from the
+  network. There is no clear-cache button; the browser's site-data clearing remains the last resort and also removes
+  tool work unless backed up, which is why the browser spec and the manual phone check run before the merge.
+
+## 8. Effort, order and what is out of scope
+
+- Effort: M. One PR, with the failing tests first (T1, T3, T4 and T9 fail on `0b995e82`; the others guard
+  behaviour that must stay), then the change, then the browser spec, then the docs (`README.md` offline paragraph,
+  `docs/DATA-FORMATS.md` is not affected, the release note).
+- Order inside Phase 5: 5A (this) first, because every later deploy strands offline copies until it ships. The
+  privacy hand-off (P1-02) is independent and can run in parallel as 5B; the Tools filter (P1-03a) as 5C.
+- Out of scope, deliberately: a "new version available" prompt, caching tool work, a cache-size display, a clear-cache
+  button, any change to the Team Sync worker or Cloudflare. Each would be its own decision.
+
+## 9. Open questions for the owner
+
+1. Should the `keep` refresh (option B element) run on every tool visit, or only once per day per device, to spare
+   mobile data? (Proposal: once per worker lifetime per page, which in practice is once per visit to the site.)
+2. Is the two-build browser spec worth the test-server change, or is the unit-level fetch-handler test enough for the
+   first release? (Proposal: the spec, because the defect is in the interaction of real cache semantics.)
+3. Is a visible line on the Tools page ("Offline copies: N pages, updated …") wanted later? Not part of 5A.
+
+## 10. Implementation results (branch `feature/phase-5a-offline-reliability`, Draft PR [catalyst-al/stiven-catalyst#371](https://github.com/catalyst-al/stiven-catalyst/pull/371))
+
+Commit `b0887a0b` on `main` `0b995e82`. Files: `src/sw.js` (the offline part rewritten between the `PHASE5A` markers;
+the reminders part, the precache, the fetch routing and the message shape unchanged), `tests/sw-eviction.test.cjs`
+(new, 10 tests, 11 scenarios), `tests/browser/sw-offline.spec.mjs` (new, 2 tests), `tests/browser/playwright.config.mjs`
+(the spec in the 1 440 px light project only), `README.md`, `docs/RELEASE.md` (§5a), this proposal and the audit
+report (P1-01 status, §11, §12). No change to `offline.js`, any tool, the CSP, Team Sync, the PIN lock or the backups.
+
+### Regression evidence
+
+- **Unit, before:** the final `tests/sw-eviction.test.cjs` run in a worktree at `0b995e82` (the old `src/sw.js`):
+  **5 of 10 fail**: T1/T2 (the shared version is evicted while a page names it), T3 (kept pages broken offline after
+  D2), T4/T5 (an incomplete kept page is skipped), T7 (a failed download does not protect the complete copy), T9 (no
+  index, no repair). T6, T8, T10, T11 and the precache test pass on both and guard what must stay.
+- **Unit, after:** 10 of 10 pass; with `tests/offline.test.cjs` and `tests/reminders.test.cjs`, 25 of 25.
+- **Browser, before:** `tests/browser/sw-offline.spec.mjs` with `SW_JS` pointing at the worker of `0b995e82` fails
+  at the first offline check after D2: `/tools/room-inspection/: tool-kit.js ran · expected true, received false`
+  (the page served from the copy, its script evicted). The run is in `/home/user/live-check/sw-spec-before.log`.
+- **Browser, after:** both tests pass (D1 → D2 → D3 with one page reopened per deploy; repair of a damaged kept page
+  from fresh HTML with the complete page not fetched again), 2 of 2, about 18 s.
+
+### What the browser spec checked, exactly
+
+A spec-local server serves `_site` as D1, then an overlay with `js/tool-kit.js` changed (a marker appended, a new
+hash in every page that names it) as D2, then an overlay with `styles-tool.css` changed (a marker rule) as D3;
+"offline" is the server closed, so the worker's own fetches fail. In one fresh browser context: register the real
+worker from Room Inspection, wait for the keep (the index names the page and the role's tools), go offline, open the
+page and three kept tools: `window.ToolKit` present, the tool stylesheet in `document.styleSheets` with its rules,
+the tool's first field and heading drawn, no failed `?v=` request. Online with D2, reopen one kept tool (it runs the
+D2 script), wait for its refresh to be indexed, go offline: the two pages never reopened open whole with their D1
+files, the reopened one with D2. Online with D3, reopen another (it has the D3 rule), go offline: three pages, three
+sets of files, each whole; the D3 rule is in effect only on the D3 page. The cache then holds exactly two versions of
+`tool-kit.js` (D1 for the pages never reopened, D2 for the reopened ones): nothing leaked, nothing lost.
+
+### Measured overhead
+
+- Unit (`T11`): one `keys()` per page update; `keep` over four complete pages makes **0** network requests;
+  100 served file requests list the cache **0** times. At scale, with 212 entries in the copy (200 ordinary pages),
+  one page update costs 1 `keys()`, 9 `match()` and 0.8 ms of logic in the fake (no I/O).
+- Browser (one run): D1 first visit 80 requests (60 versioned files, 12 pages: the page, the keep of 10 tools and the
+  Tools page; the page itself is fetched twice on the very first visit, once by the browser before the worker
+  exists and once by the keep that stores it). D2 with one page reopened: 22 requests, of which the reopened page,
+  its one new file (`tool-kit.js` D2) and 8 pages of its own "More from this orbit" list that had not been kept
+  before (a keep from another tool of the role names other tools); **no complete kept page was fetched again**. D3
+  with one page reopened: 4 requests (the page, its one new file, two unversioned files). The refresh adds no request
+  for a file the browser already asked for: the job waits 1.5 s and takes those from the copy.
+- Storage: two versions of a shared file coexist only while two cached pages name different builds.
+
+### Known limitations
+
+- A page the old worker left incomplete opens offline with what it has (as today) until its next keep or online
+  visit; the first `activate` of the new worker fetches nothing, by design (no network cost at install).
+- A kept page that is complete but stale is not refreshed by a keep; it is refreshed when visited online. A device
+  that only ever opens one tool keeps the others at the build it kept them, whole.
+- Files a script loads itself (pdf.js in the ATS CV, `media-store.js` from the backup) are not named by any page:
+  the latest version fetched is kept, older ones collected. Offline, such a file is there only if it was fetched
+  online before, as today.
+- The index is one JSON entry; a worker stopped between a page store and the index write leaves a page the index
+  does not know, which the next reconciliation parses once. The cost of that parse is bounded by the cached HTML.
+- Playwright's offline switch does not reach a worker, so the spec closes its server instead; CI runs the spec in
+  one project (1 440 px light).
+
+### Build and test results
+
+On the final code of the branch, full production build:
+
+| Step | Result |
+| --- | --- |
+| `npm run build` | 838 files written (818 HTML pages), no error |
+| `npm test` | **1 417 pass, 0 fail** (1 407 of `main` + the 10 worker tests) |
+| Six browser projects (390/768/1 440 × dark/light) | **218 pass, 0 fail**, 17.5 min (216 of `main` + the 2 offline tests) |
+| Focused: `tests/sw-eviction.test.cjs` + `tests/offline.test.cjs` + `tests/reminders.test.cjs` | 25 pass |
+| Focused: `tests/browser/sw-offline.spec.mjs` (1 440 px light) | 2 pass; with `SW_JS` at the worker of `0b995e82`: fails at the first offline check after D2 |
+| CI | run 808 (`b0887a0b`) and run 809 (`05f26949`): success |
+
+## 11. Independent code audit of `05f26949` (round 3): two offline-integrity defects, fixed
+
+ChatGPT ran the worker of `05f26949` against an isolated Cache API simulation and reproduced two defects that the
+D1 → D2 → D3 tests did not reach. Both are real; both are fixed in commit `27046d52` with the tests that failed on
+`05f26949`.
+
+| # | Finding | Cause in `05f26949` | Correction |
+| --- | --- | --- | --- |
+| F1 | Query variants shared one index entry: `/tools/a/` (D1) and `/tools/a/?action=…` (D2) are two cached documents, but `refs.docs` was keyed by pathname; the D2 variant overwrote the entry and collection deleted the D1 files the plain copy still named; offline, the plain address opened without them | index keyed by `pathname`; "already in the copy" judged with `ignoreSearch` | the index is keyed by the **cache address, query and all** (`v: 2`); every cached HTML document has its own entry; `navigation` judges "already in the copy" by the exact address and, offline, answers from the copy under the exact address before any copy of the path (the browser spec showed the variant address answered by the plain copy otherwise); `keep` treats each cached variant of a kept page as its own document and repairs each incomplete one by its own address |
+| F2 | An interrupted index write left stale references: `storePage` cached the new HTML, then wrote the index; a failure between the two left an entry naming the old files while the cached page named the new ones, and the next collection deleted the new files; `reconcile` trusted any existing entry | one write after the page, no mark | **two-step write around a mark**: the entry is first widened to the old and the new files and marked `pending`, then the HTML is written, then the entry is narrowed to the new files and the mark removed. At any interruption the entry names at least what the cached HTML names, so collection cannot delete a needed file; the next `reconcile` reads only the pages still marked (and those with no entry) and settles them. No full-cache parsing on file requests |
+| R8 | `noteLoose()` ran outside the fetch event's lifetime: a worker stopped right after serving a script-loaded versioned file could lose its loose record, and a later collection could delete that file's latest version | `cacheFirst` did not hold the event | `cacheFirst` takes the event and registers the loose write with `event.waitUntil` |
+
+Regression tests (`tests/sw-eviction.test.cjs`): **T12** (F1: plain copy and variant are two documents; D1 files
+kept while the plain copy names them; the plain address opens whole offline; both refreshed later → the D1 files go)
+and **T13** (F2, with a fault-injecting cache: (a) the write after the new HTML fails → the new file survives the next
+collection, the page is complete offline, the index heals and the old file is collected at the following collection;
+(b) the write before the new HTML fails → nothing changes, the complete old copy stays; (c) a keep whose index write
+fails → the repaired page is complete after a collection). Both fail on `05f26949` (worktree, same file: 2 of 12) and
+pass on the branch (12 of 12; 27 with the offline and reminders files). The browser spec now reopens the kept page
+under a query variant after D2 and checks, offline, the plain D1 copy, the D2 variant and the other kept pages; after
+D3 the same three plus the D3 page; pointed at the worker of `05f26949` it fails at the plain copy's offline check.
+
+Cost after the change (T11): still 1 `keys()` per page update; a keep over complete pages still makes 0 requests; at
+212 entries one page update costs 1 `keys()`, 10 `match()` (one more: the two index reads of the two-step write) and
+about 2 ms of logic in the fake. One more index write per page store (the marked entry); no more parsing.
+
+### Results of the corrected code (`27046d52`, full production build, this machine)
+
+| Step | Result |
+| --- | --- |
+| `npm run build` | 838 files written (818 HTML pages), no error |
+| `npm test` | **1 419 pass, 0 fail** (1 407 of `main` + the 12 worker tests) |
+| Six browser projects (390/768/1 440 × dark/light) | **218 pass, 0 fail**, 18.1 min |
+| Focused: `tests/sw-eviction.test.cjs` + `tests/offline.test.cjs` + `tests/reminders.test.cjs` | 27 pass |
+| Before-proof, unit: the final `tests/sw-eviction.test.cjs` against the worker of `05f26949` (worktree) | **T12 and T13 fail, the other 10 pass** |
+| Before-proof, browser: `tests/browser/sw-offline.spec.mjs` with `SW_JS` at the worker of `05f26949` | fails at the plain copy's offline check after D2 (`/tools/room-inspection/: no versioned file failed`: its own script gone) |
+| After, browser: the same spec with the worker of the branch (1 440 px light) | 2 pass |
+| CI | the run on `27046d52` and the documents commit: reported in the Draft PR once finished |
+
+## 12. Independent audit of `6ee3ea4d` (round 4): the upgrade and the plain address, fixed
+
+ChatGPT reproduced two further problems against the worker of `6ee3ea4d`, one of them with the production worker of
+`main` (`0b995e82`) and the new one run in turn against the same simulated cache. Both are real; both are fixed in
+commit `27dd6231` with the tests that failed on `6ee3ea4d`.
+
+| # | Finding | Cause in `6ee3ea4d` | Correction |
+| --- | --- | --- | --- |
+| F3 (blocking) | A versioned file a script loads itself, cached by the old worker (the search index `/search-index.json?v=…`, fetched by `js/search.js`), was deleted at the new worker's first collection: no page names it (`assetsOf` reads stylesheets and scripts) and the old worker kept no loose record, so nothing protected it. Search offline lost its index | collection kept an unnamed versioned file only when a loose record named it; migration started with no records | collection **adopts** an unnamed versioned file no record knows: the only cached version of its path becomes its loose record and is kept; a path with several unrecorded versions keeps them all until the script fetches one again, which records it and retires the others. No old address is fetched; the copy still cannot grow past one version per path once the path is fetched again |
+| F4 | A keep for a plain address cached only under a query variant fetched nothing: the variant with the same pathname stood for the address asked for, which was never kept (the `ignoreSearch` offline fallback hid it) | `keep` built its targets from the cached variants alone | the address asked for is fetched when it is not in the copy, variant or no variant; the cached variants keep their entries; a complete page is still left alone; a repeated keep makes no request |
+
+Regression tests (`tests/sw-eviction.test.cjs`): **T14**, the actual upgrade: the worker of `0b995e82` enters the
+repository verbatim as `tests/fixtures/sw-0b995e82.js`; it caches the Search page, the versioned index its script
+fetches and one tool page; the new worker takes over the same fake cache, installs and activates; the index and the
+pages survive, Search answers offline, no old address is fetched, and a newer index version fetched later retires the
+old one. **T15**: only a variant cached; a keep of the plain address fetches exactly that page, keeps the variant, both
+have their entries, and a second keep fetches nothing. The harness can hand one worker's cache to another and send a
+script's own request. Both fail on `6ee3ea4d` (worktree, same files: 2 of 14) and pass on the branch (14 of 14).
+T1–T13 are unchanged and pass; the cost is unchanged (1 `keys()` per page update, 10 `match()` at 212 entries).
+
+**For Phase 5B (recorded, not addressed here):** the index keys cached pages by their full address, query included.
+A page kept under an Action Tracker hand-off address therefore leaves that address, with the user-entered text it
+carries (P1-02), in two places of the cache: the cached document's own key (as with the worker of `main`) and the
+index entry. Both go when the page's cached copy goes (the entry of an absent document is dropped at the next
+reconciliation) and the cache is cleared by "Forget everything on this device" as before; nothing leaves the device
+through them. The 5B rewrite of the hand-off (a browser note, a meaningless token in the address) removes the text
+from both places at once; until then a hand-off address kept offline persists as long as its cached copy.
+
+### Results of the corrected code (`27dd6231`, full production build, this machine)
+
+| Step | Result |
+| --- | --- |
+| `npm run build` | 838 files written (818 HTML pages), no error |
+| `npm test` | **1 421 pass, 0 fail** (1 407 of `main` + the 14 worker tests) |
+| Six browser projects (390/768/1 440 × dark/light) | **218 pass, 0 fail**, 17.0 min |
+| Focused: `tests/sw-eviction.test.cjs` + `tests/offline.test.cjs` + `tests/reminders.test.cjs` | 29 pass |
+| Before-proof, unit: the final `tests/sw-eviction.test.cjs` and the fixture against the worker of `6ee3ea4d` (worktree) | **T14 and T15 fail, the other 12 pass** |
+| Browser: `tests/browser/sw-offline.spec.mjs` (D1 → D2 → D3 with the query variant, the repair) with the worker of the branch | 2 pass |
+| Cost (T11) | 1 `keys()` per page update, 0 requests for a keep over complete pages, 10 `match()` at 212 entries: unchanged |
+| CI | the run on `27dd6231` and the documents commit: reported in the Draft PR once finished |
+
+## 13. Independent audit of `5a3343ba` (round 5): the Search index a cached page still needs, fixed
+
+ChatGPT reproduced one regression with the production worker of `main` followed by the worker of `5a3343ba` over the
+same cache: the Search page's index, which its script fetches on its own (`data-index`, `js/search.js`), survived the
+upgrade (F3) but was deleted once a later build's Search page, opened under a query, had fetched a newer index: the
+cached D1 Search page still named the old one through `data-index`, and nothing in the index knew that. Offline, the
+D1 page opened and its index was gone. Fixed in commit `e601345d` with the test that fails on `5a3343ba`.
+
+| # | Finding | Cause in `5a3343ba` | Correction |
+| --- | --- | --- | --- |
+| F5 | A cached Search page lost the index version its markup names after a later build fetched a newer one | `assetsOf` reads stylesheets and scripts only; the loose record protects the latest fetched version of a path only, whatever a cached document still names | a **reference-only** table in the index (`v: 3`, `lazy`): for each cached document, the versioned files named by `data-index` in its markup. They count as named for collection (kept as long as the document is kept, dropped with it), are **never downloaded** for the page (`gather` and the keep read `docs` only), and their absence **never makes the page incomplete** (`whole` reads `docs` only). Written in the same two steps as the page's entry, re-read by `reconcile` with the page. Only `data-index` is read: the one lazily fetched versioned file the site has |
+
+Regression test (`tests/sw-eviction.test.cjs`): **T16**: D1 under the worker of `0b995e82` (Search page and index) →
+the new worker over the same cache → D2 Search opened under a query (another document; the plain copy stays D1) → the
+script fetches the D2 index → another page's visit collects → the D1 index is still there and the D1 page fetches it
+offline, the D2 document its own; the worker fetched the index zero times; a keep of both Search documents with the
+index deleted fetches nothing (an absent lazy file is not incompleteness); once the plain Search page is reopened online
+at D2 nothing names the D1 index and it is collected; no old index address was ever fetched. Fails on `5a3343ba` at
+"the D1 index is kept" (worktree, same files: 1 of 15 fails) and passes on the branch (15 of 15). **T14** now uses
+Search pages whose `data-index` changes with the build (the old index retires once no cached document names it) and
+checks the adoption of F3 on a file no page names at all. T1–T13 and T15 unchanged and passing; cost unchanged (1
+`keys()` per page update, 10 `match()` at 212 entries; the `lazy` table adds one short list per document).
+
+### Results of the corrected code (`e601345d`, full production build, this machine)
+
+| Step | Result |
+| --- | --- |
+| `npm run build` | 838 files written (818 HTML pages), no error |
+| `npm test` | **1 422 pass, 0 fail** (1 407 of `main` + the 15 worker tests) |
+| Six browser projects (390/768/1 440 × dark/light) | **218 pass, 0 fail**, 17.8 min |
+| Focused: `tests/sw-eviction.test.cjs` + `tests/offline.test.cjs` + `tests/reminders.test.cjs` | 30 pass |
+| Before-proof, unit: the final `tests/sw-eviction.test.cjs` and the fixture against the worker of `5a3343ba` (worktree) | **T16 fails ("the D1 index is kept"), the other 14 pass** |
+| Browser: `tests/browser/sw-offline.spec.mjs` (D1 → D2 → D3 with the query variant, the repair) with the worker of the branch | 2 pass |
+| Cost (T11) | 1 `keys()` per page update, 0 requests for a keep over complete pages, 10 `match()` at 212 entries: unchanged |
+| CI | the run on `e601345d` and the documents commit: reported in the Draft PR once finished |
+
+## 14. Independent audit of `6244ce11` (round 6): the index of a refresh in flight, fixed
+
+ChatGPT reproduced one concurrency regression against the worker of `6244ce11` with controlled timing: the Search
+page reopened online after a deploy goes to the browser at once while its refresh in the copy waits the grace period;
+the new page's script fetches the new index meanwhile; a collection run by another page's visit before the refresh
+resumes saw the old index named (by the cached D1 page) and the new one named by nothing (the loose record of a named
+path is dropped), and deleted it; the refresh then stored the D2 page, which names the missing index. Fixed in commit
+`aa98f487` with the test that fails on `6244ce11`.
+
+| # | Finding | Cause in `6244ce11` | Correction |
+| --- | --- | --- | --- |
+| F6 | The index the new Search page fetched during the grace period was collected before the refresh stored the page | the refresh in flight held only the files the browser fetches for the new page (`hold(page.assets)`), not the files its script loads on its own | the hold covers both: `hold([...page.assets, ...page.lazy])`. One line; the hold is released as before when the refresh ends or is dropped. The candidate ChatGPT tested in memory, verified here against T17 and the whole suite |
+
+Regression test (`tests/sw-eviction.test.cjs`): **T17**, the exact interleaving: D1 Search page and index; D2 deployed;
+the same address reopened online with the worker's timers held (the harness can now hold the worker's timers and
+release them later); the script fetches the D2 index; another page's visit collects: the D2 index survives and the D1
+index stays; the timers released, the refresh stores the D2 page and its index is there for it; offline, the D2 page
+and its index answer; after the next collection the D1 index, named by nothing, is gone; the index was fetched once,
+by the script, never for a page. Fails on `6244ce11` at "the D2 index survives the collection" (worktree, same file:
+1 of 16 fails) and passes on the branch (16 of 16). T1–T16 unchanged and passing; cost unchanged.
+
+### Results of the corrected code (`aa98f487`, full production build, this machine)
+
+| Step | Result |
+| --- | --- |
+| `npm run build` | 838 files written (818 HTML pages), no error |
+| `npm test` | **1 423 pass, 0 fail** (1 407 of `main` + the 16 worker tests) |
+| Six browser projects (390/768/1 440 × dark/light) | **218 pass, 0 fail**, 16.3 min |
+| Focused: `tests/sw-eviction.test.cjs` + `tests/offline.test.cjs` + `tests/reminders.test.cjs` | 31 pass |
+| Before-proof, unit: the final `tests/sw-eviction.test.cjs` against the worker of `6244ce11` (worktree) | **T17 fails ("the D2 index survives the collection"), the other 15 pass** |
+| Browser: `tests/browser/sw-offline.spec.mjs` (D1 → D2 → D3 with the query variant, the repair) with the worker of the branch | 2 pass |
+| Cost (T11) | 1 `keys()` per page update, 0 requests for a keep over complete pages, 10 `match()` at 212 entries: unchanged |
+| CI | run 813 on `b4df8961`: **failure**, 217 of 218 browser tests passed; the one failure is in the test suite, not the worker (below). Run 814 on the test fix: reported in the Draft PR once finished |
+
+**Run 813, the one failing browser test (`sw-offline.spec.mjs`, "a kept page made incomplete is repaired…"):** the
+test deleted a kept page's own script and expected the next keep to fetch that page once; the script came back but the
+page was fetched zero times, and the test ended in 1.3 s. The test's setup waited only until its three named pages had
+index entries, while the worker's first keep (every tool of the role) could still be running on the slower runner; a
+page stored by that keep after the deletion gathers the missing file itself, so the later keep found the victim whole
+and, correctly, fetched nothing. The worker behaved as specified; the test left a window. Fixed in the test only
+(commit `92bce18e`): the test waits until the server has had no request for two seconds before damaging the copy, and
+chooses a script that no other cached document names (every entry of the index, not just two pages). Locally the test
+passed in every run before and after (5 of 5 after the fix in a row); the race was not reproduced here. No worker change.
+
+Open for the release-readiness review: nothing known. Phase 5B (privacy hand-offs) is not touched by this PR beyond the note in §12.
