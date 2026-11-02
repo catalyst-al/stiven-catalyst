@@ -49,7 +49,7 @@ The platform is in good technical and editorial health. The crawl found **no bro
 no page without one `h1`, a description and the right `lang`**, and **no missing translation in 7 207 interface texts**
 across English, German and Albanian. The security posture is unusual for a static site: a Content Security Policy with
 script hashes on every page, no third-party script on any tool page, no tool work leaving the device except through
-the one hand-off P1-02 documents (the Action Tracker address) and the CV Builder's disclosed logo lookup,
+the hand-offs P1-02 documents (the Action Tracker address until Phase 5B; the `?problem=` and `?issue=` links still) and the CV Builder's disclosed logo lookup,
 backups and a PIN lock that encrypt locally. The four planets give the 59 tools a navigable order by role, the
 operations tools hand work to each other through the Action Tracker and in-browser notes rather than URLs, every one
 of the 40 essays links to its tools, and the mobile menu, theme and motion controls work by keyboard.
@@ -81,8 +81,9 @@ aggregator tools, a vendored pdf.js outside dependency tracking) complete the pi
   (`src/_includes/layouts/base.njk:89`), no analytics or third-party script on tool and role pages, newsletter and
   feedback only on writing pages, Google's icon service only in the CV Builder and said so on the Tools page. The
   claim "nothing you type leaves your device" is true of tool data at rest and of every hand-off that uses a browser
-  note; it is **not yet true** of the generic "Add to actions" hand-off, whose address carries the action's text
-  (P1-02, open for Phase 5B). Backups, sealed files and the PIN lock use AES-GCM with PBKDF2
+  note; since Phase 5B (PR of `feature/phase-5b-private-action-handoff`, November 2026) the generic "Add to actions"
+  hand-off uses a note too and its address carries only a random token (P1-02 corrected; the other tool-to-tool
+  links that carry typed text are listed under P1-02 and remain open). Backups, sealed files and the PIN lock use AES-GCM with PBKDF2
   (310 000 rounds). Team Sync is end-to-end encrypted.
 - **Local-first with real recovery.** Restore points in IndexedDB (daily, before a file replaces anything, every 15
   minutes while working, before a sync), all-or-nothing restores with rollback, "All your work in one file" under every
@@ -187,6 +188,23 @@ behaviour · privacy · S (ID was P2-04 in the first version; promoted by the re
   meaningless token in the address; keep the address form as a fallback for a link opened later or in another tab,
   with the text omitted when a note exists. Extend `tests/action-tracker.test.cjs` (hand-off arrives through the
   note; the address carries no title) and the 37 callers' tests where they check the link.
+- **Status (Phase 5B, `feature/phase-5b-private-action-handoff`, commit `6ab09816`):** corrected. `ToolKit.trackerUrl`,
+  `ToolKit.trackerLink`, `ActionsStore.link` and `ActionsStore.linkButton` write the action into one sessionStorage
+  note of the tab (`sc-action-handoff`, the last twelve kept) and put a random 16-character token in the address's
+  fragment (`#handoff=<token>`), which the browser never sends (no request line, log, referrer or service-worker cache
+  key carries it); `ActionsStore.fromParams` reads the note once, removes it, adds the action under the existing
+  duplicate rules and cleans the address; a token with no note (a copied link, another browser, storage refused) makes
+  the tracker say the action did not arrive instead of opening in silence; a link of the older `?action=` shape is
+  still read. No caller changed: every tool goes through the two helpers. Tests: `tests/action-tracker.test.cjs`
+  (the privacy proof with fictional operational text in EN/DE/SQ, several pending hand-offs, missing and refused
+  notes, the older shape), `tests/tracker-links.test.cjs`, `tests/browser/action-handoff.spec.mjs` (the real
+  navigation requests and the offline copy hold no typed word; a tab opened with Ctrl-click or a middle click gets the
+  "did not arrive" message, nothing added, nothing leaked; a reload; DE and SQ). The
+  unavoidable limitation: links of the older shape that already exist (bookmarks, history, logs written before the
+  change) still carry their text; nothing can recall them. **Other links that still carry typed text, out of this
+  phase's scope and recorded for a decision:** 5 Whys → Shift Handover (`?issue=&owner=&due=`), the result buttons,
+  the Daily Board, the A3 Report, Andon, the CX Control Tower, 8D and Hoshin Kanri → 5 Whys (`?problem=`), the
+  Action Tracker → 5 Whys (`?problem=`), Hoshin Kanri → A3 (`?problem=`), and the `?q=` of Search.
 - Phase 5A implication (recorded for 5B, PR #371 round 4): the service worker's reference index keys cached pages by
   their full address, query included, so a tracker page kept under a hand-off address holds that address, text and
   all, in its cache key (as before Phase 5A) and in the index entry. Both go with the page's cached copy and with
@@ -689,3 +707,7 @@ Release preflight (1 November 2026): CI run 813 on `b4df8961` failed in one brow
 whose setup could race the worker's first keep on a slow runner (the worker behaved correctly); the test fixed in
 `92bce18e`, no worker change (proposal §14). The dates step dry-run on the merge changes nothing: this branch touches
 no essay or publication.
+
+Phase 5B (2 November 2026): P1-02 corrected on `feature/phase-5b-private-action-handoff` (commit `6ab09816`): the Action
+Tracker hand-off through a sessionStorage note and a token in the address fragment; the remaining links that carry
+typed text listed under P1-02 for a separate decision.
