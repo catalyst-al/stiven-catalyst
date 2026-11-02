@@ -9,6 +9,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const close = (a, b, message) => assert.ok(Math.abs(a - b) < 1e-9, `${message}: ${a} vs ${b}`);
@@ -245,8 +246,8 @@ test('the hand-off to the Action Tracker and the text for the Kaizen Board', () 
   const w = load({ lang: 'de', page: false });
   const url = new URL(w.ActionsStore.link(payload));
   assert.equal(url.pathname, '/de/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'kaizen-event');
-  assert.equal(url.searchParams.get('due'), '2026-10-27');
+  assert.equal(handedOver(w, w.ActionsStore.link(payload)).action.source, 'kaizen-event');
+  assert.equal(handedOver(w, w.ActionsStore.link(payload)).action.due, '2026-10-27');
   // The Kaizen Board reads no address: the idea is copied as text.
   const board = M.boardText(e, e.ideas[11], { waste: 'Motion' });
   assert.match(board, /^Height-adjustable tables for all eight benches\nWaste: Motion · Effort: 5\/5 · Impact: 3\/5\nFrom: Packing line 2/);

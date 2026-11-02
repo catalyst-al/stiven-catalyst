@@ -6,6 +6,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 const nunjucks = require('nunjucks');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -212,9 +213,9 @@ test('a first visit opens on the example: stats, the decision list, charts, focu
   tracker.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
   const url = new URL(tracker.href);
   assert.equal(url.pathname, '/sq/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'lost-found');
-  assert.equal(url.searchParams.get('area'), 'Dhoma e mysafirit');
-  assert.equal(url.searchParams.get('priority'), 'High');
+  assert.equal(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.source, 'lost-found');
+  assert.equal(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.area, 'Dhoma e mysafirit');
+  assert.equal(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.priority, 'High');
   const whys = [...results.querySelectorAll('a')].find((a) => a.href.includes('/five-whys/'));
   assert.ok(whys.href.startsWith('https://example.test/sq/tools/five-whys/?problem='), whys.href);
   // The register on the page: 25 rows, flags in words.

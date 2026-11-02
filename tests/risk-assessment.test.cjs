@@ -9,6 +9,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -350,11 +351,11 @@ test('the page opens on the example, draws both matrices and the cross-check, an
   click(w, link);
   const url = new URL(link.href);
   assert.equal(url.pathname, '/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'risk-assessment');
-  assert.equal(url.searchParams.get('action'), 'Lone-worker check-in with the shift lead every 30 minutes');
-  assert.equal(url.searchParams.get('owner'), 'Luca');
-  assert.equal(url.searchParams.get('due'), '2026-10-19');
-  assert.equal(url.searchParams.get('area'), 'Charging room');
+  assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.source, 'risk-assessment');
+  assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.title, 'Lone-worker check-in with the shift lead every 30 minutes');
+  assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.owner, 'Luca');
+  assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.due, '2026-10-19');
+  assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.area, 'Charging room');
   // All open measures at once, each only once.
   const all = [...results.querySelectorAll('button')].find((b) => b.textContent === 'Add open measures to the Action Tracker');
   click(w, all);
@@ -446,7 +447,7 @@ test('German and Albanian pages keep their own work and hand over to the tracker
     click(w, link);
     const url = new URL(link.href);
     assert.equal(url.pathname, `/${lang}/tools/action-tracker/`, `${lang} keeps its language`);
-    assert.equal(url.searchParams.get('source'), 'risk-assessment');
+    assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.source, 'risk-assessment');
     click(w, w.document.querySelector('[data-new]'));
     assert.ok(w.localStorage.getItem(`sc-risk-assessment-${lang}`), `${lang} saves under its own key`);
     assert.equal(w.localStorage.getItem('sc-risk-assessment'), null);

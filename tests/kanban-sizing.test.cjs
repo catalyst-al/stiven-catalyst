@@ -8,6 +8,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const near = (a, b, tolerance, message) => assert.ok(Math.abs(a - b) <= tolerance, `${message}: ${a} vs ${b}`);
@@ -267,10 +268,10 @@ test('the page: a first visit opens on the example, with the result, the chart, 
   click(w, action);
   const url = new w.URL(action.href);
   assert.equal(url.pathname, '/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'kanban-sizing');
-  assert.equal(url.searchParams.get('action'), 'Add kanban cards to 2 loops with too few');
-  assert.match(url.searchParams.get('detail'), /P-1001.*6 cards now, 7 needed/);
-  assert.match(url.searchParams.get('detail'), /P-1004/);
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'kanban-sizing');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.title, 'Add kanban cards to 2 loops with too few');
+  assert.match(handedOver(action.ownerDocument.defaultView, action.href).action.detail, /P-1001.*6 cards now, 7 needed/);
+  assert.match(handedOver(action.ownerDocument.defaultView, action.href).action.detail, /P-1004/);
   click(w, doc.querySelector('[data-csv]'));
   click(w, doc.querySelector('[data-xlsx]'));
   assert.deepEqual(w.downloads, [`kanban-sizing-${TODAY}.csv`, `kanban-sizing-${TODAY}.xlsx`]);

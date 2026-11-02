@@ -9,6 +9,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -410,9 +411,9 @@ test('a first visit opens on the example: 12 needed for 10 scheduled, 11 section
   assert.ok(action, 'understaffed: an action for the tracker');
   click(w, action);
   const url = new URL(action.href);
-  assert.equal(url.searchParams.get('source'), 'housekeeping-planner');
-  assert.equal(url.searchParams.get('priority'), 'High');
-  assert.match(url.searchParams.get('action'), /12 attendants needed, 10 scheduled/);
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'housekeeping-planner');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.priority, 'High');
+  assert.match(handedOver(action.ownerDocument.defaultView, action.href).action.title, /12 attendants needed, 10 scheduled/);
   assert.match(w.document.querySelector('.hp-example-note').textContent, /180-room hotel/);
   assert.equal(w.localStorage.getItem('sc-housekeeping-planner'), null, 'nothing is written until the visitor acts');
   // The print sheets: one per section, with start and finish columns.

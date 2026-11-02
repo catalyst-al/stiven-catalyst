@@ -9,6 +9,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -442,11 +443,11 @@ test('the hand-offs: a repeat miss goes to the Action Tracker with the leader as
     click(w, link);
     const url = new URL(link.href);
     assert.equal(url.pathname, lang === 'de' ? '/de/tools/action-tracker/' : '/tools/action-tracker/');
-    assert.equal(url.searchParams.get('source'), 'leader-standard-work');
-    assert.equal(url.searchParams.get('owner'), 'Dritan Kola');
-    assert.equal(url.searchParams.get('due'), '2026-10-31');
-    assert.match(url.searchParams.get('action'), lang === 'de' ? /Standardarbeit in 2 Wochen \d+-mal verpasst: Qualitätscheck/ : /Standard work missed \d+ times in 2 weeks: Quality check/);
-    assert.equal(url.searchParams.get('area'), lang === 'de' ? 'Verladung' : 'Loading');
+    assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.source, 'leader-standard-work');
+    assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.owner, 'Dritan Kola');
+    assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.due, '2026-10-31');
+    assert.match(handedOver(link.ownerDocument.defaultView, link.href).action.title, lang === 'de' ? /Standardarbeit in 2 Wochen \d+-mal verpasst: Qualitätscheck/ : /Standard work missed \d+ times in 2 weeks: Quality check/);
+    assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.area, lang === 'de' ? 'Verladung' : 'Loading');
     const whys = [...results.querySelectorAll('a')].find((a) => /five-whys/.test(a.href));
     assert.equal(new URL(whys.href).pathname, lang === 'de' ? '/de/tools/five-whys/' : '/tools/five-whys/');
     const tool = d.querySelector('[data-day-list] .lw-item-tool');

@@ -9,6 +9,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 const nunjucks = require('nunjucks');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -263,9 +264,9 @@ test('a first visit opens on the example: the numbers, the charts and the hand-o
   action.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
   const url = new URL(action.href);
   assert.equal(url.pathname, '/de/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'andon');
-  assert.equal(url.searchParams.get('priority'), 'High');
-  assert.match(url.searchParams.get('action'), /Fehlendes Material/);
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'andon');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.priority, 'High');
+  assert.match(handedOver(action.ownerDocument.defaultView, action.href).action.title, /Fehlendes Material/);
   const whys = results.querySelector('.an-slow a');
   assert.ok(whys.href.startsWith('https://example.test/de/tools/five-whys/?problem='), whys.href);
   assert.match(new URL(whys.href).searchParams.get('problem'), /^Andon-Ruf am \d\d\.10\.2026 um \d\d:\d\d/);

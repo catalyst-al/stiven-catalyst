@@ -9,6 +9,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const near = (a, b, tolerance, message) => assert.ok(Math.abs(a - b) <= tolerance, `${message}: ${a} vs ${b}`);
@@ -333,10 +334,10 @@ test('the page: a first visit opens on the example, with its note, the matrix an
   click(w, action);
   const url = new w.URL(action.href);
   assert.equal(url.pathname, '/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'inventory-abc');
-  assert.equal(url.searchParams.get('action'), 'Reorder 7 SKUs below their reorder point');
-  assert.equal(url.searchParams.get('priority'), 'High');
-  assert.match(url.searchParams.get('detail'), /PK-1002/);
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'inventory-abc');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.title, 'Reorder 7 SKUs below their reorder point');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.priority, 'High');
+  assert.match(handedOver(action.ownerDocument.defaultView, action.href).action.detail, /PK-1002/);
   // The classified list as CSV and Excel.
   click(w, doc.querySelector('[data-csv]'));
   click(w, doc.querySelector('[data-xlsx]'));

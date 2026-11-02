@@ -70,27 +70,128 @@ test('the store adds, updates, closes with a date, removes with restore, and cou
   assert.equal(JSON.parse(w.localStorage.getItem('sc-actions')).rows.length, 3, 'kept as { rows } like the other logs');
 });
 
-test('a tool hands an action over in the address, once, in the page\'s language', () => {
+const { handedOver, carry, HANDOFF_KEY } = require('./helpers/tool-page.cjs');
+// Fictional operational text of the kind the fields hold: it must never appear in an address.
+const PRIVATE = { title: 'Guest in room 412 complained about noise from the ice machine', detail: 'Second complaint this week; offered a late checkout', owner: 'Arta B.', check: 'No noise complaint on floor 4 for two weeks', area: 'Floor 4' };
+const exposes = (href) => Object.values(PRIVATE).some((text) => decodeURIComponent(href).includes(text) || href.includes(encodeURIComponent(text)) || /412|Arta|ice machine|late checkout/i.test(decodeURIComponent(href)));
+
+test('a tool hands an action over through a note in the tab and a token in the address, once, in the page\'s language', () => {
   const w = load('https://example.test/de/tools/five-whys/');
   const href = w.ActionsStore.link({ title: 'Stacking rule as one picture', owner: 'Anna', due: '2026-10-30', source: 'five-whys', check: 'Below 10 a week' });
   const url = new w.URL(href);
   assert.equal(url.pathname, '/de/tools/action-tracker/');
-  assert.equal(url.searchParams.get('action'), 'Stacking rule as one picture');
-  assert.equal(url.searchParams.get('owner'), 'Anna');
-  // The tracker reads it.
-  const t = load(`https://example.test/de/tools/action-tracker/${url.search}&coaching=p1`);
+  assert.equal(url.search, '', 'the address carries no parameter');
+  assert.match(url.hash, /^#handoff=[a-z0-9]{16}$/, 'a random token in the fragment');
+  assert.ok(!href.includes('Stacking') && !href.includes('Anna'), 'nothing typed is in the address');
+  const sent = handedOver(w, href);
+  assert.deepEqual(sent.action, { title: 'Stacking rule as one picture', owner: 'Anna', due: '2026-10-30', source: 'five-whys', check: 'Below 10 a week' });
+  // The tracker reads it: the note travels with the tab, the token in the address names it.
+  const t = load(`https://example.test/de/tools/action-tracker/?coaching=p1${url.hash}`);
+  carry(w, t);
   const first = t.ActionsStore.fromParams(t.location);
   assert.equal(first.added.title, 'Stacking rule as one picture');
   assert.equal(first.added.source, 'five-whys');
   assert.equal(first.added.check, 'Below 10 a week');
+  assert.equal(first.added.owner, 'Anna');
   assert.equal(t.location.search, '?coaching=p1', 'the other parameters stay');
-  // The same open action again: not twice.
-  const again = load(`https://example.test/de/tools/action-tracker/${url.search}`);
+  assert.equal(t.location.hash, '', 'the token is cleaned from the address');
+  assert.equal(JSON.parse(t.sessionStorage.getItem(HANDOFF_KEY))[sent.token], undefined, 'the note is consumed');
+  // The same open action again (the note written again by the tool): not twice.
+  const again = load(`https://example.test/de/tools/action-tracker/${url.hash}`);
   again.localStorage.setItem('sc-actions', t.localStorage.getItem('sc-actions'));
+  carry(w, again);
   const second = again.ActionsStore.fromParams(again.location);
   assert.equal(second.added, null);
   assert.ok(second.duplicate);
   assert.equal(again.ActionsStore.list().length, 1);
+  // A reload after the arrival: the token is gone from the address, nothing is read, nothing is added.
+  const reload = load('https://example.test/de/tools/action-tracker/');
+  reload.localStorage.setItem('sc-actions', t.localStorage.getItem('sc-actions'));
+  assert.deepEqual({ ...reload.ActionsStore.fromParams(reload.location) }, { added: null, cleaned: false });
+  assert.equal(reload.ActionsStore.list().length, 1);
+});
+
+test('privacy (audit P1-02): realistic operational text never appears in a generated tracker address, in EN, DE and SQ, from both helpers', () => {
+  for (const lang of ['', 'de/', 'sq/']) {
+    const w = load(`https://example.test/${lang}tools/guest-complaints/`);
+    const fromStore = w.ActionsStore.link({ ...PRIVATE, due: '2026-11-20', source: 'guest-complaints', priority: 'High', caseId: 'INV-20261102-001' });
+    const fromKit = w.ToolKit.trackerUrl({ ...PRIVATE, due: '2026-11-20', priority: 'High' });
+    for (const href of [fromStore, fromKit]) {
+      assert.ok(!exposes(href), `${lang || 'en/'}: ${href}`);
+      const url = new w.URL(href);
+      assert.equal(url.pathname, `/${lang}tools/action-tracker/`);
+      assert.equal(url.search, '');
+      assert.match(url.hash, /^#handoff=[a-z0-9]{16}$/);
+    }
+    // Every field, the case and the source arrive whole.
+    const sent = handedOver(w, fromStore).action;
+    assert.deepEqual(sent, { ...PRIVATE, due: '2026-11-20', source: 'guest-complaints', priority: 'High', caseId: 'INV-20261102-001' });
+    assert.equal(handedOver(w, fromKit).action.source, 'guest-complaints', 'ToolKit names the page as the source');
+    const t = load(`https://example.test/${lang}tools/action-tracker/${new w.URL(fromStore).hash}`);
+    carry(w, t);
+    const { added } = t.ActionsStore.fromParams(t.location);
+    assert.equal(added.title, PRIVATE.title);
+    assert.equal(added.caseId, 'INV-20261102-001');
+    assert.equal(added.priority, 'High');
+    assert.equal(added.area, 'Floor 4');
+    assert.equal(added.due, '2026-11-20');
+  }
+});
+
+test('several pending hand-offs keep their contents apart; the same action keeps its token; the note holds the last twelve', () => {
+  const w = load('https://example.test/tools/daily-board/');
+  const hrefs = ['Check dock lights', 'Replace the ramp mat', 'Brief the night team'].map((title) => w.ActionsStore.link({ title, source: 'daily-board' }));
+  const tokens = hrefs.map((href) => handedOver(w, href).token);
+  assert.equal(new Set(tokens).size, 3);
+  hrefs.forEach((href, i) => assert.equal(handedOver(w, href).action.title, ['Check dock lights', 'Replace the ramp mat', 'Brief the night team'][i]));
+  // The same action asked for again (a link rebuilt at a keystroke): the same token, no second note.
+  assert.equal(w.ActionsStore.link({ title: 'Check dock lights', source: 'daily-board' }), hrefs[0]);
+  assert.equal(Object.keys(handedOver(w, hrefs[0]).notes).length, 3);
+  // Each consumed by its own token, in any order.
+  const t = load('https://example.test/tools/action-tracker/' + new w.URL(hrefs[1]).hash);
+  carry(w, t);
+  assert.equal(t.ActionsStore.fromParams(t.location).added.title, 'Replace the ramp mat');
+  const t2 = load('https://example.test/tools/action-tracker/' + new w.URL(hrefs[0]).hash);
+  carry(t, t2);
+  assert.equal(t2.ActionsStore.fromParams(t2.location).added.title, 'Check dock lights');
+  // Bounded: fifteen different actions leave the twelve most recent notes, the newest among them.
+  for (let i = 0; i < 15; i++) w.ActionsStore.link({ title: `Action ${i}`, source: 'daily-board' });
+  const last = w.ActionsStore.link({ title: 'Action 14', source: 'daily-board' });
+  const notes = handedOver(w, last).notes;
+  assert.equal(Object.keys(notes).length, 12);
+  assert.equal(handedOver(w, last).action.title, 'Action 14');
+});
+
+test('a token with no note behind it, or storage the browser refuses: the tracker says the action did not arrive, adds nothing and cleans the address; nothing is ever put in the address instead', () => {
+  // A link opened in another tab or browser: the token is there, the note is not.
+  const t = load('https://example.test/tools/action-tracker/#handoff=abcdefghij012345');
+  const arrived = t.ActionsStore.fromParams(t.location);
+  assert.deepEqual({ ...arrived }, { added: null, duplicate: false, missing: true, cleaned: true });
+  assert.equal(t.location.hash, '');
+  assert.equal(t.ActionsStore.list().length, 0);
+  // The page says so.
+  const page = load('https://example.test/tools/action-tracker/#handoff=abcdefghij012345', { page: true });
+  assert.match(page.document.querySelector('[data-log-status]').textContent, /did not arrive/);
+  // The browser refuses the note: the address says "unsaved" and carries no text.
+  const w = load('https://example.test/tools/five-whys/');
+  w.Storage.prototype.setItem = () => { throw new Error('blocked'); };
+  const href = w.ActionsStore.link({ ...PRIVATE, source: 'five-whys' });
+  assert.equal(new w.URL(href).hash, '#handoff=unsaved');
+  assert.ok(!exposes(href));
+  const u = load('https://example.test/tools/action-tracker/#handoff=unsaved');
+  assert.ok(u.ActionsStore.fromParams(u.location).missing);
+});
+
+test('a link of the older shape (?action=…, from before phase 5B) is still read once and cleaned', () => {
+  const t = load('https://example.test/sq/tools/action-tracker/?action=Walk%20the%20ramp&source=cx-control-tower&case=INV-7&priority=High&coaching=p2');
+  const { added, cleaned } = t.ActionsStore.fromParams(t.location);
+  assert.ok(cleaned);
+  assert.equal(added.title, 'Walk the ramp');
+  assert.equal(added.caseId, 'INV-7');
+  assert.equal(added.priority, 'High');
+  assert.equal(t.location.search, '?coaching=p2');
+  // No new link of that shape is generated.
+  assert.equal(new t.URL(t.ActionsStore.link({ title: 'Walk the ramp', source: 'cx-control-tower' })).search, '');
 });
 
 test('the calendar file holds every open action with a date, escaped', () => {

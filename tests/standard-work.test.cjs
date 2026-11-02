@@ -5,6 +5,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -260,16 +261,16 @@ test('the hand-offs keep the language: train the team via the Action Tracker, th
   train.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
   const url = new URL(train.href);
   assert.equal(url.pathname, '/de/tools/action-tracker/');
-  assert.match(url.searchParams.get('action'), /Rollcontainer auf den Lkw laden$/);
-  assert.equal(url.searchParams.get('source'), 'standard-work');
-  assert.equal(url.searchParams.get('owner'), 'Mehmet Y. (Trainer)');
-  assert.equal(url.searchParams.get('due'), '2026-11-06');
+  assert.match(handedOver(train.ownerDocument.defaultView, train.href).action.title, /Rollcontainer auf den Lkw laden$/);
+  assert.equal(handedOver(train.ownerDocument.defaultView, train.href).action.source, 'standard-work');
+  assert.equal(handedOver(train.ownerDocument.defaultView, train.href).action.owner, 'Mehmet Y. (Trainer)');
+  assert.equal(handedOver(train.ownerDocument.defaultView, train.href).action.due, '2026-11-06');
   assert.equal(doc.querySelector('[data-five-s]').getAttribute('href'), '/de/tools/five-s-audit/');
   assert.equal(doc.querySelector('[data-skills]').getAttribute('href'), '/de/tools/skills-matrix/');
   const en = load('en');
   const link = en.document.querySelector('[data-train]');
   link.dispatchEvent(new en.MouseEvent('click', { bubbles: true, cancelable: true }));
-  assert.equal(new URL(link.href).searchParams.get('action'), 'Train on: Load a roll cage onto the truck');
+  assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.title, 'Train on: Load a roll cage onto the truck');
 });
 
 test('copy as text and the Word file carry the header, the three columns and the versions', () => {

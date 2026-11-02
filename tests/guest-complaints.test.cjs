@@ -8,6 +8,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 const nunjucks = require('nunjucks');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -283,9 +284,9 @@ test('a first visit opens on the example: the numbers, the open complaint, repea
   repeat.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
   const url = new URL(repeat.href);
   assert.equal(url.pathname, '/sq/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'guest-complaints');
-  assert.equal(url.searchParams.get('area'), '412');
-  assert.equal(url.searchParams.get('priority'), 'High');
+  assert.equal(handedOver(repeat.ownerDocument.defaultView, repeat.href).action.source, 'guest-complaints');
+  assert.equal(handedOver(repeat.ownerDocument.defaultView, repeat.href).action.area, '412');
+  assert.equal(handedOver(repeat.ownerDocument.defaultView, repeat.href).action.priority, 'High');
   // Pareto gets the complaints of the period by category, the department as the filter.
   const pareto = [...results.querySelectorAll('a')].find((a) => a.textContent === 'Hape në Pareto 80/20');
   assert.equal(new URL(pareto.href).pathname, '/sq/tools/pareto/');
@@ -346,7 +347,9 @@ test('the recovery of the open complaint, a maintenance action with the room, na
   const link = doc.querySelector('[data-case-actions] a');
   link.addEventListener('click', (event) => event.preventDefault());
   link.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
-  const action = new URL(link.href).searchParams;
+  assert.equal(new URL(link.href).search, '', 'nothing of the action in the address (phase 5B)');
+  const sent = handedOver(w, link.href).action;
+  const action = { get: (name) => sent[name === 'action' ? 'title' : name] };
   assert.equal(action.get('area'), '518');
   assert.equal(action.get('source'), 'guest-complaints');
   assert.match(action.get('action'), /^Maintenance \/ room defect in room 518/);

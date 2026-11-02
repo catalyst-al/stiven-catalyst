@@ -9,6 +9,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 const nunjucks = require('nunjucks');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -282,9 +283,9 @@ test('a first visit opens on the example: the numbers, the signal, the charts an
   action.dispatchEvent(new w.MouseEvent('click', { bubbles: true }));
   const clicked = new URL(action.href);
   assert.equal(url.pathname, '/de/tools/action-tracker/');
-  assert.match(clicked.searchParams.get('action'), /^Zähler Strom Hauptzähler prüfen: \+14\s% gegenüber dem Ausgangswert$/);
-  assert.equal(clicked.searchParams.get('source'), 'energy-tracker');
-  assert.equal(clicked.searchParams.get('area'), 'Strom Hauptzähler');
+  assert.match(handedOver(action.ownerDocument.defaultView, action.href).action.title, /^Zähler Strom Hauptzähler prüfen: \+14\s% gegenüber dem Ausgangswert$/);
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'energy-tracker');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.area, 'Strom Hauptzähler');
   const whys = [...results.querySelectorAll('a')].find((a) => a.href.includes('/five-whys/'));
   assert.match(whys.href, /\/de\/tools\/five-whys\/\?problem=/);
   assert.match(doc.querySelector('[data-log-count]').textContent, /^68 Zählerstände von 3 Zählern/);

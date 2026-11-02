@@ -5,6 +5,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const near = (a, b, eps = 1e-6) => assert.ok(Math.abs(a - b) < eps, `${a} ≈ ${b}`);
@@ -206,8 +207,8 @@ test('the page opens on the example: the plan with six paths, the stops, the cha
   action.dispatchEvent(new window.MouseEvent('click', { bubbles: true, cancelable: true }));
   const url = new URL(action.href);
   assert.equal(url.pathname, '/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'spaghetti-diagram');
-  assert.equal(url.searchParams.get('action'), 'Label printer and tape moved onto the packing bench');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'spaghetti-diagram');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.title, 'Label printer and tape moved onto the packing bench');
   assert.equal(new URL([...results.querySelectorAll('a')].find((a) => a.textContent === 'Take to the Kaizen Board').href).pathname, '/tools/kaizen-board/');
   assert.equal(new URL([...results.querySelectorAll('a')].find((a) => a.textContent === 'Time it with the Time Study').href).pathname, '/tools/time-study/');
   // The current study is drawn on the canvas: six walks in the list.

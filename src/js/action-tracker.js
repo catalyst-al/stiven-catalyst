@@ -441,6 +441,10 @@
     flash(status, tx("Added from {source}: {text}", { source: sourceName(arrived.added.source), text: arrived.added.title }));
   } else if (arrived.duplicate) {
     flash(status, tx("Already on the list."));
+  } else if (arrived.missing) {
+    // A token with no note behind it: a link opened in another tab or browser, a copied link, or storage the browser
+    // refused. The action is still on the tool's page; nothing is lost in silence.
+    flash(status, tx("The action did not arrive. Go back to the tool and press \"Add to actions\" again in this tab."));
   } else if (nothingSaved && !new URLSearchParams(location.search).has("coaching")) {
     loadExample();
   }

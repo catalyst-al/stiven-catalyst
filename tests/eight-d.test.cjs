@@ -8,6 +8,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const close = (a, b, message) => assert.ok(Math.abs(a - b) < 1e-12, `${message}: ${a} vs ${b}`);
@@ -274,10 +275,10 @@ test('the page: the example on a first visit, the sheet with every discipline, t
     click(w, link);
     const url = new URL(link.href);
     assert.equal(url.pathname, `${lang === 'en' ? '' : `/${lang}`}/tools/action-tracker/`);
-    assert.equal(url.searchParams.get('source'), 'eight-d');
-    assert.equal(url.searchParams.get('action'), cfg.example.d5.actions[0].text);
-    assert.equal(url.searchParams.get('due'), '2026-09-27');
-    assert.equal(url.searchParams.get('priority'), 'High');
+    assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.source, 'eight-d');
+    assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.title, cfg.example.d5.actions[0].text);
+    assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.due, '2026-09-27');
+    assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.priority, 'High');
     // All actions at once, once.
     const sendButton = () => [...doc.querySelectorAll('[data-results] .result-actions button')].find((b) => b.textContent === 'Send all actions to the Action Tracker');
     click(w, sendButton());

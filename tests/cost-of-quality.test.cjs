@@ -8,6 +8,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const close = (a, b, message) => assert.ok(Math.abs(a - b) < 1e-9, `${message}: ${a} vs ${b}`);
@@ -332,10 +333,10 @@ test('hand-offs: the biggest failure item to the Action Tracker, the items to Pa
   click(w, tracker);
   const url = new URL(tracker.href);
   assert.equal(url.pathname, '/tools/action-tracker/');
-  assert.equal(url.searchParams.get('action'), 'Cut Returns processing (wrong or damaged item): €10,800 a month of poor quality');
-  assert.equal(url.searchParams.get('source'), 'cost-of-quality');
-  assert.equal(url.searchParams.get('priority'), 'High');
-  assert.match(url.searchParams.get('detail'), /is 25% of the cost of poor quality: €10,800 a month, €129,600 a year/);
+  assert.equal(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.title, 'Cut Returns processing (wrong or damaged item): €10,800 a month of poor quality');
+  assert.equal(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.source, 'cost-of-quality');
+  assert.equal(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.priority, 'High');
+  assert.match(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.detail, /is 25% of the cost of poor quality: €10,800 a month, €129,600 a year/);
   const pareto = [...results.querySelectorAll('a')].find((a) => /Pareto/.test(a.textContent));
   click(w, pareto);
   const handoff = JSON.parse(w.sessionStorage.getItem('sc-pareto-handoff'));
