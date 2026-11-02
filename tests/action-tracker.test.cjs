@@ -9,7 +9,7 @@ const { JSDOM } = require('jsdom');
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 
-const load = (url = 'https://example.test/sq/tools/action-tracker/', { page = false, now = '2026-10-23T10:00:00Z' } = {}) => {
+const load = (url = 'https://example.test/sq/tools/action-tracker/', { page = false, now = '2026-10-23T10:00:00Z', before = null } = {}) => {
   const html = page
     ? `<html lang="sq"><body>${fs.readFileSync('src/_includes/partials/action-tracker.njk', 'utf8')
       .replace(/\{%-?[\s\S]*?-?%\}/g, '').replace(/\{\{ *"([^"]+)" *\| *t\(lang\)[^}]*\}\}/g, '$1').replace(/\{\{ *'([^']+)' *\| *t\(lang\)[^}]*\}\}/g, '$1')
@@ -20,6 +20,7 @@ const load = (url = 'https://example.test/sq/tools/action-tracker/', { page = fa
   w.eval(`(() => { const Real = Date; const fixed = new Real(${JSON.stringify(now)}); Date = class extends Real { constructor(...args) { super(...(args.length ? args : [fixed])); } static now() { return fixed.getTime(); } }; })();`);
   w.confirm = () => true;
   w.HTMLElement.prototype.scrollIntoView = () => {};
+  before?.(w);
   for (const file of ['tool-kit', 'chart-kit', 'workplace', 'actions-store']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
   if (page) w.eval(fs.readFileSync('src/js/action-tracker.js', 'utf8'));
   return w;
@@ -166,7 +167,7 @@ test('a token with no note behind it, or storage the browser refuses: the tracke
   // A link opened in another tab or browser: the token is there, the note is not.
   const t = load('https://example.test/tools/action-tracker/#handoff=abcdefghij012345');
   const arrived = t.ActionsStore.fromParams(t.location);
-  assert.deepEqual({ ...arrived }, { added: null, duplicate: false, missing: true, cleaned: true });
+  assert.deepEqual({ ...arrived }, { added: null, duplicate: false, missing: true, failed: '', cleaned: true });
   assert.equal(t.location.hash, '');
   assert.equal(t.ActionsStore.list().length, 0);
   // The page says so.
@@ -255,4 +256,83 @@ test('the page: the example opens on a first visit, the week is summed, the list
   result.value = 'Zero late check-outs in the week after';
   [...w.document.querySelectorAll('.at-item.is-editing button')].find((b) => b.textContent === 'Ruaj ndryshimet' || b.textContent === 'Save changes').click();
   assert.deepEqual([w.ActionsStore.list()[0].status, w.ActionsStore.list()[0].closed, w.ActionsStore.list()[0].result], ['verified', '2026-10-23', 'Zero late check-outs in the week after']);
+});
+
+test('F5B-01: the note is consumed only once the action is saved or refused as a duplicate; a save the browser refuses (storage blocked, the PIN lock) keeps the note and the token, says so, and a reload adds it', () => {
+  const w = load('https://example.test/tools/five-whys/');
+  const href = w.ActionsStore.link({ ...PRIVATE, source: 'five-whys' });
+  const { token } = handedOver(w, href);
+  // The tracker, its localStorage refusing every write (storage full, blocked, or the tools locked with the PIN).
+  const t = load(`https://example.test/tools/action-tracker/${new w.URL(href).hash}`);
+  carry(w, t);
+  const real = t.Storage.prototype.setItem;
+  t.Storage.prototype.setItem = function (key, value) { if (this === t.localStorage) throw new Error('blocked'); return real.call(this, key, value); };
+  const refused = t.ActionsStore.fromParams(t.location);
+  assert.equal(refused.added, null);
+  assert.equal(refused.failed, 'unsaved', 'the tracker is told the save failed');
+  assert.equal(t.ActionsStore.list().length, 0);
+  assert.ok(JSON.parse(t.sessionStorage.getItem(HANDOFF_KEY))[token], 'the note is still there');
+  assert.equal(t.location.hash, `#handoff=${token}`, 'the token stays in the address, so a reload tries again');
+  assert.ok(!exposes(t.location.href));
+  // The page says so, in words that name the way out (here: the tools locked with the PIN when the page opens).
+  const page = load(`https://example.test/tools/action-tracker/${new w.URL(href).hash}`, { page: true, before: (win) => { win.WorkLock = { locked: true }; carry(w, win); } });
+  assert.match(page.document.querySelector('[data-log-status]').textContent, /still waiting/);
+  assert.ok(JSON.parse(page.sessionStorage.getItem(HANDOFF_KEY))[token], 'the page kept the note');
+  assert.equal(page.location.hash, `#handoff=${token}`);
+  // The retry: storage works again (unlocked, space freed), the page reloads with the token still in its address.
+  t.Storage.prototype.setItem = real;
+  const again = t.ActionsStore.fromParams(t.location);
+  assert.equal(again.added.title, PRIVATE.title);
+  assert.equal(JSON.parse(t.sessionStorage.getItem(HANDOFF_KEY))[token], undefined, 'now the note is consumed');
+  assert.equal(t.location.hash, '', 'and the address cleaned');
+  // The PIN lock: the same, through WorkLock.locked.
+  const locked = load(`https://example.test/tools/action-tracker/${new w.URL(href).hash}`);
+  carry(w, locked);
+  locked.WorkLock = { locked: true };
+  const held = locked.ActionsStore.fromParams(locked.location);
+  assert.equal(held.added, null);
+  assert.equal(held.failed, 'unsaved');
+  assert.ok(JSON.parse(locked.sessionStorage.getItem(HANDOFF_KEY))[token], 'the note waits for the unlock');
+  assert.equal(locked.location.hash, `#handoff=${token}`);
+});
+
+test('F5B-02: a link built early keeps a valid note however many links the page builds after it: thirteen "To actions" links, the first one followed last still hands over', () => {
+  const w = load('https://example.test/tools/shift-handover/');
+  const hrefs = [];
+  for (let i = 1; i <= 13; i++) hrefs.push(w.ToolKit.trackerUrl({ title: `Open issue ${i} of the night shift`, owner: `Owner ${i}`, source: 'shift-handover' }));
+  assert.equal(new Set(hrefs.map((h) => handedOver(w, h).token)).size, 13, 'thirteen different tokens');
+  // The links are on the page; the first is followed (a normal click, or Enter on the focused link).
+  const links = hrefs.map((h) => { const a = w.document.createElement('a'); a.href = h; a.textContent = 'To actions'; w.document.body.append(a); return a; });
+  links[0].dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
+  const first = handedOver(w, hrefs[0]);
+  assert.deepEqual(first.action, { title: 'Open issue 1 of the night shift', owner: 'Owner 1', source: 'shift-handover' }, 'the first link still has its note when it is followed');
+  assert.ok(Object.keys(first.notes).length <= 12, 'the note store stays bounded');
+  const t = load(`https://example.test/tools/action-tracker/${new w.URL(hrefs[0]).hash}`);
+  carry(w, t);
+  assert.equal(t.ActionsStore.fromParams(t.location).added.title, 'Open issue 1 of the night shift');
+  // Keyboard: Enter on a focused link is a click too; the seventh link, never clicked with a mouse.
+  links[6].dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
+  assert.equal(handedOver(w, hrefs[6]).action.title, 'Open issue 7 of the night shift');
+});
+
+test('F5B-02 on the Shift Handover page: fourteen open issues, fourteen "To actions" links; the first one, followed last, hands its issue over', { skip: !fs.existsSync('_site/tools/shift-handover/index.html') && 'run npm run build first' }, () => {
+  const { openTool, click } = require('./helpers/tool-page.cjs');
+  const issues = Array.from({ length: 14 }, (_, i) => ({ text: `Open issue ${i + 1}: pallet ${100 + i} blocked at dock ${(i % 4) + 1}`, priority: 'High', owner: `Lead ${i + 1}`, due: '', done: false, carried: 0 }));
+  const w = openTool('shift-handover', { storage: { 'sc-shift-handover': { current: { template: 'warehouse', issues } } } });
+  const links = [...w.document.querySelectorAll('a.sh-tracker')];
+  assert.equal(links.length, 14, 'one "To actions" link per open issue');
+  for (const a of links) assert.match(a.href, /#handoff=[a-z0-9]{16}$/);
+  for (const a of links) assert.ok(!a.href.includes('pallet'), 'nothing typed in the address');
+  // Followed with a normal click: the first link, built before thirteen others.
+  click(w, links[0]);
+  const first = handedOver(w, links[0].href);
+  assert.ok(first.action, 'the first link has its note when it is followed');
+  assert.equal(first.action.title, 'Open issue 1: pallet 100 blocked at dock 1');
+  assert.equal(first.action.owner, 'Lead 1');
+  assert.ok(Object.keys(first.notes).length <= 12, 'the note store stays bounded');
+  const t = load(`https://example.test/tools/action-tracker/${new w.URL(links[0].href).hash}`);
+  carry(w, t);
+  const { added } = t.ActionsStore.fromParams(t.location);
+  assert.equal(added.title, 'Open issue 1: pallet 100 blocked at dock 1');
+  assert.equal(added.source, 'shift-handover');
 });

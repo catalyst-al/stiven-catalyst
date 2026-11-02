@@ -134,3 +134,47 @@ for (const [lang, added] of [["de", "Hinzugef\u00fcgt aus"], ["sq", "U shtua nga
     expect(urls.filter((u) => leaks(u).length)).toEqual([]);
   });
 }
+
+test("F5B-02 in the browser: the Shift Handover with fourteen open issues builds fourteen links; the first, followed last, still hands its issue over, and the address carries nothing typed", async ({ page }) => {
+  const urls = watch(page);
+  const issues = Array.from({ length: 14 }, (_, i) => ({ text: `Open issue ${i + 1}: pallet ${100 + i} blocked at dock ${(i % 4) + 1}`, priority: "High", owner: `Lead ${i + 1}`, due: "", done: false, carried: 0 }));
+  await page.goto("/tools/shift-handover/", { waitUntil: "load" });
+  await page.evaluate((rows) => { localStorage.setItem("sc-shift-handover", JSON.stringify({ current: { template: "warehouse", issues: rows } })); }, issues);
+  await page.reload({ waitUntil: "load" });
+  const links = page.locator("a.sh-tracker");
+  await expect(links).toHaveCount(14);
+  await links.first().click();
+  await page.waitForURL(/\/tools\/action-tracker\/$/);
+  await expect.poll(async () => (await trackerRows(page)).length, { timeout: 10000 }).toBe(1);
+  expect((await trackerRows(page))[0]).toMatchObject({ title: "Open issue 1: pallet 100 blocked at dock 1", owner: "Lead 1", source: "shift-handover" });
+  expect(urls.filter((u) => /pallet|dock|Lead/i.test(decodeURIComponent(u)))).toEqual([]);
+});
+
+test("F5B-01 in the browser: a save the browser refuses keeps the note and the token and says the action is still waiting; once writes work again a reload hands it over; nothing typed in any request", async ({ page }) => {
+  const urls = watch(page);
+  // localStorage refuses every write while a flag of this tab says so (the way a full or blocked storage, or the PIN
+  // lock, refuses it); sessionStorage, where the note lives, keeps working.
+  await page.addInitScript(() => {
+    const real = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) { if (this === localStorage && sessionStorage.getItem("sc-test-block-writes") === "1") throw new Error("blocked"); return real.call(this, key, value); };
+  });
+  await page.goto("/tools/five-whys/", { waitUntil: "load" });
+  await fillWhys(page);
+  const href = await page.locator("[data-worksheet] [data-tracker]").getAttribute("href");
+  const token = href.split("#handoff=")[1];
+  await page.evaluate(() => { sessionStorage.setItem("sc-test-block-writes", "1"); });
+  await page.locator("[data-worksheet] [data-tracker]").click();
+  await page.waitForURL(/\/tools\/action-tracker\//);
+  await expect(page.locator("[data-log-status]")).toContainText("still waiting");
+  expect(page.url()).toContain(`#handoff=${token}`);
+  expect(await page.evaluate((t) => Boolean(JSON.parse(sessionStorage.getItem("sc-action-handoff") || "{}")[t]), token)).toBe(true);
+  expect((await trackerRows(page)).length).toBe(0);
+  // Writes work again: the reload, with the token still in the address, hands the action over.
+  await page.evaluate(() => { sessionStorage.removeItem("sc-test-block-writes"); });
+  await page.reload({ waitUntil: "load" });
+  await expect.poll(async () => (await trackerRows(page)).length, { timeout: 10000 }).toBe(1);
+  expect((await trackerRows(page))[0]).toMatchObject({ title: PRIVATE.action, owner: PRIVATE.owner, source: "five-whys" });
+  expect(page.url().endsWith("/tools/action-tracker/")).toBe(true);
+  expect(await page.evaluate((t) => Boolean(JSON.parse(sessionStorage.getItem("sc-action-handoff") || "{}")[t]), token)).toBe(false);
+  expect(urls.filter((u) => leaks(u).length)).toEqual([]);
+});

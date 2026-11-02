@@ -441,6 +441,10 @@
     flash(status, tx("Added from {source}: {text}", { source: sourceName(arrived.added.source), text: arrived.added.title }));
   } else if (arrived.duplicate) {
     flash(status, tx("Already on the list."));
+  } else if (arrived.failed) {
+    // The save was refused (storage full or blocked, the tools locked with the PIN): the note and the token in the
+    // address are kept, so a reload once the tools are unlocked or there is room hands the action over.
+    flash(status, tx("The action from the tool could not be saved: this browser's storage is full, blocked or locked. Unlock the tools or free space, then reload this page: the action is still waiting."));
   } else if (arrived.missing) {
     // A token with no note behind it: a link opened in another tab or browser, a copied link, or storage the browser
     // refused. The action is still on the tool's page; nothing is lost in silence.

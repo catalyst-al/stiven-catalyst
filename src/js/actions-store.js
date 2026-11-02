@@ -237,7 +237,8 @@ window.ActionsStore = (() => {
   // An action from the page's address: the note its token names (read once and removed), or, from a link of the older
   // shape, the parameters themselves. Added once (the same open title from the same source and case is not added
   // twice), and the address cleaned of what was read. `missing` says a token arrived with no note behind it (a link
-  // opened in another tab or browser, or storage the browser refused): the tracker then says so. Returns the action
+  // opened in another tab or browser, or storage the browser refused): the tracker then says so. `failed` says the
+  // save was refused: the note and the address are left as they are for a reload to try again. Returns the action
   // added, or null.
   const fromParams = (url = location) => {
     const h = handoff();
@@ -245,23 +246,32 @@ window.ActionsStore = (() => {
     let incoming = null;
     let missing = false;
     if (token) {
-      const note = token === "unsaved" || !h ? null : h.take(token);
+      // Read, not yet taken: the note is removed only once the action is saved or refused as a duplicate.
+      const note = token === "unsaved" || !h ? null : h.read(token);
       if (note && str(note.title)) incoming = fieldsOf((name) => note[name]); else missing = true;
     }
     const params = new URLSearchParams(url.search);
     if (!incoming && str(params.get("action"))) incoming = fieldsOf((name) => params.get(name === "title" ? "action" : name === "caseId" ? "case" : name));
     if (!incoming && !token) return { added: null, cleaned: false };
     let added = null;
-    let twin = null;
+    let duplicate = false;
+    let failed = "";
     if (incoming) {
       const rows = list();
-      twin = rows.find((row) => isOpen(row) && row.title === incoming.title && row.source === clean({ title: incoming.title, source: incoming.source }).source && (row.caseId || "") === caseIdOf(incoming.caseId));
+      const twin = rows.find((row) => isOpen(row) && row.title === incoming.title && row.source === clean({ title: incoming.title, source: incoming.source }).source && (row.caseId || "") === caseIdOf(incoming.caseId));
       added = twin ? null : add(incoming);
+      duplicate = Boolean(twin) || (!added && lastAdd === "duplicate");
+      // Saved, or already there: done. Refused (storage full or blocked, the tools locked with the PIN): the note and
+      // the address stay as they are, so a reload after the unlock, or once there is room, hands the action over; the
+      // tracker says so. Nothing is ever put back into the address.
+      failed = added || duplicate ? "" : lastAdd || "unsaved";
     }
+    if (failed) return { added: null, duplicate: false, missing: false, failed, cleaned: false };
+    if (token && h && token !== "unsaved") h.take(token);
     PARAMS.forEach((name) => params.delete(name));
     const rest = params.toString();
     if (typeof history !== "undefined" && history.replaceState) history.replaceState(null, "", `${url.pathname}${rest ? `?${rest}` : ""}${token ? "" : url.hash || ""}`);
-    return { added, duplicate: Boolean(twin), missing, cleaned: true };
+    return { added, duplicate, missing, failed: "", cleaned: true };
   };
   // A link element that becomes a hand-over to the tracker when followed: getAction() returns the action as it is then
   // (mousedown covers a middle click, which fires no click).

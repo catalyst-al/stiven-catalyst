@@ -2249,6 +2249,7 @@
   "No open action with a due date to put in a calendar.": "Asnjë veprim i hapur me afat për kalendar.",
   "Added from {source}: {text}": "U shtua nga {source}: {text}",
   "Already on the list.": "Është tashmë në listë.",
+  "The action from the tool could not be saved: this browser's storage is full, blocked or locked. Unlock the tools or free space, then reload this page: the action is still waiting.": "Veprimi nga mjeti nuk u ruajt dot: hapësira e këtij shfletuesi është plot, e bllokuar ose e mbyllur me PIN. Zhbllokoni mjetet ose lironi hapësirë, pastaj ringarkoni këtë faqe: veprimi është ende në pritje.",
   "The action did not arrive. Go back to the tool and press \"Add to actions\" again in this tab.": "Veprimi nuk mbërriti. Kthehuni te mjeti dhe shtypni përsëri „Shto te veprimet“ në këtë skedë.",
   "{n} could not be saved: this browser's storage is full, blocked or locked.": "{n} nuk u ruajtën dot: hapësira e këtij shfletuesi është plot, e bllokuar ose e kyçur.",
   "The action could not be saved: this browser's storage is full, blocked or locked.": "Veprimi nuk u ruajt dot: hapësira e këtij shfletuesi është plot, e bllokuar ose e kyçur.",

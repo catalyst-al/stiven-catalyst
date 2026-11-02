@@ -859,6 +859,11 @@ window.ToolKit = (() => {
   const HANDOFF_KEY = "sc-action-handoff";
   const HANDOFF_KEEP = 12;
   const handoffTokens = new Map();
+  // What each token of this page stands for, kept in memory for the page's life: a link built early (one "To actions"
+  // per open issue of a handover) may see its note pushed out of the bounded store by links built after it, so when a
+  // link is followed its note is written again from here, just before the navigation (the listeners below).
+  const handoffActions = new Map();
+  const HANDOFF_REMEMBER = 1000;
   const randomToken = () => {
     const bytes = new Uint8Array(16);
     if (window.crypto && window.crypto.getRandomValues) window.crypto.getRandomValues(bytes); else for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
@@ -879,7 +884,28 @@ window.ToolKit = (() => {
     while (order.length > HANDOFF_KEEP) delete notes[order.shift()];
     if (!saveNotes(notes)) return null;
     handoffTokens.set(body, token);
+    if (handoffActions.size >= HANDOFF_REMEMBER) handoffActions.delete(handoffActions.keys().next().value);
+    handoffActions.set(token, action);
     return token;
+  };
+  // The note read and left in place; null when there is none for the token.
+  const readNote = (token) => {
+    const note = readNotes()[token];
+    return note && typeof note === "object" && note.action && typeof note.action === "object" ? note.action : null;
+  };
+  // The note of a link about to be followed, written again if the store no longer holds it.
+  const ensureNote = (href) => {
+    let token = "";
+    try { token = handoffTokenOf(new URL(href, window.location.href)); } catch { return false; }
+    if (!token || token === "unsaved") return false;
+    if (readNote(token)) return true;
+    const action = handoffActions.get(token);
+    if (!action) return false;
+    const notes = readNotes();
+    notes[token] = { action, at: Date.now() };
+    const order = Object.keys(notes).sort((a, b) => (notes[a].at || 0) - (notes[b].at || 0));
+    while (order.length > HANDOFF_KEEP) delete notes[order.shift()];
+    return saveNotes(notes);
   };
   // The note read once and removed; null when there is none for the token.
   const takeNote = (token) => {
@@ -892,7 +918,13 @@ window.ToolKit = (() => {
   };
   const handoffHref = (base, action) => `${base}#handoff=${writeNote(action) || "unsaved"}`;
   const handoffTokenOf = (url) => { const found = /(?:^#|[#&])handoff=([a-z0-9]{1,32})(?:&|$)/.exec(url && url.hash ? url.hash : ""); return found ? found[1] : ""; };
-  const actionHandoff = { KEY: HANDOFF_KEY, KEEP: HANDOFF_KEEP, write: writeNote, take: takeNote, href: handoffHref, tokenOf: handoffTokenOf, notes: readNotes };
+  const actionHandoff = { KEY: HANDOFF_KEY, KEEP: HANDOFF_KEEP, write: writeNote, read: readNote, take: takeNote, ensure: ensureNote, href: handoffHref, tokenOf: handoffTokenOf, notes: readNotes };
+  // A hand-off link followed (a click, Enter on the focused link, a middle click): its note is made sure of first.
+  // Bubbling, so a link that builds its address in its own click handler is read after that.
+  if (typeof document !== "undefined" && typeof document.addEventListener === "function") for (const type of ["click", "auxclick"]) document.addEventListener(type, (event) => {
+    const link = event.target && event.target.closest ? event.target.closest('a[href*="#handoff="]') : null;
+    if (link) ensureNote(link.href);
+  });
 
   // An action for the Action Tracker: the fields go into the hand-off note above, the address carries the token. The
   // tracker is a sibling of every tool, so the link keeps the page's language. The source is the tool's own address,
