@@ -48,6 +48,22 @@ history, any referrer and, since Phase 5A, the service worker's offline copy as 
   middle click opens the tracker with the message rather than with nothing. Before this change a new tab worked
   because the address carried the text; that convenience is given up for the privacy of the address.
 
+## 2a. Independent review of `c893c23c` (round 2): two reliability gaps, fixed
+
+| # | Finding | Cause in `c893c23c` | Correction (commit `d463d1a1`) |
+| --- | --- | --- | --- |
+| F5B-01 | The note was taken before the action was saved: a save the browser refused (storage full or blocked, the tools locked with the PIN) lost the hand-off (note gone, token cleaned) with no specific word | `fromParams` called `take()` first, then `add()` | `fromParams` reads the note, adds, and only then takes it; when the save is refused it leaves the note and the address as they are and reports `failed`; the tracker says "The action from the tool could not be saved: this browser's storage is full, blocked or locked. Unlock the tools or free space, then reload this page: the action is still waiting." (EN, DE, SQ). A reload once the tools are unlocked, or there is room, hands the action over (the lock's own reload after the PIN does it). Duplicate, example, case and ref rules unchanged; nothing is ever put back into the address |
+| F5B-02 | A link built early could lose its note: the handover builds one "To actions" link per open issue when it draws, and the store keeps twelve notes, so the fourteenth link's note pushed the first one's out before it was clicked | the note was written when the link was built, and only then | the page keeps what each of its tokens stands for in memory (`handoffActions`, the last 1 000), and a document-level `click`/`auxclick` listener (bubbling, so a link that builds its address in its own handler is read after that) writes the note again just before the navigation when the store no longer holds it (`actionHandoff.ensure`). The store stays bounded at twelve; a normal click, Enter on the focused link and a middle click all pass through it; the new-tab limitation stands |
+
+Regression tests (`tests/action-tracker.test.cjs`): **F5B-01** (storage refused and the PIN lock: nothing added, the note
+and the token kept, `failed: "unsaved"`, the page's message; then the save allowed, the same address adds the action,
+consumes the note and cleans the address), **F5B-02** (thirteen links from `trackerUrl`; the first, followed last,
+has its note; the seventh by keyboard) and **F5B-02 on the Shift Handover page** (fourteen open issues in the built
+page, fourteen links, the first followed last hands its issue over; the store stays bounded). In the browser
+(`tests/browser/action-handoff.spec.mjs`): the handover with fourteen issues in Chromium, the first link followed last
+arrives and no request carries a word of it; the PIN-locked tracker keeps the note and the token and says so.
+Before-proof: the three unit tests fail on `c893c23c` (worktree, same file).
+
 ## 3. Evidence
 
 Commit `6ab09816` (code and tests). Results on this machine, full production build:
@@ -66,7 +82,24 @@ Commit `6ab09816` (code and tests). Results on this machine, full production bui
 
 **On the branch, in Chromium with the Phase 5A worker in charge (the same spec):** no request the browser makes carries a typed word; the action arrives once with title, detail, owner, due date, check, source and priority; the address is cleaned; a reload adds nothing; the same hand-off again is refused as a duplicate; the offline copy's addresses and its reference index hold no typed word and no `?action=` address; a tab opened with Ctrl-click or a middle click shows "did not arrive" and adds nothing, and no request of either tab carries a word; a token with no note says so; a link of the older shape still arrives and is cleaned; German and Albanian the same.
 
-CI: reported in the Draft PR once finished.
+CI: run 823 on `c893c23c` (round 1): success.
+
+### Results after round 2 (`d463d1a1`, full production build, this machine)
+
+| Step | Result |
+| --- | --- |
+| `npm run build` | 868 files written, no error |
+| `npm test` | **1 430 pass, 0 fail, 0 skipped** |
+| Six browser projects | **225 pass, 0 fail**, 14.6 min (the 7 hand-off tests and the Phase 5A offline spec among them) |
+| Before-proof, unit: the final `tests/action-tracker.test.cjs` against `c893c23c` (worktree) | **F5B-01, F5B-02 and F5B-02 on the Shift Handover page fail**, the other 10 pass (one earlier test also fails there only because the result of `fromParams` gained a `failed` field) |
+| Browser, on the branch | the handover with fourteen issues: the first link followed last arrives, no request carries a word; the refused save keeps the note and the token, says "still waiting", and the reload once writes work again adds the action |
+
+The first full run of this code ended with one browser failure in a spec this change does not touch
+(`handover-transfer.spec.mjs` at 390 px dark: the "wrong code" message after a sealed-link unlock did not appear within
+its 20-second budget while four browser workers ran in parallel); the test passed twice in isolated reruns and in the
+complete rerun above. Recorded here as a load-dependent timeout of that spec, not changed in this PR.
+
+CI: the run on the round-2 head is reported in the Draft PR once finished.
 
 ## 4. Limitations and what stays open
 
