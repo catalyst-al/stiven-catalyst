@@ -57,8 +57,10 @@ for (const [lang, query, first, total] of [
   });
 }
 
-test("no match: a message in the page's language, then the clear button restores the page", async ({ page }) => {
-  for (const [lang, words] of [["en", "No tool matches these words"], ["de", "Kein Tool passt zu diesen Wörtern"], ["sq", "Asnjë mjet nuk përputhet me këto fjalë"]]) {
+// One test per language: three Tools pages and an axe run in one test came close to the 30 s limit in the projects
+// with motion (23-29 s) and passed it once under load.
+for (const [lang, words] of [["en", "No tool matches these words"], ["de", "Kein Tool passt zu diesen Wörtern"], ["sq", "Asnjë mjet nuk përputhet me këto fjalë"]]) {
+  test(`${lang}: no match: a message in the page's language, then the clear button restores the page`, async ({ page }) => {
     await page.goto(PAGES[lang]);
     const field = page.locator("[data-tool-filter-input]");
     const clear = page.locator("[data-tool-filter-clear]");
@@ -72,15 +74,15 @@ test("no match: a message in the page's language, then the clear button restores
     expect(await noSideScroll(page)).toBe(true);
     const target = await clear.boundingBox();
     expect(target.width >= 44 && target.height >= 44, "the clear button is a 44 px target").toBe(true);
-    if (lang === "en") await expectAccessible(page);
+    await expectAccessible(page);
     await clear.click();
     await expect(field).toHaveValue("");
     await expect(field).toBeFocused();
     await expect(visibleCards(page)).toHaveCount(59);
     await expect(page.locator("[data-tool-filter-empty]")).toBeHidden();
     await expect(clear).toBeHidden();
-  }
-});
+  });
+}
 
 test("the keyboard: Tab goes from the field to the clear button to the first match, Enter opens the way in", async ({ page }) => {
   await page.goto(PAGES.de);
