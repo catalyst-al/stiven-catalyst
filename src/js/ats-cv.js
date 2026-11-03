@@ -902,7 +902,16 @@
     scaler.style.marginLeft = `${Math.max(0, (width - PAGE_W * scale) / 2)}px`;
     stage.style.height = `${Math.ceil(scaler.offsetHeight * scale)}px`;
   };
-  if ("ResizeObserver" in window) new ResizeObserver(fitStage).observe(stage);
+  // Only a new width needs a new scale, and the work waits for the next frame: changing the height inside the
+  // observer itself could make the browser report a "ResizeObserver loop" and the page call the tool broken.
+  let stageWidth = 0;
+  let fitFrame = 0;
+  if ("ResizeObserver" in window) new ResizeObserver(() => {
+    if (stage.clientWidth === stageWidth) return;
+    stageWidth = stage.clientWidth;
+    cancelAnimationFrame(fitFrame);
+    fitFrame = requestAnimationFrame(fitStage);
+  }).observe(stage);
   else window.addEventListener("resize", fitStage);
 
   let frame = 0;
