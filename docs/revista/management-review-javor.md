@@ -169,4 +169,5 @@ Burimet në kolonën e fundit janë kandidatë. Shifrat e tyre kontrollohen te k
 | 12 | 57–64 | U botua (seria e dytë, nëntor 2026) |
 | 13 | 65–72 | U botua (seria e dytë, nëntor 2026) |
 | 14 | 73–80 | U botua (seria e dytë; e mbyll serinë) |
-| 15 | 81–90 | Në PR (seria e tretë, nëntor 2026) |
+| 15 | 81–90 | U botua (seria e tretë, nëntor 2026) |
+| 16 | 91–100 | Në PR (seria e tretë, nëntor 2026) |

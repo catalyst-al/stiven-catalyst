@@ -12,7 +12,8 @@ import { issueText, pageNumbers, sourceLineFor, monthOf, monthsOf, blocksOf } fr
 import review from "./review.js";
 
 const folder = new URL("../../lib/weekly/issues/", import.meta.url);
-const files = fs.readdirSync(folder).filter((name) => /^\d{2}\.js$/.test(name)).sort();
+// Two digits up to 99, three from 100 (100.js): sorted by number, not as text.
+const files = fs.readdirSync(folder).filter((name) => /^\d{2,3}\.js$/.test(name)).sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
 const raw = await Promise.all(files.map((name) => import(new URL(name, folder)).then((module) => module.default)));
 
 const pad = (n) => String(n).padStart(2, "0");
