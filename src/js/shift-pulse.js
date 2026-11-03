@@ -182,7 +182,10 @@
   // stops leave the planned time, breakdowns and setup the run time (scaled down when they exceed it), performance is
   // the ideal time of the pieces over the run time, capped at 100 %, quality the good pieces over all. Several entries
   // add up by time, so a long shift weighs more than a short one. A machine without an ideal rate has no OEE.
+  // 85 % is the world-class benchmark of the OEE tool, not anybody's target: with no OEE target in the workplace profile
+  // the pulse compares with it and calls it a benchmark (audit P2A-15).
   const OEE_TARGET = 0.85;
+  const hasOeeTarget = (value) => { const n = Number(value); return Number.isFinite(n) && n > 0; };
   const oeeTarget = (value) => {
     const n = Number(value);
     return Number.isFinite(n) && n > 0 ? (n > 1 ? n / 100 : n) : OEE_TARGET;
@@ -248,6 +251,7 @@
       entries: rows.length,
       unrated: rows.length - rated.length,
       target: goal,
+      benchmark: !hasOeeTarget(target),
       below: Boolean(latest) && latest.oee < goal - 1e-9,
     };
   };
@@ -551,7 +555,12 @@
     const list = [];
     const w = weekly(model);
     if (more.safety?.accident) list.push(tx(w ? "Accidents in the week of {day}: {n}." : "Accidents on {day}: {n}.", { day: dayLabel(more.safety.latest.key), n: more.safety.latest.accidents }));
-    if (more.oee?.below) list.push(tx(w ? "OEE is below the target in the week of {day}: {pct} (target {target})." : "OEE is below the target on {day}: {pct} (target {target}).", { day: dayLabel(more.oee.latest.key), pct: pct(more.oee.latest.oee, 1), target: pct(more.oee.target, 0) }));
+    if (more.oee?.below) {
+      const message = more.oee.benchmark
+        ? (w ? "OEE is below the world-class benchmark in the week of {day}: {pct} (benchmark {target}; no OEE target is set)." : "OEE is below the world-class benchmark on {day}: {pct} (benchmark {target}; no OEE target is set).")
+        : (w ? "OEE is below the target in the week of {day}: {pct} (target {target})." : "OEE is below the target on {day}: {pct} (target {target}).");
+      list.push(tx(message, { day: dayLabel(more.oee.latest.key), pct: pct(more.oee.latest.oee, 1), target: pct(more.oee.target, 0) }));
+    }
     if (more.actions?.overdue) list.push(tx(more.actions.overdue === 1 ? "{n} action is overdue." : "{n} actions are overdue.", { n: more.actions.overdue }));
     if (more.rooms?.above) list.push(tx(w ? "First-time pass is below the usual level in the week of {day}: {pct}." : "First-time pass is below the usual level on {day}: {pct}.", { day: dayLabel(more.rooms.latest.key), pct: pct(more.rooms.latest.rate, 0) }));
     if (more.maintenance?.overdue) list.push(tx(more.maintenance.overdue === 1 ? "{n} maintenance task is overdue ({a} on A assets)." : "{n} maintenance tasks are overdue ({a} on A assets).", { n: more.maintenance.overdue, a: more.maintenance.overdueA }));
@@ -572,7 +581,7 @@
     const lines = [];
     const { safety: s, oee: o, actions: a, fiveS: f } = more;
     if (s) lines.push(`${tx("Accidents")}: ${int.format(s.totals.accidents)} · ${tx("First aid")}: ${int.format(s.totals.firstAid)} · ${tx("Near misses and unsafe")}: ${int.format(s.totals.nearMisses)} · ${tx("Days since the last accident")}: ${s.daysSince === null ? "–" : int.format(s.daysSince)}`);
-    if (o) lines.push(`OEE: ${o.latest ? `${pct(o.latest.oee, 1)} (${slotName(model, o.latest.key)})` : "–"} · ${tx("Period")}: ${o.period.oee === null ? "–" : pct(o.period.oee, 1)} · ${tx("Target")}: ${pct(o.target, 0)}`);
+    if (o) lines.push(`OEE: ${o.latest ? `${pct(o.latest.oee, 1)} (${slotName(model, o.latest.key)})` : "–"} · ${tx("Period")}: ${o.period.oee === null ? "–" : pct(o.period.oee, 1)} · ${tx(o.benchmark ? "Benchmark" : "Target")}: ${pct(o.target, 0)}`);
     if (a) lines.push(`${tx("Open actions")}: ${int.format(a.open)} · ${tx("{a} overdue · {b} due today", { a: int.format(a.overdue), b: int.format(a.dueToday) })}`);
     if (f) lines.push(`${tx("5S audit")}: ${pct(f.overall, 0)} · ${f.area || "–"} · ${showDate(f.date)}`);
     const { rooms: ri, maintenance: mp, lostFound: lf } = more;
@@ -628,13 +637,13 @@
         value: l ? pct(l.oee, 1) : "–",
         notes: [
           l ? `${slotName(model, l.key)}: ${tx("availability {a} · performance {p} · quality {q}", { a: pct(l.availability, 0), p: pct(l.performance, 0), q: pct(l.quality, 0) })}` : tx("No entries in this period."),
-          o.period.oee === null ? `${tx("Target")}: ${pct(o.target, 0)}` : tx("Period {pct} · target {target}", { pct: pct(o.period.oee, 1), target: pct(o.target, 0) }),
+          o.period.oee === null ? `${tx(o.benchmark ? "Benchmark" : "Target")}: ${pct(o.target, 0)}` : tx(o.benchmark ? "Period {pct} · world-class benchmark {target}" : "Period {pct} · target {target}", { pct: pct(o.period.oee, 1), target: pct(o.target, 0) }),
           o.unrated ? tx(o.unrated === 1 ? "{n} entry has no ideal rate and is left out." : "{n} entries have no ideal rate and are left out.", { n: o.unrated }) : "",
         ],
         values: o.values.map((value) => value ?? 0),
         highlight: l ? o.slots.indexOf(l.key) : -1,
         above: o.below,
-        flag: tx("Below target"),
+        flag: tx(o.benchmark ? "Below benchmark" : "Below target"),
         tool: "oee",
         linkText: tx("Open OEE"),
       }));

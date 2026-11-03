@@ -1010,7 +1010,11 @@
       const value = fillValue(source, totals, h);
       if (!value) return;
       found++;
-      let row = h.metrics.find(([name]) => name === label);
+      // A box saved under a label the template has since renamed ("Incomplete %", which only ever held a count, is now
+      // "Incomplete orders": audit P2A-15) is the same box: an empty one takes the new label, a typed one is kept.
+      const older = (data.renamedMetrics && data.renamedMetrics[label]) || [];
+      let row = h.metrics.find(([name]) => name === label) || h.metrics.find(([name]) => older.includes(name));
+      if (row && row[0] !== label && !row[1].trim()) row[0] = label;
       if (!row) {
         row = [label, "", ""];
         h.metrics.push(row);

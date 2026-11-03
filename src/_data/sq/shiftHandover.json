@@ -1,5 +1,6 @@
 {
   "storageKey": "sc-shift-handover-sq",
+  "renamedMetrics": { "Porosi të paplota": ["Porosi të paplota %"] },
   "shifts": ["Mëngjes", "Pasdite", "Natë"],
   "priorities": ["E lartë", "Mesatare", "E ulët"],
   "templates": {
@@ -10,7 +11,7 @@
         "Njësi të trajtuara",
         "Mbetje në dorëzim",
         "Dëme %",
-        "Porosi të paplota %",
+        "Porosi të paplota",
         "Nisje në kohë %",
         "Personel në turn"
       ],
@@ -78,7 +79,7 @@
       ["Njësi të trajtuara", "18.400", "objektivi 18.000"],
       ["Mbetje në dorëzim", "320 pako", "vala 4, të sortuara"],
       ["Dëme %", "0,42%", "objektivi 0,30%"],
-      ["Porosi të paplota %", "0,8%", ""],
+      ["Porosi të paplota", "14", ""],
       ["Nisje në kohë %", "86%", "11:15 dhe 11:30 u nisën me vonesë"],
       ["Personel në turn", "14 nga 16", "2 të sëmurë"]
     ],

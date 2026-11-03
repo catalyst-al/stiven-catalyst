@@ -7910,5 +7910,10 @@
   "the action was not done when checked": "die Maßnahme war bei der Prüfung nicht erledigt",
   "no record of the action's state when checked": "kein Eintrag zum Stand der Maßnahme bei der Prüfung",
   "the action changed since the check": "die Maßnahme hat sich seit der Prüfung geändert",
-  "{n} items marked as pass; the defects to check wait for your own answer.": "{n} Punkte als in Ordnung markiert; die zu prüfenden Mängel warten auf Ihre eigene Antwort."
+  "{n} items marked as pass; the defects to check wait for your own answer.": "{n} Punkte als in Ordnung markiert; die zu prüfenden Mängel warten auf Ihre eigene Antwort.",
+  "OEE is below the world-class benchmark in the week of {day}: {pct} (benchmark {target}; no OEE target is set).": "Die OEE liegt in der Woche ab {day} unter dem Weltklasse-Richtwert: {pct} (Richtwert {target}; kein OEE-Ziel festgelegt).",
+  "OEE is below the world-class benchmark on {day}: {pct} (benchmark {target}; no OEE target is set).": "Die OEE liegt am {day} unter dem Weltklasse-Richtwert: {pct} (Richtwert {target}; kein OEE-Ziel festgelegt).",
+  "Period {pct} · world-class benchmark {target}": "Zeitraum {pct} · Weltklasse-Richtwert {target}",
+  "Below benchmark": "Unter dem Richtwert",
+  "Benchmark": "Richtwert"
 }

@@ -123,6 +123,8 @@ test('OEE: the shift, the week, the target and a log without the reason list', (
   assert.equal(PulseMath.oeeTarget(undefined), 0.85);
   const strict = plain(PulseMath.oee(oeeSaved, { from: '2026-09-01', to: '2026-09-02', target: 99 }, reasons));
   assert.equal(strict.below, true);
+  assert.equal(strict.benchmark, false, 'a target was given');
+  assert.equal(plain(PulseMath.oee(oeeSaved, { from: '2026-09-01', to: '2026-09-02' }, reasons)).benchmark, true, 'no target: the 85 % is a benchmark');
   const easy = plain(PulseMath.oee(oeeSaved, { from: '2026-09-01', to: '2026-09-02', target: 10 }, reasons));
   assert.equal(easy.below, false);
   // Without the reason list a break is an unplanned stop, as in the OEE tool: availability drops.
@@ -211,7 +213,10 @@ test('the page shows a card for each source that holds data, in the language of 
   assert.equal(byLabel('OEE').querySelector('a').href, 'https://example.test/de/tools/oee/');
   const attention = win.document.querySelector('.sp-attention').textContent;
   assert.match(attention, /Accidents on/);
-  assert.match(attention, /OEE is below the target/);
+  // No OEE target in the workplace profile: 85 % is the world-class benchmark, and the page calls it that (P2A-15).
+  assert.match(attention, /OEE is below the world-class benchmark/);
+  assert.doesNotMatch(attention, /OEE is below the target/);
+  assert.equal(byLabel('OEE').querySelector('.sp-flag').textContent, 'Below benchmark');
   assert.match(attention, /1 action is overdue/);
 });
 

@@ -44,6 +44,15 @@ test('a CSV cell that a spreadsheet would run as a formula is kept as text', () 
   assert.equal(load('sq').ToolKit.csvSafe('=1+1'), "'=1+1");
 });
 
+// Audit P2A-15: an export read back gives the text it was, not the text with the guard's apostrophe in front.
+test('the apostrophe of a formula-like cell comes off when the CSV is read back, and nothing else changes', () => {
+  const { ToolKit } = load('en');
+  const cells = ['=SUM(A1)', '+cmd', '@A1', '-broken seal', "it's fine", "'quoted", '-5', 'Crushed box'];
+  const csv = cells.map((cell) => `"${ToolKit.csvSafe(cell).replace(/"/g, '""')}"`).join(',');
+  assert.deepEqual(plain(ToolKit.parseRows(csv)), [cells]);
+  assert.deepEqual(plain(ToolKit.parseRows("'=1+1;x")), [['=1+1', 'x']]);
+});
+
 test('the units handled in a handover are read in the page\'s number format', () => {
   // The English page writes 3,000; the German and Albanian pages write 3.000.
   assert.equal(load('en').ToolKit.parseNumber('3,000'), 3000);
