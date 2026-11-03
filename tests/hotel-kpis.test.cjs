@@ -6,6 +6,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 const nunjucks = require('nunjucks');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -252,8 +253,8 @@ test('a first visit opens on the example: the headline against budget, the calen
   action.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
   const url = new URL(action.href);
   assert.equal(url.pathname, '/sq/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'hotel-kpis');
-  assert.equal(url.searchParams.get('action'), data.sq.advice.noShows.action);
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'hotel-kpis');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.title, data.sq.advice.noShows.action);
   const links = [...results.querySelectorAll('.result-actions a')].map((a) => a.href);
   assert.ok(links.some((href) => href.startsWith('https://example.test/sq/tools/five-whys/?problem=')), links.join(' '));
   assert.ok(links.includes('https://example.test/sq/tools/night-audit/'));

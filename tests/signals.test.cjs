@@ -393,7 +393,8 @@ test('with data in the browser the page reads it, not the example; the example l
   click(w, add);
   const url = new w.URL(add.href);
   assert.equal(url.pathname, '/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'signals');
+  assert.equal(url.search, '', 'nothing of the action in the address (phase 5B)');
+  assert.equal(require('./helpers/tool-page.cjs').handedOver(w, add.href).action.source, 'signals');
   const after = storageOf(w);
   for (const key of Object.keys(before)) assert.equal(after[key], before[key], `${key} untouched`);
   same(Object.keys(after).sort(), [...Object.keys(before), 'sc-signals'].sort());

@@ -82,4 +82,15 @@ const submit = (w, form) => form.dispatchEvent(new w.Event('submit', { bubbles: 
 // Waits for the timers and frames a page uses to save after drawing (ToolKit saves right after the next frame).
 const settle = (w, ms = 30) => new Promise((resolve) => w.setTimeout(resolve, ms));
 
-module.exports = { openTool, keep, click, type, submit, settle, scriptsOf, builtPage };
+// A hand-off to the Action Tracker (phase 5B): the address carries a token in its fragment, the action waits in the
+// tab's sessionStorage note. handedOver reads the note the link names in the sender's window; carry copies the whole
+// note to another window, as a browser does for a tab opened from the page.
+const HANDOFF_KEY = 'sc-action-handoff';
+const handedOver = (w, href) => {
+  const token = (/#handoff=([a-z0-9]+)/.exec(new URL(href).hash) || [])[1] || '';
+  const notes = JSON.parse(w.sessionStorage.getItem(HANDOFF_KEY) || '{}');
+  return { token, action: token && notes[token] ? notes[token].action : null, notes };
+};
+const carry = (from, to) => { const raw = from.sessionStorage.getItem(HANDOFF_KEY); if (raw !== null) to.sessionStorage.setItem(HANDOFF_KEY, raw); };
+
+module.exports = { openTool, keep, click, type, submit, settle, scriptsOf, builtPage, handedOver, carry, HANDOFF_KEY };

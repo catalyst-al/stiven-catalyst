@@ -8,6 +8,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const close = (a, b, message) => assert.ok(Math.abs(a - b) < 1e-9, `${message}: ${a} vs ${b}`);
@@ -230,8 +231,8 @@ test('the page opens on the example, with the result, the radar and the next ste
   click(w, action);
   const url = new w.URL(action.href);
   assert.equal(url.pathname, '/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'lean-assessment');
-  assert.match(url.searchParams.get('action'), /Goods-in and putaway/);
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'lean-assessment');
+  assert.match(handedOver(action.ownerDocument.defaultView, action.href).action.title, /Goods-in and putaway/);
   assert.equal(results.querySelectorAll('.la-disagree-list li').length, 2);
   assert.equal(w.document.querySelector('.dl-example-note').hidden, false);
   const saved = JSON.parse(w.localStorage.getItem('sc-lean-assessment'));

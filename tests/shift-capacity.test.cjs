@@ -9,6 +9,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const close = (a, b, message, tolerance = 1e-9) => assert.ok(Math.abs(a - b) < tolerance, `${message}: ${a} vs ${b}`);
@@ -396,11 +397,11 @@ test('moves use the Skills Matrix of the same language; the gap goes to the Acti
   click(w, link);
   const url = new URL(link.href);
   assert.equal(url.pathname, '/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'shift-capacity');
-  assert.match(url.searchParams.get('action'), /^Close the gap on Mon 26 Oct · Early: 36\.0 h short$/);
-  assert.equal(url.searchParams.get('due'), '2026-10-25', 'the day before the shift');
-  assert.equal(url.searchParams.get('owner'), 'Shift lead');
-  assert.match(url.searchParams.get('detail'), /Bottleneck: Unloading, 79%/);
+  assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.source, 'shift-capacity');
+  assert.match(handedOver(link.ownerDocument.defaultView, link.href).action.title, /^Close the gap on Mon 26 Oct · Early: 36\.0 h short$/);
+  assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.due, '2026-10-25', 'the day before the shift');
+  assert.equal(handedOver(link.ownerDocument.defaultView, link.href).action.owner, 'Shift lead');
+  assert.match(handedOver(link.ownerDocument.defaultView, link.href).action.detail, /Bottleneck: Unloading, 79%/);
   // The CSV: one row per shift and process, the header first.
   click(w, doc.querySelector('[data-csv]'));
   assert.equal(exports.length, 1);

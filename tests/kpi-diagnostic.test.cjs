@@ -66,7 +66,11 @@ const page = (lang, answers) => {
   form.dispatchEvent(new window.Event('submit', { bubbles: true, cancelable: true }));
   const box = window.document.querySelector('[data-result]');
   const links = [...box.querySelectorAll('a')].map((a) => decodeURIComponent(a.href.replace(/\+/g, ' ')));
-  return { title: box.querySelector('.result-head h2').textContent, text: box.textContent.replace(/\s+/g, ' '), links };
+  // The hand-off to the tracker travels in the tab's note (phase 5B), the address carries only a token: the note's
+  // words are appended to the link's text here so the checks below read what the tracker would receive.
+  const { handedOver } = require('./helpers/tool-page.cjs');
+  const described = links.map((l) => { if (!/action-tracker/.test(l)) return l; const sent = handedOver(window, l).action; return sent ? `${l} ${Object.entries(sent).map(([k, v]) => `${k}=${v}`).join('&')}` : l; });
+  return { title: box.querySelector('.result-head h2').textContent, text: box.textContent.replace(/\s+/g, ' '), links: described };
 };
 const tr = (lang, text) => (lang === 'en' ? text : UI[lang][text]);
 const CAVEAT = 'These are your own ratings, two statements per cause. They show where to look first, not the cause itself. Before you act, check it: watch the work for a shift, ask two or three people who do it to rate the same statements, and look at the data behind the KPI.';

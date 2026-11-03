@@ -845,25 +845,106 @@ window.ToolKit = (() => {
   // that the Pareto tool opens; it travels in sessionStorage, so it stays in this tab.
   // chart, when given, is a day-by-day series ({ source, metric, unit, rows: [{ date, n, d }], skipped }) that
   // the Sigma & Control Chart opens as a p-chart: d defects out of n handled on each date.
-  // An action for the Action Tracker (js/actions-store.js reads these parameters on its page, adds the action once and
-  // cleans the address). The tracker is a sibling of every tool, so the link keeps the page's language. The source is the
-  // tool's own address, so the tracker can say where the action came from.
+  // A hand-off to the Action Tracker (phase 5B, privacy finding P1-02 of the audit of 31 October 2026): the action's
+  // text never travels in the address. The action waits in one sessionStorage note of this tab (sc-action-handoff:
+  // { "<token>": { action, at } }, the last twelve kept), and the address carries only a random token in its fragment
+  // (#handoff=<token>), which no server, log, referrer or cache sees: the fragment stays in the browser. The tracker
+  // (js/actions-store.js, fromParams) reads the note once by its token and removes it. The same action asked for twice
+  // on a page keeps its token, so a link rebuilt at every keystroke does not fill the note. When the note cannot be
+  // written (storage blocked or full) the address carries #handoff=unsaved, so the tracker says the action did not
+  // arrive instead of opening as if nothing had been sent. The hand-off is made by following the link in this tab: a
+  // tab opened from it (Ctrl/Cmd-click, middle click, Shift-click) has no copy of this tab's sessionStorage in
+  // Chromium (no opener), so the tracker there says the action did not arrive and the tool keeps it; the same for a
+  // link copied and opened later, or in another browser.
+  const HANDOFF_KEY = "sc-action-handoff";
+  const HANDOFF_KEEP = 12;
+  const handoffTokens = new Map();
+  // What each token of this page stands for, kept in memory for the page's life: a link built early (one "To actions"
+  // per open issue of a handover) may see its note pushed out of the bounded store by links built after it, so when a
+  // link is followed its note is written again from here, just before the navigation (the listeners below).
+  const handoffActions = new Map();
+  const HANDOFF_REMEMBER = 1000;
+  const randomToken = () => {
+    const bytes = new Uint8Array(16);
+    if (window.crypto && window.crypto.getRandomValues) window.crypto.getRandomValues(bytes); else for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
+    return Array.from(bytes, (b) => "abcdefghijklmnopqrstuvwxyz0123456789"[b % 36]).join("");
+  };
+  const readNotes = () => {
+    try { const data = JSON.parse(sessionStorage.getItem(HANDOFF_KEY) || "{}"); return data && typeof data === "object" && !Array.isArray(data) ? data : {}; } catch { return {}; }
+  };
+  const saveNotes = (notes) => { try { sessionStorage.setItem(HANDOFF_KEY, JSON.stringify(notes)); return true; } catch { return false; } };
+  // The note written, its token returned; null when the browser would not keep it.
+  const writeNote = (action) => {
+    const body = JSON.stringify(action);
+    if (handoffTokens.size > 200) handoffTokens.clear();
+    const token = handoffTokens.get(body) || randomToken();
+    const notes = readNotes();
+    notes[token] = { action, at: Date.now() };
+    const order = Object.keys(notes).sort((a, b) => (notes[a].at || 0) - (notes[b].at || 0));
+    while (order.length > HANDOFF_KEEP) delete notes[order.shift()];
+    if (!saveNotes(notes)) return null;
+    handoffTokens.set(body, token);
+    if (handoffActions.size >= HANDOFF_REMEMBER) handoffActions.delete(handoffActions.keys().next().value);
+    handoffActions.set(token, action);
+    return token;
+  };
+  // The note read and left in place; null when there is none for the token.
+  const readNote = (token) => {
+    const note = readNotes()[token];
+    return note && typeof note === "object" && note.action && typeof note.action === "object" ? note.action : null;
+  };
+  // The note of a link about to be followed, written again if the store no longer holds it.
+  const ensureNote = (href) => {
+    let token = "";
+    try { token = handoffTokenOf(new URL(href, window.location.href)); } catch { return false; }
+    if (!token || token === "unsaved") return false;
+    if (readNote(token)) return true;
+    const action = handoffActions.get(token);
+    if (!action) return false;
+    const notes = readNotes();
+    notes[token] = { action, at: Date.now() };
+    const order = Object.keys(notes).sort((a, b) => (notes[a].at || 0) - (notes[b].at || 0));
+    while (order.length > HANDOFF_KEEP) delete notes[order.shift()];
+    return saveNotes(notes);
+  };
+  // The note read once and removed; null when there is none for the token.
+  const takeNote = (token) => {
+    const notes = readNotes();
+    const note = notes[token];
+    if (!note || typeof note !== "object" || !note.action || typeof note.action !== "object") return null;
+    delete notes[token];
+    saveNotes(notes);
+    return note.action;
+  };
+  const handoffHref = (base, action) => `${base}#handoff=${writeNote(action) || "unsaved"}`;
+  const handoffTokenOf = (url) => { const found = /(?:^#|[#&])handoff=([a-z0-9]{1,32})(?:&|$)/.exec(url && url.hash ? url.hash : ""); return found ? found[1] : ""; };
+  const actionHandoff = { KEY: HANDOFF_KEY, KEEP: HANDOFF_KEEP, write: writeNote, read: readNote, take: takeNote, ensure: ensureNote, href: handoffHref, tokenOf: handoffTokenOf, notes: readNotes };
+  // A hand-off link followed (a click, Enter on the focused link, a middle click): its note is made sure of first.
+  // Bubbling, so a link that builds its address in its own click handler is read after that.
+  if (typeof document !== "undefined" && typeof document.addEventListener === "function") for (const type of ["click", "auxclick"]) document.addEventListener(type, (event) => {
+    const link = event.target && event.target.closest ? event.target.closest('a[href*="#handoff="]') : null;
+    if (link) ensureNote(link.href);
+  });
+
+  // An action for the Action Tracker: the fields go into the hand-off note above, the address carries the token. The
+  // tracker is a sibling of every tool, so the link keeps the page's language. The source is the tool's own address,
+  // so the tracker can say where the action came from.
   const trackerUrl = (action = {}) => {
     const url = new URL("../action-tracker/", window.location.href);
     const source = window.location.pathname.split("/").filter(Boolean).pop() || "";
     const title = str(action.title).trim().slice(0, 300);
-    if (title) {
-      url.searchParams.set("action", title);
-      url.searchParams.set("source", str(action.source) || source);
-      ["detail", "owner", "due", "check", "area", "priority"].forEach((name) => { if (str(action[name]).trim()) url.searchParams.set(name, str(action[name]).trim()); });
-    }
-    return url.href;
+    if (!title) return url.href;
+    const fields = { title, source: str(action.source) || source };
+    ["detail", "owner", "due", "check", "area", "priority"].forEach((name) => { if (str(action[name]).trim()) fields[name] = str(action[name]).trim(); });
+    return handoffHref(url.href, fields);
   };
   const trackerLink = (label, action, className = "button-secondary") => {
     const link = el("a", className, label);
     link.href = trackerUrl(typeof action === "function" ? {} : action);
-    // An action that changes while the page is open is read when the link is followed.
-    if (typeof action === "function") link.addEventListener("click", () => { link.href = trackerUrl(action() || {}); });
+    // An action that changes while the page is open is read when the link is followed (mousedown covers a middle click,
+    // which fires no click: the tab it opens then carries a token and the tracker says the action did not arrive,
+    // rather than opening as if nothing had been sent).
+    if (typeof action === "function") for (const type of ["mousedown", "click"]) link.addEventListener(type, () => { link.href = trackerUrl(action() || {}); });
     return link;
   };
   const resultActions = (summary, problem, pareto, chart = null) => {
@@ -1532,6 +1613,6 @@ window.ToolKit = (() => {
     read, write, warnNotSaved, actionsNote, actionRefused, newRows, keepDamaged, fiveSScore, fiveSShare, FIVE_S_COMPLETE, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseDateTime, parseRows, canon, sigma, sigmaText,
     inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, isExampleRow, isExampleState, markExample, ownRows, readOwn, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
-    panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
+    panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, actionHandoff, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,
   };
 })();

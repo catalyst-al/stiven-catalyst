@@ -2249,6 +2249,8 @@
   "No open action with a due date to put in a calendar.": "Keine offene Maßnahme mit Termin für einen Kalender.",
   "Added from {source}: {text}": "Hinzugefügt aus {source}: {text}",
   "Already on the list.": "Steht schon auf der Liste.",
+  "The action from the tool could not be saved: this browser's storage is full, blocked or locked. Unlock the tools or free space, then reload this page: the action is still waiting.": "Die Maßnahme aus dem Tool konnte nicht gespeichert werden: Der Speicher dieses Browsers ist voll, gesperrt oder per PIN geschlossen. Entsperren Sie die Tools oder schaffen Sie Platz und laden Sie diese Seite neu: Die Maßnahme wartet noch.",
+  "The action did not arrive. Go back to the tool and press \"Add to actions\" again in this tab.": "Die Maßnahme ist nicht angekommen. Gehen Sie zum Tool zurück und drücken Sie in diesem Tab noch einmal „Zu den Maßnahmen“.",
   "{n} could not be saved: this browser's storage is full, blocked or locked.": "{n} konnten nicht gespeichert werden: Der Speicher dieses Browsers ist voll, gesperrt oder per PIN geschlossen.",
   "The action could not be saved: this browser's storage is full, blocked or locked.": "Die Maßnahme konnte nicht gespeichert werden: Der Speicher dieses Browsers ist voll, gesperrt oder per PIN geschlossen.",
   "Nothing new to add.": "Nichts Neues hinzuzufügen.",

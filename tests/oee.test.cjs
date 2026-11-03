@@ -217,7 +217,8 @@ test('the page: the example opens on a first visit, with charts, a focus card an
   const add = [...results.querySelectorAll('a')].find((a) => a.textContent === 'Shto te veprimet');
   add.addEventListener('click', (event) => event.preventDefault());
   add.click();
-  const params = new URL(add.href).searchParams;
+  assert.equal(new URL(add.href).search, '', 'nothing of the action in the address (phase 5B)');
+  const params = { get: (name) => require('./helpers/tool-page.cjs').handedOver(add.ownerDocument.defaultView, add.href).action[name === 'action' ? 'title' : name] };
   assert.equal(params.get('source'), 'oee');
   assert.equal(params.get('priority'), 'High');
   assert.ok(params.get('action').length > 10);

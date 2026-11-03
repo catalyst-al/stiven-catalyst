@@ -8,6 +8,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 const nunjucks = require('nunjucks');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -245,10 +246,10 @@ test('a first visit opens on the example: the numbers, the target, the charts an
   action.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
   const url = new URL(action.href);
   assert.equal(url.pathname, '/de/tools/action-tracker/');
-  assert.equal(url.searchParams.get('source'), 'waste-log');
-  assert.equal(url.searchParams.get('area'), 'Frühstücksbuffet');
-  assert.equal(url.searchParams.get('priority'), 'High');
-  assert.match(url.searchParams.get('action'), /Überproduktion/);
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'waste-log');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.area, 'Frühstücksbuffet');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.priority, 'High');
+  assert.match(handedOver(action.ownerDocument.defaultView, action.href).action.title, /Überproduktion/);
   const whys = [...results.querySelectorAll('a')].find((a) => a.href.includes('/five-whys/'));
   assert.ok(whys.href.startsWith('https://example.test/de/tools/five-whys/?problem='), whys.href);
 });

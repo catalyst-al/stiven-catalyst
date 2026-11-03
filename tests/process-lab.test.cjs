@@ -6,6 +6,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const plain = (value) => JSON.parse(JSON.stringify(value));
@@ -229,8 +230,8 @@ test('the page opens on the example in Albanian, with charts and the hand-offs',
   action.dispatchEvent(new w.MouseEvent('click', { cancelable: true }));
   const handed = new w.URL(action.href);
   assert.equal(handed.pathname, '/sq/tools/action-tracker/');
-  assert.equal(handed.searchParams.get('source'), 'process-lab');
-  assert.match(handed.searchParams.get('action'), /Pika 23/, 'the first signal, in words');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'process-lab');
+  assert.match(handedOver(action.ownerDocument.defaultView, action.href).action.title, /Pika 23/, 'the first signal, in words');
   const whys = [...results.querySelectorAll('a')].find((a) => /five-whys/.test(a.href));
   assert.match(new w.URL(whys.href).pathname, /^\/sq\/tools\/five-whys\/$/);
   // The before/after tab shows the default rates and their verdict.

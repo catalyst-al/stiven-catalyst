@@ -7,6 +7,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const plain = (value) => JSON.parse(JSON.stringify(value));
@@ -361,7 +362,7 @@ test('the page opens every new section on its example, in German, with charts an
   action.dispatchEvent(new w.MouseEvent('click', { cancelable: true }));
   const handed = new w.URL(action.href);
   assert.equal(handed.pathname, '/de/tools/action-tracker/');
-  assert.equal(handed.searchParams.get('source'), 'process-lab');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'process-lab');
   const whys = [...chart.querySelectorAll('a')].find((a) => /five-whys/.test(a.href));
   assert.equal(new w.URL(whys.href).pathname, '/de/tools/five-whys/');
   // The other sections.

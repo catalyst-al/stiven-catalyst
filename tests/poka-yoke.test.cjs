@@ -8,6 +8,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const { JSDOM } = require('jsdom');
 const nunjucks = require('nunjucks');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const read = (file) => JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -298,10 +299,10 @@ test('a first visit opens on the example: the numbers, the due list, the hand-of
   action.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
   const url = new URL(action.href);
   assert.equal(url.pathname, '/de/tools/action-tracker/');
-  assert.equal(url.searchParams.get('priority'), 'High');
-  assert.equal(url.searchParams.get('source'), 'poka-yoke');
-  assert.equal(url.searchParams.get('action'), 'Reparieren und erneut prüfen: Verriegelung des Etikettendruckers');
-  assert.equal(url.searchParams.get('owner'), 'A. Krasniqi');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.priority, 'High');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.source, 'poka-yoke');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.title, 'Reparieren und erneut prüfen: Verriegelung des Etikettendruckers');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.owner, 'A. Krasniqi');
   const whys = [...focus.querySelectorAll('a')].find((a) => a.textContent === 'Weiter mit 5 Whys');
   assert.equal(new URL(whys.href).pathname, '/de/tools/five-whys/');
   assert.match(new URL(whys.href).searchParams.get('problem'), /^Verriegelung des Etikettendruckers ist bei der Prüfung ausgefallen: Versandetikett auf dem falschen Paket$/);
@@ -332,7 +333,7 @@ test('verifying: a failure offers the hand-offs and marks the device failed unti
   assert.equal(handoff.hidden, false);
   const action = [...handoff.querySelectorAll('a')].find((a) => a.textContent === 'Add to actions');
   action.dispatchEvent(new w.MouseEvent('click', { bubbles: true, cancelable: true }));
-  assert.equal(new URL(action.href).searchParams.get('priority'), 'High');
+  assert.equal(handedOver(action.ownerDocument.defaultView, action.href).action.priority, 'High');
   assert.ok([...handoff.querySelectorAll('a')].some((a) => new URL(a.href).pathname === '/tools/five-whys/'));
   assert.ok([...handoff.querySelectorAll('a')].some((a) => new URL(a.href).pathname === '/tools/fmea/'));
   let saved = JSON.parse(w.localStorage.getItem('sc-poka-yoke'));

@@ -306,9 +306,12 @@ test('5 Whys carries the case id and sends the whys back; the tracker names the 
   select.dispatchEvent(new tracker.Event('change', { bubbles: true }));
   assert.equal(tracker.ActionsStore.list()[0].status, 'open');
   assert.ok(tracker.document.querySelector('.at-pending'));
-  // The hand-off address carries the case, and the tracker reads it back.
-  const link = new URL(tracker.ActionsStore.link({ title: 'T', source: 'cx-control-tower', caseId: 'INV-7' }));
-  assert.equal(link.searchParams.get('case'), 'INV-7');
+  // The hand-off note carries the case (the address only a token), and the tracker reads it back; a link of the
+  // older shape still arrives.
+  const { handedOver } = require('./helpers/tool-page.cjs');
+  const href = tracker.ActionsStore.link({ title: 'T', source: 'cx-control-tower', caseId: 'INV-7' });
+  assert.equal(new URL(href).search, '');
+  assert.equal(handedOver(tracker, href).action.caseId, 'INV-7');
   const fresh = openTool('action-tracker', { search: '?action=Walk%20the%20ramp&source=cx-control-tower&case=INV-7' });
   assert.equal(fresh.ActionsStore.list().find((a) => a.title === 'Walk the ramp').caseId, 'INV-7');
 });

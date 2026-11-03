@@ -8,6 +8,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const nunjucks = require('nunjucks');
 const { JSDOM } = require('jsdom');
+const { handedOver } = require('./helpers/tool-page.cjs');
 
 const plain = (value) => JSON.parse(JSON.stringify(value));
 const close = (a, b, message, eps = 1e-9) => assert.ok(Math.abs(a - b) < eps, `${message}: ${a} vs ${b}`);
@@ -454,10 +455,10 @@ test('typing changes the plan; products can be added and removed; the CSV is the
   click(w, tracker);
   const url = new URL(tracker.href);
   assert.equal(url.pathname, '/tools/action-tracker/');
-  assert.equal(url.searchParams.get('action'), 'Reduce the changeover to D · Gift box (90 min) with SMED');
-  assert.equal(url.searchParams.get('source'), 'heijunka');
-  assert.equal(url.searchParams.get('area'), 'Packing line 2 (kits)');
-  assert.match(url.searchParams.get('detail'), /EPEI 0\.52 days, 200 min free per day for 104 min of changeovers/);
+  assert.equal(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.title, 'Reduce the changeover to D · Gift box (90 min) with SMED');
+  assert.equal(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.source, 'heijunka');
+  assert.equal(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.area, 'Packing line 2 (kits)');
+  assert.match(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.detail, /EPEI 0\.52 days, 200 min free per day for 104 min of changeovers/);
   click(w, d.querySelector('[data-add]'));
   assert.equal(d.querySelectorAll('[data-products] tr').length, 5);
   assert.equal(d.activeElement.id, 'hj-name-4');
@@ -489,7 +490,7 @@ test('German and Albanian pages: the example in that language, links keep /de/ a
     const tracker = [...results.querySelectorAll('a')].find((a) => /action-tracker/.test(a.href));
     click(w, tracker);
     assert.equal(new URL(tracker.href).pathname, `/${lang}/tools/action-tracker/`);
-    assert.equal(new URL(tracker.href).searchParams.get('source'), 'heijunka');
+    assert.equal(handedOver(tracker.ownerDocument.defaultView, tracker.href).action.source, 'heijunka');
     for (const slug of ['smed', 'shift-capacity', 'standard-work', 'five-whys']) {
       assert.ok([...d.querySelectorAll('a')].some((a) => new URL(a.href).pathname === `/${lang}/tools/${slug}/`), `${lang}: ${slug}`);
     }
