@@ -248,7 +248,7 @@ export default function (eleventyConfig) {
     const published = (items || []).filter((item) => item.data.status !== "soon");
     const index = published.findIndex((item) => item.url === url);
     if (index < 0) return null;
-    return { prev: published[index - 1] || null, next: published[index + 1] || null, number: index + 1, total: Math.max(published.length, planned) };
+    return { prev: published[index - 1] || null, next: published[index + 1] || null, first: published[0], number: index + 1, total: Math.max(published.length, planned) };
   });
   // The essays of one series (src/_data/essaySeries.json), and a series by its id or the one after it.
   eleventyConfig.addFilter("inSeries", (items, id) => (items || []).filter((item) => (item.data.series || "ten-years") === id));
