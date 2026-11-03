@@ -6108,6 +6108,9 @@ html:has(.book-zoom[open]) { overflow: hidden; }
   padding: 0 6px 24px;
   outline: none;
   overscroll-behavior: contain;
+  /* Room for the scrollbar is kept even while the preview fits: a scrollbar that comes and goes would change the
+     width of the page, the page is scaled to the width, and its new height brings the scrollbar back (a loop). */
+  scrollbar-gutter: stable;
 }
 .cv-toolbar {
   position: sticky;

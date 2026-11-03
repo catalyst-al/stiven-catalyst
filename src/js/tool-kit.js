@@ -42,6 +42,8 @@ window.ToolKit = (() => {
     if (toolFailed) return;
     const file = event?.filename || "";
     if (event?.type === "error" && !ownScript(file)) return;
+    // The browser's "ResizeObserver loop" report is a warning about layout, not a failure: the tool keeps working.
+    if (event?.type === "error" && !event.error && /ResizeObserver loop/.test(event.message || "")) return;
     const main = document.querySelector("main") || document.body;
     if (!main || !document.querySelector(".tool-panel, [data-work-backup]")) return;
     toolFailed = true;
