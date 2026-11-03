@@ -19,8 +19,8 @@ const days = (file) => execFileSync("git", ["log", "--first-parent", ref, "--for
 
 // The file each publication is written in, and the address of its page.
 const publications = [
-  ...fs.readdirSync(path.join(ROOT, "lib/weekly/issues")).filter((name) => /^\d\d\.js$/.test(name))
-    .map((name) => [`management-review-nr-${name.slice(0, 2)}`, `lib/weekly/issues/${name}`]),
+  ...fs.readdirSync(path.join(ROOT, "lib/weekly/issues")).filter((name) => /^\d{2,3}\.js$/.test(name))
+    .map((name) => [`management-review-nr-${name.slice(0, -3)}`, `lib/weekly/issues/${name}`]),
   ...fs.readdirSync(path.join(ROOT, "lib/floor")).filter((name) => /^\d\d\.js$/.test(name))
     .map((name) => [`nga-terreni-${name.slice(0, 2)}`, `lib/floor/${name}`]),
   ...fs.readdirSync(path.join(ROOT, "lib/treatise/volumes")).filter((name) => /^\d\d\.js$/.test(name))
