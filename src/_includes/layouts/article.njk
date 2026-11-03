@@ -44,6 +44,10 @@ ogType: article
 {%- set allEssays = collections["insights" + (lang | langSuffix)] | published if isEssay else [] %}
 {%- set seriesItems = allEssays | inSeries(seriesInfo.id) if seriesInfo else [] %}
 {%- set series = seriesItems | seriesNeighbours(page.url, seriesInfo.planned) if seriesInfo else null %}
+{#- All the reading in one line (essays series by series, then the reflections, newest first): what comes before and
+    after this text when its own series or list has run out, so no essay or reflection ends without a way on. -#}
+{%- set isReflection = "/reflections/" in page.inputPath %}
+{%- set reading = collections["insights" + (lang | langSuffix)] | readingOrder(essaySeries, collections["reflections" + (lang | langSuffix)]) | seriesNeighbours(page.url) if (isEssay or isReflection) else null %}
 {%- set contentsTitle = "In this essay" | t(lang) %}
 <section class="shell article-body{% if not (series or hasContents) %} no-aside{% endif %}">
   {%- if series or hasContents %}
@@ -246,6 +250,14 @@ ogType: article
         {%- if laterFirst.data.teaser or laterFirst.data.summary %}<span>{{ laterFirst.data.teaser or laterFirst.data.summary }}</span>{% endif %}
         <em aria-hidden="true">→</em>
       </a>
+      {%- elif reading and reading.next %}
+      {#- The last essay of the last series leads on to the reflections, newest first. #}
+      <a class="essay-series-next" href="{{ reading.next.url }}" rel="next">
+        <small>{{ "On to the reflections" | t(lang) }}</small>
+        <strong data-fit>{{ reading.next.data.title }}</strong>
+        {%- if reading.next.data.summary or reading.next.data.deck %}<span>{{ reading.next.data.summary or reading.next.data.deck }}</span>{% endif %}
+        <em aria-hidden="true">→</em>
+      </a>
       {%- else %}
       <div class="essay-series-next is-end">
         <strong>{{ "The last essay of the series." | t(lang) }}</strong>
@@ -257,15 +269,20 @@ ogType: article
       </div>
       {%- endif %}
       <p class="essay-series-more">
-        {%- if series.prev %}<a href="{{ series.prev.url }}" rel="prev"><small>← {{ "Previous essay" | t(lang) }}</small> {{ series.prev.data.title }}</a>{% endif %}
-        <a class="essay-series-all" href="{{ insightsUrl }}">{{ "All essays" | t(lang) }}</a>
+        {%- set before = series.prev or (reading.prev if reading else null) %}
+        {%- if before %}<a href="{{ before.url }}" rel="prev"><small>← {{ "Previous essay" | t(lang) }}</small> {{ before.data.title }}</a>{% endif %}
+        <span class="essay-series-links">
+          <a href="{{ '/reflections.html' | local(lang) }}">{{ "Reflections" | t(lang) }}</a>
+          <a class="essay-series-all" href="{{ insightsUrl }}">{{ "All essays" | t(lang) }}</a>
+        </span>
       </p>
     </nav>
     {%- endif %}
     {%- endif %}
     {#- After a reflection: the next one in the order of the Reflections page (newest first, so the next is the one
-        listed below it), large, with its summary; the one before; all reflections. -#}
-    {%- if "/reflections/" in page.inputPath %}
+        listed below it), large, with its summary; the one before; all reflections. After the oldest reflection, the
+        reading starts again with the first essay; before the newest, the last essay. -#}
+    {%- if isReflection %}
     {%- set around = collections["reflections" + (lang | langSuffix)] | seriesNeighbours(page.url) %}
     {%- if around %}
     {%- set reflectionsUrl = '/reflections.html' | local(lang) %}
@@ -278,18 +295,22 @@ ogType: article
         {%- if around.next.data.summary or around.next.data.deck %}<span>{{ around.next.data.summary or around.next.data.deck }}</span>{% endif %}
         <em aria-hidden="true">→</em>
       </a>
-      {%- elif around.prev %}
-      {#- The last one on the list leads back to the newest. #}
-      <a class="essay-series-next" href="{{ around.first.url }}">
-        <small>{{ "Start again" | t(lang) }}</small>
-        <strong data-fit>{{ around.first.data.title }}</strong>
-        {%- if around.first.data.summary or around.first.data.deck %}<span>{{ around.first.data.summary or around.first.data.deck }}</span>{% endif %}
+      {%- elif reading and reading.first and reading.first.url != page.url %}
+      {#- The oldest reflection leads back to the first essay. #}
+      <a class="essay-series-next" href="{{ reading.first.url }}">
+        <small>{{ "Back to the essays" | t(lang) }} · {{ essaySeries[0].name[lang or "en"] }}</small>
+        <strong data-fit>{{ reading.first.data.title }}</strong>
+        {%- if reading.first.data.teaser or reading.first.data.summary %}<span>{{ reading.first.data.teaser or reading.first.data.summary }}</span>{% endif %}
         <em aria-hidden="true">→</em>
       </a>
       {%- endif %}
       <p class="essay-series-more">
-        {%- if around.prev %}<a href="{{ around.prev.url }}" rel="prev"><small>← {{ "Previous reflection" | t(lang) }}</small> {{ around.prev.data.title }}</a>{% endif %}
-        <a class="essay-series-all" href="{{ reflectionsUrl }}">{{ "All reflections" | t(lang) }}</a>
+        {%- if around.prev %}<a href="{{ around.prev.url }}" rel="prev"><small>← {{ "Previous reflection" | t(lang) }}</small> {{ around.prev.data.title }}</a>
+        {%- elif reading and reading.prev %}<a href="{{ reading.prev.url }}" rel="prev"><small>← {{ "Previous essay" | t(lang) }}</small> {{ reading.prev.data.title }}</a>{% endif %}
+        <span class="essay-series-links">
+          <a href="{{ '/insights.html' | local(lang) }}">{{ "Essays" | t(lang) }}</a>
+          <a class="essay-series-all" href="{{ reflectionsUrl }}">{{ "All reflections" | t(lang) }}</a>
+        </span>
       </p>
     </nav>
     {%- endif %}

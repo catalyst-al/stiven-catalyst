@@ -558,6 +558,9 @@ a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var
 .essay-series-more a:hover { color: var(--ink); }
 .essay-series-more small { display: block; margin-bottom: 2px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
 .essay-series-more .essay-series-all { margin-left: auto; color: var(--ink); border-bottom: 1px solid currentColor; font-weight: 600; }
+/* Beside "All essays" / "All reflections": the other kind of reading, so the reader can cross over without a list. */
+.essay-series-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-left: auto; }
+.essay-series-links .essay-series-all { margin-left: 0; }
 
 @media (max-width: 900px) {
   .article-aside { display: none; }

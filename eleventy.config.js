@@ -250,6 +250,13 @@ export default function (eleventyConfig) {
     if (index < 0) return null;
     return { prev: published[index - 1] || null, next: published[index + 1] || null, first: published[0], number: index + 1, total: Math.max(published.length, planned) };
   });
+  // All the reading in one line, so a reader can go from each text to the next without going back to a list: the
+  // essays series by series (src/_data/essaySeries.json), then the reflections, newest first.
+  eleventyConfig.addFilter("readingOrder", (essays, seriesList, reflections) => {
+    const published = (items) => (items || []).filter((item) => item.data.status !== "soon");
+    const inOrder = (seriesList || []).flatMap((entry) => published(essays).filter((item) => (item.data.series || "ten-years") === entry.id));
+    return [...inOrder, ...published(reflections)];
+  });
   // The essays of one series (src/_data/essaySeries.json), and a series by its id or the one after it.
   eleventyConfig.addFilter("inSeries", (items, id) => (items || []).filter((item) => (item.data.series || "ten-years") === id));
   eleventyConfig.addFilter("seriesById", (all, id) => (all || []).find((entry) => entry.id === (id || "ten-years")) || null);
