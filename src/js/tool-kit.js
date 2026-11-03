@@ -1077,7 +1077,8 @@ window.ToolKit = (() => {
     const path = window.location.pathname.replace(/^\/(de|sq)(?=\/)/, "");
     return Object.keys(LANG_NAMES).filter((code) => code !== LANG).map((code) => {
       const saved = read(code === "en" ? base : `${base}-${code}`, null);
-      const count = isObject(saved) && Array.isArray(saved.rows) ? saved.rows.length : 0;
+      // Only the visitor's own entries: an example loaded there is not work kept there.
+      const count = isObject(saved) && !isExampleState(saved) ? ownRows(saved.rows).length : 0;
       return { code, count, name: LANG_NAMES[code], url: code === "en" ? path : `/${code}${path}` };
     }).filter((item) => item.count > 0);
   };
