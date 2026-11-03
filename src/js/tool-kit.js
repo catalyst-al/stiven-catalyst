@@ -254,7 +254,9 @@ window.ToolKit = (() => {
     const rows = [];
     let row = [], field = "";
     quoted = false;
-    const endField = () => { row.push(field.trim()); field = ""; };
+    // The apostrophe csvSafe puts before a text a spreadsheet would run as a formula ('=SUM(A1), '-broken) comes off
+    // again here, so an export read back gives the text it was (audit P2A-15). The cell stays text: nothing is run.
+    const endField = () => { row.push(field.trim().replace(/^'(?=[=+\-@\t\r])/, "").trim()); field = ""; };
     const endRow = () => {
       endField();
       if (row.some((cell) => cell)) rows.push(row);
