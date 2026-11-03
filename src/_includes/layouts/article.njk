@@ -263,6 +263,37 @@ ogType: article
     </nav>
     {%- endif %}
     {%- endif %}
+    {#- After a reflection: the next one in the order of the Reflections page (newest first, so the next is the one
+        listed below it), large, with its summary; the one before; all reflections. -#}
+    {%- if "/reflections/" in page.inputPath %}
+    {%- set around = collections["reflections" + (lang | langSuffix)] | seriesNeighbours(page.url) %}
+    {%- if around %}
+    {%- set reflectionsUrl = '/reflections.html' | local(lang) %}
+    <nav class="essay-series reflection-nav" aria-labelledby="reflection-nav-title">
+      <p class="kicker" id="reflection-nav-title">{{ "Reflection {n} of {total}" | t(lang) | replace("{n}", around.number | string) | replace("{total}", around.total | string) }}</p>
+      {%- if around.next %}
+      <a class="essay-series-next" href="{{ around.next.url }}" rel="next">
+        <small>{{ "Next reflection" | t(lang) }}</small>
+        <strong data-fit>{{ around.next.data.title }}</strong>
+        {%- if around.next.data.summary or around.next.data.deck %}<span>{{ around.next.data.summary or around.next.data.deck }}</span>{% endif %}
+        <em aria-hidden="true">→</em>
+      </a>
+      {%- elif around.prev %}
+      {#- The last one on the list leads back to the newest. #}
+      <a class="essay-series-next" href="{{ around.first.url }}">
+        <small>{{ "Start again" | t(lang) }}</small>
+        <strong data-fit>{{ around.first.data.title }}</strong>
+        {%- if around.first.data.summary or around.first.data.deck %}<span>{{ around.first.data.summary or around.first.data.deck }}</span>{% endif %}
+        <em aria-hidden="true">→</em>
+      </a>
+      {%- endif %}
+      <p class="essay-series-more">
+        {%- if around.prev %}<a href="{{ around.prev.url }}" rel="prev"><small>← {{ "Previous reflection" | t(lang) }}</small> {{ around.prev.data.title }}</a>{% endif %}
+        <a class="essay-series-all" href="{{ reflectionsUrl }}">{{ "All reflections" | t(lang) }}</a>
+      </p>
+    </nav>
+    {%- endif %}
+    {%- endif %}
     {#- From the readers: what readers who tried it wrote ("readers" in the front matter: text and who), then the
         question "Did you try it?" (partials/essay-feedback.njk), so the essay learns from the shifts it reaches. -#}
     {%- if readers and readers.length %}
