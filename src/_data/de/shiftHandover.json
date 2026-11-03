@@ -1,5 +1,6 @@
 {
   "storageKey": "sc-shift-handover-de",
+  "renamedMetrics": { "Unvollständige Aufträge": ["Unvollständig %"] },
   "shifts": ["Früh", "Spät", "Nacht"],
   "priorities": ["Hoch", "Mittel", "Niedrig"],
   "templates": {
@@ -10,7 +11,7 @@
         "Bearbeitete Einheiten",
         "Rückstand bei Übergabe",
         "Schäden %",
-        "Unvollständig %",
+        "Unvollständige Aufträge",
         "Pünktliche Abfahrten %",
         "Personal in der Schicht"
       ],
@@ -78,7 +79,7 @@
       ["Bearbeitete Einheiten", "18.400", "Ziel 18.000"],
       ["Rückstand bei Übergabe", "320 Pakete", "Welle 4, sortiert"],
       ["Schäden %", "0,42 %", "Ziel 0,30 %"],
-      ["Unvollständig %", "0,8 %", ""],
+      ["Unvollständige Aufträge", "14", ""],
       ["Pünktliche Abfahrten %", "86 %", "11:15 und 11:30 zu spät abgefahren"],
       ["Personal in der Schicht", "14 von 16", "2 krank"]
     ],

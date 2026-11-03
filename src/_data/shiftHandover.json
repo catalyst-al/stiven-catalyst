@@ -1,5 +1,6 @@
 {
   "storageKey": "sc-shift-handover",
+  "renamedMetrics": { "Incomplete orders": ["Incomplete %"] },
   "shifts": [
     "Early",
     "Late",
@@ -18,7 +19,7 @@
         "Units handled",
         "Backlog at handover",
         "Damage %",
-        "Incomplete %",
+        "Incomplete orders",
         "On-time departures %",
         "Staff on shift"
       ],
@@ -99,8 +100,8 @@
         "target 0.30%"
       ],
       [
-        "Incomplete %",
-        "0.8%",
+        "Incomplete orders",
+        "14",
         ""
       ],
       [
