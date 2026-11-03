@@ -860,7 +860,7 @@ select.sh-in { cursor: pointer; }
 
 @media print {
   .site-header, .site-footer, .skip-link, .tool-actions, .button-ghost,
-  .reading-progress, .share-row, .filter-bar, .note-actions,
+  .reading-progress, .share-row, .filter-bar, .tool-filter, .note-actions,
   .tool-aside, .newsletter, [data-add-why] { display: none !important; }
   body { background: #fff !important; color: #000 !important; }
   :root { --ink: #000; --muted: #333; --line: #bbb; --card: #fff; --blue: #0b5f9e; --red: #b00; }

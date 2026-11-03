@@ -1,4 +1,5 @@
 {#- The Tools page: the roles (families.json) as cards, then each role with its tools and training modules. Needs toolList. -#}
+{% include "partials/tool-filter.njk" %}
 <nav class="shell family-index" aria-label="{{ 'Roles' | t(lang) }}">
   {%- set familyLink = "" %}
   {%- include "partials/family-cards.njk" %}
@@ -40,3 +41,4 @@
   </div>
 </section>
 {%- endif %}
+<script src="{{ '/js/tool-filter.js' | assetUrl }}" defer></script>

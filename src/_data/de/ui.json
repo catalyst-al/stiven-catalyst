@@ -7910,5 +7910,11 @@
   "the action was not done when checked": "die Maßnahme war bei der Prüfung nicht erledigt",
   "no record of the action's state when checked": "kein Eintrag zum Stand der Maßnahme bei der Prüfung",
   "the action changed since the check": "die Maßnahme hat sich seit der Prüfung geändert",
-  "{n} items marked as pass; the defects to check wait for your own answer.": "{n} Punkte als in Ordnung markiert; die zu prüfenden Mängel warten auf Ihre eigene Antwort."
+  "{n} items marked as pass; the defects to check wait for your own answer.": "{n} Punkte als in Ordnung markiert; die zu prüfenden Mängel warten auf Ihre eigene Antwort.",
+  "Find a tool": "Tool finden",
+  "Find a tool: name, topic or task": "Tool finden: Name, Thema oder Aufgabe",
+  "Clear the search": "Suche leeren",
+  "{a} of {b} tools": "{a} von {b} Tools",
+  "1 of {b} tools": "1 von {b} Tools",
+  "No tool matches these words. Try one word of the name, or a topic such as hotel, safety or quality, or clear the search to see every role.": "Kein Tool passt zu diesen Wörtern. Versuchen Sie ein Wort aus dem Namen oder ein Thema wie Hotel, Sicherheit oder Qualität, oder leeren Sie die Suche, um alle Rollen zu sehen."
 }

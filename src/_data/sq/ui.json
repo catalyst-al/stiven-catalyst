@@ -7910,5 +7910,11 @@
   "the action was not done when checked": "veprimi nuk ishte i kryer në çastin e kontrollit",
   "no record of the action's state when checked": "asnjë shënim për gjendjen e veprimit në çastin e kontrollit",
   "the action changed since the check": "veprimi ndryshoi që nga kontrolli",
-  "{n} items marked as pass; the defects to check wait for your own answer.": "{n} artikuj të shënuar si kalon; defektet për kontroll presin përgjigjen tënde."
+  "{n} items marked as pass; the defects to check wait for your own answer.": "{n} artikuj të shënuar si kalon; defektet për kontroll presin përgjigjen tënde.",
+  "Find a tool": "Gjej një mjet",
+  "Find a tool: name, topic or task": "Gjej një mjet: emri, tema ose detyra",
+  "Clear the search": "Pastro kërkimin",
+  "{a} of {b} tools": "{a} nga {b} mjete",
+  "1 of {b} tools": "1 nga {b} mjete",
+  "No tool matches these words. Try one word of the name, or a topic such as hotel, safety or quality, or clear the search to see every role.": "Asnjë mjet nuk përputhet me këto fjalë. Provo një fjalë nga emri, ose një temë si hotel, siguri ose cilësi, ose pastro kërkimin për të parë të gjitha rolet."
 }
