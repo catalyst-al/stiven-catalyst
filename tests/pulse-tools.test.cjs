@@ -149,6 +149,10 @@ test('an empty log points to the same log kept in another language', () => {
   dom.window.eval(fs.readFileSync('src/js/tool-kit.js', 'utf8'));
   // From the German page: the Albanian log has three entries, the English one none; German is this page.
   assert.deepEqual(plain(dom.window.ToolKit.otherLogs('sc-damage-control-de')), [{ code: 'sq', count: 3, name: 'Shqip', url: '/sq/tools/damage-control/' }]);
+  // An example loaded on another page is no work kept there: neither a stamped one nor the example rows beside own ones.
+  dom.window.localStorage.setItem('sc-damage-control', JSON.stringify({ rows: [{ example: true }, { example: true }], example: { on: true, n: 2 } }));
+  dom.window.localStorage.setItem('sc-damage-control-sq', JSON.stringify({ rows: [{ example: true }, {}] }));
+  assert.deepEqual(plain(dom.window.ToolKit.otherLogs('sc-damage-control-de')), [{ code: 'sq', count: 1, name: 'Shqip', url: '/sq/tools/damage-control/' }]);
 });
 
 test('trend buckets group a log by day or by week and fill the quiet days', () => {

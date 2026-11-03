@@ -7922,5 +7922,7 @@
   "OEE is below the world-class benchmark on {day}: {pct} (benchmark {target}; no OEE target is set).": "OEE është nën standardin e klasit botëror më {day}: {pct} (standardi {target}; nuk është vendosur objektiv për OEE).",
   "Period {pct} · world-class benchmark {target}": "Periudha {pct} · standardi i klasit botëror {target}",
   "Below benchmark": "Nën standard",
-  "Benchmark": "Standardi"
+  "Benchmark": "Standardi",
+  "Your work in this tool is kept on the page in another language: each language keeps its own copy.": "Puna jote në këtë mjet ruhet te faqja në një gjuhë tjetër: çdo gjuhë mban kopjen e vet.",
+  "Open it in {language}": "Hape në {language}"
 }
