@@ -166,3 +166,30 @@ merge commit (`768400db`, no rebase, no force-push); git merged it without a con
   projects, 274 passed, 0 failed, 0 skipped, 0 flaky (18.2 min), among them the 48 filter tests (EN, DE, SQ,
   keyboard, 390/768/1440 px, axe, privacy, no scripts), the three offline tests of Phase 5A with the kept Tools page
   filtering offline, the seven Phase 5B hand-off tests and the 96 accessibility page checks.
+
+## 7. Second integration with `main` (3 November 2026)
+
+While CI run 832 ran on `a0d7b4bb`, `main` moved to `288314c3` (PR #379: Shift Handover and Shift Pulse operational
+fixes, OEE benchmark texts) and then to `ee1c001b` (PR #380: links between reflections). Both were brought in with
+one merge commit (`9cbe3b49`, no rebase, no force-push), to avoid a second cycle for #380 alone.
+
+- Conflicts: `src/_data/de/ui.json` and `src/_data/sq/ui.json` only, where #379 and this branch had each appended keys
+  at the end. Resolved by keeping both: the five #379 keys first, then the six filter keys. Checked by parsing: every
+  key and value of `main` is unchanged, the only keys added are the six of the filter (7 928 keys per language).
+- Every file #379 and #380 changed (`shift-handover.js`, `shift-pulse.js`, `tool-kit.js`, the three
+  `shiftHandover.json`, `article.njk`, `eleventy.config.js`, `package-lock.json`, their tests) is byte-identical to
+  `main`; the branch still differs from `main` in the same 14 Phase 5C files only. `src/styles.css` equals its parts
+  joined. Dependencies reinstalled with `npm ci` from the merged lock file.
+- Chain on `9cbe3b49`: build 898 files; `npm test` 1 440 pass, 0 fail, 0 skipped (the three new #379 tests among
+  them; `pulse-tools`, `shift-handover`, `shift-pulse-new-sources` and `css-parts` 46/46); Playwright 272 passed,
+  2 failed, both 30 s timeouts in projects with motion:
+  - this branch's "no match" test (768 px dark, 33.8 s): it loaded three Tools pages and ran axe in one test, and had
+    taken 23–29 s in those projects in the green runs before. Corrected in `9efeda6a`: one test per language (now
+    4–17 s each, and axe checks the no-match page in German and Albanian too). No product code changed.
+  - `journeys.spec.mjs` "search → a result, by keyboard only" (1440 px dark, 33.9 s): an existing test that does not
+    open the Tools page and touches no file of this branch; it takes 23–28 s in the projects with motion on this
+    machine. Not changed here (outside Phase 5C); recorded as a pre-existing risk near the limit.
+- Full Playwright run again on `9efeda6a`: 286 passed, 0 failed, 0 skipped, 0 flaky (17.5 min): 60 filter tests, the
+  three Phase 5A offline tests with the kept Tools page filtering offline, the seven Phase 5B hand-off tests, the 30
+  Shift Handover transfer tests and the 96 accessibility page checks; the journeys search test passed (26.8 s).
+- No storage, service-worker, PIN, Team Sync, backup or Action Tracker file differs from `main`.
