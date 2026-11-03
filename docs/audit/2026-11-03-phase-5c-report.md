@@ -148,3 +148,21 @@ the no-match page, in both themes, at 1440 px and 390/768 px (the spec runs in e
 
 Revert the merge commit; no stored data, address or service-worker format changed, so nothing on a device needs to be
 cleaned up.
+
+## 6. Final integration with `main` (3 November 2026)
+
+After CI run 828 (success on `6c661bfe`), `main` moved to `ebae6e01` (PR #378, Management Review 91–100, after PR
+#376, the CV tools' ResizeObserver correction; deploy run 830 success). `main` was merged into this branch with a
+merge commit (`768400db`, no rebase, no force-push); git merged it without a conflict.
+
+- The branch differs from `main` in the same 14 files as before and nothing else; every file #376 and #378 changed
+  (`src/content`, the magazine pages and media, `tool-kit.js`, the CV scripts, `09-career-and-data-tools.css`) is
+  byte-identical to `main`. The filter's script, partial and tests are identical to the reviewed `6c661bfe`.
+- `src/styles.css` equals its parts joined in order (`lib/css-parts.js` `joinParts`), and `tests/css-parts.test.cjs`
+  passes.
+- No storage, service-worker, PIN, Team Sync, backup or Action Tracker file differs from `main`; no storage key or
+  format is added or changed (the filter reads and writes no storage, tested).
+- Full chain on `768400db`: `npm run build` 898 files; `npm test` 1 437 pass, 0 fail, 0 skipped; Playwright, six
+  projects, 274 passed, 0 failed, 0 skipped, 0 flaky (18.2 min), among them the 48 filter tests (EN, DE, SQ,
+  keyboard, 390/768/1440 px, axe, privacy, no scripts), the three offline tests of Phase 5A with the kept Tools page
+  filtering offline, the seven Phase 5B hand-off tests and the 96 accessibility page checks.
