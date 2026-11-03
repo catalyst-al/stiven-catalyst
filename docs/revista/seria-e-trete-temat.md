@@ -23,8 +23,18 @@ te Nr. 89, një te Nr. 85 dhe një te Nr. 90. Burimet që u provuan e nuk u hap�
 | 88 | Strategjia | Efekti i kamxhikut (bullwhip) | Sterman (1989); Lee, Padmanabhan & Whang (1997); Croson & Donohue (2006) |
 | 89 | Njerëzit | Orët pa gjumë: turni i lodhur | Barger et al. (2006), PLoS Medicine; Tefft (2016), AAA Foundation; përmes: Dawson & Reid (1997), Williamson & Feyer (2000), Landrigan et al. dhe Lockley et al. (2004) |
 | 90 | Operacioni | Dorëzimi i turnit: çfarë humbet | Cullen (1990), vëll. 1; HSE; Lardner (1999); Starmer et al. (2023); përmes: Starmer et al. (2014) |
+| 91 | Roli | Të kërkosh këshillë: frika që gënjen | Brooks, Gino & Schweitzer (2015), Management Science; Flynn & Lake (2008), JPSP |
+| 92 | KPI | Mungesat nga sëmundja: çfarë fsheh norma | Destatis, Krankenstand; EFZG §§ 3, 5; TK Gesundheitsreport 2026; DAK Gesundheitsreport 2025 |
+| 93 | Strategjia | Opsioni i paracaktuar: zgjedhja që s'e bën askush | Madrian & Shea (NBER 2000); Johnson & Goldstein (2003), Science; Jachimowicz et al. (2019) |
+| 94 | Njerëzit | Zhurma në punë: veshi dhe kostot më të heshtura | Direktiva 2003/10/KE; LärmVibrationsArbSchV; Basner et al. (2014), Lancet; DGUV |
+| 95 | Operacioni | Kontrolli i dytë: çfarë kap | Koyama et al. (2020), BMJ Quality & Safety; ISMP (2019); Koppel et al. (2008), JAMIA; përmes: Poon et al. (2010) |
+| 96 | AI | Kontrollo burimet e AI-së para se të dalë | Walters & Wilder (2023), Scientific Reports; Magesh et al. (preprint 2024); Mata v. Avianca (2023) |
+| 97 | Roli | Sa i sigurt është menaxheri? | Ben-David, Graham & Harvey (NBER); Moore & Healy (2008); Moore et al. (2016); Chang et al. (2016) |
+| 98 | KPI | Prodhimi për orë: si bëhet shifra | OECD, Compendium of Productivity Indicators 2025; ILO (2008); Destatis (2026) |
+| 99 | Njerëzit | Ngritja dhe shpina: teknika nuk mjafton | Verbeek et al. (2011), Cochrane; Martimo et al. (2008), BMJ; EU-OSHA (2019); HSE; LasthandhabV |
+| 100 | Operacioni | Rrëshqitje, pengesa, rrëzime: aksidenti i zakonshëm | DGUV (2025); HSE (2025); Chang et al. (2016); Bell et al. (2019) |
 
-Tabelat e fakteve: `docs/revista/management-review-nr-81.md` … `nr-90.md`. Aty shkruhet çfarë u lexua e plotë, çfarë
+Tabelat e fakteve: `docs/revista/management-review-nr-81.md` … `nr-100.md`. Aty shkruhet çfarë u lexua e plotë, çfarë
 jo, dhe çdo shifër që u hoq sepse nuk u konfirmua.
 
 ## Lidhjet me faqen
@@ -38,3 +48,8 @@ Shift Handover). Esetë lidhen vetëm aty ku e mbështetin temën; 83 dhe 89 nuk
 Nr. 81–90 të shkruar, të kontrolluar, të printuar në tri gjuhët (1 nëntor 2026). Çdo faqe A5 mban; disa faqe kanë një
 ose dy hapa shtrëngimi (`src/_data/pageFit.json`). Data online te `src/_data/online.json` është 1 nëntor 2026; nëse bashkimi në main bëhet më vonë, ekzekuto
 `node scripts/online-dates.mjs` pas bashkimit.
+
+Nr. 91–100 u shkruan më 3 nëntor 2026 me të njëjtën metodë. Vetëm një burim mban "përmes" (Poon et al. 2010, NEJM, te
+Nr. 95); burimet që nuk u hapën të plota u lanë jashtë. Data online: 3 nëntor 2026. Numri 100 është i pari me emër
+skedari me tri shifra (`100.js`): `src/_data/weekly.js`, `scripts/online-dates.mjs` dhe `tests/weekly.test.cjs` i
+pranojnë dhe i rendisin sipas numrit.

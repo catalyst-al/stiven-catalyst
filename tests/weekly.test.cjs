@@ -10,7 +10,7 @@ const LANGS = ['en', 'sq', 'de'];
 const load = async () => (await import('../src/_data/weekly.js')).default;
 const raw = async () => {
   const dir = path.join(__dirname, '..', 'lib', 'weekly', 'issues');
-  const files = fs.readdirSync(dir).filter((name) => /^\d{2}\.js$/.test(name)).sort();
+  const files = fs.readdirSync(dir).filter((name) => /^\d{2,3}\.js$/.test(name)).sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
   return Promise.all(files.map(async (name) => ({ name, issue: (await import(path.join(dir, name))).default })));
 };
 // Every x(en, sq, de) text in a value, with where it was found.

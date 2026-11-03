@@ -32,7 +32,7 @@ test('every file listed is on the site, in the language of the page, with its si
     assert.match(html, /href="\/media\/books\/mall-per-durresin\/mall-per-durresin\.pdf" download/, 'the Albanian original');
     const edition = JSON.parse(fs.readFileSync(`src/_data/books/${lang}.json`, 'utf8'));
     assert.ok(html.includes(`href="${edition.pdf}" download`), `${file}: the book in its own language`);
-    assert.ok(html.includes(`management-review-nr-90-${lang}.pdf`) && html.includes(`management-review-nr-01-${lang}.pdf`), 'the newest and the first issue');
+    assert.ok(html.includes(`management-review-nr-100-${lang}.pdf`) && html.includes(`management-review-nr-01-${lang}.pdf`), 'the newest and the first issue');
   }
 });
 
@@ -41,9 +41,9 @@ test('a long list shows its newest eight and keeps the rest one tap away; each r
   const review = html.slice(html.indexOf('id="review"'), html.indexOf('id="treatise"'));
   const open = review.slice(0, review.indexOf('<details'));
   assert.equal((open.match(/class="downloads-row"/g) || []).length, 8);
-  assert.match(review, /<details class="downloads-more">\s*<summary>All 91 issues<\/summary>/);
-  assert.match(open, /<a class="downloads-title" href="\/magazine\/management-review-nr-90\.html">/);
-  assert.match(built('sq/downloads.html'), /<a class="downloads-title" href="\/sq\/magazine\/management-review-nr-90\.html">/);
+  assert.match(review, /<details class="downloads-more">\s*<summary>All 101 issues<\/summary>/);
+  assert.match(open, /<a class="downloads-title" href="\/magazine\/management-review-nr-100\.html">/);
+  assert.match(built('sq/downloads.html'), /<a class="downloads-title" href="\/sq\/magazine\/management-review-nr-100\.html">/);
 });
 
 test('in motion: rows rise and answer the pointer, a file\'s arrow drops, the rest unfolds one row after another', () => {
