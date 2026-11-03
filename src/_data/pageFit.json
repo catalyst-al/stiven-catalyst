@@ -43,6 +43,15 @@
    "9": 1
   }
  },
+ "management-review-nr-100": {
+  "sq": {
+   "5": 1
+  },
+  "de": {
+   "5": 1,
+   "8": 1
+  }
+ },
  "management-review-nr-15": {
   "de": {
    "8": 1
@@ -365,6 +374,94 @@
  "management-review-nr-90": {
   "de": {
    "8": 1
+  }
+ },
+ "management-review-nr-91": {
+  "de": {
+   "2": 1
+  }
+ },
+ "management-review-nr-92": {
+  "en": {
+   "1": 1,
+   "5": 1
+  },
+  "sq": {
+   "5": 2,
+   "8": 1
+  },
+  "de": {
+   "1": 1,
+   "5": 1,
+   "8": 2
+  }
+ },
+ "management-review-nr-93": {
+  "sq": {
+   "3": 1
+  },
+  "de": {
+   "2": 1,
+   "8": 1
+  }
+ },
+ "management-review-nr-94": {
+  "en": {
+   "1": 1
+  },
+  "de": {
+   "8": 1
+  }
+ },
+ "management-review-nr-95": {
+  "de": {
+   "7": 1,
+   "8": 1
+  }
+ },
+ "management-review-nr-96": {
+  "en": {
+   "4": 1,
+   "8": 1
+  },
+  "sq": {
+   "4": 2,
+   "8": 1
+  },
+  "de": {
+   "4": 2,
+   "8": 2
+  }
+ },
+ "management-review-nr-97": {
+  "sq": {
+   "8": 1
+  },
+  "de": {
+   "8": 1
+  }
+ },
+ "management-review-nr-98": {
+  "sq": {
+   "4": 1
+  },
+  "de": {
+   "4": 1
+  }
+ },
+ "management-review-nr-99": {
+  "en": {
+   "6": 1
+  },
+  "sq": {
+   "4": 1,
+   "6": 1
+  },
+  "de": {
+   "4": 2,
+   "6": 1,
+   "8": 1,
+   "9": 1
   }
  },
  "nga-terreni-02": {
