@@ -193,3 +193,35 @@ one merge commit (`9cbe3b49`, no rebase, no force-push), to avoid a second cycle
   three Phase 5A offline tests with the kept Tools page filtering offline, the seven Phase 5B hand-off tests, the 30
   Shift Handover transfer tests and the 96 accessibility page checks; the journeys search test passed (26.8 s).
 - No storage, service-worker, PIN, Team Sync, backup or Action Tracker file differs from `main`.
+
+## 8. Third and final integration with `main` (4 November 2026)
+
+`main` moved to `00675b0e` (PR #381: navigation between essays and reflections; PR #382, audit P2B-19: a tool says
+where the work is when it is kept on the page of another language, `js/work-elsewhere.js`, `src/_data/workKeys.js`).
+Merged with one merge commit (`48bde087`, no rebase, no force-push), on the owner's approval of this third and final
+planned integration.
+
+- Conflicts: `src/_data/de/ui.json` and `src/_data/sq/ui.json` only (both sides had appended keys at the end).
+  Resolved by keeping both: #382's two keys, then the six filter keys. Checked by parsing with every key pair kept:
+  no duplicate key in either file, no value of `main` changed, no key of the branch lost or changed, six keys added
+  (7 932 per language).
+- Every file of #376 to #382 (`work-elsewhere.js`, `workKeys.js`, `base.njk`, `article.njk`, `tool-kit.js`,
+  `eleventy.config.js`, the CV, Shift Handover and Shift Pulse scripts, their tests) is byte-identical to `main`; the
+  branch differs from `main` in the same 14 Phase 5C files. `src/styles.css` equals its parts joined.
+- `npm run build` 898 files; `npm test` 1 446 pass, 0 fail, 0 skipped (`work-elsewhere`, career and CV, tool-filter,
+  action-tracker, sw-eviction, pulse-tools, shift-handover and css-parts suites 87/87).
+- In a real browser on the build (fictional data): work saved on the German FMEA page makes the English page say so
+  with a link to `/de/tools/fmea/`, the German page says nothing, and the saved state is unchanged byte for byte,
+  also after filtering the Tools page; the filter puts FMEA, Night-Audit-Protokoll and Ankesat e mysafirëve first in
+  EN, DE and SQ; ATS CV at 945, 952 and 960 px shows no error notice and raises no page error (#376).
+- Playwright. Three full runs with four workers on this container, which was slower that day (the same build took
+  75–143 s, against 80 s before), each ended with two to four 30 s timeouts in existing tests that do not touch the
+  Tools page (the keyboard search journey, the motion switch, the Shift Handover transfer, the work-file restore) and
+  once the fixed 2.5 s wait at the end of the Phase 5B 5 Whys spec, after all its privacy checks had passed; a
+  different set each run, and every Phase 5C test passed in all of them. Run on their own, three times each in both
+  dark projects, the two that failed most took the same time on `main` `00675b0e` (8.5–12.5 s) as on this branch
+  (8.9–12.6 s), 12/12 on each. The full suite with two workers (the same tests, timeouts and projects, no retry):
+  **286 passed, 0 failed, 0 skipped, 0 flaky** (21.4 min), among them the 60 filter tests, the three Phase 5A offline
+  tests, the seven Phase 5B hand-off tests, the 30 Shift Handover transfer tests and the 96 accessibility checks.
+- Recorded risk, outside Phase 5C: several existing browser tests run close to their 30 s limit in the projects with
+  motion when a machine is loaded, and the Phase 5B spec's last check waits a fixed 2.5 s for the worker's keep.
