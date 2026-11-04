@@ -106,7 +106,14 @@ test('the site shows each series on its own', { skip: !fs.existsSync('_site/sq/i
   const fourthClosing = built('sq/insights/the-tools-you-build-yourself/index.html');
   assert.match(fourthClosing, /Sistemi është më i shpejtë se ti · Eseja 8 nga 8/);
   assert.doesNotMatch(fourthClosing, /serisë është në rrugë/);
-  assert.doesNotMatch(fourthClosing, /rel="next"/);
+  // The last essay of the last series leads on to the reflections, newest first, and the oldest reflection back to essay 1.
+  assert.match(fourthClosing, /Vazhdo me reflektimet/);
+  assert.match(fourthClosing, /class="essay-series-next" href="\/sq\/reflections\/[^"]+\/" rel="next"/);
+  const newestReflection = fourthClosing.match(/href="(\/sq\/reflections\/[^"]+\/)" rel="next"/)[1];
+  assert.match(built(newestReflection.slice(1) + 'index.html'), /href="\/sq\/insights\/the-tools-you-build-yourself\/" rel="prev"/);
+  const oldestReflection = built('sq/reflections/ghost-in-a-room-of-mirrors/index.html');
+  assert.match(oldestReflection, /Kthehu te esetë · Dhjetë vite pranë punës/);
+  assert.match(oldestReflection, /class="essay-series-next" href="\/sq\/insights\/starting-from-zero\/"/);
   assert.equal((fourthClosing.match(/<textarea[^>]*data-checklist-item/g) || []).length, 6);
 
   // The last essay of the finished first series leads into the second.

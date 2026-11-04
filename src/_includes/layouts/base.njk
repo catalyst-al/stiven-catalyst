@@ -225,6 +225,12 @@
 {%- if toolPage %}
 <script src="{{ '/js/floor-mode.js' | assetUrl }}" defer></script>
 {%- endif %}
+{#- Work kept on the page of another language (js/work-elsewhere.js, src/_data/workKeys.js; audit P2B-19). #}
+{%- set workKey = workKeys[(page.url | enPath).split("/")[2]] if toolPage and (page.url | enPath).indexOf("/tools/") == 0 else "" %}
+{%- if workKey %}
+<script type="application/json" id="work-elsewhere-data">{{ { "key": workKey } | scriptJson | safe }}</script>
+<script src="{{ '/js/work-elsewhere.js' | assetUrl }}" defer></script>
+{%- endif %}
 </main>
 
 <footer class="site-footer">
