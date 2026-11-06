@@ -225,6 +225,14 @@ usability · M
   four role sections, measurable by the time to reach a named tool. Only if the owner still finds the page long after
   (a): (b) role sections collapsed on phones with the count and the first three tools behind "Show all", S/M; and
   only after that (c) a "By problem" strip reusing the Challenges mapping, M.
+- **Status (Phase 5C, `feature/phase-5c-tools-filter`):** (a) implemented; (b) and (c) not started. A filter field at
+  the top of the Tools page in EN, DE and SQ (`partials/tool-filter.njk`, `js/tool-filter.js`; `js/filter.js` and the
+  Field Notes filter unchanged): name, type and description, capitals, accents, hyphens and ß not counting, every
+  word required, a tool named by the words first, empty roles hidden, the count announced, Escape and a clear button,
+  nothing sent, stored or put in the address, the page unchanged without scripts. Measured at 390 px: the CV Builder
+  from 56 cards and 21 390 px down (25.3 screens) to the first of three cards after two keystrokes, its card starting
+  at 746 px; Night Audit and Pareto 80/20 first after two and three keystrokes in every language. Measurements, tests
+  and limitations: `docs/audit/2026-11-03-phase-5c-report.md`.
 
 ### P2
 
@@ -711,3 +719,8 @@ no essay or publication.
 Phase 5B (2 November 2026): P1-02 corrected on `feature/phase-5b-private-action-handoff` (commit `6ab09816`): the Action
 Tracker hand-off through a sessionStorage note and a token in the address fragment; the remaining links that carry
 typed text listed under P1-02 for a separate decision.
+
+Phase 5C (3 November 2026): P1-03 (a) implemented on `feature/phase-5c-tools-filter` from `main` `41726227`: the Tools
+page filter field, with before and after measurements of the time to a named tool
+(`docs/audit/2026-11-03-phase-5c-report.md`); (b) collapsed sections and (c) the "By problem" strip left for the
+owner's decision after (a), as recommended.

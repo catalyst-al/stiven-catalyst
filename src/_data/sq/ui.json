@@ -7924,5 +7924,11 @@
   "Below benchmark": "Nën standard",
   "Benchmark": "Standardi",
   "Your work in this tool is kept on the page in another language: each language keeps its own copy.": "Puna jote në këtë mjet ruhet te faqja në një gjuhë tjetër: çdo gjuhë mban kopjen e vet.",
-  "Open it in {language}": "Hape në {language}"
+  "Open it in {language}": "Hape në {language}",
+  "Find a tool": "Gjej një mjet",
+  "Find a tool: name, topic or task": "Gjej një mjet: emri, tema ose detyra",
+  "Clear the search": "Pastro kërkimin",
+  "{a} of {b} tools": "{a} nga {b} mjete",
+  "1 of {b} tools": "1 nga {b} mjete",
+  "No tool matches these words. Try one word of the name, or a topic such as hotel, safety or quality, or clear the search to see every role.": "Asnjë mjet nuk përputhet me këto fjalë. Provo një fjalë nga emri, ose një temë si hotel, siguri ose cilësi, ose pastro kërkimin për të parë të gjitha rolet."
 }

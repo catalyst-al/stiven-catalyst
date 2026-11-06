@@ -2394,6 +2394,53 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   gap: 14px;
   padding: 44px 0 20px;
 }
+/* Tools page: the filter field above the roles (partials/tool-filter.njk, js/tool-filter.js). It reuses the field of
+   the writing lists (.filter-search) and shows only when scripts run; the count beside it is there from the build, so
+   typing changes its words, not the height of the line. */
+html:not(.js) .tool-filter, html:not(.js) .tool-filter-empty { display: none; }
+.tool-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  padding-top: 8px;
+}
+.tool-filter .tool-filter-field { flex: 1 1 320px; max-width: 560px; min-height: 52px; padding-right: 6px; }
+.tool-filter input { font-size: 17px; }
+.tool-filter input::-webkit-search-cancel-button { appearance: none; }
+.tool-filter-clear {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.tool-filter-clear:hover, .tool-filter-clear:focus-visible { background: color-mix(in srgb, var(--blue) 12%, transparent); color: var(--ink); }
+.tool-filter-clear:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.tool-filter-clear svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.tool-filter .tool-filter-count { margin: 0; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.tool-filter.is-filtering .tool-filter-count { color: var(--ink); font-weight: 700; }
+.tool-filter-empty { padding: 28px 0 60px; }
+.tool-filter-empty p {
+  max-width: 640px;
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.4;
+}
+/* While the field holds words, the roles shown are the first thing under it, each still with its planet, colour and
+   name, but without the line about the role and the link to its planet, so the first match is near the field. */
+.tool-filter.is-filtering ~ .family-section:not([hidden]) { padding-top: 32px; }
+.tool-filter.is-filtering ~ .family-section .family-head p:not(.kicker),
+.tool-filter.is-filtering ~ .family-section .family-head .text-link { display: none; }
+/* One or two matches keep the width of a card instead of stretching across the row. */
+.tool-filter.is-filtering ~ .family-section .family-tools { grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
 .home-families { padding: 0; }
 .home-families-link { margin-top: 28px; }
 .family-card {
@@ -2584,6 +2631,7 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   .family-head .family-visual { max-width: 320px; aspect-ratio: 16 / 9; }
   .family-tools { grid-template-columns: minmax(0, 1fr); }
   .family-tools .tool-card { min-height: 0; }
+  .tool-filter.is-filtering ~ .family-section .family-tools { grid-template-columns: minmax(0, 1fr); }
 }
 /* On a phone the Tools page reads as a list: the roles as four small links to their sections, each role's planet
    small beside its name, and the tools without the picture of their result (each tool's own page shows it). */
@@ -2596,6 +2644,13 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
     gap: 10px;
     padding: 28px 0 8px;
   }
+  .tool-filter { padding-top: 0; }
+  .tool-filter .tool-filter-field { flex-basis: 100%; max-width: none; }
+  .tool-filter ~ nav.family-index { padding-top: 16px; }
+  .tool-filter-empty { padding-top: 20px; }
+  .tool-filter-empty p { font-size: 19px; }
+  .tool-filter.is-filtering ~ .family-section:not([hidden]) { padding-top: 20px; }
+  .tool-filter.is-filtering ~ .family-section .family-tools { padding-top: 16px; }
   nav.family-index .family-visual,
   nav.family-index .family-line { display: none; }
   nav.family-index .family-card-text { gap: 4px; padding: 12px 14px; }
@@ -3720,7 +3775,7 @@ select.sh-in { cursor: pointer; }
 
 @media print {
   .site-header, .site-footer, .skip-link, .tool-actions, .button-ghost,
-  .reading-progress, .share-row, .filter-bar, .note-actions,
+  .reading-progress, .share-row, .filter-bar, .tool-filter, .note-actions,
   .tool-aside, .newsletter, [data-add-why] { display: none !important; }
   body { background: #fff !important; color: #000 !important; }
   :root { --ink: #000; --muted: #333; --line: #bbb; --card: #fff; --blue: #0b5f9e; --red: #b00; }

@@ -7924,5 +7924,11 @@
   "Below benchmark": "Unter dem Richtwert",
   "Benchmark": "Richtwert",
   "Your work in this tool is kept on the page in another language: each language keeps its own copy.": "Ihre Arbeit in diesem Tool liegt auf der Seite in einer anderen Sprache: Jede Sprache hat ihre eigene Kopie.",
-  "Open it in {language}": "Auf {language} öffnen"
+  "Open it in {language}": "Auf {language} öffnen",
+  "Find a tool": "Tool finden",
+  "Find a tool: name, topic or task": "Tool finden: Name, Thema oder Aufgabe",
+  "Clear the search": "Suche leeren",
+  "{a} of {b} tools": "{a} von {b} Tools",
+  "1 of {b} tools": "1 von {b} Tools",
+  "No tool matches these words. Try one word of the name, or a topic such as hotel, safety or quality, or clear the search to see every role.": "Kein Tool passt zu diesen Wörtern. Versuchen Sie ein Wort aus dem Namen oder ein Thema wie Hotel, Sicherheit oder Qualität, oder leeren Sie die Suche, um alle Rollen zu sehen."
 }
