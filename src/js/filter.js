@@ -113,15 +113,29 @@ document.querySelectorAll("[data-new-since]").forEach((badge) => {
     month = button.dataset.filterMonth;
     choose(true);
   }));
-  more?.querySelector("button").addEventListener("click", () => {
+  const loadMore = (moveFocus) => {
     const before = items.filter((item) => !item.hidden).length;
     limit += page;
     apply();
     reveal(before);
-    // Keyboard and screen-reader users go on from the first row that just appeared.
+    // Keyboard and screen-reader users who pressed the button go on from the first row that just appeared.
+    if (!moveFocus) return;
     const first = items.filter((item) => !item.hidden)[before];
     (first?.matches("a") ? first : first?.querySelector("a"))?.focus();
-  });
+  };
+  more?.querySelector("button").addEventListener("click", () => loadMore(true));
+  // The next rows come by themselves as the reader scrolls near the end of the list, so a long month reads on without
+  // a click; the button stays for keyboards and for browsers without IntersectionObserver.
+  if (more && "IntersectionObserver" in window) {
+    const watch = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting) || more.hidden) return;
+      loadMore(false);
+      // Looked at afresh, so a short page that still shows the end of the list goes on loading.
+      watch.unobserve(more);
+      requestAnimationFrame(() => watch.observe(more));
+    }, { rootMargin: "0px 0px 600px 0px" });
+    watch.observe(more);
+  }
   onward?.querySelector("button").addEventListener("click", () => {
     if (!onwardTo) return;
     month = onwardTo.dataset.filterMonth;
