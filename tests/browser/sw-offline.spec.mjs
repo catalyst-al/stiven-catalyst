@@ -269,3 +269,30 @@ test("a kept page made incomplete is repaired from fresh HTML on the next keep, 
   await expectWhole(page, victim);
   await goOnline();
 });
+
+// Phase 5C: the Tools page the worker keeps beside a role's tools opens whole offline, its filter script among the
+// files in the copy, and the filter works there with nothing asked of the network.
+test("the Tools page kept offline opens whole and its filter still finds a tool", async ({ page }) => {
+  test.setTimeout(120_000);
+  if (!state.online) await goOnline();
+  state.overlay = null;
+  state.phase = "filter-online";
+  const home = "/tools/night-audit/";
+  await page.goto(`${BASE}${home}`, { waitUntil: "load" });
+  await waitForKept(page, [home, "/tools.html"]);
+  await quiet();
+  await goOffline();
+  state.phase = "filter-offline";
+  const response = await page.goto(`${BASE}/tools.html`, { waitUntil: "load" });
+  expect(response?.ok(), "/tools.html answers offline").toBe(true);
+  const missing = await page.evaluate(async () => { const cache = await caches.open("sc-offline-v1"); const out = []; for (const el of document.querySelectorAll('script[src*="?v="], link[rel="stylesheet"][href*="?v="]')) { const href = el.src || el.href; if (!(await cache.match(href))) out.push(new URL(href).pathname); } return out; });
+  expect(missing, "every file the Tools page names is in the copy").toEqual([]);
+  expect(await page.locator('script[src*="/js/tool-filter.js?v="]').count()).toBe(1);
+  await page.locator("[data-tool-filter-input]").fill("night audit");
+  await expect(page.locator(".family-section:not([hidden]) .tool-card:not([hidden])")).toHaveCount(1);
+  await expect(page.locator("[data-tool-filter-count]")).toHaveText("1 of 59 tools");
+  await page.locator("[data-tool-filter-input]").press("Escape");
+  await expect(page.locator(".family-section:not([hidden]) .tool-card:not([hidden])")).toHaveCount(59);
+  expect(requests("filter-offline"), "offline means offline: the server saw nothing").toEqual([]);
+  await goOnline();
+});

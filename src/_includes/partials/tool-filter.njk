@@ -1,0 +1,15 @@
+{#- The filter field of the Tools page (js/tool-filter.js): it narrows the cards below by name, type and description,
+    in the page. Shown only when scripts run (the "js" class of the head script, so nothing moves on load); without
+    them the page lists every tool as before. The count is written at build time, so the line keeps its height.
+    Needs toolList. -#}
+{%- set toolTotal = toolList | length %}
+<div class="shell tool-filter" role="search" data-tool-filter data-total="{{ '{n} tools' | t(lang) | replace('{n}', toolTotal) }}" data-count-label="{{ '{a} of {b} tools' | t(lang) }}" data-one-label="{{ '1 of {b} tools' | t(lang) }}">
+  <div class="filter-search tool-filter-field">
+    <label class="visually-hidden" for="tool-filter">{{ "Find a tool" | t(lang) }}</label>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <input id="tool-filter" type="search" placeholder="{{ 'Find a tool: name, topic or task' | t(lang) }}" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-describedby="tool-filter-count" data-tool-filter-input>
+    <button class="tool-filter-clear" type="button" aria-label="{{ 'Clear the search' | t(lang) }}" title="{{ 'Clear the search' | t(lang) }}" hidden data-tool-filter-clear><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button>
+  </div>
+  <p class="tool-filter-count" id="tool-filter-count" aria-live="polite" data-tool-filter-count>{{ '{n} tools' | t(lang) | replace('{n}', toolTotal) }}</p>
+</div>
+<div class="shell tool-filter-empty" hidden data-tool-filter-empty><p>{{ "No tool matches these words. Try one word of the name, or a topic such as hotel, safety or quality, or clear the search to see every role." | t(lang) }}</p></div>
