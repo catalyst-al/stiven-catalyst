@@ -7924,5 +7924,8 @@
   "Below benchmark": "Nën standard",
   "Benchmark": "Standardi",
   "Your work in this tool is kept on the page in another language: each language keeps its own copy.": "Puna jote në këtë mjet ruhet te faqja në një gjuhë tjetër: çdo gjuhë mban kopjen e vet.",
-  "Open it in {language}": "Hape në {language}"
+  "Open it in {language}": "Hape në {language}",
+  "Below Bird's base": "Nën bazën e Bird-it",
+  "this month; Bird found about {n} for each injury": "këtë muaj; Bird gjeti rreth {n} për çdo lëndim",
+  "All {n} in the log. Bird found about 1 serious injury for every 10 minor ones, 30 property-damage incidents and 600 near misses (1 : 10 : 30 : 600). This log has no property-damage type, so his 30 has no level here; unsafe acts and conditions lie below his base. A wide base is good news: the team reports what could have happened.": "Të gjitha {n} në regjistër. Bird gjeti për çdo lëndim të rëndë rreth 10 të lehta, 30 dëme materiale dhe 600 rreziqe të shmangura (1 : 10 : 30 : 600). Ky regjistër nuk ka lloj për dëmet materiale, ndaj 30 e tij nuk ka nivel këtu; veprimet dhe kushtet e pasigurta janë nën bazën e tij. Një bazë e gjerë është lajm i mirë: ekipi raporton atë që mund të kishte ndodhur."
 }

@@ -1633,7 +1633,7 @@
   "No rows found. Check the order: date, volume.": "Keine Zeilen gefunden. Prüfen Sie die Reihenfolge: Datum, Menge.",
   "Or paste from Excel: one row per day, date then volume": "Oder aus Excel einfügen: eine Zeile pro Tag, Datum, dann Menge",
   "The daily volumes do not cover every day with entries yet: {days} missing. Add them, or type the volume of the period.": "Die Tagesmengen decken noch nicht jeden Tag mit Einträgen ab: {days} fehlen. Ergänzen Sie sie oder geben Sie die Menge des Zeitraums ein.",
-  "The volume is the sum of the daily volumes of {days}.": "Die Menge ist die Summe der Tagesmengen von {days}.",
+  "The volume is the sum of the daily volumes of {days}.": "Die Menge ist die Summe der Tagesmengen ({days}).",
   "from the daily volumes: {n}": "aus den Tagesmengen: {n}",
   "per day": "pro Tag",
   "Share of routes that were late per {unit}. The dashed line is the average, the solid line the target; columns above it are red.": "Anteil verspäteter Touren pro {unit}. Die gestrichelte Linie ist der Durchschnitt, die durchgezogene das Ziel; Säulen darüber sind rot.",
@@ -7924,5 +7924,8 @@
   "Below benchmark": "Unter dem Richtwert",
   "Benchmark": "Richtwert",
   "Your work in this tool is kept on the page in another language: each language keeps its own copy.": "Ihre Arbeit in diesem Tool liegt auf der Seite in einer anderen Sprache: Jede Sprache hat ihre eigene Kopie.",
-  "Open it in {language}": "Auf {language} öffnen"
+  "Open it in {language}": "Auf {language} öffnen",
+  "Below Bird's base": "Unter Birds Basis",
+  "this month; Bird found about {n} for each injury": "in diesem Monat; Bird fand etwa {n} je Verletzung",
+  "All {n} in the log. Bird found about 1 serious injury for every 10 minor ones, 30 property-damage incidents and 600 near misses (1 : 10 : 30 : 600). This log has no property-damage type, so his 30 has no level here; unsafe acts and conditions lie below his base. A wide base is good news: the team reports what could have happened.": "Alle {n} im Protokoll. Bird fand auf 1 schwere Verletzung etwa 10 leichte, 30 Sachschäden und 600 Beinahe-Unfälle (1 : 10 : 30 : 600). Dieses Protokoll hat keinen Typ für Sachschäden, daher hat seine 30 hier keine eigene Stufe; unsichere Handlungen und Zustände liegen unter seiner Basis. Eine breite Basis ist eine gute Nachricht: Das Team meldet, was hätte passieren können."
 }
