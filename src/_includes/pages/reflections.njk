@@ -32,6 +32,8 @@
       <button type="button" class="button-secondary">{{ "Show more reflections" | t(lang) }}</button>
     </div>
     {% include "partials/filter-onward.njk" %}
+    {#- After the list, the other kind of reading, so the reader goes on without going back to the menu. #}
+    <p class="filter-cross"><a class="text-link" href="{{ '/insights.html' | local(lang) }}">{{ "On to the essays" | t(lang) }} <span aria-hidden="true">→</span></a></p>
     {%- endif %}
   </section>
 {% include "partials/newsletter.njk" %}
