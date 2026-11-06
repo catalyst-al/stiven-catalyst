@@ -33,8 +33,18 @@ te Nr. 89, një te Nr. 85 dhe një te Nr. 90. Burimet që u provuan e nuk u hap�
 | 98 | KPI | Prodhimi për orë: si bëhet shifra | OECD, Compendium of Productivity Indicators 2025; ILO (2008); Destatis (2026) |
 | 99 | Njerëzit | Ngritja dhe shpina: teknika nuk mjafton | Verbeek et al. (2011), Cochrane; Martimo et al. (2008), BMJ; EU-OSHA (2019); HSE; LasthandhabV |
 | 100 | Operacioni | Rrëshqitje, pengesa, rrëzime: aksidenti i zakonshëm | DGUV (2025); HSE (2025); Chang et al. (2016); Bell et al. (2019) |
+| 101 | Roli | Të dëgjosh: çfarë merr tjetri me vete | Kluger, Lehmann, Aguinis et al. (2024), Journal of Business and Psychology; Kriz, Kluger & Lyddy (2021); Itzchakov & Grau (2022) |
+| 102 | KPI | Orët shtesë: shifra që merr hua nga e nesërmja | IAB, Arbeitszeitrechnung (2026) dhe Aktueller Bericht 7/2014; Destatis (2026); ArbZG; Matre et al. (2021); Pega et al. (2021) |
+| 103 | Strategjia | Kurba e të mësuarit: çdo përsëritje numëron | Wright (1936); Nagy et al. (2013), PLOS ONE; Levitt, List & Syverson (NBER 2012); Benkard (NBER 1999) |
+| 104 | Njerëzit | Dikush për të folur: lidhja në punë | Gallup, State of the Global Workplace 2026; Holt-Lunstad, Smith & Layton (2010), PLOS Medicine; Gallup (2022, 2024); Sasaki et al. (2025) |
+| 105 | Operacioni | Mirëmbajtja që i përshtatet mënyrës si prishen gjërat | Nowlan & Heap (1978), RCM; NASA, RCM Guide (2008) |
+| 106 | AI | AI që shqyrton CV-të: testi dhe ligji | Wilson & Caliskan (arXiv, v3 2026, me korrigjimin e autorëve); Rregullorja (BE) 2024/1689 |
+| 107 | Roli | Lodhja nga vendimet: gjyqtarët e uritur | Danziger, Levav & Avnaim-Pesso (2011), PNAS; Glöckner (2016); përmes: Weinshall-Margel & Shapard (2011) dhe përgjigjja (2011) |
+| 108 | KPI | Vlerësimet online: sa vlen një yll | Luca (HBS 2016); Hu, Pavlou & Zhang (2007); Luca & Zervas (2016); Anderson (2012), Cornell |
+| 109 | Njerëzit | Kur klienti bëhet agresiv | HSE (2025); DGUV (2025); ILO C190; ESENER 2024; Arnetz et al. (2017); Geoffrion et al. (2020), Cochrane |
+| 110 | Operacioni | Pritja që ndien klienti | Maister (1985); Larson (1987), Operations Research; Katz & Martin (1989); Spechbach et al. (2019); HSE INDG69 |
 
-Tabelat e fakteve: `docs/revista/management-review-nr-81.md` … `nr-100.md`. Aty shkruhet çfarë u lexua e plotë, çfarë
+Tabelat e fakteve: `docs/revista/management-review-nr-81.md` … `nr-110.md`. Aty shkruhet çfarë u lexua e plotë, çfarë
 jo, dhe çdo shifër që u hoq sepse nuk u konfirmua.
 
 ## Lidhjet me faqen
@@ -53,3 +63,8 @@ Nr. 91–100 u shkruan më 3 nëntor 2026 me të njëjtën metodë. Vetëm një 
 Nr. 95); burimet që nuk u hapën të plota u lanë jashtë. Data online: 3 nëntor 2026. Numri 100 është i pari me emër
 skedari me tri shifra (`100.js`): `src/_data/weekly.js`, `scripts/online-dates.mjs` dhe `tests/weekly.test.cjs` i
 pranojnë dhe i rendisin sipas numrit.
+
+Nr. 101–110 u shkruan më 6 nëntor 2026 me të njëjtën metodë. Dy burime mbajnë "përmes": dy letrat e PNAS te Nr. 107,
+të lexuara vetëm në copa. Burimet që nuk u hapën të plota u lanë jashtë (p.sh. Dembe et al. 2005, Argote & Epple 1990,
+Surgeon General 2023, Buell & Norton 2011). Lajmi i Reuters për mjetin e rekrutimit të Amazon-it nuk hyri te Nr. 106:
+mbështetet te burime anonime dhe emri mund të prekë rregullin pa emra punëdhënësish. Data online: 6 nëntor 2026.
