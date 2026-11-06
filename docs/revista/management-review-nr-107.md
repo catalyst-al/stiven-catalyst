@@ -33,6 +33,12 @@ parashikim" (Glöckner e merr këtë rezultat vetëm me censurim dhe autokorrela
 përjashton" (Glöckner shkruan "if existing at all"); "kurba nuk rivizatohet" mbeti, sepse të dhënat nuk u ndanë kurrë
 dhe pikat e Figurës 1 nuk janë në tekst.
 
+Shënim i redaktorit (6 nëntor 2026): dy letrat e PNAS (Weinshall-Margel & Shapard 2011 dhe përgjigjja e Danziger et
+al. 2011) u lexuan vetëm si copa të kthyera nga WebFetch; teksti i plotë nuk u hap (PubMed Central ka vetëm PDF, pas
+një kontrolli kundër robotëve, dhe PNAS ktheu 403). Prandaj të dy burimet mbajnë `via` ("përmes copave të faqes në
+PubMed Central"), sipas metodës editoriale. Shifrat e tyre (15%, 35%, 67%, 39%, 227 vendime) mbeten ashtu siç janë
+cituar fjalë për fjalë te copat.
+
 ## Tabela e fakteve
 
 | Shifra ose fakti | Burimi | Statusi |
