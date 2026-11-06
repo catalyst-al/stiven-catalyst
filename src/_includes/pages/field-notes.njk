@@ -48,6 +48,7 @@
   <p class="weekly-shown" aria-live="polite"></p>
   <button type="button" class="button-secondary">{{ "Show more notes" | t(lang) }}</button>
 </div>
+{% include "partials/filter-onward.njk" %}
 </section>
 <script src="{{ '/js/filter.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/share.js' | assetUrl }}" defer></script>
