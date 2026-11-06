@@ -535,7 +535,13 @@ window.ToolKit = (() => {
       const to = addDays(next(key), -1);
       buckets.push(totalOf ? { key, to, count, total, value: total ? count / total : 0 } : { key, to, value: count });
     }
-    return { unit, buckets: buckets.slice(-maxBuckets), undated };
+    // The chart keeps the newest maxBuckets; what the whole trend adds up to (trendTotal) still counts every bucket,
+    // and hidden says how many earlier ones the chart leaves out (audit P2A-15: the total covered only the newest 60).
+    const shown = buckets.slice(-maxBuckets);
+    const whole = totalOf
+      ? { count: buckets.reduce((sum, b) => sum + b.count, 0), total: buckets.reduce((sum, b) => sum + b.total, 0) }
+      : { value: buckets.reduce((sum, b) => sum + b.value, 0) };
+    return { unit, buckets: shown, undated, hidden: buckets.length - shown.length, whole };
   };
   // The period of the same length just before a period: 8–14 Oct gives 1–7 Oct (days: 7).
   const daysBetween = (from, to) => Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 864e5);
@@ -547,6 +553,9 @@ window.ToolKit = (() => {
   // What a whole trend adds up to: with shares, its count over its total (the same as the dashed average); otherwise
   // the sum of its buckets. value is null for shares without any total.
   const trendTotal = (trend) => {
+    const whole = trend?.whole;
+    if (whole && "total" in whole) return { value: whole.total ? whole.count / whole.total : null, count: whole.count, total: whole.total };
+    if (whole) return { value: whole.value, count: null, total: null };
     const buckets = trend?.buckets || [];
     if (!buckets.some((b) => "total" in b)) return { value: buckets.reduce((sum, b) => sum + b.value, 0), count: null, total: null };
     const count = buckets.reduce((sum, b) => sum + b.count, 0);
@@ -675,7 +684,9 @@ window.ToolKit = (() => {
       svg.append(svgEl("line", { x1: left, x2: W - right, y1: y(target), y2: y(target), style: `stroke:${colors.target}`, "stroke-width": 2, "pointer-events": "none" }));
       svg.append(svgEl("text", { x: W - right - averageText.length * 7 - 18, y: 16, "text-anchor": "end", "font-size": 12, "font-weight": 700, style: `fill:${colors.target}` }, `${labels.targetLabel} ${format(target)}`));
     }
-    svg.append(svgEl("text", { x: left, y: 16, "font-size": 12, style: `fill:${colors.muted}` }, labels.unit));
+    // The chart shows the newest buckets only: it says so, so its average is not read as the whole period's.
+    const shownText = trend.hidden > 0 ? ` · ${tx("the last {n} of {m} shown", { n: int.format(buckets.length), m: int.format(buckets.length + trend.hidden) })}` : "";
+    svg.append(svgEl("text", { x: left, y: 16, "font-size": 12, style: `fill:${colors.muted}` }, `${labels.unit}${shownText}`));
     return svg;
   };
   const exportTrendSvg = (trend, labels) => {

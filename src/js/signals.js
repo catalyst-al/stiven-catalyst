@@ -249,8 +249,9 @@
     const goal = own > 0 ? { value: own / 100, source: "tool" } : Number.isFinite(targets.ontime) && targets.ontime > 0 ? { value: targets.ontime / 100, source: "workplace" } : null;
     const late = partial
       ? { tool: "delay-analyzer", key: "delay-analyzer:late-count", kind: "c", better: "down", unit: "count", points: dates.length ? dayRange(dates[0], dates.at(-1)).map((date) => ({ date, c: days.get(date)?.late || 0 })) : [], target: null, source: "", partial: true }
-      // The on-time target is a floor for the on-time share, so a ceiling of 1 − target for the late share.
-      : { tool: "delay-analyzer", key: "delay-analyzer:late", kind: "p", better: "down", unit: "share", points: dates.map((date) => ({ date, d: days.get(date).late, n: days.get(date).routes })), target: goal && goal.value < 1 ? 1 - goal.value : null, onTime: goal?.value ?? null, source: goal?.source || "" };
+      // The on-time target is a floor for the on-time share, so a ceiling of 1 − target for the late share: 0 for a target
+      // of 100 %, which every late route misses (audit P2A-15: it was dropped).
+      : { tool: "delay-analyzer", key: "delay-analyzer:late", kind: "p", better: "down", unit: "share", points: dates.map((date) => ({ date, d: days.get(date).late, n: days.get(date).routes })), target: goal && goal.value <= 1 ? 1 - goal.value : null, onTime: goal?.value ?? null, source: goal?.source || "" };
     const minutes = { tool: "delay-analyzer", key: "delay-analyzer:minutes", kind: "imr", better: "down", unit: "minutes", points: dates.filter((date) => days.get(date).late > 0).map((date) => ({ date, value: days.get(date).minutes / days.get(date).late, late: days.get(date).late })), target: null, source: "" };
     return [late, minutes];
   };

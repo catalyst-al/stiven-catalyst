@@ -21,9 +21,11 @@
     return list;
   };
   const sum = (list) => list.reduce((total, value) => total + value, 0);
+  // A target typed as a per cent; 100 % is a target too (every route on time), as in the Daily Board, Signals and the
+  // Ops Report (audit P2A-15: it was ignored here).
   const share = (value) => {
     const number = Number(String(value ?? "").replace(",", ".")) / 100;
-    return number > 0 && number < 1 ? number : null;
+    return number > 0 && number <= 1 ? number : null;
   };
 
   // One KPI over the slots of the period. counts are per slot; totals are per slot when the KPI is a share of something

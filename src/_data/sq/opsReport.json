@@ -110,7 +110,7 @@
     "adr": { "label": "ADR", "noun": "ADR" },
     "revpar": { "label": "RevPAR", "noun": "RevPAR" },
     "lostLogged": { "label": "Sende të regjistruara", "noun": "sendet e gjetura të regjistruara" },
-    "lostReturned": { "label": "Kthyer te pronari", "noun": "pjesa e sendeve të kthyera te pronari" },
+    "lostReturned": { "label": "Kthyer brenda 3 ditëve", "noun": "pjesa e sendeve të kthyera te pronari brenda 3 ditëve" },
     "lostOver": { "label": "Përtej afatit të ruajtjes", "noun": "sendet përtej afatit të ruajtjes" },
     "firstPass": { "label": "Kalimi herën e parë", "noun": "kalimi herën e parë i dhomave" },
     "inspections": { "label": "Inspektime dhomash", "noun": "inspektimet e dhomave" },
@@ -128,7 +128,7 @@
     "parts": {
       "lostFound": {
         "logged": { "one": "U regjistrua një send i gjetur ({before} në periudhën para).", "many": "U regjistruan {n} sende të gjetura ({before} në periudhën para)." },
-        "returned": "Kthyer te pronari deri në fund të periudhës: {trend}.",
+        "returned": "Kthyer te pronari brenda {days} ditëve nga gjetja (sende të gjetura të paktën {days} ditë para fundit): {trend}.",
         "over": { "one": "Një send i hapur e ka kaluar afatin e ruajtjes: vendos për të tani.", "many": "{n} sende të hapura e kanë kaluar afatin e ruajtjes: vendos për to tani." },
         "overNone": "Asnjë send i hapur nuk e ka kaluar afatin e ruajtjes."
       },

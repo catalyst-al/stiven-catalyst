@@ -100,6 +100,15 @@ test('targets: up, down, exactly on target, and no target', () => {
   assert.equal(C.targetValue(kpi.onTime, '0.98'), 0.98);
   assert.equal(C.targetValue(kpi.incomplete, '<=0.8%'), 0.008);
   assert.equal(C.targetValue(kpi.loading, '20 min'), 20);
+  // Excel keeps 0.8% as 0.008: a bare number up to 1 stays a share. For a rate where less is better, "0.8" is then
+  // 80 %, which the import names as doubtful (audit P2A-15); 0.008 and "0.8%" are not.
+  assert.equal(C.targetValue(kpi.incomplete, '0.008'), 0.008);
+  assert.equal(C.doubtfulTarget(kpi.incomplete, '0.8', C.targetValue(kpi.incomplete, '0.8')), true);
+  assert.equal(C.doubtfulTarget(kpi.incomplete, '0.008', 0.008), false);
+  assert.equal(C.doubtfulTarget(kpi.incomplete, '0.8%', 0.008), false);
+  assert.equal(C.doubtfulTarget(kpi.onTime, '0.95', 0.95), false, 'more is better: 95 % is a normal target');
+  const doubted = C.readSheets([{ name: 'TARGETS', rows: [['Metric', 'Target'], ['Incomplete Rate', '0.8'], ['Damage Rate', '0.8%']], hidden: false }]);
+  assert.deepEqual(plain(doubted.targetDoubts), [{ kpi: 'incomplete', raw: '0.8', value: 0.8 }]);
 });
 
 test('route risk follows the workbook points and names each reason', () => {
@@ -108,6 +117,9 @@ test('route risk follows the workbook points and names each reason', () => {
   assert.equal(risk.level, 'critical');
   assert.deepEqual(plain(risk.reasons.map(([kind]) => kind)), ['loading', 'late', 'scan', 'gate', 'bags', 'vest']);
   assert.equal(C.routeRisk({ Loading_Time_Min: 30 }, { loadingTarget: null }).score, 0);
+  // Late is after the late limit of the settings, the same as the Late Route Rate (audit P2A-15: a fixed 10 minutes).
+  assert.equal(C.routeRisk({ Departure_Delay_Min: 8 }, { lateMinutes: 5 }).score, 20);
+  assert.equal(C.routeRisk({ Departure_Delay_Min: 8 }, { lateMinutes: 15 }).score, 0);
 });
 
 test('ISO weeks across the year boundary', () => {
@@ -234,8 +246,10 @@ test('deep dive: a row without a valid outcome is left out, never a success or a
   assert.deepEqual([C.deepAggregate(routes, metric('loading'), deepSettings).n, C.deepAggregate(routes, metric('loading'), deepSettings).k], [2, 1]);
   assert.deepEqual([C.deepAggregate(routes, metric('departure'), deepSettings).n, C.deepAggregate(routes, metric('departure'), deepSettings).k], [2, 1]);
   assert.deepEqual([C.deepAggregate(routes, metric('safety'), deepSettings).n, C.deepAggregate(routes, metric('safety'), deepSettings).k], [2, 1]);
-  // Without an approved loading target the threshold is 20 minutes.
-  assert.equal(C.deepAggregate(routes, metric('loading'), { ...deepSettings, loadingTarget: null }).k, 1);
+  // Without an approved loading target nothing is over it: the page never invents a threshold (audit P2A-15: it was
+  // 20 minutes).
+  const noTarget = C.deepAggregate(routes, metric('loading'), { ...deepSettings, loadingTarget: null });
+  assert.deepEqual([noTarget.n, noTarget.k, noTarget.rate], [0, 0, null]);
 });
 
 test('deep dive: count, share and rate are three numbers, and "vs rest" needs the sample floor on both sides', () => {

@@ -150,6 +150,12 @@ test('quality and delivery count as Shift Pulse counts the logs: units, the rate
   close(d.onTime, p.onTime, 'on time');
   assert.equal(d.minutes, 27.5);
   close(d.target, 0.95, 'target');
+  // 100 % is a target, here as in Shift Pulse, Signals and the Daily Board (audit P2A-15); past it is none.
+  assert.equal(M.percent('100'), 1);
+  assert.equal(M.percent('101'), null);
+  const all = { ...delay, target: '100' };
+  assert.equal(plain(M.delivery(all, range)).target, 1);
+  assert.equal(plain(PulseMath.compute({ damage: { rows: [] }, incomplete: { rows: [] }, delay: all }, range).delay).lateTarget, 0);
   assert.deepEqual(d.series.slice(0, 3), [0.5, 0.5, null]);
   assert.equal(M.minutesLate('23:50', '00:20'), PulseMath.minutesLate('23:50', '00:20'));
   const partial = plain(M.delivery(delay, range, { partial: true }));
@@ -275,8 +281,12 @@ test('Lost & Found counts as the register does: logged in the period, back with 
   ];
   const lf = plain(M.lostFound({ rows }, range, tools.lostFound));
   assert.equal(lf.logged, 3, 'three found in the period');
-  assert.equal(lf.returned, 1, 'the bag went back after the end, so it does not count yet');
-  close(lf.returnRate, 1 / 3, 'one of three back with its owner');
+  // Returned within 3 days, over the items found at least 3 days before the end (audit P2A-15): the phone (2 days) and
+  // the bag (8 days, after the end) are old enough; the coat of the 16th is too new to tell.
+  assert.equal(lf.eligible, 2);
+  assert.equal(lf.returned, 1, 'the phone; the bag went back after the end and after 3 days');
+  close(lf.returnRate, 1 / 2, 'one of two old enough is back with its owner');
+  assert.deepEqual(plain(w.LostFoundMath.returnedWithin(rows.slice(0, 3), '2026-10-25')), { days: 3, eligible: 3, returned: 1, young: 0, rate: 1 / 3 });
   assert.equal(lf.over, 3, 'the passport (7 days), the coat (90 days) and the keys, decided on only after the end');
   // The register itself, on the last day of the period with the steps known by then, says the same.
   const L = w.LostFoundMath;

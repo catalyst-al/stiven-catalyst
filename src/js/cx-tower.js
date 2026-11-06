@@ -241,7 +241,7 @@
     });
     // One target table only: a sheet named for targets beats a KPI dictionary.
     targetTables.sort((a, b) => /target|ziel|objektiv/i.test(b.sheet) - /target|ziel|objektiv/i.test(a.sheet));
-    return { found, targets: targetTables[0]?.t || null, targetSheet: targetTables[0]?.sheet || "" };
+    return { found, targets: targetTables[0]?.t || null, targetSheet: targetTables[0]?.sheet || "", targetDoubts: targetTables[0]?.t?.doubts || [] };
   };
 
   // A "Metric | Target" table (the TARGETS sheet of the workbook) to target values.
@@ -252,15 +252,20 @@
     const metricCol = header.findIndex((h) => /^(metric|kpi|kennzahl|treguesi)$/.test(h));
     const targetCol = header.findIndex((h) => /^(target|ziel|objektivi)$/.test(h));
     const out = {};
+    const doubts = [];
     rows.slice(headerRow + 1).forEach((row) => {
       const kpi = KPIS.find((k) => [k.label, ...k.aliases].some((name) => fold(name) === fold(row[metricCol])));
       if (!kpi) return;
       const raw = String(row[targetCol] ?? "").trim();
       out[kpi.id] = raw ? targetValue(kpi, raw) : null;
+      if (raw && doubtfulTarget(kpi, raw, out[kpi.id])) doubts.push({ kpi: kpi.id, raw, value: out[kpi.id] });
     });
+    if (doubts.length) Object.defineProperty(out, "doubts", { value: doubts, enumerable: false });
     return Object.keys(out).length ? out : null;
   };
-  // "98%", "0.98" and "98" all mean 98% for a rate; minutes and per-1,000 stay as written.
+  // "98%", "0.98" and "98" all mean 98% for a rate; minutes and per-1,000 stay as written. Excel keeps a cell shown as
+  // 0.8% as 0.008, so a bare number up to 1 stays a share. For a rate where less is better that makes "0.8" 80 %:
+  // doubtfulTarget names it, and the import says how it was read (audit P2A-15).
   const targetValue = (kpi, raw) => {
     const text = String(raw).replace(/[<>=≤≥\s]|min|‰/gi, "");
     const n = parseNumber(text.replace("%", ""));
@@ -268,6 +273,8 @@
     if (kpi.unit !== "pct") return n;
     return text.includes("%") || n > 1 ? n / 100 : n;
   };
+  // A target of a rate where less is better, written without "%", that reads as 10 % or more: perhaps meant as a per cent.
+  const doubtfulTarget = (kpi, raw, value) => kpi.unit === "pct" && kpi.dir === "down" && !String(raw).includes("%") && value >= 0.1;
 
   // ---------- KPIs ----------
   const KPIS = [
@@ -358,15 +365,15 @@
     return total / d.length;
   };
 
-  // Route risk, as in the workbook: loading over target 25, leaving over 10 min
-  // late 20, scan compliance under 98% 15, gate open 15, cold scan missed 10,
-  // yard speed breach 10 each, missing bag 5 each; capped at 100.
+  // Route risk, as in the workbook: loading over target 25, leaving later than the late limit (settings.lateMinutes,
+  // the same as the Late Route Rate; audit P2A-15: it was a fixed 10 minutes) 20, scan compliance under 98% 15, gate
+  // open 15, cold scan missed 10, yard speed breach 10 each, missing bag 5 each; capped at 100.
   const routeRisk = (row, settings) => {
     const reasons = [];
     let score = 0;
     const add = (points, reason) => { score += points; reasons.push(reason); };
     if (row.Loading_Time_Min != null && settings.loadingTarget != null && row.Loading_Time_Min > settings.loadingTarget) add(25, ["loading", row.Loading_Time_Min]);
-    if (row.Departure_Delay_Min > 10) add(20, ["late", row.Departure_Delay_Min]);
+    if (row.Departure_Delay_Min > (Number.isFinite(settings.lateMinutes) ? settings.lateMinutes : 5)) add(20, ["late", row.Departure_Delay_Min]);
     if (row.Scan_Compliance_Pct != null && row.Scan_Compliance_Pct < 0.98) add(15, ["scan", row.Scan_Compliance_Pct]);
     if (row.Gate_Closed_Compliant === 0) add(15, ["gate"]);
     if (row.Cold_Scan_Compliant === 0) add(10, ["cold"]);
@@ -536,7 +543,7 @@
     { id: "notification", label: "Late deliveries without a message", grain: "deliveries", kpi: "notification", inverse: true, incident: /communicat|notif|benachricht|kommunikat|njoftim|komunikim/ },
     { id: "complaint", label: "Customer complaints", grain: "deliveries", field: "Complaint", fail: 1, kpi: null, incident: null },
     { id: "imperfect", label: "Deliveries that were not perfect", grain: "deliveries", kpi: "perfect", inverse: true, incident: null },
-    { id: "loading", label: "Routes loading over target", grain: "routes", field: "Loading_Time_Min", over: (settings) => (settings.loadingTarget == null ? 20 : settings.loadingTarget), kpi: null, incident: /loading|ladung|belad|ngarkim/ },
+    { id: "loading", label: "Routes loading over target", grain: "routes", field: "Loading_Time_Min", over: (settings) => settings.loadingTarget ?? null, kpi: null, incident: /loading|ladung|belad|ngarkim/ },
     { id: "departure", label: "Routes leaving late", grain: "routes", field: "Departure_Delay_Min", over: (settings) => settings.lateMinutes, kpi: "lateRoute", incident: /delay|\blate\b|departure|abfahrt|verspat|nisj|vones/ },
     { id: "missingBags", label: "Routes with missing bags", grain: "routes", field: "Missing_Bag_Events", over: () => 0, kpi: null, incident: /incomplete|missing bag|\bbag|tasche|\bcant|paplot|mungon/ },
     { id: "gate", label: "Gate left open", grain: "routes", field: "Gate_Closed_Compliant", fail: 0, kpi: "gateClose", inverse: true, incident: /\bgate|\btor\b|\bport/ },
@@ -563,7 +570,11 @@
     }
     const value = row[metric.field];
     if (value == null) return null;
-    if (metric.over) return value > metric.over(settings) ? 1 : 0;
+    if (metric.over) {
+      // No limit, no failure: loading over target needs a loading target (audit P2A-15: it fell back to 20 minutes).
+      const limit = metric.over(settings);
+      return limit == null ? null : value > limit ? 1 : 0;
+    }
     return value === metric.fail ? 1 : 0;
   };
   // The eligible rows, the affected ones among them, and the rate: numerator over its own denominator.
@@ -724,7 +735,7 @@
     return { draft: next, filled, kept };
   };
 
-  window.CxTower = { TABLES, FIELDS, KPIS, DEFAULT_TARGETS, EXAMPLE_TARGETS, isDelivered, bin, minutes, recognise, toRecords, readSheets, readTargets, targetValue, computeKpis, perfectOf, judge, cxScore, routeRisk, isoWeek, weekMonday, addDays, actionStatus, verification, incidentOpen, isRepeat, severityRank, example,
+  window.CxTower = { TABLES, FIELDS, KPIS, DEFAULT_TARGETS, EXAMPLE_TARGETS, isDelivered, bin, minutes, recognise, toRecords, readSheets, readTargets, targetValue, doubtfulTarget, computeKpis, perfectOf, judge, cxScore, routeRisk, isoWeek, weekMonday, addDays, actionStatus, verification, incidentOpen, isRepeat, severityRank, example,
     DEEP, DEEP_DIMS, deepOutcome, deepAggregate, deepSegments, deepWeekly, priorWindow, deepIncidents, deepKey, CASE_FIELDS, CASE_STATUS, ROOT_STATUS, caseCheck, capaReady, caseToAction, caseRows, weekRange, beforeWindow, afterWindow, verdict, caseToTracker, applyWhys };
 })();
 
@@ -931,7 +942,7 @@
         if (/\.xlsx$/i.test(file.name)) sheets = await P.readWorkbook(await file.arrayBuffer(), window.CvImport.unzip, LANG !== "en");
         else if (/\.xls$/i.test(file.name)) { report.push(tx("{name}: old Excel files (.xls) cannot be read. Save as .xlsx or CSV.", { name: file.name })); continue; }
         else sheets = [{ name: file.name, hidden: false, rows: parseRows(P.decode(await file.arrayBuffer()), { keepBlank: true }) }];
-        const { found, targets, targetSheet } = C.readSheets(sheets);
+        const { found, targets, targetSheet, targetDoubts } = C.readSheets(sheets);
         if (!found.length && !targets) { report.push(tx("{name}: no known table found. Check the column names against the templates.", { name: file.name })); continue; }
         found.forEach((part) => {
           const records = part.name === "actions" ? part.records.filter((row) => row.Action || row.Problem).map(normaliseAction) : part.records;
@@ -953,6 +964,7 @@
         if (targets) {
           Object.assign(state.targets, targets);
           report.push(tx("Targets taken from {sheet}.", { sheet: targetSheet || file.name }));
+          targetDoubts.forEach((d) => report.push(tx("{kpi}: the target {raw} was read as {value}. If you meant {raw} %, write {raw}% in the sheet.", { kpi: label(KPI_BY[d.kpi]), raw: d.raw, value: pct(d.value, 0) })));
         }
       } catch (error) {
         report.push(error?.message === "zip-size"
@@ -1413,7 +1425,7 @@
     // Risk queue
     const risk = r.map((row) => ({ row, ...C.routeRisk(row, settings) })).filter((x) => x.score >= 25 || x.reasons.some(([kind]) => ["vest", "direction", "speed"].includes(kind)))
       .sort((a, b) => b.score - a.score || (b.row.Date || "").localeCompare(a.row.Date || ""));
-    const box = section(tx("Route risk queue"), tx("Points: loading over target 25, leaving over 10 min late 20, scans under 98% 15, gate open 15, cold scan missed 10, each yard speed breach 10, each missing bag 5. Critical from 50, watch from 25."));
+    const box = section(tx("Route risk queue"), tx("Points: loading over target 25, leaving over {m} min late 20, scans under 98% 15, gate open 15, cold scan missed 10, each yard speed breach 10, each missing bag 5. Critical from 50, watch from 25.", { m: state.settings.lateMinutes }));
     if (!risk.length) box.append(el("p", "dl-panel-note", tx("No route reaches 25 points in this selection.")));
     else {
       box.append(table([tx("Date"), tx("Route"), tx("Partner"), tx("Driver"), tx("Shift"), { text: tx("Points"), className: "num" }, tx("Level"), tx("Why")], risk.slice(0, 40).map(({ row, score, level, reasons }) => {
@@ -2055,7 +2067,10 @@
   const deepPoints = (v) => (v == null ? "–" : `${v > 0 ? "+" : v < 0 ? "−" : "±"}${num(Math.abs(v) * 100, 2)} ${tx("pts")}`);
   const grainWords = (metric, n) => (metric.grain === "routes" ? tx("{n} routes", { n: int.format(n) }) : tx("{n} deliveries", { n: int.format(n) }));
   const deepLabel = (metric) => {
-    if (metric.id === "loading") return tx("Routes loading over {m} min", { m: num(metric.over(settingsFor()), settingsFor().loadingTarget % 1 ? 1 : 0) });
+    if (metric.id === "loading") {
+      const limit = metric.over(settingsFor());
+      return limit == null ? tx("Routes loading over target (set a loading target first)") : tx("Routes loading over {m} min", { m: num(limit, limit % 1 ? 1 : 0) });
+    }
     if (metric.id === "departure") return tx("Routes leaving over {m} min late", { m: state.settings.lateMinutes });
     return tx(metric.label);
   };

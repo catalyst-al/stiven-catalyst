@@ -78,8 +78,13 @@
     };
   };
 
-  // Bird's pyramid, top to bottom, next to the 1 : 10 : 30 : 600 of his study.
-  const BIRD = [1, 10, 30, 600];
+  // Bird's pyramid, top to bottom, next to the 1 : 10 : 30 : 600 of his study (1969): 1 serious injury, 10 minor
+  // injuries, 30 property-damage incidents, 600 incidents with no injury or damage. This log has no property-damage
+  // type, so Bird's 30 has no level of its own; near misses stand beside his 600; unsafe acts and conditions are below
+  // his base and have no number of his (null). Audit P2A-15: they were paired with 30 and 600.
+  const BIRD = [1, 10, 600, null];
+  // Bird's 600 incidents without injury for his 1 + 10 injuries: about 55 for each.
+  const BIRD_NEAR_MISS_PER_INJURY = 600 / 11;
   const pyramid = (rows) => {
     const c = counts(rows);
     return [
@@ -148,7 +153,7 @@
     return { date, shift: s(row.shift), type: row.type, area: s(row.area), what: s(row.what), cause: s(row.cause), severity: severityOf(row.severity), action: s(row.action), owner: s(row.owner), done: row.done === true };
   };
 
-  window.SafetyMath = { TYPES, ACCIDENTS, RED, AMBER, BIRD, crossLayout, monthDays, addMonths, monthRows, counts, dayState, daysSince, rates, pyramid, talkIndex, typeOf, importRows, exampleRows, cleanRow };
+  window.SafetyMath = { TYPES, ACCIDENTS, RED, AMBER, BIRD, BIRD_NEAR_MISS_PER_INJURY, crossLayout, monthDays, addMonths, monthRows, counts, dayState, daysSince, rates, pyramid, talkIndex, typeOf, importRows, exampleRows, cleanRow };
 
   // The page.
   const dataEl = document.getElementById("safety-cross-data");
@@ -276,8 +281,9 @@
       const lines = wrap(names[level.key]);
       const first = ly - (lines.length - 1) * 8 - 4;
       lines.forEach((line, n) => g.append(svg("text", { x: labelX + 56, y: first + n * 16, "font-size": 13, "font-weight": 700, fill: Chart.C.text }, line)));
-      g.append(svg("text", { x: labelX + 56, y: first + lines.length * 16, "font-size": 12, fill: Chart.C.muted }, tx("Bird: {n}", { n: int.format(level.bird) })));
-      g.setAttribute("data-tip", `${names[level.key]}: ${int.format(level.n)}\n${tx("Bird: {n}", { n: int.format(level.bird) })}`);
+      const birdText = level.bird === null ? tx("Below Bird's base") : tx("Bird: {n}", { n: int.format(level.bird) });
+      g.append(svg("text", { x: labelX + 56, y: first + lines.length * 16, "font-size": 12, fill: Chart.C.muted }, birdText));
+      g.setAttribute("data-tip", `${names[level.key]}: ${int.format(level.n)}\n${birdText}`);
       chart.append(g);
     });
     return chart;
@@ -342,7 +348,7 @@
     M.TYPES.forEach((type) => { if (r.c[type]) lines.push(`- ${typeName(type)}: ${int.format(r.c[type])}`); });
     lines.push(`${tx("Near misses reported")}: ${int.format(r.c["near-miss"])}${r.nearMissTarget ? ` (${tx("Target")} ${int.format(r.nearMissTarget)})` : ""}`);
     lines.push("", `${tx("Safety pyramid")} (${tx("all {n} in the log", { n: events(state.rows.length) })}):`);
-    r.pyramid.forEach((level) => lines.push(`- ${data.pyramid[level.key]}: ${int.format(level.n)} (Bird ${int.format(level.bird)})`));
+    r.pyramid.forEach((level) => lines.push(`- ${data.pyramid[level.key]}: ${int.format(level.n)} (${level.bird === null ? tx("Below Bird's base") : `Bird ${int.format(level.bird)}`})`));
     if (r.top) {
       lines.push("", `${tx("Start here")}: ${problemText(r)}`);
       const advice = data.advice[r.top.key];
@@ -480,7 +486,7 @@
       : stat(tx("Days since the last accident"), int.format(r.since), sinceNote));
     stats.append(stat("LTIFR", r.hours ? num(r.rate.ltifr, 2) : "–", r.hours ? tx("lost-time accidents per million hours") : tx("add the hours worked")));
     stats.append(stat("TRIR", r.hours ? num(r.rate.trir, 2) : "–", r.hours ? tx("recordable accidents per 200,000 hours") : tx("add the hours worked")));
-    stats.append(stat(tx("Near misses per accident"), r.rate.nearMissPerAccident === null ? int.format(r.c["near-miss"]) : num(r.rate.nearMissPerAccident, 1), r.rate.nearMissPerAccident === null ? tx("near misses, no accident this month") : tx("this month; Bird found 30 or more")));
+    stats.append(stat(tx("Near misses per accident"), r.rate.nearMissPerAccident === null ? int.format(r.c["near-miss"]) : num(r.rate.nearMissPerAccident, 1), r.rate.nearMissPerAccident === null ? tx("near misses, no accident this month") : tx("this month; Bird found about {n} for each injury", { n: int.format(Math.round(M.BIRD_NEAR_MISS_PER_INJURY)) })));
     stats.append(stat(tx("Near misses reported"), r.nearMissTarget ? tx("{a} of {b}", { a: int.format(r.c["near-miss"]), b: int.format(r.nearMissTarget) }) : int.format(r.c["near-miss"]), r.nearMissTarget ? (r.c["near-miss"] >= r.nearMissTarget ? tx("target reached") : tx("{n} to go this month", { n: int.format(r.nearMissTarget - r.c["near-miss"]) })) : tx("this month")));
 
     // The cross (or the calendar) and the talk of the day, side by side where there is room.
@@ -517,7 +523,7 @@
       tip: `${typeName(type)}: ${int.format(r.c[type])}`,
     })), { title: `${tx("Events this month by type")}: ${monthName(r.ym)}`, yMax: Chart.niceMax(Math.max(4, ...Object.values(r.c))), format: (v) => int.format(v) }), { fileName: `safety-events-${r.ym}` }));
 
-    const pyramid = panel(tx("Safety pyramid"), tx("All {n} in the log. Bird found about 1 serious injury for every 10 minor ones, 30 property-damage incidents and 600 near misses (1 : 10 : 30 : 600). A wide base is good news: the team reports what could have happened.", { n: events(state.rows.length) }));
+    const pyramid = panel(tx("Safety pyramid"), tx("All {n} in the log. Bird found about 1 serious injury for every 10 minor ones, 30 property-damage incidents and 600 near misses (1 : 10 : 30 : 600). This log has no property-damage type, so his 30 has no level here; unsafe acts and conditions lie below his base. A wide base is good news: the team reports what could have happened.", { n: events(state.rows.length) }));
     pyramid.append(Chart.figure(pyramidChart(r.pyramid), { fileName: "safety-pyramid" }));
 
     const share = (item, total) => [int.format(item.value), ` · ${pct(item.value / total, 0)}${item.serious ? ` · ${tx("{n} serious", { n: int.format(item.serious) })}` : ""}`];
