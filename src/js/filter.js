@@ -20,6 +20,10 @@ document.querySelectorAll("[data-new-since]").forEach((badge) => {
   const months = [...controls.querySelectorAll("[data-filter-month]")];
   const page = Number(controls.dataset.page) || Infinity;
   const more = list.querySelector("[data-filter-more]");
+  // Under the list: once the month's last item is shown, the month before it (after the oldest, the newest again).
+  const onward = list.querySelector("[data-filter-onward]");
+  const monthName = (button) => (button.firstChild?.textContent || "").trim();
+  let onwardTo = null;
 
   const params = new URLSearchParams(location.search);
   let topic = chips.some((chip) => chip.dataset.topic === params.get("topic")) ? params.get("topic") : "";
@@ -61,6 +65,15 @@ document.querySelectorAll("[data-new-since]").forEach((badge) => {
     if (more) {
       more.hidden = visible.size >= matches.length;
       more.querySelector(".weekly-shown").textContent = countLabel.replace("{a}", visible.size).replace("{b}", matches.length);
+    }
+    if (onward) {
+      const index = months.findIndex((button) => button.dataset.filterMonth === month);
+      onwardTo = months[index + 1] || (index > 0 ? months[0] : null);
+      onward.hidden = !onwardTo || Boolean(filtered) || visible.size < matches.length;
+      if (onwardTo) {
+        const label = (months[index + 1] ? onward.dataset.nextLabel : onward.dataset.firstLabel) || "{month}";
+        onward.querySelector("[data-filter-onward-label]").textContent = label.replace("{month}", monthName(onwardTo));
+      }
     }
 
     // Keep the current filter in the address so it can be shared.
@@ -108,6 +121,15 @@ document.querySelectorAll("[data-new-since]").forEach((badge) => {
     // Keyboard and screen-reader users go on from the first row that just appeared.
     const first = items.filter((item) => !item.hidden)[before];
     (first?.matches("a") ? first : first?.querySelector("a"))?.focus();
+  });
+  onward?.querySelector("button").addEventListener("click", () => {
+    if (!onwardTo) return;
+    month = onwardTo.dataset.filterMonth;
+    choose(true);
+    // Back up to the top of the list, where the month starts, and on from its first item.
+    controls.scrollIntoView({ block: "start", behavior: document.documentElement.dataset.motion === "paused" ? "auto" : "smooth" });
+    const first = items.find((item) => !item.hidden);
+    (first?.matches("a") ? first : first?.querySelector("a, button"))?.focus({ preventScroll: true });
   });
   chips.forEach((chip) => chip.addEventListener("click", () => {
     topic = chip.dataset.topic;

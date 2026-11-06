@@ -31,6 +31,7 @@
       <p class="weekly-shown" aria-live="polite"></p>
       <button type="button" class="button-secondary">{{ "Show more reflections" | t(lang) }}</button>
     </div>
+    {% include "partials/filter-onward.njk" %}
     {%- endif %}
   </section>
 {% include "partials/newsletter.njk" %}

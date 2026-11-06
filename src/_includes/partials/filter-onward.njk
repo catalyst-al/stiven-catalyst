@@ -1,0 +1,8 @@
+{#- Under a list split into months (field notes, reflections, essays): once the month's last item is shown, the way on
+    to the month before it, so the reader does not have to go back up to the month buttons; after the oldest month,
+    back to the newest. js/filter.js fills in the month and shows it; without the script it stays hidden. -#}
+{%- if filterMonths and filterMonths.length > 1 %}
+<div class="filter-onward" data-filter-onward data-next-label="{{ 'Continue with {month}' | t(lang) }}" data-first-label="{{ 'Back to {month}' | t(lang) }}" hidden>
+  <button type="button" class="button-primary"><span data-filter-onward-label></span> <span aria-hidden="true">→</span></button>
+</div>
+{%- endif %}

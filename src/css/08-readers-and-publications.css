@@ -941,6 +941,10 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .weekly-more { display: grid; justify-items: center; gap: 14px; margin-top: 48px; }
 .weekly-more[hidden] { display: none; }
 .weekly-shown { margin: 0; color: var(--muted); font-size: 14px; }
+/* Under a list split into months: the way on to the month before (partials/filter-onward.njk, js/filter.js). */
+.filter-onward { display: flex; justify-content: center; margin-top: 48px; }
+.filter-onward[hidden] { display: none; }
+.weekly-more:not([hidden]) + .filter-onward { margin-top: 20px; }
 .weekly-special { border-top: 1px solid var(--line); }
 
 /* The operational treatise: its long name as a serif title on the list of volumes, the three layers every chapter is

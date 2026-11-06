@@ -82,6 +82,7 @@
       <p class="weekly-shown" aria-live="polite"></p>
       <button type="button" class="button-secondary">{{ "Show more essays" | t(lang) }}</button>
     </div>
+    {% include "partials/filter-onward.njk" %}
   </section>
 {% include "partials/newsletter.njk" %}
 <script src="{{ '/js/filter.js' | assetUrl }}" defer></script>
