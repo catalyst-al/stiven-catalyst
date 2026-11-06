@@ -102,3 +102,35 @@ test('the cover picture of an issue carries its size', { skip: !hasSite }, () =>
     for (const img of covers) assert.match(img, / width="\d+" height="\d+"/, `${file}: ${img}`);
   }
 });
+
+test('under a list split into months, the end of a month leads on to the month before, and the oldest back to the newest', () => {
+  const cards = (month, n) => Array.from({ length: n }, (_, i) => `<article data-filter-item data-topic="" data-month="${month}"><blockquote>${month} ${i}</blockquote><button>Copy</button></article>`).join('');
+  const dom = new JSDOM(`<body><section data-filter-list><div data-filter-controls data-count-label="{a} of {b}" data-page="2">
+    <button data-filter-month="2026-10">October 2026<span>3</span></button><button data-filter-month="2026-09">September 2026<span>1</span></button>
+    <input data-filter-search><span data-filter-count></span></div>
+    ${cards('2026-10', 3)}${cards('2026-09', 1)}
+    <p data-filter-empty hidden>Nothing</p>
+    <div data-filter-more hidden><p class="weekly-shown"></p><button>More</button></div>
+    <div data-filter-onward data-next-label="Continue with {month}" data-first-label="Back to {month}" hidden><button><span data-filter-onward-label></span></button></div>
+    </section></body>`, { url: 'https://example.test/field-notes.html', runScripts: 'outside-only', pretendToBeVisual: true });
+  const w = dom.window;
+  w.Element.prototype.scrollIntoView = () => {};
+  w.eval(fs.readFileSync('src/js/filter.js', 'utf8'));
+  const d = w.document;
+  const onward = d.querySelector('[data-filter-onward]');
+  const shown = () => [...d.querySelectorAll('[data-filter-item]')].filter((item) => !item.hidden).map((item) => item.dataset.month);
+  assert.equal(onward.hidden, true, 'hidden while the month has more to show');
+  d.querySelector('[data-filter-more] button').click();
+  assert.equal(onward.hidden, false, 'shown once the whole month is on the page');
+  assert.equal(onward.textContent.trim(), 'Continue with September 2026');
+  onward.querySelector('button').click();
+  assert.deepEqual(shown(), ['2026-09']);
+  assert.equal(onward.hidden, false);
+  assert.equal(onward.textContent.trim(), 'Back to October 2026');
+  onward.querySelector('button').click();
+  assert.deepEqual(shown(), ['2026-10', '2026-10']);
+  const search = d.querySelector('[data-filter-search]');
+  search.value = 'September';
+  search.dispatchEvent(new w.Event('input'));
+  assert.equal(onward.hidden, true, 'not while a search narrows the list');
+});
