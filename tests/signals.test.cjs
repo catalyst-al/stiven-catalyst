@@ -176,6 +176,8 @@ test('targets: the latest day against the target typed in the tool, else the wor
     { date: '2026-10-20', planArr: '08:00', actArr: '08:10' }, { date: '2026-10-20', planArr: '09:00', actArr: '09:30' }, { date: '2026-10-20', planArr: '23:50', actArr: '00:20' },
   ] }, period, {});
   near(delay[0].target, 0.1, 1e-12);
+  // A target of 100 % on time is a target: no late route allowed (audit P2A-15: it was dropped).
+  assert.equal(M.delaySeries({ target: '100', arrivalGrace: '15', rows: [{ date: '2026-10-20', planArr: '08:00', actArr: '08:30' }] }, period, {})[0].target, 0);
   same((delay[0].points), [{ date: '2026-10-20', d: 2, n: 3 }]);
   same((delay[1].points), [{ date: '2026-10-20', value: 30, late: 2 }], 'a route across midnight is 30 minutes late');
 });

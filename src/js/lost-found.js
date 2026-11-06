@@ -79,6 +79,19 @@
     };
   };
 
+  // Returned within a fixed number of days of being found, counted only over items found at least that many days
+  // before asOf, so that a period's items have all had the same time to go back: an item found on the last day
+  // cannot be counted as not returned (audit P2A-15). young: the items too new to tell yet.
+  const RETURN_DAYS = 3;
+  const returnedWithin = (rows, asOf, days = RETURN_DAYS) => {
+    const eligible = rows.filter((row) => isIso(row.date) && between(row.date, asOf) >= days);
+    const back = eligible.filter((row) => {
+      const step = (row.steps || []).find((item) => item.status === "returned" && isIso(item.date) && item.date <= asOf);
+      return step && between(row.date, step.date) <= days;
+    });
+    return { days, eligible: eligible.length, returned: back.length, young: rows.length - eligible.length, rate: eligible.length ? back.length / eligible.length : null };
+  };
+
   // Counts by a field, largest first.
   const tally = (rows, valueOf) => {
     const map = new Map();
@@ -263,7 +276,7 @@
     return lines.join("\n");
   };
 
-  window.LostFoundMath = { STATUSES, OPEN, VALUES, addDays, mondayOf, categoryOf, statusOf, isOpen, rules, retentionDays, keepUntil, flagOf, decisionOf, dueList, stats, tally, weekly, newId, cleanRow, cleanRows, keyOf, importRows, exampleRows, replyText };
+  window.LostFoundMath = { STATUSES, OPEN, VALUES, RETURN_DAYS, returnedWithin, addDays, mondayOf, categoryOf, statusOf, isOpen, rules, retentionDays, keepUntil, flagOf, decisionOf, dueList, stats, tally, weekly, newId, cleanRow, cleanRows, keyOf, importRows, exampleRows, replyText };
 
   // The page.
   const dataEl = document.getElementById("lost-found-data");

@@ -1281,7 +1281,7 @@
   "Cold scan": "Kühlscan",
   "By partner": "Nach Partner",
   "Route risk queue": "Risikoliste der Touren",
-  "Points: loading over target 25, leaving over 10 min late 20, scans under 98% 15, gate open 15, cold scan missed 10, each yard speed breach 10, each missing bag 5. Critical from 50, watch from 25.": "Punkte: Beladung über Ziel 25, Abfahrt über 10 min zu spät 20, Scans unter 98 % 15, Tor offen 15, Kühlscan fehlt 10, jede Geschwindigkeitsüberschreitung auf dem Hof 10, jede fehlende Tasche 5. Kritisch ab 50, beobachten ab 25.",
+  "Points: loading over target 25, leaving over {m} min late 20, scans under 98% 15, gate open 15, cold scan missed 10, each yard speed breach 10, each missing bag 5. Critical from 50, watch from 25.": "Punkte: Beladung über Ziel 25, Abfahrt über {m} min zu spät 20, Scans unter 98 % 15, Tor offen 15, Kühlscan fehlt 10, jede Geschwindigkeitsüberschreitung auf dem Hof 10, jede fehlende Tasche 5. Kritisch ab 50, beobachten ab 25.",
   "No route reaches 25 points in this selection.": "Keine Tour erreicht 25 Punkte in dieser Auswahl.",
   "Driver": "Fahrer",
   "Points": "Punkte",
@@ -7927,5 +7927,8 @@
   "Open it in {language}": "Auf {language} öffnen",
   "Below Bird's base": "Unter Birds Basis",
   "this month; Bird found about {n} for each injury": "in diesem Monat; Bird fand etwa {n} je Verletzung",
-  "All {n} in the log. Bird found about 1 serious injury for every 10 minor ones, 30 property-damage incidents and 600 near misses (1 : 10 : 30 : 600). This log has no property-damage type, so his 30 has no level here; unsafe acts and conditions lie below his base. A wide base is good news: the team reports what could have happened.": "Alle {n} im Protokoll. Bird fand auf 1 schwere Verletzung etwa 10 leichte, 30 Sachschäden und 600 Beinahe-Unfälle (1 : 10 : 30 : 600). Dieses Protokoll hat keinen Typ für Sachschäden, daher hat seine 30 hier keine eigene Stufe; unsichere Handlungen und Zustände liegen unter seiner Basis. Eine breite Basis ist eine gute Nachricht: Das Team meldet, was hätte passieren können."
+  "All {n} in the log. Bird found about 1 serious injury for every 10 minor ones, 30 property-damage incidents and 600 near misses (1 : 10 : 30 : 600). This log has no property-damage type, so his 30 has no level here; unsafe acts and conditions lie below his base. A wide base is good news: the team reports what could have happened.": "Alle {n} im Protokoll. Bird fand auf 1 schwere Verletzung etwa 10 leichte, 30 Sachschäden und 600 Beinahe-Unfälle (1 : 10 : 30 : 600). Dieses Protokoll hat keinen Typ für Sachschäden, daher hat seine 30 hier keine eigene Stufe; unsichere Handlungen und Zustände liegen unter seiner Basis. Eine breite Basis ist eine gute Nachricht: Das Team meldet, was hätte passieren können.",
+  "Routes loading over target (set a loading target first)": "Touren mit Beladung über dem Ziel (zuerst ein Ladeziel festlegen)",
+  "{kpi}: the target {raw} was read as {value}. If you meant {raw} %, write {raw}% in the sheet.": "{kpi}: Das Ziel {raw} wurde als {value} gelesen. Wenn Sie {raw} % meinen, schreiben Sie {raw}% in die Tabelle.",
+  "the last {n} of {m} shown": "die letzten {n} von {m} gezeigt"
 }

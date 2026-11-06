@@ -155,6 +155,23 @@ test('an empty log points to the same log kept in another language', () => {
   assert.deepEqual(plain(dom.window.ToolKit.otherLogs('sc-damage-control-de')), [{ code: 'sq', count: 1, name: 'Shqip', url: '/sq/tools/damage-control/' }]);
 });
 
+test('a trend longer than the chart: the chart says how many it shows, and the total still counts every bucket', () => {
+  // Audit P2A-15: 70 weeks of 7 rows; the chart keeps the newest 60, the total covered only those (420 of 490).
+  const { ToolKit } = load();
+  const rows = [];
+  for (let w = 0; w < 70; w++) for (let d = 0; d < 7; d++) rows.push({ date: new Date(Date.UTC(2025, 0, 6 + w * 7 + d)).toISOString().slice(0, 10), units: 1 });
+  const trend = ToolKit.trendBuckets(rows, (row) => row.units);
+  assert.equal(trend.unit, 'week');
+  assert.equal(trend.buckets.length, 60);
+  assert.equal(trend.hidden, 10);
+  assert.equal(ToolKit.trendTotal(trend).value, 490);
+  const shares = ToolKit.trendShares(rows, (row) => row.units, rows.map((row) => ({ date: row.date, volume: 10 })));
+  assert.equal(shares.hidden, 10);
+  assert.deepEqual(plain(ToolKit.trendTotal(shares)), { value: 0.1, count: 490, total: 4900 });
+  // A short trend hides nothing.
+  assert.equal(ToolKit.trendBuckets(rows.slice(0, 14), (row) => row.units).hidden, 0);
+});
+
 test('trend buckets group a log by day or by week and fill the quiet days', () => {
   const { ToolKit } = load();
   const rows = (dates) => dates.map((date) => ({ date, units: 2 }));
