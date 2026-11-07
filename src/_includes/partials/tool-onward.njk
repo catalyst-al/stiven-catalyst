@@ -1,0 +1,20 @@
+{#- At the end of a tool page: the next tool, large, with its summary; the one before; all tools. The tools follow
+    one another role by role, as on the Tools page ("toolNeighbours" in eleventy.config.js), so a reader goes from
+    tool to tool without going back to the list. Needs toolFamily. -#}
+{%- set onwardList = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools -%}
+{%- set around = families | toolNeighbours(onwardList, lang, page.url) -%}
+{%- if around %}
+<nav class="shell essay-series tool-onward" aria-labelledby="tool-onward-title">
+  <p class="kicker" id="tool-onward-title">{{ toolFamily.name }} · {{ "Tool {n} of {total}" | t(lang) | replace("{n}", around.number | string) | replace("{total}", around.total | string) }}</p>
+  <a class="essay-series-next" href="{{ around.next.url }}" rel="next">
+    <small>{% if around.nextFamily %}{{ "Next role" | t(lang) }} · {{ around.nextFamily.name }} · {{ around.nextFamily.role | t(lang) }}{% else %}{{ "Next tool" | t(lang) }}{% endif %}</small>
+    <strong data-fit>{{ around.next.name }}</strong>
+    {%- if around.next.summary %}<span>{{ around.next.summary }}</span>{% endif %}
+    <em aria-hidden="true">→</em>
+  </a>
+  <p class="essay-series-more">
+    <a href="{{ around.prev.url }}" rel="prev"><small>← {{ "Previous tool" | t(lang) }}</small> {{ around.prev.name }}</a>
+    <a class="essay-series-all" href="{{ '/tools.html' | local(lang) }}">{{ "All tools" | t(lang) }}</a>
+  </p>
+</nav>
+{%- endif %}

@@ -218,6 +218,28 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("familyTools", (family, tools, lang, key = "tools") =>
     (family?.[key] || []).map((url) => tools.find((tool) => tool.url === localUrl(url, lang))).filter(Boolean)
   );
+  // All the tools in one line, role by role as on the Tools page (families.json: its tools, then its training
+  // modules), so a tool page leads on to the next one; after the last tool of a role, the first of the next role, and
+  // after the very last, the first again. Gives { prev, next, number, total, nextFamily, prevFamily } for a tool page.
+  eleventyConfig.addFilter("toolNeighbours", (families, tools, lang, url) => {
+    const line = (families || []).flatMap((family) => [...family.tools, ...family.learn]
+      .map((path) => (tools || []).find((tool) => tool.url === localUrl(path, lang)))
+      .filter(Boolean)
+      .map((tool) => ({ tool, family })));
+    const index = line.findIndex((entry) => entry.tool.url === url);
+    if (index < 0 || line.length < 2) return null;
+    const here = line[index];
+    const next = line[(index + 1) % line.length];
+    const prev = line[(index - 1 + line.length) % line.length];
+    return {
+      next: next.tool,
+      prev: prev.tool,
+      nextFamily: next.family !== here.family ? next.family : null,
+      prevFamily: prev.family !== here.family ? prev.family : null,
+      number: index + 1,
+      total: line.length,
+    };
+  });
   // The family of a tool page, a training module or a role page (/tools/x/, /roles/x/, in any language), else null.
   eleventyConfig.addFilter("familyOf", (url, families) => {
     const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
