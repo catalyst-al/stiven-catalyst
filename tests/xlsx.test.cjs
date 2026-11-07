@@ -68,14 +68,19 @@ test('the download writes the rows with formulas kept as text, named like the CS
   window.URL.revokeObjectURL = () => {};
   const clicked = [];
   window.HTMLAnchorElement.prototype.click = function () { clicked.push(this.download); };
-  ToolKit.downloadXlsx('damage-log', [['Note'], ['=HYPERLINK("x")'], ['+1 cmd'], ['12']]);
+  ToolKit.downloadXlsx('damage-log', [['Note'], ['=HYPERLINK("x")'], ['+1 cmd'], ['12'], ['- check door'], ['Plain']]);
   assert.equal(clicked.length, 1);
   assert.match(clicked[0], /^damage-log-\d{4}-\d{2}-\d{2}\.xlsx$/);
   assert.equal(saved.type, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   const sheet = unzip(saved.bytes)['xl/worksheets/sheet1.xml'];
-  assert.match(sheet, /'=HYPERLINK\(&quot;x&quot;\)/, 'a formula stays text');
-  assert.match(sheet, /'\+1 cmd/);
+  // A formula stays text through the quotePrefix style (s="3"), with no apostrophe in the cell (audit P2B-18).
+  assert.match(sheet, /<c r="A2" t="inlineStr" s="3"><is><t xml:space="preserve">=HYPERLINK\(&quot;x&quot;\)<\/t>/, 'a formula stays text');
+  assert.match(sheet, /<c r="A3" t="inlineStr" s="3"><is><t xml:space="preserve">\+1 cmd<\/t>/);
+  assert.doesNotMatch(sheet, /'=|'\+/, 'no visible apostrophe');
+  assert.match(unzip(saved.bytes)['xl/styles.xml'], /<cellXfs count="4">.*quotePrefix="1"/);
   assert.match(sheet, /<c r="A4"><v>12<\/v><\/c>/, 'a plain number stays a number');
+  assert.match(sheet, /<c r="A5" t="inlineStr" s="3"><is><t xml:space="preserve">- check door<\/t>/, 'shown as typed');
+  assert.match(sheet, /<c r="A6" t="inlineStr"><is>/, 'plain text has no special style');
 });
 
 test('every log with a CSV button offers the workbook beside it, in the three languages', () => {

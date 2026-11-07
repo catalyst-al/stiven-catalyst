@@ -693,7 +693,11 @@ window.CvImport = (() => {
   };
 
   // ---------- Reading files ----------
+  // A PDF is read whole into memory before its pages are: past MAX_PDF_BYTES it is refused unread, so a large scan or
+  // a wrong file cannot hold the tab (audit P2C-16). A CV with a photo stays far below it.
+  const MAX_PDF_BYTES = 20 * 1024 * 1024;
   const readPdf = async (file, pdfjsUrl, workerUrl) => {
+    if (file.size > MAX_PDF_BYTES) throw new Error("pdf-size");
     const pdfjs = await import(pdfjsUrl);
     pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
     const doc = await pdfjs.getDocument({ data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false }).promise;
@@ -734,7 +738,10 @@ window.CvImport = (() => {
     }
     return pdfLines(pages);
   };
-  const readDocx = async (file) => docxLines(await unzip(await file.arrayBuffer(), "word/document.xml"));
+  const readDocx = async (file) => {
+    if (file.size > MAX_PDF_BYTES) throw new Error("pdf-size");
+    return docxLines(await unzip(await file.arrayBuffer(), "word/document.xml"));
+  };
 
-  return { parse, pdfLines, pageLines, docxLines, textLines, unzip, readPdf, readDocx, sectionOf, findDates, companyParts };
+  return { parse, pdfLines, pageLines, docxLines, textLines, unzip, readPdf, readDocx, MAX_PDF_BYTES, sectionOf, findDates, companyParts };
 })();

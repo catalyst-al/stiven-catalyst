@@ -10,6 +10,18 @@ window.Annotations = (() => {
   const isDate = (value) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(`${value}T00:00:00Z`));
   const MAX_TEXT = 160;
 
+  // A row without an id (from an older page or a hand-made file) gets one from its date and its whole text, the same
+  // on every device, so team sync still joins the same event twice into one; two events of a day with texts of the
+  // same length no longer share an id (audit P2C-16: the id was the date and the text's length). FNV-1a, 32 bits.
+  const fingerprint = (text) => {
+    let hash = 0x811c9dc5;
+    for (const char of text) {
+      hash ^= char.codePointAt(0);
+      hash = Math.imul(hash, 0x01000193) >>> 0;
+    }
+    return hash.toString(36);
+  };
+
   // Only rows of the expected shape are kept: a damaged entry must not break a chart.
   const clean = (row) => {
     if (!row || typeof row !== "object" || Array.isArray(row)) return null;
@@ -17,7 +29,7 @@ window.Annotations = (() => {
     const text = typeof row.text === "string" ? row.text.trim().slice(0, MAX_TEXT) : "";
     if (!isDate(date) || !text) return null;
     const tools = Array.isArray(row.tools) ? [...new Set(row.tools.filter((slug) => typeof slug === "string" && /^[a-z0-9-]{1,64}$/.test(slug)))] : [];
-    const id = typeof row.id === "string" && row.id ? row.id.slice(0, 40) : `${date}-${text.length}`;
+    const id = typeof row.id === "string" && row.id ? row.id.slice(0, 40) : `${date}-${fingerprint(text)}`;
     return { id, date, text, tools };
   };
   const all = () => {

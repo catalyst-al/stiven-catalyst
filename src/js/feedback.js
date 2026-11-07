@@ -43,6 +43,19 @@
     return out.join("\n\n");
   };
 
+  // A mail link longer than about 2,000 characters is cut or refused by some mail programs (audit P2C-16): past
+  // MAILTO_BODY the body keeps its beginning, ends with a note, and the status says to copy the whole message.
+  const MAILTO_BODY = 1800;
+  const mailBody = (text, note) => {
+    const whole = encodeURIComponent(text);
+    if (whole.length <= MAILTO_BODY) return { body: whole, cut: false };
+    const tail = encodeURIComponent(`\n\n${note}`);
+    let end = text.length;
+    while (end > 0 && encodeURIComponent(text.slice(0, end)).length + tail.length > MAILTO_BODY) end = Math.floor(end * 0.9);
+    return { body: encodeURIComponent(text.slice(0, end)) + tail, cut: true };
+  };
+  window.FeedbackMail = { MAILTO_BODY, mailBody };
+
   // The whole message to copy: the subject, then the body the mail would carry.
   const copy = form.querySelector("[data-feedback-copy]");
   if (copy) {
@@ -66,10 +79,10 @@
     button.disabled = true;
     if (!action) {
       const subject = encodeURIComponent(form.dataset.subject || "Feedback");
-      const body = encodeURIComponent(lines(data));
+      const { body, cut } = mailBody(lines(data), form.dataset.cut || "[…]");
       // The fields stay as they are: the message is not sent yet, and a visitor without a mail program copies it.
       button.disabled = false;
-      say(form.dataset.opened, mail);
+      say(cut && form.dataset.openedLong ? form.dataset.openedLong : form.dataset.opened, mail);
       // A clicked link, not location.href, so the page stays where it is in every browser.
       const link = document.createElement("a");
       link.href = `mailto:${mail}?subject=${subject}&body=${body}`;

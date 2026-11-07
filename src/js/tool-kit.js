@@ -1552,7 +1552,10 @@ window.ToolKit = (() => {
     if (serial) return `<c r="${ref}" s="2"><v>${serial}</v></c>`;
     // A number only when it reads back the same: "00123" (a code, an article number) stays text (audit T-22).
     if (/^-?(?:0|[1-9]\d*)(?:\.\d+)?$/.test(text) && text.length < 16) return `<c r="${ref}"><v>${Number(text)}</v></c>`;
-    return `<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${xmlText(text)}</t></is></c>`;
+    // A text Excel would run as a formula once the cell is edited (=, +, -, @) keeps the quotePrefix style (s="3"):
+    // Excel holds it as text without showing an apostrophe, where the CSV needs one (audit P2B-18).
+    const formulaLike = /^[=+\-@]/.test(text) && !/^[+-]?\d+(?:[.,]\d+)?%?$/.test(text);
+    return `<c r="${ref}" t="inlineStr"${formulaLike ? ' s="3"' : ""}><is><t xml:space="preserve">${xmlText(text)}</t></is></c>`;
   };
   const xlsxFile = (rows, { sheet = "Sheet1", title = "" } = {}) => {
     const head = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n';
@@ -1570,7 +1573,7 @@ window.ToolKit = (() => {
       + '<fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills>'
       + '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>'
       + '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>'
-      + '<cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs>'
+      + '<cellXfs count="4"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" quotePrefix="1"/></cellXfs>'
       + '<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
     const workbook = `${head}<workbook xmlns="${ns}/spreadsheetml/2006/main" xmlns:r="${ns}/officeDocument/2006/relationships"><sheets><sheet name="${xmlText(sheet.slice(0, 31))}" sheetId="1" r:id="rId1"/></sheets></workbook>`;
     const core = `${head}<cp:coreProperties xmlns:cp="${ns}/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:title>${xmlText(title)}</dc:title><dc:creator>Stiven Catalyst</dc:creator></cp:coreProperties>`;
@@ -1584,10 +1587,10 @@ window.ToolKit = (() => {
       { name: "docProps/core.xml", text: core },
     ]);
   };
-  // The same rows as the CSV, as an Excel workbook: a text that Excel would run as a formula stays text.
+  // The same rows as the CSV, as an Excel workbook: a text that Excel would run as a formula stays text, through the
+  // quotePrefix style of xlsxCell rather than a visible apostrophe ("- check door" reads as typed; audit P2B-18).
   const downloadXlsx = (name, rows, options = {}) => {
-    const safe = rows.map((cells) => cells.map((value) => (typeof value === "string" ? csvSafe(value) : value)));
-    const bytes = xlsxFile(safe, { sheet: options.sheet || name.slice(0, 31), title: options.title || name });
+    const bytes = xlsxFile(rows, { sheet: options.sheet || name.slice(0, 31), title: options.title || name });
     saveBlob(`${name}-${today()}.xlsx`, new Blob([bytes], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }));
   };
 

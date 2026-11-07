@@ -18,7 +18,7 @@ eleventyExcludeFromCollections: true
     <description>{{ feed.description }}</description>
     <language>{{ feed.lang }}</language>
     <copyright>© {{ feed.episodes[feed.episodes.length - 1].published.slice(0, 4) }} {{ podcast.author }}</copyright>
-    <pubDate>{{ feed.updated }}</pubDate>
+    <pubDate>{{ feed.published }}</pubDate>
     <lastBuildDate>{{ feed.updated }}</lastBuildDate>
     <image>
       <url>{{ feed.image | absoluteUrl }}</url>

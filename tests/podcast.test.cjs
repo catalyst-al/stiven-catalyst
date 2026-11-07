@@ -124,3 +124,20 @@ test('the built feed is well-formed RSS with the tags Apple Podcasts and Spotify
     assert.match(fs.readFileSync(`_site/${lang}/index.html`, 'utf8'), new RegExp(`href="/${lang}/podcast\\.html">Podcast`), `${lang}: the footer opens the podcast page of the language`);
   }
 });
+
+// Audit P7-08: the three feeds had one title, and lastBuildDate stayed at the newest episode although recordings were
+// corrected after it.
+test('each feed has a title of its own, and its last build is its latest change, corrections included', async () => {
+  const mod = (await import('../src/_data/podcast.js')).default;
+  const { feeds } = mod;
+  const titles = feeds.map((f) => f.title);
+  assert.equal(new Set(titles).size, titles.length, titles.join(' | '));
+  assert.equal(mod.correctionDay('14 October 2026'), Date.UTC(2026, 9, 14, 4));
+  assert.equal(mod.correctionDay('14. Oktober 2026'), Date.UTC(2026, 9, 14, 4));
+  assert.equal(mod.correctionDay('3 nëntor 2026'), Date.UTC(2026, 10, 3, 4));
+  assert.equal(mod.correctionDay('soon'), null);
+  const episode = { pubDate: new Date(Date.UTC(2026, 9, 13, 4)).toUTCString(), corrections: [{ date: '14 October 2026' }] };
+  assert.equal(mod.lastChange([episode]), new Date(Date.UTC(2026, 9, 14, 4)).toUTCString());
+  assert.equal(mod.lastChange([{ pubDate: episode.pubDate }]), episode.pubDate);
+  for (const feed of feeds) assert.ok(Date.parse(feed.updated) >= Date.parse(feed.published), feed.lang);
+});

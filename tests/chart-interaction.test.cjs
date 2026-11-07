@@ -294,3 +294,17 @@ test('every new text has a German and an Albanian translation', () => {
     for (const [en, text] of Object.entries(part[lang])) assert.equal(vars(text), vars(en), `${lang}: ${en}`);
   }
 });
+
+// Audit P2C-16: a row without an id got `${date}-${text.length}`, so two events of a day with texts of the same length
+// shared an id, and team sync, which joins rows by id, kept only one.
+test('rows without an id get one from their date and whole text: different texts differ, the same text is the same', () => {
+  const window = bare();
+  window.localStorage.setItem('sc-annotations', JSON.stringify({ rows: [
+    { date: '2026-10-12', text: 'New layout A' }, { date: '2026-10-12', text: 'New layout B' }, { date: '2026-10-12', text: 'New layout A' },
+  ] }));
+  const rows = window.Annotations.all();
+  assert.equal(rows.length, 3);
+  const ids = rows.map((row) => row.id);
+  assert.equal(new Set(ids).size, 2, 'the same event has the same id, a different one another');
+  assert.ok(ids.every((id) => id.startsWith('2026-10-12-')));
+});

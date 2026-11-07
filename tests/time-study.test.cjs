@@ -155,3 +155,24 @@ test('every text of the page and the script has a German and an Albanian transla
     }
   }
 });
+
+// Audit P2B-18: on the German page the standard-time CSV wrote its outliers with a dot ("9.8") beside comma decimals.
+test('the standard-time CSV writes every number in the page language, the outliers too', { skip: !fs.existsSync('_site/de/tools/time-study/index.html') }, () => {
+  const { openTool } = require('./helpers/tool-page.cjs');
+  const w = openTool('time-study', { lang: 'de' });
+  const blobs = [];
+  w.Blob = class { constructor(parts) { this.text = parts.join(''); } };
+  w.URL.createObjectURL = (blob) => { blobs.push(blob.text); return 'blob:x'; };
+  w.URL.revokeObjectURL = () => {};
+  w.HTMLAnchorElement.prototype.click = () => {};
+  const example = w.document.querySelector('[data-example]');
+  if (example) example.click();
+  const button = [...w.document.querySelectorAll('button')].find((b) => /CSV/.test(b.textContent) && /Standard/i.test(b.textContent));
+  assert.ok(button, 'the standard-time CSV button is there');
+  button.click();
+  assert.equal(blobs.length, 1);
+  const lines = blobs[0].replace(/^﻿/, '').trim().split('\r\n');
+  const body = lines.slice(1).join('\n');
+  assert.ok(body.length > 0);
+  assert.doesNotMatch(body, /\d\.\d/, 'no dot decimal in the German CSV');
+});

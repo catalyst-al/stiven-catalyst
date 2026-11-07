@@ -75,3 +75,27 @@ test('the built page carries the form with its fields, the language switch and t
   const index = JSON.parse(built('search-index.json'));
   assert.ok(index.some((item) => item.k === 'page' && item.u === '/your-challenge.html'), 'in the search index');
 });
+
+// Audit P2C-16: a long challenge made a mail link of about 5,000 characters, which some mail programs cut or refuse.
+test('a message too long for a mail link keeps its beginning, ends with a note, and the status says to copy it', async () => {
+  const long = 'Situata e gjatë. '.repeat(400);
+  const dom = new JSDOM(`<html><body><form data-tool-feedback data-mail="contact@example.test" data-sent="Thank you." data-opened="Opens. If not, write to" data-opened-long="Too long: copy it, or write to" data-cut="[CUT]" data-failed="Failed." data-subject="Your challenge">
+    <input type="hidden" name="page" value="https://example.test/your-challenge.html">
+    <textarea name="situation" data-line="Situata">${long}</textarea>
+    <button type="submit">Send</button><p data-tool-feedback-status hidden></p></form></body></html>`, { url: 'https://example.test/your-challenge.html', runScripts: 'outside-only' });
+  const w = dom.window;
+  const clicked = [];
+  w.HTMLAnchorElement.prototype.click = function () { clicked.push(this.href); };
+  w.eval(script);
+  w.document.querySelector('form').dispatchEvent(new w.Event('submit', { bubbles: true, cancelable: true }));
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(clicked.length, 1);
+  const raw = clicked[0].split('&body=')[1];
+  assert.ok(raw.length <= w.FeedbackMail.MAILTO_BODY, `${raw.length} characters`);
+  const body = new URL(clicked[0]).searchParams.get('body');
+  assert.ok(body.startsWith('Situata: Situata e gjatë.'));
+  assert.ok(body.endsWith('[CUT]'));
+  assert.match(w.document.querySelector('[data-tool-feedback-status]').textContent, /^Too long: copy it, or write to/);
+  // A short message is whole, with the usual status.
+  assert.deepEqual(JSON.parse(JSON.stringify(w.FeedbackMail.mailBody('short', '[CUT]'))), { body: 'short', cut: false });
+});
