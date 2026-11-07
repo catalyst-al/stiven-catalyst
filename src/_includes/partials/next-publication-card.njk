@@ -1,0 +1,14 @@
+{#- Under the newest issue of a series, beside the one before it: the first of the next publication (nextPub, from
+    the "nextPublication" filter), in the same card as a neighbouring issue. -#}
+{%- if nextPub %}
+      <a class="issue-more-card" href="{{ nextPub.url }}">
+        {%- if nextPub.cover %}
+        <img src="{{ nextPub.cover.image }}" srcset="{{ nextPub.cover.image | srcsetFor }}" sizes="96px" width="{{ nextPub.cover.width }}" height="{{ nextPub.cover.height }}" alt="" loading="lazy" decoding="async">
+        {%- endif %}
+        <span class="issue-more-copy">
+          <span class="issue-more-label">{{ nextPub.label }}</span>
+          <span class="issue-more-title">{{ nextPub.title }}</span>
+          {%- if nextPub.meta %}<span class="issue-more-meta">{{ nextPub.meta }}</span>{% endif %}
+        </span>
+      </a>
+{%- endif %}

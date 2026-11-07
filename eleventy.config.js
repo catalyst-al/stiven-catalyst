@@ -257,6 +257,31 @@ export default function (eleventyConfig) {
     const inOrder = (seriesList || []).flatMap((entry) => published(essays).filter((item) => (item.data.series || "ten-years") === entry.id));
     return [...inOrder, ...published(reflections)];
   });
+  // The publications in one line, so the newest issue of one series leads into the next instead of back to a list:
+  // the Management Review of September 2026, its issues, the magazine, the treatise, the book, and the review again.
+  // Takes { weekly, magazine, treatise, books, review, magazinePages } and the publication just read; gives the
+  // first of the next one as { url, cover, label, title, meta } (partials/book-onward.njk, next-publication-card.njk).
+  eleventyConfig.addFilter("nextPublication", (data, after, lang) => {
+    const l = lang || "en";
+    const t = (text) => (TRANSLATED.has(l) ? readUi(l)[text] ?? text : text);
+    const { weekly, magazine, treatise, books, review, magazinePages } = data || {};
+    const label = (name) => `${t("Next publication")} · ${name}`;
+    const issue = (first, name) => first && {
+      url: localUrl(`/magazine/${first.slug}.html`, l),
+      cover: magazinePages?.[first.slug]?.[l]?.pages?.[0] || null,
+      label: label(name),
+      title: first[l]?.heading,
+      meta: first[l]?.date,
+    };
+    if (after === "review") return issue(weekly?.issues?.[0], weekly?.[l]?.name);
+    if (after === "weekly") return issue(magazine?.issues?.[0], magazine?.names?.[l]?.name);
+    if (after === "magazine") return issue(treatise?.volumes?.[0], treatise?.[l]?.short);
+    if (after === "treatise") {
+      const book = books?.[l] || books?.sq;
+      return book && { url: localUrl("/books/mall-per-durresin.html", l), cover: book.pages?.[0] || null, label: label(t("Book")), title: book.title, meta: book.author };
+    }
+    return review && { url: localUrl(`/magazine/${review.slug}.html`, l), cover: magazinePages?.[review.slug]?.[l]?.pages?.[0] || null, label: label(review[l]?.name), title: review[l]?.theme, meta: review[l]?.date };
+  });
   // The essays of one series (src/_data/essaySeries.json), and a series by its id or the one after it.
   eleventyConfig.addFilter("inSeries", (items, id) => (items || []).filter((item) => (item.data.series || "ten-years") === id));
   eleventyConfig.addFilter("seriesById", (all, id) => (all || []).find((entry) => entry.id === (id || "ten-years")) || null);

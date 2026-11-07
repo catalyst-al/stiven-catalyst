@@ -19,11 +19,14 @@
 {%- set family = family or weekly.issues -%}
 {%- set older = family | where("number", issue.number - 1) -%}
 {%- set newer = family | where("number", issue.number + 1) -%}
-{#- At the end of the reader, the next issue; after the newest one, the list of all issues. -#}
+{#- At the end of the reader, the next issue; after the newest one, the first of the next publication
+    (the "nextPublication" filter): the magazine after the Management Review, the treatise after the magazine. -#}
+{%- set pubAfter = "magazine" if family == magazine.issues else "weekly" -%}
+{%- set nextPub = null if newer else ({ weekly: weekly, magazine: magazine, treatise: treatise, books: books, review: review, magazinePages: magazinePages } | nextPublication(pubAfter, lang)) -%}
 {%- if newer -%}
 {%- set onward = { url: ("/magazine/" + newer.slug + ".html") | local(lang), cover: magazinePages[newer.slug][lang].pages[0], label: "Next issue" | t(lang), title: newer[lang].heading, meta: L.no + " " + newer.no + " · " + newer[lang].date } -%}
 {%- else -%}
-{%- set onward = { url: archive, label: W.name, title: L.all, meta: L.no + " " + family[0].no + "–" + issue.no } -%}
+{%- set onward = nextPub -%}
 {%- endif -%}
 {%- set labels = {
   cover: "Cover" | t(lang),
@@ -192,6 +195,7 @@
         </span>
       </a>
       {%- endif %}{% endfor %}
+      {%- include "partials/next-publication-card.njk" %}
     </div>
     {%- endif %}
     <a class="text-link" href="{{ archive }}">{{ L.all }}</a>
