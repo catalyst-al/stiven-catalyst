@@ -22,10 +22,11 @@
   const monthStart = (iso) => `${iso.slice(0, 7)}-01`;
   const monthEnd = (iso) => new Date(Date.UTC(Number(iso.slice(0, 4)), Number(iso.slice(5, 7)), 0)).toISOString().slice(0, 10);
   const inRange = (date, range) => isIso(date) && date >= range.from && date <= range.to;
-  // A share typed as a percent (0.3 means 0.3 %); anything outside 0–100 % is no target.
+  // A share typed as a percent (0.3 means 0.3 %); anything outside 0–100 % is no target, and 100 % is one (every route
+  // on time), as in the Daily Board, Shift Pulse and Signals (audit P2A-15).
   const percent = (value) => {
     const n = Number(String(value ?? "").replace(",", ".").replace("%", "").trim());
-    return String(value ?? "").trim() !== "" && n > 0 && n < 100 ? n / 100 : null;
+    return String(value ?? "").trim() !== "" && n > 0 && n <= 100 ? n / 100 : null;
   };
   const number = (value) => {
     const n = Number(String(value ?? "").replace(/%/g, "").replace(",", ".").trim());
@@ -320,8 +321,10 @@
     const logged = rows.filter((row) => inRange(row.date, range));
     const over = rows.filter((row) => M.isOpen(row) && range.to > M.keepUntil(row, cfg, rules));
     if (!logged.length && !over.length) return null;
-    const returned = logged.filter((row) => M.statusOf(row) === "returned").length;
-    return { logged: logged.length, returned, returnRate: logged.length ? returned / logged.length : null, over: over.length, open: rows.filter((row) => M.isOpen(row)).length, series: perSlot(range, logged) };
+    // Back with the owner within a few days, over the items old enough to tell, so that this period and the one before
+    // compare items that had the same time (audit P2A-15).
+    const back = M.returnedWithin(logged, range.to);
+    return { logged: logged.length, returned: back.returned, eligible: back.eligible, returnDays: back.days, returnRate: back.rate, over: over.length, open: rows.filter((row) => M.isOpen(row)).length, series: perSlot(range, logged) };
   };
 
   // Room Inspection: { rows: [{ date, time, room, template, answers }], threshold, custom }, scored with
@@ -955,7 +958,7 @@
     const out = [];
     if (part === "lostFound") {
       out.push(fill(S.logged, { n: int.format(d.logged), before: b ? int.format(b.logged) : "–" }, d.logged));
-      if (d.logged) out.push(fill(S.returned, { trend: trendText(m.lostReturned), n: int.format(d.returned) }));
+      if (d.eligible) out.push(fill(S.returned, { trend: trendText(m.lostReturned), n: int.format(d.returned), days: int.format(d.returnDays) }));
       out.push(d.over ? fill(S.over, { n: int.format(d.over) }, d.over) : S.overNone);
     } else if (part === "inspection") {
       out.push(fill(S.lead, { n: int.format(d.inspections), mark: pct(d.threshold, 0), trend: trendText(m.firstPass) }, d.inspections));

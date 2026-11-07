@@ -110,7 +110,7 @@
     "adr": { "label": "ADR", "noun": "die ADR" },
     "revpar": { "label": "RevPAR", "noun": "der RevPAR" },
     "lostLogged": { "label": "Erfasste Fundsachen", "noun": "die erfassten Fundsachen" },
-    "lostReturned": { "label": "Zurück beim Eigentümer", "noun": "der Anteil der Fundsachen, die an den Eigentümer zurückgingen" },
+    "lostReturned": { "label": "Innerhalb von 3 Tagen zurück", "noun": "der Anteil der Fundsachen, die innerhalb von 3 Tagen an den Eigentümer zurückgingen" },
     "lostOver": { "label": "Über der Aufbewahrungsfrist", "noun": "die Fundsachen über ihrer Aufbewahrungsfrist" },
     "firstPass": { "label": "Erstabnahmequote", "noun": "die Erstabnahmequote der Zimmer" },
     "inspections": { "label": "Zimmerkontrollen", "noun": "die Zimmerkontrollen" },
@@ -128,7 +128,7 @@
     "parts": {
       "lostFound": {
         "logged": { "one": "Eine Fundsache erfasst ({before} im Vorzeitraum).", "many": "{n} Fundsachen erfasst ({before} im Vorzeitraum)." },
-        "returned": "Bis zum Ende des Zeitraums an den Eigentümer zurückgegeben: {trend}.",
+        "returned": "Innerhalb von {days} Tagen nach dem Fund an den Eigentümer zurückgegeben (Fundsachen, die mindestens {days} Tage vor dem Ende gefunden wurden): {trend}.",
         "over": { "one": "Eine offene Fundsache liegt über ihrer Aufbewahrungsfrist: Entscheiden Sie jetzt darüber.", "many": "{n} offene Fundsachen liegen über ihrer Aufbewahrungsfrist: Entscheiden Sie jetzt darüber." },
         "overNone": "Keine offene Fundsache liegt über ihrer Aufbewahrungsfrist."
       },

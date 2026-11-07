@@ -116,7 +116,10 @@ test('days since the last accident, LTIFR, TRIR, near misses per accident and th
   assert.equal(none.ltifr, null);
   assert.equal(none.trir, null);
   assert.equal(plain(M.rates([{ type: 'near-miss' }], 1000)).nearMissPerAccident, null);
-  assert.deepEqual(plain(M.pyramid(rows)).map((level) => [level.key, level.n, level.bird]), [['lost-time', 1, 1], ['recordable', 2, 10], ['near-miss', 2, 30], ['unsafe', 2, 600]]);
+  assert.deepEqual(plain(M.pyramid(rows)).map((level) => [level.key, level.n, level.bird]), [['lost-time', 1, 1], ['recordable', 2, 10], ['near-miss', 2, 600], ['unsafe', 2, null]]);
+  // Bird (1969): 1 serious : 10 minor : 30 property damage : 600 without injury; near misses stand beside his 600, and
+  // his 600 for his 11 injuries is about 55 near misses for each (audit P2A-15).
+  assert.equal(Math.round(M.BIRD_NEAR_MISS_PER_INJURY), 55);
   assert.equal(M.monthRows(rows, '2026-09').length, 1);
   assert.equal(M.talkIndex('2026-10-23', 20), M.talkIndex('2026-10-23', 20));
   assert.notEqual(M.talkIndex('2026-10-23', 20), M.talkIndex('2026-10-24', 20));

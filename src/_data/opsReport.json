@@ -110,7 +110,7 @@
     "adr": { "label": "ADR", "noun": "the ADR" },
     "revpar": { "label": "RevPAR", "noun": "RevPAR" },
     "lostLogged": { "label": "Items logged", "noun": "the found items logged" },
-    "lostReturned": { "label": "Returned to the owner", "noun": "the share of found items returned to the owner" },
+    "lostReturned": { "label": "Returned within 3 days", "noun": "the share of found items returned to the owner within 3 days" },
     "lostOver": { "label": "Past the keep-until date", "noun": "the found items past their keep-until date" },
     "firstPass": { "label": "First-time pass rate", "noun": "the first-time pass rate of the rooms" },
     "inspections": { "label": "Room inspections", "noun": "the room inspections" },
@@ -128,7 +128,7 @@
     "parts": {
       "lostFound": {
         "logged": { "one": "One found item logged ({before} the period before).", "many": "{n} found items logged ({before} the period before)." },
-        "returned": "Returned to the owner by the end of the period: {trend}.",
+        "returned": "Returned to the owner within {days} days of being found (items found at least {days} days before the end): {trend}.",
         "over": { "one": "One open item is past its keep-until date: decide on it now.", "many": "{n} open items are past their keep-until date: decide on them now." },
         "overNone": "No open item is past its keep-until date."
       },
