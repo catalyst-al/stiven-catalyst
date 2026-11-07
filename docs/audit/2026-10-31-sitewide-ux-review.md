@@ -331,6 +331,18 @@ with A-01 but not proven · S
 - Correction: the owner's decision, either way one line: register the site in Cloudflare Web Analytics and set the
   new token in `src/_data/site.json`, or empty `analytics.cloudflareToken` until then (the template already drops the
   script and the CSP entries when the token is empty).
+- **Status (`feature/p2-09-disable-analytics`, 7 November 2026, owner's decision):** visit counts switched off on
+  the whole site until the configuration and privacy of Cloudflare Web Analytics are reviewed: `analytics.
+  cloudflareToken` emptied, nothing else changed. No built page (898) names `cloudflareinsights` or the beacon; the
+  Content Security Policy of every page allows scripts from this site only and no Cloudflare analytics host; the
+  privacy policy says in EN, DE and SQ that the site uses no analytics (the wording the template already had for an
+  empty token). Found after Phase 5C: the beacon also ran on the three Tools pages, and Search keeps what the visitor
+  types in `?q=`, an address the beacon's report would carry (its report was seen to send `location`); no search
+  query was shown to reach Cloudflare. Team sync (a Cloudflare Worker the visitor turns on) is unchanged and still
+  allowed in the policy where it runs. Tests: `tests/analytics.test.cjs` (rewritten for the off state) and
+  `tests/browser/no-analytics.spec.mjs` (Search with fictional `?q=` text in three languages, the Tools pages, an
+  essay, a reflection and a publication: no request leaves the site); both fail on a build of `main` `3f40abcb`. To
+  switch the counts on again: set the token and change those two test files in the same pull request.
 
 **P2-07 · Team Sync: three client-side behaviours a team will meet without warning** · Concern · S/M
 - Where: `src/js/team-sync.js:27-32` (deletions beat edits; tombstones 90 days; a device away longer than 90 days
@@ -724,3 +736,6 @@ Phase 5C (3 November 2026): P1-03 (a) implemented on `feature/phase-5c-tools-fil
 page filter field, with before and after measurements of the time to a named tool
 (`docs/audit/2026-11-03-phase-5c-report.md`); (b) collapsed sections and (c) the "By problem" strip left for the
 owner's decision after (a), as recommended.
+
+P2-09 / A-01 (7 November 2026): visit counts switched off on the whole site by the owner's decision, on
+`feature/p2-09-disable-analytics`, until Cloudflare Web Analytics is reviewed; P2-09's status line gives the evidence.
