@@ -67,4 +67,4 @@ pranojnë dhe i rendisin sipas numrit.
 Nr. 101–110 u shkruan më 6 nëntor 2026 me të njëjtën metodë. Dy burime mbajnë "përmes": dy letrat e PNAS te Nr. 107,
 të lexuara vetëm në copa. Burimet që nuk u hapën të plota u lanë jashtë (p.sh. Dembe et al. 2005, Argote & Epple 1990,
 Surgeon General 2023, Buell & Norton 2011). Lajmi i Reuters për mjetin e rekrutimit të Amazon-it nuk hyri te Nr. 106:
-mbështetet te burime anonime dhe emri mund të prekë rregullin pa emra punëdhënësish. Data online: 6 nëntor 2026.
+mbështetet te burime anonime dhe emri mund të prekë rregullin pa emra punëdhënësish. Data online: 7 nëntor 2026, dita e bashkimit.
