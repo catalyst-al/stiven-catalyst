@@ -79,12 +79,14 @@ Të gjitha janë në tabelat më poshtë, me arsyen.
 
 ## 5. Numrat
 
+Numëruar sërish më 7 nëntor 2026, pas rregullimeve të P2A-15, P2B-19, P2B-18, P2C-16, PM-15 (pjesërisht), PM-16, CI-03/P5-10, ARCH-01, SEO-06 dhe P7-08.
+
 | Status | Table A (58 consolidated findings) | Table B (122 phase-level IDs, 123 rows) |
 |---|---|---|
-| fixed | 44 | 69 |
-| partly fixed | 3 | 10 |
+| fixed | 45 | 78 |
+| partly fixed | 2 | 9 |
 | needs author approval | 10 | 19 |
-| pending | 1 | 17 |
+| pending | 1 | 9 |
 | not verified | 0 | 0 |
 | no change needed | 0 | 8 |
 | **total** | **58** | **123** |
@@ -151,7 +153,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | SEO-02 | Reflections linked from one page only | SEO-02 | pending | Deferred by the author on 27 Oct to a separate editorial change: navigation between essays is useful, but recommended links must be meaningful. `src/_includes/layouts/article.njk` unchanged | The editorial change itself, later |
 | CI-01 | Search journey fails on current Chrome | — | fixed | `be86a306`, `e40c5fe2` · tests/browser/transitions.spec.mjs (failed 6/6 before). Cause: a key pressed between the new page's commit and its first frame, not `replaceState` as the audit suspected | — |
 | CI-02 | CI's Chromium is a year old | — | fixed | `d0ad3889` (@playwright/test 1.56.1 → 1.64.1; CI prints the browser and fails on skipped, flaky or not-run tests; markdown-it 14.3.3, `npm audit` 0), `00976354` (25 min). Verified on Chrome 156.0.8078.4 in CI of catalyst-al/stiven-catalyst#363 (`c7343fbf`): 176 / 176 browser tests | — |
-| CI-03 | Contract tests used invented fixtures | P5-10 (chart-note test part) | partly fixed | Real built pages: tests/helpers/tool-page.cjs (`285c7af8`), `779e05b4` · tests/handoffs-real.test.cjs; the pause is tested by behaviour (`972b58e7` · tests/browser/motion.spec.mjs, tests/cosmos-pause.test.cjs rewritten). Remains: tests/weekly.test.cjs still checks only `note.length > 20` (P5-10) | — |
+| CI-03 | Contract tests used invented fixtures | P5-10 (chart-note test part) | fixed | 7 November 2026: the chart-note test now requires each note to say how its figure is measured or to point at its chart (a figure it shows, a name in its source, a year of its data), and refuses a note that does neither (tests/weekly.test.cjs, P5-10). Before: Real built pages: tests/helpers/tool-page.cjs (`285c7af8`), `779e05b4` · tests/handoffs-real.test.cjs; the pause is tested by behaviour (`972b58e7` · tests/browser/motion.spec.mjs, tests/cosmos-pause.test.cjs rewritten). Remains: tests/weekly.test.cjs still checks only `note.length > 20` (P5-10) | — |
 | CI-04 | No check that PDFs match their sources | — | fixed | `7537b295` · tests/pdf-matches-html.test.cjs (294 PDFs + 21 archived guide editions, 0 mismatches) | — |
 
 ---
@@ -165,10 +167,10 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | SEO-03 | Tool pages ~70 % template text | — | pending | Optional in the audit; not assigned to any phase; no commit |
 | SEO-04 | Publications as HTML + 3 indexable PDFs | — | no change needed | The audit's own correction: "none mandatory; keep HTML as primary" (it is the only one in the sitemap) |
 | SEO-05 | 543 sitemap URLs without lastmod | (P5-09) | partly fixed | `e204acc5` · tests/publication-dates.test.cjs (issue, volume and edition pages take `lastmod` from online.json). Remains: tool and hub pages still have none (the sitemap gives `lastmod` only to dated content, by design) |
-| SEO-06 | No og:locale; English WebSite text on DE/SQ homes | — | pending | Not assigned; `base.njk` unchanged since `605d0df` |
+| SEO-06 | No og:locale; English WebSite text on DE/SQ homes | — | fixed | 7 November 2026: og:locale and og:locale:alternate on every page, the WebSite description and inLanguage of each language home in its language, one url for the Person (tests/locale-and-404.test.cjs). Before: Not assigned; `base.njk` unchanged since `605d0df` |
 | SEO-07 | No Book/PodcastSeries/Periodical schema | — | pending | Not assigned (optional refinement) |
 | SEO-08 | 260 titles over 70 characters | — | pending | Not assigned. The KPI Diagnostic seo_title proposal waits for the author (tools-guide-and-pdf-check.md §3) |
-| ARCH-01 | English-only 404 for DE/SQ paths | — | pending | Not assigned; `src/404.njk` unchanged |
+| ARCH-01 | English-only 404 for DE/SQ paths | — | fixed | 7 November 2026: the 404 page on a /de/ or /sq/ address puts that language first: heading, page title and lang (js/lost.js; tests/locale-and-404.test.cjs). Before: Not assigned; `src/404.njk` unchanged |
 | ARCH-02 | Thin hub pages | — | no change needed | Audit: "Mostly by design … Suggested: none required" |
 | ARCH-03 | Field notes have no own URLs | — | no change needed | Audit: OPINION/design choice, "not a defect if intended; do not split without a reason" |
 | P2A-01 | Example rows become real data | T-01 | fixed | `45f617fe` · tests/examples-never-mix.test.cjs |
@@ -205,7 +207,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P2B-15 | ABC ties put a tail into A | (P3) | fixed | `d45ba43d` · tests/inventory-abc-ties.test.cjs |
 | P2B-16 | Gage R&R α 0.05 vs "Minitab parity" | (P3) | no change needed | STATUS.md: Minitab's documented default is 0.05; code and comment agree |
 | P2B-17 | Two Hoshin exports, same file name | (P3) | fixed | Not a defect (same table byte for byte, STATUS.md); the author chose one set of buttons: `de7fa091` · tests/owner-decisions.test.cjs |
-| P2B-18 | Export polish: DE Time Study CSV dot decimal; `'` in XLSX strings; long FMEA token prints past the page | — | pending | No commit cites P2B-18; not assigned. Whether `bf3e2c51` (new standard-time column) changed the CSV decimal mark is not verified |
+| P2B-18 | Export polish: DE Time Study CSV dot decimal; `'` in XLSX strings; long FMEA token prints past the page | — | fixed | 7 November 2026: the German standard-time CSV writes its outliers with a decimal comma (tests/time-study.test.cjs, failing on the old code); the XLSX keeps formula-like text as text through the quotePrefix style instead of a visible apostrophe (tests/xlsx.test.cjs); a long unbroken token breaks inside its FMEA cell in print (table 998 px instead of 2,219 px in the check). Before: No commit cites P2B-18; not assigned. Whether `bf3e2c51` (new standard-time column) changed the CSV decimal mark is not verified |
 | P2B-19 | Per-language storage keys silo the work | — | fixed (pointer) | 3 November 2026: each language still keeps its own copy (the names in it are that language's words), but the work no longer looks lost: a tool whose own language holds no work of the visitor's says under its title where the work is kept and links to that page (`js/work-elsewhere.js`, keys from `src/_data/workKeys.js`, 35 tools; the 13 log tools already said so in their log, and `ToolKit.otherLogs` now counts only the visitor's own entries). An example is no work. Tests: tests/work-elsewhere.test.cjs, tests/pulse-tools.test.cjs. Merging the copies into one is not done: it would need language-neutral names in every tool |
 | P2C-01 | ATS score rewards filler | T-07 | fixed | `0f80fffa` · tests/ats-match.test.cjs |
 | P2C-02 | CV import corrupts own PDF | T-08 | fixed | `9a72c2de` · tests/cv-import-pdf.test.cjs |
@@ -222,7 +224,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P2C-13 | Coaching import not idempotent; wrong message | (P3) | fixed | `7fed9cfc`, `68bd1260` · tests/coaching-import.test.cjs, tests/owner-decisions.test.cjs |
 | P2C-14 | Cover-letter example fails its own check | (P3) | fixed | `2309b507` · tests/cover-letter-example.test.cjs |
 | P2C-15 | docs/COACHING_PLATFORM.md stale | (P3) | fixed | `ddd6b6cc` (a document; no test) |
-| P2C-16 | Smaller robustness: import sizes, SW cache, newsletter no-cors, mailto length, annotation ids | — | partly fixed | JSON imports refused over the limit: `9e07002f`, `eb588d94` · tests/import-size.test.cjs; DOCX/XLSX by `19cf45d8`. Remains (no commit): PDF import read whole, service-worker cache without cap, newsletter "sent" on rejection, long mailto bodies, annotation id collisions |
+| P2C-16 | Smaller robustness: import sizes, SW cache, newsletter no-cors, mailto length, annotation ids | — | fixed | 7 November 2026: PDF and Word imports over 20 MB are refused unread (tests/import-size.test.cjs); the offline copy keeps at most 200 pictures without a version, the oldest go (tests/sw-eviction.test.cjs); the newsletter note no longer says an email "just arrived" (no-cors cannot see a refusal); a mail link past 1,800 characters keeps its beginning, ends with a note and the status says to copy the message (tests/your-challenge.test.cjs); annotation ids without an id come from the date and the whole text (tests/chart-interaction.test.cjs). Before: JSON imports refused over the limit: `9e07002f`, `eb588d94` · tests/import-size.test.cjs; DOCX/XLSX by `19cf45d8`. Remains (no commit): PDF import read whole, service-worker cache without cap, newsletter "sent" on rejection, long mailto bodies, annotation id collisions |
 | PM-1 | Home canvas saturates the main thread | M-01 | partly fixed | `ba1c7ee0`; the larger gain is the approval patch (see M-01) |
 | PM-2 | Pause leaves box-shadow motion running | M-02 | fixed | `972b58e7` · tests/browser/motion.spec.mjs |
 | PM-3 | Pause only on home, not remembered | M-03 | fixed | `972b58e7` · tests/browser/motion.spec.mjs |
@@ -237,8 +239,8 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | PM-12 | Heading order skip in chart legends | (P3) | fixed | `4f49f830` · tests/browser/a11y-pages.spec.mjs (same look, measured) |
 | PM-13 | Typography differs by platform; Inter never loaded on screen | — | needs author approval | Design decision ("decide deliberately", audit); not taken up in any phase |
 | PM-14 | All tools' CSS in one 436 KB render-blocking file | — | pending | Optional refinement; not assigned |
-| PM-15 | CSP gaps; no HSTS/frame-ancestors on GitHub Pages | — | pending | Not assigned. The meta-tag parts (img-src scope, form-action, referrer) are code; HSTS and frame-ancestors need a proxy or the owner's acceptance of the risk |
-| PM-16 | Smaller motion/UX notes (smooth scrollIntoView, glide override, hidden live regions, "Save for later" pill) | — | partly fixed | Smooth scrollIntoView under reduced motion: reproduced once reduced motion was really emulated, fixed `502f72df` · tests/browser/motion.spec.mjs; glide override ends with the M-06 patch; live regions and the pill: not changed |
+| PM-15 | CSP gaps; no HSTS/frame-ancestors on GitHub Pages | — | partly fixed | 7 November 2026: in the meta policy: Google's icon origin only on the CV Builder, form-action only to this site and the providers in site.json, a referrer policy on every page, a policy on the offline page (tests/csp.test.cjs). Remains: HSTS and frame-ancestors need a proxy in front of GitHub Pages or the owner's acceptance of the risk; style-src keeps 'unsafe-inline' (inline style attributes for role colours and SVG charts). Before: Not assigned. The meta-tag parts (img-src scope, form-action, referrer) are code; HSTS and frame-ancestors need a proxy or the owner's acceptance of the risk |
+| PM-16 | Smaller motion/UX notes (smooth scrollIntoView, glide override, hidden live regions, "Save for later" pill) | — | fixed | 7 November 2026: the status lines of the newsletter and feedback forms stay in the page, empty, and only their text changes (tests/newsletter.test.cjs); "Save for later" stays on one line and goes under the byline below 560 px (checked at 390 and 1280 px). Before: Smooth scrollIntoView under reduced motion: reproduced once reduced motion was really emulated, fixed `502f72df` · tests/browser/motion.spec.mjs; glide override ends with the M-06 patch; live regions and the pill: not changed |
 | P4-01 | German reflections switch Sie/du | E-02 | fixed | `593cb4f3` · tests/register.test.cjs |
 | P4-02 | Career timeline contradicts itself | E-03 | needs author approval | `a2e2812c`, timeline-contradictions.md |
 | P4-03 | Reflections on one rhetorical template | E-08 | needs author approval | albanian-proposals.md §1 option B |
@@ -265,7 +267,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P5-07 | DE treatise Vol 4 garbles a caveat | (P3) | fixed | `284fcdac`, `616cac0c` · tests/publication-colophon.test.cjs ("treatise Vol 4 in German keeps the caveat") |
 | P5-08 | PDF accessibility and metadata | (P3) | partly fixed | `39666489` (Author, Creator, /Lang via scripts/pdf-meta.py), reprint `a1517ed5`; checked with pdftotext (management-review.md §7), no automated test. Remains: tagged PDF, outline, clickable source links |
 | P5-09 | No lastmod for magazine URLs | (SEO-05) | fixed | `e204acc5` · tests/publication-dates.test.cjs |
-| P5-10 | Chart-note test does not test the claim | CI-03 | pending | tests/weekly.test.cjs:114 unchanged (`note.length > 20`) |
+| P5-10 | Chart-note test does not test the claim | CI-03 | fixed | 7 November 2026: see CI-03: tests/weekly.test.cjs checks the claim on all 624 chart notes, with a negative case. Before: tests/weekly.test.cjs:114 unchanged (`note.length > 20`) |
 | P5-11 | Citation slips: Nos. 21, 75, special edition | (P3) | fixed | `c9a75002` · tests/publication-colophon.test.cjs (No. 21), tests/corrections-register.test.cjs (register lists every dated correction); sources checked: management-review.md §2 |
 | P5-12 | Cover figures are study counts or model outputs (OPINION) | — | needs author approval | Editorial choice; not taken up in any phase |
 | P6-01 | Back-cover blurb EN vs DE | B-01 | needs author approval | albanian-proposals.md §8.1 |
@@ -281,7 +283,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P7-05 | "Start again" only stop; resume can skip a sentence | (P3) | fixed | `4eceb400` · tests/listen-real-pages.test.cjs (generation ids; Chrome-like and late-"end" stubs). Other engines not verified |
 | P7-06 | Podcast loudness below −16 LUFS; +0.6 dBTP | (P3) | pending | Not assigned; `scripts/audio.mjs` and the MP3s unchanged |
 | P7-07 | Re-encode deletes corrections | (P3) | pending | Not assigned; `scripts/audio.mjs` unchanged |
-| P7-08 | Three feeds share one title; lastBuildDate | (P3) | pending | Not assigned |
+| P7-08 | Three feeds share one title; lastBuildDate | (P3) | fixed | 7 November 2026: the German and Albanian feeds carry their language in the title; lastBuildDate is the latest episode or correction, whichever is later (tests/podcast.test.cjs). Before: Not assigned |
 | P7-09 | Live MP3s served as `audio/mp3` | (P3) | no change needed | Audit: "GitHub Pages decides it; podcast apps tolerate it … Note only" |
 
 ---

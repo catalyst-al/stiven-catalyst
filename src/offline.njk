@@ -8,6 +8,9 @@ eleventyExcludeFromCollections: true
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex">
+  {#- No script, styles inline, nothing from elsewhere (audit PM-15: the offline page had no policy). #}
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Offline | Stiven Catalyst</title>
   <meta name="description" content="This page is not saved on this device yet. Open it once with a connection and it will be here next time.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">

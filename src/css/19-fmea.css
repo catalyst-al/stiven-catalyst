@@ -100,6 +100,9 @@
   .fm-results .dl-table-wrap { max-height: none; overflow: visible; border: 0; }
   .fm-sheet-table { font-size: 7.5pt; }
   .fm-sheet-table :is(th, td) { padding: 3px 4px; min-width: 0; max-width: none; white-space: normal; border-bottom: 1px solid #bbb; }
+  /* A long unbroken token (a URL, a part number run together) breaks inside its cell instead of pushing the sheet past
+     the page edge (audit P2B-18); words that fit still break only between words. */
+  .fm-sheet-table td { overflow-wrap: anywhere; }
   .fm-sheet-table thead th { position: static; font-size: 6.5pt; letter-spacing: .04em; }
   .fm-paper-a3 .fm-sheet-table { font-size: 9.5pt; }
   .fm-paper-a3 .fm-sheet-table thead th { font-size: 8pt; }

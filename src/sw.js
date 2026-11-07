@@ -153,6 +153,19 @@ const collect = async (cache) => {
     if (!isVersioned(url) || used.has(key.url) || latest.has(key.url) || spared.has(key.url)) continue;
     await cache.delete(key);
   }
+  await trimPictures(cache);
+};
+// Pictures without a version (the photos and covers of the pages read) are the copy's bulk and were kept forever
+// (audit P2C-16): past MAX_PICTURES the oldest go, the newest stay. No page needs them to open (they are not among
+// the files a kept page must have), and one seen again online is kept again.
+const MAX_PICTURES = 200;
+const PICTURE = /\.(?:png|jpe?g|webp|gif|avif|svg)$/i;
+const trimPictures = async (cache) => {
+  const pictures = (await cache.keys()).filter((key) => {
+    const url = new URL(key.url);
+    return PICTURE.test(url.pathname) && !isVersioned(url) && !PRECACHE.includes(url.pathname);
+  });
+  for (const key of pictures.slice(0, Math.max(0, pictures.length - MAX_PICTURES))) await cache.delete(key);
 };
 // A versioned file fetched for a page that is not a cached document (a script's own import): remembered as the
 // latest of its path, so collection keeps it and drops its older versions.
@@ -407,5 +420,5 @@ self.onnotificationclick = (event) => {
 };
 
 // For the tests (tests/offline.test.cjs, tests/reminders.test.cjs).
-self.SwKit = { CACHE, PRECACHE, KEPT, REFS, isVersioned, assetsOf, lazyOf, settings, idle: () => chain, readRefs, collect, keep };
+self.SwKit = { CACHE, PRECACHE, KEPT, REFS, MAX_PICTURES, isVersioned, assetsOf, lazyOf, settings, idle: () => chain, readRefs, collect, keep };
 self.SwReminders = { REMIND, remindCounts, remindUrl, remind };

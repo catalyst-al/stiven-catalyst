@@ -569,3 +569,21 @@ test('T17 (audit F6): while a Search refresh waits its grace period, the index t
   assert.ok(w.cached(`/search-index.json?${versionOf(2)}`));
   assert.deepEqual(w.requestsSince(from).filter((r) => r.startsWith('/search-index.json')), [`/search-index.json?${versionOf(2)}`], 'the index was fetched once, by the script, and never for a page');
 });
+
+// Audit P2C-16: pictures without a version were kept forever. Past MAX_PICTURES the oldest go at the next collection;
+// the precached icon, the versioned files and the pages stay.
+test('pictures past the cap: the oldest go at the next collection, pages, versioned files and the icon stay', async () => {
+  const w = worker();
+  await w.install();
+  await w.navigate('/tools/a/');
+  const max = w.self.SwKit.MAX_PICTURES;
+  for (let i = 0; i < max + 15; i++) await w.cache.put(abs(`/media/photo-${String(i).padStart(3, '0')}.jpg`), new FakeResponse('jpg', { contentType: 'image/jpeg' }));
+  await w.activate();
+  const keys = [...w.cache.store.keys()].map(pathOf);
+  const photos = keys.filter((path) => path.startsWith('/media/photo-'));
+  assert.equal(photos.length, max);
+  assert.equal(photos[0], '/media/photo-015.jpg', 'the oldest fifteen went');
+  assert.ok(keys.includes('/favicon.svg'), 'the precached icon stays');
+  assert.ok(keys.includes('/tools/a/'), 'the page stays');
+  assert.ok([...w.cache.store.keys()].some((url) => /\/js\/a\.js\?v=/.test(url)), 'its versioned script stays');
+});

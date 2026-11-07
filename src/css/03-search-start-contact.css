@@ -314,6 +314,9 @@
 }
 .newsletter-row:not([hidden]) ~ .newsletter-status { margin-top: 14px; }
 .newsletter-status a { border-bottom: 1px solid currentColor; }
+/* The status lines stay in the page, empty, so a screen reader announces the text when it is set (audit PM-16: they were
+   hidden and shown in the same moment, which some readers do not announce). Empty, they take no room. */
+.newsletter-status:empty, .newsletter-row ~ .newsletter-status:empty, .tf-status:empty { margin: 0; padding: 0; border: 0; }
 
 .form-note {
   margin: 14px 0 0 18px;
