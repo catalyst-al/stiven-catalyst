@@ -100,7 +100,7 @@
     <a class="text-link" href="{{ '/magazine/from-the-floor.html' | local(lang) }}">{{ magazine.names[ml].name }}: {{ magazine.archive[ml].all }} ({{ magazine.issues | length }}) <span aria-hidden="true">→</span></a>
   </nav>
   <div class="shell publications-more">
-    {{ filter.more(P) }}
+    {{ filter.more(P, lang) }}
   </div>
 <script src="{{ '/js/weekly.js' | assetUrl }}" defer></script>
 {% include "partials/newsletter.njk" %}

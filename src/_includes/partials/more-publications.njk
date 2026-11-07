@@ -1,0 +1,12 @@
+{#- After a reader with no series of its own (the book, the Management Review of September 2026): the next publication
+    (nextPub, from the "nextPublication" filter) and the list of all of them. -#}
+{%- if nextPub %}
+  <section class="shell issue-more" id="more-publications" aria-labelledby="more-publications-title">
+    <p class="kicker">{{ "Publications" | t(lang) }}</p>
+    <h2 id="more-publications-title">{{ "Read another publication" | t(lang) }}</h2>
+    <div class="issue-more-list">
+      {%- include "partials/next-publication-card.njk" %}
+    </div>
+    <a class="text-link" href="{{ '/publications.html' | local(lang) }}">{{ "All publications" | t(lang) }}</a>
+  </section>
+{%- endif %}

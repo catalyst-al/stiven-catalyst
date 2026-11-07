@@ -39,7 +39,7 @@
       </li>
       {%- endfor %}
     </ol>
-    {{ filter.more(A) }}
+    {{ filter.more(A, lang) }}
     <p class="treatise-monthly">{{ A.monthly }} <a class="text-link" href="{{ '/magazine/management-review.html' | local(lang) }}">{{ A.monthly_link }}</a></p>
   </section>
 <script src="{{ '/js/weekly.js' | assetUrl }}" defer></script>
