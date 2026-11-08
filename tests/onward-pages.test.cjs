@@ -44,3 +44,26 @@ test('the projects page ends with the way on: the tools, essay 1 and the newest 
     assert.match(links[2], new RegExp(`^${prefix}/magazine/management-review-nr-\\d+\\.html$`));
   }
 });
+
+test('the homepage offers to continue where the reader left off, and nothing on a first visit', () => {
+  const order = [
+    { s: 'one', t: 'Essay one', u: '/insights/one/', k: 'Essay', d: 'First.' },
+    { s: 'two', t: 'Essay two', u: '/insights/two/', k: 'Essay', d: 'Second.' },
+    { s: 'three', t: 'Reflection three', u: '/reflections/three/', k: 'Reflection', d: '' },
+  ];
+  const page = (reading) => {
+    const dom = new JSDOM(`<body><section data-home-continue hidden data-continue-label="Continue" data-next-label="Up next" data-read-label="{p}% read">
+      <p data-home-continue-kicker></p><a href="#" data-home-continue-link><small data-home-continue-meta></small><strong data-home-continue-title></strong><span data-home-continue-summary></span></a>
+      <script type="application/json" data-home-continue-data>${JSON.stringify(order)}</script></section></body>`, { url: 'https://example.test/', runScripts: 'outside-only' });
+    if (reading) dom.window.localStorage.setItem('sc-reading', JSON.stringify(reading));
+    dom.window.eval(fs.readFileSync('src/js/home-continue.js', 'utf8'));
+    const box = dom.window.document.querySelector('[data-home-continue]');
+    return { hidden: box.hidden, kicker: box.querySelector('[data-home-continue-kicker]').textContent, href: box.querySelector('a').getAttribute('href'), meta: box.querySelector('small').textContent };
+  };
+  assert.equal(page(null).hidden, true, 'a first visit sees nothing');
+  const begun = page({ one: { p: 1, done: true, t: 1 }, three: { p: 0.4, done: false, t: 3 }, two: { p: 0.2, done: false, t: 2 } });
+  assert.deepEqual(begun, { hidden: false, kicker: 'Continue', href: '/reflections/three/', meta: 'Reflection · 40% read' });
+  const finished = page({ one: { p: 1, done: true, t: 5 } });
+  assert.deepEqual(finished, { hidden: false, kicker: 'Up next', href: '/insights/two/', meta: 'Essay' });
+  assert.equal(page({ one: { p: 1, done: true, t: 1 }, two: { p: 1, done: true, t: 2 }, three: { p: 1, done: true, t: 3 } }).hidden, true, 'nothing left to read');
+});

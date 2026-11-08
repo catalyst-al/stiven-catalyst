@@ -1032,3 +1032,9 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   text-transform: uppercase;
 }
 
+
+/* "Continue where you left off" under the hero, for a returning reader (partials/home-continue.njk). The card is the
+   one that ends an essay (.essay-series-next). */
+.home-continue { margin: 28px auto 0; }
+.home-continue[hidden] { display: none; }
+.home-continue .kicker { margin: 0 0 14px; }
