@@ -9,16 +9,24 @@ const path = require('node:path');
 const built = (file) => fs.readFileSync(path.join('_site', file), 'utf8');
 const onward = (html) => html.match(/<a class="book-onward" href="([^"]+)"/)?.[1];
 
-test('the newest issue of each publication leads into the next one', { skip: !fs.existsSync('_site/sq/books/mall-per-durresin.html') }, () => {
+const data = async (name) => {
+  const mod = await import(path.resolve(`src/_data/${name}.js`));
+  return typeof mod.default === 'function' ? mod.default() : mod.default;
+};
+
+test('the newest issue of each publication leads into the next one', { skip: !fs.existsSync('_site/sq/books/mall-per-durresin.html') }, async () => {
+  // The newest of each series, from the data, so the test holds as new issues come out.
+  const [weekly, magazine, treatise, review] = await Promise.all(['weekly', 'magazine', 'treatise', 'review'].map(data));
+  const at = (slug) => `/sq/magazine/${slug}.html`;
   const chain = [
-    ['sq/magazine/management-review-2026-09.html', '/sq/magazine/management-review-nr-01.html'],
-    ['sq/magazine/management-review-nr-100.html', '/sq/magazine/nga-terreni-01.html'],
-    ['sq/magazine/nga-terreni-02.html', '/sq/magazine/operational-treatise-vol-01.html'],
-    ['sq/magazine/operational-treatise-vol-13.html', '/sq/books/mall-per-durresin.html'],
-    ['sq/books/mall-per-durresin.html', '/sq/magazine/management-review-2026-09.html'],
+    [at(review.slug), at(weekly.issues[0].slug)],
+    [at(weekly.issues.at(-1).slug), at(magazine.issues[0].slug)],
+    [at(magazine.issues.at(-1).slug), at(treatise.volumes[0].slug)],
+    [at(treatise.volumes.at(-1).slug), '/sq/books/mall-per-durresin.html'],
+    ['/sq/books/mall-per-durresin.html', at(review.slug)],
   ];
   for (const [page, next] of chain) {
-    const html = built(page);
+    const html = built(page.slice(1));
     assert.equal(onward(html), next, `${page}: at the end of the reader`);
     assert.match(html, new RegExp(`<a class="issue-more-card" href="${next}">[\\s\\S]*?Botimi i radhës`), `${page}: under the text`);
   }

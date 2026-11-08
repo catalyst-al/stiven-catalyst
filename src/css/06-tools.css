@@ -629,6 +629,10 @@ main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
 .dm-case p:last-child { margin: 0; color: var(--muted); font-size: 19px; }
 
 .dm-module { display: grid; gap: 24px; padding: 70px 0 20px; scroll-margin-top: 80px; }
+/* Under each step: back to the one before and on to the next (the next on the right, first in a phone column). */
+.dm-module-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; padding-top: 6px; }
+.dm-module-nav [rel="prev"] { margin-right: auto; }
+@media (max-width: 640px) { .dm-module-nav { flex-direction: column-reverse; } .dm-module-nav a { justify-content: center; text-align: center; } .dm-module-nav [rel="prev"] { margin-right: 0; } }
 .dm-module + .dm-module { border-top: 1px solid var(--line); }
 .dm-module-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 26px; align-items: start; }
 .dm-letter {
@@ -872,7 +876,7 @@ select.sh-in { cursor: pointer; }
   .has-result .tool-layout { display: none; }
   .statement, .result-card { break-inside: avoid; }
   .field input, .field textarea { border-color: #bbb; }
-  .dl-setup, .sc-hit, .sc-tooltip, .dm-nav, .sh-side, .sh-history, .sh-output .section-heading p, .lang-switch { display: none !important; }
+  .dl-setup, .sc-hit, .sc-tooltip, .dm-nav, .dm-module-nav, .sh-side, .sh-history, .sh-output .section-heading p, .lang-switch { display: none !important; }
   .sh-output { padding: 0; border: 0; }
   .sh-output-grid { display: block; }
   .print-charter main > :not(.dm-charter) { display: none !important; }
