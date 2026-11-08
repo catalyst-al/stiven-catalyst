@@ -24,3 +24,32 @@
     else select();
   });
 })();
+
+// The episodes one after another: when one ends, the next in the list starts by itself and comes into view (not
+// after the last, so the page does not play on forever), and the lock screen's, the car's and the headphones'
+// "next" and "previous" go from episode to episode. A browser that refuses to start it leaves the next one ready
+// under its own play button.
+(() => {
+  const episodes = [...document.querySelectorAll(".podcast-episode")];
+  if (episodes.length < 2) return;
+  const mediaOf = (episode) => episode?.querySelector("[data-audio-media]");
+  const start = (episode) => {
+    if (!episode) return;
+    episode.scrollIntoView({ block: "center", behavior: document.documentElement.dataset.motion === "paused" ? "auto" : "smooth" });
+    const toggle = episode.querySelector("[data-audio-toggle]");
+    // The player's own button, so the place reached and the speed are kept as when the listener presses it.
+    if (toggle && !toggle.closest("[hidden]")) toggle.click();
+    else mediaOf(episode)?.play()?.catch(() => {});
+  };
+  episodes.forEach((episode, i) => {
+    const media = mediaOf(episode);
+    if (!media) return;
+    media.addEventListener("ended", () => { if (episodes[i + 1]) start(episodes[i + 1]); });
+    media.addEventListener("play", () => {
+      if (!("mediaSession" in navigator)) return;
+      const on = (action, handler) => { try { navigator.mediaSession.setActionHandler(action, handler); } catch { /* not supported */ } };
+      on("nexttrack", episodes[i + 1] ? () => { media.pause(); start(episodes[i + 1]); } : null);
+      on("previoustrack", episodes[i - 1] ? () => { media.pause(); start(episodes[i - 1]); } : null);
+    });
+  });
+})();

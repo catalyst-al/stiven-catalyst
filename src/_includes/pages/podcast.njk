@@ -72,6 +72,12 @@
           {%- set artwork = e.image %}
           {%- set compact = true %}
           {%- include "partials/audio-player.njk" %}
+          {#- The episode after this one in the list (after the last, the first), so the listener goes on without
+              scrolling for it; when an episode ends, js/podcast.js starts the next by itself. #}
+          {%- set nextEpisode = P.list[loop.index] if not loop.last else (P.list[0] if P.list.length > 1 else null) %}
+          {%- if nextEpisode %}
+          <p class="podcast-next"><a class="text-link" href="#episode-{{ nextEpisode.slug }}" data-podcast-next="episode-{{ nextEpisode.slug }}">{{ "Next episode" | t(lang) }}: {{ nextEpisode.title }} <span aria-hidden="true">→</span></a></p>
+          {%- endif %}
         </div>
       </li>
       {%- endfor %}

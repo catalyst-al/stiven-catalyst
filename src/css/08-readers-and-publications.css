@@ -947,6 +947,8 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .weekly-more:not([hidden]) + .filter-onward { margin-top: 20px; }
 /* Under the essays and the reflections: the other kind of reading. */
 .filter-cross { display: flex; justify-content: center; margin: 32px 0 0; }
+/* Under an episode of the podcast: the next one (pages/podcast.njk). */
+.podcast-next { margin: 14px 0 0; font-size: 15px; }
 .weekly-special { border-top: 1px solid var(--line); }
 
 /* The operational treatise: its long name as a serif title on the list of volumes, the three layers every chapter is
