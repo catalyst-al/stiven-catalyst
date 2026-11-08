@@ -5733,6 +5733,9 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 
 .wk-svg { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--sans); }
 .wk-grid { stroke: var(--line); stroke-width: .6; }
+/* The scale of a share chart that does not run to 100 % (audit P5-06). */
+line.wk-scale { stroke: var(--muted); }
+line.wk-scale.is-top { stroke-dasharray: 2 2; }
 .wk-axis { fill: var(--muted); font-size: 7.4px; font-weight: 600; }
 .wk-label { fill: var(--ink); font-size: 8.2px; font-weight: 700; }
 .wk-value { fill: var(--ink); font-size: 8.4px; font-weight: 800; }

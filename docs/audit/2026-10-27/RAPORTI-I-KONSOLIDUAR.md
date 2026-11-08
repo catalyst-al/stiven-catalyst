@@ -83,10 +83,10 @@ Numëruar sërish më 7 nëntor 2026, pas rregullimeve të P2A-15, P2B-19, P2B-1
 
 | Status | Table A (58 consolidated findings) | Table B (122 phase-level IDs, 123 rows) |
 |---|---|---|
-| fixed | 45 | 78 |
+| fixed | 45 | 79 |
 | partly fixed | 2 | 9 |
 | needs author approval | 10 | 19 |
-| pending | 1 | 9 |
+| pending | 1 | 8 |
 | not verified | 0 | 0 |
 | no change needed | 0 | 8 |
 | **total** | **58** | **123** |
@@ -263,7 +263,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P5-03 | Method statement overclaims | E-05 | fixed | `c9a75002` · tests/publication-colophon.test.cjs |
 | P5-04 | PDFs carry no AI disclosure | E-06 | fixed | `c9a75002`, `a1517ed5` · tests/publication-colophon.test.cjs, tests/pdf-matches-html.test.cjs |
 | P5-05 | Chart labels overflow on phones | E-07 | fixed | `5824bd06` · tests/browser/chart-labels.spec.mjs |
-| P5-06 | Percentage bars on truncated scales | (P3) | pending | Not assigned; the wide charts are unchanged (phase3/charts.md) |
+| P5-06 | Percentage bars on truncated scales | (P3) | fixed | 8 November 2026: a share chart whose scale stops short of 100 % (or starts above 0) shows its scale, written as its figures are ("0%" … "40%", "40 %" in German): a line with both ends under bars, pairs and dumbbells, a dashed top line with its value over columns (lib/weekly/charts.js; tests/weekly.test.cjs). In 44 Management Review issues (55 charts in English), treatise volumes 6 and 13 and From the Floor 1 and 2, in three languages; the pages measured again (scripts/page-fit.mjs, all fit; the scale takes 11 units so that From the Floor 1, page 6, with two scaled charts, still fits) and their 144 PDFs printed again (scripts/weekly.mjs, treatise.mjs, magazine.mjs; tests/pdf-matches-html.test.cjs checks every page's text against the site). Before: Not assigned; the wide charts are unchanged (phase3/charts.md) |
 | P5-07 | DE treatise Vol 4 garbles a caveat | (P3) | fixed | `284fcdac`, `616cac0c` · tests/publication-colophon.test.cjs ("treatise Vol 4 in German keeps the caveat") |
 | P5-08 | PDF accessibility and metadata | (P3) | partly fixed | `39666489` (Author, Creator, /Lang via scripts/pdf-meta.py), reprint `a1517ed5`; checked with pdftotext (management-review.md §7), no automated test. Remains: tagged PDF, outline, clickable source links |
 | P5-09 | No lastmod for magazine URLs | (SEO-05) | fixed | `e204acc5` · tests/publication-dates.test.cjs |

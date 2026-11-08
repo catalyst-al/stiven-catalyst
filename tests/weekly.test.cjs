@@ -339,3 +339,33 @@ test('Field Notes shows a month and twelve notes at a time, and a link to one no
   // The script opens the month and the page of a note named in the address.
   assert.match(fs.readFileSync('src/js/filter.js', 'utf8'), /location\.hash[\s\S]*linked\.dataset\.month/);
 });
+
+// Audit P5-06: percentage bars on a scale short of 100 % (a bar of 30 % three quarters full on a scale of 40 %) had no
+// axis. Such a chart now shows its scale, written as its figures are, in the print and on the phone.
+test('a share chart on a scale short of 100 % shows its scale; a full scale or a count draws none', async () => {
+  const { chartMarkup, NARROW } = await import('../lib/weekly/charts.js');
+  const ends = (svgText) => [...svgText.matchAll(/class="wk-axis wk-scale"[^>]*>([^<]*)</g)].map((m) => m[1]);
+  const bars = { type: 'hbars', label: 'x', max: 40, items: [{ k: 'Albania', v: 32, n: '32%' }, { k: 'Europe', v: 12, n: '12%' }] };
+  assert.deepEqual(ends(chartMarkup(bars)), ['0%', '40%']);
+  assert.deepEqual(ends(chartMarkup(bars, NARROW)), ['0%', '40%'], 'on the phone too');
+  assert.deepEqual(ends(chartMarkup({ ...bars, items: bars.items.map((item) => ({ ...item, n: `${item.v} %` })) })), ['0 %', '40 %'], 'German figures, German scale');
+  assert.deepEqual(ends(chartMarkup({ ...bars, max: 100 })), [], 'a full scale needs none');
+  assert.deepEqual(ends(chartMarkup({ ...bars, max: 70, items: [{ k: 'Change', v: 12, n: '+12%' }] })), ['0%', '70%'], 'the sign of a change is not the scale\'s');
+  assert.deepEqual(ends(chartMarkup({ ...bars, items: [{ k: 'Routes', v: 32, n: '32' }] })), [], 'a count needs none');
+  assert.deepEqual(ends(chartMarkup({ type: 'pairs', label: 'x', from: '2010', to: '2012', max: 90, rows: [{ k: 'All', a: 83, an: '83%', b: 88, bn: '88%' }] })), ['0%', '90%']);
+  assert.deepEqual(ends(chartMarkup({ type: 'dumbbell', label: 'x', from: '2022', to: '2025', min: 10, max: 40, rows: [{ k: 'Managers', a: 31, an: '31%', b: 22, bn: '22%' }] })), ['10%', '40%']);
+  assert.deepEqual(ends(chartMarkup({ type: 'columns', label: 'x', max: 25, items: [{ k: '2009', v: 12, n: '12%' }, { k: '2025', v: 20, n: '20%' }] })), ['25%'], 'columns: the top of the scale');
+  const weekly = await load();
+  for (const issue of weekly.issues) {
+    for (const lang of LANGS) {
+      for (const chart of issue[lang].charts) {
+        if (!['hbars', 'pairs', 'dumbbell'].includes(chart.type)) continue;
+        const figures = JSON.stringify(chart.items || chart.rows || []);
+        const short = (chart.max ?? 100) < 100 || (chart.min ?? 0) > 0;
+        if (!short || !figures.includes('%')) continue;
+        assert.match(chart.svg, /wk-scale/, `${issue.slug} ${lang} ${chart.type}: no scale`);
+        assert.match(chart.svgNarrow, /wk-scale/, `${issue.slug} ${lang} ${chart.type}: no scale on the phone`);
+      }
+    }
+  }
+});
