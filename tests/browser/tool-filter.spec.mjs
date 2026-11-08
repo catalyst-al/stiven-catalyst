@@ -123,8 +123,16 @@ test("a filtered tool's link opens the tool, and the role cards still lead to th
 });
 
 test("nothing typed leaves the page: no request, no storage, no change of address", async ({ page }) => {
-  await page.goto(PAGES.en);
-  await page.waitForLoadState("networkidle");
+  // Ready when the page has loaded and its filter answers, not when the network has been quiet for half a second: on a
+  // first visit the service worker keeps the role's tools in the background, so "networkidle" came after 1.2 s or, on
+  // a loaded runner, not within 30 s (CI run 861, 768 px dark). Requests still arriving after this point are recorded
+  // and must pass every check below.
+  await page.goto(PAGES.en, { waitUntil: "load" });
+  const ready = page.locator("[data-tool-filter-input]");
+  await ready.fill("zzqx");
+  await expect(page.locator("[data-tool-filter-count]")).toHaveText(/^0 /);
+  await ready.fill("");
+  await expect(page.locator("[data-tool-filter-count]")).toHaveText("59 tools");
   // Fictional saved work and a fictional hand-off note, to show the filter leaves them as they are.
   await page.evaluate(() => {
     localStorage.setItem("sc-actions", JSON.stringify([{ id: "fx1", title: "Fictional action: tidy the returns shelf" }]));
