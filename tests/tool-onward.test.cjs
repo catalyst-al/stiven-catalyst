@@ -22,3 +22,14 @@ test('every tool page leads on to the next tool, across the roles and round agai
   assert.match(built(`sq${lastOfFirstRole}index.html`), new RegExp(`Roli i radhës · ${families[1].name}`));
   assert.match(built('de/tools/andon/index.html'), /Tool \d+ von 59/);
 });
+
+test('each step of the DMAIC course leads on to the next step, and the last to the 8 wastes', { skip: !fs.existsSync('_site/sq/tools/six-sigma-dmaic/index.html') }, () => {
+  const html = built('sq/tools/six-sigma-dmaic/index.html');
+  const navs = html.match(/<nav class="dm-module-nav"[\s\S]*?<\/nav>/g) || [];
+  assert.equal(navs.length, 5);
+  const nexts = navs.map((nav) => nav.match(/<a class="button-primary" href="([^"]+)"/)[1]);
+  assert.deepEqual(nexts, ['#dm-measure', '#dm-analyze', '#dm-improve', '#dm-control', '#dm-wastes']);
+  assert.doesNotMatch(navs[0], /rel="prev"/);
+  assert.match(navs[1], /href="#dm-define" rel="prev"/);
+  assert.match(navs[1], /Hapi tjetër: A · Analizo/);
+});

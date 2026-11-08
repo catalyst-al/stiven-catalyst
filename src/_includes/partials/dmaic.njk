@@ -87,6 +87,21 @@
       <p class="form-note dm-score" data-score></p>
     </div>
   </div>
+
+  {#- After the step: on to the next one (after Control, the 8 wastes), and back to the one before, so the course reads
+      from step to step without going back up to the steps at the top. -#}
+  {%- set nextModule = cfg.modules[loop.index] if not loop.last else null %}
+  {%- set prevModule = cfg.modules[loop.index0 - 1] if not loop.first else null %}
+  <nav class="dm-module-nav" aria-label="{{ 'Course steps' | t(lang) }}">
+    {%- if prevModule %}
+    <a class="button-secondary" href="#dm-{{ prevModule.id }}" rel="prev"><span aria-hidden="true">←</span> {{ "Previous step" | t(lang) }}: {{ prevModule.letter }} · {{ prevModule.nav or prevModule.name }}</a>
+    {%- endif %}
+    {%- if nextModule %}
+    <a class="button-primary" href="#dm-{{ nextModule.id }}" rel="next">{{ "Next step" | t(lang) }}: {{ nextModule.letter }} · {{ nextModule.nav or nextModule.name }} <span aria-hidden="true">→</span></a>
+    {%- else %}
+    <a class="button-primary" href="#dm-wastes">{{ "Next" | t(lang) }}: {{ "8 wastes" | t(lang) }} <span aria-hidden="true">→</span></a>
+    {%- endif %}
+  </nav>
 </section>
 {%- endfor %}
 
