@@ -104,3 +104,40 @@
 </section>
 
 {% include "partials/book-feature.njk" %}
+
+{#- After the author and the book, the way on: where a new reader begins, the first essay, the built work and a word
+    to the author, so the page does not end with nowhere to go. -#}
+{%- set firstEssay = (collections["insights" + (lang | langSuffix)] | readingOrder(essaySeries, []))[0] %}
+<section class="shell issue-more about-next" aria-labelledby="about-next-title">
+  <p class="kicker">{{ "Continue reading" | t(lang) }}</p>
+  <h2 id="about-next-title">{{ "Where to go next" | t(lang) }}</h2>
+  <div class="issue-more-list">
+    <a class="issue-more-card" href="{{ '/start.html' | local(lang) }}">
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ "New to Stiven Catalyst" | t(lang) }}</span>
+        <span class="issue-more-title">{{ "Start here" | t(lang) }}</span>
+      </span>
+    </a>
+    {%- if firstEssay %}
+    <a class="issue-more-card" href="{{ firstEssay.url }}">
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ "Start with essay 1" | t(lang) }}</span>
+        <span class="issue-more-title">{{ firstEssay.data.title }}</span>
+        <span class="issue-more-meta">{{ essaySeries[0].name[lang or "en"] }}</span>
+      </span>
+    </a>
+    {%- endif %}
+    <a class="issue-more-card" href="{{ '/projects.html' | local(lang) }}">
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ "Built work" | t(lang) }}</span>
+        <span class="issue-more-title">{{ "Projects" | t(lang) }}</span>
+      </span>
+    </a>
+    <a class="issue-more-card" href="{{ '/contact.html' | local(lang) }}">
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ "Contact" | t(lang) }}</span>
+        <span class="issue-more-title">{{ "Write to me" | t(lang) }}</span>
+      </span>
+    </a>
+  </div>
+</section>
