@@ -1,5 +1,5 @@
-// The podcast episodes one after another (pages/podcast.njk, js/podcast.js): each episode links to the next one, and
-// when one ends the next starts by itself, but not after the last.
+// The way on from the podcast and the projects page: each podcast episode links to the next one and, when one
+// ends, the next starts by itself (pages/podcast.njk, js/podcast.js); the projects page ends with where to go next.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -31,4 +31,16 @@ test('each episode on the podcast page links to the next one', { skip: !fs.exist
   if (ids.length < 2) return;
   assert.deepEqual(nexts, ids.map((_, i) => ids[(i + 1) % ids.length]));
   assert.match(html, /Episodi i radhës: /);
+});
+
+test('the projects page ends with the way on: the tools, essay 1 and the newest issue', { skip: !fs.existsSync('_site/sq/projects.html') }, () => {
+  for (const [lang, prefix] of [['en', ''], ['sq', '/sq'], ['de', '/de']]) {
+    const html = fs.readFileSync(`_site${prefix || ''}/projects.html`, 'utf8');
+    const section = html.match(/<section class="shell issue-more projects-more"[\s\S]*?<\/section>/)?.[0];
+    assert.ok(section, `${lang}: the section is there`);
+    const links = [...section.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
+    assert.equal(links[0], `${prefix}/tools.html`);
+    assert.match(links[1], new RegExp(`^${prefix}/insights/[^/]+/$`));
+    assert.match(links[2], new RegExp(`^${prefix}/magazine/management-review-nr-\\d+\\.html$`));
+  }
 });
