@@ -304,6 +304,20 @@ export default function (eleventyConfig) {
     }
     return review && { url: localUrl(`/magazine/${review.slug}.html`, l), cover: magazinePages?.[review.slug]?.[l]?.pages?.[0] || null, label: label(review[l]?.name), title: review[l]?.theme, meta: review[l]?.date };
   });
+  // The reading order as the homepage's "Continue where you left off" needs it (partials/home-continue.njk): for each
+  // essay and reflection its key in "sc-reading" (the file slug, as js/article.js keeps it), title, address, kind
+  // and summary, in the page's language.
+  eleventyConfig.addFilter("readingList", (items, lang) => {
+    const l = lang || "en";
+    const t = (text) => (TRANSLATED.has(l) ? readUi(l)[text] ?? text : text);
+    return (items || []).map((item) => ({
+      s: item.fileSlug,
+      t: item.data.title,
+      u: item.url,
+      k: t(String(item.inputPath || "").includes("/reflections/") ? "Reflection" : "Essay"),
+      d: item.data.teaser || item.data.summary || "",
+    }));
+  });
   // The essays of one series (src/_data/essaySeries.json), and a series by its id or the one after it.
   eleventyConfig.addFilter("inSeries", (items, id) => (items || []).filter((item) => (item.data.series || "ten-years") === id));
   eleventyConfig.addFilter("seriesById", (all, id) => (all || []).find((entry) => entry.id === (id || "ten-years")) || null);

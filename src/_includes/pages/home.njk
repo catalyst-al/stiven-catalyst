@@ -11,6 +11,7 @@
     why, in this language. -#}
 {%- set picks = homeEssays.essays -%}
 {% include "partials/cosmos-hero.njk" %}
+{% include "partials/home-continue.njk" %}
 
 {#- Under the hero, a calm way in for someone new: where the writing comes from (the About page's own line) and two
     paths, the experience (Start here) or a problem at work (the tools, by role). -#}
@@ -139,3 +140,4 @@
 <script src="/js/notes-{{ lang or 'en' }}.js?v={{ dayNotes | noteDayData(lang) | stamp }}" defer></script>
 <script src="{{ '/js/note-of-the-day.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/share.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/home-continue.js' | assetUrl }}" defer></script>
