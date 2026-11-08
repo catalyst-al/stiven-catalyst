@@ -33,3 +33,17 @@ test('each step of the DMAIC course leads on to the next step, and the last to t
   assert.match(navs[1], /href="#dm-define" rel="prev"/);
   assert.match(navs[1], /Hapi tjetër: A · Analizo/);
 });
+
+test('the three career tools show the three as steps, the one on screen marked', { skip: !fs.existsSync('_site/sq/tools/ats-cv/index.html') }, () => {
+  const steps = ['/tools/cv-builder/', '/tools/ats-cv/', '/tools/cover-letter/'];
+  for (const lang of ['', 'sq/', 'de/']) {
+    steps.forEach((step, i) => {
+      const html = built(`${lang}${step.slice(1)}index.html`);
+      const nav = html.match(/<nav class="shell cv-steps"[\s\S]*?<\/nav>/)?.[0];
+      assert.ok(nav, `${lang}${step}`);
+      const links = [...nav.matchAll(/<a href="([^"]+)"( aria-current="page")?/g)];
+      assert.deepEqual(links.map((m) => m[1]), steps.map((s) => `/${lang}${s.slice(1)}`));
+      assert.deepEqual(links.map((m) => Boolean(m[2])), steps.map((_, j) => j === i));
+    });
+  }
+});
