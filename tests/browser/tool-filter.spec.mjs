@@ -128,11 +128,19 @@ test("nothing typed leaves the page: no request, no storage, no change of addres
   // a loaded runner, not within 30 s (CI run 861, 768 px dark). Requests still arriving after this point are recorded
   // and must pass every check below.
   await page.goto(PAGES.en, { waitUntil: "load" });
+  // The number of tools comes from the cards on the page, not from this file, so the test holds as tools are added.
+  const total = await page.locator(".family-section .tool-card").count();
+  expect(total, "the page lists its tools").toBeGreaterThan(0);
+  const count = page.locator("[data-tool-filter-count]");
+  await expect(count).toHaveText(new RegExp(`^${total}\\b`));
+  const atRest = await count.textContent();
   const ready = page.locator("[data-tool-filter-input]");
   await ready.fill("zzqx");
-  await expect(page.locator("[data-tool-filter-count]")).toHaveText(/^0 /);
+  await expect(count).toHaveText(/^0 /);
   await ready.fill("");
-  await expect(page.locator("[data-tool-filter-count]")).toHaveText("59 tools");
+  // Cleared: the count reads as it did before the search, and every card is shown again.
+  await expect(count).toHaveText(atRest);
+  await expect(visibleCards(page)).toHaveCount(total);
   // Fictional saved work and a fictional hand-off note, to show the filter leaves them as they are.
   await page.evaluate(() => {
     localStorage.setItem("sc-actions", JSON.stringify([{ id: "fx1", title: "Fictional action: tidy the returns shelf" }]));
