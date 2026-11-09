@@ -1,5 +1,5 @@
 ---
-title: 'Die Opferfalle: Warum die Schuld der anderen Ihr Leben nicht retten kann'
+title: 'Die Opferfalle: warum die Schuld der anderen Ihr Leben nicht retten kann'
 date: 2026-10-26
 status: published
 summary: 'Das System ist oft ungerecht. Doch wenn an allem die anderen schuld sind, sind Sie von jeder Pflicht zu handeln befreit, und Ihre Zukunft bleibt in ihren Händen.'

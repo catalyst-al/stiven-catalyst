@@ -82,3 +82,21 @@ test('each language reads its own edition and links the others', { skip: !hasSit
   assert.match(read('_site/books/mall-per-durresin.html'), /Chapter I</);
   assert.match(read('_site/de/books/mall-per-durresin.html'), /Kapitel I</);
 });
+
+// Audit P6-05: the translations said only "Translated from the Albanian". The edition line of each translation, and
+// the facts of its page, say it was translated with AI assistance and revised by the author; the original says nothing
+// of the kind.
+test('the translations say how they were made, in the PDF\'s edition line and on the page', () => {
+  const en = JSON.parse(fs.readFileSync('src/_data/books/en.json', 'utf8'));
+  const de = JSON.parse(fs.readFileSync('src/_data/books/de.json', 'utf8'));
+  const editionLine = (book) => JSON.stringify(book.text);
+  assert.match(editionLine(en), /Translated from the Albanian with AI assistance, revised by the author/);
+  assert.match(editionLine(de), /Aus dem Albanischen mit KI-Unterstützung übersetzt, vom Autor durchgesehen/);
+  assert.match(fs.readFileSync('scripts/book/en.txt', 'utf8'), /^edition: .*with AI assistance, revised by the author$/m);
+  const page = fs.readFileSync('src/_includes/pages/book.njk', 'utf8');
+  assert.match(page, /book\.language != "sq" %\}<div><dt>\{\{ "Translation"/);
+  for (const lang of ['de', 'sq']) {
+    const ui = JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'));
+    for (const key of ['Translation', 'with AI assistance', 'revised by the author']) assert.ok(ui[key], `${lang}: ${key}`);
+  }
+});

@@ -1,5 +1,5 @@
 ---
-title: 'Monopoli i informacionit: Kur fshehja e procesit shitet si pazëvendësueshmëri'
+title: 'Monopoli i informacionit: kur fshehja e procesit shitet si pazëvendësueshmëri'
 date: 2026-10-26
 status: published
 summary: 'Njeriu që mban të gjithë çelësat në xhep nuk është shtylla e kompanisë. Ai e mban sistemin peng, dhe mjaftojnë dy ditë sëmundje që gjithçka të paralizohet.'
@@ -9,7 +9,7 @@ description: 'Një reflektim për njeriun që fsheh procesin për t''u bërë i 
 
 Ekziston një figurë shumë e njohur në zyrat, hotelet dhe magazinat tona, një personazh që e gjen pothuajse në çdo sektor ku mungojnë rregullat e shkruara. Është njeriu që mban të gjithë çelësat në xhepin e tij.
 
-Ai është i vetmi që e di se ku ruhen fjalëkalimet e sistemit. Është i vetmi që e njeh numrin personal të furnitorit kyç. Është i vetmi që di se si printohet ai raporti i veçantë në orën pesë të mëngjesit dhe çfarë lëvizjeje magjike me tastierë duhet bërë kur kompjuteri bllokohet. Nëse e pyet me mirësjellje se si bëhet një procedurë, ai të përgjigjet me gjysmë fjalë, me udhëzime të turbullta, ose të thotë me një buzëqeshje misterioze: "Lëre aty, e bëj unë më vonë se është e ndërlikuar."
+Ai është i vetmi që e di se ku ruhen fjalëkalimet e sistemit. Është i vetmi që e njeh numrin personal të furnitorit kyç. Është i vetmi që di se si printohet ai raporti i veçantë në orën pesë të mëngjesit dhe çfarë lëvizjeje magjike me tastierë duhet bërë kur kompjuteri bllokohet. Nëse e pyet me mirësjellje se si bëhet një procedurë, ai të përgjigjet me gjysmë fjalë, me udhëzime të turbullta, ose të thotë me një buzëqeshje misterioze: „Lëre aty, e bëj unë më vonë se është e ndërlikuar.“
 
 Në pamje të parë, ky person duket si shtylla e palëkundur e kompanisë. Ai duket punëtor i palodhur, njeriu që nuk merr kurrë leje të plotë, ai që telefonon nga pushimet për të dhënë një kod urgjent dhe pa të cilin puna duket se nuk ecën dot përpara.
 

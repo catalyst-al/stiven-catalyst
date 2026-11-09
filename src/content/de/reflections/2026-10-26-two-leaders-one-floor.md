@@ -1,5 +1,5 @@
 ---
-title: 'Zwei Vorgesetzte auf demselben Boden: Die Ruhe der Regel gegen das Theater des Chaos'
+title: 'Zwei Vorgesetzte auf demselben Boden: die Ruhe der Regel gegen das Theater des Chaos'
 date: 2026-10-26
 status: published
 summary: 'Dasselbe Team, dasselbe Lager, zwei völlig verschiedene Schichten. Wer Lärm macht, wirkt leidenschaftlich; wer dem Prozess folgt, hält die Schicht auf den Beinen.'

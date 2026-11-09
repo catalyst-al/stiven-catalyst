@@ -1,5 +1,5 @@
 ---
-title: 'Das perfekte Alibi: Wenn das Versagen der Führung zur Faulheit eines Volkes erklärt wird'
+title: 'Das perfekte Alibi: wenn das Versagen der Führung zur Faulheit eines Volkes erklärt wird'
 date: 2026-10-25
 status: published
 summary: 'Derselbe Mensch, der hier als faul gilt, wird in München oder London zum Mustermitarbeiter. Was sich ändert, ist nicht das Blut, sondern das System.'

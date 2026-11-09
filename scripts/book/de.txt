@@ -19,7 +19,7 @@ dedication: Für die Freunde der Jahre, in denen unser größter Reichtum die Ze
 note-heading: ANMERKUNG ZUR ERZÄHLUNG
 note: Die Dialoge und einige szenische Details sind literarische Rekonstruktionen auf Grundlage der erzählten Erinnerungen, keine Transkriptionen. Die Bahnhofsszene in Deutschland ist ein literarisch imaginiertes Bild der Sehnsucht, keine belegte Episode. Es wurden keine Namen oder Biografien von Freunden hinzugefügt.
 note: Die Fotografien dieser Ausgabe begleiten die Erzählung; sie dokumentieren nicht unbedingt Ort oder Zeit der Szene.
-edition: 2026 / Dritte, überarbeitete Fassung / Aus dem Albanischen
+edition: 2026 / Dritte, überarbeitete Fassung / Aus dem Albanischen mit KI-Unterstützung übersetzt, vom Autor durchgesehen
 
 == 03
 contents: Inhalt

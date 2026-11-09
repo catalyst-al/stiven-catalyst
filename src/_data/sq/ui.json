@@ -7954,5 +7954,8 @@
   "the last {n} of {m} shown": "shfaqen {n} të fundit nga {m}",
   "This file is larger than 20 MB, far larger than any CV, so it was not read. Nothing was changed.": "Ky skedar është më i madh se 20 MB, shumë më i madh se çdo CV, ndaj nuk u lexua. Asgjë nuk ndryshoi.",
   "The message is longer than a mail link can carry: the email program opens with its beginning. Copy the whole message with the button below and paste it into the email, or send it to": "Mesazhi është më i gjatë se sa mban një lidhje emaili: programi i emailit hapet me fillimin e tij. Kopjo gjithë mesazhin me butonin më poshtë dhe ngjite në email, ose dërgoje te",
-  "[The rest did not fit in the mail link: use “Copy message” on the page.]": "[Pjesa tjetër nuk u fut në lidhjen e emailit: përdor “Kopjo mesazhin” në faqe.]"
+  "[The rest did not fit in the mail link: use “Copy message” on the page.]": "[Pjesa tjetër nuk u fut në lidhjen e emailit: përdor “Kopjo mesazhin” në faqe.]",
+  "Translation": "Përkthimi",
+  "with AI assistance": "me ndihmën e AI",
+  "revised by the author": "i rishikuar nga autori"
 }

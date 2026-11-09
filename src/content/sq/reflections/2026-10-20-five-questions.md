@@ -17,41 +17,41 @@ Nëse do të kishim guximin t'i hiqnim fasadën e gënjeshtërt këtyre intervis
 
 ## 1. Paga dhe matematika e pamundur
 
-Pronari të thotë: "Paga është pesëqind mijë lekë të vjetra, por po t'i japim mundësinë të rritesh bashkë me kompaninë."
+Pronari të thotë: „Paga është pesëqind mijë lekë të vjetra, por po t'i japim mundësinë të rritesh bashkë me kompaninë.“
 
-Pyetja e vërtetë që duhet të bësh: "A keni bërë ndonjëherë llogarinë se sa kushton të paguash dritat, ujin, ushqimin dhe barnat në këtë vend me pesëqind mijë lekë? Si mund të rritem me kompaninë kur mendja ime është te fakti se si do t'ia dal të mbyll muajin pa hyrë në borxhe?"
+Pyetja e vërtetë që duhet të bësh: „A keni bërë ndonjëherë llogarinë se sa kushton të paguash dritat, ujin, ushqimin dhe barnat në këtë vend me pesëqind mijë lekë? Si mund të rritem me kompaninë kur mendja ime është te fakti se si do t'ia dal të mbyll muajin pa hyrë në borxhe?“
 
 Në Shqipëri, shifra pesëqind mijë lekë është shndërruar në një lloj fiksioni ekonomik. Është shuma e caktuar sa për të thënë se nuk je pa punë, por jo aq sa për të jetuar me nder. Dhe kur kërkon llogari, të përgjigjen me fjalët e vjetra se tregu kaq e ka, se nuk ka para, se biznesi po vuan. Ndërkohë, makinat luksoze te dera e magazinës ndërrohen çdo dy vjet.
 
 ## 2. Puna gjashtë ditë në javë
 
-Pronari të thotë: "Kemi nevojë për përkushtim total, orari është nga e hëna në të shtunë."
+Pronari të thotë: „Kemi nevojë për përkushtim total, orari është nga e hëna në të shtunë.“
 
-Pyetja e vërtetë që duhet të bësh: "A e kuptoni se po më blini jo thjesht orët e punës, por të gjithë jetën time? Ku do të gjej kohë të shoh familjen, të kultivoj veten apo thjesht të marr frymë, kur e vetmja ditë pushim përdoret vetëm për të fshirë lodhjen e javës?"
+Pyetja e vërtetë që duhet të bësh: „A e kuptoni se po më blini jo thjesht orët e punës, por të gjithë jetën time? Ku do të gjej kohë të shoh familjen, të kultivoj veten apo thjesht të marr frymë, kur e vetmja ditë pushim përdoret vetëm për të fshirë lodhjen e javës?“
 
 Të punosh gjashtë ditë në javë për pesëqind mijë lekë do të thotë të heqësh dorë nga çdo e drejtë për të jetuar jashtë mureve të punës. Është një ritëm që të shkatërron fizikisht dhe moralisht, i stisur vetëm nga fakti se drejtuesi nuk di të organizojë procesin dhe zgjidhjen e kërkon te djersa e tepërt e njeriut të thjeshtë, jo te teknologjia apo te efikasiteti.
 
 ## 3. Katërmbëdhjetë ditët e lirisë
 
-Pronari të thotë: "Ke katërmbëdhjetë ditë pushim në vit, sipas ligjit."
+Pronari të thotë: „Ke katërmbëdhjetë ditë pushim në vit, sipas ligjit.“
 
-Pyetja e vërtetë që duhet të bësh: "Pse ligjin e zbatoni vetëm kur bëhet fjalë për të numëruar ditët e mia të pakta të lirisë, ndërsa kur bëhet fjalë për orët shtesë, për sigurinë në punë apo për respektimin e dinjitetit, ligji harrohet?"
+Pyetja e vërtetë që duhet të bësh: „Pse ligjin e zbatoni vetëm kur bëhet fjalë për të numëruar ditët e mia të pakta të lirisë, ndërsa kur bëhet fjalë për orët shtesë, për sigurinë në punë apo për respektimin e dinjitetit, ligji harrohet?“
 
 Katërmbëdhjetë ditë pushim në vit janë dy javë ku njeriu duhet të mbledhë veten nga treqind e pesëdhjetë ditë stres, presion dhe lodhje. Dhe shpesh, edhe ato katërmbëdhjetë ditë jepen me kusht, të llogaritura me garë, me telefonata që nuk ndalen kurrë dhe me ndjenjën e fajit se po lë punën pas dore.
 
 ## 4. Fleksibiliteti i njëanshëm
 
-Pronari të thotë: "Duhet të jesh i/e gatshëm të qëndrosh edhe pak më gjatë kur ka ngarkesë."
+Pronari të thotë: „Duhet të jesh i/e gatshëm të qëndrosh edhe pak më gjatë kur ka ngarkesë.“
 
-Pyetja e vërtetë që duhet të bësh: "Ky 'pak më gjatë' a do të paguhet, apo konsiderohet pjesë e atyre pesëqind mijë lekëve ku ju mendoni se keni blerë gjithë kohën time?"
+Pyetja e vërtetë që duhet të bësh: „Ky 'pak më gjatë' a do të paguhet, apo konsiderohet pjesë e atyre pesëqind mijë lekëve ku ju mendoni se keni blerë gjithë kohën time?“
 
-Në mentalitetin tonë korporativ, orët shtesë janë kthyer në një detyrim moral të pashkruar. Kur ikën në orar, je "dembel". Kur kërkon pagesë për orët e mbajtura pas mbylljes, je "tregtar interesi". Ky është iluzioni i kontrollit përmes fajit, ku pronari do përkushtim perëndimor me kushte pune feudale.
+Në mentalitetin tonë korporativ, orët shtesë janë kthyer në një detyrim moral të pashkruar. Kur ikën në orar, je „dembel“. Kur kërkon pagesë për orët e mbajtura pas mbylljes, je „tregtar interesi“. Ky është iluzioni i kontrollit përmes fajit, ku pronari do përkushtim perëndimor me kushte pune feudale.
 
 ## 5. E ardhmja e zbrazët
 
-Pronari të thotë: "Këtu ka mundësi të shkëlqyera për ata që duan të punojnë."
+Pronari të thotë: „Këtu ka mundësi të shkëlqyera për ata që duan të punojnë.“
 
-Pyetja e vërtetë që duhet të bësh: "Cila është saktësisht e ardhmja e një njeriu që punon gjashtë ditë në javë për këtë pagë? A do të mund të blej një shtëpi, të rris një fëmijë, apo thjesht do të jem një tjetër emër në listën tuaj të rotacionit të stafit?"
+Pyetja e vërtetë që duhet të bësh: „Cila është saktësisht e ardhmja e një njeriu që punon gjashtë ditë në javë për këtë pagë? A do të mund të blej një shtëpi, të rris një fëmijë, apo thjesht do të jem një tjetër emër në listën tuaj të rotacionit të stafit?“
 
 Kjo është pyetja që tremb më shumë. Sepse përgjigjja e saj është e qartë për të gjithë. Me pesëqind mijë lekë dhe një ritëm që të bluan shpirtin, e ardhmja nuk ekziston. Ekziston vetëm mbijetesa nga muaji në muaj, deri në ditën kur trupi të lë ose kur të kuptosh se jeta po ikën kot mes rafteve dhe tavolinave të një vendi që nuk të jep asnjë shans.
 

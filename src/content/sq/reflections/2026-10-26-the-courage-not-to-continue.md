@@ -1,5 +1,5 @@
 ---
-title: 'Guximi për të mos vazhduar: Kur këmbëngulja pushon së qeni virtyt dhe bëhet peng i krenarisë'
+title: 'Guximi për të mos vazhduar: kur këmbëngulja pushon së qeni virtyt dhe bëhet peng i krenarisë'
 date: 2026-10-26
 status: published
 summary: 'Paratë e shpenzuara nuk kthehen vetëm ngaqë projekti vazhdon, por krenaria hyn në vendimmarrje. Pyetja e drejtë është çfarë do të vendosnim sot, me gjithçka që kemi mësuar.'
@@ -29,7 +29,7 @@ Njerëzit vazhdonin të punonin. Menaxherët vazhdonin të raportonin. Drejtoria
 
 Deri në ditën kur dikush bëri një pyetje të thjeshtë:
 
-"Po sikur ta mbyllim?"
+„Po sikur ta mbyllim?“
 
 Në sallë ra heshtja.
 
@@ -39,7 +39,7 @@ Por sepse, për herë të parë, dikush kishte guxuar ta shqiptonte.
 
 Drejtuesi që kishte mbështetur investimin u mbështet në karrige.
 
-"Kemi shpenzuar shumë për t'u tërhequr tani."
+„Kemi shpenzuar shumë për t'u tërhequr tani.“
 
 Dhe brenda asaj fjalie ndodhej i gjithë problemi.
 
@@ -159,7 +159,7 @@ Dhe sa burime jemi të gatshëm të investojmë për ta marrë atë provë?
 
 Nëse ekziston një përgjigje e qartë, vazhdimi mund të jetë një vendim i arsyeshëm.
 
-Nëse përgjigjja është vazhdimisht "na duhet edhe pak kohë", pa përcaktuar se çfarë duhet të ndryshojë gjatë asaj kohe, atëherë nuk kemi më domosdoshmërisht një strategji.
+Nëse përgjigjja është vazhdimisht „na duhet edhe pak kohë“, pa përcaktuar se çfarë duhet të ndryshojë gjatë asaj kohe, atëherë nuk kemi më domosdoshmërisht një strategji.
 
 Kemi një shpresë.
 
@@ -319,7 +319,7 @@ Dhe kjo kërkon një formë guximi shumë më të rrallë sesa entuziazmi i fill
 
 Të ngrihesh përpara njerëzve dhe të thuash:
 
-"Besova te ky projekt. Kishim arsye për ta provuar. Por rezultatet dhe informacioni që kemi sot nuk e mbështesin më vazhdimin në këtë formë."
+„Besova te ky projekt. Kishim arsye për ta provuar. Por rezultatet dhe informacioni që kemi sot nuk e mbështesin më vazhdimin në këtë formë.“
 
 Kjo nuk është domosdoshmërisht pranim paaftësie.
 
@@ -393,7 +393,7 @@ Mund të jetë mënyra më e mirë për ta mbrojtur atë.
 
 Por edhe ndryshimi i drejtimit kërkon prova.
 
-Nuk mjafton ta quajmë një projekt të dështuar "transformim" dhe të vazhdojmë ta financojmë pa e ndryshuar realisht.
+Nuk mjafton ta quajmë një projekt të dështuar „transformim“ dhe të vazhdojmë ta financojmë pa e ndryshuar realisht.
 
 Një strategji e re duhet të ketë një arsyetim të ri.
 

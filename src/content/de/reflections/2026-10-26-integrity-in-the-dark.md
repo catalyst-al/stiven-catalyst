@@ -1,5 +1,5 @@
 ---
-title: 'Integrität im Dunkeln: Was Sie tun, wenn Sie niemand sieht'
+title: 'Integrität im Dunkeln: was Sie tun, wenn Sie niemand sieht'
 date: 2026-10-26
 status: published
 summary: 'Der Ruf entsteht im Licht; der Charakter wird um drei Uhr morgens geprüft, wenn der Karton fällt, keine Kamera läuft und es niemand je erfahren wird.'

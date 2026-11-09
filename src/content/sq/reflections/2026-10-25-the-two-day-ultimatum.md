@@ -1,5 +1,5 @@
 ---
-title: 'Kujtesa e pllakave dhe ultimatumi dy-ditor: Kur menaxhimi kthehet në sport ekstrem'
+title: 'Kujtesa e pllakave dhe ultimatumi dy-ditor: kur menaxhimi kthehet në sport ekstrem'
 date: 2026-10-25
 status: published
 summary: 'Pa sistem, pa trajnim dhe pa procedura, punonjësi duhet të jetë skaner i gjallë. Kur gabon, faji i jepet atij, jo kaosit.'

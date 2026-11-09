@@ -83,10 +83,10 @@ Numëruar sërish më 7 nëntor 2026, pas rregullimeve të P2A-15, P2B-19, P2B-1
 
 | Status | Table A (58 consolidated findings) | Table B (122 phase-level IDs, 123 rows) |
 |---|---|---|
-| fixed | 45 | 83 |
-| partly fixed | 2 | 9 |
+| fixed | 45 | 87 |
+| partly fixed | 2 | 6 |
 | needs author approval | 10 | 19 |
-| pending | 1 | 4 |
+| pending | 1 | 3 |
 | not verified | 0 | 0 |
 | no change needed | 0 | 8 |
 | **total** | **58** | **123** |
@@ -169,7 +169,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | SEO-05 | 543 sitemap URLs without lastmod | (P5-09) | partly fixed | `e204acc5` · tests/publication-dates.test.cjs (issue, volume and edition pages take `lastmod` from online.json). Remains: tool and hub pages still have none (the sitemap gives `lastmod` only to dated content, by design) |
 | SEO-06 | No og:locale; English WebSite text on DE/SQ homes | — | fixed | 7 November 2026: og:locale and og:locale:alternate on every page, the WebSite description and inLanguage of each language home in its language, one url for the Person (tests/locale-and-404.test.cjs). Before: Not assigned; `base.njk` unchanged since `605d0df` |
 | SEO-07 | No Book/PodcastSeries/Periodical schema | — | fixed | 8 November 2026: Book for the book (its translations name the Albanian original) and the Tools Guide, PodcastSeries with its feed for the podcast page of each language, an issue as a PublicationIssue of its Periodical (Management Review, From the Floor) and a treatise volume as a PublicationVolume of its series (tests/schema.test.cjs). BreadcrumbList not added. Before: Not assigned (optional refinement) |
-| SEO-08 | 260 titles over 70 characters | — | pending | Not assigned. The KPI Diagnostic seo_title proposal waits for the author (tools-guide-and-pdf-check.md §3) |
+| SEO-08 | 260 titles over 70 characters | — | fixed | 9 November 2026, decided by the author: every <title> is fitted to 65 characters by lib/fit-title.js (an issue or a volume keeps its topic and number; else the longest beginning that ends at a colon, a comma or a dash); the heading and the social preview keep the full title. 423 pages, listed before and after in seo-titles-2026-11.md (tests/fit-title.test.cjs). Before: Not assigned. The KPI Diagnostic seo_title proposal waits for the author (tools-guide-and-pdf-check.md §3) |
 | ARCH-01 | English-only 404 for DE/SQ paths | — | fixed | 7 November 2026: the 404 page on a /de/ or /sq/ address puts that language first: heading, page title and lang (js/lost.js; tests/locale-and-404.test.cjs). Before: Not assigned; `src/404.njk` unchanged |
 | ARCH-02 | Thin hub pages | — | no change needed | Audit: "Mostly by design … Suggested: none required" |
 | ARCH-03 | Field notes have no own URLs | — | no change needed | Audit: OPINION/design choice, "not a defect if intended; do not split without a reason" |
@@ -249,9 +249,9 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P4-06 | Unsourced "research-like" claims | E-11 | needs author approval | albanian-proposals.md §6 |
 | P4-07 | *The night the system went down* disowns its title | E-12 | needs author approval | timeline-contradictions.md C2 |
 | P4-08 | Albanian consistency: ju/ti, colon capitals, lidershipi/udhëheqja, "procedurë standarde operimi", eskalimi, "je duke punuar" | (P3) | needs author approval | albanian-proposals.md §1, §5 (nothing under src/content/sq/ changed) |
-| P4-09 | German grammar slips and glossary breaches | (P3) | partly fixed | `c010f2ea` (plus 3 items in `593cb4f3`), before → after in german-english-edits.md; text, no test. Remains: capitals after the colon in DE reflection titles, left as a separate decision (albanian-proposals.md §5.5) |
+| P4-09 | German grammar slips and glossary breaches | (P3) | fixed | 9 November 2026, decided by the author: lower case after the colon in all 32 Albanian reflection titles, and in the German ones where a clause or a phrase that is no sentence follows (Duden), a capital where a full sentence does; the 59 link previews drawn again (scripts/page-cards.mjs; tests/titles.test.cjs). Before: `c010f2ea` (plus 3 items in `593cb4f3`), before → after in german-english-edits.md; text, no test. Remains: capitals after the colon in DE reflection titles, left as a separate decision (albanian-proposals.md §5.5) |
 | P4-10 | English calques and slips | (P3) | fixed | `04674954`, german-english-edits.md rows 215–229 (text; no test). The "week … ten days" line: EN/DE now "recent days"; the SQ line is a proposal |
-| P4-11 | Inconsistent quotation marks | (P3) | partly fixed | EN reflection bodies curly (`04674954`, 222 marks), DE closing marks (`722b7324`, 57 marks); text, no test. Remains: SQ reflection bodies still use straight quotes (100 lines at HEAD), the mixed „…” in sq architects-of-smoke, and the EN note 13 with ‘…’ (still at HEAD); the SQ part waits on the author (Albanian originals are not edited) |
+| P4-11 | Inconsistent quotation marks | (P3) | fixed | 9 November 2026, decided by the author: the Albanian reflection bodies quote with „…“ (220 marks in 35 texts) and the mixed „…” in architects-of-smoke is closed with “ (tests/titles.test.cjs). The English note 13 keeps ‘…’: it is a quotation inside a quotation. Before: EN reflection bodies curly (`04674954`, 222 marks), DE closing marks (`722b7324`, 57 marks); text, no test. Remains: SQ reflection bodies still use straight quotes (100 lines at HEAD), the mixed „…” in sq architects-of-smoke, and the EN note 13 with ‘…’ (still at HEAD); the SQ part waits on the author (Albanian originals are not edited) |
 | P4-12 | Albanian grammar and wording slips | (P3) | needs author approval | albanian-proposals.md §4 |
 | P4-13 | Projects page overstates | (P3) | needs author approval | The author's own wording; not taken up in phase 2, no proposal written; `src/content/projects/` unchanged |
 | P4-14 | Caveats that undercut authority | (P3) | needs author approval | The author's own wording; not taken up, no proposal written |
@@ -274,7 +274,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P6-02 | DE "bei Gjergj Kastrioti Skënderbeu" | (P3) | needs author approval | albanian-proposals.md §8.2 |
 | P6-03 | Small DE nuance shifts in the book | — | no change needed | Audit: "no loss of meaning … no rewrite needed" |
 | P6-04 | Book EN/DE PDFs lack /Lang, outline; untagged | (P3) | partly fixed | 8 November 2026: the English and German editions have /Lang (en-GB, de-DE), the author and the bookmarks of the original, on the same pages (scripts/book-meta.py, run by book-edition.py; tests/pdf-access.test.cjs). Remains: they are not tagged (ReportLab), and the unused Helvetica reference stays until the editions are set again. Before: `scripts/pdf-meta.py` (`39666489`) is run by the magazine/review/treatise/weekly scripts only; book scripts and PDFs unchanged since `605d0df` |
-| P6-05 | Translations not credited; disclosure direction wrong for the book | (P3) | partly fixed | Site disclosure: `b4e59ecd` · tests/ai-disclosure.test.cjs. Remains: the book's edition line, an author decision (RAPORTI §4, §9.3) |
+| P6-05 | Translations not credited; disclosure direction wrong for the book | (P3) | fixed | 9 November 2026, decided by the author: the English and German editions say "Translated from the Albanian with AI assistance, revised by the author" / "Aus dem Albanischen mit KI-Unterstützung übersetzt, vom Autor durchgesehen" in the edition line of the PDF (set again with scripts/book-edition.py) and in the facts of the book page (tests/book-editions.test.cjs). Before: Site disclosure: `b4e59ecd` · tests/ai-disclosure.test.cjs. Remains: the book's edition line, an author decision (RAPORTI §4, §9.3) |
 | P6-06 | Photograph quality (p. 23) | (P3) | needs author approval | Visual decision on the book; not taken up in any phase |
 | P7-01 | Narration reads past the essay | P-02 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs |
 | P7-02 | Case box content skipped | P-03 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs |

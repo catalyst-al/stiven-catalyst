@@ -1,5 +1,5 @@
 ---
-title: 'Das Talent, das den Raum vergiftet: Wenn Ergebnisse zum Alibi für den Charakter werden'
+title: 'Das Talent, das den Raum vergiftet: wenn Ergebnisse zum Alibi für den Charakter werden'
 date: 2026-10-26
 status: published
 summary: 'Eine Organisation zählt das Talent, das sie im Bericht messen kann, und übersieht den Schaden ohne Spalte in Excel. So gilt eine Regel für die Wertvollen und eine für alle anderen.'

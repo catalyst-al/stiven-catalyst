@@ -1,5 +1,5 @@
 ---
-title: 'Teatri i ngutjes: Kur nxitimi ngatërrohet me rëndësinë'
+title: 'Teatri i ngutjes: kur nxitimi ngatërrohet me rëndësinë'
 date: 2026-10-26
 status: published
 summary: 'Kur gjithçka shpallet urgjente, asgjë nuk është e rëndësishme. Paniku krijon ndjesinë e lëvizjes, ndërsa puna nuk ecën përpara.'
@@ -9,7 +9,7 @@ description: 'Një reflektim për kulturën ku gjithçka është urgjente, për 
 
 Ka një iluzion të zakonshëm dhe shumë të kushtueshëm në botën e sotme të punës, ku vlera e një dite nuk matet më me atë që ndërtohet realisht, por me sasinë e zhurmës që krijohet rreth procesit.
 
-Vëzhgojeni me vëmendje se si funksionon ky teatër në shumë nga zyrat, magazinat dhe mjediset tona operacionale. Dyert hapen me rrëmbim, njerëzit ecin me hapa të shpejtuar sikur po shuajnë një zjarr imagjinar, telefonat tronditen pa pushim mbi tavolina dhe në çdo cep dëgjohet e njëjta fjalë e përsëritur si lutje: "urgjente". Gjithçka shpallet urgjente. Çdo kërkesë duhej të ishte mbyllur dje. Çdo mesazh vjen me shenja të kuqe alarmi dhe çdo bisedë nis me frymëmarrje të marrë, sikur kompania ndodhet në çdo sekondë buzë greminës.
+Vëzhgojeni me vëmendje se si funksionon ky teatër në shumë nga zyrat, magazinat dhe mjediset tona operacionale. Dyert hapen me rrëmbim, njerëzit ecin me hapa të shpejtuar sikur po shuajnë një zjarr imagjinar, telefonat tronditen pa pushim mbi tavolina dhe në çdo cep dëgjohet e njëjta fjalë e përsëritur si lutje: „urgjente“. Gjithçka shpallet urgjente. Çdo kërkesë duhej të ishte mbyllur dje. Çdo mesazh vjen me shenja të kuqe alarmi dhe çdo bisedë nis me frymëmarrje të marrë, sikur kompania ndodhet në çdo sekondë buzë greminës.
 
 Në pamje të parë, për një vëzhgues të sipërfaqshëm, kjo duket si një ndërmarrje me ritëm të lartë, e mbushur me njerëz të përkushtuar që po japin gjithçka nga vetja.
 
@@ -27,7 +27,7 @@ Dhe ja ku shfaqet padrejtësia më e madhe e kësaj kulture: mënyra se si ajo e
 
 Përfytyroni një menaxher apo një punonjës që beson te rregulli. Ai hyn në turn me qetësi, hap shënimet, analizon prioritetet dhe refuzon të marrë pjesë në histerinë e përgjithshme. Ai e di se para se të nisësh vrapin, duhet të dish se në cilin drejtim po vrapon.
 
-Në sytë e një drejtuesi të cekët, ky njeri shihet menjëherë me dyshim. "Pse rri kaq i qetë? Pse nuk po shqetësohet si të tjerët? Ky nuk e paska mendjen te puna."
+Në sytë e një drejtuesi të cekët, ky njeri shihet menjëherë me dyshim. „Pse rri kaq i qetë? Pse nuk po shqetësohet si të tjerët? Ky nuk e paska mendjen te puna.“
 
 Në mendësinë e atyre që e ngatërrojnë zhurmën me rezultatin, qetësia përjetohet si fyerje, sepse ajo ekspozon kotësinë e panikut të tyre. Ata nuk e kuptojnë se qetësia e një profesionisti nuk buron nga moskokëçarja, por nga forca e përgatitjes.
 
@@ -35,7 +35,7 @@ Një kirurg i aftë nuk futet në sallën e operacionit duke bërtitur me nervoz
 
 Kultura e nxitimit të verbër nuk është vetëm qesharake; ajo është thellësisht shkatërruese për shëndetin e njeriut dhe të organizatës.
 
-Ajo prodhon shkurtime të rrezikshme. Për të mbyllur "urgjencën" e radhës, njerëzit anashkalojnë kontrollin e cilësisë, shkelin rregullat e sigurisë dhe i lënë detajet thelbësore përgjysmë. Dhe rezultati dihet: shkurtorja e sotme bëhet kriza e madhe e së nesërmes. Njerëzit digjen nga stresi kronik, gabimet shtohen dhe kompania futet në një rreth vicioz ku vetë nxitimi prodhon nevojën për më shumë nxitim.
+Ajo prodhon shkurtime të rrezikshme. Për të mbyllur „urgjencën“ e radhës, njerëzit anashkalojnë kontrollin e cilësisë, shkelin rregullat e sigurisë dhe i lënë detajet thelbësore përgjysmë. Dhe rezultati dihet: shkurtorja e sotme bëhet kriza e madhe e së nesërmes. Njerëzit digjen nga stresi kronik, gabimet shtohen dhe kompania futet në një rreth vicioz ku vetë nxitimi prodhon nevojën për më shumë nxitim.
 
 Lidershipi i vërtetë dallohet pikërisht nga aftësia për të thyer këtë iluzion.
 

@@ -1,5 +1,5 @@
 ---
-title: 'Der Sockelkomplex: Der verzweifelte Kampf, der Größte im Raum zu bleiben'
+title: 'Der Sockelkomplex: der verzweifelte Kampf, der Größte im Raum zu bleiben'
 date: 2026-10-26
 status: published
 summary: 'Der unsichere Eigentümer will keine fähigen Mitstreiter, sondern einen grauen Hintergrund, vor dem er allein glänzt. So vertreibt er die Besten und behält die Jasager.'

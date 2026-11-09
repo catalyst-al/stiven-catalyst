@@ -1,5 +1,5 @@
 ---
-title: 'Der grüne Tag, der untersucht werden muss: Wenn Erfolg an dem gemessen wird, was man sieht, und das Scheitern in dem steckt, was nicht gezählt wird'
+title: 'Der grüne Tag, der untersucht werden muss: wenn Erfolg an dem gemessen wird, was man sieht, und das Scheitern in dem steckt, was nicht gezählt wird'
 date: 2026-10-26
 status: published
 summary: 'Alle Kennzahlen sind grün, doch Mitarbeiter haben Fehler korrigiert, die keine Tabelle zählt. Messen ist notwendig, Deuten ist Verantwortung.'

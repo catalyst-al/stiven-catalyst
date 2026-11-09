@@ -14,6 +14,7 @@ import { feedEntries } from "./lib/feed-entries.js";
 import { LIVE_PAGES, livePagesCss, clearLivePages } from "./lib/live-pages.js";
 import { writingLinks } from "./lib/writing-links.js";
 import { writeStylesheet } from "./lib/css-parts.js";
+import { fitTitle } from "./lib/fit-title.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // Interface texts in German and Albanian, keyed by the English text (also used
@@ -398,6 +399,8 @@ export default function (eleventyConfig) {
     return file && fs.existsSync(`src${file}`) ? file : null;
   });
   // The English address of a page in any language: /de/tools/x/ becomes /tools/x/.
+  // The page title fitted for search results (lib/fit-title.js; audit SEO-08).
+  eleventyConfig.addFilter("fitTitle", (title) => fitTitle(title));
   eleventyConfig.addFilter("enPath", (url) => String(url || "").replace(/^\/(de|sq)(?=\/)/, ""));
   // The essay of a language that translates the English essay with this file slug (its "original"), or the English one itself.
   eleventyConfig.addFilter("byOriginal", (items, slug) => (items || []).find((item) => item.data.original === slug || item.fileSlug === slug) || null);

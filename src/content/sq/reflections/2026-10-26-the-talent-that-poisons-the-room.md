@@ -1,5 +1,5 @@
 ---
-title: 'Talenti që helmon dhomën: Kur rezultatet bëhen alibi për karakterin'
+title: 'Talenti që helmon dhomën: kur rezultatet bëhen alibi për karakterin'
 date: 2026-10-26
 status: published
 summary: 'Organizata e quan talent atë që e mat dot në raport dhe e injoron dëmin që nuk ka kolonë në Excel. Kështu për sjelljen e keqe vlen një rregull për të vlefshmin dhe një për të tjerët.'
@@ -49,7 +49,7 @@ Megjithatë, këtu duhet të jemi të kujdesshëm.
 
 Jo çdo njeri i vështirë është njeri që dëmton ekipin. Jo çdo profesionist që kundërshton drejtuesin është arrogant. Ka njerëz të drejtpërdrejtë që nuk dinë të zbukurojnë të vërtetën. Ka punonjës që ngrenë probleme të pakëndshme dhe për këtë arsye fitojnë reputacionin e atyre që prishin qetësinë.
 
-Madje, në disa organizata, etiketa "nuk di të punojë në ekip" përdoret pikërisht kundër atij që refuzon të marrë pjesë në një marrëveshje heshtjeje.
+Madje, në disa organizata, etiketa „nuk di të punojë në ekip“ përdoret pikërisht kundër atij që refuzon të marrë pjesë në një marrëveshje heshtjeje.
 
 Prandaj dallimi është thelbësor.
 
@@ -77,11 +77,11 @@ Problemi më i madh fillon kur drejtuesi e di të gjithë këtë dhe përsëri z
 
 Ai mund ta justifikojë heshtjen me dhjetëra arsye.
 
-"Është pak i vështirë, por e njeh punën."
+„Është pak i vështirë, por e njeh punën.“
 
-"Duhet të mësohen edhe të tjerët të jenë më të fortë."
+„Duhet të mësohen edhe të tjerët të jenë më të fortë.“
 
-"Nuk mund të humbasim një njeri të tillë."
+„Nuk mund të humbasim një njeri të tillë.“
 
 Fjalia e fundit është ndoshta më domethënësja.
 

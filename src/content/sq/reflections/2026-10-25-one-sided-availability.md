@@ -1,5 +1,5 @@
 ---
-title: 'Disponueshmëria e njëanshme: Kur emergjenca jote është detyrim, por e drejta jote është luks'
+title: 'Disponueshmëria e njëanshme: kur emergjenca jote është detyrim, por e drejta jote është luks'
 date: 2026-10-25
 status: published
 summary: 'Telefoni yt duhet të jetë i hapur natë e ditë për kaosin e kompanisë, por kur pyet për rrogën, ka orar zyrtar.'
@@ -13,7 +13,7 @@ Në atë sekondë, nga ti nuk pritet thjesht përgjigje. Nga ti pritet gatishmë
 
 Por le të bëjmë një ushtrim të thjeshtë ndershmërie. Çfarë ndodh kur drejtimi i kësaj shigjete ndryshon?
 
-Provo ti, qoftë edhe një herë të vetme, të kërkosh llogari jashtë orarit zyrtar. Provo të telefonosh pronarin apo menaxherin në mbrëmje për një paqartësi te rroga, për një padrejtësi të bërë gjatë ditës, apo për një emergjencë të vogël personale ku të duhet mbështetja e atyre që të quajnë pjesë të "familjes".
+Provo ti, qoftë edhe një herë të vetme, të kërkosh llogari jashtë orarit zyrtar. Provo të telefonosh pronarin apo menaxherin në mbrëmje për një paqartësi te rroga, për një padrejtësi të bërë gjatë ditës, apo për një emergjencë të vogël personale ku të duhet mbështetja e atyre që të quajnë pjesë të „familjes“.
 
 Në atë çast, bota ndryshon me një shpejtësi marramendëse. Telefoni bie pa marrë asnjë përgjigje, ose del në sekretari. Dhe të nesërmen në mëngjes, kur pyet se çfarë ndodhi, përgjigjja të vjen me një ftohtësi prej burokrati: *Ka orar zyrtar. Pse më shqetëson në shtëpi? Pse nuk vjen në zyrë në orarin e përcaktuar?*
 
