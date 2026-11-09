@@ -93,3 +93,14 @@ test('the contact page ends with where to go next: start here, essay 1, the tool
     assert.deepEqual(links.slice(2), [`${prefix}/tools.html`, `${prefix}/about.html`]);
   }
 });
+
+test('start here marks the three essays already read and offers to continue where the reader left off', { skip: !fs.existsSync('_site/sq/start.html') }, () => {
+  const picks = JSON.parse(fs.readFileSync('src/_data/homeEssays.json', 'utf8')).essays.map((e) => e.slug);
+  for (const prefix of ['', '/sq', '/de']) {
+    const html = fs.readFileSync(`_site${prefix}/start.html`, 'utf8');
+    for (const slug of picks) assert.match(html, new RegExp(`data-read-row="${slug}"[\\s\\S]*?data-read-mark hidden`), `${prefix || '/'}: ${slug}`);
+    assert.match(html, /<section class="shell home-continue"[^>]*data-home-continue hidden/);
+    assert.match(html, /\/js\/writing\.js/);
+    assert.match(html, /\/js\/home-continue\.js/);
+  }
+});

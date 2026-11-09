@@ -443,6 +443,8 @@ body:has([data-article]) :is(.essay-tools, .essay-notes, .essay-feedback) { back
   font-weight: 800;
 }
 .read-mark::before { content: "✓ "; }
+/* In the meta line of a card (the three essays of Start here), where the line itself spaces its parts. */
+.card-meta .read-mark { margin-left: 0; }
 .list-row.is-read .number { opacity: .55; }
 
 /* The essay: who wrote it in one line under the title. */
