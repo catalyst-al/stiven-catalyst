@@ -104,3 +104,23 @@ test('start here marks the three essays already read and offers to continue wher
     assert.match(html, /\/js\/home-continue\.js/);
   }
 });
+
+test('the publications page offers the publication left unfinished, in its language, opened on its page', () => {
+  const page = (url, recent) => {
+    const dom = new JSDOM(`<body><section data-pub-continue hidden data-page-label="Page {n} of {total}">
+      <a href="#" data-pub-continue-link><small data-pub-continue-meta></small><strong data-pub-continue-title></strong></a></section></body>`, { url, runScripts: 'outside-only' });
+    if (recent) dom.window.localStorage.setItem('sc-book-recent', JSON.stringify(recent));
+    dom.window.eval(fs.readFileSync('src/js/pub-continue.js', 'utf8'));
+    const box = dom.window.document.querySelector('[data-pub-continue]');
+    return { hidden: box.hidden, href: box.querySelector('a').getAttribute('href'), meta: box.querySelector('small').textContent, title: box.querySelector('strong').textContent };
+  };
+  const recent = [
+    { u: '/sq/magazine/management-review-nr-45.html', k: 'Management Review · Nr. 45', h: 'Puna me turne', p: 7, n: 10, t: 3 },
+    { u: '/magazine/management-review-nr-12.html', k: 'Management Review · No. 12', h: 'Shift work', p: 4, n: 10, t: 2 },
+    { u: '/magazine/management-review-nr-13.html', k: 'Management Review · No. 13', h: 'Finished', p: 10, n: 10, t: 9 },
+  ];
+  assert.equal(page('https://example.test/sq/publications.html', null).hidden, true, 'nothing read: nothing shown');
+  assert.deepEqual(page('https://example.test/sq/publications.html', recent), { hidden: false, href: '/sq/magazine/management-review-nr-45.html#faqe-7', meta: 'Management Review · Nr. 45 · Page 7 of 10', title: 'Puna me turne' });
+  assert.equal(page('https://example.test/publications.html', recent).href, '/magazine/management-review-nr-12.html#faqe-4', 'English: the English one, not the finished one');
+  assert.equal(page('https://example.test/de/publications.html', recent).hidden, true, 'German: none read in German');
+});
