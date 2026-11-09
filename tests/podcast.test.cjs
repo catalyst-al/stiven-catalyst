@@ -141,3 +141,19 @@ test('each feed has a title of its own, and its last build is its latest change,
   assert.equal(mod.lastChange([{ pubDate: episode.pubDate }]), episode.pubDate);
   for (const feed of feeds) assert.ok(Date.parse(feed.updated) >= Date.parse(feed.published), feed.lang);
 });
+
+// Audit P7-06: the recordings were at -16.9 to -18.1 LUFS, one with a true peak of +0.6 dBTP. scripts/audio.mjs now
+// measures the file it writes and keeps the result in audio.json. P7-07: encoding again keeps the corrections.
+test('every recording is within 0.5 LU of -16 LUFS with its true peak at or below -1 dBTP; corrections survive a new encoding', () => {
+  const audio = JSON.parse(fs.readFileSync('src/_data/audio.json', 'utf8'));
+  for (const [slug, langs] of Object.entries(audio)) {
+    for (const [lang, track] of Object.entries(langs)) {
+      assert.ok(track.loudness, `${slug} ${lang}: measured`);
+      assert.ok(Math.abs(track.loudness.lufs + 16) <= 0.5, `${slug} ${lang}: ${track.loudness.lufs} LUFS`);
+      assert.ok(track.loudness.truePeak <= -1, `${slug} ${lang}: ${track.loudness.truePeak} dBTP`);
+    }
+  }
+  const script = fs.readFileSync('scripts/audio.mjs', 'utf8');
+  assert.match(script, /dropCorrections \? \[\] : list\[slug\]\?\.\[lang\]\?\.corrections/);
+  assert.equal(audio['management-review-nr-01'].en.corrections.length > 0, true, 'the corrections of nr-01 are still there');
+});

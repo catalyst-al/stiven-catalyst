@@ -83,10 +83,10 @@ Numëruar sërish më 7 nëntor 2026, pas rregullimeve të P2A-15, P2B-19, P2B-1
 
 | Status | Table A (58 consolidated findings) | Table B (122 phase-level IDs, 123 rows) |
 |---|---|---|
-| fixed | 45 | 79 |
+| fixed | 45 | 83 |
 | partly fixed | 2 | 9 |
 | needs author approval | 10 | 19 |
-| pending | 1 | 8 |
+| pending | 1 | 4 |
 | not verified | 0 | 0 |
 | no change needed | 0 | 8 |
 | **total** | **58** | **123** |
@@ -168,7 +168,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | SEO-04 | Publications as HTML + 3 indexable PDFs | — | no change needed | The audit's own correction: "none mandatory; keep HTML as primary" (it is the only one in the sitemap) |
 | SEO-05 | 543 sitemap URLs without lastmod | (P5-09) | partly fixed | `e204acc5` · tests/publication-dates.test.cjs (issue, volume and edition pages take `lastmod` from online.json). Remains: tool and hub pages still have none (the sitemap gives `lastmod` only to dated content, by design) |
 | SEO-06 | No og:locale; English WebSite text on DE/SQ homes | — | fixed | 7 November 2026: og:locale and og:locale:alternate on every page, the WebSite description and inLanguage of each language home in its language, one url for the Person (tests/locale-and-404.test.cjs). Before: Not assigned; `base.njk` unchanged since `605d0df` |
-| SEO-07 | No Book/PodcastSeries/Periodical schema | — | pending | Not assigned (optional refinement) |
+| SEO-07 | No Book/PodcastSeries/Periodical schema | — | fixed | 8 November 2026: Book for the book (its translations name the Albanian original) and the Tools Guide, PodcastSeries with its feed for the podcast page of each language, an issue as a PublicationIssue of its Periodical (Management Review, From the Floor) and a treatise volume as a PublicationVolume of its series (tests/schema.test.cjs). BreadcrumbList not added. Before: Not assigned (optional refinement) |
 | SEO-08 | 260 titles over 70 characters | — | pending | Not assigned. The KPI Diagnostic seo_title proposal waits for the author (tools-guide-and-pdf-check.md §3) |
 | ARCH-01 | English-only 404 for DE/SQ paths | — | fixed | 7 November 2026: the 404 page on a /de/ or /sq/ address puts that language first: heading, page title and lang (js/lost.js; tests/locale-and-404.test.cjs). Before: Not assigned; `src/404.njk` unchanged |
 | ARCH-02 | Thin hub pages | — | no change needed | Audit: "Mostly by design … Suggested: none required" |
@@ -265,7 +265,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P5-05 | Chart labels overflow on phones | E-07 | fixed | `5824bd06` · tests/browser/chart-labels.spec.mjs |
 | P5-06 | Percentage bars on truncated scales | (P3) | fixed | 8 November 2026: a share chart whose scale stops short of 100 % (or starts above 0) shows its scale, written as its figures are ("0%" … "40%", "40 %" in German): a line with both ends under bars, pairs and dumbbells, a dashed top line with its value over columns (lib/weekly/charts.js; tests/weekly.test.cjs). In 44 Management Review issues (55 charts in English), treatise volumes 6 and 13 and From the Floor 1 and 2, in three languages; the pages measured again (scripts/page-fit.mjs, all fit; the scale takes 11 units so that From the Floor 1, page 6, with two scaled charts, still fits) and their 144 PDFs printed again (scripts/weekly.mjs, treatise.mjs, magazine.mjs; tests/pdf-matches-html.test.cjs checks every page's text against the site). Before: Not assigned; the wide charts are unchanged (phase3/charts.md) |
 | P5-07 | DE treatise Vol 4 garbles a caveat | (P3) | fixed | `284fcdac`, `616cac0c` · tests/publication-colophon.test.cjs ("treatise Vol 4 in German keeps the caveat") |
-| P5-08 | PDF accessibility and metadata | (P3) | partly fixed | `39666489` (Author, Creator, /Lang via scripts/pdf-meta.py), reprint `a1517ed5`; checked with pdftotext (management-review.md §7), no automated test. Remains: tagged PDF, outline, clickable source links |
+| P5-08 | PDF accessibility and metadata | (P3) | fixed | 8 November 2026: every Management Review, treatise, From the Floor, special edition and current Tools Guide PDF printed again tagged (Chromium tagged: true), with /Lang and Author (scripts/pdf-meta.py, now run by the guide script too), bookmarks named by the page headings (lib/pdf-outline.js: Chromium's own joined the two lines of a heading without a space) and the sources' addresses (the titles in the treatise) as links; 381 PDFs (tests/pdf-access.test.cjs). The earlier editions of the guide stay as printed. Before: `39666489` (Author, Creator, /Lang via scripts/pdf-meta.py), reprint `a1517ed5`; checked with pdftotext (management-review.md §7), no automated test. Remains: tagged PDF, outline, clickable source links |
 | P5-09 | No lastmod for magazine URLs | (SEO-05) | fixed | `e204acc5` · tests/publication-dates.test.cjs |
 | P5-10 | Chart-note test does not test the claim | CI-03 | fixed | 7 November 2026: see CI-03: tests/weekly.test.cjs checks the claim on all 624 chart notes, with a negative case. Before: tests/weekly.test.cjs:114 unchanged (`note.length > 20`) |
 | P5-11 | Citation slips: Nos. 21, 75, special edition | (P3) | fixed | `c9a75002` · tests/publication-colophon.test.cjs (No. 21), tests/corrections-register.test.cjs (register lists every dated correction); sources checked: management-review.md §2 |
@@ -273,7 +273,7 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P6-01 | Back-cover blurb EN vs DE | B-01 | needs author approval | albanian-proposals.md §8.1 |
 | P6-02 | DE "bei Gjergj Kastrioti Skënderbeu" | (P3) | needs author approval | albanian-proposals.md §8.2 |
 | P6-03 | Small DE nuance shifts in the book | — | no change needed | Audit: "no loss of meaning … no rewrite needed" |
-| P6-04 | Book EN/DE PDFs lack /Lang, outline; untagged | (P3) | pending | `scripts/pdf-meta.py` (`39666489`) is run by the magazine/review/treatise/weekly scripts only; book scripts and PDFs unchanged since `605d0df` |
+| P6-04 | Book EN/DE PDFs lack /Lang, outline; untagged | (P3) | partly fixed | 8 November 2026: the English and German editions have /Lang (en-GB, de-DE), the author and the bookmarks of the original, on the same pages (scripts/book-meta.py, run by book-edition.py; tests/pdf-access.test.cjs). Remains: they are not tagged (ReportLab), and the unused Helvetica reference stays until the editions are set again. Before: `scripts/pdf-meta.py` (`39666489`) is run by the magazine/review/treatise/weekly scripts only; book scripts and PDFs unchanged since `605d0df` |
 | P6-05 | Translations not credited; disclosure direction wrong for the book | (P3) | partly fixed | Site disclosure: `b4e59ecd` · tests/ai-disclosure.test.cjs. Remains: the book's edition line, an author decision (RAPORTI §4, §9.3) |
 | P6-06 | Photograph quality (p. 23) | (P3) | needs author approval | Visual decision on the book; not taken up in any phase |
 | P7-01 | Narration reads past the essay | P-02 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs |
@@ -281,8 +281,8 @@ Tabelat (në anglisht, si `STATUS.md`; çdo commit i përmendur është në deg�
 | P7-03 | Privacy note vs online voices | P-04 | fixed | `8bbf356f` · tests/listen-real-pages.test.cjs |
 | P7-04 | Albanian episode No. 1 without correction | P-05 | needs author approval | see P-05 |
 | P7-05 | "Start again" only stop; resume can skip a sentence | (P3) | fixed | `4eceb400` · tests/listen-real-pages.test.cjs (generation ids; Chrome-like and late-"end" stubs). Other engines not verified |
-| P7-06 | Podcast loudness below −16 LUFS; +0.6 dBTP | (P3) | pending | Not assigned; `scripts/audio.mjs` and the MP3s unchanged |
-| P7-07 | Re-encode deletes corrections | (P3) | pending | Not assigned; `scripts/audio.mjs` unchanged |
+| P7-06 | Podcast loudness below −16 LUFS; +0.6 dBTP | (P3) | fixed | 8 November 2026: scripts/audio.mjs measures the MP3 it writes (ebur128, true peak) and encodes again until it is within 0.5 LU of -16 LUFS at or below -1 dBTP; the six recordings encoded again from their files: -16.3 to -16.5 LUFS, true peak -1.1 to -2.0 dBTP, recorded in audio.json (tests/podcast.test.cjs). Before: Not assigned; `scripts/audio.mjs` and the MP3s unchanged |
+| P7-07 | Re-encode deletes corrections | (P3) | fixed | 8 November 2026: encoding again keeps the corrections; --drop-corrections removes them for a new recording (tests/podcast.test.cjs). Before: Not assigned; `scripts/audio.mjs` unchanged |
 | P7-08 | Three feeds share one title; lastBuildDate | (P3) | fixed | 7 November 2026: the German and Albanian feeds carry their language in the title; lastBuildDate is the latest episode or correction, whichever is later (tests/podcast.test.cjs). Before: Not assigned |
 | P7-09 | Live MP3s served as `audio/mp3` | (P3) | no change needed | Audit: "GitHub Pages decides it; podcast apps tolerate it … Note only" |
 
