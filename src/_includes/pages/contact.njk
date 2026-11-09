@@ -46,3 +46,42 @@
     </a>
   </aside>
 </section>
+
+{#- After writing, the way on while the answer comes: where a new reader begins, the first essay, the tools and who
+    reads the message, so the page does not end with nowhere to go. -#}
+{%- set firstEssay = (collections["insights" + (lang | langSuffix)] | readingOrder(essaySeries, []))[0] %}
+{%- set contactTools = {"sq": sq.tools, "de": de.tools}[lang] or tools %}
+<section class="shell issue-more contact-next" aria-labelledby="contact-next-title">
+  <p class="kicker">{{ "Continue reading" | t(lang) }}</p>
+  <h2 id="contact-next-title">{{ "Where to go next" | t(lang) }}</h2>
+  <div class="issue-more-list">
+    <a class="issue-more-card" href="{{ '/start.html' | local(lang) }}">
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ "New to Stiven Catalyst" | t(lang) }}</span>
+        <span class="issue-more-title">{{ "Start here" | t(lang) }}</span>
+      </span>
+    </a>
+    {%- if firstEssay %}
+    <a class="issue-more-card" href="{{ firstEssay.url }}">
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ "Start with essay 1" | t(lang) }}</span>
+        <span class="issue-more-title">{{ firstEssay.data.title }}</span>
+        <span class="issue-more-meta">{{ essaySeries[0].name[lang or "en"] }}</span>
+      </span>
+    </a>
+    {%- endif %}
+    <a class="issue-more-card" href="{{ '/tools.html' | local(lang) }}">
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ "Tools" | t(lang) }}</span>
+        <span class="issue-more-title">{{ "{n} tools" | t(lang) | replace("{n}", contactTools.length) }}</span>
+        <span class="issue-more-meta">{{ "Free · Private · No sign-up" | t(lang) }}</span>
+      </span>
+    </a>
+    <a class="issue-more-card" href="{{ '/about.html' | local(lang) }}">
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ "About" | t(lang) }}</span>
+        <span class="issue-more-title">{{ site.author }}</span>
+      </span>
+    </a>
+  </div>
+</section>

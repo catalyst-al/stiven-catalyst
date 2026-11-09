@@ -80,3 +80,16 @@ test('the about page ends with where to go next: start here, essay 1, projects a
     assert.deepEqual(links.slice(2), [`${prefix}/projects.html`, `${prefix}/contact.html`]);
   }
 });
+
+test('the contact page ends with where to go next: start here, essay 1, the tools and about', { skip: !fs.existsSync('_site/sq/contact.html') }, () => {
+  for (const prefix of ['', '/sq', '/de']) {
+    const html = fs.readFileSync(`_site${prefix}/contact.html`, 'utf8');
+    const section = html.match(/<section class="shell issue-more contact-next"[\s\S]*?<\/section>/)?.[0];
+    assert.ok(section, `${prefix || '/'}: the section is there`);
+    const links = [...section.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
+    assert.equal(links.length, 4);
+    assert.equal(links[0], `${prefix}/start.html`);
+    assert.match(links[1], new RegExp(`^${prefix}/insights/[^/]+/$`));
+    assert.deepEqual(links.slice(2), [`${prefix}/tools.html`, `${prefix}/about.html`]);
+  }
+});
