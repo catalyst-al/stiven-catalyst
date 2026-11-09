@@ -123,20 +123,31 @@ test("a filtered tool's link opens the tool, and the role cards still lead to th
 });
 
 test("nothing typed leaves the page: no request, no storage, no change of address", async ({ page }) => {
-  // What is still open from the load is noted, so a run that never goes quiet says what kept it busy.
+  // What is still open from the load is noted (from #399), so a run that waits or fails here says what kept the
+  // network busy. Nothing waits for the network to go quiet: on a first visit the service worker keeps the role's
+  // tools in the background, so a quiet network came after about 1.2 s or, on a loaded runner, not within the 30 s of
+  // the test (CI runs 861 and 863). Requests still arriving after the page is ready are recorded below and must pass
+  // every check.
   const open = new Set();
   page.on("request", (request) => open.add(request));
   page.on("requestfinished", (request) => open.delete(request));
   page.on("requestfailed", (request) => open.delete(request));
-  await page.goto(PAGES.en);
-  // The page as the reader has it: loaded, its fonts ready, then at most 5 s for the network to go quiet. Not an
-  // unbounded "networkidle": on GitHub's runner this page in the dark project kept a request open past the 30 s of the
-  // test (8 November 2026, twice), as /de/field-notes.html did for a11y-pages.spec.mjs. A request still open from the
-  // load does not weaken the test: only the requests that start once typing begins are checked below.
-  await page.waitForLoadState("load");
+  await page.goto(PAGES.en, { waitUntil: "load" });
   await page.evaluate(() => document.fonts.ready.then(() => undefined));
-  const quiet = await page.waitForLoadState("networkidle", { timeout: 5_000 }).then(() => true, () => false);
-  if (!quiet) console.log(`${page.url()}: still open 5 s after the load: ${[...open].map((r) => `${r.resourceType()} ${r.url()}`).join(", ") || "(none seen)"}`);
+  // Ready when the filter answers. The number of tools comes from the cards on the page, not from this file.
+  const total = await page.locator(".family-section .tool-card").count();
+  expect(total, "the page lists its tools").toBeGreaterThan(0);
+  const count = page.locator("[data-tool-filter-count]");
+  await expect(count).toHaveText(new RegExp(`^${total}\\b`));
+  const atRest = await count.textContent();
+  const ready = page.locator("[data-tool-filter-input]");
+  await ready.fill("zzqx");
+  await expect(count).toHaveText(/^0 /);
+  await ready.fill("");
+  // Cleared: the count reads as it did before the search, and every card is shown again.
+  await expect(count).toHaveText(atRest);
+  await expect(visibleCards(page)).toHaveCount(total);
+  if (open.size) console.log(`${page.url()}: still open when the filter was ready: ${[...open].map((r) => `${r.resourceType()} ${r.url()}`).join(", ")}`);
   // Fictional saved work and a fictional hand-off note, to show the filter leaves them as they are.
   await page.evaluate(() => {
     localStorage.setItem("sc-actions", JSON.stringify([{ id: "fx1", title: "Fictional action: tidy the returns shelf" }]));
