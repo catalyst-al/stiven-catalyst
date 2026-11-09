@@ -1,5 +1,5 @@
 ---
-title: 'Noteri i bindur: Kur Burimet Njerëzore kthehen në xhelatin e brendshëm'
+title: 'Noteri i bindur: kur Burimet Njerëzore kthehen në xhelatin e brendshëm'
 date: 2026-10-26
 status: published
 summary: 'Zyra që duhej të mbronte njeriun i vë vulën çdo teke të pronarit dhe heton punonjësin që troket për ndihmë.'
@@ -37,7 +37,7 @@ Shikoni se me sa kujdes trajtohen makineritë në një biznes. Kur prishet një 
 
 Ata profesionistë që ulen në ato karrige duhet t'i bëjnë vetes një pyetje të thjeshtë morale: Çfarë po mbroni në të vërtetë?
 
-Besnikëria ndaj një biznesi nuk tregohet duke noterizuar gabimet e tij. T'i thuash "po" çdo trilli të pronarit nuk është profesionalizëm; është nënshtrim me rrogë mujore. Duke u bërë mburojë për arrogancën dhe duke shtypur zërin e të drejtës, Burimet Njerëzore po ndihmojnë në krijimin e kompanive fantazmë, të cilat duken të plota në letrat e arkivës, por janë plotësisht të zbrazëta nga shpirti, përkushtimi dhe e ardhmja.
+Besnikëria ndaj një biznesi nuk tregohet duke noterizuar gabimet e tij. T'i thuash „po“ çdo trilli të pronarit nuk është profesionalizëm; është nënshtrim me rrogë mujore. Duke u bërë mburojë për arrogancën dhe duke shtypur zërin e të drejtës, Burimet Njerëzore po ndihmojnë në krijimin e kompanive fantazmë, të cilat duken të plota në letrat e arkivës, por janë plotësisht të zbrazëta nga shpirti, përkushtimi dhe e ardhmja.
 
 Një kompani e madhe nuk ndërtohet me vula që justifikojnë fyerjen. Ajo ndërtohet me institucione të brendshme që kanë guximin të mbrojnë njeriun edhe atëherë kur kjo i prish qejfin pronarit.
 

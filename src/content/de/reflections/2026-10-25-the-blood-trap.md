@@ -1,5 +1,5 @@
 ---
-title: 'Die Falle des Blutes: Wenn der Familienbetrieb zu Ihrem Gefängnis wird'
+title: 'Die Falle des Blutes: wenn der Familienbetrieb zu Ihrem Gefängnis wird'
 date: 2026-10-25
 status: published
 summary: 'Wenn der Familienname zum Schild wird, um dem jungen Mann, der dort arbeitet, Lohn und Würde zu verweigern, baut der Familienbetrieb keine Zukunft: Er verzehrt seine eigenen Kinder.'

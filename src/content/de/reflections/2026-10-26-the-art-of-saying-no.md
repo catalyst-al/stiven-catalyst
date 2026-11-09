@@ -1,5 +1,5 @@
 ---
-title: 'Die Kunst, Nein zu sagen: Die Grenze, an der Ihre Freiheit beginnt'
+title: 'Die Kunst, Nein zu sagen: die Grenze, an der Ihre Freiheit beginnt'
 date: 2026-10-26
 status: published
 summary: 'Wer niemals Nein sagen kann, ist nicht loyal, sondern grenzenlos. Und wo die Grenzen eines Menschen enden, beginnt die zügellose Ausbeutung.'

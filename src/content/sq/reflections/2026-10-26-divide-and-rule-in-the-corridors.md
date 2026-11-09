@@ -1,5 +1,5 @@
 ---
-title: 'Përça dhe sundo në korridore: Kur menaxhimi ushqen armiqësinë mes kolegëve'
+title: 'Përça dhe sundo në korridore: kur menaxhimi ushqen armiqësinë mes kolegëve'
 date: 2026-10-26
 status: published
 summary: 'Armiqësia mes turneve dhe kolegëve nuk lind vetvetiu. Drejtuesi i pasigurt e mbjell, sepse një ekip i ndarë nuk sheh kurrë boshllëkun në krye.'
@@ -21,7 +21,7 @@ Më lejoni ta them këtë me të gjithë qartësinë që meriton e vërteta. **K
 
 Le ta vëzhgojmë mekanizmin se si orkestrohet kjo luftë e vogël civile në korridore.
 
-Fillon gjithmonë në zyrën e mbyllur të shefit, përmes bisedave të fshehta me dyer gjysmë të hapura. Pronari apo drejtori thërret njërin nga punonjësit, i jep një kafe, i buzëqesh me një konfidencë të rreme dhe i pëshpërit me zë të ulët: "Shiko, unë ty të kam pikë të fortë. Vetëm ti punon këtu. Ruaju nga ai tjetri, se më tha ca fjalë jo të mira për ty dje."
+Fillon gjithmonë në zyrën e mbyllur të shefit, përmes bisedave të fshehta me dyer gjysmë të hapura. Pronari apo drejtori thërret njërin nga punonjësit, i jep një kafe, i buzëqesh me një konfidencë të rreme dhe i pëshpërit me zë të ulët: „Shiko, unë ty të kam pikë të fortë. Vetëm ti punon këtu. Ruaju nga ai tjetri, se më tha ca fjalë jo të mira për ty dje.“
 
 Pastaj, vetëm një orë më vonë, e njëjta skenë përsëritet me kolegun tjetër, duke ndryshuar vetëm emrat në fjalor.
 
@@ -39,7 +39,7 @@ Energjia që duhej të shkonte për të përmirësuar shërbimin ndaj klientit, 
 
 Lidershipi i vërtetë bën saktësisht të kundërtën.
 
-Një udhëheqës me integritet dhe me vetëbesim e di se suksesi i tij matet me shkallën e besimit që ekziston mes njerëzve kur ai nuk ndodhet fare në dhomë. Ai nuk i duron dot intrigat. Sapo dikush hyn në zyrën e tij për të folur keq për një koleg, një lider i vërtetë e ndalon menjëherë dhe thotë: "Thërrite këtu brenda, ulu përballë tij dhe thuaja në sy atë që ke për të thënë."
+Një udhëheqës me integritet dhe me vetëbesim e di se suksesi i tij matet me shkallën e besimit që ekziston mes njerëzve kur ai nuk ndodhet fare në dhomë. Ai nuk i duron dot intrigat. Sapo dikush hyn në zyrën e tij për të folur keq për një koleg, një lider i vërtetë e ndalon menjëherë dhe thotë: „Thërrite këtu brenda, ulu përballë tij dhe thuaja në sy atë që ke për të thënë.“
 
 Ai vendos procedura të qarta komunikimi, ndërton protokolle transparente dorëzimi dhe krijon një mjedis ku rezultati i secilit varet nga suksesi i të gjithëve bashkë.
 

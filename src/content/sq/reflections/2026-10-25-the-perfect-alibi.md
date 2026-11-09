@@ -1,5 +1,5 @@
 ---
-title: 'Alibia e përkryer: Kur dështimi i drejtimit shpallet dembelizëm i popullit'
+title: 'Alibia e përkryer: kur dështimi i drejtimit shpallet dembelizëm i popullit'
 date: 2026-10-25
 status: published
 summary: 'I njëjti njeri që këtu shpallet dembel, në Mynih apo Londër bëhet punonjës model. Ajo që ndryshon nuk është gjaku, por sistemi.'
@@ -7,7 +7,7 @@ deck: 'Në mendësinë e një kaste sipërmarrësish që nuk pranojnë kurrë ga
 description: 'Një reflektim për mitin e shqiptarit dembel, për punëtorët që shkëlqejnë jashtë vendit dhe pse problemet në një organizatë rrjedhin nga lart poshtë.'
 ---
 
-Ka një refren të vjetër, të përsëritur aq shpesh nëpër zyra, kafene biznesi dhe studio televizive, saqë për shumë drejtues është kthyer në një lloj dogme të shenjtë: "Fajin nuk e ka firma. Fajin e ka punëtori që nuk do me punu."
+Ka një refren të vjetër, të përsëritur aq shpesh nëpër zyra, kafene biznesi dhe studio televizive, saqë për shumë drejtues është kthyer në një lloj dogme të shenjtë: „Fajin nuk e ka firma. Fajin e ka punëtori që nuk do me punu.“
 
 Kjo është fjalia më komode që ka shpikur ndonjëherë menaxhimi shqiptar.
 
@@ -19,7 +19,7 @@ Le ta ballafaqojmë këtë mit me një fakt të thjeshtë që askush nuk mund ta
 
 Shikoni se çfarë ndodh në sekondën që këta djem dhe vajza kalojnë kufirin. Në Gjermani, në Itali, në Angli dhe kudo nëpër botë, ata hyjnë në turne të gjata në logjistikë, në kantiere ndërtimi, në hotele dhe në spitale. Zgjohen para agimit, punojnë me disiplinë të hekurt, mbajnë pesha, respektojnë oraret dhe fitojnë respektin e punëdhënësve të huaj si disa nga njerëzit më punëtorë.
 
-Si ka mundësi që i njëjti njeri, i cili në Durrës apo në Tiranë shpallet "dembel që nuk do me punu", sapo zbret në një magazinë në Mynih apo në Londër kthehet në një punonjës model?
+Si ka mundësi që i njëjti njeri, i cili në Durrës apo në Tiranë shpallet „dembel që nuk do me punu“, sapo zbret në një magazinë në Mynih apo në Londër kthehet në një punonjës model?
 
 A ndryshon gjaku i tij gjatë rrugës? A ndryshon ADN-ja e tij në aeroport?
 
@@ -29,7 +29,7 @@ Jashtë vendit, ai njeri përballet me një kontratë që respektohet, me një p
 
 Kur një punonjës largohet nga kompania jote, mund të jetë një rast i izoluar. Por kur nga kompania jote largohen dhjetëra njerëz çdo vit, kur dyert e rekrutimit rrinë të hapura pa ndërprerë dhe askush nuk kthen kokën të vijë, kjo nuk është krizë e moralit të rinisë. **Kjo është një aktakuzë e hapur ndaj mënyrës se si drejton.**
 
-Të thuash se "njerëzit nuk duan të punojnë" kur ti ofron kushte mbijetese, është njëlloj si të hedhësh farën mbi shkëmb të thatë dhe pastaj të mallkosh natyrën pse nuk mbin asgjë. Puna nuk lind nga presioni dhe as nga ankesat nëpër ekrane televizive. Puna e përkushtuar lind kur krijon një mjedis ku njeriu e sheh se mundi i tij ka një kuptim dhe një shpërblim të ndershëm.
+Të thuash se „njerëzit nuk duan të punojnë“ kur ti ofron kushte mbijetese, është njëlloj si të hedhësh farën mbi shkëmb të thatë dhe pastaj të mallkosh natyrën pse nuk mbin asgjë. Puna nuk lind nga presioni dhe as nga ankesat nëpër ekrane televizive. Puna e përkushtuar lind kur krijon një mjedis ku njeriu e sheh se mundi i tij ka një kuptim dhe një shpërblim të ndershëm.
 
 Lidershipi i vërtetë matet me guximin për të marrë përgjegjësi. Është shumë e lehtë të ulesh në karrigen e madhe dhe të marrësh meritat e çdo suksesi, ndërsa çdo dështim t'ia faturosh atyre që janë në bazë. Por historia e menaxhimit na mëson një rregull të palëkundur: problemet në një organizatë rrjedhin gjithmonë nga lart poshtë, jo nga poshtë lart.
 

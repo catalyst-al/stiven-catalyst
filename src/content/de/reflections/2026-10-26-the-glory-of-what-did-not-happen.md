@@ -1,5 +1,5 @@
 ---
-title: 'Der Ruhm dessen, was nicht geschah: Für Menschen, die ihre Arbeit gut machen, aber keine Katastrophe haben, die es beweist'
+title: 'Der Ruhm dessen, was nicht geschah: für Menschen, die ihre Arbeit gut machen, aber keine Katastrophe haben, die es beweist'
 date: 2026-10-26
 status: published
 summary: 'Gute Vorbeugung erzeugt das Ausbleiben eines Ereignisses und bleibt deshalb unsichtbar. Die Organisation belohnt, wer die Krise löst, und vergisst, wer davor gewarnt hat.'

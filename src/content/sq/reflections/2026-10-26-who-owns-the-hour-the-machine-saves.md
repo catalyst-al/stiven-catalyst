@@ -261,7 +261,7 @@ Por mënyra se si shpërndahen pasojat e tij mbetet një zgjedhje njerëzore.
 
 Në këtë pikë, një drejtues mund të kundërshtojë:
 
-"Nëse teknologjia më lejon të përpunoj dyfishin e punës, përse të mos e bëj?"
+„Nëse teknologjia më lejon të përpunoj dyfishin e punës, përse të mos e bëj?“
 
 Është një pyetje legjitime.
 

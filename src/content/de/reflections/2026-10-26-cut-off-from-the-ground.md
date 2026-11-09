@@ -1,5 +1,5 @@
 ---
-title: 'Ohne Bodenhaftung: Wenn Entscheidungen auf Schatten statt auf der Wirklichkeit beruhen'
+title: 'Ohne Bodenhaftung: wenn Entscheidungen auf Schatten statt auf der Wirklichkeit beruhen'
 date: 2026-10-26
 status: published
 summary: 'Eine Entscheidung, in fünf Minuten im gläsernen Besprechungsraum getroffen, landet im Lager als körperliche Last. Wer vor den Folgen geschützt ist, macht den Fehler zur Gewissheit.'

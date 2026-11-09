@@ -1,5 +1,5 @@
 ---
-title: 'Misioni hyjnor në katin e dytë: Kur pronari bëhet bamirës i mjerimit'
+title: 'Misioni hyjnor në katin e dytë: kur pronari bëhet bamirës i mjerimit'
 date: 2026-10-25
 status: published
 summary: 'Kur pronari beson se rroga është mëshirë dhe jo detyrim, puna kthehet në bamirësi feudale.'
@@ -19,7 +19,7 @@ Logjika e këtij misioni hyjnor është e thjeshtë, por shkatërruese. Nëse bi
 
 Kështu, marrëdhënia e punës kthehet përmbys. Ajo nuk është më një shkëmbim i ndershëm mes dy palëve të lira, ku mundi takohet me kapitalin. Ajo shndërrohet në një shfaqje bamirësie feudale.
 
-Pronari nuk është më punëdhënës; ai është bamirës. Punonjësi nuk është më profesionist që prodhon vlerë; ai është lypësi i heshtur që duhet të falënderojë çdo mbrëmje për faktin se ekziston ende. Dhe kur vjen momenti i llogaridhënies, kur pyetet se pse fitimet rriten ndërsa rrogat mbeten në vend, përgjigjja jepet me të njëjtin ton prej mesie të lodhur: "Po ju mbaj me bukë në këtë vend të vështirë."
+Pronari nuk është më punëdhënës; ai është bamirës. Punonjësi nuk është më profesionist që prodhon vlerë; ai është lypësi i heshtur që duhet të falënderojë çdo mbrëmje për faktin se ekziston ende. Dhe kur vjen momenti i llogaridhënies, kur pyetet se pse fitimet rriten ndërsa rrogat mbeten në vend, përgjigjja jepet me të njëjtin ton prej mesie të lodhur: „Po ju mbaj me bukë në këtë vend të vështirë.“
 
 Por le të flasim hapur. Zoti nuk ka zbritur asnjëherë në tokë për të firmosur kontrata pune me orar të plotë dhe pa pagesë për orët shtesë. Qielli nuk ka caktuar asnjë oligark apo tregtar të vogël për të qenë kujdestar i fatit të shqiptarëve.
 

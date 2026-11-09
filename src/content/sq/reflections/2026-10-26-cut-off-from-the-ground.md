@@ -1,5 +1,5 @@
 ---
-title: 'Shkëputja nga toka: Kur vendimet merren mbi hije dhe jo mbi realitet'
+title: 'Shkëputja nga toka: kur vendimet merren mbi hije dhe jo mbi realitet'
 date: 2026-10-26
 status: published
 summary: 'Vendimi i marrë në pesë minuta në sallën me xham zbret në magazinë si barrë fizike. Kur vendimmarrësi është i mbrojtur nga pasojat, gabimi bëhet garanci.'

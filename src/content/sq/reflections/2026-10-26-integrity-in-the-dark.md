@@ -1,5 +1,5 @@
 ---
-title: 'Integriteti në errësirë: Çfarë bën kur askush nuk po të sheh'
+title: 'Integriteti në errësirë: çfarë bën kur askush nuk po të sheh'
 date: 2026-10-26
 status: published
 summary: 'Reputacioni ndërtohet nën dritë; karakteri provohet në orën tre të mëngjesit, kur kutia bie, nuk ka kamera dhe askush nuk do ta dijë kurrë.'

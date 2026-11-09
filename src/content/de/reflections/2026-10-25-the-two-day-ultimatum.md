@@ -1,5 +1,5 @@
 ---
-title: 'Das Gedächtnis der Fliesen und das Zwei-Tage-Ultimatum: Wenn Führung zum Extremsport wird'
+title: 'Das Gedächtnis der Fliesen und das Zwei-Tage-Ultimatum: wenn Führung zum Extremsport wird'
 date: 2026-10-25
 status: published
 summary: 'Kein System, keine Schulung, keine Abläufe: Der Mitarbeiter soll ein lebender Scanner sein. Passiert ein Fehler, trägt er die Schuld, nicht das Chaos.'

@@ -1,5 +1,5 @@
 ---
-title: 'Das Theater der Hast: Wenn Eile mit Wichtigkeit verwechselt wird'
+title: 'Das Theater der Hast: wenn Eile mit Wichtigkeit verwechselt wird'
 date: 2026-10-26
 status: published
 summary: 'Wenn alles für dringend erklärt wird, ist nichts wichtig. Panik erzeugt das Gefühl von Bewegung, während die Arbeit nicht vorankommt.'

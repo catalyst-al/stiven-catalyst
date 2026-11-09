@@ -1,5 +1,5 @@
 ---
-title: 'Das Paradox der abgeschotteten Burg: Warum Führungskräfte am Ende in einer Lüge leben'
+title: 'Das Paradox der abgeschotteten Burg: warum Führungskräfte am Ende in einer Lüge leben'
 date: 2026-10-26
 status: published
 summary: 'Wer den Überbringer schlechter Nachrichten bestraft, ist bald von geschönten Berichten umgeben, bis die Wahrheit mit Gewalt ins Büro bricht.'

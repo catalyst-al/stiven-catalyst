@@ -1,4 +1,4 @@
-{%- set shortTitle = seo_title or title -%}
+{%- set shortTitle = (seo_title or title) | fitTitle if (seo_title or title) else "" -%}
 {#- The site's name follows the title only while the whole stays within about 60 characters, what a search result
     shows; a longer title stands alone, since the name would be the part cut off (the site name is in the structured
     data, partials/structured-data.njk). -#}

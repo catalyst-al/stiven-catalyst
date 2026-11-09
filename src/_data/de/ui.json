@@ -7954,5 +7954,8 @@
   "the last {n} of {m} shown": "die letzten {n} von {m} gezeigt",
   "This file is larger than 20 MB, far larger than any CV, so it was not read. Nothing was changed.": "Diese Datei ist größer als 20 MB, weit größer als jeder Lebenslauf, und wurde daher nicht gelesen. Nichts wurde geändert.",
   "The message is longer than a mail link can carry: the email program opens with its beginning. Copy the whole message with the button below and paste it into the email, or send it to": "Die Nachricht ist länger, als ein Mail-Link tragen kann: Das E-Mail-Programm öffnet sich mit ihrem Anfang. Kopieren Sie die ganze Nachricht mit der Schaltfläche unten und fügen Sie sie in die E-Mail ein, oder senden Sie sie an",
-  "[The rest did not fit in the mail link: use “Copy message” on the page.]": "[Der Rest passte nicht in den Mail-Link: Verwenden Sie „Nachricht kopieren“ auf der Seite.]"
+  "[The rest did not fit in the mail link: use “Copy message” on the page.]": "[Der Rest passte nicht in den Mail-Link: Verwenden Sie „Nachricht kopieren“ auf der Seite.]",
+  "Translation": "Übersetzung",
+  "with AI assistance": "mit KI-Unterstützung",
+  "revised by the author": "vom Autor durchgesehen"
 }

@@ -1,5 +1,5 @@
 ---
-title: 'Die Mitschuld der Anständigen: Wenn Schweigen zur Stimme für das Unrecht wird'
+title: 'Die Mitschuld der Anständigen: wenn Schweigen zur Stimme für das Unrecht wird'
 date: 2026-10-26
 status: published
 summary: 'Angesichts offenen Unrechts gibt es keine Neutralität. Das Schweigen der Anständigen liest derjenige, der andere mit Füßen tritt, als Erlaubnis.'

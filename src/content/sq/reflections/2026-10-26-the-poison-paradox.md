@@ -1,5 +1,5 @@
 ---
-title: 'Paradoksi i helmit: Kur tolerojmë vjedhjen dhe çuditemi me rrënimin'
+title: 'Paradoksi i helmit: kur tolerojmë vjedhjen dhe çuditemi me rrënimin'
 date: 2026-10-26
 status: published
 summary: '"Korrupsionin e kuptoj, por pse nuk zhvillohet vendi?" Nuk mund të hedhësh helm në pus dhe të çuditesh pse uji të sëmur fëmijët.'
@@ -7,7 +7,7 @@ deck: 'Ideja se një shoqëri mund të bashkëjetojë me korrupsionin dhe njëko
 description: 'Një reflektim për korrupsionin e normalizuar, për mitin e "hajdutit që bën punë" dhe pse zhvillimi dhe vjedhja nuk ndajnë dot të njëjtën dhomë.'
 ---
 
-Në kafenetë e Tiranës, në takimet e pasdites në Durrës, në tryezat familjare dhe në bisedat e përditshme të njerëzve të zakonshëm, dëgjohet rëndom një fjali. Ajo thuhet me një lloj pjekurie të shtirë, me tonin e njeriut që pretendon se e njeh botën deri në palcë: "Shiko, korrupsionin e kuptoj unë. Kudo vidhet. Por nuk kuptoj pse nuk zhvillohet ky vend, pse nuk bëhet shteti."
+Në kafenetë e Tiranës, në takimet e pasdites në Durrës, në tryezat familjare dhe në bisedat e përditshme të njerëzve të zakonshëm, dëgjohet rëndom një fjali. Ajo thuhet me një lloj pjekurie të shtirë, me tonin e njeriut që pretendon se e njeh botën deri në palcë: „Shiko, korrupsionin e kuptoj unë. Kudo vidhet. Por nuk kuptoj pse nuk zhvillohet ky vend, pse nuk bëhet shteti.“
 
 Kjo është, pa asnjë dyshim, një nga shprehjet më vetëvrasëse dhe thellësisht kontradiktore që ka prodhuar mendësia jonë kolektive.
 
@@ -25,11 +25,11 @@ Si mund të presësh zhvillim nga një organizëm ku çdo qelizë ushqehet me pa
 
 Zhvillimi i një kombi nuk është një mrekulli magjike që bie nga qielli. Ai nuk vjen nga fati dhe as nga moti i mirë. Zhvillimi është rezultati i pashmangshëm i tre elementeve themelore: rregullave të qarta të lojës, garës së lirë të merituar dhe besimit se ligji mbron mundin e gjithsecilit.
 
-Në sekondën që ti thua "korrupsionin e kuptoj", ti ke pranuar të asgjësosh të treja këto themele.
+Në sekondën që ti thua „korrupsionin e kuptoj“, ti ke pranuar të asgjësosh të treja këto themele.
 
 Ke pranuar që rregullat të jenë prej plasteline për të fortët dhe prej hekuri për të dobëtit. Ke pranuar që talenti të mposhtet nga servilizmi. Ke pranuar që djersa e ballit të mos vlejë asgjë përballë pushtetit të zarfit. Dhe pasi ke pranuar të gjitha këto me një ngritje shpatullash, kthehesh nga ekrani dhe pyet me zë të lartë: *Pse nuk po bëhemi dot si Gjermania? Pse nuk kemi dot shtet?*
 
-Kjo kontradiktë ushqen edhe mitin tjetër të rrezikshëm: shpresën te "hajduti që bën punë".
+Kjo kontradiktë ushqen edhe mitin tjetër të rrezikshëm: shpresën te „hajduti që bën punë“.
 
 Për vite me radhë, qytetarëve shqiptarë u është shitur ideja se nuk ka problem nëse një udhëheqës vjedh, mjafton që të lërë pas disa kilometra asfalt me cilësi të dobët apo disa fasada të lyera me bojë vezulluese. Por historia botërore nuk njeh asnjë rast të vetëm ku një vend të ketë arritur mirëqenie afatgjatë përmes hajdutërisë së ndriçuar. Asfalti i shtruar pa standard mbi themelet e korrupsionit prishet me shiun e parë. Spitali i ndërtuar me vjedhje kthehet në një godinë të ftohtë ku mungojnë fashat dhe shiringat. Dhe fasada e lyer shpejt zbehet, duke lënë pas mjerimin e vërtetë.
 

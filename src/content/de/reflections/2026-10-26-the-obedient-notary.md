@@ -1,5 +1,5 @@
 ---
-title: 'Der gehorsame Notar: Wenn die Personalabteilung zum Henker im eigenen Haus wird'
+title: 'Der gehorsame Notar: wenn die Personalabteilung zum Henker im eigenen Haus wird'
 date: 2026-10-26
 status: published
 summary: 'Das Büro, das den Menschen schützen sollte, stempelt jede Laune des Eigentümers ab und verhört den Mitarbeiter, der um Hilfe bittet.'

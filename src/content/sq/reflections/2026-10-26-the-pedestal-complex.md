@@ -1,5 +1,5 @@
 ---
-title: 'Kompleksi i piedestalit: Lufta e dëshpëruar për të mbetur më i gjati në dhomë'
+title: 'Kompleksi i piedestalit: lufta e dëshpëruar për të mbetur më i gjati në dhomë'
 date: 2026-10-26
 status: published
 summary: 'Pronari i pasigurt nuk kërkon bashkëpunëtorë të zotë, por një sfond gri ku të shkëlqejë vetëm. Kështu i largon më të mirët dhe mbetet me servilët.'

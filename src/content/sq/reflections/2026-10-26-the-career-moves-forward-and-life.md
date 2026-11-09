@@ -13,7 +13,7 @@ Mbledhja e mëngjesit. Afati i një projekti. Një telefonatë me drejtuesin. Nj
 
 Diku mes tyre ishte shkruar edhe një kujtesë e vogël.
 
-"Të jem në shtëpi në kohë."
+„Të jem në shtëpi në kohë.“
 
 Nuk kishte asnjë orë të përcaktuar nga drejtoria. Nuk kërkonte konfirmim me email. Nuk ndikonte në treguesit e performancës.
 

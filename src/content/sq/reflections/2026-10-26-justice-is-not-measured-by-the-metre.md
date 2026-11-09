@@ -1,5 +1,5 @@
 ---
-title: 'Drejtësia nuk ndahet me metër: Kur barazia në letër bëhet padrejtësi në praktikë'
+title: 'Drejtësia nuk ndahet me metër: kur barazia në letër bëhet padrejtësi në praktikë'
 date: 2026-10-26
 status: published
 summary: 'Dy punonjës shënohen me tetë orë, por dita e tyre nuk ishte e njëjtë. Barazia kërkon një standard të përbashkët, drejtësia kërkon gjykim, dhe kompetenca nuk duhet të bëhet dënim.'
@@ -175,7 +175,7 @@ Kur përkushtimi i tij merret si i mirëqenë, ndërsa çdo mungesë përkushtim
 
 Po e shfrytëzon atë.
 
-Dhe kur drejtuesi i përgjigjet çdo kundërshtimi me fjalinë "Rregullat janë njësoj për të gjithë", ai mund të jetë duke mbrojtur një parim të rëndësishëm.
+Dhe kur drejtuesi i përgjigjet çdo kundërshtimi me fjalinë „Rregullat janë njësoj për të gjithë“, ai mund të jetë duke mbrojtur një parim të rëndësishëm.
 
 Por mund të jetë edhe duke u fshehur pas tij.
 

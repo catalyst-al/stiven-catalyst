@@ -1,5 +1,5 @@
 ---
-title: 'Teile und herrsche auf den Fluren: Wenn Führung die Feindschaft unter Kollegen nährt'
+title: 'Teile und herrsche auf den Fluren: wenn Führung die Feindschaft unter Kollegen nährt'
 date: 2026-10-26
 status: published
 summary: 'Die Feindschaft zwischen Schichten und Kollegen entsteht nicht von selbst. Der unsichere Chef sät sie, denn ein gespaltenes Team sieht nie die Leere an der Spitze.'

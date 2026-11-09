@@ -1,5 +1,5 @@
 ---
-title: 'Einseitige Erreichbarkeit: Wenn ihr Notfall Ihre Pflicht ist, Ihr Recht aber ein Luxus'
+title: 'Einseitige Erreichbarkeit: wenn ihr Notfall Ihre Pflicht ist, Ihr Recht aber ein Luxus'
 date: 2026-10-25
 status: published
 summary: 'Ihr Handy muss Tag und Nacht für das Chaos der Firma an sein, doch fragen Sie nach Ihrem Lohn, gibt es Bürozeiten.'

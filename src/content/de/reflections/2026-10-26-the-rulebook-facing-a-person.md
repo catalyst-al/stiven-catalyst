@@ -1,5 +1,5 @@
 ---
-title: 'Das Regelwerk vor einem Menschen: Wenn das Verfahren den Fall kennt, aber nicht den Menschen'
+title: 'Das Regelwerk vor einem Menschen: wenn das Verfahren den Fall kennt, aber nicht den Menschen'
 date: 2026-10-26
 status: published
 summary: 'Die Antwort des Rezeptionisten war formal richtig, aber trotzdem nicht genug. Das Regelwerk zeigt die Grenzen unserer Verantwortung, das Urteil zeigt, wie ernst wir den Menschen nehmen.'

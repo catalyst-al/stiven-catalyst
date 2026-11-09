@@ -1,5 +1,5 @@
 ---
-title: 'Lavdia e asaj që nuk ndodhi: Për njerëzit që e bëjnë mirë punën, por nuk kanë një katastrofë për ta dëshmuar'
+title: 'Lavdia e asaj që nuk ndodhi: për njerëzit që e bëjnë mirë punën, por nuk kanë një katastrofë për ta dëshmuar'
 date: 2026-10-26
 status: published
 summary: 'Parandalimi i mirë prodhon mungesën e një ngjarjeje, prandaj mbetet i padukshëm. Organizata shpërblen kush e zgjidh krizën dhe harron kush e paralajmëroi.'
@@ -203,7 +203,7 @@ Një tjetër se nuk ka nevojë të shqetësohet për çdo detaj.
 
 Mund të dëgjojë edhe fjalinë më të rrezikshme të një organizate që ka filluar ta ngatërrojë fatin me kompetencën:
 
-"Kështu kemi punuar gjithmonë dhe nuk ka ndodhur asgjë."
+„Kështu kemi punuar gjithmonë dhe nuk ka ndodhur asgjë.“
 
 Por mungesa e një incidenti të mëparshëm nuk është garanci për sigurinë e një procesi.
 

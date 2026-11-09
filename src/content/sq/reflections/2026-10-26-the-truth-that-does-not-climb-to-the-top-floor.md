@@ -1,5 +1,5 @@
 ---
-title: 'E vërteta që nuk ngjitet në katin e sipërm: Anatomia e një organizate që mësoi t''i fshihte plagët pas raporteve të bukura'
+title: 'E vërteta që nuk ngjitet në katin e sipërm: anatomia e një organizate që mësoi t''i fshihte plagët pas raporteve të bukura'
 date: 2026-10-26
 status: published
 summary: 'Raporti ndryshon fjalë pas fjale derisa një natë e vështirë bëhet "operacione normale". Nuk ka gënjeshtar, por njerëzit kanë mësuar se e vërteta ka çmim dhe drejtimi merr vendime mbi një realitet të zgjedhur nga të tjerët.'
@@ -13,19 +13,19 @@ Punonjësit e turnit të natës kishin kaluar disa orë duke korrigjuar gabime q
 
 Në raportin e parë u shkrua:
 
-"Probleme të përsëritura në proces. Nevojitet ndërhyrje."
+„Probleme të përsëritura në proces. Nevojitet ndërhyrje.“
 
 Përgjegjësi i departamentit e lexoi. Problemi ishte real, por ai nuk dëshironte që raporti të krijonte përshtypjen se situata kishte dalë jashtë kontrollit. E ndryshoi formulimin:
 
-"Vështirësi operative të identifikuara dhe të menaxhuara."
+„Vështirësi operative të identifikuara dhe të menaxhuara.“
 
 Menaxheri i nivelit tjetër e shkurtoi edhe më shumë. Në fund të fundit, puna kishte përfunduar dhe klientët ishin larguar.
 
-"Sfidat operative u trajtuan me sukses."
+„Sfidat operative u trajtuan me sukses.“
 
 Kur raporti mbërriti në drejtori, fjalia kishte marrë formën e saj përfundimtare:
 
-"Operacionet përfunduan normalisht."
+„Operacionet përfunduan normalisht.“
 
 Asnjë nga njerëzit që kishte prekur dokumentin nuk e konsideronte veten gënjeshtar.
 
@@ -69,7 +69,7 @@ Mjafton që njerëzit të kuptojnë çfarë ndodh me atë që i sjell.
 
 Pastaj fillon vetëcensura.
 
-Në fillim hiqet një detaj që konsiderohet tepër negativ. Më vonë zëvendësohet një fjalë e drejtpërdrejtë me një shprehje më diplomatike. Një gabim i përsëritur bëhet "një situatë që po monitorohet". Një mungesë serioze personeli përshkruhet si "optimizim i burimeve". Një proces që mbijeton vetëm falë përpjekjeve të jashtëzakonshme të punonjësve paraqitet si dëshmi e efikasitetit të strukturës.
+Në fillim hiqet një detaj që konsiderohet tepër negativ. Më vonë zëvendësohet një fjalë e drejtpërdrejtë me një shprehje më diplomatike. Një gabim i përsëritur bëhet „një situatë që po monitorohet“. Një mungesë serioze personeli përshkruhet si „optimizim i burimeve“. Një proces që mbijeton vetëm falë përpjekjeve të jashtëzakonshme të punonjësve paraqitet si dëshmi e efikasitetit të strukturës.
 
 Informacioni vazhdon të qarkullojë.
 
@@ -91,7 +91,7 @@ Shpesh, ajo fillon në zyrën ku informacioni duhet të mbërrijë.
 
 Ka drejtues që deklarojnë vazhdimisht se duan transparencë.
 
-"Unë dua të di gjithçka. Mos më fshihni asnjë problem."
+„Unë dua të di gjithçka. Mos më fshihni asnjë problem.“
 
 Fjalë të admirueshme.
 
@@ -209,7 +209,7 @@ Kur ishte hera e fundit që dikush më tha diçka që nuk doja ta dëgjoja?
 
 Jo një kritikë e parëndësishme, jo një ankesë e zakonshme, por një të vërtetë që vinte në diskutim një vendim timin, një bindje timen ose mënyrën se si e kisha kuptuar situatën.
 
-Nëse përgjigjja është "nuk më kujtohet", kjo nuk është domosdoshmërisht dëshmi se gjithçka funksionon mirë.
+Nëse përgjigjja është „nuk më kujtohet“, kjo nuk është domosdoshmërisht dëshmi se gjithçka funksionon mirë.
 
 Mund të jetë shenjë se njerëzit kanë pushuar së provuari.
 
@@ -243,7 +243,7 @@ Pastaj një klient i rëndësishëm largohet. Një gabim bëhet publik. Një pro
 
 Drejtoria pyet:
 
-"Si ka mundësi që askush nuk na informoi?"
+„Si ka mundësi që askush nuk na informoi?“
 
 Ndonjëherë përgjigjja është se dikush i kishte informuar.
 

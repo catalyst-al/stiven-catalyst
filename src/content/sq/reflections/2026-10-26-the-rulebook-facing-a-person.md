@@ -1,5 +1,5 @@
 ---
-title: 'Rregullorja përballë një njeriu: Kur procedura e njeh rastin, por nuk e njeh njeriun'
+title: 'Rregullorja përballë një njeriu: kur procedura e njeh rastin, por nuk e njeh njeriun'
 date: 2026-10-26
 status: published
 summary: 'Përgjigjja e recepsionistit ishte administrativisht e saktë, por ende e pamjaftueshme. Rregullorja jep kufijtë e përgjegjësisë, ndërsa gjykimi tregon sa seriozisht e marrim njeriun.'
@@ -19,7 +19,7 @@ Punonjësi i recepsionit kontrolloi sistemin.
 
 Rezervimi ishte i saktë. Pagesa ishte në rregull. Megjithatë, ora e hyrjes ishte e përcaktuar qartë në kushtet e hotelit.
 
-"Më vjen keq, por check-in fillon në orën tre."
+„Më vjen keq, por check-in fillon në orën tre.“
 
 Gruaja nuk kundërshtoi.
 
@@ -27,7 +27,7 @@ Nuk kërkoi të fliste me drejtorin. Nuk kërcënoi me një vlerësim negativ. N
 
 Vetëm pa fëmijën dhe pyeti:
 
-"A ka ndonjë vend ku mund të presim?"
+„A ka ndonjë vend ku mund të presim?“
 
 Punonjësi kishte dhënë përgjigjen e saktë.
 
@@ -75,7 +75,7 @@ Pyet nëse ka respektuar atë që është shkruar.
 
 Dhe nëse përgjigjja është po, përgjegjësia e tij konsiderohet e përfunduar.
 
-"Nuk mund të bëj asgjë. Kështu është rregullorja."
+„Nuk mund të bëj asgjë. Kështu është rregullorja.“
 
 Kjo fjali mund të jetë plotësisht e drejtë në një situatë ku ligji, siguria apo autoriteti i punonjësit nuk lejojnë një veprim tjetër.
 
@@ -411,7 +411,7 @@ Askush nuk është domosdoshmërisht i angazhuar për të gjetur zgjidhjen.
 
 Ka një fjali që dëgjohet shpesh në botën e shërbimit:
 
-"Unë vetëm ndoqa rregullat."
+„Unë vetëm ndoqa rregullat.“
 
 Ndonjëherë është shpjegimi i duhur.
 
@@ -419,7 +419,7 @@ Ndonjëherë është e vetmja përgjigje që punonjësi kishte autoritet të jep
 
 Por ka raste kur ajo fjali fsheh një pyetje që nuk u bë kurrë:
 
-"A kishte ndonjë mënyrë të drejtë dhe të lejuar për të ndihmuar më shumë?"
+„A kishte ndonjë mënyrë të drejtë dhe të lejuar për të ndihmuar më shumë?“
 
 Kjo pyetje nuk kërkon heroizëm.
 

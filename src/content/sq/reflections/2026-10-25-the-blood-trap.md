@@ -1,5 +1,5 @@
 ---
-title: 'Gracka e gjakut: Kur firma familjare bëhet burgu yt'
+title: 'Gracka e gjakut: kur firma familjare bëhet burgu yt'
 date: 2026-10-25
 status: published
 summary: 'Kur emri i familjes bëhet mburojë për të mohuar rrogën dhe dinjitetin e të riut që punon aty, biznesi familjar nuk ndërton të ardhmen: konsumon fëmijët e vet.'
@@ -17,7 +17,7 @@ Dhe për një kohë të gjatë, ai e beson këtë. Ai jep energjinë, rininë dh
 
 Por muajt kalojnë, vitet ikin, dhe realiteti përplaset me fasadën e ëmbël të fjalëve.
 
-Kur vjen momenti për të mbyllur muajin, për të paguar qiranë, për të krijuar një familje të re apo për të kërkuar një jetë me dinjitet, përgjigjja nga lart është gjithmonë e njëjtë, e thënë me një natyrshmëri rrëqethëse: "Familja tani nuk ka buxhet. Duhet të durosh edhe pak. Ne jemi të gjithë në një varkë."
+Kur vjen momenti për të mbyllur muajin, për të paguar qiranë, për të krijuar një familje të re apo për të kërkuar një jetë me dinjitet, përgjigjja nga lart është gjithmonë e njëjtë, e thënë me një natyrshmëri rrëqethëse: „Familja tani nuk ka buxhet. Duhet të durosh edhe pak. Ne jemi të gjithë në një varkë.“
 
 Më lejoni të jem i drejtpërdrejtë. **Kur një kompani familjare nuk mund t'i sigurojë një njeriu të saj jetë dinjitoze, ndërkohë që pasuria e përbashkët shfaqet kudo tjetër, ajo nuk po ndërton një të ardhme. Ajo po konsumon fëmijët e vet.**
 
