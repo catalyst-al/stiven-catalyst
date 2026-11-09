@@ -50,7 +50,57 @@
   {%- if kind == "Reflection" %}{% set article = article | merge({ "genre": "Reflection" }) %}{% endif %}
   {%- if minutes and (minutes | int) > 0 %}{% set article = article | merge({ "timeRequired": "PT" + (minutes | int) + "M" }) %}{% endif %}
   {%- if image %}{% set article = article | merge({ "image": [image | absoluteUrl, socialImage | absoluteUrl] }) %}{% endif %}
+  {#- An issue or a volume says which series it belongs to (audit SEO-07): the Management Review and From the Floor
+      are periodicals of numbered issues, the treatise a series of numbered volumes. -#}
+  {%- if issue and issue.slug and (issue.slug.indexOf("management-review-nr-") == 0 or issue.slug.indexOf("nga-terreni-") == 0) %}
+    {%- set isReview = issue.slug.indexOf("management-review-nr-") == 0 %}
+    {%- set article = article | merge({ "isPartOf": {
+      "@type": "PublicationIssue",
+      "issueNumber": issue.number | string,
+      "isPartOf": { "@type": "Periodical", "@id": siteUrl + ("#management-review" if isReview else "#from-the-floor"), "name": "Management Review" if isReview else magazine.names[lang or "en"].name, "publisher": { "@id": siteUrl + "#publisher" } }
+    } }) %}
+  {%- elif volume and volume.slug and volume.number %}
+    {%- set article = article | merge({ "isPartOf": {
+      "@type": "PublicationVolume",
+      "volumeNumber": volume.number | string,
+      "isPartOf": { "@type": "CreativeWorkSeries", "@id": siteUrl + "#operational-treatise", "name": treatise[lang or "en"].short, "publisher": { "@id": siteUrl + "#publisher" } }
+    } }) %}
+  {%- endif %}
   {%- set graph = graph.concat([article]) %}
+{%- elif ogType == "book" %}
+  {#- The book and the Tools Guide (audit SEO-07); the book's English and German pages are translations of the
+      Albanian original. -#}
+  {%- set book = {
+    "@type": "Book",
+    "@id": (page.url | absoluteUrl) + "#book",
+    "name": title,
+    "description": pageDescription,
+    "url": (page.url | absoluteUrl),
+    "image": socialImage | absoluteUrl,
+    "inLanguage": lang or "en",
+    "bookFormat": "https://schema.org/EBook",
+    "isAccessibleForFree": true,
+    "author": { "@id": siteUrl + "#author" },
+    "publisher": { "@id": siteUrl + "#publisher" }
+  } %}
+  {%- if "/books/" in page.url and (lang or "en") != "sq" and alternates.sq %}
+    {%- set book = book | merge({ "translationOfWork": { "@type": "Book", "@id": (alternates.sq | absoluteUrl) + "#book", "inLanguage": "sq", "url": alternates.sq | absoluteUrl } }) %}
+  {%- endif %}
+  {%- set graph = graph.concat([book]) %}
+{%- elif (page.url | enPath) == "/podcast.html" and podcast[lang or "en"] and podcast[lang or "en"].feed %}
+  {%- set show = podcast[lang or "en"] %}
+  {%- set graph = graph.concat([{
+    "@type": "PodcastSeries",
+    "@id": (page.url | absoluteUrl) + "#podcast",
+    "name": show.feed.title,
+    "description": pageDescription,
+    "url": (page.url | absoluteUrl),
+    "image": show.feed.image | absoluteUrl,
+    "webFeed": show.feed.url,
+    "inLanguage": show.feed.lang,
+    "author": { "@id": siteUrl + "#author" },
+    "publisher": { "@id": siteUrl + "#publisher" }
+  }]) %}
 {%- elif page.url == homeUrl %}
   {%- set graph = graph.concat([{
     "@type": "WebSite",

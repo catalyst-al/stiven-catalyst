@@ -67,3 +67,16 @@ test('the homepage offers to continue where the reader left off, and nothing on 
   assert.deepEqual(finished, { hidden: false, kicker: 'Up next', href: '/insights/two/', meta: 'Essay' });
   assert.equal(page({ one: { p: 1, done: true, t: 1 }, two: { p: 1, done: true, t: 2 }, three: { p: 1, done: true, t: 3 } }).hidden, true, 'nothing left to read');
 });
+
+test('the about page ends with where to go next: start here, essay 1, projects and contact', { skip: !fs.existsSync('_site/sq/about.html') }, () => {
+  for (const prefix of ['', '/sq', '/de']) {
+    const html = fs.readFileSync(`_site${prefix}/about.html`, 'utf8');
+    const section = html.match(/<section class="shell issue-more about-next"[\s\S]*?<\/section>/)?.[0];
+    assert.ok(section, `${prefix || '/'}: the section is there`);
+    const links = [...section.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
+    assert.equal(links.length, 4);
+    assert.equal(links[0], `${prefix}/start.html`);
+    assert.match(links[1], new RegExp(`^${prefix}/insights/[^/]+/$`));
+    assert.deepEqual(links.slice(2), [`${prefix}/projects.html`, `${prefix}/contact.html`]);
+  }
+});

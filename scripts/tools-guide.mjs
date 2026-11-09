@@ -19,6 +19,7 @@ import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { checkPagesFit, unfitMessage } from "../lib/page-fit.js";
+import { readOutline, writeOutline } from "../lib/pdf-outline.js";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const OUT = path.join(ROOT, "src", "media", "guides", "tools-guide");
@@ -69,7 +70,11 @@ for (const lang of guide.langs) {
   await page.goto(`${base}/guide-print/${lang}/`, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
   const target = path.join(OUT, `${guide.slug}-${lang}.pdf`);
-  await page.pdf({ path: target, preferCSSPageSize: true, printBackground: true });
+  // Tagged, so a screen reader follows the text; the bookmarks are the page headings (lib/pdf-outline.js; audit P5-08).
+  await page.pdf({ path: target, preferCSSPageSize: true, printBackground: true, tagged: true });
+  writeOutline(target, await readOutline(page));
+  // The author and the language of the guide, which Chromium does not write (scripts/pdf-meta.py; audit P5-08).
+  execFileSync("python3", [path.join(ROOT, "scripts", "pdf-meta.py"), target, lang], { cwd: ROOT, stdio: "inherit" });
   console.log(`Printed ${path.relative(ROOT, target)}`);
   await page.close();
 }

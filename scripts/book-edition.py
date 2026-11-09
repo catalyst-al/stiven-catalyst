@@ -514,6 +514,11 @@ def main(lang, only_fit=False):
     sys.path.insert(0, str(Path(__file__).parent))
     spec.loader.exec_module(book_pages)
     book_pages.main(str(out), lang)
+    # The language and the bookmarks of the original (scripts/book-meta.py; audit P6-04).
+    spec = importlib.util.spec_from_file_location("book_meta", Path(__file__).with_name("book-meta.py"))
+    book_meta = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(book_meta)
+    book_meta.finish(lang)
 
 
 if __name__ == "__main__":

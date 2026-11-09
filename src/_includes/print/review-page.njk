@@ -58,7 +58,7 @@
   <p class="kicker">{{ R.sourcesPage.kicker }}</p>
   <h2>{{ R.sourcesPage.title[0] }}<span class="accent">{{ R.sourcesPage.title[1] }}</span></h2>
   <p class="lead">{{ R.sourcesPage.lead }}</p>
-  <ol class="src">{% for s in review.sources %}<li>{{ s.title }}<em>{{ s.by }}</em><i>{{ s.url }}</i></li>{% endfor %}</ol>
+  <ol class="src">{% for s in review.sources %}<li>{{ s.title }}<em>{{ s.by }}</em>{% if s.url %}<a class="src-link" href="{{ s.url }}"><i>{{ s.url }}</i></a>{% endif %}</li>{% endfor %}</ol>
   <div class="callout"><span class="label">{{ R.sourcesPage.method }}</span><p>{{ R.sourcesPage.methodText }}</p></div>
   {%- for c in R.corrections %}
   <div class="callout is-correction"><span class="label">{{ "Correction" | t(lang) }} · {{ c.date }}</span><p>{{ c.t }}</p></div>
