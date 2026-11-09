@@ -168,9 +168,29 @@
     }
   };
 
+  // The publications read lately, for the Publications page's "Continue where you left off"
+  // (js/pub-continue.js): this one's address, name, page and length, the latest first, at most eight.
+  const recentKey = "sc-book-recent";
+  const hero = document.querySelector(".book-hero");
+  const rememberRecent = (page) => {
+    try {
+      const list = (JSON.parse(localStorage.getItem(recentKey) || "[]") || []).filter((entry) => entry && entry.u !== location.pathname);
+      list.unshift({
+        u: location.pathname,
+        k: hero?.querySelector(".eyebrow")?.textContent.trim() || "",
+        h: hero?.querySelector("h1")?.textContent.trim() || document.title,
+        p: page,
+        n: total,
+        t: Date.now(),
+      });
+      localStorage.setItem(recentKey, JSON.stringify(list.slice(0, 8)));
+    } catch { /* storage unavailable */ }
+  };
+
   const remember = () => {
     const page = currentPage();
     try { localStorage.setItem(storageKey, String(page)); } catch { /* storage unavailable */ }
+    if (page > 1) rememberRecent(page);
     history.replaceState(null, "", page > 1 ? `#faqe-${page}` : "#reader");
     $("[data-book-resume]").hidden = true;
   };
