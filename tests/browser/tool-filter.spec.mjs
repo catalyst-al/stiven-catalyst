@@ -123,8 +123,20 @@ test("a filtered tool's link opens the tool, and the role cards still lead to th
 });
 
 test("nothing typed leaves the page: no request, no storage, no change of address", async ({ page }) => {
+  // What is still open from the load is noted, so a run that never goes quiet says what kept it busy.
+  const open = new Set();
+  page.on("request", (request) => open.add(request));
+  page.on("requestfinished", (request) => open.delete(request));
+  page.on("requestfailed", (request) => open.delete(request));
   await page.goto(PAGES.en);
-  await page.waitForLoadState("networkidle");
+  // The page as the reader has it: loaded, its fonts ready, then at most 5 s for the network to go quiet. Not an
+  // unbounded "networkidle": on GitHub's runner this page in the dark project kept a request open past the 30 s of the
+  // test (8 November 2026, twice), as /de/field-notes.html did for a11y-pages.spec.mjs. A request still open from the
+  // load does not weaken the test: only the requests that start once typing begins are checked below.
+  await page.waitForLoadState("load");
+  await page.evaluate(() => document.fonts.ready.then(() => undefined));
+  const quiet = await page.waitForLoadState("networkidle", { timeout: 5_000 }).then(() => true, () => false);
+  if (!quiet) console.log(`${page.url()}: still open 5 s after the load: ${[...open].map((r) => `${r.resourceType()} ${r.url()}`).join(", ") || "(none seen)"}`);
   // Fictional saved work and a fictional hand-off note, to show the filter leaves them as they are.
   await page.evaluate(() => {
     localStorage.setItem("sc-actions", JSON.stringify([{ id: "fx1", title: "Fictional action: tidy the returns shelf" }]));
