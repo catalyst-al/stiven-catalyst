@@ -53,9 +53,12 @@ jobs:
           grep -qE '^ +[0-9]+ passed' browser-test.log
           if grep -qE '^ +[0-9]+ (skipped|flaky|did not run)' browser-test.log; then exit 1; fi
       # Only when the browser tests failed: the trace of each failed test (playwright.config.mjs keeps a trace only on
-      # failure), for 7 days. The repository is public, so anyone can download it: the tests use fictional data only and
-      # every request outside the local test server is blocked (fixtures.mjs). The job stays failed whatever this step
-      # does; no trace found gives a warning, not a pass.
+      # failure), for 7 days. The repository is public: treat every trace as accessible to others. The tests use
+      # fictional data only. The standard fixture (fixtures.mjs) blocks every request outside the local test server, but
+      # three tests open their own browser context, which does not inherit that block (print.spec.mjs,
+      # work-backup-photos.spec.mjs, tool-filter.spec.mjs). Those contexts load local pages only; with tracing on for
+      # every test (PR 404) they made no request outside 127.0.0.1. The job stays failed whatever this step does; no
+      # trace found gives a warning, not a pass.
       - name: Keep the traces of the failed browser tests
         if: failure() && steps.browser.outcome == 'failure'
         continue-on-error: true
