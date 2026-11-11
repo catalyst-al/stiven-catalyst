@@ -6,6 +6,10 @@
 {%- set chapterWord = {"sq": "Kapitulli", "en": "Chapter", "de": "Kapitel"}[book.language] -%}
 {%- set editions = [["en", "English"], ["de", "Deutsch"], ["sq", "Shqip"]] -%}
 {%- set cover = book.pages[0] -%}
+{#- At the end of the reader and under the text: the next publication, the Management Review of September 2026. -#}
+{%- set pubAfter = "book" -%}
+{%- set nextPub = { weekly: weekly, magazine: magazine, treatise: treatise, books: books, review: review, magazinePages: magazinePages } | nextPublication(pubAfter, lang) -%}
+{%- set onward = nextPub -%}
 {%- set labels = {
   cover: "Cover" | t(lang),
   back: "Back cover" | t(lang),
@@ -24,6 +28,8 @@
         <div><dt>{{ "Chapters" | t(lang) }}</dt><dd>{{ book.chapters.length - 2 }} <span>+ {{ "prologue and epilogue" | t(lang) }}</span></dd></div>
         <div><dt>{{ "Pages" | t(lang) }}</dt><dd>{{ book.pageCount }}</dd></div>
         <div><dt>{{ "Language" | t(lang) }}</dt><dd>{% if book.language == "sq" %}{{ "Albanian" | t(lang) }}{% else %}{{ {"en": "English", "de": "Deutsch"}[book.language] }} <span>{{ "from the Albanian" | t(lang) }}</span>{% endif %}</dd></div>
+        {#- How the translation was made (audit P6-05), as the edition line of the PDF says it. -#}
+        {%- if book.language != "sq" %}<div><dt>{{ "Translation" | t(lang) }}</dt><dd>{{ "with AI assistance" | t(lang) }} <span>{{ "revised by the author" | t(lang) }}</span></dd></div>{% endif %}
         <div><dt>{{ "Edition" | t(lang) }}</dt><dd>2026</dd></div>
       </dl>
       <div class="hero-actions">
@@ -53,6 +59,7 @@
           {%- endfor %}
         </div>
       </div>
+      {%- include "partials/book-onward.njk" %}
 
       <div class="book-controls" data-book-controls hidden>
         <button class="book-button" type="button" data-book-prev aria-label="{{ 'Previous page' | t(lang) }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -117,4 +124,5 @@
       </div>
     </details>
   </section>
+{% include "partials/more-publications.njk" %}
 <script src="{{ '/js/book.js' | assetUrl }}" defer></script>

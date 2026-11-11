@@ -1,5 +1,5 @@
 ---
-title: 'Tirania e njeriut të vogël: Kur pushteti i jepet atij që nuk ka karakter'
+title: 'Tirania e njeriut të vogël: kur pushteti i jepet atij që nuk ka karakter'
 date: 2026-10-26
 status: published
 summary: 'Poshtërimi më i përditshëm nuk vjen nga maja, por nga njeriu i vogël që merr një portë, një vulë apo një çelës dhe e përdor si kamxhik.'
@@ -21,7 +21,7 @@ Pse ndodh kjo metamorfozë kaq e shpejtë dhe kaq e shëmtuar?
 
 Kjo ndodh sepse njeriu pa karakter të brendshëm e percepton pushtetin jo si një përgjegjësi për të shërbyer, por si një mundësi historike për t'u hakmarrë. Gjatë gjithë jetës së tij, ai është ndier i parëndësishëm, i padukshëm dhe i nëpërkëmbur nga të tjerët. Dhe në sekondën e parë që sistemi i jep atij autoritetin më të vogël mbi fatin e një njeriu tjetër, ai nuk e përdor atë për të lehtësuar procesin. Ai e përdor për të kompensuar të gjitha pasiguritë e tij të vjetra.
 
-Për të, çdo pengesë që mund të të vendosë është një dëshmi e forcës së tij. Çdo "jo" që të thotë me indiferencë është një mënyrë për t'i provuar vetes se sot nuk është më ai që ulet në fund të dhomës, por është njeriu që mund të vendosë nëse ti do të ecësh përpara apo do të mbetesh në vend.
+Për të, çdo pengesë që mund të të vendosë është një dëshmi e forcës së tij. Çdo „jo“ që të thotë me indiferencë është një mënyrë për t'i provuar vetes se sot nuk është më ai që ulet në fund të dhomës, por është njeriu që mund të vendosë nëse ti do të ecësh përpara apo do të mbetesh në vend.
 
 Ky është thelbi i tiranisë së njeriut të vogël: ai nuk ka vizion për të ndërtuar, prandaj autoritetin e tij mund ta ndiejë vetëm përmes aftësisë për të bllokuar.
 

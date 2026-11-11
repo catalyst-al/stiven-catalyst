@@ -58,6 +58,9 @@
     const moreButton = more.querySelector("button");
     const shown = more.querySelector(".weekly-shown");
     const none = document.querySelector("[data-weekly-none]");
+    // Under the list: once the month's last cover is shown, the month before it (after the oldest, the newest again).
+    const onward = document.querySelector("[data-weekly-onward]");
+    let onwardTo = null;
     const page = Number(filter.dataset.page) || 12;
     const params = new URLSearchParams(location.search);
     // A link to one item (publications.html#treatise) opens the month it is in.
@@ -103,6 +106,15 @@
       // The count and "show more" only while some covers are still to come.
       more.hidden = visible.size >= matching.length;
       shown.textContent = filter.dataset.shown.replace("{shown}", visible.size).replace("{total}", matching.length);
+      if (onward) {
+        const index = monthButtons.findIndex((button) => button.dataset.month === state.month);
+        onwardTo = index < 0 ? null : monthButtons[index + 1] || (index > 0 ? monthButtons[0] : null);
+        onward.hidden = !onwardTo || Boolean(state.block) || !more.hidden;
+        if (onwardTo) {
+          const label = (monthButtons[index + 1] ? onward.dataset.nextLabel : onward.dataset.firstLabel) || "{month}";
+          onward.querySelector("[data-weekly-onward-label]").textContent = label.replace("{month}", (onwardTo.firstChild?.textContent || "").trim());
+        }
+      }
       const query = new URLSearchParams();
       if (state.month && state.month !== monthButtons[0]?.dataset.month) query.set("month", state.month);
       if (state.block) query.set("topic", state.block);
@@ -135,14 +147,37 @@
       render();
       reveal();
     });
-    moreButton.addEventListener("click", () => {
+    const loadMore = (moveFocus) => {
       const before = items.filter((item) => !item.hidden).length;
       state.limit += page;
       render();
       reveal(before);
-      // Keyboard and screen-reader users go on from the first cover that just appeared.
-      items.filter((item) => !item.hidden)[before]?.querySelector("a")?.focus();
+      // Keyboard and screen-reader users who pressed the button go on from the first cover that just appeared.
+      if (moveFocus) items.filter((item) => !item.hidden)[before]?.querySelector("a")?.focus();
+    };
+    moreButton.addEventListener("click", () => loadMore(true));
+    onward?.querySelector("button").addEventListener("click", () => {
+      if (!onwardTo) return;
+      state.month = onwardTo.dataset.month;
+      state.limit = page;
+      render();
+      reveal();
+      // Back up to the top of the list, where the month starts, and on from its first cover.
+      filter.scrollIntoView({ block: "start", behavior: document.documentElement.dataset.motion === "paused" ? "auto" : "smooth" });
+      items.find((item) => !item.hidden)?.querySelector("a")?.focus({ preventScroll: true });
     });
+    // The next covers come by themselves as the reader scrolls near the end of the list, so a hundred issues read on
+    // without a click; the button stays for keyboards and for browsers without IntersectionObserver.
+    if ("IntersectionObserver" in window) {
+      const watch = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting) || more.hidden) return;
+        loadMore(false);
+        // Looked at afresh, so a short page that still shows the end of the list goes on loading.
+        watch.unobserve(more);
+        requestAnimationFrame(() => watch.observe(more));
+      }, { rootMargin: "0px 0px 600px 0px" });
+      watch.observe(more);
+    }
     // With one month and one topic there is nothing to choose, only the covers to show twelve at a time.
     filter.hidden = !filter.querySelector("button");
     render();

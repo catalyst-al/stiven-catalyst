@@ -1,5 +1,5 @@
 ---
-title: 'Die göttliche Mission im zweiten Stock: Wenn der Eigentümer zum Wohltäter des Elends wird'
+title: 'Die göttliche Mission im zweiten Stock: wenn der Eigentümer zum Wohltäter des Elends wird'
 date: 2026-10-25
 status: published
 summary: 'Sieht der Eigentümer den Lohn als Gnade statt Pflicht, wird Arbeit zu feudaler Wohltätigkeit.'

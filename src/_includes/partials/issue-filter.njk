@@ -19,10 +19,15 @@
     </div>
 {%- endmacro %}
 
-{%- macro more(F) %}
+{%- macro more(F, lang) %}
     <p class="weekly-none" data-weekly-none hidden>{{ F.empty }}</p>
     <div class="weekly-more" data-weekly-more hidden>
       <p class="weekly-shown" aria-live="polite"></p>
       <button type="button" class="button-secondary">{{ F.more }}</button>
+    </div>
+    {#- Once the month's last cover is shown, on to the month before it (after the oldest, back to the newest), so the
+        reader does not go back up to the month buttons (js/weekly.js shows it when the list has two months or more). #}
+    <div class="filter-onward" data-weekly-onward data-next-label="{{ 'Continue with {month}' | t(lang) }}" data-first-label="{{ 'Back to {month}' | t(lang) }}" hidden>
+      <button type="button" class="button-primary"><span data-weekly-onward-label></span> <span aria-hidden="true">→</span></button>
     </div>
 {%- endmacro %}

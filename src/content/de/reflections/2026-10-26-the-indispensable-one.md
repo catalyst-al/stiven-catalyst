@@ -1,5 +1,5 @@
 ---
-title: 'Der Unersetzliche: Der Mann, der das Chaos auf den Beinen hielt'
+title: 'Der Unersetzliche: der Mann, der das Chaos auf den Beinen hielt'
 date: 2026-10-26
 status: published
 summary: 'Eine Organisation verwechselt ihre Stabilität mit der Fähigkeit eines Einzelnen, die Schwächen der anderen aufzufangen. Seine Unersetzlichkeit beweist, was das System noch nicht gelernt hat.'

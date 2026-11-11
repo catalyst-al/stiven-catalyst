@@ -77,3 +77,17 @@ for (const lang of ['en', 'de', 'sq']) {
     assert.ok(w.document.body.textContent.includes(ATS[lang]), 'the page says why');
   });
 }
+
+// Audit P2C-16: a PDF or Word file was read whole whatever its size. Past 20 MB it is refused before it is read.
+test('a PDF or Word file past 20 MB is refused before a byte of it is read', async () => {
+  const { JSDOM } = require('jsdom');
+  const w = new JSDOM('<html><body></body></html>', { runScripts: 'outside-only' }).window;
+  w.eval(fs.readFileSync('src/js/cv-import.js', 'utf8'));
+  const { CvImport } = w;
+  assert.equal(CvImport.MAX_PDF_BYTES, 20 * 1024 * 1024);
+  let read = 0;
+  const file = { name: 'scan.pdf', size: CvImport.MAX_PDF_BYTES + 1, arrayBuffer: async () => { read++; return new ArrayBuffer(0); } };
+  await assert.rejects(CvImport.readPdf(file, 'data:text/javascript,', ''), /pdf-size/);
+  await assert.rejects(CvImport.readDocx({ ...file, name: 'cv.docx' }), /pdf-size/);
+  assert.equal(read, 0, 'nothing was read');
+});

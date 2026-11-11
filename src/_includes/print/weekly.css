@@ -51,6 +51,9 @@
 .mr .pg .wk-figure:has(.wk-fig-note) { margin-bottom: 3mm; }
 .mr .pg .wk-svg { display: block; width: 100%; height: auto; overflow: visible; }
 .mr .pg .wk-grid { stroke: rgba(255,255,255,.1); stroke-width: .6; }
+/* The scale of a share chart that does not run to 100 % (audit P5-06): clearer than the grid, so it is read. */
+.mr .pg line.wk-scale { stroke: rgba(255,255,255,.38); }
+.mr .pg line.wk-scale.is-top { stroke-dasharray: 2 2; }
 .mr .pg .wk-axis { fill: var(--muted); font-size: 7.2px; font-weight: 500; }
 .mr .pg .wk-label { fill: var(--ink); font-size: 8px; font-weight: 600; }
 .mr .pg .wk-value { fill: var(--ink); font-size: 8.4px; font-weight: 700; }

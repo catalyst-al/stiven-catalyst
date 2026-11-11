@@ -1,5 +1,5 @@
 ---
-title: 'I domosdoshmi: Njeriu që e mbante kaosin në këmbë'
+title: 'I domosdoshmi: njeriu që e mbante kaosin në këmbë'
 date: 2026-10-26
 status: published
 summary: 'Organizata e ngatërron qëndrueshmërinë me aftësinë e një njeriu për të mbuluar dobësitë e të tjerëve. Domosdoshmëria e tij është prova e asaj që sistemi nuk ka mësuar ende të bëjë.'
@@ -11,7 +11,7 @@ Në planin e turnit figurojnë dhjetë emra. Në planin e krizës është vetëm
 
 Mund të prishet një sistem, të vonohet një dërgesë, të mungojë një punonjës apo të shfaqet një problem që askush nuk e kishte parashikuar. Në fillim ka pak rrëmujë, disa telefonata dhe njerëz që shkëmbejnë përgjegjësinë nga njëri te tjetri. Pastaj, dikush shqipton fjalinë që i jep fund gjithë diskutimit:
 
-"Thirreni atë. Ai e zgjidh."
+„Thirreni atë. Ai e zgjidh.“
 
 Dhe ai vjen.
 

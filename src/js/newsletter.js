@@ -1,7 +1,9 @@
 // The newsletter form (partials/newsletter.njk). The address goes straight to the newsletter provider
 // (site.newsletter.action) and the page stays where it is: the form gives way to a note to confirm the
 // subscription from the email that follows. The provider's answer cannot be read across sites ("no-cors"),
-// so a request that arrives counts as sent; the browser has already checked the address. Without
+// so a request that arrives counts as sent; the browser has already checked the address. Since a refusal by the
+// provider cannot be seen, the note says the email comes if the address was accepted, and what to do if none comes
+// (audit P2C-16: it said the email "just arrived"). Without
 // JavaScript the form posts in a new tab, as built.
 (() => {
   const form = document.querySelector("[data-newsletter]");

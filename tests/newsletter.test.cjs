@@ -98,3 +98,16 @@ test('the built pages show the form and allow the provider in their Content Secu
   assert.ok(fs.readFileSync('_site/sq/index.html', 'utf8').includes('name="fields[language]" value="sq"'));
   assert.ok(fs.readFileSync('_site/datenschutz.html', 'utf8').includes('MailerLite'));
 });
+
+// Audit PM-16: the status lines were hidden and shown in the same moment as their text was set, which some screen
+// readers do not announce. They stay in the page, empty, and only their text changes.
+test('the status lines of the newsletter and the feedback forms are never hidden, only empty', () => {
+  const files = ['src/_includes/partials/newsletter.njk', 'src/_includes/partials/tool-feedback.njk', 'src/_includes/partials/essay-feedback.njk', 'src/_includes/pages/your-challenge.njk'];
+  for (const file of files) {
+    const line = fs.readFileSync(file, 'utf8').match(/<p [^>]*data-(?:newsletter|tool-feedback)-status[^>]*>/)[0];
+    assert.doesNotMatch(line, /\bhidden\b/, file);
+    assert.match(line, /role="status"/, file);
+    assert.match(line, /aria-live="polite"/, file);
+  }
+  assert.match(fs.readFileSync('src/css/03-search-start-contact.css', 'utf8'), /\.newsletter-status:empty[^{]*\{[^}]*border: 0/);
+});

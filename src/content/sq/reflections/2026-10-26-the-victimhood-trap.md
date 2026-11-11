@@ -1,5 +1,5 @@
 ---
-title: 'Kurthi i viktimizimit: Pse faji i të tjerëve nuk të shpëton dot jetën'
+title: 'Kurthi i viktimizimit: pse faji i të tjerëve nuk të shpëton dot jetën'
 date: 2026-10-26
 status: published
 summary: 'Sistemi shpesh është i padrejtë. Por nëse gjithçka është faji i të tjerëve, ti je i shfajësuar nga çdo detyrim për të vepruar, dhe e ardhmja jote mbetet në duart e tyre.'
@@ -11,7 +11,7 @@ Ka një të vërtetë të pamohueshme që duhet thënë pa asnjë lëkundje: sis
 
 Por pikërisht këtu, në këtë stacion ku e vërteta e hidhur bëhet e qartë, hapet një humnerë e padukshme psikologjike. Është kurthi i ëmbël dhe tinëzar i viktimizimit.
 
-Përfytyroni një bisedë të zakonshme në kafe pas një dite të lodhshme pune. Njerëzit ulen rreth tavolinës, numërojnë me përpikmëri çdo padrejtësi të pronarit, çdo paaftësi të shtetit, çdo të metë të këtij vendi, dhe në fund, me një psherëtimë të rëndë, arrijnë në përfundimin e njohur: "Këtu nuk bëhet asgjë. Çfarë të bëjmë ne? Ne jemi thjesht të vegjël."
+Përfytyroni një bisedë të zakonshme në kafe pas një dite të lodhshme pune. Njerëzit ulen rreth tavolinës, numërojnë me përpikmëri çdo padrejtësi të pronarit, çdo paaftësi të shtetit, çdo të metë të këtij vendi, dhe në fund, me një psherëtimë të rëndë, arrijnë në përfundimin e njohur: „Këtu nuk bëhet asgjë. Çfarë të bëjmë ne? Ne jemi thjesht të vegjël.“
 
 Më lejoni ta them këtë me të gjithë peshën e kujdesit njerëzor. **Ka një rehati të rrezikshme te roli i viktimës. Sepse nëse gjithçka është faji i të tjerëve, atëherë ti je i shfajësuar nga çdo detyrim për të vepruar.**
 

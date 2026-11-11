@@ -19,7 +19,7 @@ dedication: For the friends of the years when our greatest wealth was time; for 
 note-heading: A NOTE ON THE NARRATIVE
 note: The dialogues and some scene details are literary reconstructions of the memories recounted, not transcripts. The station scene in Germany is a literary imagining of longing, not a confirmed episode. No names or biographies of friends have been added.
 note: The photographs in this edition accompany the narrative; they do not necessarily show the place or time of the scene.
-edition: 2026 / Third version, revised / Translated from the Albanian
+edition: 2026 / Third version, revised / Translated from the Albanian with AI assistance, revised by the author
 
 == 03
 contents: Contents

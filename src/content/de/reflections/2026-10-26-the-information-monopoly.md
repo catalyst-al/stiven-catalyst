@@ -1,5 +1,5 @@
 ---
-title: 'Das Informationsmonopol: Wenn das Verbergen des Ablaufs als Unersetzlichkeit verkauft wird'
+title: 'Das Informationsmonopol: wenn das Verbergen des Ablaufs als Unersetzlichkeit verkauft wird'
 date: 2026-10-26
 status: published
 summary: 'Wer alle Schlüssel in der eigenen Tasche trägt, ist nicht die Säule der Firma. Er hält das System als Geisel, und zwei Krankheitstage genügen, um alles lahmzulegen.'

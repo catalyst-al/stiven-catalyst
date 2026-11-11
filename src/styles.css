@@ -1537,6 +1537,12 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   text-transform: uppercase;
 }
 
+
+/* "Continue where you left off" under the hero, for a returning reader (partials/home-continue.njk). The card is the
+   one that ends an essay (.essay-series-next). */
+.home-continue { margin: 28px auto 0; }
+.home-continue[hidden] { display: none; }
+.home-continue .kicker { margin: 0 0 14px; }
 /* Search */
 .search-hero { padding-bottom: 10px; }
 .section.search-page { padding-top: 32px; }
@@ -1853,6 +1859,9 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 }
 .newsletter-row:not([hidden]) ~ .newsletter-status { margin-top: 14px; }
 .newsletter-status a { border-bottom: 1px solid currentColor; }
+/* The status lines stay in the page, empty, so a screen reader announces the text when it is set (audit PM-16: they were
+   hidden and shown in the same moment, which some readers do not announce). Empty, they take no room. */
+.newsletter-status:empty, .newsletter-row ~ .newsletter-status:empty, .tf-status:empty { margin: 0; padding: 0; border: 0; }
 
 .form-note {
   margin: 14px 0 0 18px;
@@ -2236,6 +2245,17 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .shelf-link .shelf-count { position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px; background: var(--blue); color: var(--on-blue); font-family: var(--sans); font-size: 10px; font-weight: 800; line-height: 16px; text-align: center; }
 .shelf-link .shelf-count[hidden] { display: none; }
 .essay-save { display: inline-flex; align-items: center; gap: 6px; margin-left: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 12px; font-weight: 800; letter-spacing: .04em; cursor: pointer; transition: color .2s, border-color .2s, background .2s, scale .25s cubic-bezier(.22, 1, .36, 1); }
+/* One line always: where the byline has no room for it, it goes under the byline instead of wrapping to three lines in
+   a round button (audit PM-16). */
+.essay-save { flex: none; white-space: nowrap; }
+@media (max-width: 560px) {
+  .article-byline:has(.essay-save) { flex-wrap: wrap; row-gap: 10px; }
+  /* The name and dates take the row beside the photo, so the button starts the next row, under them. */
+  .article-byline:has(.essay-save) > span { flex: 1 1 calc(100% - 60px); min-width: 0; }
+  .article-byline:not(:has(.author-photo)) > span { flex-basis: 100%; }
+  .article-byline .essay-save { margin-left: 60px; }
+  .article-byline:not(:has(.author-photo)) .essay-save { margin-left: 0; }
+}
 .essay-save svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
 .essay-save:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .essay-save.is-saved { color: var(--blue); border-color: var(--blue); background: color-mix(in srgb, var(--blue) 12%, transparent); }
@@ -3544,6 +3564,10 @@ main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
 .dm-case p:last-child { margin: 0; color: var(--muted); font-size: 19px; }
 
 .dm-module { display: grid; gap: 24px; padding: 70px 0 20px; scroll-margin-top: 80px; }
+/* Under each step: back to the one before and on to the next (the next on the right, first in a phone column). */
+.dm-module-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; padding-top: 6px; }
+.dm-module-nav [rel="prev"] { margin-right: auto; }
+@media (max-width: 640px) { .dm-module-nav { flex-direction: column-reverse; } .dm-module-nav a { justify-content: center; text-align: center; } .dm-module-nav [rel="prev"] { margin-right: 0; } }
 .dm-module + .dm-module { border-top: 1px solid var(--line); }
 .dm-module-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 26px; align-items: start; }
 .dm-letter {
@@ -3787,7 +3811,7 @@ select.sh-in { cursor: pointer; }
   .has-result .tool-layout { display: none; }
   .statement, .result-card { break-inside: avoid; }
   .field input, .field textarea { border-color: #bbb; }
-  .dl-setup, .sc-hit, .sc-tooltip, .dm-nav, .sh-side, .sh-history, .sh-output .section-heading p, .lang-switch { display: none !important; }
+  .dl-setup, .sc-hit, .sc-tooltip, .dm-nav, .dm-module-nav, .sh-side, .sh-history, .sh-output .section-heading p, .lang-switch { display: none !important; }
   .sh-output { padding: 0; border: 0; }
   .sh-output-grid { display: block; }
   .print-charter main > :not(.dm-charter) { display: none !important; }
@@ -3825,6 +3849,17 @@ select.sh-in { cursor: pointer; }
 /* A tool script that failed (tool-kit.js, failedNotice): one notice at the top of the main content. */
 .tk-error { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 16px auto 0; max-width: 1120px; padding: 12px 16px; border: 1px solid color-mix(in srgb, var(--danger) 55%, var(--line)); border-radius: 12px; background: color-mix(in srgb, var(--danger) 8%, var(--bg)); color: var(--ink); }
 .tk-error p { margin: 0; flex: 1 1 320px; }
+
+/* The three career tools as steps under their title (partials/cv-steps.njk): the one on screen marked. */
+.cv-steps ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 8px; padding: 0; list-style: none; }
+.cv-steps a { display: flex; align-items: center; gap: 12px; height: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); color: inherit; text-decoration: none; transition: border-color .2s ease; }
+.cv-steps a:hover, .cv-steps a:focus-visible { border-color: color-mix(in srgb, var(--blue) 55%, var(--line)); }
+.cv-steps a[aria-current="page"] { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue) inset; }
+.cv-step-n { display: grid; flex: none; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: color-mix(in srgb, var(--blue) 16%, transparent); color: var(--blue); font-size: 14px; font-weight: 800; }
+.cv-steps a[aria-current="page"] .cv-step-n { background: var(--blue); color: var(--on-blue); }
+.cv-steps strong { font-size: 15px; line-height: 1.25; }
+@media (max-width: 640px) { .cv-steps a { flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px; } .cv-steps strong { font-size: 13px; } }
+@media print { .cv-steps { display: none !important; } }
 /* Search and filters */
 html:not(.js) .filter-bar { display: none; }
 .filter-bar {
@@ -5715,6 +5750,9 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 
 .wk-svg { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--sans); }
 .wk-grid { stroke: var(--line); stroke-width: .6; }
+/* The scale of a share chart that does not run to 100 % (audit P5-06). */
+line.wk-scale { stroke: var(--muted); }
+line.wk-scale.is-top { stroke-dasharray: 2 2; }
 .wk-axis { fill: var(--muted); font-size: 7.4px; font-weight: 600; }
 .wk-label { fill: var(--ink); font-size: 8.2px; font-weight: 700; }
 .wk-value { fill: var(--ink); font-size: 8.4px; font-weight: 800; }
@@ -5894,6 +5932,8 @@ html:has(.book-zoom[open]) { overflow: hidden; }
 .weekly-more:not([hidden]) + .filter-onward { margin-top: 20px; }
 /* Under the essays and the reflections: the other kind of reading. */
 .filter-cross { display: flex; justify-content: center; margin: 32px 0 0; }
+/* Under an episode of the podcast: the next one (pages/podcast.njk). */
+.podcast-next { margin: 14px 0 0; font-size: 15px; }
 .weekly-special { border-top: 1px solid var(--line); }
 
 /* The operational treatise: its long name as a serif title on the list of volumes, the three layers every chapter is
@@ -8290,6 +8330,8 @@ body:has([data-article]) :is(.essay-tools, .essay-notes, .essay-feedback) { back
   font-weight: 800;
 }
 .read-mark::before { content: "✓ "; }
+/* In the meta line of a card (the three essays of Start here), where the line itself spaces its parts. */
+.card-meta .read-mark { margin-left: 0; }
 .list-row.is-read .number { opacity: .55; }
 
 /* The essay: who wrote it in one line under the title. */
@@ -10441,6 +10483,9 @@ textarea.kb-in { min-height: 56px; resize: vertical; line-height: 1.4; }
   .fm-results .dl-table-wrap { max-height: none; overflow: visible; border: 0; }
   .fm-sheet-table { font-size: 7.5pt; }
   .fm-sheet-table :is(th, td) { padding: 3px 4px; min-width: 0; max-width: none; white-space: normal; border-bottom: 1px solid #bbb; }
+  /* A long unbroken token (a URL, a part number run together) breaks inside its cell instead of pushing the sheet past
+     the page edge (audit P2B-18); words that fit still break only between words. */
+  .fm-sheet-table td { overflow-wrap: anywhere; }
   .fm-sheet-table thead th { position: static; font-size: 6.5pt; letter-spacing: .04em; }
   .fm-paper-a3 .fm-sheet-table { font-size: 9.5pt; }
   .fm-paper-a3 .fm-sheet-table thead th { font-size: 8pt; }

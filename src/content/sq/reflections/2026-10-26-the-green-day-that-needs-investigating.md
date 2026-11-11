@@ -1,5 +1,5 @@
 ---
-title: 'Dita e gjelbër që duhet hetuar: Kur suksesi matet me atë që shihet dhe dështimi fshihet në atë që nuk numërohet'
+title: 'Dita e gjelbër që duhet hetuar: kur suksesi matet me atë që shihet dhe dështimi fshihet në atë që nuk numërohet'
 date: 2026-10-26
 status: published
 summary: 'Të gjithë treguesit janë të gjelbër, por punonjësit kanë korrigjuar gabime që asnjë tabelë nuk i numëron. Matja është e nevojshme, interpretimi është përgjegjësi.'
@@ -369,11 +369,11 @@ Dhe nëse një drejtues e përdor vetëm për të dëshmuar suksesin, ai rreziko
 
 Në fund të fundit, pyetja më e rëndësishme e një dite të gjelbër nuk është gjithmonë:
 
-"A e arritëm objektivin?"
+„A e arritëm objektivin?“
 
 Ndonjëherë është:
 
-**"Çfarë na u desh të mos shihnim, që gjithçka të dukej në rregull?"**
+**„Çfarë na u desh të mos shihnim, që gjithçka të dukej në rregull?“**
 
 Sepse numrat mund të jenë të saktë.
 

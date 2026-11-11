@@ -1,5 +1,5 @@
 ---
-title: 'Rregullat nuk mbarojnë te dera e menaxherit: Pushteti, privilegji dhe arti i të qenit përjashtim nga parimet e tua'
+title: 'Rregullat nuk mbarojnë te dera e menaxherit: pushteti, privilegji dhe arti i të qenit përjashtim nga parimet e tua'
 date: 2026-10-26
 status: published
 summary: 'Rregulli që është i detyrueshëm për punonjësin bëhet pengesë kur e shkel menaxheri. Kur përjashtimet varen nga personi, standardi i përbashkët zhduket dhe fillon disiplina e frikës.'
@@ -19,13 +19,13 @@ Pak më vonë, menaxheri hyri në zyrë. Kishte një çështje të ngjashme, por
 
 Punonjësi kërkoi miratimin dhe dokumentimin e nevojshëm.
 
-"Nuk ka nevojë. Po ta them unë."
+„Nuk ka nevojë. Po ta them unë.“
 
-"Duhet ta regjistroj arsyen?"
+„Duhet ta regjistroj arsyen?“
 
 Menaxheri ngriti sytë nga ekrani.
 
-"Mos e komplikoni kot. Është një rast i veçantë."
+„Mos e komplikoni kot. Është një rast i veçantë.“
 
 Dhe aty, brenda disa sekondash, ndodhi diçka që nuk shfaqet zakonisht në raportet e performancës.
 
@@ -59,13 +59,13 @@ Dhe ky tundim nuk shfaqet gjithmonë në formën e një abuzimi të hapur.
 
 Ndonjëherë vjen i veshur me gjuhën e përgjegjësisë.
 
-"Duhet të jemi praktikë."
+„Duhet të jemi praktikë.“
 
-"Situata kërkon fleksibilitet."
+„Situata kërkon fleksibilitet.“
 
-"Nuk kemi kohë për burokraci."
+„Nuk kemi kohë për burokraci.“
 
-"Unë e marr përsipër."
+„Unë e marr përsipër.“
 
 Fjali që në rrethana të caktuara mund të jenë plotësisht të arsyeshme.
 
@@ -315,7 +315,7 @@ Në shumë mjedise pune, një punonjës mund të ndihet i pasigurt kur duhet të
 
 Sidomos kur kërkesa jepet me një ton që nuk lë shumë hapësirë për diskutim.
 
-"Bëje, e marr unë përgjegjësinë."
+„Bëje, e marr unë përgjegjësinë.“
 
 Kjo fjali mund të jetë e përshtatshme kur drejtuesi ka autoritetin dhe kompetencën për të autorizuar një veprim të ligjshëm.
 
@@ -331,11 +331,11 @@ Dhe nuk duhet ta vendosë atë përballë zgjedhjes mes integritetit profesional
 
 Një drejtues që e merr seriozisht autoritetin duhet të krijojë mundësinë që një punonjës t'i thotë:
 
-"Kjo kërkon miratim."
+„Kjo kërkon miratim.“
 
-"Ky veprim duhet dokumentuar."
+„Ky veprim duhet dokumentuar.“
 
-"Kjo procedurë nuk na lejon të vazhdojmë në këtë mënyrë."
+„Kjo procedurë nuk na lejon të vazhdojmë në këtë mënyrë.“
 
 Pa e kthyer një vërejtje profesionale në përplasje personale.
 
@@ -451,7 +451,7 @@ Dhe pa të, çdo rregull kërkon më shumë kontroll për t'u zbatuar.
 
 Në atë zyrën e fillimit, punonjësi kishte bërë një pyetje të thjeshtë.
 
-"Duhet ta regjistroj arsyen?"
+„Duhet ta regjistroj arsyen?“
 
 Nuk kishte kundërshtuar autoritetin.
 
@@ -469,7 +469,7 @@ Ose mund ta kuptonte si provë se standardi që organizata kishte ndërtuar po f
 
 Mund të thoshte:
 
-"Po. Regjistroje. Nëse nevojitet miratimi im, do ta jap sipas procedurës."
+„Po. Regjistroje. Nëse nevojitet miratimi im, do ta jap sipas procedurës.“
 
 Një përgjigje e zakonshme.
 

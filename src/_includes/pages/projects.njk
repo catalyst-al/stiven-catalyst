@@ -18,3 +18,41 @@
 </article>
 {%- endfor %}
 </section>
+{#- After the projects, the way on: the tools the projects grew into, the first essay of the first series and the
+    newest issue of the Management Review, so the page does not end with nowhere to go. -#}
+{%- set moreTools = (de if lang == "de" else sq).tools if lang == "de" or lang == "sq" else tools %}
+{%- set firstEssay = (collections["insights" + (lang | langSuffix)] | readingOrder(essaySeries, []))[0] %}
+{%- set newestIssue = weekly.issues[weekly.issues.length - 1] %}
+<section class="shell issue-more projects-more" aria-labelledby="projects-more-title">
+  <p class="kicker">{{ "Continue reading" | t(lang) }}</p>
+  <h2 id="projects-more-title">{{ "Where to go next" | t(lang) }}</h2>
+  <div class="issue-more-list">
+    <a class="issue-more-card" href="{{ '/tools.html' | local(lang) }}">
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ "Tools" | t(lang) }}</span>
+        <span class="issue-more-title">{{ "{n} tools" | t(lang) | replace("{n}", moreTools.length) }}</span>
+        <span class="issue-more-meta">{{ "Free · Private · No sign-up" | t(lang) }}</span>
+      </span>
+    </a>
+    {%- if firstEssay %}
+    <a class="issue-more-card" href="{{ firstEssay.url }}">
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ "Start with essay 1" | t(lang) }}</span>
+        <span class="issue-more-title">{{ firstEssay.data.title }}</span>
+        <span class="issue-more-meta">{{ (essaySeries[0].name[lang or "en"]) }}</span>
+      </span>
+    </a>
+    {%- endif %}
+    {%- if newestIssue %}
+    {%- set issueCover = magazinePages[newestIssue.slug][lang or "en"].pages[0] %}
+    <a class="issue-more-card" href="{{ ('/magazine/' + newestIssue.slug + '.html') | local(lang) }}">
+      {%- if issueCover %}<img src="{{ issueCover.image }}" srcset="{{ issueCover.image | srcsetFor }}" sizes="96px" width="{{ issueCover.width }}" height="{{ issueCover.height }}" alt="" loading="lazy" decoding="async">{% endif %}
+      <span class="issue-more-copy">
+        <span class="issue-more-label">{{ weekly[lang or "en"].name }}</span>
+        <span class="issue-more-title">{{ newestIssue[lang or "en"].heading }}</span>
+        <span class="issue-more-meta">{{ newestIssue[lang or "en"].date }}</span>
+      </span>
+    </a>
+    {%- endif %}
+  </div>
+</section>

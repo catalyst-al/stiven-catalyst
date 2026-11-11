@@ -140,7 +140,8 @@ const loadChromium = async () => {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const chromium = await loadChromium();
-  const browser = await chromium.launch();
+  // The browser the other print scripts use where it is installed (scripts/weekly.mjs), else the default one.
+  const browser = await chromium.launch(fs.existsSync("/opt/pw-browsers/chromium") ? { executablePath: "/opt/pw-browsers/chromium" } : {});
   const tab = await browser.newPage({ viewport: { width: 1200, height: 630 } });
   const list = cards();
   for (const item of list) {

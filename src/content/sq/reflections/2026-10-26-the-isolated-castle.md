@@ -1,5 +1,5 @@
 ---
-title: 'Paradoksi i kështjellës së izoluar: Pse drejtuesit përfundojnë duke jetuar në gënjeshtër'
+title: 'Paradoksi i kështjellës së izoluar: pse drejtuesit përfundojnë duke jetuar në gënjeshtër'
 date: 2026-10-26
 status: published
 summary: 'Drejtuesi që ndëshkon lajmëtarin e lajmit të keq mbetet i rrethuar nga raporte të pastruara, derisa e vërteta shpërthen me dhunë brenda zyrës.'

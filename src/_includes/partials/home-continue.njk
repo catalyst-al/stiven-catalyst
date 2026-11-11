@@ -1,0 +1,17 @@
+{#- For a reader who has been here before: where they stopped, from what this browser keeps of their reading
+    (localStorage "sc-reading", js/article.js). The essay or reflection begun most recently and not finished, with how
+    far it was read; when everything begun is finished, the next text after the last one finished, in the reading
+    order of the essays and reflections ("readingOrder"). Hidden for a first visit, and without the script; nothing
+    is sent (js/home-continue.js). -#}
+{%- set continueOrder = collections["insights" + (lang | langSuffix)] | readingOrder(essaySeries, collections["reflections" + (lang | langSuffix)]) %}
+<section class="shell home-continue" aria-labelledby="home-continue-title" data-home-continue hidden
+         data-continue-label="{{ 'Continue where you left off' | t(lang) }}" data-next-label="{{ 'Up next' | t(lang) }}" data-read-label="{{ '{p}% read' | t(lang) }}">
+  <p class="kicker" id="home-continue-title" data-home-continue-kicker></p>
+  <a class="essay-series-next" href="#" data-home-continue-link>
+    <small data-home-continue-meta></small>
+    <strong data-home-continue-title></strong>
+    <span data-home-continue-summary></span>
+    <em aria-hidden="true">→</em>
+  </a>
+  <script type="application/json" data-home-continue-data>{{ continueOrder | readingList(lang) | dump | safe }}</script>
+</section>

@@ -29,7 +29,7 @@ Kjo është gënjeshtra universale që përdoret sa herë që duhet paguar djers
 
 Ky lloj trajtimi prodhon një dëm shumë më të thellë se sa thjesht zhgënjimi financiar. Ai vret besimin. Sepse në atë çast, çdo punonjës e kupton se premtimet për karrierë, për vlerësim dhe për rritje të përbashkët ishin thjesht përralla për të blerë kohë. I kërkohet përkushtim maksimal, fleksibilitet pa orar dhe dashuri për kompaninë, por kur vjen puna për ta shpërblyer, kompania i sillet si një matrapaz që numëron qindarkat e mbetura në fund të xhepit.
 
-Unë e di mirë se çfarë mendon ai punonjës teksa del nga ajo zyrë me letrën e rritjes në dorë. Ai nuk ndihet i vlerësuar; ai ndihet i vjedhur. Ndihet sikur dikush i ka marrë një vit të plotë nga jeta, rininë dhe energjinë e tij, dhe në këmbim i ka hedhur disa thërrime mbi tavolinë, duke i kërkuar madje të thotë edhe "faleminderit".
+Unë e di mirë se çfarë mendon ai punonjës teksa del nga ajo zyrë me letrën e rritjes në dorë. Ai nuk ndihet i vlerësuar; ai ndihet i vjedhur. Ndihet sikur dikush i ka marrë një vit të plotë nga jeta, rininë dhe energjinë e tij, dhe në këmbim i ka hedhur disa thërrime mbi tavolinë, duke i kërkuar madje të thotë edhe „faleminderit“.
 
 Dhe pastaj, pas gjashtë muajsh, kur ky punonjës gjen një mundësi tjetër dhe e lë vendin e punës bosh, po këta drejtues bëjnë të habiturin. Mblidhen sërish nëpër zyra dhe pyesin me naivitet të shtirë: *Pse iku? Ne sapo ia rritëm rrogën.*
 

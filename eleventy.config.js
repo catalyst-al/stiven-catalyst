@@ -14,6 +14,7 @@ import { feedEntries } from "./lib/feed-entries.js";
 import { LIVE_PAGES, livePagesCss, clearLivePages } from "./lib/live-pages.js";
 import { writingLinks } from "./lib/writing-links.js";
 import { writeStylesheet } from "./lib/css-parts.js";
+import { fitTitle } from "./lib/fit-title.js";
 
 const site = JSON.parse(fs.readFileSync("src/_data/site.json", "utf8"));
 // Interface texts in German and Albanian, keyed by the English text (also used
@@ -218,6 +219,28 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("familyTools", (family, tools, lang, key = "tools") =>
     (family?.[key] || []).map((url) => tools.find((tool) => tool.url === localUrl(url, lang))).filter(Boolean)
   );
+  // All the tools in one line, role by role as on the Tools page (families.json: its tools, then its training
+  // modules), so a tool page leads on to the next one; after the last tool of a role, the first of the next role, and
+  // after the very last, the first again. Gives { prev, next, number, total, nextFamily, prevFamily } for a tool page.
+  eleventyConfig.addFilter("toolNeighbours", (families, tools, lang, url) => {
+    const line = (families || []).flatMap((family) => [...family.tools, ...family.learn]
+      .map((path) => (tools || []).find((tool) => tool.url === localUrl(path, lang)))
+      .filter(Boolean)
+      .map((tool) => ({ tool, family })));
+    const index = line.findIndex((entry) => entry.tool.url === url);
+    if (index < 0 || line.length < 2) return null;
+    const here = line[index];
+    const next = line[(index + 1) % line.length];
+    const prev = line[(index - 1 + line.length) % line.length];
+    return {
+      next: next.tool,
+      prev: prev.tool,
+      nextFamily: next.family !== here.family ? next.family : null,
+      prevFamily: prev.family !== here.family ? prev.family : null,
+      number: index + 1,
+      total: line.length,
+    };
+  });
   // The family of a tool page, a training module or a role page (/tools/x/, /roles/x/, in any language), else null.
   eleventyConfig.addFilter("familyOf", (url, families) => {
     const path = String(url || "").replace(/^\/(de|sq)(?=\/)/, "");
@@ -256,6 +279,45 @@ export default function (eleventyConfig) {
     const published = (items) => (items || []).filter((item) => item.data.status !== "soon");
     const inOrder = (seriesList || []).flatMap((entry) => published(essays).filter((item) => (item.data.series || "ten-years") === entry.id));
     return [...inOrder, ...published(reflections)];
+  });
+  // The publications in one line, so the newest issue of one series leads into the next instead of back to a list:
+  // the Management Review of September 2026, its issues, the magazine, the treatise, the book, and the review again.
+  // Takes { weekly, magazine, treatise, books, review, magazinePages } and the publication just read; gives the
+  // first of the next one as { url, cover, label, title, meta } (partials/book-onward.njk, next-publication-card.njk).
+  eleventyConfig.addFilter("nextPublication", (data, after, lang) => {
+    const l = lang || "en";
+    const t = (text) => (TRANSLATED.has(l) ? readUi(l)[text] ?? text : text);
+    const { weekly, magazine, treatise, books, review, magazinePages } = data || {};
+    const label = (name) => `${t("Next publication")} · ${name}`;
+    const issue = (first, name) => first && {
+      url: localUrl(`/magazine/${first.slug}.html`, l),
+      cover: magazinePages?.[first.slug]?.[l]?.pages?.[0] || null,
+      label: label(name),
+      title: first[l]?.heading,
+      meta: first[l]?.date,
+    };
+    if (after === "review") return issue(weekly?.issues?.[0], weekly?.[l]?.name);
+    if (after === "weekly") return issue(magazine?.issues?.[0], magazine?.names?.[l]?.name);
+    if (after === "magazine") return issue(treatise?.volumes?.[0], treatise?.[l]?.short);
+    if (after === "treatise") {
+      const book = books?.[l] || books?.sq;
+      return book && { url: localUrl("/books/mall-per-durresin.html", l), cover: book.pages?.[0] || null, label: label(t("Book")), title: book.title, meta: book.author };
+    }
+    return review && { url: localUrl(`/magazine/${review.slug}.html`, l), cover: magazinePages?.[review.slug]?.[l]?.pages?.[0] || null, label: label(review[l]?.name), title: review[l]?.theme, meta: review[l]?.date };
+  });
+  // The reading order as the homepage's "Continue where you left off" needs it (partials/home-continue.njk): for each
+  // essay and reflection its key in "sc-reading" (the file slug, as js/article.js keeps it), title, address, kind
+  // and summary, in the page's language.
+  eleventyConfig.addFilter("readingList", (items, lang) => {
+    const l = lang || "en";
+    const t = (text) => (TRANSLATED.has(l) ? readUi(l)[text] ?? text : text);
+    return (items || []).map((item) => ({
+      s: item.fileSlug,
+      t: item.data.title,
+      u: item.url,
+      k: t(String(item.inputPath || "").includes("/reflections/") ? "Reflection" : "Essay"),
+      d: item.data.teaser || item.data.summary || "",
+    }));
   });
   // The essays of one series (src/_data/essaySeries.json), and a series by its id or the one after it.
   eleventyConfig.addFilter("inSeries", (items, id) => (items || []).filter((item) => (item.data.series || "ten-years") === id));
@@ -337,6 +399,8 @@ export default function (eleventyConfig) {
     return file && fs.existsSync(`src${file}`) ? file : null;
   });
   // The English address of a page in any language: /de/tools/x/ becomes /tools/x/.
+  // The page title fitted for search results (lib/fit-title.js; audit SEO-08).
+  eleventyConfig.addFilter("fitTitle", (title) => fitTitle(title));
   eleventyConfig.addFilter("enPath", (url) => String(url || "").replace(/^\/(de|sq)(?=\/)/, ""));
   // The essay of a language that translates the English essay with this file slug (its "original"), or the English one itself.
   eleventyConfig.addFilter("byOriginal", (items, slug) => (items || []).find((item) => item.data.original === slug || item.fileSlug === slug) || null);

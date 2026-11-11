@@ -7,7 +7,7 @@ deck: 'Kur një drejtues përcjell njerëzit e zotë me arrogancën se tregu ës
 description: 'Një reflektim për fjalinë "ka njerëz sa të duash te dera", për koston e padukshme të njeriut që ikën dhe pse kur ikën një i mirë, dështon drejtimi.'
 ---
 
-Për vite me radhë, në zyrat e drejtorëve dhe pronarëve shqiptarë ka qarkulluar një fjali që përdorej si çekiç mbi çdo kërkesë për dinjitet, rritje rroge apo kushte më të mira: "Le të largohet, se ka njerëz sa të duash që presin te dera për të punuar."
+Për vite me radhë, në zyrat e drejtorëve dhe pronarëve shqiptarë ka qarkulluar një fjali që përdorej si çekiç mbi çdo kërkesë për dinjitet, rritje rroge apo kushte më të mira: „Le të largohet, se ka njerëz sa të duash që presin te dera për të punuar.“
 
 Ishte përgjigjja e gatshme e një arrogance që nuk njihte kufi. Ishte filozofia e një tregu ku njeriu shihej si një pjesë këmbimi e lirë, e cila sapo konsumohej, hidhej tutje për t'u zëvendësuar me të radhës. Dhe për një kohë të gjatë, varfëria dhe mungesa e alternativave e mbajtën gjallë këtë iluzion. Drejtuesit u mësuan të mendonin se vlera qëndronte vetëm te muret e biznesit të tyre, dhe jo te duart dhe mendjet e atyre që e mbanin atë biznes hapur.
 
@@ -25,7 +25,7 @@ Unë e kam parë nga afër se si vyshken bizneset që udhëhiqen nga ky cinizëm
 
 **Ky nuk është më një biznes që ecën përpara. Ky është një spital fushor ku çdo ditë mjekohen plagët e djeshme.**
 
-Sot, ata që thoshin "le të largohen" janë të njëjtët që vënë duart në kokë sepse nuk gjejnë dot asnjë njeri që të mbajë përgjegjësi për një turn të vetëm. Janë të njëjtët që ankohen se brezi i ri nuk ka durim. Por brezi i ri nuk ka mungesë durimi për punën; ka mungesë durimi për arrogancën. Askush nuk pranon më të trajtohet si i tepërt në një vend ku mban peshën kryesore.
+Sot, ata që thoshin „le të largohen“ janë të njëjtët që vënë duart në kokë sepse nuk gjejnë dot asnjë njeri që të mbajë përgjegjësi për një turn të vetëm. Janë të njëjtët që ankohen se brezi i ri nuk ka durim. Por brezi i ri nuk ka mungesë durimi për punën; ka mungesë durimi për arrogancën. Askush nuk pranon më të trajtohet si i tepërt në një vend ku mban peshën kryesore.
 
 Mësimi i kësaj kohe është i thjeshtë, por i pamëshirshëm për ata që refuzojnë të ndryshojnë. Njerëzit nuk janë lëndë e parë që blihet me shumicë në treg.
 

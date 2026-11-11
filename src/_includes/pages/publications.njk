@@ -9,6 +9,16 @@
     <h1{% if pubTitle | length > 10 %} class="hero-long"{% endif %}>{{ pubTitle }}</h1>
     <p class="lede">{{ "Longer pieces made to be leafed through: a book about where it started, a guide to the tools, every month a review of the best management research in several issues, an operational treatise in volumes that follow one question from the floor to the protocol, and a magazine from the floor." | t(lang) }}</p>
   </section>
+{#- For a reader back for more: the publication they left unfinished, opened on the page they stopped at
+    (js/pub-continue.js, from what the reader keeps in this browser). Hidden for a first visit and without the script. #}
+  <section class="shell home-continue pub-continue" aria-labelledby="pub-continue-title" data-pub-continue hidden data-page-label="{{ 'Page {n} of {total}' | t(lang) }}">
+    <p class="kicker" id="pub-continue-title">{{ "Continue where you left off" | t(lang) }}</p>
+    <a class="essay-series-next" href="#" data-pub-continue-link>
+      <small data-pub-continue-meta></small>
+      <strong data-pub-continue-title></strong>
+      <em aria-hidden="true">→</em>
+    </a>
+  </section>
 {%- set ml = lang or "en" %}
 {%- set P = publications[ml] %}
 {%- import "partials/issue-filter.njk" as filter %}
@@ -100,7 +110,8 @@
     <a class="text-link" href="{{ '/magazine/from-the-floor.html' | local(lang) }}">{{ magazine.names[ml].name }}: {{ magazine.archive[ml].all }} ({{ magazine.issues | length }}) <span aria-hidden="true">→</span></a>
   </nav>
   <div class="shell publications-more">
-    {{ filter.more(P) }}
+    {{ filter.more(P, lang) }}
   </div>
 <script src="{{ '/js/weekly.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/pub-continue.js' | assetUrl }}" defer></script>
 {% include "partials/newsletter.njk" %}

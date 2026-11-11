@@ -1,5 +1,5 @@
 ---
-title: 'Die Kultur des Schuldigen: Warum die Jagd auf den Sündenbock das System nicht heilt'
+title: 'Die Kultur des Schuldigen: warum die Jagd auf den Sündenbock das System nicht heilt'
 date: 2026-10-26
 status: published
 summary: 'Wenn nach jedem Fehler „Wer war das?“ gefragt wird statt „Warum hat der Ablauf versagt?“, lernen die Menschen zu verbergen, und derselbe Fehler wiederholt sich morgen.'

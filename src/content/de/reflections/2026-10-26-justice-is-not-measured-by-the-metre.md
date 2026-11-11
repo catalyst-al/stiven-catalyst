@@ -1,5 +1,5 @@
 ---
-title: 'Gerechtigkeit misst man nicht mit dem Zollstock: Wenn Gleichheit auf dem Papier zur Ungerechtigkeit in der Praxis wird'
+title: 'Gerechtigkeit misst man nicht mit dem Zollstock: wenn Gleichheit auf dem Papier zur Ungerechtigkeit in der Praxis wird'
 date: 2026-10-26
 status: published
 summary: 'Zwei Mitarbeiter sind mit je acht Stunden verbucht, aber ihr Tag war nicht derselbe. Gleichheit verlangt einen gemeinsamen Maßstab, Gerechtigkeit verlangt Urteilskraft, und Kompetenz darf nicht zur Strafe werden.'

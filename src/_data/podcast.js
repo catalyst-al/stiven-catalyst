@@ -17,7 +17,8 @@ const local = (url, lang) => (lang === "en" ? url : `/${lang}${url}`);
 const absolute = (path) => new URL(path.replace(/^\//, ""), site.url).href;
 
 const texts = {
-  title: x("Management Review · Stiven Catalyst", "Management Review · Stiven Catalyst", "Management Review · Stiven Catalyst"),
+  // Each language its own title, so a listener subscribed to two feeds can tell them apart (audit P7-08).
+  title: x("Management Review · Stiven Catalyst", "Management Review · Stiven Catalyst · Shqip", "Management Review · Stiven Catalyst · Deutsch"),
   description: x(
     "Management without theatre, to listen to. Every episode is a conversation about one issue of the Management Review, the monthly magazine of Stiven Catalyst: what the research says about leading people and operations, and what to do with it on the next shift. The episodes are made with AI (NotebookLM) from the text of each issue; the figures, their sources and the tools are in the issue, free on stivencatalyst.com.",
     "Menaxhim pa teatër, për ta dëgjuar. Çdo episod është një bisedë për një numër të Management Review, revistës mujore të Stiven Catalyst: çfarë thotë kërkimi për drejtimin e njerëzve dhe të operacioneve, dhe çfarë të bësh me të në turnin e radhës. Episodet krijohen me inteligjencë artificiale (NotebookLM) nga teksti i çdo numri; shifrat, burimet dhe mjetet janë te numri, falas në stivencatalyst.com.",
@@ -122,6 +123,24 @@ const corrected = weekly.issues
 const and = x(" and ", " dhe ", " und ");
 const listOf = (items, lang) => (items.length < 2 ? items.join("") : `${items.slice(0, -1).join(", ")}${and[lang]}${items.at(-1)}`);
 
+// The day of a correction, written in its language ("14 October 2026", "14. Oktober 2026", "14 tetor 2026"), as a date.
+const MONTHS = {
+  january: 1, february: 2, march: 3, april: 4, may: 5, june: 6, july: 7, august: 8, september: 9, october: 10, november: 11, december: 12,
+  januar: 1, februar: 2, märz: 3, mai: 5, juni: 6, juli: 7, oktober: 10, dezember: 12,
+  janar: 1, shkurt: 2, mars: 3, prill: 4, maj: 5, qershor: 6, korrik: 7, gusht: 8, shtator: 9, tetor: 10, nëntor: 11, dhjetor: 12,
+};
+const correctionDay = (text) => {
+  const match = /(\d{1,2})\.?\s+([^\s\d]+)\s+(\d{4})/.exec(String(text || ""));
+  const month = match && MONTHS[match[2].toLowerCase()];
+  return month ? Date.UTC(Number(match[3]), month - 1, Number(match[1]), 4) : null;
+};
+// The feed changed last when its newest episode came out or when a recording was last corrected, whichever is later
+// (audit P7-08: lastBuildDate stayed at the newest episode when notes changed after it).
+const lastChange = (episodes) => {
+  const times = episodes.flatMap((e) => [Date.parse(e.pubDate), ...(e.corrections || []).map((c) => correctionDay(c.date))]).filter(Number.isFinite);
+  return times.length ? new Date(Math.max(...times)).toUTCString() : "";
+};
+
 const feedPath = (lang) => local("/podcast.xml", lang);
 const feeds = langs.filter((lang) => episodesOf(lang).length).map((lang) => {
   const episodes = episodesOf(lang);
@@ -135,7 +154,8 @@ const feeds = langs.filter((lang) => episodesOf(lang).length).map((lang) => {
     description: texts.description[lang],
     pageUrl: local("/podcast.html", lang),
     image: "/media/podcast/cover.jpg",
-    updated: episodes.map((e) => e.pubDate).sort((a, b) => new Date(b) - new Date(a))[0],
+    published: episodes.map((e) => e.pubDate).sort((a, b) => new Date(b) - new Date(a))[0],
+    updated: lastChange(episodes),
     episodes,
   };
 });
@@ -178,6 +198,9 @@ const pages = Object.fromEntries(langs.map((lang) => {
 }));
 
 export default {
+  // For the tests (tests/podcast.test.cjs): a correction's day and a feed's last change.
+  correctionDay,
+  lastChange,
   author: site.author,
   email: site.email,
   feeds,

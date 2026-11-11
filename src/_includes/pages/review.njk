@@ -13,6 +13,9 @@
 {%- set first = weekly.issues[0] -%}
 {%- set WK = weekly[lang] -%}
 {%- set onward = { url: ("/magazine/" + first.slug + ".html") | local(lang), cover: magazinePages[first.slug][lang].pages[0], label: WK.name + " · " + WK.labels.edition, title: first[lang].heading, meta: WK.labels.no + " " + first.no + " · " + first[lang].date } -%}
+{#- And under the text, the same first issue as the next publication (the "nextPublication" filter). -#}
+{%- set pubAfter = "review" -%}
+{%- set nextPub = { weekly: weekly, magazine: magazine, treatise: treatise, books: books, review: review, magazinePages: magazinePages } | nextPublication(pubAfter, lang) -%}
 {%- set labels = {
   cover: "Cover" | t(lang),
   back: "Back cover" | t(lang),
@@ -142,4 +145,5 @@
       </div>
     </details>
   </section>
+{% include "partials/more-publications.njk" %}
 <script src="{{ '/js/book.js' | assetUrl }}" defer></script>

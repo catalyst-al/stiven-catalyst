@@ -1,5 +1,5 @@
 ---
-title: 'Unë dhashë urdhrin e gabuar: Përgjegjësia fillon aty ku mbarojnë justifikimet e autoritetit'
+title: 'Unë dhashë urdhrin e gabuar: përgjegjësia fillon aty ku mbarojnë justifikimet e autoritetit'
 date: 2026-10-26
 status: published
 summary: 'Pranimi i fajit është një veprim, përgjegjësia është një proces. Një drejtues që e shpjegon gabimin e vet me rrethana, ndërsa të tjerët me shkaqe, e kthen autoritetin në strehë.'
@@ -13,7 +13,7 @@ Pasojat e tij mund të kërkonin një turn të tërë për t'u korrigjuar.
 
 Një proces ishte vonuar. Presioni po rritej. Drejtuesi kishte përpara disa alternativa, por asnjëra nuk dukej e përsosur. Duhej marrë një vendim dhe koha për diskutim po mbaronte.
 
-"Vazhdojeni kështu. Përgjegjësinë e marr unë."
+„Vazhdojeni kështu. Përgjegjësinë e marr unë.“
 
 Punonjësit iu bindën.
 
@@ -25,7 +25,7 @@ Mund të shpjegonte se situata kishte qenë e vështirë, se koha ishte e kufizu
 
 Ose mund të thoshte një fjali shumë më të shkurtër.
 
-"Unë dhashë urdhrin e gabuar."
+„Unë dhashë urdhrin e gabuar.“
 
 Pesë fjalë.
 
@@ -141,7 +141,7 @@ Ka një moment në marrëdhënien mes drejtuesit dhe punonjësit që tregon shum
 
 Është çasti kur punonjësi thotë:
 
-"Nuk mendoj se kjo do të funksionojë."
+„Nuk mendoj se kjo do të funksionojë.“
 
 Kjo fjali mund të jetë një kundërshtim i pabazuar. Mund të vijë nga frika ndaj ndryshimit, mungesa e përvojës apo moskuptimi i plotë i situatës.
 
@@ -173,7 +173,7 @@ Por sepse ka filluar ta mbrojë imazhin e vet edhe kur përpara tij ekziston nj�
 
 Më shqetëson veçanërisht një lloj fjalie që dëgjohet shpesh në mjediset ku autoriteti është më i fortë se përgjegjësia.
 
-"Unë të thashë çfarë të bëje. Si e bëre, është problemi yt."
+„Unë të thashë çfarë të bëje. Si e bëre, është problemi yt.“
 
 Ndonjëherë kjo mund të jetë e drejtë.
 
@@ -223,7 +223,7 @@ E bën publikisht.
 
 Ndoshta në një mbledhje, përpara gjithë ekipit.
 
-"Po, ishte vendimi im. Marr përgjegjësi."
+„Po, ishte vendimi im. Marr përgjegjësi.“
 
 Fjalët tingëllojnë mirë.
 
@@ -485,7 +485,7 @@ Mund të zgjedhë një fjali të kujdesshme, ku të gjithë kanë gabuar pak dhe
 
 Ose mund të qëndrojë përpara njerëzve dhe të thotë:
 
-"Vendimin e mora unë. Arsyetimi im ishte i gabuar. Tani duhet të korrigjojmë pasojat dhe të kuptojmë si të mos e përsërisim."
+„Vendimin e mora unë. Arsyetimi im ishte i gabuar. Tani duhet të korrigjojmë pasojat dhe të kuptojmë si të mos e përsërisim.“
 
 Kjo fjali nuk e zgjidh vetë problemin.
 

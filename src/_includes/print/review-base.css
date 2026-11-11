@@ -164,6 +164,8 @@
 .mr .pg .src { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 2mm; margin-bottom: 3.6mm; }
 .mr .pg .src li { border: .25mm solid var(--line); border-radius: 2mm; padding: 2.2mm 2.6mm; background: var(--card); font-size: 7pt; color: var(--ink); font-weight: 600; line-height: 1.32; }
 .mr .pg .src li em { display: block; font-style: normal; color: var(--muted); font-weight: 400; margin-top: .6mm; }
+/* A source's address is a link in the PDF and in the reader (audit P5-08), drawn as before. */
+.mr .pg .src a.src-link { color: inherit; text-decoration: none; }
 .mr .pg .src li i { display: block; font-style: normal; color: var(--blue); font-weight: 400; font-size: 5.6pt; word-break: break-all; margin-top: .8mm; }
 
 /* Back */

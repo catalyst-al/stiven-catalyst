@@ -123,8 +123,31 @@ test("a filtered tool's link opens the tool, and the role cards still lead to th
 });
 
 test("nothing typed leaves the page: no request, no storage, no change of address", async ({ page }) => {
-  await page.goto(PAGES.en);
-  await page.waitForLoadState("networkidle");
+  // What is still open from the load is noted (from #399), so a run that waits or fails here says what kept the
+  // network busy. Nothing waits for the network to go quiet: on a first visit the service worker keeps the role's
+  // tools in the background, so a quiet network came after about 1.2 s or, on a loaded runner, not within the 30 s of
+  // the test (CI runs 861 and 863). Requests still arriving after the page is ready are recorded below and must pass
+  // every check.
+  const open = new Set();
+  page.on("request", (request) => open.add(request));
+  page.on("requestfinished", (request) => open.delete(request));
+  page.on("requestfailed", (request) => open.delete(request));
+  await page.goto(PAGES.en, { waitUntil: "load" });
+  await page.evaluate(() => document.fonts.ready.then(() => undefined));
+  // Ready when the filter answers. The number of tools comes from the cards on the page, not from this file.
+  const total = await page.locator(".family-section .tool-card").count();
+  expect(total, "the page lists its tools").toBeGreaterThan(0);
+  const count = page.locator("[data-tool-filter-count]");
+  await expect(count).toHaveText(new RegExp(`^${total}\\b`));
+  const atRest = await count.textContent();
+  const ready = page.locator("[data-tool-filter-input]");
+  await ready.fill("zzqx");
+  await expect(count).toHaveText(/^0 /);
+  await ready.fill("");
+  // Cleared: the count reads as it did before the search, and every card is shown again.
+  await expect(count).toHaveText(atRest);
+  await expect(visibleCards(page)).toHaveCount(total);
+  if (open.size) console.log(`${page.url()}: still open when the filter was ready: ${[...open].map((r) => `${r.resourceType()} ${r.url()}`).join(", ")}`);
   // Fictional saved work and a fictional hand-off note, to show the filter leaves them as they are.
   await page.evaluate(() => {
     localStorage.setItem("sc-actions", JSON.stringify([{ id: "fx1", title: "Fictional action: tidy the returns shelf" }]));

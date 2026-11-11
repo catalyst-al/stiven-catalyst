@@ -15,7 +15,7 @@ Ky është realiteti ynë operacional. Nuk të kërkohet të njohësh sistemin. 
 
 **Më lejoni ta them pa doreza. Kur lidhja e gjakut vlen më shumë se rregullorja e punës, ju nuk keni ndërtuar një kompani. Ju keni ngritur thjesht një fis me nipt biznesi.**
 
-Shikoni se çfarë i bën kjo mendësi një operacioni të përditshëm. Ti mund të jesh menaxheri më i përgatitur, mund të kesh ndërtuar procedura të qarta për të ulur dëmtimet, për të shpejtuar shërbimin apo për të sjellë rregull në turn. Por e gjithë kjo strukturë shembet në sekondën e parë që përplaset me interesin ose përtacinë e një "nipi" apo një "miku të shtëpisë".
+Shikoni se çfarë i bën kjo mendësi një operacioni të përditshëm. Ti mund të jesh menaxheri më i përgatitur, mund të kesh ndërtuar procedura të qarta për të ulur dëmtimet, për të shpejtuar shërbimin apo për të sjellë rregull në turn. Por e gjithë kjo strukturë shembet në sekondën e parë që përplaset me interesin ose përtacinë e një „nipi“ apo një „miku të shtëpisë“.
 
 Në atë çast, rregulli ndalon së funksionuari. Procedura kthehet në një copë letër qesharake. Sepse nëse një punonjës i thjeshtë vonohet dhjetë minuta, ai gjobitet në emër të disiplinës. Nëse nipi i pronarit nuk vjen fare në punë ose prish operacionin e një dite të tërë, menaxherit i kërkohet të mbyllë sytë, të rregullojë shifrat në heshtje dhe të mbajë mbi shpinë gabimin e tjetrit.
 

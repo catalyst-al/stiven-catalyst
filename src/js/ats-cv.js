@@ -1214,6 +1214,8 @@
           ? tx("This file is not a JSON Resume (jsonresume.org). Nothing was changed.")
         : error.message === "size"
           ? tx("This file is larger than 5 MB, far larger than any CV. Nothing was changed.")
+        : error.message === "pdf-size"
+          ? tx("This file is larger than 20 MB, far larger than any CV, so it was not read. Nothing was changed.")
         : error.message === "zip-size"
           ? tx("This file would unpack to far more than any CV or table holds, so it was not read. It may be damaged; nothing was changed.")
         : error.message === "empty"

@@ -1,5 +1,5 @@
 ---
-title: 'Die Tyrannei des kleinen Mannes: Wenn Macht dem gegeben wird, der keinen Charakter hat'
+title: 'Die Tyrannei des kleinen Mannes: wenn Macht dem gegeben wird, der keinen Charakter hat'
 date: 2026-10-26
 status: published
 summary: 'Die alltäglichste Demütigung kommt nicht von oben, sondern vom kleinen Mann, der ein Tor, einen Stempel oder einen Schlüssel bekommt und ihn als Peitsche benutzt.'

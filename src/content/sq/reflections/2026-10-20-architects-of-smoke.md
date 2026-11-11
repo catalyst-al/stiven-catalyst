@@ -27,7 +27,7 @@ E vërteta e hidhur është se nuk mund të ndërtosh ekonomi moderne me mentali
 
 Por ky realitet nuk është një fat i paracaktuar. Është thjesht pasojë e një zgjedhjeje të gabuar që vazhdojmë ta tolerojmë çdo ditë.
 
-Udhëheqja e vërtetë nuk fillon në podiumin e konferencave. Ajo fillon në këndin e qetë të vëzhgimit. Fillon kur një drejtues ka guximin të ulet përballë të dhënave të papërpunuara dhe të thotë: Këtu po dështojmë, dhe përgjegjësia është e imja. Fillon kur ne heqim dorë nga kultura e „fasadës që shkëlqen” dhe kthejmë sytë nga dinjiteti i procesit.
+Udhëheqja e vërtetë nuk fillon në podiumin e konferencave. Ajo fillon në këndin e qetë të vëzhgimit. Fillon kur një drejtues ka guximin të ulet përballë të dhënave të papërpunuara dhe të thotë: Këtu po dështojmë, dhe përgjegjësia është e imja. Fillon kur ne heqim dorë nga kultura e „fasadës që shkëlqen“ dhe kthejmë sytë nga dinjiteti i procesit.
 
 Shqipëria nuk ka nevojë për më shumë drejtues që dinë të pozojnë para pasqyrës së suksesit të rremë. Ky vend ka nevojë për njerëz që nuk kanë frikë të zbresin aty ku puna është e rëndë, ku sistemi ngec dhe ku e vërteta nuk ka filtra.
 

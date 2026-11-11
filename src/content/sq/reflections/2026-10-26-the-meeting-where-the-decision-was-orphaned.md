@@ -1,5 +1,5 @@
 ---
-title: 'Mbledhja ku vendimi mbeti jetim: Anatomia e një organizate ku të gjithë flasin dhe askush nuk vendos'
+title: 'Mbledhja ku vendimi mbeti jetim: anatomia e një organizate ku të gjithë flasin dhe askush nuk vendos'
 date: 2026-10-26
 status: published
 summary: 'Në një organizatë ku çdo problem diskutohet dhe askush nuk e merr përsipër, mbledhja përfundon me sukses dhe problemi kthehet. Pa përgjegjës, autoritet dhe afat, diskutimi zëvendëson veprimin.'
@@ -17,7 +17,7 @@ U analizuan gabimet. U përmend mungesa e komunikimit. U diskutuan procedurat. D
 
 Në fund, drejtori mbylli laptopin.
 
-"Shumë mirë. Besoj se patëm një diskutim produktiv."
+„Shumë mirë. Besoj se patëm një diskutim produktiv.“
 
 Të gjithë pohuan me kokë.
 
@@ -89,7 +89,7 @@ Vetëm se zakonisht është zgjedhja për të cilën askush nuk dëshiron të fi
 
 Në shumë mbledhje ekziston një fjali që tingëllon si zgjidhje:
 
-"Duhet ta përmirësojmë komunikimin."
+„Duhet ta përmirësojmë komunikimin.“
 
 Është një fjali e përshtatshme. E pranueshme për të gjithë. Rrallë krijon kundërshtime.
 
@@ -103,7 +103,7 @@ Pa këto përgjigje, përmirësimi i komunikimit nuk është plan.
 
 Është një dëshirë e formuluar në gjuhë profesionale.
 
-E njëjta gjë ndodh me shprehje si "duhet të jemi më proaktivë", "duhet të forcojmë bashkëpunimin" apo "duhet të rrisim ndërgjegjësimin".
+E njëjta gjë ndodh me shprehje si „duhet të jemi më proaktivë“, „duhet të forcojmë bashkëpunimin“ apo „duhet të rrisim ndërgjegjësimin“.
 
 Fjalë të rregullta. Fjalë që mund të vendosen në çdo prezantim.
 
@@ -277,7 +277,7 @@ Diskutimi ka përfunduar. Argumentet janë dëgjuar. Të gjithë e kanë thënë
 
 Në atë moment, drejtuesi mund të bëjë një pyetje që vlen më shumë se shumë faqe procesverbali:
 
-"Kush e merr përsipër?"
+„Kush e merr përsipër?“
 
 Mund të ketë heshtje.
 

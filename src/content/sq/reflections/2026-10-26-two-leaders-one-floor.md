@@ -1,5 +1,5 @@
 ---
-title: 'Dy drejtues në të njëjtën dysheme: Qetësia e rregullit përballë teatrit të kaosit'
+title: 'Dy drejtues në të njëjtën dysheme: qetësia e rregullit përballë teatrit të kaosit'
 date: 2026-10-26
 status: published
 summary: 'I njëjti ekip, e njëjta magazinë, dy turne krejt të ndryshme. Ai që bën zhurmë duket me pasion; ai që ndjek procesin e mban turnin në këmbë.'

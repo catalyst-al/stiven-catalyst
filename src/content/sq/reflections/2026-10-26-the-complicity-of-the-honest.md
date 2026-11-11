@@ -1,5 +1,5 @@
 ---
-title: 'Bashkëfajësia e njeriut të ndershëm: Kur heshtja bëhet votë për padrejtësinë'
+title: 'Bashkëfajësia e njeriut të ndershëm: kur heshtja bëhet votë për padrejtësinë'
 date: 2026-10-26
 status: published
 summary: 'Në prani të një padrejtësie të hapur, neutraliteti nuk ekziston. Heshtja e të ndershmëve lexohet si leje nga ai që shkel mbi të tjerët.'
@@ -7,7 +7,7 @@ deck: 'Në një sistem të deformuar, e keqja nuk lulëzon vetëm prej atyre që
 description: 'Një reflektim për heshtjen në mbledhje, për njerëzit e mirë që "shohin punën e tyre" dhe pse kurajoja fillon me një fjalë të thënë me qetësi.'
 ---
 
-Ka një strehë shumë të rehatshme ku njerëzit e mirë shkojnë për t'u fshehur sa herë që përballen me një vendim moral të vështirë. Është një strehë e ndërtuar me justifikime të padëmshme në dukje, me fjalë që tingëllojnë si mençuri popullore: "Unë shoh punën time", "Nuk më përket mua", "Pse të bëhem unë heroi që rregullon botën".
+Ka një strehë shumë të rehatshme ku njerëzit e mirë shkojnë për t'u fshehur sa herë që përballen me një vendim moral të vështirë. Është një strehë e ndërtuar me justifikime të padëmshme në dukje, me fjalë që tingëllojnë si mençuri popullore: „Unë shoh punën time“, „Nuk më përket mua“, „Pse të bëhem unë heroi që rregullon botën“.
 
 Këto fjali përsëriten çdo ditë në zyra, në magazina, në korridore institucionesh dhe në jetën publike. Ato shërbejnë si një lloj qetësuesi për ndërgjegjen. Njeriu i thotë vetes se mjafton të mos vjedhësh vetë, mjafton të mos fyesh dikë me gojën tënde dhe të zbatosh orarin tënd të punës, që të quhesh një njeri me integritet. Ai beson se midis xhelatit dhe viktimës ekziston një zonë neutrale, një tokë e askujt ku mund të rrish mënjanë, të mos përfshihesh dhe të ruash duart e pastra.
 
@@ -35,7 +35,7 @@ Sepse sa herë që ti gëlltit një të vërtetë për të ruajtur rehatinë e �
 
 Kurajoja qytetare dhe profesionale nuk kërkon domosdoshmërisht të dalësh në shesh me flamur apo të sakrifikosh gjithçka në një përplasje të verbër.
 
-Kurajoja fillon me vendime shumë më të thjeshta, por thelbësore. Ajo fillon me një fjalë të thënë me zë të qetë e të vendosur në një mbledhje: "Kjo nuk është e saktë." Fillon me refuzimin për të qeshur me një shaka poshtëruese të shefit. Fillon me një dorë të shtrirë mbi supin e kolegut që po sulmohet padrejtësisht, duke i thënë hapur para të gjithëve: "Nuk je vetëm, e vërteta është ndryshe."
+Kurajoja fillon me vendime shumë më të thjeshta, por thelbësore. Ajo fillon me një fjalë të thënë me zë të qetë e të vendosur në një mbledhje: „Kjo nuk është e saktë.“ Fillon me refuzimin për të qeshur me një shaka poshtëruese të shefit. Fillon me një dorë të shtrirë mbi supin e kolegut që po sulmohet padrejtësisht, duke i thënë hapur para të gjithëve: „Nuk je vetëm, e vërteta është ndryshe.“
 
 Një sistem i drejtë nuk ndërtohet vetëm me ligje të shkruara mirë mbi letër. Ai ndërtohet me refuzimin e përditshëm të njerëzve të zakonshëm për t'u bërë spektatorë të turpit.
 

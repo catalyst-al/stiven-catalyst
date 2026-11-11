@@ -1,4 +1,4 @@
-{%- set shortTitle = seo_title or title -%}
+{%- set shortTitle = (seo_title or title) | fitTitle if (seo_title or title) else "" -%}
 {#- The site's name follows the title only while the whole stays within about 60 characters, what a search result
     shows; a longer title stands alone, since the name would be the part cut off (the site name is in the structured
     data, partials/structured-data.njk). -#}
@@ -80,18 +80,21 @@
 {#- Links on this site are fetched while the pointer rests on them (or on touch), so the next page is usually there
     by the time it is clicked; browsers without speculation rules ignore it. -#}
 {%- set speculationRules -%}{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"selector_matches":"[download],[target=_blank]"}}]},"eagerness":"moderate"}]}{%- endset -%}
-{#- Everything comes from this site; the one exception is a company logo from Google's icon service in the
-    CV tools (img-src). Styles allow inline attributes (the role colour, SVG charts), fonts and images may be
+{#- Everything comes from this site; the one exception is a company logo from Google's icon service on the CV
+    Builder page only (img-src; audit PM-15: it was on every page). Styles allow inline attributes (the role colour, SVG charts), fonts and images may be
     data: or blob: (exports, uploaded photos), pdf.js runs its worker from here, forms may post to the
-    newsletter provider (form-action https:, and connect-src for the form that stays on the page), and the
+    newsletter provider and the form provider only (form-action; audit PM-15: it was any https: address, and
+    connect-src for the form that stays on the page), and the
     feedback form at the end of a tool may post to the form provider in site.contact.action (connect-src), and team
     sync in the work box (the tools and the Tools page) talks to the server in site.sync.endpoint (connect-src). -#}
-{%- set csp = "default-src 'self'; script-src 'self' " + (themeScript | cspHash) + " " + (speculationRules | cspHash) + (" " + (coachingLoader | cspHash) if toolFamily and not rolePage else "") + (" https://static.cloudflareinsights.com" if analyticsToken else "") + "; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google.com; font-src 'self' data:; connect-src 'self'" + ((" " + (site.newsletter.action | originOf)) if site.newsletter.action else "") + (" https://cloudflareinsights.com" if analyticsToken else "") + ((" " + (site.contact.action | originOf)) if site.contact.action and toolFamily and not rolePage else "") + ((" " + (site.sync.endpoint | originOf)) if site.sync.endpoint and ((toolFamily and not rolePage) or page.url | enPath == "/tools.html") else "") + "; worker-src 'self' blob:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-src 'none'" -%}
+{%- set csp = "default-src 'self'; script-src 'self' " + (themeScript | cspHash) + " " + (speculationRules | cspHash) + (" " + (coachingLoader | cspHash) if toolFamily and not rolePage else "") + (" https://static.cloudflareinsights.com" if analyticsToken else "") + "; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:" + (" https://www.google.com" if (page.url | enPath) == "/tools/cv-builder/" else "") + "; font-src 'self' data:; connect-src 'self'" + ((" " + (site.newsletter.action | originOf)) if site.newsletter.action else "") + (" https://cloudflareinsights.com" if analyticsToken else "") + ((" " + (site.contact.action | originOf)) if site.contact.action and toolFamily and not rolePage else "") + ((" " + (site.sync.endpoint | originOf)) if site.sync.endpoint and ((toolFamily and not rolePage) or page.url | enPath == "/tools.html") else "") + "; worker-src 'self' blob:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'" + ((" " + (site.newsletter.action | originOf)) if site.newsletter.action else "") + ((" " + (site.contact.action | originOf)) if site.contact.action else "") + "; frame-src 'none'" -%}
 <!doctype html>
 <html lang="{{ lang or 'en' }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Security-Policy" content="{{ csp | safe }}">
+  {#- The full address stays on this site; other sites learn only that a visitor came from it (audit PM-15). #}
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ pageTitle }}</title>
   <meta name="description" content="{{ pageDescription }}">
@@ -106,6 +109,12 @@
 {%- endif %}
   <meta property="og:type" content="{{ ogType or 'website' }}">
   <meta property="og:site_name" content="{{ site.title }}">
+{#- The page's language as Open Graph names it, and the languages it also exists in (audit SEO-06). #}
+{%- set ogLocales = { "en": "en_GB", "de": "de_DE", "sq": "sq_AL" } %}
+  <meta property="og:locale" content="{{ ogLocales[lang or 'en'] }}">
+{%- if not noindex %}{% for code, href in alternates %}{% if code != (lang or 'en') and ogLocales[code] %}
+  <meta property="og:locale:alternate" content="{{ ogLocales[code] }}">
+{%- endif %}{% endfor %}{% endif %}
   <meta property="og:title" content="{{ ogTitle or title or site.title }}">
   <meta property="og:description" content="{{ pageDescription }}">
   <meta property="og:url" content="{{ page.url | absoluteUrl }}">
@@ -214,6 +223,7 @@
 {% include "partials/coaching-bridge.njk" %}
 {% include "partials/tool-essays.njk" %}
 {% include "partials/tool-guide.njk" %}
+{% include "partials/tool-onward.njk" %}
 {% include "partials/tool-feedback.njk" %}
 {% include "partials/work-backup.njk" %}
 {% include "partials/family-more.njk" %}

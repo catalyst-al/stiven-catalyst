@@ -1,5 +1,5 @@
 ---
-title: 'Kultura e fajtorit: Pse gjuetia e kokës së turkut nuk e shëron dot sistemin'
+title: 'Kultura e fajtorit: pse gjuetia e kokës së turkut nuk e shëron dot sistemin'
 date: 2026-10-26
 status: published
 summary: 'Kur pas çdo gabimi pyetet "kush e bëri?" dhe jo "pse dështoi procesi?", njerëzit mësojnë të fshehin, dhe i njëjti dështim përsëritet nesër.'
@@ -9,7 +9,7 @@ description: 'Një reflektim për gjuetinë e fajtorit pas çdo gabimi, për më
 
 Kur diçka shkon keq në një operacion, kur vonohet një ngarkesë në magazinë, kur bllokohet një faturë apo kur dëmtohet një pajisje pune, reagimi i parë zbulon nivelin e vërtetë të qytetërimit të asaj organizate.
 
-Në shumicën e ndërmarrjeve tona, në atë sekondë kritike nuk shtrohet kurrë pyetja thelbësore: "Pse dështoi procesi?". Aty shtrohet menjëherë një pyetje tjetër, e ngarkuar me mllef dhe me një etje primitive për ndëshkim: "Kush e bëri? Kush e ka fajin?".
+Në shumicën e ndërmarrjeve tona, në atë sekondë kritike nuk shtrohet kurrë pyetja thelbësore: „Pse dështoi procesi?“. Aty shtrohet menjëherë një pyetje tjetër, e ngarkuar me mllef dhe me një etje primitive për ndëshkim: „Kush e bëri? Kush e ka fajin?“.
 
 Zyra shndërrohet brenda pak minutash në një sallë gjyqi të improvizuar. Drejtuesi kërkon me ngulm një emër, një fytyrë konkrete mbi të cilën mund të shkarkojë të gjithë dufin, nervozizmin dhe pasigurinë e tij operative. Duhet gjetur një kokë turku. Duhet dikush që të ulet në mes të sallës, të marrë fyerjet, t'i mbahet një shumë nga rroga dhe të shpallet fajtor absolut para syve të të gjithëve. Dhe sapo kjo kokë gjendet dhe ndëshkimi jepet me bujë, të gjithë marrin frymë të lehtësuar, drejtuesi kthehet i qetë në karrigen e tij dhe çështja shpallet e zgjidhur.
 
@@ -25,7 +25,7 @@ Por çfarë ndodh në një kompani shqiptare që ushqehet me frikën e ndëshkim
 
 Aty ndodh shkatërrimi i plotë i së vërtetës operative. Punonjësit nuk janë naivë. Në sekondën që kuptojnë se pranimi i një gabimi të vogël të kushton bukën e gojës apo dinjitetin para kolegëve, ata heqin dorë nga transparenca dhe mësojnë artin e errët të mbijetesës: fshehjen.
 
-Gabimi nuk korrigjohet; ai shtyhet thellë poshtë qilimit. E meta maskohet me arna të shpejta, shifrat në sistem modifikohen pa u ndier dhe defekti lihet si një bombë me sahat, duke u lutur që shpërthimi të ndodhë në turnin e dikujt tjetër. Kështu, kompania fillon të kalbet nga brenda pa e kuptuar askush, sepse kultura e terrorit e ka vrarë të vetmin mjet që shpëton biznesin: guximin për të thënë "këtu kemi një problem".
+Gabimi nuk korrigjohet; ai shtyhet thellë poshtë qilimit. E meta maskohet me arna të shpejta, shifrat në sistem modifikohen pa u ndier dhe defekti lihet si një bombë me sahat, duke u lutur që shpërthimi të ndodhë në turnin e dikujt tjetër. Kështu, kompania fillon të kalbet nga brenda pa e kuptuar askush, sepse kultura e terrorit e ka vrarë të vetmin mjet që shpëton biznesin: guximin për të thënë „këtu kemi një problem“.
 
 Udhëheqja e vërtetë ka një dallim të prerë mes dy botëve. Ajo di të ndajë me thikë gabimin e procesit nga shkelja e qëllimshme e etikës.
 

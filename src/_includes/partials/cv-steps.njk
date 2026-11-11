@@ -1,0 +1,13 @@
+{#- Under the title of the three career tools: the three as steps, the one on screen marked, so a reader working on a
+    CV goes from the CV to the version for application software to the letter, and back, in one tap. -#}
+{%- set cvTools = {"sq": sq.tools, "de": de.tools}[lang] or tools %}
+<nav class="shell cv-steps" aria-label="{{ 'CV' | t(lang) }}">
+  <ol>
+    {%- for url in ["/tools/cv-builder/", "/tools/ats-cv/", "/tools/cover-letter/"] %}
+    {%- set stepN = loop.index %}
+    {%- for tool in cvTools %}{% if tool.url == url | local(lang) %}
+    <li><a href="{{ tool.url }}"{% if tool.url == page.url %} aria-current="page"{% endif %}><span class="cv-step-n">{{ stepN }}</span><strong>{{ tool.name }}</strong></a></li>
+    {%- endif %}{% endfor %}
+    {%- endfor %}
+  </ol>
+</nav>

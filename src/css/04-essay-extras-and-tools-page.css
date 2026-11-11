@@ -250,6 +250,17 @@
 .shelf-link .shelf-count { position: absolute; top: 2px; right: 2px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px; background: var(--blue); color: var(--on-blue); font-family: var(--sans); font-size: 10px; font-weight: 800; line-height: 16px; text-align: center; }
 .shelf-link .shelf-count[hidden] { display: none; }
 .essay-save { display: inline-flex; align-items: center; gap: 6px; margin-left: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 12px; font-weight: 800; letter-spacing: .04em; cursor: pointer; transition: color .2s, border-color .2s, background .2s, scale .25s cubic-bezier(.22, 1, .36, 1); }
+/* One line always: where the byline has no room for it, it goes under the byline instead of wrapping to three lines in
+   a round button (audit PM-16). */
+.essay-save { flex: none; white-space: nowrap; }
+@media (max-width: 560px) {
+  .article-byline:has(.essay-save) { flex-wrap: wrap; row-gap: 10px; }
+  /* The name and dates take the row beside the photo, so the button starts the next row, under them. */
+  .article-byline:has(.essay-save) > span { flex: 1 1 calc(100% - 60px); min-width: 0; }
+  .article-byline:not(:has(.author-photo)) > span { flex-basis: 100%; }
+  .article-byline .essay-save { margin-left: 60px; }
+  .article-byline:not(:has(.author-photo)) .essay-save { margin-left: 0; }
+}
 .essay-save svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
 .essay-save:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .essay-save.is-saved { color: var(--blue); border-color: var(--blue); background: color-mix(in srgb, var(--blue) 12%, transparent); }

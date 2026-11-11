@@ -8,6 +8,23 @@ const path = require('node:path');
 
 const LANGS = ['en', 'sq', 'de'];
 const load = async () => (await import('../src/_data/weekly.js')).default;
+
+// What a chart's note must hold (audit P5-10): a word for how the figure is measured (a share, a rate, a survey, a
+// correlation, self-reports, a sample, a unit of time or of people), or something of the chart itself.
+const NOTE_BASIS = {
+  en: /%|\bshare|\bper\b|\bout of\b|\bsurvey|\brespondent|\bsample|\bcount|\bestimate|\bpoints?\b|\brate\b|\baverage|\bmedian|\bindex\b|\bscore|\bminutes?\b|\bhours?\b|\bdays?\b|\bweeks?\b|\byears?\b|\bpeople\b|\bworkers?\b|\bemployees?\b|\bmanagers?\b|\bratio|\btimes\b|\bin \d+\b|\bnumber of\b|\btotal\b|\bmillion|\bbillion|\bcases?\b|\bincidents?\b|\bmeasured\b|\bcorrelat|\beffect sizes?|\brelative risk|\bself-report|\bstud(?:y|ies)\b|\bdata\b|\bfigures?\b|\bbefore and after|\bforecast|\bscenario|\bcontrol group|\bexperiment|\bweights?\b|\btable\b|\bp = |\bsums?\b|\bassessment/i,
+  de: /%|\banteil|\bje\b|\bpro\b|\bvon \d|\bumfrage|\bbefragt|\bstichprobe|\bzahl|\bschätz|\bpunkte?\b|\brate\b|\bdurchschnitt|\bmittel|\bmedian|\bindex\b|\bminuten?\b|\bstunden?\b|\btage?n?\b|\bwochen?\b|\bjahre?n?\b|\bmenschen\b|\bbeschäftigte|\bmitarbeit|\bführungskräfte|\bverhältnis|\bmal\b|\bmillion|\bmilliard|\bfälle?n?\b|\bgemessen|\bsumme\b|\binsgesamt\b|\bkorrelation|\beffektst|\beffektgr|\brelative risik|\bselbstausk|\bstudie|\bdaten\b|\bzahlen?\b|\bvorher|\bprognose|\bszenario|\bkontrollgruppe|\bexperiment|\bgewicht|\btabelle|\bp = |\bsummen?\b|\bsegment|\bzähl|\bwartezeit|\babbildung/i,
+  sq: /%|\bpjes|\bpër\b|\bnga \d|\banket|\bmostr|\bnumër|\bnumri|\bvlerës|\bpikë|\bnorm|\bmesatar|\bmedian|\bindeks|\bminut|\bor[ëe]\b|\borë|\bdit[ëe]|\bjav[ëe]|\bvit|\bnjerëz|\bpunonjës|\bpuntor|\bmenaxher|\braport|\bher[ëe]\b|\bmilion|\bmiliard|\braste?\b|\bmatur|\bgjithsej\b|\btotal|\bkorrelac|\bmadhësi efekti|\brrezik|\bvetëdeklar|\bstudim|\bdhëna|\bshifr|\bpara dhe pas|\bparashikim|\bskenar|\bgrup kontrolli|\beksperiment|\bpesh|\btabel|\bp = |\bshum|\bfigur|\bvlerësim/i,
+};
+const foldText = (text) => String(text || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+const COMMON_WORDS = /^(the|and|for|from|with|von|der|die|das|und|des|nga|dhe|per|report|study|survey|data|article|page|press|release|fact|sheet|accessed|retrieved|online|journal|review|vol|pdf|https?|www|com|org|html)$/;
+const notePointsAtChart = (chart) => {
+  const note = foldText(chart.note);
+  const source = foldText([chart.sourceLine, chart.source, ...(Array.isArray(chart.sources) ? chart.sources.map((s) => (typeof s === 'string' ? s : JSON.stringify(s))) : [])].filter(Boolean).join(' '));
+  const words = (source.match(/[a-z][a-z&.'-]{2,}/g) || []).filter((word) => !COMMON_WORDS.test(word));
+  const figures = [...(foldText(chart.alt).match(/\d+(?:[.,]\d+)?/g) || []), ...(source.match(/\b(?:19|20)\d\d\b/g) || [])];
+  return words.some((word) => note.includes(word)) || figures.some((n) => new RegExp(`(^|[^\\d])${n.replace(/[.,]/, '[.,]')}([^\\d]|$)`).test(note));
+};
 const raw = async () => {
   const dir = path.join(__dirname, '..', 'lib', 'weekly', 'issues');
   const files = fs.readdirSync(dir).filter((name) => /^\d{2,3}\.js$/.test(name)).sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
@@ -110,11 +127,22 @@ test('the charts are drawn for the print and again, narrower, for phones, each w
         assert.ok(!chart.svg.includes('NaN') && !chart.svg.includes('undefined'), `${issue.slug} ${lang} ${chart.type}`);
         if (chart.type !== 'donut') assert.match(chart.svgNarrow, /viewBox="0 0 230 /, `${issue.slug} ${lang} ${chart.type}`);
         assert.ok(chart.sourceLine, `${issue.slug} ${lang} ${chart.type}: source`);
-        // What it counts (its base, unit or limit): its own note or its page's, never a bare figure.
+        // What it counts (its base, unit or limit): its own note or its page's, never a bare figure. Audit P5-10: a
+        // length alone passed any note; the note must say how the figure is measured (NOTE_BASIS) or tie itself to its
+        // chart: a figure the chart shows, a name in its source or a year of its data (notePointsAtChart).
         assert.ok(chart.note && chart.note.trim().length > 20, `${issue.slug} ${lang} ${chart.type}: no note`);
+        assert.ok(NOTE_BASIS[lang].test(chart.note) || notePointsAtChart(chart), `${issue.slug} ${lang} ${chart.type}: the note says nothing of what the chart counts: ${chart.note}`);
       }
     }
   }
+});
+
+test('the chart-note check refuses a note that says nothing of its chart', () => {
+  const chart = { note: 'An interesting picture of how things have moved over the period.', alt: 'A 31%, B 22%', sourceLine: 'Gallup, State of the Global Workplace, 2025' };
+  assert.equal(NOTE_BASIS.en.test(chart.note), false);
+  assert.equal(notePointsAtChart(chart), false);
+  assert.equal(notePointsAtChart({ ...chart, note: 'As Gallup reported it.' }), true);
+  assert.equal(NOTE_BASIS.en.test('Share of respondents in each group.'), true);
 });
 
 test('the teasers of the cover point at pages of the issue, and the essays it links to exist', async () => {
@@ -310,4 +338,34 @@ test('Field Notes shows a month and twelve notes at a time, and a link to one no
   }
   // The script opens the month and the page of a note named in the address.
   assert.match(fs.readFileSync('src/js/filter.js', 'utf8'), /location\.hash[\s\S]*linked\.dataset\.month/);
+});
+
+// Audit P5-06: percentage bars on a scale short of 100 % (a bar of 30 % three quarters full on a scale of 40 %) had no
+// axis. Such a chart now shows its scale, written as its figures are, in the print and on the phone.
+test('a share chart on a scale short of 100 % shows its scale; a full scale or a count draws none', async () => {
+  const { chartMarkup, NARROW } = await import('../lib/weekly/charts.js');
+  const ends = (svgText) => [...svgText.matchAll(/class="wk-axis wk-scale"[^>]*>([^<]*)</g)].map((m) => m[1]);
+  const bars = { type: 'hbars', label: 'x', max: 40, items: [{ k: 'Albania', v: 32, n: '32%' }, { k: 'Europe', v: 12, n: '12%' }] };
+  assert.deepEqual(ends(chartMarkup(bars)), ['0%', '40%']);
+  assert.deepEqual(ends(chartMarkup(bars, NARROW)), ['0%', '40%'], 'on the phone too');
+  assert.deepEqual(ends(chartMarkup({ ...bars, items: bars.items.map((item) => ({ ...item, n: `${item.v} %` })) })), ['0 %', '40 %'], 'German figures, German scale');
+  assert.deepEqual(ends(chartMarkup({ ...bars, max: 100 })), [], 'a full scale needs none');
+  assert.deepEqual(ends(chartMarkup({ ...bars, max: 70, items: [{ k: 'Change', v: 12, n: '+12%' }] })), ['0%', '70%'], 'the sign of a change is not the scale\'s');
+  assert.deepEqual(ends(chartMarkup({ ...bars, items: [{ k: 'Routes', v: 32, n: '32' }] })), [], 'a count needs none');
+  assert.deepEqual(ends(chartMarkup({ type: 'pairs', label: 'x', from: '2010', to: '2012', max: 90, rows: [{ k: 'All', a: 83, an: '83%', b: 88, bn: '88%' }] })), ['0%', '90%']);
+  assert.deepEqual(ends(chartMarkup({ type: 'dumbbell', label: 'x', from: '2022', to: '2025', min: 10, max: 40, rows: [{ k: 'Managers', a: 31, an: '31%', b: 22, bn: '22%' }] })), ['10%', '40%']);
+  assert.deepEqual(ends(chartMarkup({ type: 'columns', label: 'x', max: 25, items: [{ k: '2009', v: 12, n: '12%' }, { k: '2025', v: 20, n: '20%' }] })), ['25%'], 'columns: the top of the scale');
+  const weekly = await load();
+  for (const issue of weekly.issues) {
+    for (const lang of LANGS) {
+      for (const chart of issue[lang].charts) {
+        if (!['hbars', 'pairs', 'dumbbell'].includes(chart.type)) continue;
+        const figures = JSON.stringify(chart.items || chart.rows || []);
+        const short = (chart.max ?? 100) < 100 || (chart.min ?? 0) > 0;
+        if (!short || !figures.includes('%')) continue;
+        assert.match(chart.svg, /wk-scale/, `${issue.slug} ${lang} ${chart.type}: no scale`);
+        assert.match(chart.svgNarrow, /wk-scale/, `${issue.slug} ${lang} ${chart.type}: no scale on the phone`);
+      }
+    }
+  }
 });

@@ -1,5 +1,5 @@
 ---
-title: 'Das Paradox des Giftes: Wenn wir Diebstahl dulden und uns über den Verfall wundern'
+title: 'Das Paradox des Giftes: wenn wir Diebstahl dulden und uns über den Verfall wundern'
 date: 2026-10-26
 status: published
 summary: '„Korruption verstehe ich, aber warum entwickelt sich das Land nicht?“ Sie können kein Gift in den Brunnen gießen und sich wundern, warum das Wasser Ihre Kinder krank macht.'

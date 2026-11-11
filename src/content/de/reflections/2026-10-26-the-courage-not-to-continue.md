@@ -1,5 +1,5 @@
 ---
-title: 'Der Mut, nicht weiterzumachen: Wenn Beharrlichkeit aufhört, eine Tugend zu sein, und zur Geisel des Stolzes wird'
+title: 'Der Mut, nicht weiterzumachen: wenn Beharrlichkeit aufhört, eine Tugend zu sein, und zur Geisel des Stolzes wird'
 date: 2026-10-26
 status: published
 summary: 'Das bereits ausgegebene Geld kommt nicht zurück, nur weil das Projekt weiterläuft, aber der Stolz mischt sich in die Entscheidung. Die richtige Frage ist, was wir heute entscheiden würden, mit allem, was wir gelernt haben.'

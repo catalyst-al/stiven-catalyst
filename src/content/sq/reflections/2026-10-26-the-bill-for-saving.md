@@ -1,5 +1,5 @@
 ---
-title: 'Fatura e kursimit: Kush po e paguan? Kur një kompani kursen në buxhet dhe shpenzon në gjithçka tjetër'
+title: 'Fatura e kursimit: kush po e paguan? Kur një kompani kursen në buxhet dhe shpenzon në gjithçka tjetër'
 date: 2026-10-26
 status: published
 summary: 'Një kursim në buxhet mund të jetë shpenzim i zhvendosur: financa sheh uljen, operacioni humbet kohë dhe klienti pret. Kostoja nuk zhduket, ndryshon emër dhe departament.'

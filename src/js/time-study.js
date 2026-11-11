@@ -594,10 +594,12 @@
   root.querySelector("[data-xlsx]").addEventListener("click", () => { if (state.rows.length) downloadXlsx(`${data.csv}-timings`, observationRows()); });
 
   // Results --------------------------------------------------------------------------------------------------------------
+  // The outliers are text in one cell, written in the page's numbers ("9,8" on the German page, as the other columns;
+  // audit P2B-18).
   const standardRows = (result) => [
     [tx("Station"), tx("Element"), tx("Type"), "n", tx("Median (s)"), tx("Standard time (s)"), tx("Mean (s)"), tx("Min (s)"), tx("Max (s)"), tx("CV %"), tx("Outliers")],
     ...result.stations.flatMap((station) => station.elements.map((element) => [station.name || stationName(station.index), element.name || elementName(station.index, element.index), element.type, element.n,
-      element.n ? Math.round(element.median * 10) / 10 : "", element.n ? Math.round(element.standard * 100) / 100 : "", element.n ? Math.round(element.mean * 100) / 100 : "", element.min ?? "", element.max ?? "", element.n ? Math.round(element.cv * 1000) / 10 : "", element.outliers.join(" ")])),
+      element.n ? Math.round(element.median * 10) / 10 : "", element.n ? Math.round(element.standard * 100) / 100 : "", element.n ? Math.round(element.mean * 100) / 100 : "", element.min ?? "", element.max ?? "", element.n ? Math.round(element.cv * 1000) / 10 : "", element.outliers.map((value) => num(value, 1)).join(" ")])),
   ];
   // The first moves of the bottleneck: its waste first, then the element moves of the balancing, as plain lines.
   const moveLines = (result) => {

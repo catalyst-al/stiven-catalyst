@@ -8,6 +8,8 @@
   <form class="tool-feedback-form essay-feedback-form" data-tool-feedback{% if site.contact.action %} action="{{ site.contact.action }}" method="post"{% else %} data-mail="{{ site.email }}"{% endif %}
         data-sent="{{ 'Thank you. What helps others appears under the essay, anonymised; if you left an email, you get an answer.' | t(lang) }}"
         data-opened="{{ 'Your email program opens with the message ready. Nothing is sent until you send it there. If no program opens, copy the message and send it to' | t(lang) }}"
+        data-opened-long="{{ 'The message is longer than a mail link can carry: the email program opens with its beginning. Copy the whole message with the button below and paste it into the email, or send it to' | t(lang) }}"
+        data-cut="{{ '[The rest did not fit in the mail link: use “Copy message” on the page.]' | t(lang) }}"
         data-copied="{{ 'Message copied. Paste it into an email to' | t(lang) }}"
         data-copy-failed="{{ 'Copying did not work here. Select your text in the field above and copy it.' | t(lang) }}"
         data-failed="{{ 'The message could not be sent. Please write to' | t(lang) }}"
@@ -51,6 +53,6 @@
       <p class="form-note">{{ "Nothing is sent from this page. The button opens your email program with the message, and you send it from there." | t(lang) }}{% if legal.name and legal.city %} <a href="{{ '/datenschutz.html' | local(lang) }}">{{ "privacy policy" | t(lang) | capitalize }}</a>.{% endif %}</p>
       {%- endif %}
     </div>
-    <p class="form-note tf-status" data-tool-feedback-status role="status" aria-live="polite" hidden></p>
+    <p class="form-note tf-status" data-tool-feedback-status role="status" aria-live="polite"></p>
   </form>
 </section>
