@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Prototip · Sot dhe Kontrolli i dëmeve</title>
+<style>
+:root{
+  --paper:#060a10;--paper-2:#0c121a;--ink:#f6f7f4;--muted:#a5b0b8;--line:rgba(255,255,255,.12);
+  --blue:#4ab5f7;--blue-soft:#79c9f7;--on-blue:#001018;--ok:#3cc47c;--warn:#d1a553;--danger:#ff5a5f;
+  --card:rgba(255,255,255,.045);--pulse:#a78bfa;--bench:#02050a;
+  --sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --display:"Arial Black","Archivo Black","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: light){:root{
+  --paper:#f6f7f5;--paper-2:#fff;--ink:#0b1015;--muted:#5f6870;--line:rgba(11,16,21,.14);
+  --blue:#0a6ab0;--blue-soft:#0a6ab0;--on-blue:#fff;--ok:#1d7a45;--warn:#7f5c1f;--danger:#c2141b;
+  --card:rgba(11,16,21,.04);--pulse:#6d4fd6;--bench:#e6e9e7;
+}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bench);color:var(--ink);font:15px/1.45 var(--sans);-webkit-text-size-adjust:100%}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* ---- Paneli i prototipit (jashtë produktit) ---- */
+.bench{padding:14px 16px 10px;border-bottom:1px dashed var(--line)}
+.bench h1{font:800 15px/1.2 var(--sans);margin:0 0 2px;letter-spacing:.02em}
+.bench p{margin:0;color:var(--muted);font-size:13px;max-width:980px}
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:10px;align-items:flex-end}
+.ctl{display:flex;flex-direction:column;gap:4px}
+.ctl>span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--paper)}
+.seg button{border:0;background:none;padding:8px 12px;min-height:38px;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--blue);color:var(--on-blue);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:12.5px;color:var(--muted)}
+.scen-note{margin-top:8px;font-size:13px;color:var(--ink)}
+.demo,.n{font:700 10px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;border-radius:5px;padding:3px 5px;white-space:nowrap;vertical-align:middle;font-style:normal;display:inline-block}
+.demo{border:1px dashed var(--warn);color:var(--warn);margin-left:6px}
+.n{display:none;margin-left:6px}
+.n.new{background:var(--blue);color:var(--on-blue)}
+.n.old{border:1px solid var(--muted);color:var(--muted)}
+.notes .n{display:inline-block;align-self:center}
+.strip{display:none;height:28px;align-items:center;gap:10px;padding:0 12px;font-size:12px;color:var(--muted);background:var(--bench);border-bottom:1px dashed var(--line)}
+.strip span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.strip button{white-space:nowrap;flex:none}
+.strip button,.bench .hide{border:1px solid var(--line);background:none;border-radius:7px;padding:2px 9px;font-size:12px}
+.bench .hide{padding:8px 12px;min-height:38px;font-size:14px;border-radius:10px}
+
+/* ---- Kornizat ---- */
+.stage{display:flex;gap:22px;padding:18px 16px 40px;overflow-x:auto;align-items:flex-start}
+.device{flex:none}
+.device>p{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.frame{container-type:inline-size;container-name:app;position:relative;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto}
+.device.desktop{flex:1 1 900px;min-width:900px;max-width:1240px}
+.device.desktop .frame{height:760px}
+.device.phone .frame{width:390px;max-width:calc(100vw - 32px);height:780px;border-radius:28px}
+.only-desktop .device.phone,.only-phone .device.desktop{display:none}
+/* Paneli i fshehur: vetëm produkti, sa gjithë dritarja */
+.bare .bench,.bare .device>p{display:none}
+.bare .strip{display:flex}
+.bare .stage{padding:0;gap:0;overflow:visible}
+.bare .device{flex:1 1 auto;min-width:0;max-width:none}
+body.bare .device .frame{width:100%;max-width:none;height:calc(100dvh - 28px);border:0;border-radius:0}
+
+/* ---- Produkti ---- */
+.top{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--paper-2)}
+.brand{font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.brand i{width:9px;height:9px;border-radius:50%;background:var(--pulse)}
+.role{color:var(--muted);font-size:13px}
+.spacer{flex:1}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;min-height:36px;background:var(--card);font-size:13.5px}
+button.chip:hover{border-color:var(--blue)}
+.chip.unset{border-color:var(--warn);color:var(--warn)}
+.chip b{font-weight:700}
+.nav{display:flex;gap:6px}
+.nav button,.tabbar button{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 12px;min-height:40px;font-weight:600}
+.nav button[aria-current=page],.tabbar button[aria-current=page]{border-color:var(--blue);color:var(--blue-soft)}
+.nav .plus,.tabbar .plus{background:var(--blue);color:var(--on-blue);border-color:var(--blue)}
+.count{display:inline-block;min-width:20px;padding:1px 6px;border-radius:999px;background:var(--danger);color:#fff;font-size:12px;font-weight:700;text-align:center;margin-left:4px}
+.tabbar{display:none;grid-template-columns:repeat(5,1fr);gap:5px;padding:8px;border-top:1px solid var(--line);background:var(--paper-2)}
+.tabbar button{padding:6px 2px;min-height:48px;font-size:12.5px}
+.screen{overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px;scroll-behavior:auto}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:14px 16px;min-width:0}
+.kick{font:700 11px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--blue-soft);margin:0 0 8px}
+.card h2{font:800 20px/1.2 var(--sans);margin:0 0 6px}
+.card p{margin:0 0 8px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 14px;min-height:42px;font-weight:600}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.btn.rec{border-color:var(--blue);color:var(--blue-soft)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.between{justify-content:space-between}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.list li{display:flex;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.list li:first-child{border-top:0}
+.list button.link{flex:1;text-align:left;background:none;border:0;padding:4px 0;min-height:36px}
+.list button.link:hover{color:var(--blue-soft)}
+.dot{flex:none;width:9px;height:9px;border-radius:50%;background:var(--muted)}
+.dot.bad{background:var(--danger)}.dot.warn{background:var(--warn)}.dot.ok{background:var(--ok)}
+.stats{display:flex;flex-wrap:wrap;gap:8px 22px}
+.stats div{display:flex;flex-direction:column}
+.stats b{font:800 22px/1.1 var(--sans);font-variant-numeric:tabular-nums}
+.stats span{font-size:12.5px;color:var(--muted)}
+.banner{border:1px solid var(--blue);border-radius:12px;padding:10px 12px;background:color-mix(in srgb,var(--blue) 9%,transparent)}
+.banner .row{gap:6px}
+.tag{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:3px 9px;background:var(--paper)}
+.banner .back{margin-top:8px}
+.note-bar{border:1px solid var(--warn);border-radius:12px;padding:9px 12px;font-size:13.5px}
+.note-bar .row{margin-top:8px}
+.dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px;margin:0}
+.dl dt{color:var(--muted)}.dl dd{margin:0;overflow-wrap:anywhere}
+.head{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.head h1{font:900 22px/1.1 var(--display);margin:0;text-transform:uppercase;letter-spacing:.01em}
+.rate{font-variant-numeric:tabular-nums}
+.rate b{font-size:18px}
+.over{color:var(--danger)}.in{color:var(--ok)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.tabs button{border:0;background:none;padding:9px 12px;min-height:40px;color:var(--muted);border-bottom:2px solid transparent;font-weight:600}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--blue)}
+form.entry{display:grid;grid-template-columns:1fr 1fr 90px;gap:10px;align-items:end}
+form.entry label,.field{display:flex;flex-direction:column;gap:4px;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);min-width:0}
+form.entry select,form.entry input,.field input{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:9px 10px;min-height:44px;font-size:15px;text-transform:none;letter-spacing:0;color:var(--ink);width:100%}
+form.entry .full{grid-column:1/-1}
+.bars{display:flex;flex-direction:column;gap:5px}
+.bar{display:grid;grid-template-columns:118px 1fr 44px;gap:8px;align-items:center;border:1px solid transparent;background:none;border-radius:8px;padding:5px 6px;text-align:left;min-height:34px;width:100%}
+.bar:hover{border-color:var(--line)}
+.bar[aria-pressed=true]{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 10%,transparent)}
+.bar span{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar i{display:block;height:10px;border-radius:5px;background:var(--blue);min-width:3px}
+.bar em{font-style:normal;font-size:12.5px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.next{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--paper-2)}
+.carry{font-size:12.5px;color:var(--muted);margin-top:8px}
+.carry b{color:var(--ink);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:7px 8px;border-top:1px solid var(--line);white-space:nowrap}
+th{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);border-top:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.hl td{background:color-mix(in srgb,var(--blue) 14%,transparent)}
+.tw{overflow-x:auto}
+.mini{border:1px solid var(--line);background:none;border-radius:8px;padding:4px 9px;min-height:32px;font-size:12.5px}
+.sheet{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;z-index:5}
+.sheet>div{background:var(--paper-2);border:1px solid var(--line);border-radius:18px 18px 0 0;padding:16px;width:min(460px,100%);max-height:100%;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.sheet h2{margin:0;font:800 17px/1.2 var(--sans)}
+.sheet .opt{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left}
+.toast{position:absolute;left:12px;right:12px;bottom:74px;z-index:6;background:var(--ink);color:var(--paper);border-radius:10px;padding:10px 12px;font-size:13.5px;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+.steps li{counter-increment:s;display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.steps li:first-child{border-top:0}
+.steps li::before{content:counter(s);flex:none;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:700}
+.steps li>span{flex:1}
+.seg.sm button{padding:5px 10px;min-height:32px;font-size:13px}
+
+@container app (max-width:640px){
+  .top{padding:8px 12px;gap:8px}
+  .top .nav,.top .role{display:none}
+  .tabbar{display:grid}
+  .screen{padding:12px;gap:12px}
+  .grid2{grid-template-columns:1fr}
+  .grid2.an .formcard{order:2}
+  form.entry{grid-template-columns:1fr 1fr}
+  form.entry .units{grid-column:1/-1}
+  .head h1{font-size:18px}
+  .bar{grid-template-columns:96px 1fr 40px}
+  .hide-phone{display:none}
+}
+@container app (min-width:641px){.sheet{align-items:center}.sheet>div{border-radius:18px}.toast{left:auto;right:16px;bottom:16px;max-width:380px}}
+@media (max-width:520px){.stage{padding:12px 16px 30px}.device.phone .frame{height:720px}}
+</style>
+</head>
+<body>
+
+<div class="strip"><span>Prototip · të dhëna shembull · asgjë nuk ruhet</span><span style="flex:1"></span><button data-panel="on">Shfaq panelin</button></div>
+
+<section class="bench" aria-label="Paneli i prototipit">
+  <h1>Prototip projektimi · “Sot” dhe “Kontrolli i dëmeve” · Shef turni · raundi 3 · struktura e ngrirë · korrigjimi i drafteve</h1>
+  <p>Faqe e izoluar, pa lidhje me repo-n dhe pa ruajtje: çdo numër, emër dhe datë është shembull, dhe gjithçka fshihet kur e rifreskon faqen.</p>
+  <div class="controls">
+    <div class="ctl"><span>Gjendja</span><div class="seg" data-seg="scen">
+      <button data-v="empty">1 · Bosh</button><button data-v="shift">2 · Gjatë turnit</button><button data-v="analysis">3 · Analizë e filtruar</button><button data-v="close">4 · Mbyllje</button></div></div>
+    <div class="ctl"><span>Konteksti</span><div class="seg" data-seg="ctx"><button data-v="wh">Magazinë</button><button data-v="ho">Hotel</button></div></div>
+    <div class="ctl"><span>Pamja</span><div class="seg" data-seg="view"><button data-v="desktop">Desktop</button><button data-v="phone">Telefon</button><button data-v="both">Të dyja</button></div></div>
+    <div class="ctl"><span>Ora e simuluar</span><div class="seg" data-seg="clock"><button data-v="day">11 nën · 21:40</button><button data-v="mid">12 nën · 00:20</button></div></div>
+    <div class="ctl"><span>Shënimet</span><div class="seg" data-seg="notes"><button data-v="off">Fshehur</button><button data-v="on">Ekziston / E re</button></div></div>
+    <div class="ctl"><span>Paneli</span><button class="hide" data-panel="off">Fshih panelin</button></div>
+  </div>
+  <p class="scen-note" data-scen-note></p>
+  <div class="legend">
+    <span><i class="demo" style="margin:0">demo</i> ndërveprim ose tekst i demonstruar: tregon çfarë do të ndodhte, nuk e bën dhe nuk llogaritet</span>
+    <span><i class="n new" style="display:inline-block;margin:0">e re</i> kërkon zhvillim</span>
+    <span><i class="n old" style="display:inline-block;margin:0">ekziston</i> funksion që faqja e ka sot</span>
+    <span>Pa etiketë: punon vërtet brenda prototipit, mbi të dhënat shembull.</span>
+  </div>
+</section>
+
+<div class="stage" data-stage>
+  <div class="device desktop"><p>Desktop · 760 px lartësi, pjesa tjetër me rrëshqitje</p><div class="frame" data-frame></div></div>
+  <div class="device phone"><p>Telefon · 390 px</p><div class="frame" data-frame></div></div>
+</div>
+
+<script>
+(() => {
+  const MONTHS = ["jan","shk","mar","pri","maj","qer","kor","gus","sht","tet","nën","dhj"];
+  const SHIFTS = ["Mëngjes","Pasdite","Natë"];
+  const CTX = {
+    wh: { name: "Magazinë", stages: ["Pranimi","Magazinimi","Mbledhja","Paketimi","Ngarkimi","Transporti","Dorëzimi"],
+      causes: ["Stivimi","Manipulimi","Ambalazhi","Pajisjet","Sigurimi i ngarkesës","Mjedisi","E panjohur"],
+      volLabel: "njësi të trajtuara", vol: 3860, prevVol: 3790, target: 0.005, proposal: false,
+      plus: [["Dëm","Kontrolli i dëmeve",true],["Porosi e paplotë","Kontrolli i plotësisë"],["Vonesë linje","Analiza e vonesave"],["Ngjarje sigurie","Kryqi i sigurisë"]],
+      other: [["1","Porosi të paplota"],["11/12","Nisje në kohë"]],
+      signals: [["bad","Dëmet: 3 ditë radhazi mbi objektiv","dmg"],["warn","Nisjet në kohë: 11 nga 12 këtë turn",""]],
+      second: "Riparo rampën 3" },
+    ho: { name: "Hotel", stages: ["Lobi","Korridori","Restoranti","Banja","Dhoma","Lavanderia"],
+      causes: ["Pastrimi","Mysafiri","Mirëmbajtja","Pajisjet","Furnitori","Konsumi normal","E panjohur"],
+      volLabel: "dhoma të shitura", vol: 1240, prevVol: 1210, target: 0.015, proposal: true,
+      plus: [["Dëm","Kontrolli i dëmeve",true],["Përjashtim i Night Audit","Regjistri i Night Audit"],["Ankesë mysafiri","Ankesat e mysafirëve"],["Send i gjetur","Sendet e gjetura"]],
+      other: [["2","No-show"],["1","Ankesë e hapur"]],
+      signals: [["bad","Dëmet: 3 ditë radhazi mbi objektiv","dmg"],["warn","1 ankesë mysafiri pa përgjigje prej 20 orësh",""]],
+      second: "Ndërro bravën e dhomës 214" },
+  };
+  // [data, turni, hapi, shkaku, njësi]: periudha 5–11 nëntor dhe ajo para saj, të dyja shembull.
+  const BASE = [[5,0,4,0,2],[5,1,2,1,1],[5,2,4,0,1],[6,0,4,0,1],[6,1,3,2,2],[6,1,5,4,1],[7,0,4,0,2],[7,2,0,6,1],[8,1,4,0,1],[8,1,2,1,1],
+    [9,0,3,2,1],[9,1,4,0,1],[9,2,6,1,1],[10,0,4,4,1],[10,1,4,0,1],[10,1,3,2,1],[11,0,1,3,1],[11,1,4,0,1],[11,1,3,2,1],[11,1,2,6,1]].map(([d, ...r]) => [`2026-11-${String(d).padStart(2, "0")}`, ...r]);
+  const PREV = [["2026-10-29",0,4,0,2],["2026-10-29",1,2,1,1],["2026-10-30",1,4,0,2],["2026-10-31",0,4,0,1],["2026-10-31",2,3,2,1],["2026-11-01",1,4,0,2],
+    ["2026-11-02",0,4,0,1],["2026-11-02",1,5,4,1],["2026-11-03",1,4,0,1],["2026-11-04",0,4,0,1],["2026-11-04",2,2,6,1]];
+  const SCEN_NOTES = {
+    empty: "Bosh: asnjë turn i zgjedhur, asnjë regjistrim. “Sot” kërkon së pari turnin dhe datën operative; Kontrolli i dëmeve nuk pranon regjistrim pa to.",
+    shift: "Gjatë turnit: Pasdite, 11 nëntor. Forma është gjëja e parë; analiza rri poshtë dhe nuk të shtyn askund.",
+    analysis: "Analizë e filtruar: një shkak është zgjedhur. Fjalia, regjistri dhe çdo kalim ndjekin filtrin; provo “Hapi tjetër” dhe kthimin te burimi.",
+    close: "Mbyllje: fund turni. “Sot” bëhet listë mbylljeje; një veprim i kryer pret verifikimin para/pas; mbyllja thotë qartë gjendjen e dorëzimit.",
+  };
+
+  const S = { scen: "shift", ctx: "wh", view: "desktop", clock: "day", notes: "off", panel: "on" };
+  const esc = (v) => String(v).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const dayLabel = (s) => { const d = new Date(`${s}T12:00:00`); return `${d.getDate()} ${MONTHS[d.getMonth()]}`; };
+  const pct = (x, n = 0) => `${(x * 100).toFixed(n).replace(".", ",")}%`;
+  const c = () => CTX[S.ctx];
+  const demo = '<i class="demo">demo</i>';
+  const N = (kind, text) => `<i class="n ${kind}">${text || (kind === "new" ? "e re" : "ekziston")}</i>`;
+  const keep = (k) => S.keep[k] || "";
+  const addDays = (iso, n) => { const d = new Date(`${iso}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+  // Periudha është gjithmonë dy data ISO; emri i saj ndërtohet vetëm për ekranin.
+  const pLabel = (p) => p.from === p.to ? dayLabel(p.from) : p.from.slice(0, 7) === p.to.slice(0, 7) ? `${Number(p.from.slice(8))}–${dayLabel(p.to)}` : `${dayLabel(p.from)} – ${dayLabel(p.to)}`;
+  const defPeriod = () => ({ from: addDays(S.opDate, -6), to: S.opDate });
+  const per = () => S.period || defPeriod();
+  const inP = (p) => S.all.filter((r) => r.date >= p.from && r.date <= p.to);
+  const volOf = (p) => (p.to <= "2026-11-04" ? c().prevVol : c().vol);
+  // Çelësi i një turni: data operative dhe turni. Draftet e formës dhe të dorëzimit rrinë nën të.
+  const keyOf = (date, shift) => `${date}|${shift}`;
+  const key = () => keyOf(S.opDate, S.shift);
+  const keyLabel = (k) => { const [d, sh] = k.split("|"); return `${sh} · ${dayLabel(d)}`; };
+  const draft = (k = key()) => (S.drafts[k] ||= { form: {}, ho: {} });
+  const isClosed = (k) => S.closedList.some((r) => keyOf(r.date, r.shift) === k);
+  const clockLabel = () => (S.clock === "mid" ? "12 nën, 00:20" : "11 nën, 21:40");
+  const regs = (n) => `${n} ${n === 1 ? "regjistrim" : "regjistrime"}`;
+
+  const toRows = (list) => { const k = c(); return list.map(([date, sh, st, ca, u]) => ({ date, shift: SHIFTS[sh], stage: k.stages[st % k.stages.length], cause: k.causes[ca], units: u })); };
+  Object.defineProperty(S, "rows", { get: () => inP(per()) });
+  const reset = () => {
+    const k = c(), rows = toRows(BASE), top = k.causes[0], stage = k.stages[4], closing = S.scen === "close";
+    Object.assign(S, {
+      screen: S.scen === "analysis" ? "dmg" : "sot", tab: "puno", sheet: null, sheetMsg: "", toast: "", arrive: null, dest: null, verify: null, closed: false, hl: null, keep: {},
+      period: null, drafts: {}, closedList: [], rec: 0,
+      shift: S.scen === "empty" ? "" : "Pasdite", opDate: "2026-11-11",
+      all: S.scen === "empty" ? [] : [...toRows(PREV), ...(closing ? rows.filter((r) => !(r.cause === top && r.date >= "2026-11-07")) : rows)],
+      pick: S.scen === "analysis" ? { field: "cause", value: top } : null,
+      phase: S.scen === "empty" ? "start" : closing ? "end" : "during",
+      actions: S.scen === "empty" ? [] : [
+        { id: 1, title: `Kundërmasë: ${top.toLowerCase()} te ${stage}`, owner: "A. Hoxha", due: closing ? "4 nën" : "8 nën", status: closing ? "done" : "open", late: !closing, done: closing ? "4 nën" : "",
+          src: { kind: "filter", pick: { field: "cause", value: top }, from: "2026-10-29", to: "2026-11-04" } },
+        { id: 2, title: k.second, owner: "pa përgjegjës", due: "10 nën", status: "open", late: true, src: { kind: "handover" } },
+      ],
+    });
+  };
+
+  // ---- Llogaritja mbi të dhënat shembull ----
+  const FIELD = { cause: "Shkaku", stage: "Hapi", shift: "Turni" };
+  const units = (rows) => rows.reduce((n, r) => n + r.units, 0);
+  const group = (rows, f) => { const m = new Map(); rows.forEach((r) => m.set(r[f], (m.get(r[f]) || 0) + r.units)); return [...m].map(([key, value]) => ({ key, value })).sort((a, b) => b.value - a.value); };
+  const by = (pick, rows) => (pick ? rows.filter((r) => r[pick.field] === pick.value) : rows);
+  const filtered = () => by(S.pick, S.rows);
+  const span = () => pLabel(per());
+  const mine = () => S.all.filter((r) => r.date === S.opDate && r.shift === S.shift);
+  // Fjalia e problemit: çdo numër thotë nga cili grup është marrë.
+  const problem = (pick = S.pick) => {
+    const T = units(S.rows), R = by(pick, S.rows), U = units(R); if (!U) return "";
+    const st = group(R, "stage")[0], ca = group(R, "cause")[0], parts = [];
+    if (pick?.field !== "stage") parts.push(`më shumë te ${st.key} (${st.value} nga ${U})`);
+    if (pick?.field !== "cause") parts.push(`kryesisht ${ca.key.toLowerCase()} (${ca.value} nga ${U})`);
+    return `${span()} · ${pick ? `${FIELD[pick.field]} ${pick.value}: ${U} nga ${T} dëme (${pct(U / T)})` : `${T} dëme`}; ${parts.join(", ")}.`;
+  };
+  // Përmbledhja e fushës që mbart një kalim: një rresht për çdo përmasë, pa kundërthënie.
+  const scope = (pick = S.pick) => { const R = by(pick, S.rows);
+    return [`Periudha: ${span()}`, `Turni: ${pick?.field === "shift" ? pick.value : "të gjitha"}`, `Hapi: ${pick?.field === "stage" ? pick.value : "të gjitha"}`, `Shkaku: ${pick?.field === "cause" ? pick.value : "të gjitha"}`,
+      `${R.length} nga ${regs(S.rows.length)}`, `${units(R)} nga ${units(S.rows)} njësi`]; };
+  const openCount = () => S.actions.filter((a) => a.status === "open").length;
+  const shiftText = () => (S.shift ? `${S.shift} · ${dayLabel(S.opDate)}` : "pa turn");
+  const hoContent = (k = key()) => { const h = S.drafts[k]?.ho || {}; return { owner: (h.owner || "").trim(), due: (h.due || "").trim(), note: (h.note || "").trim(), issue: h.issue || "" }; };
+  const hoState = (k = key()) => { const h = S.drafts[k]?.ho || {}, now = hoContent(k);
+    if (h.demoSnap) return JSON.stringify(now) === h.demoSnap ? "demo" : "changed";
+    return now.owner || now.due || now.note || now.issue ? "draft" : "none"; };
+  const HO = { none: "nuk është shkruar", draft: "i shkruar, i padërguar", demo: "dërgimi u demonstrua; asgjë nuk doli nga kjo faqe",
+    changed: "ndryshuar pas demonstrimit të dërgimit; versioni i ri nuk është dërguar" };
+  const formText = (f) => `${f.stage || c().stages[0]}, ${f.cause || c().causes[0]}, ${f.units || 1} njësi${f.note ? `, “${f.note}”` : ""}`;
+  const orphans = () => Object.keys(S.drafts).filter((k) => S.drafts[k].form.dirty && (!S.shift || k !== key()));
+  const rowText = (r) => `${dayLabel(r.date)}, ${r.shift}, ${r.stage}, ${r.cause}, ${r.units} njësi`;
+  const srcText = (s) => s.kind === "handover" ? "Dorëzimi i turnit" : s.kind === "row" ? `Kontrolli i dëmeve · një rresht: ${rowText(s.row)}`
+    : s.kind === "filter" ? `Kontrolli i dëmeve · ${FIELD[s.pick.field]} = ${s.pick.value} · ${pLabel(s)}` : `Kontrolli i dëmeve · pa filtër · ${pLabel(s)}`;
+  // E njëjta gjë si vlera të strukturuara: kështu do të ruhej me veprimin.
+  const srcData = (s) => s.kind === "handover" ? "" : `nga ${s.from} · deri ${s.to} · ${s.kind === "filter" ? `${s.pick.field} = ${s.pick.value}` : "pa filtër"}${s.kind === "row" ? ` · rreshti ${s.row.date} ${s.row.shift}` : ""}`;
+  const SRC = { sot: "Sot", dmg: "Kontrolli i dëmeve", actions: "Veprimet", dest: "ekrani i mëparshëm" };
+
+  // ---- Pjesët e përbashkëta ----
+  const banner = () => {
+    const a = S.arrive; if (!a) return "";
+    return `<div class="banner"><p class="kick">Erdhe nga: ${esc(a.from)} ${a.note || ""}</p>
+      <div class="row"><span class="small muted">Mbart:</span>${a.carry.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</div>
+      <div class="back"><button class="btn" data-a="back">← Kthehu te ${esc(a.from)}</button> ${N("new", "kthimi: i ri")}</div></div>`;
+  };
+  const midnight = () => (S.clock === "mid" && S.shift && !S.closed && S.opDate < "2026-11-12"
+    ? `<div class="note-bar"><b>Ora 00:20, kalendari 12 nën.</b> Data operative mbetet <b>${dayLabel(S.opDate)}</b> dhe turni <b>${S.shift}</b> derisa ta mbyllësh vetë turnin. Regjistrimet e reja marrin datën operative. ${N("new")}</div>` : "");
+  const top = () => `<header class="top">
+    <span class="brand"><i></i>${S.screen === "sot" ? "Sot" : S.screen === "dmg" ? "Dëmet" : S.screen === "actions" ? "Veprimet" : esc(DEST[S.dest.kind].short)}</span>
+    <span class="role">Shef turni · ${c().name}</span>
+    <button class="chip ${S.shift ? "" : "unset"}" data-a="sheet" data-v="shift" title="Turni dhe data operative">${S.shift ? `<b>${S.shift}</b> ${dayLabel(S.opDate)}` : "Zgjidh turnin"} ▾</button>${N("new")}
+    <span class="spacer"></span>
+    <nav class="nav" aria-label="Gjithmonë të dukshme">${navButtons()}</nav></header>`;
+  const navButtons = () => `<button data-a="go" data-v="sot" ${S.screen === "sot" ? 'aria-current="page"' : ""}>Sot</button>
+    <button class="plus" data-a="sheet" data-v="plus" aria-label="Regjistro">+ <span class="hide-phone">Regjistro</span></button>
+    <button data-a="go" data-v="actions" ${S.screen === "actions" ? 'aria-current="page"' : ""}>Veprime${openCount() ? `<span class="count">${openCount()}</span>` : ""}</button>
+    <button data-a="dest" data-v="handover" ${S.screen === "dest" && S.dest.kind === "handover" ? 'aria-current="page"' : ""}>Dorëzimi</button>
+    <button data-a="sheet" data-v="more" aria-label="Pjesa tjetër e Stiven Catalyst">Catalyst</button>`;
+
+  // ---- Sot ----
+  const PHASES = [["start", "Fillim"], ["during", "Gjatë"], ["end", "Fund"]];
+  const sot = () => {
+    const k = c(), m = mine();
+    const phaseSeg = S.shift && !S.closed ? `<div class="seg sm" role="group" aria-label="Faza e turnit">${PHASES.map(([v, l]) => `<button data-a="phase" data-v="${v}" aria-pressed="${S.phase === v}">${l}</button>`).join("")}</div>` : "";
+    const headRow = (label) => `<div class="row between" style="margin-bottom:8px"><p class="kick" style="margin:0">${label} ${N("new", "faza zgjidhet nga ti: e re")}</p>${phaseSeg}</div>`;
+    let now;
+    const last = S.closedList.at(-1);
+    if (S.closed) now = `<p class="kick">Turni u mbyll</p><h2>${esc(last.shift)} · ${dayLabel(last.date)} është i mbyllur.</h2>
+      <p>Dorëzimi: <b class="${last.state === "demo" ? "" : "over"}">${HO[last.state]}</b>.</p><p class="muted">Mbyllja vetëm e mbyll turnin për regjistrime; nuk shkruan dhe nuk dërgon dorëzim. Përmbajtja e dorëzimit u ruajt me turnin.</p>
+      <div class="row"><button class="btn primary" data-a="sheet" data-v="shift">Zgjidh turnin e radhës</button><button class="btn" data-a="rec" data-v="${S.closedList.length - 1}">Shiko dorëzimin e ruajtur</button></div>`;
+    else if (!S.shift) now = `<p class="kick">Para se të fillosh</p><h2>Zgjidh turnin dhe datën operative.</h2><p class="muted">Çdo regjistrim, numër dhe dorëzim i takon një turni. Faqja nuk e hamendëson nga ora.</p><button class="btn primary" data-a="sheet" data-v="shift">Zgjidh turnin</button>`;
+    else if (S.phase === "start") now = `${headRow("Tani · fillim turni")}<h2>Lexo dorëzimin e fundit para brifingut.</h2><p class="muted">Pastaj regjistro dëmin e parë aty ku ndodh.</p>
+      <div class="row">${last ? `<button class="btn primary" data-a="rec" data-v="${S.closedList.length - 1}">Hap dorëzimin e ${esc(last.shift)} · ${dayLabel(last.date)}</button>`
+        : `<button class="btn primary" data-a="demo" data-v="Hap dorëzimin e turnit të mëparshëm te Dorëzimi i turnit.">Hap dorëzimin e fundit ${demo}</button>`}<button class="btn" data-a="plusgo">Regjistro një dëm</button></div>`;
+    else if (S.phase === "during") now = `${headRow("Tani · gjatë turnit")}<h2>Regjistro çdo dëm aty ku ndodh.</h2><p class="muted">Me hapin dhe shkakun. Kur turni mbaron, kalo te “Fund”.</p>
+      <div class="row"><button class="btn primary" data-a="plusgo">Regjistro një dëm</button><button class="btn" data-a="sheet" data-v="plus">Tjetër regjistrim</button></div>`;
+    else now = `${headRow("Tani · fund turni")}<h2>Mbyll turnin në tre hapa.</h2>
+      <ol class="steps"><li><span>Shiko turnin në një pamje</span><button class="mini" data-a="demo" data-v="Hap Shift Pulse për ${esc(shiftText())}.">Shift Pulse ${demo}</button></li>
+      <li><span>Çdo çështje e hapur me përgjegjës: ${S.actions.filter((a) => a.status === "open" && a.owner === "pa përgjegjës").length} pa përgjegjës</span><button class="mini" data-a="go" data-v="actions">Veprimet</button></li>
+      <li><span>Dorëzimi: <b>${HO[hoState()]}</b></span><button class="mini" data-a="dest" data-v="handover">Dorëzimi</button></li></ol>
+      <div class="row" style="margin-top:10px"><button class="btn primary" data-a="sheet" data-v="close">Mbyll turnin ${esc(S.shift)}</button>${N("new")}</div>`;
+    const late = S.actions.filter((a) => a.late && a.status === "open").length;
+    const sigItems = [...(late ? [["bad", `${late} veprime të vonuara`, "actions", true]] : []), ...(S.scen !== "empty" ? k.signals : [])];
+    const sig = !sigItems.length ? `<p class="muted">Asnjë sinjal: nuk ka ende të dhëna të mjaftueshme. Sinjalet dalin vetë sapo regjistrat mbushen.</p>`
+      : `<ul class="list">${sigItems.map(([tone, text, to, live]) => `<li><span class="dot ${tone}"></span>${to ? `<button class="link" data-a="signal" data-v="${to}">${esc(text)} → ${live ? "" : demo}</button>` : `<span style="flex:1">${esc(text)} ${demo}</span>`}</li>`).join("")}</ul>
+         <p class="small muted" style="margin:6px 0 0">Vetëm numri i veprimeve të vonuara numërohet nga lista. Sinjalet me “demo” janë tekst i ngulitur, jo llogaritje mbi regjistrin.</p>`;
+    const nums = !S.shift ? `<p class="muted">Zgjidh turnin për të parë numrat e tij.</p>`
+      : `<div class="stats"><div><b>${units(m)}</b><span>Dëme në këtë turn</span></div>${S.rows.length ? k.other.map(([v, l]) => `<div><b>${v}</b><span>${l} ${demo}</span></div>`).join("") : ""}</div>
+         <p class="small muted" style="margin-top:8px">Dëmet numërohen nga regjistri për ${esc(shiftText())}.</p>`;
+    const dirtyNow = S.shift && draft().form.dirty, orph = orphans();
+    const cont = !S.all.length && !dirtyNow && !orph.length ? `<p class="muted">Këtu shfaqen mjetet ku ke punuar së fundi.</p><button class="btn" data-a="example">Ngarko javën shembull ${demo}</button>`
+      : `<ul class="list"><li><button class="link" data-a="go" data-v="dmg">Kontrolli i dëmeve · ${regs(S.rows.length)}${dirtyNow ? " · <b>formë e papërfunduar</b>" : ""} →</button></li>
+         ${orph.map((k) => `<li><button class="link" data-a="go" data-v="dmg">Formë e papërfunduar nga <b>${esc(keyLabel(k))}</b> →</button></li>`).join("")}
+         ${S.scen === "empty" ? "" : `<li><button class="link" data-a="demo" data-v="Hap fletën e pambaruar të 5 Whys aty ku e le.">5 Whys · fletë e pambaruar → ${demo}</button></li>`}</ul>`;
+    return `${midnight()}<div class="grid2"><section class="card">${now}</section>
+      <section class="card"><p class="kick">Kërkon vëmendje ${N("old", "llogaritja ekziston te Signals")}</p>${sig}</section>
+      <section class="card"><p class="kick">Turni deri tani ${N("old", "llogaritja ekziston te Dorëzimi")}</p>${nums}</section>
+      <section class="card"><p class="kick">Vazhdo ${N("new")}</p>${cont}</section></div>
+      ${S.closedList.length ? `<section class="card"><p class="kick">Turnet e mbyllura në këtë seancë ${N("new", "ruajtja me turnin: e re · historiku i dorëzimeve: ekziston")}</p><ul class="list">${S.closedList.map((r, i) => `<li style="flex-wrap:wrap"><span class="dot ${r.state === "demo" ? "ok" : "warn"}"></span>
+        <span style="flex:1;min-width:180px"><b>${esc(r.shift)} · ${dayLabel(r.date)}</b><br><span class="small muted">mbyllur ${r.closedAt} · ${r.dmg} njësi të dëmtuara · dorëzimi: ${HO[r.state]}</span></span>
+        <button class="mini" data-a="rec" data-v="${i}">Shiko dorëzimin</button></li>`).join("")}</ul></section>` : ""}
+      <div class="row"><button class="btn" data-a="sheet" data-v="more">Pjesa tjetër e Stiven Catalyst →</button>${N("new", "hyrja: e re")}</div>`;
+  };
+
+  // ---- Kontrolli i dëmeve ----
+  const bars = (items, field, total) => `<div class="bars">${items.map((it) => `<button class="bar" data-a="pick" data-f="${field}" data-v="${esc(it.key)}" aria-pressed="${S.pick?.field === field && S.pick.value === it.key}">
+    <span>${esc(it.key)}</span><i style="width:${Math.max(3, (it.value / items[0].value) * 100)}%"></i><em>${pct(it.value / total)}</em></button>`).join("")}</div>`;
+  const opts = (list, value) => list.map((s) => `<option${value === s ? " selected" : ""}>${s}</option>`).join("");
+  const verifyCard = () => {
+    const a = S.actions.find((x) => x.id === S.verify); if (!a) return "";
+    const k = c(), pb = { from: a.src.from, to: a.src.to }, pa = { from: addDays(a.src.to, 1), to: addDays(a.src.to, 7) };
+    const before = units(by(a.src.pick, inP(pb))), after = units(by(a.src.pick, inP(pa))), rb = before / volOf(pb), ra = after / volOf(pa), better = ra < rb;
+    return `<section class="card" style="border-color:var(--${better ? "ok" : "danger"})"><p class="kick">Verifikim: para dhe pas veprimit ${N("new")}</p>
+      <p class="small muted">Veprimi u krye më ${a.done}. I njëjti filtër (${FIELD[a.src.pick.field]} = ${esc(a.src.pick.value)}) mbi periudhën e ruajtur me veprimin dhe 7 ditët pas saj.</p>
+      <div class="tw"><table><tr><th></th><th>Periudha</th><th class="num">Njësi të dëmtuara</th><th class="num">${k.volLabel}</th><th class="num">Shkalla</th></tr>
+        <tr><td>Para</td><td>${pLabel(pb)}</td><td class="num">${before}</td><td class="num">${volOf(pb)}</td><td class="num">${pct(rb, 2)}</td></tr>
+        <tr><td>Pas</td><td>${pLabel(pa)}</td><td class="num">${after}</td><td class="num">${volOf(pa)}</td><td class="num"><b class="${better ? "in" : "over"}">${pct(ra, 2)}</b></td></tr></table></div>
+      <p class="small muted" style="margin-top:8px">Të dyja periudhat janë rreshta shembull dhe numrat llogariten prej tyre. Krahasimi i vërtetë do të lexonte regjistrin dhe vëllimin e ruajtur të secilës periudhë dhe do të kërkonte mjaft ditë pas veprimit; kjo kartë tregon vetëm formën e tij. ${demo}</p>
+      <div class="row" style="margin-top:6px"><button class="btn primary" data-a="verified" data-v="${before} → ${after} njësi · ${pct(rb, 2)} → ${pct(ra, 2)}">Shëno si të verifikuar me këtë rezultat</button></div></section>`;
+  };
+  const dmg = () => {
+    const k = c(), vol = volOf(per()), total = units(S.rows), rate = total / vol, allowed = Math.floor(k.target * vol), R = filtered(), U = units(R), m = mine();
+    const fd = S.shift ? draft().form : {};
+    const head = `<div class="head"><h1>Kontrolli i dëmeve</h1>${S.period ? `<button class="chip" data-a="curperiod" style="border-color:var(--blue)">Periudha e ruajtur: <b>${span()}</b> ✕</button>` : S.rows.length ? `<span class="chip">${span()}</span>` : ""}${S.rows.length ? `
+      <span class="rate"><b>${pct(rate, 2)}</b> ${S.pick ? "e gjithë periudhës" : ""} · objektivi ${pct(k.target, 2)} · ${total > allowed ? `<span class="over">${total - allowed} mbi</span>` : `<span class="in">brenda</span>`}</span>` : ""}
+      ${S.pick ? `<button class="chip" data-a="clear" style="border-color:var(--blue)">${FIELD[S.pick.field]} = <b>${esc(S.pick.value)}</b> · ${U} nga ${total} njësi ✕</button>` : ""}</div>
+      ${k.proposal ? `<p class="small muted">Hapat dhe shkaqet e hotelit janë propozim: mjeti sot ka vetëm ato të magazinës. ${N("new")}</p>` : ""}
+      <div class="tabs" role="tablist">${[["puno", "Puno"], ["meso", "Mëso"], ["data", "Të dhënat"]].map(([v, l]) => `<button role="tab" aria-selected="${S.tab === v}" data-a="tab" data-v="${v}">${l}</button>`).join("")}${N("new", "skedat: të reja")}</div>`;
+    if (S.tab !== "puno") return `${banner()}${head}<section class="card"><p class="kick">${S.tab === "meso" ? "Mëso" : "Të dhënat"} ${demo}</p><p class="muted">${S.tab === "meso"
+      ? "Këtu kalojnë pjesët që sot rrinë nën çdo mjet: historia pas mjetit, udhëzuesi dhe “si përdoret”. Përmbajtja ekziston; vetëm vendi ndryshon."
+      : "Këtu kalojnë kopja rezervë e punës, kyçja me PIN, importi nga Excel dhe eksporti. Funksionet ekzistojnë; vetëm vendi ndryshon."}</p></section>`;
+
+    const orph = S.shift ? orphans().map((ok) => `<div class="note-bar"><b>Formë e papërfunduar nga ${esc(keyLabel(ok))}:</b> ${esc(formText(S.drafts[ok].form))}. Nuk u soll te ky turn. ${N("new")}
+        <div class="row">${isClosed(ok) ? `<span class="small muted">Ai turn është mbyllur.</span>` : `<button class="mini" data-a="draftback" data-v="${ok}">Kthehu te ${esc(keyLabel(ok))}</button>`}
+        ${fd.dirty ? "" : `<button class="mini" data-a="draftmove" data-v="${ok}">Sille te ${esc(keyLabel(key()))}</button>`}<button class="mini" data-a="draftdrop" data-v="${ok}">Hidhe</button></div>
+        ${fd.dirty ? `<p class="small" style="margin:8px 0 0" data-blocked>Nuk mund të sillet këtu: ${esc(keyLabel(key()))} ka formën e vet të papërfunduar (${esc(formText(fd))}). Të dy draftet mbeten të ruajtura; përfundo ose pastro këtë formë, pastaj sille.</p>` : ""}</div>`).join("") : "";
+    const form = `<section class="card formcard"><p class="kick">Regjistro ${N("old", "forma ekziston")}</p>${orph}
+      ${S.shift ? `<form class="entry" data-entry>
+        <label>Hapi<select name="stage" data-form="stage">${opts(k.stages, fd.stage)}</select></label>
+        <label>Shkaku<select name="cause" data-form="cause">${opts(k.causes, fd.cause)}</select></label>
+        <label class="units">Njësi<input name="units" type="number" min="1" max="999" value="${esc(fd.units || 1)}" inputmode="numeric" data-form="units"></label>
+        <label class="full">Shënim <input name="note" maxlength="120" value="${esc(fd.note || "")}" placeholder="opsional" data-form="note"></label>
+        <div class="full row"><button class="btn primary" type="submit">Shto</button>
+          <button class="btn" type="button" data-a="demo" data-v="Hap fushat e tjera të formës ekzistuese: lloji i dëmit, kostoja, skanimi i kodit.">+ lloji, kosto ${demo}</button>
+          ${fd.dirty ? `<button class="btn" type="button" data-a="discard">Pastro</button>` : ""}</div>
+        <p class="full small muted" style="margin:0">${fd.dirty ? `<b>Formë e papërfunduar e këtij turni:</b> vlerat mbeten këtu edhe kur shkon te një ekran tjetër. ${N("new")} ` : ""}Ruhet me <b>${esc(shiftText())}</b> (data operative, jo ora e kalendarit). ${N("new", "turni nga çipi: i ri")}</p></form>`
+      : `<p class="muted">Pa turn dhe datë operative regjistrimi nuk ka ku të shkojë.</p><button class="btn primary" data-a="sheet" data-v="shift">Zgjidh turnin</button>`}
+      ${S.shift ? `<p class="kick" style="margin-top:14px">Në këtë turn: ${units(m)} njësi në ${regs(m.length)}</p>
+        ${m.length ? `<ul class="list">${m.slice(-3).reverse().map((r) => `<li><span class="dot"></span><span style="flex:1">${esc(r.stage)} · ${esc(r.cause)}${r.note ? ` · <span class="muted">${esc(r.note)}</span>` : ""}</span><span class="muted">${r.units}</span></li>`).join("")}</ul>` : `<p class="muted small">Asnjë ende.</p>`}` : ""}</section>`;
+
+    let focus;
+    if (!S.rows.length) focus = `<section class="card"><p class="kick">Fillo këtu</p><h2>Asnjë dëm i regjistruar.</h2><p class="muted">Pas regjistrimit të parë këtu del shkalla e dëmeve, shkaqet kryesore dhe hapi ku të fillosh.</p><button class="btn" data-a="example">Ngarko javën shembull ${demo}</button></section>`;
+    else {
+      const unknown = (group(S.rows, "cause").find((x) => x.key === "E panjohur")?.value || 0) / total;
+      focus = `<section class="card"><p class="kick">Fillo këtu ${N("new", "fjalia ndjek filtrin: e re")}</p><p><b>${esc(problem())}</b></p>
+        ${unknown > 0.15 ? `<p class="small" style="color:var(--warn)">${pct(unknown)} e dëmeve pa shkak të njohur: kontrollo në terren para analizës.</p>` : ""}
+        <p class="kick" style="margin-top:12px">Shkaqet · prek për të filtruar ${N("old")}</p>${bars(group(S.rows, "cause").slice(0, 5), "cause", total)}
+        <p class="kick" style="margin-top:12px">Hapat</p>${bars(group(S.rows, "stage").slice(0, 4), "stage", total)}
+        <p class="kick" style="margin-top:12px">Turnet</p>${bars(group(S.rows, "shift"), "shift", total)}
+        <p class="small muted" style="margin:8px 0 0">Përqindjet janë pjesë e gjithë periudhës. Një filtër në të njëjtën kohë, si te mjeti sot.</p></section>`;
+    }
+
+    let next = "";
+    if (S.rows.length) {
+      const rec = S.phase === "end" ? "handover" : S.pick?.value === "E panjohur" ? "floor" : S.pick?.field === "cause" ? "action" : S.pick ? "whys" : "";
+      const b = (kind, label) => `<button class="btn ${rec === kind ? "rec" : ""}" data-a="dest" data-v="${kind}">${label}${rec === kind ? " · sugjeruar" : ""}</button>`;
+      next = `<section class="next"><p class="kick">Hapi tjetër, sipas situatës ${N("new", "shiriti: i ri · kalimet: ekzistojnë")}</p><div class="row">
+        ${b("action", S.pick ? `Veprim për ${esc(S.pick.value)}` : "Veprim për periudhën")}${b("whys", "Pse? (5 Whys)")}${b("floor", "Kontroll në terren")}${b("chart", "Zhurmë apo ndryshim?")}${b("pareto", "Për mbledhjen (Pareto)")}${b("handover", "Çështje në dorëzim")}</div>
+        <p class="carry">Mbart: ${scope().map((t) => `<b>${esc(t)}</b>`).join(" · ")}</p></section>`;
+    }
+    const shown = R.slice(-7).reverse(); if (S.hl && !shown.includes(S.hl) && S.rows.includes(S.hl)) shown.unshift(S.hl);
+    const log = S.rows.length ? `<section class="card"><p class="kick">Regjistri${S.pick ? ` · ${esc(S.pick.value)}` : ""} · ${R.length} nga ${S.rows.length}</p><div class="tw"><table>
+      <tr><th>Data</th><th>Turni</th><th>Hapi</th><th>Shkaku</th><th class="num">Njësi</th><th></th></tr>
+      ${shown.map((r) => `<tr class="${r === S.hl ? "hl" : ""}"><td>${dayLabel(r.date)}</td><td>${r.shift}</td><td>${esc(r.stage)}</td><td>${esc(r.cause)}</td><td class="num">${r.units}</td>
+        <td>${r === S.hl ? `<span class="small">burimi i veprimit</span>` : `<button class="mini" data-a="rowaction" data-v="${S.all.indexOf(r)}">Veprim</button>`}</td></tr>`).join("")}</table></div>
+      <p class="small muted" style="margin:8px 0 0">Veprim për një rresht të vetëm, për një dëm të rëndë. ${N("new")}</p></section>` : "";
+    const up = S.pick || S.phase === "end";
+    return `${banner()}${midnight()}${head}${verifyCard()}${up ? next : ""}<div class="grid2 ${S.pick ? "an" : ""}">${form}${focus}</div>${up ? "" : next}${log}`;
+  };
+
+  // ---- Ekranet e mbërritjes (demonstrime) ----
+  const DEST = {
+    action: { short: "Veprim i ri", title: "Lista e veprimeve · veprim i ri", extra: ["Titulli i veprimit", "Burimi i veprimit", "Përparësia: e lartë"], note: N("old", "kalimi ekziston · burimi i plotë: i ri") },
+    whys: { short: "5 Whys", title: "5 Whys", extra: ["Fjalia e problemit"], note: N("old", "kalimi ekziston · filtri: i ri") },
+    floor: { short: "Terreni", title: "Kontrolli në terren", extra: ["Fjalia e problemit"], note: N("old", "lista ekziston në faqe") },
+    chart: { short: "Karta", title: "Karta e kontrollit", extra: ["Seria ditore"], note: N("old", "kalimi ekziston") },
+    pareto: { short: "Pareto", title: "Pareto 80/20", extra: ["Tabela e shkaqeve ose e hapave"], note: N("old", "kalimi ekziston") },
+    handover: { short: "Dorëzimi", title: "Dorëzimi i turnit", extra: [], note: N("old", "numrat mbushen vetë sot") },
+  };
+  const destBody = () => {
+    const d = S.dest, R = d.rows, p = d.problem;
+    if (d.kind === "action") return `<div class="field">Titulli<input value="${esc(d.title)}" readonly></div>
+      <div class="field" style="margin-top:10px">Burimi (ruhet me veprimin) ${N("new")}<input value="${esc(srcText(d.src))}" readonly></div>
+      <p class="small muted" style="margin:4px 0 0">Ruhet si: <code>${esc(srcData(d.src))}</code></p>
+      <div class="grid2" style="margin-top:10px"><div class="field">Përgjegjësi<input placeholder="Kush?" value="${esc(keep("a-owner"))}" data-keep="a-owner"></div><div class="field">Afati<input value="18 nën" readonly></div></div>
+      <div class="field" style="margin-top:10px">Si kontrollohet<input value="${d.src.kind === "row" ? "Asnjë dëm i të njëjtit lloj në 7 ditët pas afatit" : "Shkalla e dëmeve për të njëjtën fushë, 7 ditë pas afatit"}" readonly></div>
+      <div class="row" style="margin-top:12px"><button class="btn primary" data-a="saveaction">Ruaj veprimin</button></div>`;
+    if (d.kind === "whys") return `<div class="field">Problemi (mbërrin i mbushur)<input value="${esc(p)}" readonly></div>
+      <ol class="steps" style="margin-top:10px">${[1, 2, 3].map(() => `<li><span class="muted">Pse? …</span></li>`).join("")}</ol>
+      <p class="small muted">Nga këtu fleta vazhdon te një veprim ose te një çështje në dorëzim, me kundërmasën, shkakun rrënjë, përgjegjësin dhe afatin. ${N("old")}</p>`;
+    if (d.kind === "floor") return `<p><b>${esc(p)}</b></p><ol class="steps"><li><span>Shko te hapi ku gjendet më shumë dëm dhe shiko tre raste me sy</span></li><li><span>Pyet ekipin çfarë ndryshoi këtë javë</span></li><li><span>Kthehu dhe plotëso shkakun te regjistrimet “E panjohur”</span></li></ol>`;
+    if (d.kind === "chart") { const days = group(R, "date").sort((a, b) => a.key.localeCompare(b.key)), max = Math.max(...days.map((x) => x.value), 1), mean = units(R) / Math.max(days.length, 1);
+      const x = (i) => 20 + i * (300 / Math.max(days.length - 1, 1)), y = (v) => 110 - (v / max) * 90;
+      return `<svg viewBox="0 0 340 130" role="img" aria-label="Dëmet për ditë" style="width:100%;max-width:520px"><line x1="20" x2="320" y1="${y(mean)}" y2="${y(mean)}" stroke="currentColor" stroke-dasharray="4 4" opacity=".4"/>
+        <polyline points="${days.map((v, i) => `${x(i)},${y(v.value)}`).join(" ")}" fill="none" stroke="var(--blue)" stroke-width="2.5"/>${days.map((v, i) => `<circle cx="${x(i)}" cy="${y(v.value)}" r="3.5" fill="var(--blue)"/>`).join("")}</svg>
+        <p class="small muted">${days.length} ditë me dëme, mesatarja ${mean.toFixed(1).replace(".", ",")} në ditë. Karta e vërtetë shton kufijtë e kontrollit dhe rregullat.</p>`; }
+    if (d.kind === "pareto") { const f = d.pick?.field === "cause" ? "stage" : "cause", g = group(R, f), t = units(R); let cum = 0;
+      return `<div class="tw"><table><tr><th>${FIELD[f]}</th><th class="num">Njësi</th><th class="num">Pjesa e ${t}</th><th class="num">Kumulative</th></tr>
+        ${g.map((v) => { cum += v.value; return `<tr><td>${esc(v.key)}</td><td class="num">${v.value}</td><td class="num">${pct(v.value / t)}</td><td class="num">${pct(cum / t)}</td></tr>`; }).join("")}</table></div>`; }
+    if (!S.shift) return `<p class="muted">Dorëzimi i takon një turni. Zgjidh turnin dhe datën operative.</p><button class="btn primary" data-a="sheet" data-v="shift">Zgjidh turnin</button>`;
+    const m = mine(), h = draft().ho;
+    return `<p class="small muted">Dorëzimi i <b>${esc(shiftText())}</b>. Ruhet me këtë turn dhe nuk kalon te një turn tjetër.</p>
+      <div class="stats"><div><b>${units(m)}</b><span>Dëme · nga regjistri</span></div>${S.all.length ? c().other.map(([v, l]) => `<div><b>${v}</b><span>${l} ${demo}</span></div>`).join("") : ""}</div>
+      ${h.issue ? `<div class="field" style="margin-top:12px">Çështje e hapur në dorëzim<input value="${esc(h.issue)}" readonly></div><div class="row" style="margin-top:6px"><button class="mini" data-a="hoissuedrop">Hiqe çështjen</button></div>`
+        : d.from === "dmg" && p ? `<div class="field" style="margin-top:12px">Çështje e propozuar nga Kontrolli i dëmeve ${N("new")}<input value="${esc(p)}" readonly></div><div class="row" style="margin-top:6px"><button class="btn" data-a="hoissue">Shtoje te dorëzimi</button></div>` : ""}
+      <div class="grid2" style="margin-top:10px"><div class="field">Përgjegjësi<input placeholder="Kush e merr?" value="${esc(h.owner || "")}" data-ho="owner"></div><div class="field">Deri kur<input placeholder="Ora ose data" value="${esc(h.due || "")}" data-ho="due"></div></div>
+      <div class="field" style="margin-top:10px">Shënim për turnin tjetër<input value="${esc(h.note || "")}" data-ho="note"></div>
+      <p class="small" style="margin-top:10px">Gjendja e dorëzimit: <b data-ho-state>${HO[hoState()]}</b>.</p>
+      <div class="row"><button class="btn primary" data-a="hosend">Dërgo te turni tjetër ${demo}</button></div>`;
+  };
+  const dest = () => `${banner()}<section class="card"><p class="kick">Ekran demonstrimi ${demo}</p><h2>${DEST[S.dest.kind].title}</h2>
+    <p class="muted small">Tregon vetëm çfarë mbërrin nga burimi. Mjeti i vërtetë ekziston dhe nuk është rindërtuar këtu.</p>${destBody()}</section>`;
+
+  // ---- Veprimet ----
+  const STATUS = { open: "E hapur", done: "Kryer, pa verifikim", verified: "E verifikuar" };
+  const actions = () => `${banner()}<div class="head"><h1>Veprimet</h1><span class="chip">${openCount()} të hapura</span></div>
+    ${S.actions.length ? `<section class="card"><ul class="list">${S.actions.map((a) => `<li style="flex-wrap:wrap"><span class="dot ${a.status === "verified" ? "ok" : a.late ? "bad" : a.status === "done" ? "warn" : ""}"></span>
+      <span style="flex:1;min-width:200px"><b>${esc(a.title)}</b><br><span class="small muted">${esc(a.owner)} · afati ${esc(a.due)}${a.late ? " · e vonuar" : ""} · ${STATUS[a.status]}${a.result ? ` · ${esc(a.result)}` : ""}</span><br>
+      <span class="small muted">Nga: ${esc(srcText(a.src))}</span>${a.src.kind === "handover" ? "" : `<br><code class="small muted">${esc(srcData(a.src))}</code>`}</span>
+      ${a.src.kind === "handover" ? `<button class="mini" data-a="demo" data-v="Hap dorëzimin nga erdhi ky veprim.">Hap burimin ${demo}</button>`
+        : `<button class="mini" data-a="source" data-v="${a.id}">${a.status === "done" ? "Verifiko para/pas" : "Hap burimin"}</button>${N("new")}`}</li>`).join("")}</ul></section>`
+      : `<section class="card"><h2>Asnjë veprim.</h2><p class="muted">Veprimet vijnë nga mjetet: një kundërmasë nga Kontrolli i dëmeve, një çështje nga dorëzimi.</p></section>`}
+    <p class="small muted">Lista e përbashkët e veprimeve ekziston. Të reja janë: burimi i plotë (pa filtër, me filtër ose një rresht), lidhja “Hap burimin” dhe verifikimi para/pas.</p>`;
+
+  // ---- Fletët ----
+  const sheet = () => {
+    const wrap = (title, body) => `<div class="sheet" data-a="closesheet"><div data-stop><h2>${title}</h2>${body}<button class="btn" data-a="closesheet">Mbyll dritaren</button></div></div>`;
+    if (S.sheet === "shift") return wrap("Turni dhe data operative", `<p class="small muted" style="margin:0">Zgjidhen shprehimisht dhe nuk ndryshojnë vetë në mesnatë. Turni i natës i 11 nëntorit mbetet 11 nëntor edhe në orën 02:00.</p>
+      <p class="small" style="margin:0">Ora e simuluar tani: <b>${clockLabel()}</b>. Data operative nuk e ndjek vetë.</p>
+      ${S.sheetMsg ? `<p class="small over" style="margin:0">${esc(S.sheetMsg)}</p>` : ""}
+      <div class="field">Data operative<input type="date" value="${S.opDate}" data-opdate></div>
+      <div class="row">${SHIFTS.map((s) => `<button class="btn ${S.shift === s ? "rec" : ""}" data-a="setshift" data-v="${s}">${s}</button>`).join("")}</div>`);
+    if (S.sheet === "plus") return wrap("Regjistro", `<p class="small muted" style="margin:0">Çdo zgjedhje hap formën ekzistuese të mjetit të vet, gati për shkrim. Asgjë nuk regjistrohet nga këtu.</p>
+      ${c().plus.map(([label, tool, real]) => `<button class="btn opt" data-a="${real ? "plusgo" : "demo"}" data-v="Hap formën ekzistuese te ${esc(tool)}.">${esc(label)}<span class="small muted">${esc(tool)}${real && S.shift && draft().form.dirty ? " · e papërfunduar" : ""} ${real ? "" : demo}</span></button>`).join("")}`);
+    if (S.sheet === "more") return wrap("Stiven Catalyst", `<p class="small muted" style="margin:0">“Sot” është hyrja e punës; pjesa tjetër e faqes mbetet një prekje larg. Këto lidhje çojnë te faqet që ekzistojnë.</p>
+      ${[["Të gjitha mjetet", "59 mjete, sipas rolit"], ["Shift Pulse", "turni në një pamje"], ["Signals", "gjithçka që kërkon vëmendje"], ["Ese dhe reflektime", "leximi"], ["Udhëzuesi i mjeteve", "si përdoret secili"], ["Kryefaqja", "Stiven Catalyst"]]
+        .map(([label, sub]) => `<button class="btn opt" data-a="demo" data-v="Hap “${label}” në faqen ekzistuese.">${label}<span class="small muted">${sub} ${demo}</span></button>`).join("")}`);
+    if (S.sheet === "rec") { const r = S.closedList[S.rec], row = (a, b) => `<dt>${a}</dt><dd>${b}</dd>`;
+      return wrap(`Dorëzimi i ${esc(r.shift)} · ${dayLabel(r.date)}`, `<p class="small muted" style="margin:0">Siç u ruajt kur u mbyll turni. Vetëm për lexim.</p><dl class="dl">
+        ${row("Data operative", `${dayLabel(r.date)} <code class="small muted">${r.date}</code>`)}${row("Turni", esc(r.shift))}${row("Mbyllur", `${r.closedAt} ${demo}`)}
+        ${row("Gjendja", `<b>${HO[r.state]}</b>`)}${row("Dëme në turn", `${r.dmg} njësi në ${regs(r.regs)}`)}
+        ${row("Përgjegjësi", esc(r.ho.owner) || "–")}${row("Deri kur", esc(r.ho.due) || "–")}${row("Shënimi", esc(r.ho.note) || "–")}${row("Çështja e hapur", esc(r.ho.issue) || "–")}
+        ${r.form ? row("Formë e papërfunduar", `${esc(r.form)} (nuk u regjistrua)`) : ""}</dl>`); }
+    if (S.sheet === "close") { const ho = hoState(), fd = draft().form;
+      return wrap(`Mbyll turnin ${esc(shiftText())}`, `<p style="margin:0">Dorëzimi: <b class="${ho === "demo" ? "" : "over"}">${HO[ho]}</b>.</p>
+        ${fd.dirty ? `<p class="small over" style="margin:0">Ke edhe një formë regjistrimi të papërfunduar për këtë turn (${esc(formText(fd))}). Ajo ruhet si draft, por nuk regjistrohet.</p>` : ""}
+        <p class="small muted" style="margin:0">Mbyllja nuk shkruan dhe nuk dërgon dorëzim; përmbajtja e tij ruhet me turnin ashtu siç është. ${ho === "demo" ? "Në këtë prototip dërgimi është vetëm demonstrim." : "Turni tjetër nuk merr asgjë nga kjo mbyllje."}</p>
+        ${ho === "demo" ? "" : `<button class="btn primary" data-a="dest" data-v="handover">${ho === "none" ? "Shkruaj dorëzimin" : "Kthehu te dorëzimi"}</button>`}
+        <button class="btn ${ho === "demo" ? "primary" : ""}" data-a="closenow">${ho === "demo" ? "Mbyll turnin" : "Mbyll turnin pa e dërguar dorëzimin"}</button>`); }
+    return "";
+  };
+
+  const app = () => `${top()}<main class="screen" data-screen>${S.screen === "sot" ? sot() : S.screen === "dmg" ? dmg() : S.screen === "actions" ? actions() : dest()}</main>
+    <nav class="tabbar" aria-label="Gjithmonë të dukshme">${navButtons()}</nav>${sheet()}${S.toast ? `<div class="toast" role="status"><b>Demonstrim.</b> ${esc(S.toast)}</div>` : ""}`;
+
+  let lastScreen = "", toastTimer = 0;
+  const render = (focusForm) => {
+    const key = `${S.screen}:${S.dest?.kind || ""}`, bare = S.panel === "off";
+    const view = bare ? (window.innerWidth >= 900 ? "desktop" : "phone") : S.view;
+    document.body.classList.toggle("bare", bare);
+    document.querySelector("[data-stage]").className = `stage ${view === "both" ? "" : `only-${view}`}`;
+    document.querySelectorAll("[data-frame]").forEach((f) => {
+      const y = f.querySelector("[data-screen]")?.scrollTop || 0;
+      f.innerHTML = app(); f.classList.toggle("notes", S.notes === "on");
+      if (key === lastScreen) f.querySelector("[data-screen]").scrollTop = y;
+    });
+    lastScreen = key;
+    document.querySelectorAll("[data-seg]").forEach((seg) => seg.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(S[seg.dataset.seg] === b.dataset.v))));
+    document.querySelector("[data-scen-note]").textContent = SCEN_NOTES[S.scen];
+    if (focusForm) [...document.querySelectorAll("[data-entry] select")].find((el) => el.offsetParent)?.focus();
+  };
+  const toast = (text) => { S.toast = text; clearTimeout(toastTimer); toastTimer = setTimeout(() => { S.toast = ""; render(); }, 4200); };
+  const here = () => ({ screen: S.screen, pick: S.pick, verify: S.verify, dest: S.dest, arrive: S.arrive, tab: S.tab, hl: S.hl, period: S.period });
+  const goDest = (kind, more = {}) => {
+    if (S.screen === "dest" && S.dest.kind === kind) { S.sheet = null; return; }
+    const from = S.screen, inDmg = from === "dmg" && S.rows.length, back = here();
+    const carry = kind === "handover" ? [`Data operative: ${S.shift ? dayLabel(S.opDate) : "pa zgjedhur"}`, `Turni: ${S.shift || "pa zgjedhur"}`, `Dëme në turn: ${units(mine())} njësi`, ...(inDmg ? ["Çështja: fjalia e problemit", `Fusha e çështjes: ${S.pick ? `${FIELD[S.pick.field]} = ${S.pick.value}` : "pa filtër"} · ${span()}`] : [])]
+      : [...(more.carry || scope()), ...DEST[kind].extra];
+    S.dest = { kind, from, rows: inDmg ? filtered() : S.rows, pick: S.pick, problem: more.problem ?? (inDmg ? problem() : ""), title: more.title || `Kundërmasë për: ${problem()}`,
+      src: { ...(more.src || (S.pick ? { kind: "filter", pick: S.pick } : { kind: "period" })), from: per().from, to: per().to } };
+    S.arrive = { from: SRC[from] || "Sot", carry, back, note: DEST[kind].note };
+    S.screen = "dest"; S.sheet = null;
+  };
+
+  const ACT = {
+    go: (v) => { S.screen = v; S.arrive = null; S.verify = null; S.hl = null; S.period = null; S.sheet = null; S.tab = "puno"; },
+    sheet: (v) => { S.sheet = v; S.sheetMsg = ""; }, closesheet: () => { S.sheet = null; },
+    rec: (v) => { S.rec = Number(v); S.sheet = "rec"; },
+    curperiod: () => { S.period = null; S.verify = null; S.hl = null; },
+    demo: (v) => { S.sheet = null; toast(v); },
+    plusgo: () => { S.sheet = null; S.screen = "dmg"; S.tab = "puno"; S.arrive = null; S.verify = null; S.period = null; return true; },
+    phase: (v) => { S.phase = v; },
+    setshift: (v, el) => { const d = el.closest("[data-stop]").querySelector("[data-opdate]").value || S.opDate;
+      if (isClosed(keyOf(d, v))) { S.sheetMsg = `${v} · ${dayLabel(d)} është mbyllur. Një turn i mbyllur nuk rihapet; zgjidh një tjetër.`; return; }
+      const moved = S.shift && keyOf(d, v) !== key(); S.opDate = d; S.shift = v; S.period = null; if (S.closed || moved) S.phase = "start"; S.closed = false; S.sheet = null; },
+    example: () => { S.all = S.all.concat(toRows(PREV), toRows(BASE)); },
+    draftback: (v) => { const [d, sh] = v.split("|"); S.opDate = d; S.shift = sh; S.period = null; return true; },
+    draftmove: (v) => { if (draft().form.dirty) return; draft().form = S.drafts[v].form; S.drafts[v].form = {}; return true; },
+    draftdrop: (v) => { S.drafts[v].form = {}; },
+    hoissue: () => { draft().ho.issue = S.dest.problem; }, hoissuedrop: () => { delete draft().ho.issue; },
+    pick: (v, el) => { const f = el.dataset.f; S.pick = S.pick?.field === f && S.pick.value === v ? null : { field: f, value: v }; S.hl = null; },
+    clear: () => { S.pick = null; S.verify = null; }, tab: (v) => { S.tab = v; },
+    discard: () => { draft().form = {}; },
+    signal: (v) => { const back = here(); if (v === "dmg") { S.screen = "dmg"; S.pick = null; S.period = null; S.arrive = { from: "Sot", carry: ["Sinjali (tekst shembull): dëmet mbi objektiv", ...scope(null).slice(0, 4)], back, note: N("new", "kalimi nga sinjali: i ri") }; }
+      else { S.screen = "actions"; S.arrive = { from: "Sot", carry: [`Sinjali: ${S.actions.filter((a) => a.late && a.status === "open").length} veprime të vonuara`], back, note: N("new") }; } },
+    dest: (v) => goDest(v),
+    rowaction: (v) => { const r = S.all[Number(v)]; goDest("action", { title: `Kundërmasë për: dëm te ${r.stage}, ${r.cause.toLowerCase()} (${dayLabel(r.date)}, ${r.shift})`, problem: "", src: { kind: "row", row: r },
+      carry: ["Një rresht i vetëm, jo periudha", `Data: ${dayLabel(r.date)}`, `Turni: ${r.shift}`, `Hapi: ${r.stage}`, `Shkaku: ${r.cause}`, `Njësi: ${r.units}`] }); },
+    saveaction: () => { const d = S.dest;
+      S.actions.unshift({ id: Date.now(), title: d.title.slice(0, 160), owner: keep("a-owner").trim() || "pa përgjegjës", due: "18 nën", status: "open", late: false, src: d.src });
+      delete S.keep["a-owner"]; S.arrive = { ...S.arrive, carry: ["Veprimi u ruajt", `Burimi: ${srcText(d.src)}`] }; S.screen = "actions"; },
+    source: (v) => { const a = S.actions.find((x) => String(x.id) === v), s = a.src, back = here(); S.screen = "dmg"; S.tab = "puno";
+      const def = defPeriod(), same = def.from === s.from && def.to === s.to;
+      S.period = same ? null : { from: s.from, to: s.to }; S.pick = s.kind === "filter" ? s.pick : null; S.hl = s.kind === "row" ? s.row : null; S.verify = a.status === "done" && s.kind === "filter" ? a.id : null;
+      S.arrive = { from: "Veprimet", back, note: N("new"), carry: [`Veprimi: ${a.title}`, `Periudha e ruajtur: ${pLabel(s)} (${s.from} → ${s.to})${same ? ", e njëjtë me të sotmen" : ""}`,
+        `Filtri i ruajtur: ${s.kind === "filter" ? `${FIELD[s.pick.field]} = ${s.pick.value}` : "asnjë"}`, ...(s.kind === "row" ? [`Rreshti i shënuar: ${rowText(s.row)}`] : []), ...(S.verify ? ["Krahasimi: 7 ditët pas periudhës së ruajtur"] : [])] }; },
+    verified: (v) => { const a = S.actions.find((x) => x.id === S.verify); if (a) { a.status = "verified"; a.result = v; } S.verify = null; S.screen = "actions"; S.arrive = null; },
+    hosend: () => { draft().ho.demoSnap = JSON.stringify(hoContent()); toast("Asgjë nuk u dërgua. Te mjeti i vërtetë dorëzimi del si lidhje e koduar, kod QR ose skedar."); },
+    closenow: () => { const m = mine(), fd = draft().form;
+      S.closedList.push({ shift: S.shift, date: S.opDate, closedAt: clockLabel(), state: hoState(), ho: hoContent(), dmg: units(m), regs: m.length, form: fd.dirty ? formText(fd) : "" });
+      draft().ho = {}; S.period = null;
+      S.closed = true; S.shift = ""; S.phase = "start"; S.sheet = null; S.screen = "sot"; S.arrive = null; },
+    back: () => { Object.assign(S, S.arrive.back); },
+  };
+
+  document.addEventListener("click", (e) => {
+    const panel = e.target.closest("[data-panel]");
+    if (panel) { S.panel = panel.dataset.panel; render(); return; }
+    const seg = e.target.closest("[data-seg] button");
+    if (seg) { const name = seg.parentElement.dataset.seg; S[name] = seg.dataset.v; if (name === "scen" || name === "ctx") reset(); render(); return; }
+    const el = e.target.closest("[data-a]"); if (!el) return;
+    if (el.dataset.a === "closesheet" && e.target.closest("[data-stop]") && !e.target.closest("button")) return;
+    const focus = ACT[el.dataset.a]?.(el.dataset.v, el); render(focus === true);
+  });
+  // Çdo fushë e shënuar mban vlerën e vet gjatë navigimit; asnjë ridizajnim gjatë shkrimit.
+  const remember = (e) => { const el = e.target.closest?.("[data-keep],[data-form],[data-ho]"); if (!el) return;
+    if (el.dataset.keep) S.keep[el.dataset.keep] = el.value;
+    else if (!S.shift) return;
+    else if (el.dataset.form) { const f = draft().form; f[el.dataset.form] = el.value; f.dirty = true; }
+    else { draft().ho[el.dataset.ho] = el.value; document.querySelectorAll("[data-ho-state]").forEach((b) => { b.textContent = HO[hoState()]; }); } };
+  document.addEventListener("input", remember); document.addEventListener("change", remember);
+  document.addEventListener("submit", (e) => {
+    const f = e.target.closest("[data-entry]"); if (!f) return; e.preventDefault();
+    const n = Math.max(1, Math.min(999, Math.round(Number(f.elements.units.value) || 1)));
+    S.all.push({ date: S.opDate, shift: S.shift, stage: f.elements.stage.value, cause: f.elements.cause.value, units: n, note: f.elements.note.value.trim() });
+    draft().form = { stage: f.elements.stage.value, cause: f.elements.cause.value };
+    render(true);
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && S.sheet) { S.sheet = null; render(); } });
+  window.addEventListener("resize", () => { if (S.panel === "off") render(); });
+
+  // #panel=0&scen=empty&ctx=ho hap prototipin drejt në një gjendje.
+  const hash = new URLSearchParams(location.hash.slice(1));
+  if (SCEN_NOTES[hash.get("scen")]) S.scen = hash.get("scen");
+  if (CTX[hash.get("ctx")]) S.ctx = hash.get("ctx");
+  if (hash.get("panel") === "0") S.panel = "off";
+  S.view = window.innerWidth < 960 ? "phone" : window.innerWidth >= 1500 ? "both" : "desktop";
+  reset(); render();
+})();
+</script>
+</body>
+</html>
