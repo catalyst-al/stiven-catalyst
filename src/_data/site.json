@@ -16,7 +16,7 @@
     "hiddenFields": { "ml-submit": "1", "anticsrf": "true" }
   },
   "analytics": {
-    "cloudflareToken": "51fb88e35e624e8bb98d558b7293a446"
+    "cloudflareToken": ""
   },
   "sync": {
     "endpoint": "https://stiven-catalyst-sync.stivenjanaqi1.workers.dev"
