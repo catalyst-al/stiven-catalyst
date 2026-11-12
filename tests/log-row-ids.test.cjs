@@ -95,3 +95,50 @@ test('team sync: a device that keeps the id has the row as the team has it; a co
   assert.equal(merged.length, 1);
   assert.ok(!('id' in merged[0]), 'which is why the id is kept before any page writes one');
 });
+
+// The logs have no way to edit a row: a row is added, pasted, removed (with an undo) or cleared with the whole log.
+// What else writes the log is a setting of the page, saved with the rows as they are.
+test('removing a row and undoing it puts the same row back, id and all, and the others keep theirs', async () => {
+  const stored = { rows: [row({ id: 'r-1' }), row({ id: 'r-2', stage: 'Picking' }), row({ stage: 'Packing' })] };
+  const w = openTool('damage-control', { storage: { 'sc-damage-control': stored }, now: NOW });
+  await settle(w);
+  const ids = () => keep(w)['sc-damage-control'].rows.map((r) => r.id || '');
+  const target = [...w.document.querySelectorAll('[data-remove]')].find((button) => keep(w)['sc-damage-control'].rows[Number(button.dataset.remove)].id === 'r-1');
+  click(w, target);
+  await settle(w);
+  assert.deepEqual(ids(), ['r-2', '']);
+  click(w, w.document.querySelector('[data-log-status] .dl-undo'));
+  await settle(w);
+  assert.deepEqual(ids(), ['r-1', 'r-2', ''], 'back in its place');
+  assert.deepEqual(keep(w)['sc-damage-control'].rows[0], stored.rows[0], 'the very row');
+});
+
+test('a setting of the log changed and saved leaves every row as it was', async () => {
+  const stored = { rows: [row({ id: 'r-1' }), row({ stage: 'Picking' })] };
+  const w = openTool('damage-control', { storage: { 'sc-damage-control': stored }, now: NOW });
+  await settle(w);
+  const volume = w.document.querySelector('[data-defect-log] [name="volume"]');
+  volume.value = '4000';
+  volume.dispatchEvent(new w.Event('input', { bubbles: true }));
+  await settle(w, 400);
+  const saved = keep(w)['sc-damage-control'];
+  assert.equal(String(saved.volume), '4000', 'the setting was saved');
+  assert.deepEqual(saved.rows, stored.rows);
+});
+
+test('the work file carries the id: saved here, opened in another browser, kept through a visit there', async () => {
+  const stored = { rows: [row({ id: 'r-1' }), row({ stage: 'Picking' })] };
+  const first = openTool('damage-control', { storage: { 'sc-damage-control': stored }, now: NOW });
+  await settle(first);
+  await addEntry(first);
+  // The file as work-backup.js writes and reads it.
+  const box = new JSDOM('<html lang="en"><body></body></html>', { url: 'https://example.test/tools.html', runScripts: 'outside-only' }).window;
+  for (const [key, value] of Object.entries(keep(first))) box.localStorage.setItem(key, JSON.stringify(value));
+  for (const file of ['storage-guard', 'work-backup']) box.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+  const file = box.WorkBackup.readBackup(JSON.stringify(box.WorkBackup.makeBackup(box.localStorage)));
+  assert.ok(file, 'the file is sound');
+  const second = openTool('damage-control', { storage: { 'sc-damage-control': JSON.parse(file.items['sc-damage-control']) }, now: NOW });
+  await settle(second);
+  await addEntry(second);
+  assert.deepEqual(keep(second)['sc-damage-control'].rows.map((r) => r.id || ''), ['r-1', '', '', ''], 'the id is there, and no row was given one');
+});
