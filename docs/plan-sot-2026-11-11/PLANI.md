@@ -1,6 +1,6 @@
 # Plani i integrimit: “Sot” dhe “Kontrolli i dëmeve”
 
-**Gjendja:** plan i miratuar si bazë e integrimit më 11 nëntor 2026. Integrimi në repo nuk ka nisur.
+**Gjendja:** plan i miratuar si bazë e integrimit më 11 nëntor 2026. Më 12 nëntor 2026 u bënë pjesët 1a dhe 1b të hapit 1, pa asnjë ndryshim të dukshëm në faqe (pjesa 7). Hapat e tjerë nuk kanë nisur.
 **Saktësimi i fundit:** kufizimi i pilotit dhe garancia “vetëm një herë” (pjesët 3.3–3.6), me kriteret e pranimit për hapin 3.
 **Fusha:** piloti për Shefin e turnit. Ndërfaqja e re ndizet fillimisht vetëm te Kontrolli i dëmeve, me hapat dhe shkaqet e magazinës.
 
@@ -15,6 +15,7 @@
 | `prova/dy-drafte-njekohesisht.cjs` | Dy turne me drafte njëkohësisht dhe bllokimi i “Sille këtu”. |
 | `prova/dy-pajisje.cjs` | Dy pajisje të pasinkronizuara që nisin të njëjtin turn, me bashkimin e vërtetë të sinkronizimit (`src/js/team-sync.js`). |
 | `prova/sinkronizimi-pa-dorezimin.cjs` | Sinkronizim i plotë mes dy pajisjeve, me dorëzimin jashtë dhe dëmet brenda. Kodi i vërtetë, server i rremë. |
+| `prova/id-e-rreshtave.cjs` | Çfarë ndryshon te sinkronizimi kur rreshtat e dëmeve kanë `id`, në shtatë raste. Kodi i vërtetë, server i rremë. |
 | `prova/rikthimi-nga-backup.cjs` | Rikthimi nga kopja rezervë para dhe pas mbartjes. Kopja rezervë është kodi i vërtetë; mbartja është model i planit. |
 
 Të gjitha nisen nga rrënja e repo-s, pas `npm ci`, me `node docs/plan-sot-2026-11-11/prova/<emri>.cjs`. Tri të parat hapin prototipin në shfletues me Playwright; tri të tjerat lexojnë kodin e repo-s pa e ndryshuar dhe nuk kanë nevojë për shfletues.
@@ -271,7 +272,7 @@ Rregullat:
 Rreshtat e regjistrit sot nuk kanë `id`, dhe sinkronizimi i njeh rreshtat pa `id` nga përmbajtja e plotë (`mergeRows`).
 
 - **Rreshtat e vjetër nuk marrin `id` me vonesë.** Një `id` e shtuar në një pajisje e ndryshon përmbajtjen; sinkronizimi do ta shihte si rresht të ri dhe do ta dyfishonte.
-- **Rreshtat e rinj** marrin `id` në krijim.
+- **Rreshtat e rinj** do të marrin `id` në krijim, por jo ende: shih 5.1 për kushtin.
 - **Veprim nga një rresht pa `id`:** `origin.row` ruan kopjen e fushave, `id` bosh dhe `twins`, numrin e rreshtave identikë në çastin e krijimit.
 
 “Hap burimin” për një rresht pa `id` kërkon sipas fushave:
@@ -283,6 +284,34 @@ Rreshtat e regjistrit sot nuk kanë `id`, dhe sinkronizimi i njeh rreshtat pa `i
 | Asnjë | Hap periudhën e ruajtur me “rreshti nuk gjendet më”. |
 
 Dublikatat e veprimeve për rreshta pa `id` ndjekin rregullin ekzistues: titull dhe burim i njëjtë.
+
+### 5.1 `id` e rreshtave: çfarë nxori verifikimi
+
+E provuar me sinkronizimin e vërtetë (`prova/id-e-rreshtave.cjs`), me dy pajisje:
+
+| Rasti | Çfarë ndodh |
+| --- | --- |
+| 1. Pa `id`: dy dëme identike në një pajisje | Pajisja tjetër merr vetëm një. |
+| 2. Pa `id`: një rresht fshihet në një pajisje | Kthehet me sinkronizimin tjetër. Fshirja nuk mban. |
+| 3. Me `id`: dy dëme identike | Pajisja tjetër i merr të dy. |
+| 4. Me `id`: një rresht fshihet | Fshihet edhe te pajisja tjetër. |
+| 5. `id` e shtuar me vonesë te një rresht i vjetër | I njëjti dëm del dy herë te të dyja. |
+| 6. Të vjetër pa `id` dhe të rinj me `id`, bashkë | Bashkohen pa dyfishim. |
+| 7. Një pajisje me faqe të vjetër e heq `id`-në | Rreshti mbetet, por `id` humbet te të gjitha pajisjet. |
+
+Çfarë del prej tyre:
+
+- **Rastet 1 dhe 2 janë të meta që ekzistojnë sot**, për çdo ekip që sinkronizon regjistrin e dëmeve, të plotësisë ose të Night Audit. Nuk i shkaktoi ky plan; `id` për rreshtat e rinj i rregullon të dyja.
+- **Rasti 4 është ndryshim sjelljeje**: me `id`, fshirja në një pajisje fshin rreshtin te gjithë ekipi. Është sjellja që kanë sot mjetet me `id` (p.sh. lista e veprimeve).
+- **Rasti 5** është arsyeja pse rreshtat e vjetër nuk marrin `id` me vonesë.
+- **Rasti 7** vendos rendin e daljes. Faqja e sotme e rindërton çdo rresht kur hapet dhe do ta hiqte një `id` që nuk e njeh. Sinkronizimi e lexon këtë si fshirje të `id`-së.
+
+Prandaj shkrimi i `id`-ve del në dy kohë:
+
+1. **Së pari, faqja e mban `id`-në që gjen** dhe nuk shkruan asnjë. Kjo është bërë (hapi 1b).
+2. **Më vonë, faqja shkruan `id` për rreshtat e rinj** (hapi 1c). Vetëm pasi çdo pajisje e ekipit ka marrë versionin e pikës 1. Sa kohë duhet pritur varet nga sa shpejt pajisjet marrin faqen e re, edhe ato që punojnë pa internet; kjo nuk është matur.
+
+Derisa të dalë hapi 1c, çdo veprim nga një rresht përdor rrugën e rreshtave pa `id`: kopjen e fushave dhe `twins`.
 
 ---
 
@@ -308,7 +337,9 @@ Kontrolli i drafteve gjatë rikthimit:
 
 | Hapi | Çfarë sjell | Skedarët kryesorë |
 | --- | --- | --- |
-| 1. Burimi i veprimeve | `origin`, `id` për rreshtat e rinj, rregullat e rreshtave të vjetër. Asnjë ndryshim i dukshëm. | `actions-store.js`, `tool-kit.js`, `docs/DATA-FORMATS.md` |
+| 1a. Burimi i veprimeve · **bërë** | `origin` te lista e veprimeve dhe te shënimi i kalimit, me rregullat e rreshtave pa `id`. Asnjë mjet nuk e dërgon ende. | `actions-store.js`, `tool-kit.js`, `docs/DATA-FORMATS.md`, `tests/action-origin.test.cjs` |
+| 1b. Mbajtja e `id`-së së rreshtit · **bërë** | Tri regjistrat e `defect-log.js` e mbajnë `id`-në që gjejnë dhe nuk shkruajnë asnjë. Rreshti i ngjitur krahasohet pa `id`. | `defect-log.js`, `tool-kit.js`, `tests/log-row-ids.test.cjs` |
+| 1c. Shkrimi i `id`-ve · pret | Rreshtat e rinj marrin `id`. Vetëm pasi çdo pajisje ka versionin e 1b (5.1). | `defect-log.js` |
 | 2. Turni aktiv dhe draftet | Dy çelësat e rinj, rregullat e kopjes rezervë dhe të rikthimit. | modul i ri, `work-backup.js` |
 | 3. Mbyllja e përbashkët | Mbyllje pa dorëzim, pa turn aktiv pas saj, nisje e shprehur, mbartje sipas 3.5, “ndryshuar pas ndarjes”, dorëzimi jashtë sinkronizimit. Kriteret K1–K16. | `shift-handover.js`, `team-sync.js` |
 | 4. Kontrolli i dëmeve | Ndërfaqja e re me çelës vetëm për këtë mjet, vetëm magazina. | `defect-log.njk`, `defect-log.js`, `tool-kit.js`, `damageControl.json` |
@@ -316,7 +347,7 @@ Kontrolli i drafteve gjatë rikthimit:
 | 6. Faqja “Sot” | Faqja e punës, mbi të njëjtën mbyllje. Hyrja te Catalyst. | faqe e re, `families.json`, `signals.js` |
 | 7. Verifikimi para/pas | Krahasimi i periudhës së ruajtur me atë pas veprimit, me vëllimet e vërteta. | `action-tracker.js`, `defect-log.js` |
 
-Hapat 1 dhe 2 nuk varen nga njëri-tjetri. Hapi 3 kërkon hapin 2. Hapat 5 dhe 7 kërkojnë hapat 1 dhe 4.
+Hapat 1 dhe 2 nuk varen nga njëri-tjetri. Hapi 3 kërkon hapin 2. Hapat 5 dhe 7 kërkojnë hapat 1a dhe 4. Hapi 1c nuk bllokon asnjë hap tjetër: pa të, veprimet nga një rresht përdorin kopjen e fushave.
 
 ---
 
@@ -342,6 +373,15 @@ Me skriptet e dosjes `prova/`, në desktop (1366 px) dhe telefon (390 px), me pa
 
 Çfarë **nuk** tregon prototipi: ruajtjen në shfletues, sinkronizimin, kopjen rezervë, tri gjuhët, mbartjen e çështjeve, dhe mjetet e vërteta pas kalimeve (5 Whys, Pareto, karta e kontrollit, dorëzimi janë ekrane demonstrimi).
 
+### Bërë në repo
+
+Në degën `claude/vigilant-pascal-bf9nhn`, pa PR. Të gjitha testet e repo-s kalojnë, bashkë me testet në shfletues për kalimin e veprimeve.
+
+- **1a:** `origin` pranohet vetëm i plotë, shkruhet një herë, udhëton vetëm me shënimin e skedës dhe del i njëjtë pas kopjes rezervë dhe pas sinkronizimit. Një veprim pa `origin` ka formën që kishte.
+- **1b:** `id` e një rreshti mbahet gjatë hapjes dhe ruajtjes në të tria regjistrat. Një `id` e pavlefshme hidhet dhe rreshti mbetet.
+
+Asnjë faqe nuk duket ose sillet ndryshe: asnjë mjet nuk dërgon `origin` dhe asnjë faqe nuk shkruan `id`.
+
 ### Verifikuar në kodin e repo-s
 
 - Identiteti i vendit të punës, renditja e turneve dhe sjellja e dy pajisjeve (pjesa 3).
@@ -355,9 +395,9 @@ Me skriptet e dosjes `prova/`, në desktop (1366 px) dhe telefon (390 px), me pa
 
 | Çfarë | Në cilin hap |
 | --- | --- |
-| `origin` kalon i plotë nëpër shënimin e skedës, listën, sinkronizimin dhe kopjen rezervë. | 1 |
-| Rreshtat e rinj me `id` dhe të vjetrit pa `id` bashkohen pa dyfishim mes dy pajisjeve. | 1 |
-| Tri përfundimet e “Hap burimin” për rreshta pa `id`. | 1, 5 |
+| Sa kohë duhet që çdo pajisje të marrë versionin që e mban `id`-në, para se të dalë 1c. | 1c |
+| Rreshtat e rinj me `id` dhe të vjetrit pa `id` në faqet e vërteta, mes dy pajisjeve. | 1c |
+| Tri përfundimet e “Hap burimin” për rreshta pa `id`. | 5 |
 | Turni aktiv mungon vërtet në kopjen rezervë dhe në sinkronizim; draftet janë në kopjen rezervë dhe mungojnë në sinkronizim. | 2 |
 | Rikthimi i drafteve: forma e gabuar, turni i mbyllur, përplasja me formën në ekran. | 2 |
 | Turni aktiv mes gjuhëve: a ruhet si pozicion në listë apo si fjalë. | 2 |

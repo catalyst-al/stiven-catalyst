@@ -35,6 +35,12 @@
 //   re-inspection's id, date, time, qid, item, answer: pass | fail }), the record of the check that verified or
 //   reopened it; only the re-inspection writes or changes it. Done is a task reported finished; verified is the
 //   defect seen fixed in the room. Actions of older pages without a ref are verified by hand as before.
+// - An action may say where in a log it came from (origin, docs/DATA-FORMATS.md §1): the period as two ISO dates, the
+//   one filter that was on, or the one row. It is kept only whole (originOf): a damaged one is dropped and the action
+//   stays. It is written when the action is made and never changed after (update() keeps the one that is there). It
+//   travels in the hand-off note like the other fields, never in the address. A row that has an id names the action's
+//   ref, so the same row sent again is the same action; a row without an id (a log from before rows had ids) keeps
+//   only its copy of the row, and the rule without a ref holds.
 window.ActionsStore = (() => {
   const KEY = "sc-actions";
   const STATUSES = ["open", "doing", "done", "verified"];
@@ -59,17 +65,59 @@ window.ActionsStore = (() => {
     if (!recheck || !isQid(qid) || !["pass", "fail"].includes(answer)) return null;
     return { recheck, date: isDate(str(value.date)) ? str(value.date) : "", time: isTime(str(value.time)) ? str(value.time) : "", qid, item: str(value.item).slice(0, 300), answer };
   };
+  // Where in a log an action came from: { v: 1, tool, lang, kind: "period" | "filter" | "row", from, to } with, for
+  // "filter", filter: { field: "cause" | "stage" | "shift", value }, and for "row", row: { id, date, shift, stage, cause,
+  // units, twins }: a copy of the row, its id ("" on a row from before rows had ids) and how many rows of the log read
+  // the same when the action was made. Whole or not at all: null for anything else.
+  const ORIGIN_KINDS = ["period", "filter", "row"];
+  const ORIGIN_FIELDS = ["cause", "stage", "shift"];
+  const ORIGIN_LANGS = ["en", "de", "sq"];
+  const originOf = (value) => {
+    if (!isObject(value) || value.v !== 1) return null;
+    const tool = str(value.tool);
+    const lang = str(value.lang);
+    const kind = str(value.kind);
+    const from = str(value.from);
+    const to = str(value.to);
+    if (!/^[a-z0-9-]{1,40}$/.test(tool) || !ORIGIN_LANGS.includes(lang) || !ORIGIN_KINDS.includes(kind) || !isDate(from) || !isDate(to) || from > to) return null;
+    const origin = { v: 1, tool, lang, kind, from, to };
+    if (kind === "filter") {
+      const filter = value.filter;
+      if (!isObject(filter) || !ORIGIN_FIELDS.includes(filter.field) || !str(filter.value)) return null;
+      origin.filter = { field: filter.field, value: str(filter.value).slice(0, 120) };
+    }
+    if (kind === "row") {
+      const row = value.row;
+      if (!isObject(row) || !isDate(str(row.date)) || !Number.isInteger(row.units) || row.units < 1 || row.units > 1000000) return null;
+      origin.row = {
+        id: str(row.id).replace(/[^A-Za-z0-9_-]/g, "").slice(0, 40),
+        date: str(row.date),
+        shift: str(row.shift).slice(0, 120),
+        stage: str(row.stage).slice(0, 120),
+        cause: str(row.cause).slice(0, 120),
+        units: row.units,
+        twins: Number.isInteger(row.twins) && row.twins >= 1 ? Math.min(row.twins, 9999) : 1,
+      };
+    }
+    return origin;
+  };
   // An action a re-inspection verifies: Room Inspection's, naming its defect (ref "<inspection id>|<item id>").
   const byRecheckOnly = (action) => isObject(action) && action.source === "room-inspection" && /^[A-Za-z0-9_-]+\|[a-z]+-\d+$/.test(str(action.ref));
   const clean = (item) => {
     if (!isObject(item) || !str(item.title)) return null;
+    const source = str(item.source).replace(/[^a-z0-9-]/gi, "").slice(0, 40);
+    // The origin is of the tool the action came from, or it is not kept.
+    const found = originOf(item.origin);
+    const origin = found && found.tool === source ? found : null;
+    // The row of a log names the action, when the row has an id: the same row sent again is the same action.
+    const ref = refOf(item.ref) || (origin && origin.kind === "row" ? refOf(origin.row.id) : "");
     return {
       id: str(item.id) || id(),
       title: str(item.title).slice(0, 300),
       detail: str(item.detail).slice(0, 2000),
       owner: str(item.owner).slice(0, 120),
       due: isDate(str(item.due)) ? str(item.due) : "",
-      source: str(item.source).replace(/[^a-z0-9-]/gi, "").slice(0, 40),
+      source,
       check: str(item.check).slice(0, 500),
       area: str(item.area).slice(0, 120),
       priority: PRIORITIES.includes(item.priority) ? item.priority : "Medium",
@@ -78,8 +126,9 @@ window.ActionsStore = (() => {
       closed: isDate(str(item.closed)) ? str(item.closed) : "",
       result: str(item.result).slice(0, 1000),
       ...(caseIdOf(item.caseId) ? { caseId: caseIdOf(item.caseId) } : {}),
-      ...(refOf(item.ref) ? { ref: refOf(item.ref) } : {}),
+      ...(ref ? { ref } : {}),
       ...(proofOf(item.proof) ? { proof: proofOf(item.proof) } : {}),
+      ...(origin ? { origin } : {}),
       ...(item.example === true ? { example: true } : {}),
     };
   };
@@ -163,7 +212,8 @@ window.ActionsStore = (() => {
     if (index < 0) return null;
     const before = rows[index];
     // The proof is the re-inspection's to write; any other caller keeps the one that is there.
-    const next = clean({ ...before, ...(isObject(patch) ? patch : {}), ...(byRecheck ? {} : { proof: before.proof }), id: before.id, created: before.created });
+    // The origin says where the action was made: it stays as it was, like the id and the day it was created.
+    const next = clean({ ...before, ...(isObject(patch) ? patch : {}), ...(byRecheck ? {} : { proof: before.proof }), id: before.id, created: before.created, origin: before.origin });
     if (!next) return null;
     if (next.status === "verified" && !next.result) { lastUpdate = "needs-result"; return null; }
     if ((before.caseId || next.caseId) && (next.status === "verified") !== (before.status === "verified") && !byCase) { lastUpdate = "case-verifies"; return null; }
@@ -230,6 +280,7 @@ window.ActionsStore = (() => {
     const fields = { title: str(action.title) };
     PARAMS.slice(1, -1).forEach((name) => { if (str(action[name])) fields[name] = str(action[name]); });
     if (caseIdOf(action.caseId)) fields.caseId = caseIdOf(action.caseId);
+    if (originOf(action.origin)) fields.origin = originOf(action.origin);
     const h = handoff();
     return h ? h.href(url.href, fields) : `${url.href}#handoff=unsaved`;
   };
@@ -249,6 +300,8 @@ window.ActionsStore = (() => {
       // Read, not yet taken: the note is removed only once the action is saved or refused as a duplicate.
       const note = token === "unsaved" || !h ? null : h.read(token);
       if (note && str(note.title)) incoming = fieldsOf((name) => note[name]); else missing = true;
+      // The origin comes with the note only: a link of the older shape never carried one, and nothing puts it in an address.
+      if (incoming && originOf(note.origin)) incoming.origin = originOf(note.origin);
     }
     const params = new URLSearchParams(url.search);
     if (!incoming && str(params.get("action"))) incoming = fieldsOf((name) => params.get(name === "title" ? "action" : name === "caseId" ? "case" : name));
@@ -319,5 +372,5 @@ window.ActionsStore = (() => {
     return `${lines.map(icsFold).join("\r\n")}\r\n`;
   };
 
-  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, forCase, byRef, byId, byRecheckOnly, trackerUrl, link, linkButton, fromParams, ics, icsText, icsFold, get failed() { return failed; }, get lastAdd() { return lastAdd; }, get lastUpdate() { return lastUpdate; } };
+  return { KEY, STATUSES, PRIORITIES, PARAMS, clean, originOf, list, all, add, addAll, update, remove, restore, replaceAll, isOpen, isOverdue, open, overdue, dueSoon, counts, forCase, byRef, byId, byRecheckOnly, trackerUrl, link, linkButton, fromParams, ics, icsText, icsFold, get failed() { return failed; }, get lastAdd() { return lastAdd; }, get lastUpdate() { return lastUpdate; } };
 })();

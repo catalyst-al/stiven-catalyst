@@ -57,6 +57,11 @@
   state.from = parseDate(state.from);
   state.to = parseDate(state.to);
   state.volumes = cleanVolumes(state.volumes);
+  // A row's id, when it has one: kept as it is, last on the row. This page gives no row an id yet, and a row without one
+  // is never given one (team sync knows such a row by its whole content, docs/DATA-FORMATS.md §1). It is kept so that a
+  // row written with an id by a later version of the page, on another device of the team, is not stripped of it here:
+  // team sync would read the missing id as the row deleted, and the row would lose its id on every device.
+  const rowIdOf = (value) => (typeof value === "string" && /^[A-Za-z0-9_-]{1,40}$/.test(value) ? value : "");
   state.rows = state.rows.filter(isObject).map((row) => {
     const units = Math.round(Number(row.units));
     const cost = Number(row.cost);
@@ -66,6 +71,7 @@
       units: units > 0 ? units : 1,
       cost: row.cost != null && row.cost !== "" && cost >= 0 ? cost : null,
       note: str(row.note),
+      ...(rowIdOf(row.id) ? { id: rowIdOf(row.id) } : {}),
     };
   });
   const save = () => write(KEY, state);
@@ -527,6 +533,8 @@
     removedText: (row) => tx("Removed {count} at {stage}.", { count: plural(row.units, t.one, t.many), stage: row.stage }),
     countText: (rows) => `${entries(rows.length)} · ${plural(rows.reduce((sum, row) => sum + row.units, 0), t.one, t.many)}`,
     importRows,
+    // A pasted row has no id: it is the row already in the log when everything else on it is the same.
+    rowAside: ["id"],
     importText: {
       none: tx("No rows found. Check that {count} are in the sixth column.", { count: t.countShort }),
       done: (added, skipped) => `${tx("Imported {rows}", { rows: plural(added, tx("row"), tx("rows")) })}${skipped ? tx(", skipped {n} without {count}", { n: skipped, count: t.countShort }) : ""}.`,

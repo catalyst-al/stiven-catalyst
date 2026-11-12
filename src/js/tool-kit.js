@@ -951,6 +951,9 @@ window.ToolKit = (() => {
     if (!title) return url.href;
     const fields = { title, source: str(action.source) || source };
     ["detail", "owner", "due", "check", "area", "priority"].forEach((name) => { if (str(action[name]).trim()) fields[name] = str(action[name]).trim(); });
+    // Where in the log the action comes from (js/actions-store.js, originOf): in the note with the rest, checked by the
+    // store that reads it.
+    if (isObject(action.origin)) fields.origin = action.origin;
     return handoffHref(url.href, fields);
   };
   const trackerLink = (label, action, className = "button-secondary") => {
@@ -1149,15 +1152,16 @@ window.ToolKit = (() => {
   };
 
   // The rows of a paste that are not in the log yet: a row equal to one already there, field for field (its example
-  // mark aside), is left out once for each such row, so a paste of two identical events adds two.
-  const rowKey = (row) => JSON.stringify(Object.keys(row).filter((name) => name !== "example").sort().map((name) => [name, row[name] ?? ""]));
-  const newRows = (rows, added) => {
+  // mark aside), is left out once for each such row, so a paste of two identical events adds two. `aside` names the
+  // fields a log keeps on a row that a paste never has (a row's id), left out of the comparison too.
+  const rowKey = (row, aside = []) => JSON.stringify(Object.keys(row).filter((name) => name !== "example" && !aside.includes(name)).sort().map((name) => [name, row[name] ?? ""]));
+  const newRows = (rows, added, aside = []) => {
     const left = new Map();
-    ownRows(rows).forEach((row) => { const k = rowKey(row); left.set(k, (left.get(k) || 0) + 1); });
+    ownRows(rows).forEach((row) => { const k = rowKey(row, aside); left.set(k, (left.get(k) || 0) + 1); });
     const fresh = [];
     let already = 0;
     added.forEach((row) => {
-      const k = rowKey(row);
+      const k = rowKey(row, aside);
       if (left.get(k) > 0) { left.set(k, left.get(k) - 1); already += 1; } else fresh.push(row);
     });
     return { fresh, already };
@@ -1166,7 +1170,7 @@ window.ToolKit = (() => {
   // under a chip that clears it (the result is not filtered here: the tool decides what it filters).
   // firstExample: false when the page should not open on its example even on a first visit (the Daily Board, when other
   // tools already hold the visitor's data).
-  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearExample, clearText, csv, renderResults, results, filter = null, firstExample = true }) => {
+  const logBook = ({ root, key, state, save, paste, cells, removeLabel, removedText, countText, importRows, importText, loadExample, clearExample, clearText, csv, renderResults, results, filter = null, firstExample = true, rowAside = [] }) => {
     const logBody = root.querySelector("[data-log]");
     const logWrap = root.querySelector("[data-log-wrap]");
     const logEmpty = root.querySelector("[data-log-empty]");
@@ -1296,7 +1300,7 @@ window.ToolKit = (() => {
       if (exampleMatches(state)) dropExample();
       // The same rows pasted again (the same export twice, or after a reload) are not counted twice: a pasted row that
       // matches a row already in the log, field for field, is left out, once per matching row (audit T-17).
-      const { fresh, already } = newRows(state.rows, added);
+      const { fresh, already } = newRows(state.rows, added, rowAside);
       if (!fresh.length) {
         flash(importStatus, tx("All {n} rows are already in the log: nothing was added.", { n: int.format(already) }));
         return;

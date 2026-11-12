@@ -65,7 +65,32 @@ caller's `proof` is dropped). A verification sets `closed` to the re-inspection'
 re-inspection's fault that is the checked inspection's own defect (still open, or done and now reopened) is never sent
 as a second action; an item the inspection had not failed, or a defect verified before the check, is a new defect
 sent under the re-inspection's identity (`ri-<re-inspection id>-<item id>`). Actions of older pages without a `ref`
-are verified by hand as before. In `sc-cx-tower` the saved investigations are `cases: [{ id, updated, the
+are verified by hand as before.
+
+An action may also say where in a log it came from, `origin` (`ActionsStore.originOf`; no tool sends one yet, the shape
+is settled before the pages that will): `{ v: 1, tool, lang, kind, from, to }`, `tool` the slug of the log and the same
+as the action's `source` (an origin of another tool is not kept), `lang` the language whose copy of the log it is (`en`,
+`de`, `sq`: each language keeps its own log, and the words of a filter are that language's), `from` and `to` the period
+as two ISO dates, always both, and `kind` one of three. `period`: the whole period, nothing more. `filter`: with
+`filter: { field: "cause" | "stage" | "shift", value }`, the one filter that was on. `row`: with `row: { id, date, shift,
+stage, cause, units, twins }`, a copy of the one row, `twins` how many rows of the log read the same when the action was
+made (1 when the row was alone). An origin is kept whole or not at all: one with another `v`, a date that is not ISO, a
+period backwards, an unknown kind, field or language, or a kind without its part is dropped, and the action stays. It
+is written when the action is made and `update()` never changes it. It travels in the hand-off note with the other
+fields (`sc-action-handoff`), never in an address: a link of the older shape (`?action=…`) carries none. A row with an
+`id` is the action's `ref`, so the same row sent again is the same action in any status. The rows of the logs have no
+`id` today, and a row that has none is never given one later: team sync knows a row without an `id` by its whole
+content, so an `id` added on one device would make it a second row on the others. The three logs of `js/defect-log.js`
+(`sc-damage-control`, `sc-incomplete-control`, `sc-night-audit`) keep the `id` a row already has (letters, digits, `_`
+and `-`, up to 40; anything else is dropped and the row stays), last on the row, and write none yet. The order
+matters: a page that rebuilt a row without its `id` would have team sync read the `id` as deleted on that device, and
+the row would lose it on every device, so pages write ids only once every device of a team runs a version that keeps
+them. A pasted row has no `id` and is the row already in the log when everything else on it is the same. For such a row `row.id` is `""`, no
+`ref` is set and the rule without a `ref` holds (the same open title from the same tool). Opened again from the action,
+a row without an `id` is looked for by the copy of its fields: one match is the row; several are shown as "one of
+these", none chosen; no match opens the period and says the row is no longer there.
+
+In `sc-cx-tower` the saved investigations are `cases: [{ id, updated, the
 case fields (title, status, problem, evidence, where, rootStatus, why1–why5, root, containment, corrective, preventive,
 owner, deadline, verifyMetric, verifyResult), actionId (the row of the station's own actions table), snapshot (metric,
 label, from, to, DSP, Shift, Zone, dim, segment, k, n, source), trackerId (the action in `sc-actions`), verifyFrom (the
