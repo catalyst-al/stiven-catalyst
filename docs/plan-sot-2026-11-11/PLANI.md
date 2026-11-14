@@ -1,6 +1,6 @@
 # Plani i integrimit: “Sot” dhe “Kontrolli i dëmeve”
 
-**Gjendja:** plan i miratuar si bazë e integrimit më 11 nëntor 2026. Më 12 nëntor 2026 u bënë pjesët 1a dhe 1b të hapit 1, pa asnjë ndryshim të dukshëm në faqe (pjesa 7). Hapat e tjerë nuk kanë nisur.
+**Gjendja:** plan i miratuar si bazë e integrimit më 11 nëntor 2026. Bërë deri tani, pa asnjë ndryshim të dukshëm në faqe: pjesët 1a dhe 1b të hapit 1 (12 nëntor) dhe hapi 2 (14 nëntor). Hapi 1c pret. Hapat 3–7 nuk kanë nisur (pjesa 7).
 **Saktësimi i fundit:** kufizimi i pilotit dhe garancia “vetëm një herë” (pjesët 3.3–3.6), me kriteret e pranimit për hapin 3.
 **Fusha:** piloti për Shefin e turnit. Ndërfaqja e re ndizet fillimisht vetëm te Kontrolli i dëmeve, me hapat dhe shkaqet e magazinës.
 
@@ -317,17 +317,66 @@ Derisa të dalë hapi 1c, çdo veprim nga një rresht përdor rrugën e rreshtav
 
 ## 6. Turni aktiv, draftet dhe kopja rezervë
 
-- **Turni aktiv:** çelës që mbaron me `-ui`. Sinkronizimi i anashkalon vetë këta çelësa (`NOT_TOOL` te `team-sync.js`). Shtohet te lista `SKIP` e `work-backup.js`, që të mos hyjë në kopjen rezervë.
-- **Draftet:** çelës tjetër që mbaron me `-ui`, jashtë sinkronizimit. Nuk shtohet te `SKIP`, prandaj hyn në kopjen rezervë.
-- **Çelësi i një drafti:** data operative dhe turni. Një draft për turn.
+Kjo pjesë është bërë (hapi 2). Kodi është te `src/js/shift-context.js`; asnjë faqe nuk e përdor ende për të shfaqur diçka.
 
-Kontrolli i drafteve gjatë rikthimit:
+### 6.1 Çfarë u kontrollua para kodit
 
-- **Forma:** skedari refuzohet kur hyrja e drafteve nuk ka formën e pritur, si për regjistrat sot.
-- **Turni aktiv:** nuk është në skedar. Asnjë draft i rikthyer nuk e aktivizon turnin e vet. Pas rikthimit, turni aktiv mbahet vetëm kur përputhet me dorëzimin aktiv të rikthyer (3.5, K12).
-- **Si shfaqen:** drafti i një turni tjetër del si “formë e papërfunduar nga…”, me “Kthehu”, “Sille” dhe “Hidhe”.
-- **Turn i mbyllur:** drafti i tij nuk ofron “Kthehu”.
-- **Përplasja:** kur drafti i rikthyer i takon turnit aktiv dhe forma në ekran ka punë, rikthimi nuk e mbishkruan. Përdoruesi i sheh të dy dhe zgjedh. Pika e rikthimit e mban gjendjen e mëparshme.
+- **Mjeti dhe gjuha.** Çdo regjistër ka çelësin e vet për çdo gjuhë (`sc-damage-control`, `-de`, `-sq`). Prandaj një draft i takon çelësit ku forma do të shkruajë, jo vetëm mjetit.
+- **Konteksti i punës.** Regjistri i dëmeve është një për shfletues dhe gjuhë; nuk ndahet sipas vendit të punës. Dorëzimi ka shabllon dhe zonë. Prandaj drafti ka edhe një `scope` të lirë, bosh për regjistrat, që dorëzimi ta përdorë në hapin 3.
+- **Turni.** Fjalët e turneve ndryshojnë sipas gjuhës, por renditja është e njëjtë. Turni ruhet si pozicion në listë (`index`) bashkë me gjatësinë e listës (`of`), dhe fjala (`label`) vetëm për t'u shfaqur. Kjo mbyll pyetjen e hapur te pjesa 8.
+- **Kyçja me PIN.** Asgjë nuk shkruhet kur mjetet janë të kyçura, si te çdo mjet tjetër.
+
+### 6.2 Çfarë ruhet
+
+| Çelësi | Çfarë mban | Sinkronizim | Kopje rezervë dhe pika rikthimi |
+| --- | --- | --- | --- |
+| `sc-shift-ui` | Turni aktiv i pajisjes: data operative, pozicioni i turnit, fjala. | Jo | Jo (`SKIP` te `work-backup.js`) |
+| `sc-drafts-ui` | Lista e drafteve. | Jo | Po |
+| `sc-drafts-unreadable-ui` | Kopja e një liste draftesh që nuk u lexua dot, e mbajtur mënjanë një herë. | Jo | Po |
+
+Sinkronizimi i anashkalon të tria sepse mbarojnë me `-ui` (`NOT_TOOL` te `team-sync.js`); `team-sync.js` nuk u prek.
+
+Turnin aktiv e vendos vetëm `setActive()`. Nuk e ndryshon ora, as rikthimi i një skedari ose i një pike rikthimi.
+
+### 6.3 Identiteti i një drafti
+
+Një draft është i një forme në një turn. Identiteti ka gjashtë pjesë: çelësi i mjetit (me gjuhën), emri i formës, `scope`, data operative, pozicioni i turnit dhe gjatësia e listës së turneve.
+
+- Dy forma me të njëjtën datë dhe turn janë dy drafte kur ndryshon çdo pjesë tjetër.
+- Një identitet ka një draft. Drafti ekziston vetëm sa ka diçka të shkruar.
+- Asnjë draft nuk lëviz vetë. `move()` e çon te një turn tjetër vetëm kur kërkohet, dhe refuzon kur caku ka punë: një draft të vetin, ose një formë që thirrësi thotë se ka punë të paruajtur. Të dy mbeten si ishin.
+- Çdo ruajtje i jep draftit një `rev` të ri. Forma e kthen `rev`-in e draftit që ka ngarkuar; nëse ai në ruajtje ka ndryshuar ndërkohë, ruajtja refuzohet dhe forma merr draftin që është aty. Kështu një formë e hapur nuk shkruan mbi një draft që nuk e ka parë.
+
+### 6.4 Rikthimi nga një skedar ose pikë rikthimi
+
+- **Forma.** Skedari refuzohet i tëri kur lista e drafteve nuk është siç e shkruan faqja.
+- **Turni aktiv.** Nuk është në skedar; edhe kur dikush e vë me dorë, lihet jashtë. Asnjë draft i rikthyer nuk aktivizon turn.
+- **Draftet që skedari nuk i ka** mbeten. Draftet e skedarit që nuk janë këtu shtohen.
+- **Përplasja.** Kur skedari dhe shfletuesi kanë draft për të njëjtin identitet me vlera të ndryshme, faqja pyet para se të ndryshojë ndonjë gjë: “Mbaj ato të këtij shfletuesi”, “Merr ato nga skedari” ose “Anulo”.
+- **Anulimi** (edhe me Esc) nuk ndryshon asnjë çelës, as të tjerët që skedari mban, dhe nuk bën pikë rikthimi.
+- **Përgjigjja vlen vetëm për draftet e treguara.** Nëse një formë ruhet në një skedë tjetër sa pyetja është e hapur, asgjë nuk shkruhet.
+- **Drafti i marrë nga skedari** merr `rev` të ri, prandaj forma e hapur mbi draftin e vjetër nuk e mbishkruan dot.
+- **Pika e rikthimit** bën të njëjtën pyetje, para se të bëhet pika e gjendjes së tanishme.
+
+### 6.5 Të dhënat e dëmtuara
+
+- Turni aktiv që nuk lexohet dot lexohet si “asnjë turn”.
+- Lista e drafteve që nuk lexohet dot mbahet mënjanë e paprekur dhe lista lexohet si bosh. Një rekord që nuk është draft lihet jashtë në të njëjtën mënyrë.
+- Ruajtja e bllokuar ose e mbushur kthen një përgjigje me arsyen; faqja nuk rrëzohet.
+
+### 6.6 Çfarë pret hapin 3 dhe hapin 4
+
+Këto nuk janë implementuar, sepse varen nga mbyllja e përbashkët ose nga ndërfaqja:
+
+| Sjellja | Pse pret |
+| --- | --- |
+| Drafti i një turni të mbyllur nuk ofron “Kthehu”. | Vetëm mbyllja e hapit 3 e di cili turn është i mbyllur. |
+| Mbyllja paralajmëron për formën e papërfunduar të turnit. | Është pjesë e mbylljes (hapi 3). |
+| Pas rikthimit, turni aktiv mbahet vetëm kur përputhet me dorëzimin e rikthyer (K12). | Kërkon dorëzimin me `closeId` (hapi 3). |
+| Drafti i dorëzimit, me shabllonin dhe zonën si `scope`. | Dorëzimi nis ta përdorë modulin në hapin 3. |
+| Njoftimi “formë e papërfunduar nga…” me “Kthehu”, “Sille”, “Hidhe”. | Ndërfaqja e hapit 4. Funksionet poshtë saj janë gati. |
+| Forma e Kontrollit të dëmeve i ruan vlerat si draft. | Ndërfaqja e hapit 4. Sot asnjë faqe nuk shkruan draft. |
+| Profili me turne të personalizuara e ndal ndërfaqen e re. | Ndërfaqja e hapit 4. |
 
 ---
 
@@ -340,7 +389,7 @@ Kontrolli i drafteve gjatë rikthimit:
 | 1a. Burimi i veprimeve · **bërë** | `origin` te lista e veprimeve dhe te shënimi i kalimit, me rregullat e rreshtave pa `id`. Asnjë mjet nuk e dërgon ende. | `actions-store.js`, `tool-kit.js`, `docs/DATA-FORMATS.md`, `tests/action-origin.test.cjs` |
 | 1b. Mbajtja e `id`-së së rreshtit · **bërë** | Tri regjistrat e `defect-log.js` e mbajnë `id`-në që gjejnë dhe nuk shkruajnë asnjë. Rreshti i ngjitur krahasohet pa `id`. | `defect-log.js`, `tool-kit.js`, `tests/log-row-ids.test.cjs` |
 | 1c. Shkrimi i `id`-ve · pret | Rreshtat e rinj marrin `id`. Vetëm pasi çdo pajisje ka versionin e 1b (5.1). | `defect-log.js` |
-| 2. Turni aktiv dhe draftet | Dy çelësat e rinj, rregullat e kopjes rezervë dhe të rikthimit. | modul i ri, `work-backup.js` |
+| 2. Turni aktiv dhe draftet · **bërë** | Ruajtja e turnit aktiv dhe e drafteve, rregullat e kopjes rezervë dhe pyetja për përplasjet (pjesa 6). Asnjë faqe nuk i shfaq ende. | `shift-context.js`, `work-backup.js`, `storage-guard.js`, `partials/work-backup.njk`, `tests/shift-context.test.cjs`, `tests/browser/work-backup-drafts.spec.mjs` |
 | 3. Mbyllja e përbashkët | Mbyllje pa dorëzim, pa turn aktiv pas saj, nisje e shprehur, mbartje sipas 3.5, “ndryshuar pas ndarjes”, dorëzimi jashtë sinkronizimit. Kriteret K1–K16. | `shift-handover.js`, `team-sync.js` |
 | 4. Kontrolli i dëmeve | Ndërfaqja e re me çelës vetëm për këtë mjet, vetëm magazina. | `defect-log.njk`, `defect-log.js`, `tool-kit.js`, `damageControl.json` |
 | 5. “Hap burimin” | Lista e veprimeve rikthen periudhën, filtrin ose rreshtin. | `action-tracker.js`, `defect-log.js` |
@@ -380,7 +429,9 @@ Në degën `claude/vigilant-pascal-bf9nhn`, pa PR. Të gjitha testet e repo-s ka
 - **1a:** `origin` pranohet vetëm i plotë, shkruhet një herë, udhëton vetëm me shënimin e skedës dhe del i njëjtë pas kopjes rezervë dhe pas sinkronizimit. Një veprim pa `origin` ka formën që kishte.
 - **1b:** `id` e një rreshti mbahet gjatë hapjes dhe ruajtjes në të tria regjistrat. Një `id` e pavlefshme hidhet dhe rreshti mbetet.
 
-Asnjë faqe nuk duket ose sillet ndryshe: asnjë mjet nuk dërgon `origin` dhe asnjë faqe nuk shkruan `id`.
+- **2:** turni aktiv dhe draftet ruhen dhe lexohen me rregullat e pjesës 6; skedari i punës i mban draftet dhe jo turnin aktiv; sinkronizimi nuk ndan asnjërin.
+
+Asnjë mjet nuk dërgon `origin`, asnjë faqe nuk shkruan `id`, dhe asnjë faqe nuk vendos turn aktiv ose nuk shkruan draft. E vetmja gjë e re në faqe është pyetja për draftet që ndryshojnë, e cila hapet vetëm kur një skedar ose pikë rikthimi mban një draft të tillë, pra jo para hapit 4.
 
 ### Verifikuar në kodin e repo-s
 
@@ -398,9 +449,8 @@ Asnjë faqe nuk duket ose sillet ndryshe: asnjë mjet nuk dërgon `origin` dhe a
 | Sa kohë duhet që çdo pajisje të marrë versionin që e mban `id`-në, para se të dalë 1c. | 1c |
 | Rreshtat e rinj me `id` dhe të vjetrit pa `id` në faqet e vërteta, mes dy pajisjeve. | 1c |
 | Tri përfundimet e “Hap burimin” për rreshta pa `id`. | 5 |
-| Turni aktiv mungon vërtet në kopjen rezervë dhe në sinkronizim; draftet janë në kopjen rezervë dhe mungojnë në sinkronizim. | 2 |
-| Rikthimi i drafteve: forma e gabuar, turni i mbyllur, përplasja me formën në ekran. | 2 |
-| Turni aktiv mes gjuhëve: a ruhet si pozicion në listë apo si fjalë. | 2 |
+| Sjelljet e drafteve që varen nga mbyllja (6.6): turni i mbyllur, paralajmërimi i mbylljes, K12. | 3 |
+| Kyçja me PIN dhe draftet në faqet e vërteta: draftet hyjnë te rekordi i kyçur dhe kthehen pas hapjes. | 4 |
 | Mbyllja pa dorëzim dhe nisja e shprehur nga faqja e Dorëzimit, pa “Sot”. | 3 |
 | Kriteret K1–K16 (3.6), me kodin e vërtetë të mbylljes dhe të mbartjes në vend të modelit. | 3 |
 | Mbartja: vend pune i ndryshëm, turn jo pasues, çështje e paqartë. | 3 |

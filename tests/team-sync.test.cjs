@@ -475,10 +475,11 @@ const render = (lang, withSite = true) => {
 test('the section shows only with an endpoint, after the box scripts, and every text is translated', () => {
   const on = render('en');
   assert.match(on.html, /data-team-sync data-endpoint="https:\/\/sync\.example\.test"/);
-  assert.deepEqual(on.scripts, ['/js/storage-guard.js', '/js/work-backup.js', '/js/reminders.js', '/js/team-sync.js']);
+  // The active shift and the drafts (shift-context.js) come first: the file box settles the drafts of a file put back.
+  assert.deepEqual(on.scripts, ['/js/shift-context.js', '/js/storage-guard.js', '/js/work-backup.js', '/js/reminders.js', '/js/team-sync.js']);
   const off = render('en', false);
   assert.doesNotMatch(off.html, /data-team-sync/);
-  assert.deepEqual(off.scripts, ['/js/storage-guard.js', '/js/work-backup.js', '/js/reminders.js']);
+  assert.deepEqual(off.scripts, ['/js/shift-context.js', '/js/storage-guard.js', '/js/work-backup.js', '/js/reminders.js']);
   for (const lang of ['de', 'sq']) assert.deepEqual(render(lang).missing, [], lang);
   assert.deepEqual(Object.keys(part.de).sort(), Object.keys(part.sq).sort());
   assert.deepEqual(Object.keys(part2.de).sort(), Object.keys(part2.sq).sort());

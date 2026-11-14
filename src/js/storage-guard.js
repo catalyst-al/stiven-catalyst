@@ -130,7 +130,7 @@
       return null;
     }
   })();
-  const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && !["sc-theme", "sc-motion", "sc-print-guide-hidden", "sc-team", "sc-team-state", "sc-locked", "sc-lock-idle"].includes(key));
+  const isWork = (key) => (window.WorkBackup ? window.WorkBackup.isWork(key) : typeof key === "string" && key.startsWith("sc-") && !["sc-theme", "sc-motion", "sc-print-guide-hidden", "sc-team", "sc-team-state", "sc-locked", "sc-lock-idle", "sc-shift-ui"].includes(key));
   const toolSlug = (key) => (window.WorkBackup ? window.WorkBackup.toolSlug(key) : String(key).replace(/^sc-/, ""));
   const work = () => snapshot(storage, isWork);
 
@@ -200,12 +200,18 @@
   const withTimeout = (promise, ms) => Promise.race([promise, new Promise((resolve) => setTimeout(() => resolve(null), ms))]);
 
   // Back to a point: first a point of the work as it is now (so the restore can be undone), then exactly the keys
-  // of the point are replaced, all or nothing. "restored", "full", "gone" or "failed".
+  // of the point are replaced, all or nothing. "restored", "full", "gone", "failed", or "cancelled" when the point's
+  // unfinished forms differ from the ones here and the visitor did not choose (work-backup.js, settleDrafts): asked
+  // before the point of now is made and before anything is replaced, so leaving the question changes nothing.
   const restorePoint = async (id) => {
     if (!storage || window.WorkLock?.locked) return "failed";
     const point = await get(id).catch(() => null);
     if (!point || !point.items || typeof point.items !== "object") return "gone";
-    const items = Object.fromEntries(Object.entries(point.items).filter(([key, value]) => isWork(key) && typeof value === "string"));
+    const all = Object.fromEntries(Object.entries(point.items).filter(([key, value]) => isWork(key) && typeof value === "string"));
+    if (!Object.keys(all).length) return "gone";
+    // Without the page's question (no "All your work in one file" box), the unfinished forms here are left as they are.
+    const items = window.WorkBackup?.settleDrafts ? await window.WorkBackup.settleDrafts(all) : Object.fromEntries(Object.entries(all).filter(([key]) => key !== "sc-drafts-ui"));
+    if (!items) return "cancelled";
     if (!Object.keys(items).length) return "gone";
     try {
       await makePoint("before-restore");

@@ -7957,5 +7957,12 @@
   "[The rest did not fit in the mail link: use “Copy message” on the page.]": "[Der Rest passte nicht in den Mail-Link: Verwenden Sie „Nachricht kopieren“ auf der Seite.]",
   "Translation": "Übersetzung",
   "with AI assistance": "mit KI-Unterstützung",
-  "revised by the author": "vom Autor durchgesehen"
+  "revised by the author": "vom Autor durchgesehen",
+  "Unfinished forms": "Unfertige Formulare",
+  "{tool}, {date}, {shift}. Here: {mine}. In the file: {file}.": "{tool}, {date}, {shift}. Hier: {mine}. In der Datei: {file}.",
+  "Nothing was changed: the unfinished forms differ and none was chosen.": "Nichts wurde geändert: Die unfertigen Formulare unterscheiden sich, und es wurde keines gewählt.",
+  "Unfinished forms differ": "Unfertige Formulare unterscheiden sich",
+  "The file and this browser each hold an unfinished form for the same tool, day and shift, and they are not the same. Choose which to keep. Nothing has been changed yet.": "Die Datei und dieser Browser enthalten je ein unfertiges Formular für dasselbe Werkzeug, denselben Tag und dieselbe Schicht, und sie sind nicht gleich. Wählen Sie, welches bleibt. Bisher wurde nichts geändert.",
+  "Keep the ones in this browser": "Die in diesem Browser behalten",
+  "Take the ones from the file": "Die aus der Datei übernehmen"
 }

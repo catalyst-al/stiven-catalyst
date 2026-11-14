@@ -7957,5 +7957,12 @@
   "[The rest did not fit in the mail link: use “Copy message” on the page.]": "[Pjesa tjetër nuk u fut në lidhjen e emailit: përdor “Kopjo mesazhin” në faqe.]",
   "Translation": "Përkthimi",
   "with AI assistance": "me ndihmën e AI",
-  "revised by the author": "i rishikuar nga autori"
+  "revised by the author": "i rishikuar nga autori",
+  "Unfinished forms": "Formularë të papërfunduar",
+  "{tool}, {date}, {shift}. Here: {mine}. In the file: {file}.": "{tool}, {date}, {shift}. Këtu: {mine}. Në skedar: {file}.",
+  "Nothing was changed: the unfinished forms differ and none was chosen.": "Asgjë nuk u ndryshua: formularët e papërfunduar ndryshojnë dhe nuk u zgjodh asnjëri.",
+  "Unfinished forms differ": "Formularët e papërfunduar ndryshojnë",
+  "The file and this browser each hold an unfinished form for the same tool, day and shift, and they are not the same. Choose which to keep. Nothing has been changed yet.": "Skedari dhe ky shfletues kanë secili një formular të papërfunduar për të njëjtin mjet, ditë dhe turn, dhe nuk janë njësoj. Zgjidh cili mbetet. Deri tani nuk është ndryshuar asgjë.",
+  "Keep the ones in this browser": "Mbaj ato të këtij shfletuesi",
+  "Take the ones from the file": "Merr ato nga skedari"
 }

@@ -21,9 +21,13 @@
   const SELF = document.currentScript?.src || "";
   // Settings of the page itself, not work; the team code and what team sync last saw (js/team-sync.js) stay on this
   // device too, so a saved file never carries the code.
-  const SKIP = new Set(["sc-theme", "sc-motion", "sc-floor-mode-ui", "sc-print-guide-hidden", "sc-team", "sc-team-state", "sc-locked", "sc-lock-idle"]);
-  // Storage names that differ from the tool's address.
-  const ALIAS = { "sigma-chart": "sigma-control-chart", dmaic: "six-sigma-dmaic", "cx-tower": "cx-control-tower", actions: "action-tracker" };
+  // The shift this device is working in (js/shift-context.js) is such a setting too: a file put back never sets it.
+  const SKIP = new Set(["sc-theme", "sc-motion", "sc-floor-mode-ui", "sc-print-guide-hidden", "sc-team", "sc-team-state", "sc-locked", "sc-lock-idle", "sc-shift-ui"]);
+  // Storage names that differ from the tool's address. The unfinished forms (js/shift-context.js: sc-drafts-ui, and
+  // the copy kept aside of drafts that could not be read) are one entry, "drafts".
+  const ALIAS = { "sigma-chart": "sigma-control-chart", dmaic: "six-sigma-dmaic", "cx-tower": "cx-control-tower", actions: "action-tracker", "drafts-unreadable": "drafts" };
+  const DRAFTS_KEY = "sc-drafts-ui";
+  const DRAFTS_ASIDE_KEY = "sc-drafts-unreadable-ui";
 
   const isWork = (key) => typeof key === "string" && key.startsWith("sc-") && !SKIP.has(key);
   // "sc-damage-control-sq-check" → "damage-control": the floor check and calculator settings
@@ -38,6 +42,9 @@
   const OBJECT = /^sc-(damage-control|incomplete-control|night-audit|delay-analyzer|sigma-chart|pareto|cx-tower|shift-handover|six-sigma|dmaic|daily-board|five-s-audit|safety-cross|a3-report|kaizen-board|skills-matrix|oee|hotel-kpis|fishbone|fmea|process-lab|time-study|value-stream-map|standard-work|gemba-walk)(-(de|sq))?$|^sc-(actions|workplace)$|^sc-annotations$/;
   const LOG = /^sc-(damage-control|incomplete-control|night-audit|delay-analyzer|sigma-chart)(-(de|sq))?$|^sc-actions$|^sc-annotations$/;
   const sound = ([key, value]) => {
+    // The unfinished forms are read by the file that keeps them: a list it would not have written is refused, and so
+    // is any list on a page that cannot check it.
+    if (key === DRAFTS_KEY) return Boolean(window.ShiftContext && window.ShiftContext.sound(value));
     if (!OBJECT.test(key)) return true;
     let parsed;
     try { parsed = JSON.parse(value); } catch { return false; }
@@ -225,7 +232,7 @@
 
   const toolNames = (keys) => [...new Set(keys.map((key) => {
     const slug = toolSlug(key);
-    return slug === "coaching-v1" ? text.coaching : names[slug] || slug;
+    return slug === "coaching-v1" ? text.coaching : slug === "drafts" ? text.drafts || slug : names[slug] || slug;
   }))].sort((a, b) => a.localeCompare(b));
 
   const showSummary = () => {
@@ -329,6 +336,66 @@
     ].filter(Boolean).join(" "));
   });
 
+  // The unfinished forms of a file or a restore point about to be put back (js/shift-context.js). They never replace
+  // the forms of this browser unasked: those the file does not have stay, and where both hold a form for the same tool,
+  // day and shift with other values, the visitor chooses, before anything is changed. Returns the items to write (the
+  // drafts as settled), or null when nothing may be written: the visitor closed the question, or the choice could not
+  // be asked. A copy kept aside of drafts that could not be read is never written over the one this browser keeps.
+  const draftsDialog = document.querySelector("[data-work-drafts-dialog]");
+  const draftLine = (pair) => {
+    const short = (values) => Object.values(values).map((value) => String(value).trim()).filter(Boolean).join(", ").slice(0, 120);
+    return fill(text.draftsItem || "{tool}, {date}, {shift}: {mine} / {file}", {
+      tool: toolNames([pair.mine.tool]).join(", "), date: pair.mine.date, shift: pair.mine.label || `${pair.mine.index + 1}/${pair.mine.of}`,
+      mine: short(pair.mine.values), file: short(pair.file.values),
+    });
+  };
+  // "mine", "file", or "" when the visitor leaves the question (Cancel, Esc) or the page cannot ask it.
+  const askDrafts = (conflicts) => new Promise((resolve) => {
+    if (!draftsDialog || typeof draftsDialog.showModal !== "function") { resolve(""); return; }
+    const list = draftsDialog.querySelector("[data-work-drafts-list]");
+    list.replaceChildren(...conflicts.map((pair) => {
+      const item = document.createElement("li");
+      item.textContent = draftLine(pair);
+      return item;
+    }));
+    let settled = false;
+    const buttons = [...draftsDialog.querySelectorAll("[data-work-drafts-choice]")];
+    const finish = (choice) => {
+      if (settled) return;
+      settled = true;
+      buttons.forEach((button) => button.removeEventListener("click", onChoice));
+      draftsDialog.removeEventListener("close", onClose);
+      if (draftsDialog.open) draftsDialog.close();
+      resolve(choice);
+    };
+    const onChoice = (event) => { const choice = event.currentTarget.dataset.workDraftsChoice; finish(choice === "mine" || choice === "file" ? choice : ""); };
+    const onClose = () => finish("");
+    buttons.forEach((button) => button.addEventListener("click", onChoice));
+    draftsDialog.addEventListener("close", onClose);
+    draftsDialog.showModal();
+  });
+  const settleDrafts = async (items) => {
+    const out = { ...items };
+    if (DRAFTS_ASIDE_KEY in out && storage.getItem(DRAFTS_ASIDE_KEY) !== null) delete out[DRAFTS_ASIDE_KEY];
+    if (!(DRAFTS_KEY in out)) return out;
+    const context = window.ShiftContext;
+    if (!context) return null;
+    const plan = context.planRestore(out[DRAFTS_KEY]);
+    // Drafts that cannot be read (a restore point from a damaged list) are left out: the forms here stay as they are.
+    if (!plan.ok) { delete out[DRAFTS_KEY]; return out; }
+    const choice = plan.conflicts.length ? await askDrafts(plan.conflicts) : "";
+    if (plan.conflicts.length && !choice) return null;
+    // Read again as it is now. The answer covers the forms that were shown and no others: when a form was saved in
+    // another tab while the question was open, nothing is written.
+    const settled = context.settleRestore(out[DRAFTS_KEY], choice);
+    if (!settled.ok) return null;
+    const shown = (pairs) => pairs.map((pair) => `${context.identity(pair.mine)} ${pair.mine.rev}`).sort().join("\n");
+    if (shown(settled.plan.conflicts) !== shown(plan.conflicts)) return null;
+    out[DRAFTS_KEY] = settled.text;
+    return out;
+  };
+  api.settleDrafts = settleDrafts;
+
   const picker = root.querySelector("[data-work-open]");
   picker.addEventListener("change", async () => {
     const file = picker.files[0];
@@ -356,13 +423,16 @@
       say(text.invalid);
       return;
     }
-    const keys = Object.keys(backup.items);
     const date = backup.exported ? new Date(backup.exported) : null;
     const pad = (n) => String(n).padStart(2, "0");
     const when = date && !Number.isNaN(date.getTime())
       ? (document.documentElement.lang === "en" ? `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` : `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()}`)
       : "?";
-    if (!window.confirm(fill(text.confirm, { date: when, tools: toolNames(keys).join(", ") }))) return;
+    if (!window.confirm(fill(text.confirm, { date: when, tools: toolNames(Object.keys(backup.items)).join(", ") }))) return;
+    // The unfinished forms are settled first: until then nothing is changed, and leaving the question changes nothing.
+    const items = await settleDrafts(backup.items);
+    if (!items) { say(text.draftsCancelled || text.invalid); return; }
+    const keys = Object.keys(items);
     // A restore point of the work as it is (js/storage-guard.js sets the hook), so the wrong file can be undone.
     try { await window.WorkBackup.beforeReplace?.(keys); } catch { /* opened as before */ }
     // All or nothing: when the browser runs out of space halfway, the tools already written get
@@ -372,7 +442,7 @@
     let full = false;
     for (const key of keys) {
       try {
-        storage.setItem(key, backup.items[key]);
+        storage.setItem(key, items[key]);
         written.push(key);
       } catch {
         full = true;

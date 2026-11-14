@@ -15,7 +15,7 @@ const SITE = path.join(ROOT, '_site');
 
 // The scripts the page runs for the tool itself: the texts of its language (ui-de.js, ui-sq.js) and everything from its
 // data block on, up to the site-wide scripts that follow the tool (feedback, backup, sync, the header).
-const SITE_WIDE = /^(feedback|storage-guard|work-backup|reminders|team-sync|tool-fold|offline|floor-mode|share-orbit|shelf|family-sky|work-lock|coaching-[a-z-]+|annotations|newsletter)$/;
+const SITE_WIDE = /^(feedback|shift-context|storage-guard|work-backup|reminders|team-sync|tool-fold|offline|floor-mode|share-orbit|shelf|family-sky|work-lock|coaching-[a-z-]+|annotations|newsletter)$/;
 const scriptsOf = (html) => [...html.matchAll(/<script src="\/(js\/)?([a-z0-9-]+)\.js(?:\?[^"]*)?"[^>]*><\/script>/g)]
   .map((match) => ({ dir: match[1] ? 'js' : '', name: match[2] }))
   .filter(({ dir, name }) => dir === 'js' && !SITE_WIDE.test(name));

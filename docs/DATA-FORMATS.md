@@ -35,6 +35,27 @@ Keys that are settings of the page and never travel in a file or a lock: `sc-the
 `OPEN` in `js/work-lock.js`). `sc-team` (the team code) and `sc-team-state` stay on the device and out of files, but
 go into the locked record so team sync pauses while locked.
 
+The shift a device is working in and the forms left unfinished in it (`js/shift-context.js`; no page shows either yet).
+`sc-shift-ui` is the active shift, `{ v: 1, date, index, of, label, set }`: `date` the operative date the visitor chose
+(ISO; a night shift keeps the date it started on), `index` the shift's place in the list it was chosen from and `of`
+the length of that list (the words of the shifts differ by language, their order does not), `label` the word as it was
+shown, `set` when. Only `ShiftContext.setActive()` writes it: not the clock, not a file, not a restore point. It is a
+setting of the device: it is in the list `SKIP`, so it is in no saved file and no restore point; like `sc-team` it goes
+into the locked record. `sc-drafts-ui` is `{ v: 1, drafts: [draft] }`, a draft being `{ tool, form, scope, date, index,
+of, label, values, updated, rev }`. Its identity is `tool` (the storage key the form writes to, so the tool and the
+language), `form` (the form's name on the page), `scope` (what else sets two forms of the page apart; `""` when
+nothing does), `date`, `index` and `of`: one draft for each identity, and a draft only while its `values` hold
+something. `rev` changes at every save; a save names the `rev` it loaded (`base`) and is refused with `"changed"` when
+the stored draft has another, so an open form never writes over a draft it has not seen. A draft moves to another
+identity only through `move()`, which refuses (`"target-has-work"`) when the target has a draft or the caller says its
+form has work. The drafts are work: they are in the saved file and the restore points. Team sync shares none of these
+keys (they end in `-ui`). A file whose `sc-drafts-ui` is not as the site writes it is refused whole. A file or a
+restore point put back never sets the active shift and never replaces a draft unasked: the drafts it does not have
+stay, the ones that are new here are added, and where both hold a draft of one identity with other values the page
+asks which to keep before anything is changed (`WorkBackup.settleDrafts`); leaving the question changes nothing. A
+draft taken from the file gets a new `rev`. A list of drafts that cannot be read is kept aside unchanged, once, under
+`sc-drafts-unreadable-ui`, and reads as empty; a record in it that is not a draft is left out the same way.
+
 Two shapes worth naming, because other tools read them. `sc-actions` is `{ rows: [action] }`, an action being `{ id, title,
 detail, owner, due, source, check, area, priority, status (open | doing | done | verified), created, closed, result }`
 and, when it belongs to an investigation of the CX Control Tower, `caseId` (`INV-…`); `verified` is never written

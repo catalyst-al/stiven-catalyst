@@ -28,7 +28,10 @@
   photosUnread: "The photos could not be read here, so the file holds the work without them." | t(lang),
   openedPhotos: "Photos from the file: {n}." | t(lang),
   photosFailed: "The photos in the file could not be kept in this browser; the rest of the work is opened." | t(lang),
-  locked: "The tools are locked. Unlock them with the PIN first; nothing was changed." | t(lang)
+  locked: "The tools are locked. Unlock them with the PIN first; nothing was changed." | t(lang),
+  drafts: "Unfinished forms" | t(lang),
+  draftsItem: "{tool}, {date}, {shift}. Here: {mine}. In the file: {file}." | t(lang),
+  draftsCancelled: "Nothing was changed: the unfinished forms differ and none was chosen." | t(lang)
 } %}
 {#- Restore points, space and the browser's promise to keep it (js/storage-guard.js). -#}
 {%- set sgText = {
@@ -56,6 +59,7 @@
   restored: "Restored. The page reloads to show your work." | t(lang),
   full: "This browser ran out of space, so nothing was changed. Free some space and try again." | t(lang),
   gone: "This restore point is no longer there. Nothing was changed." | t(lang),
+  cancelled: "Nothing was changed: the unfinished forms differ and none was chosen." | t(lang),
   spaceWork: "Your work takes {work}; the browser gives the tools about 5 MB." | t(lang),
   spaceDevice: "Offline copies, photos and restore points: {usage} of {quota} the browser allows." | t(lang),
   nearlyFull: "The space for your work is nearly full ({work} of about 5 MB). The largest: {tools}." | t(lang)
@@ -110,11 +114,29 @@
     <p class="form-note wb-error" data-work-password-error role="alert"></p>
   </form>
 </dialog>
+{#- The unfinished forms of a file or a restore point that differ from the ones here (js/work-backup.js, settleDrafts;
+    js/shift-context.js). Asked before anything is changed; Cancel and Esc change nothing. -#}
+<dialog class="wb-dialog" data-work-drafts-dialog aria-labelledby="wb-drafts-title">
+  <form method="dialog" novalidate>
+    <p class="kicker">{{ "All your work in one file" | t(lang) }}</p>
+    <h2 id="wb-drafts-title">{{ "Unfinished forms differ" | t(lang) }}</h2>
+    <p class="form-note">{{ "The file and this browser each hold an unfinished form for the same tool, day and shift, and they are not the same. Choose which to keep. Nothing has been changed yet." | t(lang) }}</p>
+    <ul class="form-note" data-work-drafts-list></ul>
+    <div class="tool-actions">
+      <button class="button-primary" type="button" data-work-drafts-choice="mine">{{ "Keep the ones in this browser" | t(lang) }}</button>
+      <button class="button-secondary" type="button" data-work-drafts-choice="file">{{ "Take the ones from the file" | t(lang) }}</button>
+      <button class="button-ghost" type="button" data-work-drafts-choice="cancel">{{ "Cancel" | t(lang) }}</button>
+    </div>
+  </form>
+</dialog>
 <script type="application/json" id="work-backup-names">{
 {%- for tool in wbTools %}{% if tool.url %}{% set parts = tool.url.split("/") %}{{ parts[parts.length - 2] | scriptJson | safe }}: {{ tool.name | scriptJson | safe }}, {% endif %}{% endfor -%}
 {#- The reader's own keys (js/shelf.js, js/article.js) travel in the same file. -#}
 "workplace": {{ "Workplace profile" | t(lang) | scriptJson | safe }}, "annotations": {{ "Timeline events" | t(lang) | scriptJson | safe }}, "shelf": {{ "My shelf" | t(lang) | scriptJson | safe }}, "checklists": {{ "Cards in progress" | t(lang) | scriptJson | safe }}, "reading": {{ "Reading progress" | t(lang) | scriptJson | safe }}
 }</script>
+{#- The active shift and the unfinished forms (no page shows them yet): before the file box, which settles the forms
+    of a file put back. #}
+<script src="{{ '/js/shift-context.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/storage-guard.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/work-backup.js' | assetUrl }}" defer></script>
 {#- Reminders of due actions, on this device only, once switched on in the Action Tracker. #}
