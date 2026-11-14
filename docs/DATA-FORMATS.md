@@ -36,16 +36,27 @@ Keys that are settings of the page and never travel in a file or a lock: `sc-the
 go into the locked record so team sync pauses while locked.
 
 The shift a device is working in and the forms left unfinished in it (`js/shift-context.js`; no page shows either yet).
-`sc-shift-ui` is the active shift, `{ v: 1, date, index, of, label, set }`: `date` the operative date the visitor chose
-(ISO; a night shift keeps the date it started on), `index` the shift's place in the list it was chosen from and `of`
-the length of that list (the words of the shifts differ by language, their order does not), `label` the word as it was
-shown, `set` when. Only `ShiftContext.setActive()` writes it: not the clock, not a file, not a restore point. It is a
+`sc-shift-ui` is the active shift, `{ v: 1, date, index, of, label, list, set }`: `date` the operative date the visitor
+chose (ISO; a night shift keeps the date it started on), then the shift as it was when it was chosen, all four parts
+required: `index` its place in the list it was chosen from, `of` the length of that list, `label` the word it was
+shown as, and `list` which list that was (`en`, `de` or `sq` for the list built into the pages of that language,
+`profile` for the shifts of the workplace profile), and `set` when. Only `ShiftContext.setActive()` writes it: not the
+clock, not a file, not a restore point. A stored shift is never read as whatever is in its place now: the visitor may
+put the profile's shifts in another order or name another shift in the same place. `ShiftContext.place(shift, shifts,
+list)` says where a stored shift is in a list as it is today: `same` when the list is of the same kind and length and
+has the same word in the same place, or when both lists are built into the pages of two languages (the same shifts in
+the same order, in other words; the logs and the handover of a language offer the same three); otherwise `unclear`,
+with the places that hold its word now (one, none or several). `ShiftContext.activeOn(shifts, list)` gives the active
+shift for a page only when it is `same`, and `"shift-unclear"` otherwise; nothing in the file changes a stored shift
+or the profile by itself. It is a
 setting of the device: it is in the list `SKIP`, so it is in no saved file and no restore point; like `sc-team` it goes
 into the locked record. `sc-drafts-ui` is `{ v: 1, drafts: [draft] }`, a draft being `{ tool, form, scope, date, index,
-of, label, values, updated, rev }`. Its identity is `tool` (the storage key the form writes to, so the tool and the
-language), `form` (the form's name on the page), `scope` (what else sets two forms of the page apart; `""` when
-nothing does), `date`, `index` and `of`: one draft for each identity, and a draft only while its `values` hold
-something. `rev` changes at every save; a save names the `rev` it loaded (`base`) and is refused with `"changed"` when
+of, label, list, values, updated, rev }`. Its identity is `tool` (the storage key the form writes to, so the tool and
+the language), `form` (the form's name on the page), `scope` (what else sets two forms of the page apart; `""` when
+nothing does), `date` and the shift whole (`index`, `of`, `label`, `list`): one draft for each identity, and a draft
+only while its `values` hold something. Because the word and the kind of list are part of the identity, a draft of a
+shift whose place now holds another shift is not found for that other shift: it stays the draft of the shift it was
+written in, until the visitor has it moved or dropped. `rev` changes at every save; a save names the `rev` it loaded (`base`) and is refused with `"changed"` when
 the stored draft has another, so an open form never writes over a draft it has not seen. A draft moves to another
 identity only through `move()`, which refuses (`"target-has-work"`) when the target has a draft or the caller says its
 form has work. The drafts are work: they are in the saved file and the restore points. Team sync shares none of these

@@ -36,8 +36,10 @@ const open = (path = '/sq/tools/damage-control/', { storage = {}, scripts = ['sh
 const held = (w) => Object.fromEntries(Array.from({ length: w.localStorage.length }, (_, i) => w.localStorage.key(i)).sort().map((key) => [key, w.localStorage.getItem(key)]));
 const reopen = (w, path, options = {}) => open(path, { ...options, storage: held(w) });
 
-const NIGHT = { date: '2026-11-11', index: 2, of: 3, label: 'Natë' };
-const EARLY = { date: '2026-11-12', index: 0, of: 3, label: 'Mëngjes' };
+// The shifts as the Albanian pages have them built in: a shift is kept with its place, its word and which list it is from.
+const SHIFTS = ['Mëngjes', 'Pasdite', 'Natë'];
+const NIGHT = { date: '2026-11-11', index: 2, of: 3, label: 'Natë', list: 'sq' };
+const EARLY = { date: '2026-11-12', index: 0, of: 3, label: 'Mëngjes', list: 'sq' };
 const entry = (shift, extra = {}) => ({ tool: 'sc-damage-control-sq', form: 'entry', scope: '', ...shift, ...extra });
 const WET = { stage: 'Pranimi', cause: 'Ambalazhi', units: '4', note: 'kuti e lagur' };
 const FORK = { stage: 'Pranimi', cause: 'Pajisjet', units: '2', note: 'pirun i dëmtuar' };
@@ -54,7 +56,7 @@ test('the active shift is what was set, on every page and in every language, unt
   for (const path of ['/sq/tools/damage-control/', '/sq/tools/shift-handover/', '/de/tools/damage-control/', '/tools.html']) {
     const page = reopen(w, path);
     const active = page.ShiftContext.active();
-    assert.deepEqual([active.date, active.index, active.of], ['2026-11-11', 2, 3], path);
+    assert.deepEqual([active.date, active.index, active.of, active.label, active.list], ['2026-11-11', 2, 3, 'Natë', 'sq'], path);
   }
   assert.ok(w.ShiftContext.clearActive().ok);
   assert.equal(w.ShiftContext.active(), null);
@@ -73,7 +75,7 @@ test('the clock does not move the active shift: past midnight it is the date and
 
 test('an active shift that is not one is refused, and one that cannot be read is none', () => {
   const w = open();
-  const bad = [null, 'night', {}, { ...NIGHT, date: '11.11.2026' }, { ...NIGHT, date: '2026-02-30' }, { ...NIGHT, index: 3 }, { ...NIGHT, index: -1 }, { ...NIGHT, index: 1.5 }, { ...NIGHT, of: 0 }, { ...NIGHT, of: 25, index: 24 }];
+  const bad = [null, 'night', {}, { ...NIGHT, date: '11.11.2026' }, { ...NIGHT, date: '2026-02-30' }, { ...NIGHT, index: 3 }, { ...NIGHT, index: -1 }, { ...NIGHT, index: 1.5 }, { ...NIGHT, of: 0 }, { ...NIGHT, of: 25, index: 24 }, { ...NIGHT, label: '' }, { ...NIGHT, label: '   ' }, { ...NIGHT, list: undefined }, { ...NIGHT, list: 'it' }, { ...NIGHT, label: 'x'.repeat(61) }];
   for (const value of bad) assert.deepEqual(plain(w.ShiftContext.setActive(value)), { ok: false, reason: 'invalid' }, JSON.stringify(value));
   assert.equal(w.localStorage.getItem(ACTIVE), null, 'nothing was written');
   for (const stored of ['{"v":1,"date":"2026-11-1', 'null', '[]', '"x"', JSON.stringify({ v: 2, ...NIGHT }), JSON.stringify({ v: 1, ...NIGHT, index: 9 })]) {
@@ -102,11 +104,13 @@ test('forms that share a date and a shift are separate drafts when the tool, the
   assert.equal(S.drafts().length, contexts.length);
   contexts.forEach((context, i) => assert.equal(S.find(context).values.note, `draft ${i}`, `draft ${i} is found under its own identity`));
   assert.equal(new Set(contexts.map((context) => S.identity(context))).size, contexts.length);
-  // The scope is compared as typed, spaces aside; the label is not part of the identity.
+  // The scope and the shift's word are compared as typed, spaces aside.
   assert.equal(S.find(entry(NIGHT, { tool: 'sc-shift-handover-sq', form: 'sheet', scope: '  Dock   A ' })).values.note, 'draft 5');
-  assert.equal(S.find(entry({ ...NIGHT, label: 'Night' })).values.note, 'draft 0');
-  // The same place in a list of another length is another shift.
+  assert.equal(S.find(entry({ ...NIGHT, label: '  Natë ' })).values.note, 'draft 0');
+  // The same place is another shift when the list is of another length, of another kind, or has another word there.
   assert.equal(S.find(entry({ ...NIGHT, of: 4 })), null);
+  assert.equal(S.find(entry({ ...NIGHT, list: 'profile' })), null);
+  assert.equal(S.find(entry({ ...NIGHT, label: 'Pasdite' })), null);
 });
 
 test('one identity has one draft: saving again replaces it, and empty values remove it', () => {
@@ -156,7 +160,7 @@ test('a draft is carried to another shift only when asked, and never over work: 
   assert.deepEqual([plain(refused.source.values), plain(refused.target.values)], [WET, FORK], 'the answer shows both');
   assert.equal(w.localStorage.getItem(DRAFTS), before, 'not a byte changed');
   // The form on the page has work that is not saved yet: refused the same, with no draft in the way.
-  const third = { date: '2026-11-12', index: 1, of: 3, label: 'Pasdite' };
+  const third = { date: '2026-11-12', index: 1, of: 3, label: 'Pasdite', list: 'sq' };
   assert.equal(S.move(entry(NIGHT), entry(third), { targetHasWork: true }).reason, 'target-has-work');
   assert.equal(w.localStorage.getItem(DRAFTS), before);
   // The target cleared, the draft is carried: it is the target's now, with a new rev, and the source is gone.
@@ -240,7 +244,7 @@ test('a record that is not a draft is left out, the others are read, and the lis
   const w = open();
   const good = w.ShiftContext.save(entry(NIGHT), WET).draft;
   const older = { ...plain(good), values: FORK, updated: good.updated - 1000, rev: 'olderolder00' };
-  const mixed = JSON.stringify({ v: 1, drafts: [good, { tool: 'sc-damage-control-sq' }, 'x', null, { ...good, rev: '' }, { ...good, index: 7 }, { ...entry(EARLY), values: { note: ' ' }, updated: 1, rev: 'emptyempty00' }, older] });
+  const mixed = JSON.stringify({ v: 1, drafts: [good, { tool: 'sc-damage-control-sq' }, 'x', null, { ...good, rev: '' }, { ...good, index: 7 }, { ...good, label: '' }, (({ list, ...rest }) => rest)(good), { ...entry(EARLY), values: { note: ' ' }, updated: 1, rev: 'emptyempty00' }, older] });
   const page = open('/sq/tools/damage-control/', { storage: { [DRAFTS]: mixed } });
   const list = plain(page.ShiftContext.drafts());
   assert.equal(list.length, 1, 'one draft: the good one, the later of the two with its identity');
@@ -547,4 +551,141 @@ test('the built pages load the script before the file box, show nothing of it, a
   // No tool script uses the context yet: the new interface is not switched on.
   const users = fs.readdirSync('src/js').filter((file) => file.endsWith('.js') && file !== 'shift-context.js' && fs.readFileSync(`src/js/${file}`, 'utf8').includes('ShiftContext'));
   assert.deepEqual(users, ['work-backup.js'], 'only the file box, to settle the drafts of a file');
+});
+
+// ---- A list of shifts that changes ----
+// The shifts of the workplace profile are the visitor's to order and to name (js/workplace.js, the real profile here).
+// A stored shift is its place, its word and which list it was from: it is never read as whatever is in that place now.
+
+const profilePage = (storage = {}) => open('/sq/tools/damage-control/', { storage, scripts: ['tool-kit', 'workplace', 'shift-context'] });
+// The shift named `label` as a page would hand it over, from the profile's list as it is now.
+const fromProfile = (w, label, date = '2026-11-11') => ({ date, index: w.Workplace.shifts().indexOf(label), of: w.Workplace.shifts().length, label, list: 'profile' });
+
+test('the profile\'s shifts in another order: the active shift and the draft are not read as the shift now in that place', () => {
+  const w = profilePage();
+  const S = w.ShiftContext;
+  w.Workplace.set({ shifts: ['A', 'B', 'C'] });
+  assert.ok(S.setActive(fromProfile(w, 'C')).ok);
+  assert.ok(S.save(entry(fromProfile(w, 'C')), WET).ok);
+  assert.deepEqual(plain(S.activeOn(w.Workplace.shifts(), 'profile')), { ok: true, active: plain(S.active()), index: 2, label: 'C' });
+  const kept = { active: w.localStorage.getItem(ACTIVE), drafts: w.localStorage.getItem(DRAFTS) };
+  // The visitor puts the shifts in another order: the same three, C first.
+  w.Workplace.set({ shifts: ['C', 'A', 'B'] });
+  const profile = w.localStorage.getItem('sc-workplace');
+  const now = w.Workplace.shifts();
+  assert.equal(now[2], 'B', 'the place the active shift was in holds B now');
+  // The active shift: not B. Unclear, with the one place its word is in now.
+  const active = S.activeOn(now, 'profile');
+  assert.equal(active.ok, false);
+  assert.equal(active.reason, 'shift-unclear');
+  assert.deepEqual(plain(active.candidates), [0]);
+  assert.equal(active.active.label, 'C', 'what was kept is shown as it was kept');
+  // The draft: not found for B, nor for C in its new place; it is still the draft of C as it was written.
+  assert.equal(S.find(entry(fromProfile(w, 'B'))), null, 'the form of B is empty');
+  assert.equal(S.find(entry(fromProfile(w, 'C'))), null, 'nothing moved it to the new place of C by itself');
+  assert.equal(S.drafts().length, 1);
+  assert.deepEqual(plain(S.drafts()[0].values), WET);
+  assert.deepEqual(plain(S.place(S.drafts()[0], now, 'profile')), { state: 'unclear', candidates: [0] });
+  // Reading changed nothing: not the setting, not the draft, not the profile.
+  assert.deepEqual({ active: w.localStorage.getItem(ACTIVE), drafts: w.localStorage.getItem(DRAFTS) }, kept);
+  assert.equal(w.localStorage.getItem('sc-workplace'), profile);
+  // The visitor settles it: the draft is carried to C where C is now, and C is chosen again.
+  const old = S.drafts()[0];
+  assert.ok(S.move(old, entry(fromProfile(w, 'C')), { base: old.rev }).ok);
+  assert.deepEqual(plain(S.find(entry(fromProfile(w, 'C'))).values), WET, 'the whole draft, in its new place');
+  assert.ok(S.setActive(fromProfile(w, 'C')).ok);
+  assert.deepEqual([S.activeOn(now, 'profile').ok, S.activeOn(now, 'profile').index], [true, 0]);
+  assert.equal(w.localStorage.getItem('sc-workplace'), profile, 'the profile was never written by this file');
+});
+
+test('another shift named in the same place: the active shift and the draft are not that shift', () => {
+  const w = profilePage();
+  const S = w.ShiftContext;
+  w.Workplace.set({ shifts: ['A', 'B', 'C'] });
+  S.setActive(fromProfile(w, 'C'));
+  S.save(entry(fromProfile(w, 'C')), WET);
+  S.save(entry(fromProfile(w, 'A')), FORK);
+  const kept = { active: w.localStorage.getItem(ACTIVE), drafts: w.localStorage.getItem(DRAFTS) };
+  // The third shift is replaced by another; the list is as long as it was.
+  w.Workplace.set({ shifts: ['A', 'B', 'D'] });
+  const now = w.Workplace.shifts();
+  const active = S.activeOn(now, 'profile');
+  assert.deepEqual([active.ok, active.reason, plain(active.candidates)], [false, 'shift-unclear', []], 'C is nowhere in the list: nothing to offer, nothing assumed');
+  assert.equal(S.find(entry(fromProfile(w, 'D'))), null, 'the form of D is empty');
+  const draftOfC = S.drafts().find((draft) => draft.label === 'C');
+  assert.deepEqual(plain(draftOfC.values), WET, 'the draft of C is kept whole');
+  assert.deepEqual(plain(S.place(draftOfC, now, 'profile')), { state: 'unclear', candidates: [] });
+  // A shift that did not change is still itself.
+  assert.deepEqual(plain(S.find(entry(fromProfile(w, 'A'))).values), FORK);
+  assert.deepEqual(plain(S.place(S.find(entry(fromProfile(w, 'A'))), now, 'profile')), { state: 'same', index: 0, candidates: [0] });
+  assert.deepEqual({ active: w.localStorage.getItem(ACTIVE), drafts: w.localStorage.getItem(DRAFTS) }, kept);
+  // Only the visitor can say the draft of C belongs to D, or drop it.
+  assert.ok(S.move(draftOfC, entry(fromProfile(w, 'D')), { base: draftOfC.rev }).ok);
+  assert.deepEqual(plain(S.find(entry(fromProfile(w, 'D'))).values), WET);
+});
+
+test('a list made longer, two shifts with one name, and a list of another kind are unclear too', () => {
+  const w = profilePage();
+  const S = w.ShiftContext;
+  w.Workplace.set({ shifts: ['A', 'B', 'C'] });
+  S.setActive(fromProfile(w, 'A'));
+  const stored = S.active();
+  // One more shift at the end: A is where it was, but the list is not the one it was chosen from.
+  assert.deepEqual(plain(S.place(stored, ['A', 'B', 'C', 'D'], 'profile')), { state: 'unclear', candidates: [0] });
+  // Two shifts share the word: neither is assumed.
+  assert.deepEqual(plain(S.place(stored, ['B', 'A', 'A'], 'profile')), { state: 'unclear', candidates: [1, 2] });
+  // The profile's shifts cleared, so the page shows its built-in list: nothing ties the two.
+  assert.deepEqual(plain(S.place(stored, SHIFTS, 'sq')), { state: 'unclear', candidates: [] });
+  assert.equal(S.activeOn(SHIFTS, 'sq').reason, 'shift-unclear');
+  // And the other way round.
+  S.setActive(NIGHT);
+  assert.equal(S.activeOn(['A', 'B', 'C'], 'profile').reason, 'shift-unclear');
+  // What is not a list, or a kind of list this file does not know, is unclear rather than an error.
+  for (const [shifts, list] of [[null, 'sq'], [[], 'sq'], [SHIFTS, 'it'], [SHIFTS, undefined]]) assert.deepEqual(plain(S.place(S.active(), shifts, list)), { state: 'unclear', candidates: [] });
+  assert.deepEqual(plain(S.activeOn(SHIFTS, 'sq')), { ok: true, active: plain(S.active()), index: 2, label: 'Natë' });
+  S.clearActive();
+  assert.deepEqual(plain(S.activeOn(SHIFTS, 'sq')), { ok: false, reason: 'none' });
+});
+
+test('the lists built into the pages are the same shifts in every language: the active shift is found by its place, with the page\'s word', () => {
+  const w = open();
+  const S = w.ShiftContext;
+  S.setActive(NIGHT);
+  const lists = {};
+  for (const [lang, dir] of [['en', ''], ['de', 'de/'], ['sq', 'sq/']]) {
+    const handover = JSON.parse(fs.readFileSync(`src/_data/${dir}shiftHandover.json`, 'utf8')).shifts;
+    lists[lang] = handover;
+    // The logs of the pilot offer the same shifts, in the same order, as the handover of their language.
+    for (const file of ['damageControl', 'incompleteControl', 'nightAudit']) {
+      const options = JSON.parse(fs.readFileSync(`src/_data/${dir}${file}.json`, 'utf8')).fields.find((field) => field.name === 'shift').options;
+      assert.deepEqual(options, handover, `${lang} ${file}`);
+    }
+  }
+  assert.deepEqual(lists.sq, SHIFTS);
+  assert.deepEqual([lists.en.length, lists.de.length, lists.sq.length], [3, 3, 3], 'which is what lets a place stand for the same shift across them');
+  for (const lang of ['en', 'de', 'sq']) {
+    const found = S.activeOn(lists[lang], lang);
+    assert.deepEqual([found.ok, found.index, found.label], [true, 2, lists[lang][2]], lang);
+  }
+  // In its own language the word must be in its place: a built-in list that changed is unclear, like any other.
+  assert.equal(S.activeOn(['Natë', 'Mëngjes', 'Pasdite'], 'sq').reason, 'shift-unclear');
+  assert.deepEqual(plain(S.activeOn(['Natë', 'Mëngjes', 'Pasdite'], 'sq').candidates), [0]);
+  // A built-in list of another length in another language is not assumed to be the same shifts.
+  assert.equal(S.activeOn(['Early', 'Night'], 'en').reason, 'shift-unclear');
+});
+
+// ---- The PIN of a shared computer ----
+
+test('the lock takes the active shift, the drafts and the copy kept aside into its record, like any work', () => {
+  const w = open('/sq/tools/damage-control/', { scripts: ['shift-context', 'work-lock'] });
+  const { lockable, gather, OPEN } = w.WorkLockMath;
+  for (const key of [ACTIVE, DRAFTS, ASIDE]) {
+    assert.ok(lockable(key), `${key} is locked away`);
+    assert.ok(!OPEN.has(key), `${key} is not left readable`);
+  }
+  w.ShiftContext.setActive(NIGHT);
+  w.ShiftContext.save(entry(NIGHT), WET);
+  w.localStorage.setItem(ASIDE, 'a damaged list');
+  w.localStorage.setItem('sc-theme', 'light');
+  assert.deepEqual(Object.keys(plain(gather(w.localStorage))).sort(), [ASIDE, DRAFTS, ACTIVE].sort(), 'all three go into the record; the theme stays out');
 });

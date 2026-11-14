@@ -4,7 +4,7 @@
 // other values, the page asks before anything is changed; leaving the question changes nothing.
 import { test, expect, expectAccessible } from "./fixtures.mjs";
 
-const NIGHT = { tool: "sc-damage-control", form: "entry", scope: "", date: "2026-11-11", index: 2, of: 3, label: "Night" };
+const NIGHT = { tool: "sc-damage-control", form: "entry", scope: "", date: "2026-11-11", index: 2, of: 3, label: "Night", list: "en" };
 const HERE = { stage: "Receiving", cause: "Packaging", units: "4", note: "wet box" };
 const THERE = { stage: "Receiving", cause: "Equipment", units: "2", note: "damaged fork" };
 const held = (page) => page.evaluate(() => Object.fromEntries(Object.keys(localStorage).filter((key) => key.startsWith("sc-") && !/^sc-(theme|seen-)/.test(key)).sort().map((key) => [key, localStorage.getItem(key)])));
@@ -26,7 +26,7 @@ test("a file whose unfinished form differs from the one here: asked first, Esc c
   page.on("dialog", (dialog) => dialog.accept());
   await page.goto("/tools.html");
   await page.evaluate(([context, values]) => {
-    window.ShiftContext.setActive({ date: "2026-11-12", index: 0, of: 3, label: "Early" });
+    window.ShiftContext.setActive({ date: "2026-11-12", index: 0, of: 3, label: "Early", list: "en" });
     window.ShiftContext.save(context, values);
   }, [NIGHT, HERE]);
   const before = await held(page);
@@ -94,4 +94,95 @@ test("a restore point whose unfinished form differs from the one here asks the s
   await restore.click();
   await Promise.all([page.waitForEvent("load"), question.locator('[data-work-drafts-choice="file"]').click()]);
   expect(await draft(page)).toEqual(HERE);
+});
+
+// The PIN of a shared computer (js/work-lock.js), through the page's own controls: the active shift, the drafts and
+// the copy kept aside of drafts that could not be read are locked away with the rest of the work, are not there while
+// the tools are locked, and come back whole. The file saved afterwards holds the drafts and the copy, not the active
+// shift, and opens in an empty browser by the rules of docs/DATA-FORMATS.md.
+test("drafts through the PIN lock and back, then into a saved file and out of it in an empty browser", async ({ page }) => {
+  test.setTimeout(120_000);
+  page.on("dialog", (dialog) => dialog.accept());
+  const KEYS = ["sc-shift-ui", "sc-drafts-ui", "sc-drafts-unreadable-ui"];
+  const three = () => page.evaluate((keys) => Object.fromEntries(keys.map((key) => [key, localStorage.getItem(key)])), KEYS);
+  const EARLY = { ...NIGHT, date: "2026-11-12", index: 0, label: "Early" };
+  const DAMAGED = '{"v":1,"drafts":[{"tool":"sc-damage-control","form":"ent';
+  const PIN = "246810";
+
+  await page.goto("/tools/damage-control/");
+  // A list of drafts that cannot be read is found first and kept aside; then the work of two shifts.
+  await page.evaluate(([damaged, night, early, here, there]) => {
+    localStorage.setItem("sc-drafts-ui", damaged);
+    window.ShiftContext.drafts();
+    window.ShiftContext.setActive({ date: "2026-11-11", index: 2, of: 3, label: "Night", list: "en" });
+    window.ShiftContext.save(night, here);
+    window.ShiftContext.save(early, there);
+  }, [DAMAGED, NIGHT, EARLY, HERE, THERE]);
+  const before = await three();
+  expect(before["sc-drafts-unreadable-ui"]).toBe(DAMAGED);
+  expect(JSON.parse(before["sc-drafts-ui"]).drafts).toHaveLength(2);
+  const drafts = await page.evaluate(() => window.ShiftContext.drafts());
+
+  // Lock with the PIN, with the page's own form.
+  await page.locator("[data-wl-lock]").click();
+  const setup = page.locator("[data-wl-setup]");
+  await setup.locator("[name=pin]").fill(PIN);
+  await setup.locator("[name=again]").fill(PIN);
+  await Promise.all([page.waitForEvent("load"), setup.locator("button[type=submit]").click()]);
+  const lockDialog = page.locator("[data-work-lock-dialog]");
+  // Locked, and again after a reload: none of the three is in the browser's plain storage, and nothing can be written.
+  for (const again of [false, true]) {
+    if (again) await page.reload();
+    await expect(lockDialog).toBeVisible();
+    expect(await three()).toEqual({ "sc-shift-ui": null, "sc-drafts-ui": null, "sc-drafts-unreadable-ui": null });
+    expect(await page.evaluate(([night, here]) => ({
+      active: window.ShiftContext.active(), drafts: window.ShiftContext.drafts().length,
+      save: window.ShiftContext.save(night, here).reason,
+      set: window.ShiftContext.setActive({ date: "2026-11-11", index: 2, of: 3, label: "Night", list: "en" }).reason,
+    }), [NIGHT, HERE])).toEqual({ active: null, drafts: 0, save: "locked", set: "locked" });
+    expect(await three()).toEqual({ "sc-shift-ui": null, "sc-drafts-ui": null, "sc-drafts-unreadable-ui": null });
+  }
+  // A wrong PIN opens nothing.
+  await lockDialog.locator("[name=pin]").fill("135791");
+  await lockDialog.locator("button[type=submit]").click();
+  await expect(lockDialog.locator("[data-wl-error]")).not.toBeEmpty();
+  expect(await three()).toEqual({ "sc-shift-ui": null, "sc-drafts-ui": null, "sc-drafts-unreadable-ui": null });
+
+  // The PIN brings back all three, to the byte: every draft with its values and its rev, the copy aside, the shift.
+  await lockDialog.locator("[name=pin]").fill(PIN);
+  await Promise.all([page.waitForEvent("load"), lockDialog.locator("button[type=submit]").click()]);
+  await expect(lockDialog).toBeHidden();
+  expect(await three()).toEqual(before);
+  expect(await page.evaluate(() => window.ShiftContext.drafts())).toEqual(drafts);
+  expect(await page.evaluate(() => window.ShiftContext.activeOn(["Early", "Late", "Night"], "en"))).toMatchObject({ ok: true, index: 2, label: "Night" });
+
+  // The saved file: the drafts and the copy aside as they are, and no active shift.
+  const [download] = await Promise.all([page.waitForEvent("download"), page.locator("[data-work-save]").click()]);
+  const path = await download.path();
+  const { readFile } = await import("node:fs/promises");
+  const file = JSON.parse(await readFile(path, "utf8"));
+  expect(file.items["sc-drafts-ui"]).toBe(before["sc-drafts-ui"]);
+  expect(file.items["sc-drafts-unreadable-ui"]).toBe(DAMAGED);
+  expect(Object.keys(file.items)).not.toContain("sc-shift-ui");
+
+  // An empty browser opens it: the drafts are there with their values, the copy aside too, and no shift is active.
+  await page.evaluate(() => Object.keys(localStorage).filter((key) => key.startsWith("sc-") && key !== "sc-theme").forEach((key) => localStorage.removeItem(key)));
+  await page.reload();
+  expect(await page.evaluate(() => window.ShiftContext.drafts().length)).toBe(0);
+  await Promise.all([page.waitForEvent("load"), page.locator("[data-work-open]").setInputFiles(path)]);
+  await expect(page.locator("[data-work-drafts-dialog]")).toBeHidden();
+  const restored = await page.evaluate(() => window.ShiftContext.drafts());
+  const values = (list) => list.map((draft) => [draft.date, draft.index, draft.label, draft.list, draft.values]).sort((a, b) => (a[0] < b[0] ? -1 : 1));
+  expect(values(restored)).toEqual(values(drafts));
+  const after = await three();
+  expect(after["sc-drafts-unreadable-ui"]).toBe(DAMAGED);
+  expect(after["sc-shift-ui"]).toBeNull();
+
+  // Opened again where a copy aside is already kept and the drafts are the same: nothing is asked, the copy here stays.
+  await page.evaluate(() => localStorage.setItem("sc-drafts-unreadable-ui", "the copy this browser keeps"));
+  const kept = await page.evaluate(() => window.ShiftContext.drafts());
+  await Promise.all([page.waitForEvent("load"), page.locator("[data-work-open]").setInputFiles(path)]);
+  expect((await three())["sc-drafts-unreadable-ui"]).toBe("the copy this browser keeps");
+  expect(await page.evaluate(() => window.ShiftContext.drafts())).toEqual(kept);
+  expect((await three())["sc-shift-ui"]).toBeNull();
 });

@@ -323,7 +323,7 @@ Kjo pjesë është bërë (hapi 2). Kodi është te `src/js/shift-context.js`; a
 
 - **Mjeti dhe gjuha.** Çdo regjistër ka çelësin e vet për çdo gjuhë (`sc-damage-control`, `-de`, `-sq`). Prandaj një draft i takon çelësit ku forma do të shkruajë, jo vetëm mjetit.
 - **Konteksti i punës.** Regjistri i dëmeve është një për shfletues dhe gjuhë; nuk ndahet sipas vendit të punës. Dorëzimi ka shabllon dhe zonë. Prandaj drafti ka edhe një `scope` të lirë, bosh për regjistrat, që dorëzimi ta përdorë në hapin 3.
-- **Turni.** Fjalët e turneve ndryshojnë sipas gjuhës, por renditja është e njëjtë. Turni ruhet si pozicion në listë (`index`) bashkë me gjatësinë e listës (`of`), dhe fjala (`label`) vetëm për t'u shfaqur. Kjo mbyll pyetjen e hapur te pjesa 8.
+- **Turni.** Fjalët e turneve ndryshojnë sipas gjuhës, por renditja është e njëjtë. Turni ruhet me katër pjesë: pozicioni në listë (`index`), gjatësia e listës (`of`), fjala (`label`) dhe lloji i listës (`list`). Shih 6.6 për arsyen. Kjo mbyll pyetjen e hapur te pjesa 8.
 - **Kyçja me PIN.** Asgjë nuk shkruhet kur mjetet janë të kyçura, si te çdo mjet tjetër.
 
 ### 6.2 Çfarë ruhet
@@ -340,7 +340,7 @@ Turnin aktiv e vendos vetëm `setActive()`. Nuk e ndryshon ora, as rikthimi i nj
 
 ### 6.3 Identiteti i një drafti
 
-Një draft është i një forme në një turn. Identiteti ka gjashtë pjesë: çelësi i mjetit (me gjuhën), emri i formës, `scope`, data operative, pozicioni i turnit dhe gjatësia e listës së turneve.
+Një draft është i një forme në një turn. Identiteti është: çelësi i mjetit (me gjuhën), emri i formës, `scope`, data operative dhe turni i plotë (pozicioni, gjatësia e listës, fjala dhe lloji i listës).
 
 - Dy forma me të njëjtën datë dhe turn janë dy drafte kur ndryshon çdo pjesë tjetër.
 - Një identitet ka një draft. Drafti ekziston vetëm sa ka diçka të shkruar.
@@ -364,7 +364,48 @@ Një draft është i një forme në një turn. Identiteti ka gjashtë pjesë: ç
 - Lista e drafteve që nuk lexohet dot mbahet mënjanë e paprekur dhe lista lexohet si bosh. Një rekord që nuk është draft lihet jashtë në të njëjtën mënyrë.
 - Ruajtja e bllokuar ose e mbushur kthen një përgjigje me arsyen; faqja nuk rrëzohet.
 
-### 6.6 Çfarë pret hapin 3 dhe hapin 4
+### 6.6 Kur lista e turneve ndryshon
+
+Verifikim i bërë pas hapit 2, më 15 nëntor 2026. Turnet e profilit janë të përdoruesit: mund t'u ndryshojë rendin ose emrin.
+
+**Çfarë doli.** Versioni i parë i hapit 2 (`021839f`) e njihte turnin vetëm nga pozicioni dhe gjatësia e listës. Me profilin e vërtetë (`workplace.js`):
+
+| Ndryshimi i listës | Para korrigjimit |
+| --- | --- |
+| Rendi: A, B, C bëhet C, A, B | Turni aktiv C lexohej si B. Drafti i C-së dilte te forma e B-së. |
+| Zëvendësimi: A, B, C bëhet A, B, D | Turni aktiv C lexohej si D. Drafti i C-së dilte te forma e D-së. |
+
+**Korrigjimi.** Fjala dhe lloji i listës u bënë pjesë e detyrueshme e çdo turni të ruajtur dhe e identitetit të draftit. Lloji është `en`, `de` ose `sq` për listën e ngulitur të asaj gjuhe, dhe `profile` për turnet e profilit.
+
+- Një turn i ruajtur nuk lexohet kurrë si “çfarëdo që është në atë pozicion tani”.
+- `place()` thotë ku është sot një turn i ruajtur: “i njëjti” kur lista është e të njëjtit lloj dhe gjatësi dhe ka të njëjtën fjalë në të njëjtin pozicion; përndryshe “i paqartë”, me pozicionet ku gjendet fjala tani (një, asnjë ose disa).
+- `activeOn()` e jep turnin aktiv për një faqe vetëm kur është “i njëjti”.
+- Dy lista të ngulitura të gjuhëve të ndryshme merren si të njëjtat turne në të njëjtin rend. Një test kontrollon që regjistrat dhe dorëzimi i çdo gjuhe ofrojnë të njëjtat tri turne.
+- Një listë e profilit dhe një e ngulitur nuk lidhen: kalimi nga njëra te tjetra është gjithmonë “i paqartë”.
+
+**Pas korrigjimit**, në të dy rastet e tabelës:
+
+- Turni aktiv del “i paqartë”; forma e turnit që zuri vendin është bosh.
+- Drafti mbetet i plotë, si draft i turnit ku u shkrua.
+- Asgjë nuk shkruhet nga leximi: as turni aktiv, as draftet, as profili.
+- Zgjidhja është e shprehur: përdoruesi e zgjedh përsëri turnin, dhe drafti çohet me `move()` ose hidhet.
+
+Edhe një listë më e gjatë, dy turne me të njëjtin emër dhe një listë e ngulitur që ndryshon dalin “të paqarta”.
+
+Ky është ndryshim i formës së ruajtur. Nuk kërkon migrim, sepse asnjë faqe nuk shkruan ende turn aktiv ose draft.
+
+### 6.7 Kyçja me PIN
+
+Verifikim i bërë pas hapit 2, pa ndryshim kodi. Në shfletues të vërtetë, me kontrollet e vetë faqes:
+
+- Me dy drafte, turnin aktiv dhe një kopje të mbajtur mënjanë, kyçja i heq të tria nga ruajtja e lexueshme.
+- Sa janë të kyçura, edhe pas rifreskimit, asgjë nuk lexohet dhe asgjë nuk shkruhet. PIN-i i gabuar nuk hap asgjë.
+- PIN-i i saktë i kthen të tria bajt për bajt: çdo draft me vlerat dhe `rev`-in, kopja mënjanë, turni aktiv.
+- Skedari i ruajtur më pas mban draftet dhe kopjen mënjanë, jo turnin aktiv.
+- Në një shfletues bosh skedari hapet: draftet kthehen me vlerat e tyre, kopja mënjanë vjen, asnjë turn nuk aktivizohet.
+- Ku ka tashmë një kopje mënjanë, ajo e skedarit nuk e zëvendëson.
+
+### 6.8 Çfarë pret hapin 3 dhe hapin 4
 
 Këto nuk janë implementuar, sepse varen nga mbyllja e përbashkët ose nga ndërfaqja:
 
@@ -449,8 +490,8 @@ Asnjë mjet nuk dërgon `origin`, asnjë faqe nuk shkruan `id`, dhe asnjë faqe 
 | Sa kohë duhet që çdo pajisje të marrë versionin që e mban `id`-në, para se të dalë 1c. | 1c |
 | Rreshtat e rinj me `id` dhe të vjetrit pa `id` në faqet e vërteta, mes dy pajisjeve. | 1c |
 | Tri përfundimet e “Hap burimin” për rreshta pa `id`. | 5 |
-| Sjelljet e drafteve që varen nga mbyllja (6.6): turni i mbyllur, paralajmërimi i mbylljes, K12. | 3 |
-| Kyçja me PIN dhe draftet në faqet e vërteta: draftet hyjnë te rekordi i kyçur dhe kthehen pas hapjes. | 4 |
+| Sjelljet e drafteve që varen nga mbyllja (6.8): turni i mbyllur, paralajmërimi i mbylljes, K12. | 3 |
+| Ndërfaqja për një turn “të paqartë” (6.6): si i tregohet përdoruesit dhe si e zgjidh. | 4 |
 | Mbyllja pa dorëzim dhe nisja e shprehur nga faqja e Dorëzimit, pa “Sot”. | 3 |
 | Kriteret K1–K16 (3.6), me kodin e vërtetë të mbylljes dhe të mbartjes në vend të modelit. | 3 |
 | Mbartja: vend pune i ndryshëm, turn jo pasues, çështje e paqartë. | 3 |

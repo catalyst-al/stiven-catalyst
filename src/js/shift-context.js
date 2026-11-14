@@ -2,20 +2,32 @@
 // yet: this file keeps them, so the pages that will have one place to ask (docs/plan-sot-2026-11-11/PLANI.md, step 2;
 // docs/DATA-FORMATS.md §1).
 //
-// The active shift is a setting of this device: localStorage "sc-shift-ui", { v: 1, date, index, of, label, set }.
-// date is the operative date the visitor chose (ISO; a night shift keeps the date it started on), index the shift's
-// place in the list it was chosen from and of the length of that list, so the same shift is found on a page of another
-// language, whose words differ; label is the word as it was shown, for a page that does not have the list. Nothing
+// The active shift is a setting of this device: localStorage "sc-shift-ui", { v: 1, date, index, of, label, list,
+// set }. date is the operative date the visitor chose (ISO; a night shift keeps the date it started on). A shift is
+// kept as what it was when it was chosen: index, its place in the list it was chosen from; of, the length of that
+// list; label, the word it was shown as; and list, which list that was: "en", "de" or "sq" for the list built into the
+// pages of that language, "profile" for the shifts of the workplace profile, the same words in every language. Nothing
 // sets it but setActive(): not the clock, not a file put back, not a restore point. It is not work: it is in no saved
 // file and no restore point (work-backup.js SKIP), and team sync shares no key that ends in "-ui".
+//
+// A place in a list says nothing by itself: the visitor may put the profile's shifts in another order, or name another
+// shift in the same place. So a stored shift is never read as "whatever is in that place now". place() says where it
+// is in a list as it is today: "same" when the list is of the same kind and length and has the same word in the same
+// place (or when both lists are built into the pages, of two languages: the same shifts in the same order, in other
+// words); otherwise "unclear", with the places where its word is found now (one, none or several). activeOn() gives
+// the active shift for a page's list only when it is "same". Nothing here changes a stored shift or the profile: what
+// is unclear stays as it was kept, for the visitor to settle.
 //
 // A draft is what was typed into a form and not yet entered: localStorage "sc-drafts-ui", { v: 1, drafts: [draft] },
 // a draft being { tool, form, scope, date, index, of, label, values, updated, rev }. A draft is of one form in one
 // shift, and that is its identity: tool is the storage key the form writes to (sc-damage-control-sq: the tool and the
 // language, each language keeping its own log), form the form's name on that page, scope what else sets two forms of
-// the page apart (an area; "" when nothing does), then the operative date and the shift (index and of). Two forms that
-// share a date and a shift are two drafts as long as anything else of the identity differs; one identity has one
-// draft. A draft exists only while it holds something: saving empty values removes it.
+// the page apart (an area; "" when nothing does), then the operative date and the shift, whole: index, of, label and
+// list. Two forms that share a date and a shift are two drafts as long as anything else of the identity differs; one
+// identity has one draft. A draft exists only while it holds something: saving empty values removes it. Because the
+// word and the kind of list are part of the identity, a draft of a shift whose place now holds another shift is not
+// found for that other shift: it stays in the list as the draft of the shift it was written in, and place() says where
+// that shift is now, for move() to carry it when the visitor asks.
 //
 // Nothing moves a draft by itself. move() carries one to another identity only when asked, and refuses when the
 // target has work (a draft there, or a form the caller says has work): both stay as they were.
@@ -42,6 +54,9 @@ window.ShiftContext = (() => {
   const MAX_FIELDS = 24;
   const MAX_TEXT = 2000;
   const MAX_SHIFTS = 24;
+  // Which list a shift was chosen from: the one built into the pages of a language, or the workplace profile's.
+  const BUILT_IN = ["en", "de", "sq"];
+  const LISTS = [...BUILT_IN, "profile"];
 
   const isObject = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   const str = (value) => (typeof value === "string" ? value : "");
@@ -69,11 +84,32 @@ window.ShiftContext = (() => {
     try { window.dispatchEvent(new CustomEvent("shift-context:changed", { detail: { what } })); } catch { /* no events here */ }
   };
 
-  // A shift: its place in a list and the length of that list, with the word it was shown as.
+  // A shift as it was chosen: its place in a list, the length of that list, the word it was shown as and which list
+  // it was. All four, or it is not a shift: a place without its word could be read as another shift later.
+  const word = (value) => str(value).trim().replace(/\s+/g, " ");
   const shiftOf = (value) => {
     if (!isObject(value) || !Number.isInteger(value.index) || !Number.isInteger(value.of)) return null;
     if (value.of < 1 || value.of > MAX_SHIFTS || value.index < 0 || value.index >= value.of) return null;
-    return { index: value.index, of: value.of, label: str(value.label).trim().slice(0, 60) };
+    const label = word(value.label);
+    if (!label || label.length > 60 || !LISTS.includes(value.list)) return null;
+    return { index: value.index, of: value.of, label, list: value.list };
+  };
+  // Where a stored shift (the active one, or a draft's) is in a list as it is now. shifts is the list of the page, list
+  // its kind. { state: "same", index } when it is the same shift in the same place; { state: "unclear", candidates }
+  // otherwise, candidates being the places that hold its word now: one when the shift moved, none when it is gone or
+  // the lists cannot be compared, several when two shifts share the word. Nothing is changed.
+  const place = (item, shifts, list) => {
+    const shift = shiftOf(item);
+    const words = Array.isArray(shifts) ? shifts.map(word) : [];
+    if (!shift || !LISTS.includes(list) || !words.length) return { state: "unclear", candidates: [] };
+    if (shift.list === list) {
+      if (words.length === shift.of && words[shift.index] === shift.label) return { state: "same", index: shift.index, candidates: [shift.index] };
+      return { state: "unclear", candidates: words.map((text, at) => (text === shift.label ? at : -1)).filter((at) => at >= 0) };
+    }
+    // The lists built into the pages of two languages are the same shifts in the same order, in other words. A list
+    // of the profile and a built-in one have nothing that ties a place in one to a place in the other.
+    if (BUILT_IN.includes(shift.list) && BUILT_IN.includes(list) && words.length === shift.of) return { state: "same", index: shift.index, candidates: [shift.index] };
+    return { state: "unclear", candidates: [] };
   };
 
   // ---- The active shift ----
@@ -87,6 +123,17 @@ window.ShiftContext = (() => {
     const storage = store();
     if (!storage) return null;
     try { return cleanActive(JSON.parse(storage.getItem(ACTIVE_KEY))); } catch { return null; }
+  };
+  // The active shift for a page, given the page's list of shifts and its kind: { ok: true, active, index, label } with
+  // the word of this page's list, or { ok: false, reason: "none" } when no shift is active and { ok: false, reason:
+  // "shift-unclear", active, candidates } when the stored shift is not surely one of this list (place()). A page uses
+  // this, never the stored place by itself.
+  const activeOn = (shifts, list) => {
+    const stored = active();
+    if (!stored) return { ok: false, reason: "none" };
+    const where = place(stored, shifts, list);
+    if (where.state !== "same") return { ok: false, reason: "shift-unclear", active: stored, candidates: where.candidates };
+    return { ok: true, active: stored, index: where.index, label: word(shifts[where.index]) };
   };
   const setActive = (value) => {
     const next = cleanActive({ ...(isObject(value) ? value : {}), v: VERSION, set: Date.now() });
@@ -133,7 +180,7 @@ window.ShiftContext = (() => {
     if (!/^[a-z][a-z0-9-]{0,39}$/.test(form) || scope.length > 200 || !isDate(str(context.date)) || !shift) return null;
     return { tool, form, scope, date: context.date, ...shift };
   };
-  const identity = (context) => JSON.stringify([context.tool, context.form, context.scope, context.date, context.index, context.of]);
+  const identity = (context) => JSON.stringify([context.tool, context.form, context.scope, context.date, context.index, context.of, context.list, context.label]);
   const cleanDraft = (item) => {
     const context = cleanContext(item);
     if (!context || !/^[a-z0-9]{6,32}$/.test(str(item.rev))) return null;
@@ -276,7 +323,7 @@ window.ShiftContext = (() => {
 
   return {
     ACTIVE_KEY, DRAFTS_KEY, ASIDE_KEY, VERSION, MAX_DRAFTS,
-    active, setActive, clearActive,
+    active, activeOn, setActive, clearActive, place,
     drafts, find, save, drop, move, hasWork, sameValues, identity: (context) => { const wanted = cleanContext(context); return wanted ? identity(wanted) : ""; },
     sound, planRestore, settleRestore,
   };
