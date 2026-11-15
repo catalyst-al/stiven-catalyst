@@ -225,7 +225,7 @@ test('the audit: Disallow /t with Allow /tools/ blocks nothing the sitemap offer
   const { audit } = await load();
   const report = audit(cleanSite({ robots: `User-agent: *\nDisallow: /t\nAllow: /tools/\n\nSitemap: ${O}/sitemap.xml\n` }));
   assert.ok(!report.errors.some((e) => e.url.startsWith('/tools/') || e.url.startsWith('/de/')), 'no false error under /tools/');
-  assert.ok(found(report, 'robots', '/team/', /Googlebot and \*/), 'the page /t really blocks is still reported');
+  assert.ok(found(report, 'robots', '/team/', /for Googlebot/), 'the page /t really blocks is still reported');
   assert.ok(found(report, 'sitemap', '/team/', /disallows/));
 });
 
@@ -234,7 +234,21 @@ test('a robots rule for Googlebot alone, or behind a grouped user-agent, is foun
   let report = audit(cleanSite({ robots: `User-agent: Googlebot\nDisallow: /tools/\n\nSitemap: ${O}/sitemap.xml\n` }));
   assert.ok(found(report, 'robots', '/tools/fictional/', /Googlebot/));
   report = audit(cleanSite({ robots: `User-agent: *\nUser-agent: Googlebot\nDisallow: /tools/\n\nSitemap: ${O}/sitemap.xml\n` }));
-  assert.ok(found(report, 'robots', '/tools/fictional/', /Googlebot and \*/));
+  assert.ok(found(report, 'robots', '/tools/fictional/', /for Googlebot/));
+});
+
+test('a Googlebot group overrides the * group: allowed there means not blocked, blocked there means blocked', async () => {
+  const { audit } = await load();
+  // The counterexample: every crawler is shut out, but Googlebot has its own group that allows everything.
+  let report = audit(cleanSite({ robots: `User-agent: *\nDisallow: /\n\nUser-agent: Googlebot\nAllow: /\n\nSitemap: ${O}/sitemap.xml\n` }));
+  assert.ok(!report.errors.some((e) => e.check === 'robots' || /disallows/.test(e.detail)), 'nothing is blocked for Googlebot');
+  assert.deepEqual(report.errors, []);
+  // The reverse: every crawler may come, but Googlebot's own group shuts it out.
+  report = audit(cleanSite({ robots: `User-agent: *\nAllow: /\n\nUser-agent: Googlebot\nDisallow: /\n\nSitemap: ${O}/sitemap.xml\n` }));
+  for (const url of ['/', '/tools/fictional/', '/de/tools/fictional/', '/team/']) {
+    assert.ok(found(report, 'robots', url, /for Googlebot/), `${url} is blocked for Googlebot`);
+    assert.ok(found(report, 'sitemap', url, /disallows it for Googlebot/), `${url} is listed in the sitemap but blocked`);
+  }
 });
 
 test('a missing og:url and a missing x-default are warnings', async () => {
@@ -278,9 +292,10 @@ test('titles and descriptions that differ only in capitals or whitespace are dup
 
 test('sitemap lastmod: the W3C forms pass, anything else is an error', async () => {
   const { audit, validLastmod } = await load();
-  for (const ok of ['2026', '2026-11', '2026-11-14', '2026-11-14T08:30Z', '2026-11-14T08:30:05+01:00', '2026-11-14T08:30:05.123Z', '2024-02-29']) assert.equal(validLastmod(ok), true, ok);
-  for (const bad of ['14.11.2026', '2026-13-01', '2026-02-30', '2025-02-29', '2026-11-14T25:00Z', '2026-11-14T08:30', 'yesterday', '']) assert.equal(validLastmod(bad), false, bad);
+  for (const ok of ['2026', '2026-11', '2026-11-14', '2026-11-14T08:30Z', '2026-11-14T08:30:05+01:00', '2026-11-14T08:30:05.123Z', '2024-02-29', '2026-11-14T08:30:05+14:00', '2026-11-14T08:30:05-12:00', '2026-11-14T08:30+05:45', '2026-11-14T08:30:05-00:00']) assert.equal(validLastmod(ok), true, ok);
+  for (const bad of ['14.11.2026', '2026-13-01', '2026-02-30', '2025-02-29', '2026-11-14T25:00Z', '2026-11-14T08:30', 'yesterday', '', '2026-11-14T08:30:05+99:99', '2026-11-14T08:30:05+01:60', '2026-11-14T08:30:05+15:00', '2026-11-14T08:30:05-13:00', '2026-11-14T08:30+14:01']) assert.equal(validLastmod(bad), false, bad);
   assert.ok(found(audit(cleanSite({ lastmod: '2026-02-30' })), 'sitemap', '/sitemap.xml', /not a valid W3C date/));
+  assert.ok(found(audit(cleanSite({ lastmod: '2026-11-14T08:30:05+99:99' })), 'sitemap', '/sitemap.xml', /not a valid W3C date/), 'an impossible time-zone offset');
   assert.deepEqual(audit(cleanSite({ lastmod: '2026-11-14T08:30:05+01:00' })).errors, []);
 });
 
