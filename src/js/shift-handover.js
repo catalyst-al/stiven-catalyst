@@ -260,7 +260,7 @@
   // The handover as shared: without the names of people unless asked, without what the other device decides for
   // itself (the takeover, the sharing and receiving records).
   const forTransfer = (h, { names = false } = {}) => {
-    const { ackAt, shared, ack, received, ...rest } = h;
+    const { ackAt, shared, ack, received, carriedFrom, ...rest } = h;
     return {
       ...rest,
       from: names ? rest.from : "",
@@ -330,7 +330,9 @@
 
   const form = document.querySelector("[data-handover]");
   const dataEl = document.getElementById("shift-handover-data");
-  if (!form || !dataEl || !window.ToolKit) return;
+  if (!form || !dataEl || !window.ToolKit || !window.ShiftClose) return;
+  // Closing a shift and carrying its open issues (js/shift-close.js): the one mechanism, this page its first user.
+  const Close = window.ShiftClose;
 
   const { LOCALE, tx, dayMonth, lower, pct, plural, read, readOwn, write, isObject, str, el, today, parseDate, parseNumber, renderOnPause, partialRouteLog } = window.ToolKit;
   const data = JSON.parse(dataEl.textContent);
@@ -394,24 +396,30 @@
     })) : [];
     const checks = base.checks.map((_, i) => Array.isArray(h.checks) && h.checks[i] === true);
     const MODES = ["link", "qr", "file"];
-    const shared = Array.isArray(h.shared) ? h.shared.filter(isObject).map((entry) => ({ id: str(entry.id), at: str(entry.at), mode: MODES.includes(entry.mode) ? entry.mode : "link", ack: str(entry.ack) })).filter((entry) => entry.id).slice(-10) : [];
+    const shared = Array.isArray(h.shared) ? h.shared.filter(isObject).map((entry) => ({ id: str(entry.id), at: str(entry.at), mode: MODES.includes(entry.mode) ? entry.mode : "link", ack: str(entry.ack), ...(Close.sumOf(entry.sum) ? { sum: entry.sum } : {}) })).filter((entry) => entry.id).slice(-10) : [];
     const ack = isObject(h.ack) && str(h.ack.id) ? { id: str(h.ack.id), at: str(h.ack.at), by: str(h.ack.by), code: str(h.ack.code) } : null;
     const received = isObject(h.received) && str(h.received.id) ? { id: str(h.received.id), at: str(h.received.at), from: str(h.received.from), ackCode: str(h.received.ackCode) } : null;
-    return { ...base, area: str(h.area), from: str(h.from), to: str(h.to), headsUp: str(h.headsUp), safety: str(h.safety), ackAt: str(h.ackAt), metrics, issues, checks, shared, ack, received };
+    return { ...base, area: str(h.area), from: str(h.from), to: str(h.to), headsUp: str(h.headsUp), safety: str(h.safety), ackAt: str(h.ackAt), metrics, issues, checks, shared, ack, received, ...(Close.carriedFromOf(h).length ? { carriedFrom: Close.carriedFromOf(h) } : {}) };
   };
   const saved = read(KEY, {});
   const state = {
     current: isObject(saved) && isObject(saved.current) ? clean(saved.current) : blank(Object.keys(data.templates)[0]),
     history: isObject(saved) && Array.isArray(saved.history)
       ? saved.history.filter((entry) => isObject(entry) && isObject(entry.handover) && typeof entry.text === "string")
-        .map((entry) => ({ ...entry, handover: clean(entry.handover) }))
+        .map((entry) => ({ text: entry.text, handover: clean(entry.handover), ...Close.cleanEntry(entry) }))
       : [],
+    // No shift is open: the last one was closed and the next has not been started (js/shift-close.js). `current` is
+    // then a blank handover the page does not show.
+    idle: isObject(saved) && saved.idle === true,
     received: isObject(saved) && Array.isArray(saved.received)
       ? saved.received.filter(isObject).map((entry) => ({ id: str(entry.id), at: str(entry.at) })).filter((entry) => entry.id).slice(-50)
       : [],
   };
   const save = () => write(KEY, state);
   const cur = () => state.current;
+  // The list of shifts this page offers is the one built into the pages of its language (js/shift-context.js).
+  const LIST = ["de", "sq"].includes(document.documentElement.lang) ? document.documentElement.lang : "en";
+  const shiftContext = () => window.ShiftContext || null;
 
   const hasContent = (h) => Boolean(h.area || h.from || h.to || h.headsUp || h.safety
     || h.issues.length || h.metrics.some(([, value]) => value));
@@ -848,11 +856,13 @@
       if (last) lines.push(tx(last.mode === "file" ? "Shared at {time} as a file. The other device confirms with a code." : last.mode === "qr" ? "Shared at {time} as a QR code. The other device confirms with a code." : "Shared at {time} as a link. The other device confirms with a code.", { time: clock(last.at) }));
       if (h.ackAt && !h.ack) lines.push(tx("Confirmed on this device at {time}.", { time: clock(h.ackAt) }));
       if (h.ack) lines.push(tx("Code {code} typed in here at {time}. It matches the code of a handover shared from here, so that handover was opened with its transfer code. It does not prove who opened it, or on which device.", { code: window.ShiftHandoverLink.showAck(h.ack.code), time: clock(h.ack.at) }));
+      // The states above keep their meaning; this says one more thing about a handover that was shared.
+      if (Close.changedAfterShare(h)) lines.push(tx("Changed after it was shared at {time}: the other device has the earlier version. Share it again to send this one.", { time: clock(last.at) }));
       stateLine.textContent = lines.join(" ");
       stateLine.hidden = !lines.length;
     }
     ackText.textContent = h.ackAt
-      ? tx("Confirmed by {name} at {time}. Close the shift to start the next handover with the open issues carried over.", { name: h.to, time: clock(h.ackAt) })
+      ? tx("Confirmed by {name} at {time}. Close the shift; its open issues are carried over when the next shift is started.", { name: h.to, time: clock(h.ackAt) })
       : h.received
         ? tx("You received this handover. Confirm takeover once you have read it; a confirmation code appears, for you to pass to the sender by hand.")
         : tx("The person taking over confirms they have read it and asked their questions.");
@@ -867,6 +877,26 @@
     renderQuality();
   };
 
+  // What a closure says of the handover it holds; nothing for a closure of the page as it was before. The history is
+  // only read: nothing here starts a shift or carries an issue.
+  const closureFacts = (entry) => {
+    if (!entry.closeId) return "";
+    const facts = [];
+    if (!entry.written) facts.push(tx("Nothing was written in this handover."));
+    else facts.push({
+      draft: tx("Closed before it was ready."),
+      ready: tx("Closed ready, never sent from this device."),
+      shared: tx("Closed after it was shared; the other device had not confirmed."),
+      received: tx("Closed as received, before the takeover was confirmed."),
+      taken: tx("Closed after the takeover was confirmed on this device."),
+      acknowledged: tx("Closed after the other device's confirmation code was typed in here."),
+    }[entry.state]);
+    if (entry.changed) facts.push(tx("It was changed after it was last shared."));
+    if (entry.drafts) facts.push(tx(entry.drafts === 1 ? "{n} unfinished form of this shift was left as a draft." : "{n} unfinished forms of this shift were left as drafts.", { n: entry.drafts }));
+    if (entry.carried) facts.push(tx("Its open issues were carried to {shift}, {date}.", { shift: entry.carried.shift, date: longDate(entry.carried.date) }));
+    else if (openIssues(entry.handover).length) facts.push(tx("Its open issues wait for the next shift started in this area."));
+    return facts.join(" ");
+  };
   const renderHistory = () => {
     historyBox.replaceChildren();
     historySection.hidden = !state.history.length;
@@ -876,6 +906,8 @@
       const summary = el("summary");
       summary.append(el("strong", null, `${longDate(h.date)} · ${h.shift}`), ` ${h.area ? `· ${h.area} ` : ""}· ${h.from || "?"} → ${h.to || "?"} · ${tx("{n} open", { n: openIssues(h).length })}`);
       details.append(summary);
+      const facts = closureFacts(entry);
+      if (facts) details.append(el("p", "form-note sh-closure", facts));
       details.append(el("pre", "sh-pre", entry.text));
       const copyButton = el("button", "button-secondary", tx("Copy as text"));
       copyButton.type = "button";
@@ -887,7 +919,79 @@
     });
   };
 
+  // ---- No shift open: the next one is started here, by the visitor ----
+  const startBox = document.querySelector("[data-start]");
+  const setupSection = form.closest("section");
+  // The fields of the start are named apart from the handover's own (start-date, not date).
+  const startField = (name) => startBox.querySelector(`[name="start-${name}"]`);
+  const startTarget = () => ({ template: startField("template").value, date: startField("date").value, shift: startField("shift").value, area: startField("area").value.trim() });
+  // One of two sentences by the number, with the number in it.
+  const counted = (n, one, many) => tx(n === 1 ? one : many, { n });
+  // What starting this shift would do, said before it is done.
+  const renderStartPreview = () => {
+    const target = startTarget();
+    const preview = startBox.querySelector("[data-start-preview]");
+    const button = startBox.querySelector("[data-start-shift]");
+    button.disabled = false;
+    if (!target.date || !data.shifts.includes(target.shift)) { preview.textContent = tx("Choose a date and a shift."); button.disabled = true; return; }
+    if (Close.closed(state, data.shifts, target)) { preview.textContent = tx("This shift was closed in this area. A closed shift is not started again."); button.disabled = true; return; }
+    const waiting = Close.pending(state, data.shifts, target).reduce((n, entry) => n + Close.openOf(entry.handover).length, 0);
+    preview.textContent = waiting
+      ? counted(waiting, "{n} open issue will be carried over.", "{n} open issues will be carried over.")
+      : tx("Nothing will be carried over: no closed shift of this area is waiting before this one.");
+  };
+  let startFilledFor = null;
+  const renderStart = () => {
+    if (!startBox) return;
+    startBox.hidden = !state.idle;
+    setupSection.hidden = state.idle;
+    output.hidden = state.idle;
+    if (!state.idle) { startFilledFor = null; return; }
+    const last = Close.lastClosed(state);
+    const filledFor = last ? last.closedAt : "";
+    // The proposal is filled once for each closure: what the visitor changes in it stays.
+    if (startFilledFor !== filledFor) {
+      startFilledFor = filledFor;
+      const proposal = last && last.handover.date && data.shifts.includes(last.handover.shift) ? nextShift(last.handover) : { date: today(), shift: data.shifts[0] };
+      startField("template").value = last ? last.handover.template : cur().template;
+      startField("date").value = proposal.date;
+      startField("shift").value = proposal.shift;
+      startField("area").value = last ? last.handover.area : "";
+      const lastLine = startBox.querySelector("[data-start-last]");
+      lastLine.textContent = last ? `${longDate(last.handover.date)} · ${last.handover.shift}${last.handover.area ? ` · ${last.handover.area}` : ""}. ${closureFacts(last)}`.trim() : "";
+      lastLine.hidden = !last;
+    }
+    renderStartPreview();
+  };
+  // Starts the shift the visitor confirmed: the handover of that shift is opened, the open issues that wait for it
+  // are carried, and the shift becomes the active one of this device. Asked twice, it starts once.
+  const startShift = () => {
+    const target = startTarget();
+    const result = Close.start(state, { shifts: data.shifts, ...target, make: blank, merge: Link.mergeIssues, priorities: data.priorities });
+    if (!result.ok) {
+      note(result.reason === "closed" ? tx("This shift was closed in this area. A closed shift is not started again.") : result.reason === "open" ? tx("Another handover is open. Close it first.") : tx("Choose a date and a shift."));
+      renderStart();
+      return result;
+    }
+    save();
+    shiftContext()?.setActive({ date: cur().date, index: data.shifts.indexOf(cur().shift), of: data.shifts.length, label: cur().shift, list: LIST });
+    renderAll();
+    if (result.started) {
+      const said = [tx(result.added === 1 ? "Started the {shift} shift handover with {n} carried issue." : "Started the {shift} shift handover with {n} carried issues.", { shift: lower(cur().shift), n: result.added })];
+      if (result.unclear.length) said.push(counted(result.unclear.length, "{n} issue was not carried: it may be the same as one already carried. It stays in the history.", "{n} issues were not carried: they may be the same as ones already carried. They stay in the history."));
+      note(said.join(" "));
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    return result;
+  };
+  if (startBox) {
+    startBox.addEventListener("input", renderStartPreview);
+    startBox.addEventListener("change", renderStartPreview);
+    startBox.querySelector("[data-start-shift]").addEventListener("click", startShift);
+  }
+
   const renderAll = () => {
+    renderStart();
     renderEditor();
     renderOutput();
     renderHistory();
@@ -1106,29 +1210,33 @@
     note(tx(file.pages === 1 ? "PDF saved: one page, laid out the same in every reader and on every printer." : "PDF saved: {n} pages, laid out the same in every reader and on every printer.", { n: file.pages }));
   });
 
-  output.querySelector("[data-close]").addEventListener("click", () => {
+  // Closing the shift (js/shift-close.js). The handover moves to the history as it is, with where it stood; nothing is
+  // sent and nothing is marked as sent. A handover with nothing written closes too, after the warning, and the history
+  // says so. Afterwards no shift is open on this device: the next one is started by the visitor, above.
+  const draftsOf = (h) => (shiftContext()?.drafts() || []).filter((draft) => draft.date === h.date && draft.list === LIST && draft.label === h.shift).length;
+  const closeShift = () => {
+    if (state.idle) return null;
     const h = cur();
-    if (!hasContent(h)) {
-      note(tx("There is nothing to close yet."));
-      return;
-    }
-    const open = openIssues(h);
-    if (!window.confirm(tx(open.length === 1 ? "Close the {shift} shift? It moves to the history, and {n} open issue carries over to the next handover." : "Close the {shift} shift? It moves to the history, and {n} open issues carry over to the next handover.", { shift: lower(h.shift), n: open.length }))) return;
-    state.history.unshift({ closedAt: new Date().toISOString(), handover: JSON.parse(JSON.stringify(h)), text: asText(h) });
-    state.history = state.history.slice(0, HISTORY_MAX);
-    const next = nextShift(h);
-    state.current = {
-      ...blank(h.template, next.date, next.shift),
-      area: h.area,
-      from: h.to,
-      metrics: h.metrics.map(([label]) => [label, "", ""]),
-      issues: open.map((issue) => ({ ...issue, carried: (issue.carried || 0) + 1 })),
-    };
+    const written = hasContent(h);
+    const status = transferState(h);
+    const open = openIssues(h).length;
+    const drafts = draftsOf(h);
+    const said = [tx("Close the {shift} shift? It moves to the history, and no shift is open until you start the next one. Closing sends nothing.", { shift: lower(h.shift) })];
+    if (!written) said.push(tx("Nothing is written in this handover; the history will say so."));
+    else if (status === "draft" || status === "ready") said.push(tx("It has not been sent to another device."));
+    if (Close.changedAfterShare(h)) said.push(tx("It was changed after it was last shared."));
+    if (open) said.push(counted(open, "{n} open issue waits for the next shift started in this area.", "{n} open issues wait for the next shift started in this area."));
+    if (drafts) said.push(counted(drafts, "{n} unfinished form of this shift stays as a draft.", "{n} unfinished forms of this shift stay as drafts."));
+    if (!window.confirm(said.join("\n\n"))) return null;
+    const entry = Close.close(state, { text: asText(h), status, written, drafts, placeholder: blank(h.template, h.date, h.shift), max: HISTORY_MAX });
     save();
+    shiftContext()?.clearActive();
     renderAll();
-    note(tx(open.length === 1 ? "Started the {shift} shift handover with {n} carried issue." : "Started the {shift} shift handover with {n} carried issues.", { shift: lower(next.shift), n: open.length }));
-    form.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+    note(tx("Closed. No shift is open on this device."));
+    if (startBox) { startBox.scrollIntoView({ behavior: "smooth", block: "start" }); startBox.querySelector("[data-start-shift]").focus({ preventScroll: true }); }
+    return entry;
+  };
+  output.querySelector("[data-close]").addEventListener("click", closeShift);
 
   output.querySelector("[data-clear]").addEventListener("click", () => {
     if (!window.confirm(tx("Clear this handover? The history stays."))) return;
@@ -1290,7 +1398,7 @@
     const markShared = (mode) => {
       if (!sealed) return;
       const h = cur();
-      h.shared = [...h.shared.filter((entry) => entry.id !== sealed.id), { id: sealed.id, at: new Date().toISOString(), mode, ack: sealed.ack }].slice(-10);
+      h.shared = [...h.shared.filter((entry) => entry.id !== sealed.id), { id: sealed.id, at: new Date().toISOString(), mode, ack: sealed.ack, sum: Close.sum(h) }].slice(-10);
       h.ack = null;
       commit();
     };
@@ -1329,14 +1437,20 @@
   const incomingBox = document.querySelector("[data-incoming]");
   const clearHash = () => history.replaceState(null, "", location.pathname + location.search);
   const takeOver = (h, { id = "", ackCode = "" } = {}) => {
-    const merged = Link.mergeIssues(h.issues, openIssues(cur()), data.priorities);
-    if (hasContent(cur())) {
+    // With no shift open there is nothing here to keep or to close: the blank handover behind the page is not work.
+    const merged = Link.mergeIssues(h.issues, state.idle ? [] : openIssues(cur()), data.priorities);
+    let replaced = null;
+    if (!state.idle && hasContent(cur())) {
       if (!window.confirm(tx("Take over the handover that arrived? What you have here moves to the history first; your open issues the sender did not have stay with it."))) return false;
-      state.history.unshift({ closedAt: new Date().toISOString(), handover: JSON.parse(JSON.stringify(cur())), text: asText(cur()) });
-      state.history = state.history.slice(0, HISTORY_MAX);
+      // What was here is closed like any shift, and is not left waiting: its open issues stay with the handover taken
+      // over (the merge above), which names the closure so they are not carried a second time.
+      const was = cur();
+      replaced = Close.close(state, { text: asText(was), status: transferState(was), written: true, drafts: draftsOf(was), placeholder: was, max: HISTORY_MAX });
+      replaced.carried = { date: str(h.date), shift: str(h.shift), at: new Date().toISOString() };
     }
     const now = new Date().toISOString();
-    state.current = { ...h, issues: merged.issues.map(({ kept, ambiguous, conflicts, ...issue }) => issue), ackAt: "", shared: [], ack: null, received: id ? { id, at: now, from: h.from, ackCode } : null };
+    state.current = { ...h, issues: merged.issues.map(({ kept, ambiguous, conflicts, ...issue }) => issue), ackAt: "", shared: [], ack: null, received: id ? { id, at: now, from: h.from, ackCode } : null, ...(replaced ? { carriedFrom: [replaced.closeId] } : {}) };
+    state.idle = false;
     if (id) state.received = [...state.received.filter((entry) => entry.id !== id), { id, at: now }].slice(-50);
     save();
     renderAll();
@@ -1519,7 +1633,10 @@
     return isObject(found) && found.caseId === caseParam && found.from === "cx-control-tower" && str(found.issue).trim() ? { issue: str(found.issue).trim(), owner: str(found.owner).trim(), due: str(found.due).trim() } : null;
   })();
   const issueText = fromTower ? fromTower.issue : incoming.get("issue")?.trim();
-  if (issueText) {
+  if (issueText && state.idle) {
+    // No shift is open: there is no handover to put the issue on, and none is started unasked.
+    note(tx("No shift is open. Start the shift, then send the issue again."));
+  } else if (issueText) {
     const open = cur().issues.find((issue) => !issue.done && issue.text.trim() === issueText);
     if (!open) {
       cur().issues.push({ text: issueText, priority: data.priorities[0], owner: fromTower ? fromTower.owner : incoming.get("owner")?.trim() || "", due: fromTower ? fromTower.due : incoming.get("due")?.trim() || "", done: false, carried: 0 });

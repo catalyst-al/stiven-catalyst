@@ -1,6 +1,6 @@
 # Plani i integrimit: “Sot” dhe “Kontrolli i dëmeve”
 
-**Gjendja:** plan i miratuar si bazë e integrimit më 11 nëntor 2026. Bërë deri tani, pa asnjë ndryshim të dukshëm në faqe: pjesët 1a dhe 1b të hapit 1 (12 nëntor) dhe hapi 2 (14 nëntor). Hapi 1c pret. Hapat 3–7 nuk kanë nisur (pjesa 7).
+**Gjendja:** plan i miratuar si bazë e integrimit më 11 nëntor 2026. Bërë deri tani: pjesët 1a dhe 1b të hapit 1 (12 nëntor), hapi 2 (14 nëntor) dhe hapi 3 (15 nëntor). Hapi 3 e ndryshon faqen e Dorëzimit; pjesa 3.7 thotë si u plotësua çdo kriter dhe çfarë mbetet e hapur. Hapi 1c pret. Hapat 4–7 nuk kanë nisur (pjesa 7).
 **Saktësimi i fundit:** kufizimi i pilotit dhe garancia “vetëm një herë” (pjesët 3.3–3.6), me kriteret e pranimit për hapin 3.
 **Fusha:** piloti për Shefin e turnit. Ndërfaqja e re ndizet fillimisht vetëm te Kontrolli i dëmeve, me hapat dhe shkaqet e magazinës.
 
@@ -217,6 +217,46 @@ Dokumentimi:
 | K15 | Faqja e Dorëzimit dhe udhëzuesi thonë që gjatë pilotit dorëzimi nuk sinkronizohet dhe kalon mes pajisjeve vetëm me transferim. |
 | K16 | Teksti i garancisë te 3.5 është në `docs/DATA-FORMATS.md`, me të dy “nuk garantohet”. |
 
+### 3.7 Hapi 3: si u plotësuan kriteret
+
+Bërë më 15 nëntor 2026. Çdo kriter ka provë me implementimin e vërtetë: faqja e ndërtuar e Dorëzimit me skriptet e veta, kutia e vërtetë e skedarit, sinkronizimi i vërtetë kundër një serveri të rremë, dhe pikat e rikthimit në shfletues të vërtetë. Modelet e pjesëve 3.4 dhe 3.5 (`prova/`) mbeten si shënim i projektimit; nuk përdoren si provë.
+
+| Nr. | Gjendja | Ku është prova |
+| --- | --- | --- |
+| K1 | Plotësuar | `tests/shift-close.test.cjs`, në të tria gjuhët |
+| K2 | Plotësuar | po aty |
+| K3 | Plotësuar | po aty; edhe `tests/team-sync.test.cjs` (kutia e vërtetë) |
+| K4 | Plotësuar | `tests/team-sync.test.cjs`: lista e mjeteve nuk e ofron, edhe me zgjedhje të ruajtur |
+| K5 | Plotësuar | `tests/shift-close.test.cjs` |
+| K6 | Plotësuar | po aty; edhe `tests/shift-context.test.cjs` |
+| K7–K11 | Plotësuar | `tests/shift-close.test.cjs`, me skedarin e vërtetë |
+| K12 | Plotësuar | po aty; edhe për një gjuhë tjetër |
+| K13 | Plotësuar | po aty, në çdo provë të K7–K11 |
+| K14 | Plotësuar | `tests/browser/shift-close.spec.mjs`, me pikat e vërteta të rikthimit |
+| K15 | **Pjesërisht: e hapur për udhëzuesin** | Faqja e thotë në tri gjuhët. Udhëzuesi jo: shih më poshtë. |
+| K16 | Plotësuar | `docs/DATA-FORMATS.md`, me testin që e kontrollon |
+
+**Çfarë mbetet e hapur.**
+
+- **K15, udhëzuesi i shtypur.** Udhëzuesi i mjeteve është botim me numër (botimi 8), me PDF në tri gjuhë, dhe një test kërkon që PDF-ja të thotë atë që thotë faqja. Ndryshimi i tekstit të tij kërkon një botim të ri, që është publikim. Nuk u bë. Deri atëherë udhëzuesi nuk e thotë që dorëzimi nuk sinkronizohet, dhe e përshkruan butonin me emrin e vjetër (“Close shift, start the next”) dhe sjelljen e vjetër.
+
+**Ku implementimi ndryshon nga teksti i mëparshëm i planit.**
+
+- **Përjashtimi nga sinkronizimi vlen për të gjithë, jo për një grup pilot.** Produkti nuk ka çelës piloti; mbyllja e re është mbyllja e faqes së Dorëzimit. Çdo ekip që e kishte ndezur dorëzimin te sinkronizimi pushon ta ndajë.
+- **Çështja e paqartë nuk shtohet.** Kur dy mbyllje që presin kanë të njëjtin tekst me përgjegjës ose afat tjetër, e dyta nuk mbartet vetë; faqja e thotë dhe ajo mbetet në historik.
+- **Turni aktiv pastrohet pas çdo rikthimi kur nuk përputhet**, edhe kur skedari nuk ka dorëzim. Rasti i një turni të zgjedhur nga lista e profilit pastrohet gjithmonë, sepse nuk ka dorëzim me të cilin të matet.
+- **Një dorëzim që mbërrin me transferim** e mbyll dorëzimin e hapur me `closeId` dhe e emërton, që çështjet e tij të mos mbarten dy herë.
+
+**Kufizimet.**
+
+- Garancia është ajo e 3.5: në një pajisje, pa dyfishim brenda një dorëzimi. Jo ndërmjet pajisjeve, dhe jo “një herë në kohë” pas një skedari të vjetër.
+- “Fshi historikun” fshin edhe mbylljet që presin; çështjet e tyre nuk mbarten më.
+- Historiku mban 30 mbylljet e fundit; një mbyllje më e vjetër që pret humbet me të.
+- Shenja “ndryshuar pas ndarjes” punon vetëm për ndarjet e bëra pas këtij hapi. Një ndarje e mëparshme nuk ka me çfarë të krahasohet dhe nuk thotë asgjë.
+- Marrja e një dorëzimi me transferim nuk e vendos turnin aktiv të pajisjes.
+- Një çështje e dërguar nga një mjet tjetër kur asnjë turn nuk është i hapur nuk ruhet askund; faqja kërkon të niset turni dhe të dërgohet përsëri.
+- “Sot” nuk ekziston ende. Mekanizmi është në `shift-close.js`, pa lidhje me faqen, që “Sot” ta thërrasë në hapin 6.
+
 ---
 
 ## 4. Mbyllja dhe mbartja
@@ -431,7 +471,7 @@ Këto nuk janë implementuar, sepse varen nga mbyllja e përbashkët ose nga nd�
 | 1b. Mbajtja e `id`-së së rreshtit · **bërë** | Tri regjistrat e `defect-log.js` e mbajnë `id`-në që gjejnë dhe nuk shkruajnë asnjë. Rreshti i ngjitur krahasohet pa `id`. | `defect-log.js`, `tool-kit.js`, `tests/log-row-ids.test.cjs` |
 | 1c. Shkrimi i `id`-ve · pret | Rreshtat e rinj marrin `id`. Vetëm pasi çdo pajisje ka versionin e 1b (5.1). | `defect-log.js` |
 | 2. Turni aktiv dhe draftet · **bërë** | Ruajtja e turnit aktiv dhe e drafteve, rregullat e kopjes rezervë dhe pyetja për përplasjet (pjesa 6). Asnjë faqe nuk i shfaq ende. | `shift-context.js`, `work-backup.js`, `storage-guard.js`, `partials/work-backup.njk`, `tests/shift-context.test.cjs`, `tests/browser/work-backup-drafts.spec.mjs` |
-| 3. Mbyllja e përbashkët | Mbyllje pa dorëzim, pa turn aktiv pas saj, nisje e shprehur, mbartje sipas 3.5, “ndryshuar pas ndarjes”, dorëzimi jashtë sinkronizimit. Kriteret K1–K16. | `shift-handover.js`, `team-sync.js` |
+| 3. Mbyllja e përbashkët · **bërë, K15 pjesërisht** | Mbyllje pa dorëzim, pa turn aktiv pas saj, nisje e shprehur, mbartje sipas 3.5, “ndryshuar pas ndarjes”, dorëzimi jashtë sinkronizimit. Gjendja e kritereve te 3.7. | `shift-close.js`, `shift-handover.js`, `partials/shift-handover.njk`, `team-sync.js`, `shift-context.js`, `work-backup.js`, `storage-guard.js`, `tests/shift-close.test.cjs`, `tests/browser/shift-close.spec.mjs` |
 | 4. Kontrolli i dëmeve | Ndërfaqja e re me çelës vetëm për këtë mjet, vetëm magazina. | `defect-log.njk`, `defect-log.js`, `tool-kit.js`, `damageControl.json` |
 | 5. “Hap burimin” | Lista e veprimeve rikthen periudhën, filtrin ose rreshtin. | `action-tracker.js`, `defect-log.js` |
 | 6. Faqja “Sot” | Faqja e punës, mbi të njëjtën mbyllje. Hyrja te Catalyst. | faqe e re, `families.json`, `signals.js` |
@@ -470,9 +510,10 @@ Në degën `claude/vigilant-pascal-bf9nhn`, pa PR. Të gjitha testet e repo-s ka
 - **1a:** `origin` pranohet vetëm i plotë, shkruhet një herë, udhëton vetëm me shënimin e skedës dhe del i njëjtë pas kopjes rezervë dhe pas sinkronizimit. Një veprim pa `origin` ka formën që kishte.
 - **1b:** `id` e një rreshti mbahet gjatë hapjes dhe ruajtjes në të tria regjistrat. Një `id` e pavlefshme hidhet dhe rreshti mbetet.
 
+- **3:** mbyllja e përbashkët dhe mbartja në nisjen e shprehur, te faqja e Dorëzimit; dorëzimi jashtë sinkronizimit; turni aktiv pas rikthimit (3.7).
 - **2:** turni aktiv dhe draftet ruhen dhe lexohen me rregullat e pjesës 6; skedari i punës i mban draftet dhe jo turnin aktiv; sinkronizimi nuk ndan asnjërin.
 
-Asnjë mjet nuk dërgon `origin`, asnjë faqe nuk shkruan `id`, dhe asnjë faqe nuk vendos turn aktiv ose nuk shkruan draft. E vetmja gjë e re në faqe është pyetja për draftet që ndryshojnë, e cila hapet vetëm kur një skedar ose pikë rikthimi mban një draft të tillë, pra jo para hapit 4.
+Asnjë mjet nuk dërgon `origin`, asnjë faqe nuk shkruan `id`, dhe asnjë faqe nuk shkruan draft. Turnin aktiv e vendos vetëm nisja e turnit te faqja e Dorëzimit. Ndërfaqja e re e Kontrollit të dëmeve dhe faqja “Sot” nuk janë ndezur. E vetmja gjë e re në faqe është pyetja për draftet që ndryshojnë, e cila hapet vetëm kur një skedar ose pikë rikthimi mban një draft të tillë, pra jo para hapit 4.
 
 ### Verifikuar në kodin e repo-s
 
@@ -493,9 +534,7 @@ Asnjë mjet nuk dërgon `origin`, asnjë faqe nuk shkruan `id`, dhe asnjë faqe 
 | Sjelljet e drafteve që varen nga mbyllja (6.8): turni i mbyllur, paralajmërimi i mbylljes, K12. | 3 |
 | Ndërfaqja për një turn “të paqartë” (6.6): si i tregohet përdoruesit dhe si e zgjidh. | 4 |
 | Mbyllja pa dorëzim dhe nisja e shprehur nga faqja e Dorëzimit, pa “Sot”. | 3 |
-| Kriteret K1–K16 (3.6), me kodin e vërtetë të mbylljes dhe të mbartjes në vend të modelit. | 3 |
-| Mbartja: vend pune i ndryshëm, turn jo pasues, çështje e paqartë. | 3 |
-| Marrja e një dorëzimi me transferim te një pajisje që ka çështje të mbartura. | 3 |
+| K15 për udhëzuesin: botim i ri i udhëzuesit të shtypur, me emrin e ri të butonit dhe fjalinë për sinkronizimin. | botim |
 | Profil me turne të personalizuara: ndërfaqja e re nuk ndizet dhe thotë pse. | 4 |
 | Kontrolli i plotësisë dhe Regjistri i Night Audit nuk ndryshojnë. | 4 |
 | Tri gjuhët, aksesueshmëria, puna pa internet, kyçja me PIN, modaliteti në terren. | 4, 5, 6 |

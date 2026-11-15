@@ -221,6 +221,8 @@
     if (!replaceItems(storage, items)) return "full";
     // Rows the point lacks were not deleted: team sync (js/team-sync.js) does not delete them on the team's devices.
     try { window.TeamSync?.rebase?.(storage, Object.keys(items)); } catch { /* no team here */ }
+    // The active shift stays only when the handover that is open now is of that shift (js/shift-context.js).
+    try { window.ShiftContext?.keepActiveIfOpen?.(); } catch { /* the setting stays as it is */ }
     return "restored";
   };
 

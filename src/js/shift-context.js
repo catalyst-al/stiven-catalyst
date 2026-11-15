@@ -135,6 +135,23 @@ window.ShiftContext = (() => {
     if (where.state !== "same") return { ok: false, reason: "shift-unclear", active: stored, candidates: where.candidates };
     return { ok: true, active: stored, index: where.index, label: word(shifts[where.index]) };
   };
+  // After a saved file or a restore point was put back (work-backup.js, storage-guard.js): the active shift is kept
+  // only when the handover that is open now is of that very shift, the same date and the same word, in the handover of
+  // the language the shift was chosen in. Otherwise it is cleared, and the visitor starts the shift again: a file may
+  // have brought back a shift that was closed, or taken away the one that was started. A shift chosen from the
+  // profile's list has no handover to be measured against, and is cleared too.
+  const HANDOVER_KEYS = { en: "sc-shift-handover", de: "sc-shift-handover-de", sq: "sc-shift-handover-sq" };
+  const keepActiveIfOpen = () => {
+    const stored = active();
+    if (!stored) return { ok: true, kept: false };
+    let open = false;
+    try {
+      const saved = JSON.parse(store().getItem(HANDOVER_KEYS[stored.list] || ""));
+      open = isObject(saved) && saved.idle !== true && isObject(saved.current) && saved.current.date === stored.date && word(saved.current.shift) === stored.label;
+    } catch { open = false; }
+    if (open) return { ok: true, kept: true };
+    return { ...clearActive(), kept: false };
+  };
   const setActive = (value) => {
     const next = cleanActive({ ...(isObject(value) ? value : {}), v: VERSION, set: Date.now() });
     if (!next) return { ok: false, reason: "invalid" };
@@ -323,7 +340,7 @@ window.ShiftContext = (() => {
 
   return {
     ACTIVE_KEY, DRAFTS_KEY, ASIDE_KEY, VERSION, MAX_DRAFTS,
-    active, activeOn, setActive, clearActive, place,
+    active, activeOn, setActive, clearActive, keepActiveIfOpen, place,
     drafts, find, save, drop, move, hasWork, sameValues, identity: (context) => { const wanted = cleanContext(context); return wanted ? identity(wanted) : ""; },
     sound, planRestore, settleRestore,
   };

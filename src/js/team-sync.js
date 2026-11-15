@@ -307,6 +307,14 @@
   // Settings of the page, the reader and this module, not work of a tool.
   const NOT_TOOL = /^sc-(team|book-|audio-|listen-|import-maps|persist-|restore|theme|print-guide)|-ui$/;
   const offerable = (key) => isWork(key) && !PERSONAL.test(key) && !NOT_TOOL.test(key);
+  // The Shift Handover and its history, in every language: a shift is closed and its open issues carried on one device
+  // (js/shift-close.js), and a copy merged field by field would replace one device's handover with another's. So it
+  // is not shared: not listed among the tools, not sent and not read, whatever a device ticked before. A handover an
+  // older page left in the team's copy is passed on as it is, like the work of a tool this device does not share:
+  // not read here, not changed, not deleted. A handover goes to another device by the page's own "Send to the next
+  // shift".
+  const ONE_DEVICE = /^sc-shift-handover(-(de|sq))?$/;
+  const sharable = (key) => offerable(key) && !ONE_DEVICE.test(key);
   // Ticked unless the device says otherwise: the action list, the workplace, the timeline events, the floor logs and the hotel boards.
   const DEFAULT_ON = new Set(["action-tracker", "workplace", "annotations", "damage-control", "incomplete-control", "night-audit", "delay-analyzer", "sigma-control-chart", "lost-found", "room-inspection", "maintenance-planner", "safety-cross", "room-status", "guest-complaints"]);
   const isOn = (slug, choices = {}) => (typeof choices[slug] === "boolean" ? choices[slug] : DEFAULT_ON.has(slug));
@@ -890,7 +898,7 @@
 
       const deviceId = state.deviceId || newDeviceId();
       const device = { id: deviceId, name: state.deviceName || "" };
-      const shared = (key) => offerable(key) && ctx.selected(key);
+      const shared = (key) => sharable(key) && ctx.selected(key);
       const remoteItems = remote ? remote.items : {};
       const local = collect(storage, shared);
       const remoteShared = Object.fromEntries(Object.entries(remoteItems).filter(([key]) => shared(key)));
@@ -961,7 +969,7 @@
     let remote = null;
     try { remote = readPayload(await unseal(box, keys.key)); } catch { remote = null; }
     if (!remote) return { status: "unreadable" };
-    const shared = (key) => offerable(key) && ctx.selected(key);
+    const shared = (key) => sharable(key) && ctx.selected(key);
     const team = Object.fromEntries(Object.entries(remote.items).filter(([key]) => shared(key)));
     const changed = Object.keys(team).filter((key) => storage.getItem(key) !== team[key]);
     if (changed.length) {
@@ -1113,7 +1121,7 @@
     FORMAT, VERSION, SALT, ID_SALT, ITERATIONS, WORDS, BITS, DEFAULT_ON, VIEW_VERSION, TOMBSTONE_DAYS,
     newCode, parseCode, normalise, deriveKeys, seal, unseal, toBase64, fromBase64, toBase64Url, fromBase64Url,
     looksViewer, viewerCode, parseViewer, viewerKeys,
-    offerable, isOn, readPayload, withDevice, deviceFresh,
+    offerable, sharable, isOn, readPayload, withDevice, deviceFresh,
     hash, newer, mergeRows, mergeValue, merge, baseOf, changedSince, sameItems,
     deletedHere, joinDeleted, purgeDeleted, applyDeleted,
     qrEncode, qrSvg,
@@ -1178,7 +1186,7 @@
   const state = () => readState(storage);
   const setState = (patch) => writeJson(storage, STATE_KEY, { ...state(), ...patch });
   const slugsHere = () => {
-    const keysHere = [...Object.keys(collect(storage, offerable)), ...(state().teamKeys || []).filter(offerable)];
+    const keysHere = [...Object.keys(collect(storage, sharable)), ...(state().teamKeys || []).filter(sharable)];
     return [...new Set(keysHere.map(toolSlug))].filter((slug) => names[slug]).sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
   };
   const selected = (key) => isOn(toolSlug(key), state().choices || {});
@@ -1222,7 +1230,7 @@
   const viewerPending = () => {
     const s = state();
     const synced = s.synced || {};
-    return (s.teamKeys || []).filter((key) => offerable(key) && selected(key) && synced[key]).filter((key) => {
+    return (s.teamKeys || []).filter((key) => sharable(key) && selected(key) && synced[key]).filter((key) => {
       const value = storage.getItem(key);
       return value === null || hash(value) !== synced[key].h;
     });
@@ -1499,11 +1507,11 @@
     if (!root.contains(event.target)) activity();
   }, { capture: true, passive: true }));
   ["storage", "actions:changed", "workplace:changed"].forEach((type) => window.addEventListener(type, (event) => {
-    if (event.type === "storage" && event.key && !offerable(event.key)) return;
+    if (event.type === "storage" && event.key && !sharable(event.key)) return;
     activity();
   }));
   const pending = () => {
-    const items = collect(storage, (key) => offerable(key) && selected(key));
+    const items = collect(storage, (key) => sharable(key) && selected(key));
     return changedSince(items, state().synced || {}).length > 0;
   };
   setInterval(() => {

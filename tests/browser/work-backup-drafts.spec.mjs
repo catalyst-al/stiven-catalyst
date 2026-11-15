@@ -56,14 +56,15 @@ test("a file whose unfinished form differs from the one here: asked first, Esc c
   await Promise.all([page.waitForEvent("load"), question.locator('[data-work-drafts-choice="mine"]').click()]);
   expect(await draft(page)).toEqual(HERE);
   expect((await held(page))["sc-damage-control"]).toContain("Stacking");
-  expect((await held(page))["sc-shift-ui"]).toBe(before["sc-shift-ui"]);
+  // No handover of the active shift is open on this device, so the shift does not outlive a file put back (step 3).
+  expect((await held(page))["sc-shift-ui"]).toBeUndefined();
 
   // The forms of the file taken.
   await page.locator("[data-work-open]").setInputFiles(workFile());
   await expect(question).toBeVisible();
   await Promise.all([page.waitForEvent("load"), question.locator('[data-work-drafts-choice="file"]').click()]);
   expect(await draft(page)).toEqual(THERE);
-  expect((await held(page))["sc-shift-ui"]).toBe(before["sc-shift-ui"]);
+  expect((await held(page))["sc-shift-ui"]).toBeUndefined();
 });
 
 test("a restore point whose unfinished form differs from the one here asks the same question before it changes anything", async ({ page }) => {

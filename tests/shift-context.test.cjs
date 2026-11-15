@@ -350,13 +350,15 @@ const openFile = async (w, file, choice) => {
   return { status: status(), asked };
 };
 const fileOf = (w) => plain(w.WorkBackup.makeBackup(w.localStorage));
+// The handover of the early shift, open: what keeps that shift active when a file is put back.
+const OPEN_EARLY = JSON.stringify({ current: { template: 'warehouse', date: '2026-11-12', shift: 'Mëngjes', area: '', issues: [] }, history: [], received: [] });
 // Two browsers that each hold a draft for the night's entry form, with other values, and something else each.
 const twoSides = () => {
   const theirs = open('/sq/tools.html', { scripts: backupScripts });
   theirs.ShiftContext.save(entry(NIGHT), FORK);
   theirs.ShiftContext.save(entry(NIGHT, { tool: 'sc-incomplete-control-sq' }), { note: 'only in the file' });
   theirs.localStorage.setItem('sc-damage-control-sq', '{"rows":[{"date":"2026-11-10","units":1}]}');
-  const mine = box({});
+  const mine = box({ 'sc-shift-handover-sq': OPEN_EARLY });
   mine.ShiftContext.setActive(EARLY);
   mine.ShiftContext.save(entry(NIGHT), WET);
   mine.ShiftContext.save(entry(EARLY), { note: 'only here' });
@@ -378,11 +380,16 @@ test('a file put back adds its drafts to the ones here, replaces none, and sets 
   assert.deepEqual(plain(mine.ShiftContext.find(entry(EARLY))), plain(own), 'the draft that was here is as it was, rev and all');
   assert.equal(mine.ShiftContext.active(), null, 'no shift was made active: the device had none');
   assert.equal(mine.reloads, 1);
-  // And a device that has an active shift keeps it.
-  const busy = box({});
+  // A device whose active shift has its handover open keeps the shift it had; the file does not change it.
+  const busy = box({ 'sc-shift-handover-sq': OPEN_EARLY });
   busy.ShiftContext.setActive(EARLY);
   await openFile(busy, fileOf(theirs));
   assert.deepEqual([busy.ShiftContext.active().date, busy.ShiftContext.active().index], ['2026-11-12', 0]);
+  // Without an open handover of that shift, the active shift does not outlive a file put back (step 3, K12).
+  const loose = box({});
+  loose.ShiftContext.setActive(EARLY);
+  await openFile(loose, fileOf(theirs));
+  assert.equal(loose.ShiftContext.active(), null);
 });
 
 test('drafts that differ are asked about before anything is changed, and leaving the question changes nothing', async () => {
@@ -548,9 +555,12 @@ test('the built pages load the script before the file box, show nothing of it, a
     if (name === 'de' || name === 'sq') assert.ok(!dialog[0].includes(english), `${name}: translated`);
     else assert.ok(dialog[0].includes(english));
   }
-  // No tool script uses the context yet: the new interface is not switched on.
-  const users = fs.readdirSync('src/js').filter((file) => file.endsWith('.js') && file !== 'shift-context.js' && fs.readFileSync(`src/js/${file}`, 'utf8').includes('ShiftContext'));
-  assert.deepEqual(users, ['work-backup.js'], 'only the file box, to settle the drafts of a file');
+  // Who uses the context: the handover (the active shift is set when a shift is started and cleared when it is closed),
+  // and the file box and the restore points (the drafts of a file, the active shift after it). The logs do not: the
+  // new interface of Damage Control is not switched on.
+  const users = fs.readdirSync('src/js').filter((file) => file.endsWith('.js') && file !== 'shift-context.js' && fs.readFileSync(`src/js/${file}`, 'utf8').includes('ShiftContext')).sort();
+  assert.deepEqual(users, ['shift-handover.js', 'storage-guard.js', 'work-backup.js']);
+  assert.ok(!fs.readFileSync('src/js/defect-log.js', 'utf8').includes('ShiftContext'));
 });
 
 // ---- A list of shifts that changes ----

@@ -1,4 +1,47 @@
 {#- The Shift Handover. The page sets `cfg` to its data file; shift-handover.js does the rest. -#}
+{#- No shift is open (the last one was closed): the next one is started here, by the visitor. The date and the shift are
+    a proposal. js/shift-handover.js shows this in place of the handover; js/shift-close.js carries the open issues. -#}
+<section class="shell sh-start" data-start hidden aria-labelledby="sh-start-title">
+  <div class="tool-panel">
+    <fieldset class="dl-box">
+      <legend class="kicker">{{ "No shift is open" | t(lang) }}</legend>
+      <h2 id="sh-start-title">{{ "Start the next shift" | t(lang) }}</h2>
+      <p class="form-note">{{ "The last shift was closed. Choose the shift you are starting: the date and the shift below are a proposal, change them if they are not right. Open issues are carried over only to a shift that follows the closed one, in the same area." | t(lang) }}</p>
+      <p class="form-note" data-start-last hidden></p>
+      <div class="dl-grid">
+        <div class="field">
+          <label for="sh-start-template">{{ "Type of work" | t(lang) }}</label>
+          <select id="sh-start-template" name="start-template">
+            {%- for key, tpl in cfg.templates %}
+            <option value="{{ key }}">{{ tpl.name }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="sh-start-date">{{ "Date" | t(lang) }}</label>
+          <input id="sh-start-date" name="start-date" type="date">
+        </div>
+        <div class="field">
+          <label for="sh-start-shift">{{ "Shift" | t(lang) }}</label>
+          <select id="sh-start-shift" name="start-shift">
+            {%- for shift in cfg.shifts %}
+            <option>{{ shift }}</option>
+            {%- endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="sh-start-area">{{ "Area or team" | t(lang) }}</label>
+          <input id="sh-start-area" name="start-area" autocomplete="off">
+        </div>
+      </div>
+      <p class="form-note" data-start-preview role="status" aria-live="polite"></p>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-start-shift>{{ "Start this shift" | t(lang) }}</button>
+      </div>
+    </fieldset>
+  </div>
+</section>
+
 <section class="shell tool-layout dl-setup sh-setup">
   <form class="tool-panel" data-handover novalidate>
     <fieldset class="dl-box">
@@ -153,10 +196,12 @@
         <button class="button-secondary" type="button" data-send>{{ "Send to the next shift" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-pdf>{{ "Save as PDF" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-print>{{ "Print" | t(lang) }}</button>
-        <button class="button-secondary" type="button" data-close>{{ "Close shift, start the next" | t(lang) }}</button>
+        <button class="button-secondary" type="button" data-close>{{ "Close the shift" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-clear>{{ "Clear" | t(lang) }}</button>
       </div>
       <p class="form-note" data-status aria-live="polite"></p>
+      {#- The handover is closed and carried on one device (js/shift-close.js), so team sync leaves it out (js/team-sync.js). #}
+      <p class="form-note sh-sync-note">{{ "Team sync does not share the handover or its history: each device keeps its own. A handover reaches another device only when you send it from here." | t(lang) }}</p>
       <dialog class="sh-send" data-send-dialog aria-labelledby="sh-send-title">
         <h2 id="sh-send-title">{{ "Send this handover to another device" | t(lang) }}</h2>
         <div data-send-step="prepare">
@@ -217,4 +262,5 @@
 <script type="application/json" id="shift-handover-data">{{ cfg | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/pdf-kit.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/shift-close.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/shift-handover.js' | assetUrl }}" defer></script>

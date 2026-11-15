@@ -216,7 +216,7 @@ test('a handover from an old link is shown as text: markup in its fields never b
   Object.assign(w, { CompressionStream, DecompressionStream, Blob, Response, TextEncoder, TextDecoder });
   w.HTMLElement.prototype.scrollIntoView = () => {};
   w.confirm = () => true;
-  for (const file of ['tool-kit', 'shift-handover']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+  for (const file of ['tool-kit', 'shift-close', 'shift-handover']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
   const box = w.document.querySelector('[data-incoming]');
   for (let i = 0; i < 100 && box.hidden; i++) await new Promise((r) => setTimeout(r, 10));
   assert.equal(box.hidden, false, 'the handover is offered');
@@ -329,7 +329,7 @@ test('a state saved by the version before this one loads unchanged, and taking o
     w.HTMLElement.prototype.scrollIntoView = () => {};
     w.confirm = () => true;
     w.localStorage.setItem('sc-shift-handover', JSON.stringify(legacy));
-    for (const file of ['tool-kit', 'shift-handover']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+    for (const file of ['tool-kit', 'shift-close', 'shift-handover']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
     return w;
   };
   // Loaded: nothing is rewritten unasked (the saved text is the same), the page shows the handover and the history.

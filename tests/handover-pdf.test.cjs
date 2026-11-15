@@ -22,7 +22,7 @@ const open = (lang, state) => {
   // The translations the built page hands its scripts (js/ui-de.js, js/ui-sq.js, loaded by the page's head).
   if (lang !== 'en' && fs.existsSync(`_site/js/ui-${lang}.js`)) w.eval(fs.readFileSync(`_site/js/ui-${lang}.js`, 'utf8'));
   if (state) w.localStorage.setItem('sc-shift-handover', JSON.stringify(state));
-  for (const file of ['tool-kit', 'pdf-kit', 'shift-handover']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+  for (const file of ['tool-kit', 'pdf-kit', 'shift-close', 'shift-handover']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
   return w;
 };
 // Fictional: a hotel night shift.

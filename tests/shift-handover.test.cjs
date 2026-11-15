@@ -16,7 +16,7 @@ const fill = (delay, saved) => {
   window.localStorage.setItem('sc-incomplete-control', JSON.stringify({ rows: [{ date: DAY, shift: 'Early', stage: 'Picking', cause: 'Short pick', units: 2, note: '' }], volumes: [] }));
   window.localStorage.setItem('sc-delay-analyzer', JSON.stringify(delay));
   if (saved) window.localStorage.setItem('sc-shift-handover', JSON.stringify(saved));
-  for (const file of ['tool-kit', 'shift-handover']) window.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+  for (const file of ['tool-kit', 'shift-close', 'shift-handover']) window.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
   const form = window.document.querySelector('[data-handover]');
   const set = (selector, value) => {
     const node = form.querySelector(selector);

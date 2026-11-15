@@ -93,7 +93,7 @@ test('a first visit opens on the example week, with the hotel Pareto template an
 
   // The hotel handover of the same night fills its No-shows from this log.
   const DAY = '2026-09-18';
-  const handover = page('/tools/shift-handover/', ['tool-kit', 'shift-handover'], (w) => {
+  const handover = page('/tools/shift-handover/', ['tool-kit', 'shift-close', 'shift-handover'], (w) => {
     w.localStorage.setItem('sc-night-audit', JSON.stringify({ rows: [
       { date: DAY, shift: 'Night', stage: 'Arrival', type: 'No-show', cause: 'No guarantee', units: 5, note: '' },
       { date: DAY, shift: 'Night', stage: 'Payment', type: 'Card declined', cause: 'No guarantee', units: 2, note: '' },

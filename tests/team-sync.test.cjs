@@ -922,3 +922,32 @@ test('Site Compare keeps other teams\' read-only codes: its key is never offered
   const payload = w.TeamSyncMath.readPayload({ format: 'stiven-catalyst-team', version: 1, items: { 'sc-site-compare': '{"sites":[]}', 'sc-pareto': '{}' } });
   assert.deepEqual(Object.keys(payload.items), ['sc-pareto']);
 });
+
+// The Shift Handover is closed and carried on one device (js/shift-close.js; docs/plan-sot-2026-11-11/PLANI.md, K4).
+test('K4: the box does not offer the Shift Handover, in any language of its key, even to a device that ticked it before', async (t) => {
+  const server = fakeServer();
+  const handover = { current: { template: 'warehouse', date: '2026-11-11', shift: 'Late', area: 'Dock A', issues: [{ text: 'Ramp 3 blocked', priority: 'High', owner: '', due: '', done: false, carried: 0 }] }, history: [], received: [] };
+  const w = load({
+    url: 'https://stivencatalyst.com/tools.html',
+    body: render('en').html,
+    storage: {
+      'sc-actions': { rows: [{ id: 'a1', title: 'Fix dock door' }] },
+      'sc-damage-control': { rows: [{ date: '2026-11-11', shift: 'Late', stage: 'Loading', type: 'Crushed', cause: 'Stacking', units: 1, cost: null, note: '' }] },
+      'sc-shift-handover': handover, 'sc-shift-handover-de': handover, 'sc-shift-handover-sq': handover,
+      'sc-team-state': { choices: { 'shift-handover': true } },
+    },
+    before: (win) => { win.fetch = server.fetch; },
+  });
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  $('[data-tm-start]').click();
+  for (let i = 0; i < 300 && !/^Synced/.test($('[data-tm-status]').textContent); i++) await new Promise((r) => setTimeout(r, 20));
+  assert.match($('[data-tm-status]').textContent, /^Synced/);
+  const offered = [...w.document.querySelectorAll('[data-tm-tools] input')].map((box) => box.dataset.slug);
+  assert.deepEqual(offered, ['action-tracker', 'damage-control'], 'the log and the actions, not the handover');
+  // And the first sync of the box sent none of the three.
+  const keys = await w.TeamSyncMath.deriveKeys(JSON.parse(w.localStorage.getItem('sc-team')).code);
+  const team = plain(await w.TeamSyncMath.unseal(server.spaces.get(keys.spaceId), keys.key));
+  assert.deepEqual(Object.keys(team.items).sort(), ['sc-actions', 'sc-damage-control']);
+  assert.equal(w.localStorage.getItem('sc-shift-handover'), JSON.stringify(handover), 'the handover on the device is as it was');
+});

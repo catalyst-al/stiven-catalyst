@@ -48,7 +48,7 @@ test('5 Whys carries its countermeasure, owner and due date to the handover, and
 
 test('the handover takes the issue once, with the owner and the time, and cleans its address', { skip: !hasSite }, () => {
   const query = '?issue=Stacking%20rule%20as%20one%20picture&owner=Anna&due=2026-10-20&coaching=p1';
-  const window = page(`/tools/shift-handover/${query}`, ['tool-kit', 'shift-handover']);
+  const window = page(`/tools/shift-handover/${query}`, ['tool-kit', 'shift-close', 'shift-handover']);
   const issues = JSON.parse(window.localStorage.getItem('sc-shift-handover')).current.issues;
   assert.deepEqual(issues, [{ text: 'Stacking rule as one picture', priority: 'High', owner: 'Anna', due: '2026-10-20', done: false, carried: 0 }]);
   assert.equal(window.location.search, '?coaching=p1', 'the other parameters stay');
@@ -56,7 +56,7 @@ test('the handover takes the issue once, with the owner and the time, and cleans
   const row = window.document.querySelector('[data-issues] .sh-issue');
   assert.equal(row.querySelector('[data-issue="text"]').value, 'Stacking rule as one picture');
   // Opened again with the same issue: not added twice.
-  const second = page(`/tools/shift-handover/?issue=Stacking%20rule%20as%20one%20picture`, ['tool-kit', 'shift-handover'], (w) => {
+  const second = page(`/tools/shift-handover/?issue=Stacking%20rule%20as%20one%20picture`, ['tool-kit', 'shift-close', 'shift-handover'], (w) => {
     w.localStorage.setItem('sc-shift-handover', window.localStorage.getItem('sc-shift-handover'));
   });
   assert.equal(JSON.parse(second.localStorage.getItem('sc-shift-handover')).current.issues.length, 1);
@@ -64,7 +64,7 @@ test('the handover takes the issue once, with the owner and the time, and cleans
 });
 
 test('an issue carried three shifts links to 5 Whys on itself', { skip: !hasSite }, () => {
-  const window = page('/sq/tools/shift-handover/', ['tool-kit', 'shift-handover'], (w) => {
+  const window = page('/sq/tools/shift-handover/', ['tool-kit', 'shift-close', 'shift-handover'], (w) => {
     w.localStorage.setItem('sc-shift-handover-sq', JSON.stringify({ current: { template: 'warehouse', date: '2026-10-12', shift: 'Mëngjes', issues: [
       { text: 'Dock 3 scanner', priority: 'E lartë', owner: 'B', due: '10:00', done: false, carried: 3 },
       { text: 'Fresh', priority: 'Mesatare', owner: '', due: '', done: false, carried: 1 },

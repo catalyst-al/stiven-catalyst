@@ -461,6 +461,8 @@
     }
     // Rows the file lacks were not deleted: team sync (js/team-sync.js) does not delete them on the team's devices.
     try { window.TeamSync?.rebase?.(storage, keys); } catch { /* no team here */ }
+    // The active shift stays only when the handover that is open now is of that shift (js/shift-context.js).
+    try { window.ShiftContext?.keepActiveIfOpen?.(); } catch { /* the setting stays as it is */ }
     // The photos: added where this browser does not have them, never in place of one it has.
     let photoNote = "";
     if (backup.media.length) {
