@@ -76,9 +76,9 @@ jobs:
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: _site
-          # Since v4 hidden files are left out unless asked for; v3 published them (only .git and .github were left
-          # out). Kept as before, so the site published is the same file for file (today: media/.gitkeep).
-          include-hidden-files: true
+          # Hidden files and folders (names starting with a dot) are left out by default since v4, and on purpose
+          # here, so a dot file in _site is never published. Today that leaves out only media/.gitkeep, an empty
+          # placeholder no page uses.
 
   deploy:
     if: github.event_name != 'pull_request'
