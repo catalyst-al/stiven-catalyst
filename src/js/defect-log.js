@@ -75,6 +75,9 @@
     };
   });
   const save = () => write(KEY, state);
+  // The work view of the pilot (js/defect-work.js), on the one page that has it and only where it is on: null
+  // everywhere else, and then nothing below does anything it did not do before.
+  let work = null;
 
   const importRows = (text) => {
     const added = [];
@@ -327,6 +330,7 @@
   };
 
   const renderResults = () => {
+    work?.render();
     syncPeriodVolume();
     syncTarget();
     renderVolumes();
@@ -528,6 +532,7 @@
       el("td", "num", int.format(row.units)),
       el("td", "num", row.cost == null ? "" : num(row.cost, 2)),
       el("td", "dl-note", row.note || ""),
+      ...(work ? [work.rowCell(row)] : []),
     ],
     removeLabel: (row) => tx(row.date ? "Remove {n} {type} at {stage} on {date}" : "Remove {n} {type} at {stage}", { n: row.units, type: row.type, stage: row.stage, date: showDate(row.date) }),
     removedText: (row) => tx("Removed {count} at {stage}.", { count: plural(row.units, t.one, t.many), stage: row.stage }),
@@ -653,6 +658,7 @@
   entry.elements.date.value = today();
   entry.addEventListener("submit", (event) => {
     event.preventDefault();
+    if (work) { work.submit(); return; }
     const form = entry.elements;
     const units = Math.round(parseNumber(form.units.value));
     if (!(units > 0)) {
@@ -706,5 +712,27 @@
   }
 
   checkSummary = floorCheck(document.querySelector("[data-floor-check]"), `${KEY}-check`);
+  // The work view asks for what it needs of this page; it changes nothing of the log's format.
+  // The modules it stands on are loaded for every page further down the page, so it is mounted once
+  // they are there: at once when they are, otherwise when the page's scripts have all run.
+  const mountWork = () => { work = window.DefectWork.mount({
+    root, data, KEY, state, field, fields, t, kit, entry, entryStatus, results, Workplace, UNKNOWN, NOT_RECORDED,
+    periodRows, periodName, analyse, bars, pickOptions, clearPick, picked: () => picked, paretoTable, controlChart,
+    top: (rows, name) => bySize(tally(rows, name)),
+    render: () => book.render(),
+    // A row from the form, written at once: true only when it is in the browser's storage. When it is not, the row
+    // is taken out again, so the page never shows an entry it does not hold.
+    addNow: (row) => {
+      book.ownWork();
+      state.rows.push(row);
+      const stored = write(KEY, state);
+      if (!stored) state.rows.pop();
+      book.render();
+      return stored;
+    },
+  }); if (work) book.render(); };
+  if (data.workUi && window.DefectWork) {
+    if (window.DefectWork.ready()) mountWork(); else document.addEventListener("DOMContentLoaded", mountWork, { once: true });
+  }
   book.render();
 })();

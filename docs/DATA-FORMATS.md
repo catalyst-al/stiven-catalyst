@@ -67,6 +67,15 @@ asks which to keep before anything is changed (`WorkBackup.settleDrafts`); leavi
 draft taken from the file gets a new `rev`. A list of drafts that cannot be read is kept aside unchanged, once, under
 `sc-drafts-unreadable-ui`, and reads as empty; a record in it that is not a draft is left out the same way.
 
+The work view of Damage Control (`js/defect-work.js`; `workUi: true` in `damageControl.json`, the pilot on, and no
+shifts of its own in the workplace profile) is the first page that writes a draft and sends `origin`. Its draft is
+`{ tool: "sc-damage-control[-de|-sq]", form: "entry", scope: "", date, index, of, label, list, values: { stage, cause,
+units, note } }`, with `more: "1"`, `type` and `cost` when the type and the cost were opened; it is written at each
+keystroke and removed once the entry is stored. A row it adds is the row the log always wrote (`date` the operative
+date of the active shift, `shift` its word on this page, `type` "Not recorded" when the type was not opened), with no
+`id`. Its actions carry `origin` of the kinds `period`, `filter` and `row`; a row without an `id` goes as a copy of its
+fields with `twins`. Incomplete Control and the Night Audit Log, which share the template, have none of this.
+
 Closing a shift and carrying its open issues (`js/shift-close.js`, used by the Shift Handover page). This way of closing
 is on only where the device has it turned on: `sc-shift-close-ui`, `{ v: 1, on: true, set }`, a setting of the device
 that is in no saved file, no restore point and no team copy, and is read without the PIN. Anything else under that key,

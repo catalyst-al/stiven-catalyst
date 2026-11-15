@@ -152,6 +152,19 @@ window.ShiftClose = (() => {
     }
     return state.history;
   };
+  // What the handover of a language's pages says of one shift, read from the browser's storage for a page that is not
+  // the Handover page (the work view of Damage Control asks before it offers to go back to a shift): "open" when the
+  // handover open now is of that date and that word, "closed" when a closure of it is in the history, "none"
+  // otherwise, also when nothing readable is stored. Read only: nothing is changed.
+  const HANDOVER_KEYS = { en: "sc-shift-handover", de: "sc-shift-handover-de", sq: "sc-shift-handover-sq" };
+  const shiftStatus = (list, date, label) => {
+    let saved = null;
+    try { saved = JSON.parse(window.localStorage.getItem(HANDOVER_KEYS[list] || "")); } catch { saved = null; }
+    if (!isObject(saved)) return "none";
+    const is = (h) => isObject(h) && h.date === date && str(h.shift).trim() === label;
+    if (saved.idle !== true && is(saved.current)) return "open";
+    return Array.isArray(saved.history) && saved.history.some((entry) => isObject(entry) && is(entry.handover)) ? "closed" : "none";
+  };
   // The last closure, with or without an id: what the next shift is proposed from.
   const lastClosed = (state) => state.history[0] || null;
 
@@ -218,5 +231,5 @@ window.ShiftClose = (() => {
     return { ok: true, started: true, added, sources: sources.length, unclear };
   };
 
-  return { PILOT_KEY, enabled, enable, waiting, trim, STATES, newId, idOf, sameWorkplace, compare, sum, sumOf, changedAfterShare, cleanEntry, carriedFromOf, openOf, carriedIds, closed, pending, lastClosed, close, start };
+  return { PILOT_KEY, enabled, enable, waiting, trim, shiftStatus, STATES, newId, idOf, sameWorkplace, compare, sum, sumOf, changedAfterShare, cleanEntry, carriedFromOf, openOf, carriedIds, closed, pending, lastClosed, close, start };
 })();

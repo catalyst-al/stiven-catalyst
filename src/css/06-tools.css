@@ -925,3 +925,34 @@ select.sh-in { cursor: pointer; }
 .cv-steps strong { font-size: 15px; line-height: 1.25; }
 @media (max-width: 640px) { .cv-steps a { flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px; } .cv-steps strong { font-size: 13px; } }
 @media print { .cv-steps { display: none !important; } }
+
+/* The work view of Damage Control, for the pilot (js/defect-work.js). */
+.dw-off { display: none !important; }
+.dw-off-note { margin-bottom: 12px; }
+.dw-head { display: grid; gap: 12px; margin-bottom: 16px; }
+.dw-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; min-height: 0; }
+.dw-chips:empty { display: none; }
+.dw-chip { padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 600; }
+.dw-rate { font-size: 14px; }
+.dw-rate strong { font-size: 18px; }
+.dw-over { color: var(--danger); font-weight: 700; }
+.dw-in { color: var(--ok); font-weight: 700; }
+.dw-tabs { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid var(--line); }
+.dw-tabs [role="tab"] { min-height: 44px; padding: 8px 16px; border: 0; border-bottom: 3px solid transparent; background: none; color: var(--muted); font: inherit; font-weight: 700; cursor: pointer; }
+.dw-tabs [role="tab"][aria-selected="true"] { border-bottom-color: var(--blue); color: var(--ink); }
+.dw-layout { grid-template-columns: minmax(0, 1fr); }
+.dw-on .tool-hero .lede, .dw-on .tool-hero .eyebrow { display: none; }
+.dw-on .tool-hero { padding-bottom: 8px; }
+.dw-drafts { display: grid; gap: 12px; }
+.dw-drafts:empty { display: none; }
+.dw-draft { gap: 10px; border-color: var(--warn); }
+.dw-draft p { margin: 0; }
+.dw-blocked { color: var(--ink); }
+.dw-mine, .dw-focus, .dw-next { gap: 10px; }
+.dw-mine p, .dw-focus p, .dw-next p { margin: 0; }
+.dw-problem { font-size: 17px; }
+.dw-next .tool-actions { flex-wrap: wrap; }
+.dw-rec { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+.dw-row-action { font-weight: 700; white-space: nowrap; }
+@media print { .dw-head, .dw-drafts, .dw-next, .dw-noshift { display: none !important; } }
+.dw-on .tool-hero h1 { font-size: clamp(30px, 5vw, 52px); }

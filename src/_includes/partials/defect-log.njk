@@ -1,5 +1,17 @@
 {#- A private defect log (damage, incomplete orders, ...). The page sets `cfg` to its data file; defect-log.js does the rest. -#}
 {%- set t = cfg.text -%}
+{%- if cfg.workUi %}
+{#- The work view of the pilot (js/defect-work.js): hidden unless the device has the pilot on and the shifts fit. -#}
+<p class="shell form-note dw-off-note" data-work-off hidden></p>
+<section class="shell dw-head" data-work-head hidden>
+  <div class="dw-chips" data-work-chips></div>
+  <div class="dw-tabs" role="tablist" aria-label="{{ "Views of this tool" | t(lang) }}">
+    <button type="button" role="tab" aria-selected="true" data-work-tab="work">{{ "Work" | t(lang) }}</button>
+    <button type="button" role="tab" aria-selected="false" tabindex="-1" data-work-tab="learn">{{ "Learn" | t(lang) }}</button>
+    <button type="button" role="tab" aria-selected="false" tabindex="-1" data-work-tab="data">{{ "Data" | t(lang) }}</button>
+  </div>
+</section>
+{%- endif %}
 <section class="shell tool-layout dl-setup">
   <div class="tool-panel" data-defect-log>
 
@@ -122,7 +134,7 @@
       <div class="dl-table-wrap" tabindex="0" data-log-wrap hidden>
         <table class="dl-table">
           <thead>
-            <tr><th scope="col">{{ "Date" | t(lang) }}</th>{% for f in cfg.fields %}<th scope="col">{{ f.label }}</th>{% endfor %}<th scope="col" class="num">{{ t.countShort | capitalize }}</th><th scope="col" class="num">€</th><th scope="col">{{ "Note" | t(lang) }}</th><th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
+            <tr><th scope="col">{{ "Date" | t(lang) }}</th>{% for f in cfg.fields %}<th scope="col">{{ f.label }}</th>{% endfor %}<th scope="col" class="num">{{ t.countShort | capitalize }}</th><th scope="col" class="num">€</th><th scope="col">{{ "Note" | t(lang) }}</th>{% if cfg.workUi %}<th scope="col" data-work-col hidden><span class="visually-hidden">{{ "Action" | t(lang) }}</span></th>{% endif %}<th scope="col"><span class="visually-hidden">{{ "Remove" | t(lang) }}</span></th></tr>
           </thead>
           <tbody data-log></tbody>
         </table>
@@ -181,5 +193,9 @@
 <script src="{{ '/js/import-map.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/annotations.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+{%- if cfg.workUi %}
+<script src="{{ '/js/shift-close.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/defect-work.js' | assetUrl }}" defer></script>
+{%- endif %}
 <script src="{{ '/js/defect-log.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/floor-capture.js' | assetUrl }}" defer></script>

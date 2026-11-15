@@ -499,13 +499,13 @@ Këto nuk janë implementuar, sepse varen nga mbyllja e përbashkët ose nga nd�
 
 | Sjellja | Pse pret |
 | --- | --- |
-| Drafti i një turni të mbyllur nuk ofron “Kthehu”. | Vetëm mbyllja e hapit 3 e di cili turn është i mbyllur. |
+| Drafti i një turni të mbyllur nuk ofron “Kthehu”. | **Bërë në hapin 4** (7.1), me gjendjen që thotë dorëzimi. |
 | Mbyllja paralajmëron për formën e papërfunduar të turnit. | Është pjesë e mbylljes (hapi 3). |
 | Pas rikthimit, turni aktiv mbahet vetëm kur përputhet me dorëzimin e rikthyer (K12). | Kërkon dorëzimin me `closeId` (hapi 3). |
 | Drafti i dorëzimit, me shabllonin dhe zonën si `scope`. | Dorëzimi nis ta përdorë modulin në hapin 3. |
-| Njoftimi “formë e papërfunduar nga…” me “Kthehu”, “Sille”, “Hidhe”. | Ndërfaqja e hapit 4. Funksionet poshtë saj janë gati. |
-| Forma e Kontrollit të dëmeve i ruan vlerat si draft. | Ndërfaqja e hapit 4. Sot asnjë faqe nuk shkruan draft. |
-| Profili me turne të personalizuara e ndal ndërfaqen e re. | Ndërfaqja e hapit 4. |
+| Njoftimi “formë e papërfunduar nga…” me “Kthehu”, “Sille”, “Hidhe”. | **Bërë në hapin 4** (7.1). |
+| Forma e Kontrollit të dëmeve i ruan vlerat si draft. | **Bërë në hapin 4** (7.1). |
+| Profili me turne të personalizuara e ndal ndërfaqen e re. | **Bërë në hapin 4** (7.1). |
 
 ---
 
@@ -520,10 +520,59 @@ Këto nuk janë implementuar, sepse varen nga mbyllja e përbashkët ose nga nd�
 | 1c. Shkrimi i `id`-ve · pret | Rreshtat e rinj marrin `id`. Vetëm pasi çdo pajisje ka versionin e 1b (5.1). | `defect-log.js` |
 | 2. Turni aktiv dhe draftet · **bërë** | Ruajtja e turnit aktiv dhe e drafteve, rregullat e kopjes rezervë dhe pyetja për përplasjet (pjesa 6). Asnjë faqe nuk i shfaq ende. | `shift-context.js`, `work-backup.js`, `storage-guard.js`, `partials/work-backup.njk`, `tests/shift-context.test.cjs`, `tests/browser/work-backup-drafts.spec.mjs` |
 | 3. Mbyllja e përbashkët · **bërë, K15 pjesërisht** | Mbyllje pa dorëzim, pa turn aktiv pas saj, nisje e shprehur, mbartje sipas 3.5, “ndryshuar pas ndarjes”, dorëzimi jashtë sinkronizimit. Gjendja e kritereve te 3.7. | `shift-close.js`, `shift-handover.js`, `partials/shift-handover.njk`, `team-sync.js`, `shift-context.js`, `work-backup.js`, `storage-guard.js`, `tests/shift-close.test.cjs`, `tests/browser/shift-close.spec.mjs` |
-| 4. Kontrolli i dëmeve | Ndërfaqja e re me çelës vetëm për këtë mjet, vetëm magazina. | `defect-log.njk`, `defect-log.js`, `tool-kit.js`, `damageControl.json` |
+| 4. Kontrolli i dëmeve · **bërë** | Pamja e punës vetëm për këtë mjet, vetëm magazina, vetëm me pilotin të ndezur (7.1). | `defect-work.js`, `defect-log.njk`, `defect-log.js`, `tool-kit.js`, `shift-close.js`, `damageControl.json`, `tests/defect-work.test.cjs`, `tests/browser/damage-work.spec.mjs` |
 | 5. “Hap burimin” | Lista e veprimeve rikthen periudhën, filtrin ose rreshtin. | `action-tracker.js`, `defect-log.js` |
 | 6. Faqja “Sot” | Faqja e punës, mbi të njëjtën mbyllje. Hyrja te Catalyst. | faqe e re, `families.json`, `signals.js` |
 | 7. Verifikimi para/pas | Krahasimi i periudhës së ruajtur me atë pas veprimit, me vëllimet e vërteta. | `action-tracker.js`, `defect-log.js` |
+
+### 7.1 Hapi 4: pamja e punës e Kontrollit të dëmeve
+
+Bërë më 15 nëntor 2026. Pamja është një shtresë mbi faqen ekzistuese: i njëjti regjistër, të njëjtët rreshta, të njëjtat rezultate. Nuk ka ruajtje të vetën dhe asnjë mekanizëm paralel: turni është turni aktiv i pajisjes dhe formulari i papërfunduar është drafti i tij (`shift-context.js`); nëse një turn është i hapur apo i mbyllur e thotë dorëzimi (`shift-close.js`, `shiftStatus`).
+
+**Kur ndizet.** Vetëm kur vlejnë të tria: faqja e kërkon (`workUi` te `damageControl.json`, në tri gjuhët; Kontrolli i plotësisë dhe Regjistri i Night Audit nuk e kanë dhe nuk marrin as skriptin, as shënjimin); pajisja ka pilotin të ndezur (i njëjti cilësim `sc-shift-close-ui` i hapit 3: një çelës për pilotin, sepse draftet dhe turni aktiv varen nga nisja e shprehur e turnit); dhe turnet përputhen: profili i vendit të punës nuk ka turne të vetat, ose ka pikërisht turnet e faqes në të njëjtin rend. Me turne të tjera pamja nuk ndizet dhe një shënim thotë pse. Jashtë këtyre kushteve faqja është ajo që ishte.
+
+**Krahasimi me prototipin e ngrirë.**
+
+| Prototipi | Në repo |
+| --- | --- |
+| Kokë kompakte: periudha, shkalla kundrejt objektivit, filtri | Po. Titulli i faqes zvogëlohet, hyrja fshihet. |
+| Skedat Puno · Mëso · Të dhënat | Po, me tastierë (shigjetat, Home, End). Mëso mban “Si përdoret”; Të dhënat mban ngjitjen nga Excel, periudhën, vëllimet, ngjarjet, eksportin dhe pastrimin. |
+| Formulari i pari, i lidhur me turnin | Po. Data dhe turni nuk pyeten: regjistrimi merr datën operative dhe turnin e turnit aktiv. Lloji dhe kostoja hapen me një buton. |
+| “Formë e papërfunduar nga…” me Kthehu, Sille, Hidhe | Po, me rregullat e mëposhtme. |
+| “Në këtë turn” | Po: njësitë, regjistrimet dhe tre të fundit. |
+| “Fillo këtu”, fjalia ndjek filtrin | Po, me listat e shkaqeve, hapave dhe turneve që filtrojnë. Një filtër njëherësh. |
+| “Hapi tjetër” me gjashtë dalje, “Mbart:” | Po. Me filtër, shiriti del para formularit, si në prototip. |
+| Regjistri me “Veprim” për një rresht | Po. |
+| Faza e turnit (Fillim, Gjatë, Fund) për sugjerimin | Jo: është e “Sot” (hapi 6). Sugjerimi ndjek vetëm filtrin. |
+| Banderola “Erdhe nga… / Kthehu te burimi” | Jo: është hapi 5. |
+
+**Rregullat e drafteve.**
+
+- Çdo gjë që shkruhet ruhet menjëherë si draft i turnit aktiv dhe kthehet pas rifreskimit. Kur drafti nuk ruhet dot, faqja e thotë dhe ajo që u shkrua mbetet në formular.
+- Regjistrimi shkruhet i pari, në çast; drafti pastrohet vetëm pasi rreshti është në memorien e shfletuesit. Kur rreshti nuk ruhet, ai hiqet nga faqja, dhe formulari me draftin mbeten për riprovim.
+- “Kthehu te” ofrohet vetëm për turnin që dorëzimi e ka të hapur. Për një turn të mbyllur faqja thotë që është mbyllur; për një turn që dorëzimi nuk e ka, që nuk është i hapur aty.
+- “Sille te” nuk ofrohet kur formulari aktual ka punë, dhe funksioni vetë e refuzon; të dy draftet mbeten. Zhvendosja bëhet me një shkrim të vetëm: drafti është te turni tjetër derisa të jetë te ky, kurrë te asnjëri. Kur shkrimi dështon mbetet ku ishte.
+- “Hidhe” pyet më parë.
+- Kur drafti ndryshon diku tjetër (skedë tjetër, skedar i rikthyer) ndërsa formulari është i hapur, asgjë nuk mbishkruhet: faqja pyet cilin të mbajë.
+
+**Pa turn aktiv**, ose me një turn që nuk është me siguri i kësaj faqeje (6.6: p.sh. i zgjedhur nga lista e profilit), nuk ka formular; faqja e thotë dhe çon te Dorëzimi, ku nisen turnet. Kjo është mënyra si i tregohet përdoruesit turni “i paqartë”.
+
+**Burimi i veprimeve.** Tri daljet drejt listës së veprimeve dërgojnë `origin` sipas pjesës 5: `period` nga “Veprim për periudhën”, `filter` nga “Veprim për {vlera}”, `row` nga “Veprim” i një rreshti. Për një rresht pa `id` shkon kopja e fushave dhe `twins`, numri i rreshtave identikë në atë çast; për një rresht që ka `id`, `id`-ja. Asnjë rresht nuk merr `id` (1c mbetet në pritje). Asgjë nga burimi nuk është në adresë.
+
+**Çfarë nuk ndryshoi.** Formati i rreshtit (të njëjtat fusha, në të njëjtin rend), formati i sinkronizimit, krijimi i `id`-ve, fshirja. “Hap burimin”, “Sot” dhe para/pas nuk janë nisur.
+
+**Ndryshime jashtë pamjes.** Çipi i përbashkët i filtrit (“Filtruar: …”) kishte një emër për lexuesit e ekranit që nuk përmbante tekstin e dukshëm; kontrolli i aksesueshmërisë e kapi dhe emri u plotësua. Vlen për çdo mjet që e përdor çipin; sjellja nuk ndryshon.
+
+**Kufizimet.**
+
+- Dalja “Te dorëzimi” hap Dorëzimin pa mbartur asgjë; numrat i merr dorëzimi vetë nga regjistri. Çështja e propozuar nga prototipi nuk është bërë, sepse do të kërkonte një kalim të ri te Dorëzimi.
+- Gjendja e një turni lexohet nga dorëzimi i gjuhës së faqes ku u shkrua drafti. Kur e njëjta pajisje përdor faqe të dy gjuhëve, drafti i gjuhës tjetër nuk ofron “Kthehu”.
+- Kur lloji dhe kostoja nuk hapen, lloji shkruhet “Pa regjistruar” dhe kostoja mbetet bosh.
+- Pamja vendoset kur hapet faqja: ndezja ose fikja e pilotit në një skedë tjetër shihet pas rifreskimit. Ndryshimi i turnit aktiv dhe i drafteve shihet menjëherë.
+- Kopja rezervë, pikat e rikthimit dhe kyçja me PIN mbeten në vendin e tyre, më poshtë në faqe; skeda Të dhënat ka një lidhje drejt tyre.
+- Listat e “Fillo këtu” dhe ato të rezultatit më poshtë filtrojnë njësoj; pas një klikimi në listën e poshtme fokusi kalon te e njëjta vlerë në listën e sipërme.
+- Rezultati i plotë ekzistues (trendi, matrica, përmbledhja) mbetet në skedën Puno, poshtë regjistrit; prototipi nuk e tregonte.
+- Një rresht pa datë (i importuar dikur) dërgon veprimin pa `origin`.
 
 Hapat 1 dhe 2 nuk varen nga njëri-tjetri. Hapi 3 kërkon hapin 2. Hapat 5 dhe 7 kërkojnë hapat 1a dhe 4. Hapi 1c nuk bllokon asnjë hap tjetër: pa të, veprimet nga një rresht përdorin kopjen e fushave.
 
