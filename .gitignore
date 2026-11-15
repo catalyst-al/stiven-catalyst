@@ -9,6 +9,22 @@ seo-audit.json
 docs/seo/private/
 *Performance-on-Search*
 *Coverage-Validation*
+*Coverage-Drilldown*
 *search-console*
 *Search-Console*
 gsc-export*
+# The files inside an unzipped Search Console export, wherever it is unpacked. No file of the project has these
+# names. .gitignore does not protect a file already tracked or one added with git add -f: tests/seo-audit.test.cjs
+# fails if a file with one of these names is ever tracked.
+Queries.csv
+Pages.csv
+Countries.csv
+Devices.csv
+Dates.csv
+Chart.csv
+Filters.csv
+Table.csv
+Metadata.csv
+Search?appearance.csv
+Critical?issues.csv
+Non-critical?issues.csv
