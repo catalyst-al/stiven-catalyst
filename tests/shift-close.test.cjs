@@ -33,6 +33,8 @@ const open = ({ lang = 'en', storage = {}, search = '', scripts = PAGE_SCRIPTS, 
   w.asked = [];
   w.answer = true;
   w.confirm = (message) => { w.asked.push(message); return w.answer; };
+  w.told = [];
+  w.alert = (message) => { w.told.push(message); };
   if (pilot) w.localStorage.setItem(PILOT, JSON.stringify({ v: 1, on: true, set: 1 }));
   for (const [key, value] of Object.entries(storage)) w.localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value));
   before?.(w);
@@ -134,14 +136,11 @@ test('it is turned on only by the visitor, on this device, and turned off the sa
   assert.ok(!JSON.stringify(fileOf(w)).includes(PILOT));
   const other = await putBack(open({ pilot: false, storage: withHandover('en', { date: '2026-11-01' }) }), fileOf(w));
   assert.equal(other.ShiftClose.enabled(), false, 'a device that opens the file of a device where it is on stays off');
-  // That device shows what the file holds (no shift open) and starts the shift the visitor confirms; it closes as before.
-  assert.equal($(other, '[data-start]').hidden, false);
-  startShift(other, {});
-  assert.deepEqual(openTexts(other), ['Ramp 3 blocked']);
-  closeShift(other);
-  assert.equal(isIdle(other), false, 'closing there makes the next handover at once');
-  // Turned off by its button, after the question.
-  const page = reload(w);
+  // What that device does with such a state is in "held", below.
+  assert.equal($(other, '[data-pilot-held]').hidden, false);
+  // Turned off by its button, after the question, once a shift is open and nothing waits.
+  const page = reload(w, { pilot: true });
+  startShift(page, {});
   page.answer = false;
   $(page, '[data-pilot-off]').click();
   assert.equal(page.ShiftClose.enabled(), true, 'the answer "no" leaves it on');
@@ -151,6 +150,203 @@ test('it is turned on only by the visitor, on this device, and turned off the sa
   assert.equal(page.localStorage.getItem(PILOT), null);
   assert.equal($(page, '[data-close]').textContent, 'Close shift, start the next');
   assert.equal($(page, '.sh-sync-note').hidden, true);
+});
+
+// ---- Held: what the new way left, on a device where it is off ----
+
+// A device where the new way is on: a shift closed with an open issue, an issue from 5 Whys waiting for the next one.
+const pilotDevice = () => open({ storage: held(idlePage()), search: sentSearch });
+const heldFacts = (w) => $(w, '[data-pilot-held-facts]').textContent;
+
+test('held: the file of a device where it is on, put back where it is off with the handover ticked for team sync, is neither worked on nor shared until the visitor decides', { skip: !hasSite }, async () => {
+  const source = pilotDevice();
+  const file = fileOf(source);
+  // The device that opens it: the new way off, a handover of its own, the handover ticked for team sync.
+  const target = open({ pilot: false, scripts: SYNC_SCRIPTS, storage: { ...withHandover('en', { date: '2026-11-01', issues: [issue('Its own')] }), 'sc-team-state': { choices: { 'shift-handover': true } }, 'sc-damage-control': { rows: [damageRow('Target')] } } });
+  assert.equal(target.TeamSyncMath.sharable(KEYS.en), true, 'before the file, this device shares its handover as it always did');
+  const w = await putBack(target, file);
+  for (const file of ['team-sync']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+  assert.equal(w.ShiftClose.enabled(), false, 'the file turned nothing on');
+  assert.equal(w.localStorage.getItem(PILOT), null);
+  const before = w.localStorage.getItem(KEYS.en);
+  assert.deepEqual([saved(w).idle, saved(w).waiting.length, saved(w).history[0].closeId !== undefined], [true, 1, true], 'the state of the other device is here, whole');
+  // The page says so, and offers neither way of going on.
+  assert.equal($(w, '[data-pilot-held]').hidden, false);
+  assert.equal(heldFacts(w), 'No shift is open. 1 open issue of a closed shift waits to be carried over. 1 issue sent here waits for a shift.');
+  assert.equal($(w, '[data-start]').hidden, true, 'the start is not offered');
+  assert.equal($(w, '[data-handover]').closest('section').hidden, true, 'nor a handover to close the old way');
+  $(w, '[data-start-shift]').click();
+  $(w, '[data-close]').click();
+  assert.equal(w.localStorage.getItem(KEYS.en), before, 'asked all the same, neither starts nor closes anything');
+  assert.deepEqual(w.asked, [], 'and asks nothing');
+  assert.match($(w, '[data-status]').textContent, /Not done: this device holds a shift closed the new way/);
+  // A handover that arrives is not taken over either.
+  const arrived = await arrive(w, { pilot: false });
+  await take(arrived);
+  assert.equal(arrived.localStorage.getItem(KEYS.en), before);
+  assert.equal($(arrived, '[data-incoming]').hidden, false, 'it stays offered');
+  // Team sync: ticked, and still not shared, in or out. Another device of the team shares its own handover.
+  assert.equal(w.TeamSyncMath.closeHeld(KEYS.en), true);
+  assert.equal(w.TeamSyncMath.sharable(KEYS.en), false);
+  const server = fakeServer();
+  const dev = async (page, who) => ({ w: page, who, keys: await page.TeamSyncMath.deriveKeys(CODE, 1000), selected: (key) => page.TeamSyncMath.isOn(page.WorkBackup.toolSlug(key), JSON.parse(page.localStorage.getItem('sc-team-state')).choices || {}) });
+  const mate = await dev(await settle(open({ pilot: false, scripts: SYNC_SCRIPTS, storage: { ...withHandover('en', { issues: [issue('Of the team mate')] }), 'sc-team-state': { choices: { 'shift-handover': true } }, 'sc-damage-control': { rows: [damageRow('Mate')] } } })), 'mate');
+  const me = await dev(w, 'held');
+  assert.equal(me.selected(KEYS.en), true, 'the handover is ticked on the held device');
+  for (const device of [mate, me, mate, me]) await sync(device, server);
+  assert.equal(w.localStorage.getItem(KEYS.en), before, 'the held handover is not replaced, to the byte');
+  const team = await teamCopy(server, mate);
+  assert.ok(team.items[KEYS.en].includes('Of the team mate') && !team.items[KEYS.en].includes('Ramp 3 blocked'), 'and is not sent: the team\'s copy holds the mate\'s only');
+  assert.deepEqual(JSON.parse(w.localStorage.getItem('sc-damage-control')).rows.map((row) => row.stage).sort(), ['Mate', 'Target'], 'the rest of team sync goes on: the damage rows of both');
+  // The decision: the visitor turns the new way on, here. Then the page goes on the new way, whole.
+  const page = reload(w);
+  page.answer = false;
+  $(page, '[data-pilot-held-on]').click();
+  assert.match(page.asked.at(-1), /^Turn the new shift close on, on this device only\?/);
+  assert.equal(page.ShiftClose.enabled(), false, '"no" leaves it held');
+  assert.equal($(page, '[data-pilot-held]').hidden, false);
+  page.answer = true;
+  $(page, '[data-pilot-held-on]').click();
+  assert.equal(page.ShiftClose.enabled(), true);
+  assert.equal($(page, '[data-pilot-held]').hidden, true);
+  assert.equal($(page, '[data-start]').hidden, false);
+  startShift(page, {});
+  assert.deepEqual(openTexts(page).sort(), ['Ramp 3 blocked', SENT], 'what waited is carried and added, each once');
+  assert.deepEqual(saved(page).waiting, []);
+});
+
+test('held with a handover open: a closure of another area still waits, so the open handover is not closed the old way; it can still be written in', { skip: !hasSite }, async () => {
+  const source = idlePage();
+  startShift(source, { area: 'Dock B' });
+  const w = await putBack(open({ pilot: false }), fileOf(source));
+  assert.equal($(w, '[data-pilot-held]').hidden, false);
+  assert.equal(heldFacts(w), '1 open issue of a closed shift waits to be carried over.');
+  assert.equal($(w, '[data-handover]').closest('section').hidden, false, 'the open handover is shown');
+  const area = $(w, '[data-handover] [name=headsUp]');
+  area.value = 'Door 2 sticks';
+  area.dispatchEvent(new w.Event('input', { bubbles: true }));
+  await new Promise((resolve) => setTimeout(resolve, 150));
+  assert.equal(saved(w).current.headsUp, 'Door 2 sticks', 'writing is the same in both ways and is kept');
+  const before = w.localStorage.getItem(KEYS.en);
+  closeShift(w);
+  assert.equal(w.localStorage.getItem(KEYS.en), before, 'closing is not done: the old way would never carry what waits');
+  assert.deepEqual(w.asked, []);
+  // Deleting the history is the visitor's own decision in either way, with its warning; after it nothing is held.
+  $(w, '[data-clear-history]').click();
+  assert.match(w.asked.at(-1), /1 open issue of a closed shift still waits to be carried over\. It is deleted too/);
+  assert.equal($(w, '[data-pilot-held]').hidden, true);
+  closeShift(w);
+  assert.equal(saved(w).history.length, 1, 'now the page closes as it always did');
+  assert.ok(!saved(w).history[0].closeId);
+});
+
+test('a device without anything the new way left is never held: the page and team sync are as they always were', { skip: !hasSite }, () => {
+  for (const storage of [{}, withHandover('en'), { [KEYS.en]: { current: sheet('en'), history: [{ closedAt: '2026-11-01T06:00:00.000Z', handover: sheet('en', { date: '2026-10-31' }), text: 'old' }], received: [] } }]) {
+    const w = open({ pilot: false, scripts: SYNC_SCRIPTS, storage });
+    assert.equal($(w, '[data-pilot-held]').hidden, true);
+    assert.equal(w.TeamSyncMath.closeHeld(KEYS.en), false);
+    assert.equal(w.TeamSyncMath.sharable(KEYS.en), true);
+  }
+  // A closure the new way made that was carried, or has nothing open, holds nothing either.
+  const done = open({ storage: withHandover('en') });
+  closeShift(done);
+  startShift(done, {});
+  const w = open({ pilot: false, scripts: SYNC_SCRIPTS, storage: { [KEYS.en]: done.localStorage.getItem(KEYS.en) } });
+  assert.deepEqual([$(w, '[data-pilot-held]').hidden, w.TeamSyncMath.closeHeld(KEYS.en), w.TeamSyncMath.sharable(KEYS.en)], [true, false, true]);
+  // What cannot be read is not held, and not a reason to stop sharing other keys.
+  const broken = open({ pilot: false, scripts: SYNC_SCRIPTS, storage: { [KEYS.en]: '{"idle":' } });
+  assert.equal(broken.TeamSyncMath.closeHeld(KEYS.en), false);
+});
+
+test('turning the new way off: refused while no shift is open or something waits, with what to settle; with a handover open and nothing waiting it is turned off and the handover stays', { skip: !hasSite }, async () => {
+  // No shift open, a closure waiting, an issue sent here waiting.
+  const idle = pilotDevice();
+  const before = held(idle);
+  $(idle, '[data-pilot-off]').click();
+  assert.equal(idle.ShiftClose.enabled(), true);
+  assert.deepEqual(idle.asked, [], 'not asked: there is nothing to say yes to');
+  assert.equal(idle.told.at(-1), 'The new shift close stays on: turning it off now would leave these with no way to go on.\n\nNo shift is open. 1 open issue of a closed shift waits to be carried over. 1 issue sent here waits for a shift.\n\nStart the shift that takes them, or delete or discard them, then turn it off.');
+  assert.deepEqual(held(idle), before, 'nothing was changed');
+  // A handover open, and a closure of another area that still waits.
+  const waiting = idlePage();
+  startShift(waiting, { area: 'Dock B' });
+  $(waiting, '[data-pilot-off]').click();
+  assert.equal(waiting.ShiftClose.enabled(), true);
+  assert.match(waiting.told.at(-1), /\n\n1 open issue of a closed shift waits to be carried over\.\n\n/);
+  // A handover open and nothing waiting: asked, with what happens to the open handover, then off.
+  const open1 = await settle(open({ storage: withHandover('en') }));
+  const stored = open1.localStorage.getItem(KEYS.en);
+  $(open1, '[data-pilot-off]').click();
+  assert.match(open1.asked.at(-1), /^Turn the new shift close off on this device\?[^]*\n\nThe late shift that is open stays open as it is\.$/);
+  assert.equal(open1.ShiftClose.enabled(), false);
+  assert.equal(open1.localStorage.getItem(KEYS.en), stored, 'the handover is as it was');
+  assert.equal($(open1, '[data-pilot-held]').hidden, true, 'and nothing is held');
+  // From here the page is the page as it always was, whole.
+  closeShift(open1);
+  assert.match(open1.asked.at(-1), /carries over to the next handover\.$/);
+  assert.deepEqual([saved(open1).idle, saved(open1).current.shift, openTexts(open1)], [false, 'Night', ['Ramp 3 blocked']]);
+  // After the waiting things are settled the new way, it can be turned off.
+  startShift(idle, {});
+  $(idle, '[data-pilot-off]').click();
+  assert.equal(idle.ShiftClose.enabled(), false);
+  assert.deepEqual(openTexts(idle).sort(), ['Ramp 3 blocked', SENT]);
+});
+
+// ---- The fifty-first issue that waits ----
+
+test('the fifty-first issue sent while no shift is open is not kept, not used up and not lost: after room is made it is stored once', { skip: !hasSite }, () => {
+  // Fifty issues arrive the real way, one page opened for each.
+  let w = idlePage();
+  for (let n = 1; n <= 50; n += 1) w = open({ storage: held(w), search: `?issue=${encodeURIComponent(`Waiting issue ${n}`)}` });
+  assert.equal(saved(w).waiting.length, 50);
+  const full = w.localStorage.getItem(KEYS.en);
+  const note = { caseId: 'INV-51', from: 'cx-control-tower', issue: 'The fifty-first', owner: 'Arben', due: '2026-11-13' };
+  const withNote = (page) => page.sessionStorage.setItem('sc-case-handoff', JSON.stringify(note));
+  // What the tab still holds after a page: the address and the note, as a reload would find them.
+  const again = (page, options = {}) => open({ storage: held(page), search: page.location.search, ...options, before: (next) => { const kept = page.sessionStorage.getItem('sc-case-handoff'); if (kept !== null) next.sessionStorage.setItem('sc-case-handoff', kept); options.before?.(next); } });
+  const refusedOnce = (page, what) => {
+    assert.equal(page.localStorage.getItem(KEYS.en), full, `${what}: nothing stored, nothing pushed out`);
+    assert.equal(page.location.search, '?case=INV-51', `${what}: the address still asks`);
+    assert.deepEqual(JSON.parse(page.sessionStorage.getItem('sc-case-handoff')), note, `${what}: the note is not used up`);
+    assert.match($(page, '[data-status]').textContent, /“The fifty-first” was not kept: too many issues already wait here\. Start the shift or discard some, then reload the page\./, what);
+  };
+  let page = open({ storage: held(w), search: '?case=INV-51', before: withNote });
+  refusedOnce(page, 'the first time');
+  page = again(page);
+  refusedOnce(page, 'after a reload');
+  // Room is made: one of the fifty is discarded, by the visitor.
+  $(page, '[data-discard-waiting]').click();
+  assert.equal(saved(page).waiting.length, 49);
+  assert.deepEqual(JSON.parse(page.sessionStorage.getItem('sc-case-handoff')), note, 'discarding another issue does not use the note up');
+  // The storage fails on the next try: still not used up.
+  let restore;
+  const failing = again(page, { before: (next) => { restore = refuseSaves(next); } });
+  assert.equal(failing.location.search, '?case=INV-51');
+  assert.deepEqual(JSON.parse(failing.sessionStorage.getItem('sc-case-handoff')), note);
+  assert.equal(saved(failing).waiting.length, 49);
+  assert.match($(failing, '[data-status]').textContent, /could not be saved here/);
+  restore();
+  // And with the storage working: stored, once, and only now used up.
+  page = again(failing);
+  assert.equal(saved(page).waiting.filter((item) => item.text === 'The fifty-first').length, 1);
+  assert.equal(saved(page).waiting.length, 50);
+  assert.equal(page.location.search, '');
+  assert.equal(page.sessionStorage.getItem('sc-case-handoff'), null);
+  page = again(page);
+  assert.equal(saved(page).waiting.filter((item) => item.text === 'The fifty-first').length, 1, 'a reload stores nothing twice');
+  // The same limit for an issue from 5 Whys, whose text is in the address: refused, the address kept; stored once after room is made.
+  let whys = open({ storage: held(page), search: '?issue=A%20fifty-first%20from%205%20Whys' });
+  assert.equal(whys.location.search, '?issue=A%20fifty-first%20from%205%20Whys');
+  assert.equal(saved(whys).waiting.length, 50);
+  $(whys, '[data-discard-waiting]').click();
+  whys = again(whys);
+  assert.equal(whys.location.search, '');
+  assert.equal(saved(whys).waiting.filter((item) => item.text === 'A fifty-first from 5 Whys').length, 1);
+  // Started, the shift takes all fifty and what was carried, each once.
+  startShift(whys, {});
+  const texts = saved(whys).current.issues.map((item) => item.text);
+  assert.equal(texts.length, 51);
+  assert.equal(new Set(texts).size, 51);
 });
 
 test('where it is not on, team sync shares the handover as before: offered, sent when ticked, and merged', { skip: !hasSite }, async () => {
@@ -721,9 +917,11 @@ test('when every closure waits, the history grows past its limit rather than dro
   assert.equal(state.history.length, 36);
   assert.equal(w.ShiftClose.waiting(state).length, 36);
   // The page as it always closed uses the same rule: a closure that waits is not sliced away by it either.
-  const old = open({ pilot: false, storage: { [KEYS.en]: { ...plain(state), idle: false, current: sheet('en', { area: 'Elsewhere', issues: [] }) } } });
+  const carried = plain(state);
+  carried.history.forEach((entry) => { entry.carried = { date: '2026-11-12', shift: 'Early', at: '2026-11-12T05:00:00.000Z' }; });
+  const old = open({ pilot: false, storage: { [KEYS.en]: { ...carried, idle: false, current: sheet('en', { area: 'Elsewhere', issues: [] }) } } });
   closeShift(old);
-  assert.equal(saved(old).history.filter((entry) => entry.closeId).length, 36);
+  assert.equal(saved(old).history.length, 30, 'closures that wait for nothing are dropped by the limit there as before');
 });
 
 test('"Delete history" says when open issues still wait, and the answer "no" changes nothing', { skip: !hasSite }, () => {
@@ -1107,9 +1305,9 @@ test('K15: the Handover page says in every language that team sync does not shar
 test('K15: the Tools Guide says it too, in its three languages, in the edition that is on the site and in its PDF', { skip: !hasSite }, async () => {
   const guide = (await import('../src/_data/toolsGuide.js')).default;
   const said = {
-    en: 'Where the new shift close is turned on (a pilot, on one device), team sync does not share the handover or its history: it reaches another device only when you send it.',
-    sq: 'Aty ku mbyllja e re e turnit është e ndezur (një pilot, në një pajisje), Sinkronizimi i ekipit nuk e ndan dorëzimin dhe historikun e tij: ai arrin në një pajisje tjetër vetëm kur e dërgon ti.',
-    de: 'Wo der neue Schichtabschluss eingeschaltet ist (ein Pilot, auf einem Gerät), teilt die Team-Synchronisierung die Übergabe und ihren Verlauf nicht: Sie erreicht ein anderes Gerät nur, wenn Sie sie senden.',
+    en: 'Without the pilot, team sync shares the handover only where it is ticked. With the new shift close turned on (a pilot, on one device), it shares neither the handover nor its history: the handover reaches another device only when you send it.',
+    sq: 'Pa pilotin, Sinkronizimi i ekipit e ndan dorëzimin vetëm aty ku është zgjedhur. Me mbylljen e re të turnit të ndezur (një pilot, në një pajisje), ai nuk ndan as dorëzimin, as historikun e tij: dorëzimi arrin në një pajisje tjetër vetëm kur e dërgon ti.',
+    de: 'Ohne den Piloten teilt die Team-Synchronisierung die Übergabe nur dort, wo sie angehakt ist. Mit eingeschaltetem neuem Schichtabschluss (ein Pilot, auf einem Gerät) teilt sie weder die Übergabe noch ihren Verlauf: Die Übergabe erreicht ein anderes Gerät nur, wenn Sie sie senden.',
   };
   assert.ok(guide.edition >= 9, 'a new edition: the earlier one is kept as it was printed');
   assert.ok(guide.editions.find((edition) => edition.number === 8).pdf, 'edition 8 is archived');

@@ -326,7 +326,29 @@
       return false;
     }
   };
-  const sharable = (key) => offerable(key) && !(ONE_DEVICE.test(key) && closeOn());
+  // A handover that holds what the new way of closing left, on a device where the setting is off (a saved file of a
+  // device where it is on, put back here): no shift open, issues another tool sent that wait for a shift, or a
+  // closure whose open issues no handover has carried yet. The Handover page does nothing with such a state until the
+  // visitor decides (js/shift-handover.js, "held"), and it is not shared either, whatever is ticked: a copy merged
+  // field by field would replace it. The same reading as ShiftClose.waiting, kept here because this file also runs
+  // where that one does not.
+  const closeHeld = (key) => {
+    try {
+      const value = JSON.parse(localStorage.getItem(key));
+      const isObject = (item) => item !== null && typeof item === "object" && !Array.isArray(item);
+      if (!isObject(value)) return false;
+      if (value.idle === true) return true;
+      if (Array.isArray(value.waiting) && value.waiting.some(isObject)) return true;
+      const history = Array.isArray(value.history) ? value.history.filter(isObject) : [];
+      const named = new Set();
+      [value.current, ...history.map((entry) => entry.handover)].forEach((h) => { if (isObject(h) && Array.isArray(h.carriedFrom)) h.carriedFrom.forEach((id) => named.add(id)); });
+      return history.some((entry) => typeof entry.closeId === "string" && entry.closeId && !isObject(entry.carried) && !named.has(entry.closeId)
+        && isObject(entry.handover) && Array.isArray(entry.handover.issues) && entry.handover.issues.some((issue) => isObject(issue) && !issue.done && typeof issue.text === "string" && issue.text.trim()));
+    } catch {
+      return false;
+    }
+  };
+  const sharable = (key) => offerable(key) && !(ONE_DEVICE.test(key) && (closeOn() || closeHeld(key)));
   // Ticked unless the device says otherwise: the action list, the workplace, the timeline events, the floor logs and the hotel boards.
   const DEFAULT_ON = new Set(["action-tracker", "workplace", "annotations", "damage-control", "incomplete-control", "night-audit", "delay-analyzer", "sigma-control-chart", "lost-found", "room-inspection", "maintenance-planner", "safety-cross", "room-status", "guest-complaints"]);
   const isOn = (slug, choices = {}) => (typeof choices[slug] === "boolean" ? choices[slug] : DEFAULT_ON.has(slug));
@@ -1133,7 +1155,7 @@
     FORMAT, VERSION, SALT, ID_SALT, ITERATIONS, WORDS, BITS, DEFAULT_ON, VIEW_VERSION, TOMBSTONE_DAYS,
     newCode, parseCode, normalise, deriveKeys, seal, unseal, toBase64, fromBase64, toBase64Url, fromBase64Url,
     looksViewer, viewerCode, parseViewer, viewerKeys,
-    offerable, sharable, closeOn, isOn, readPayload, withDevice, deviceFresh,
+    offerable, sharable, closeOn, closeHeld, isOn, readPayload, withDevice, deviceFresh,
     hash, newer, mergeRows, mergeValue, merge, baseOf, changedSince, sameItems,
     deletedHere, joinDeleted, purgeDeleted, applyDeleted,
     qrEncode, qrSvg,

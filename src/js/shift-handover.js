@@ -429,6 +429,15 @@
   const rollback = (text) => { Object.assign(state, JSON.parse(text)); };
   // The new way of closing a shift is on, on this device (js/shift-close.js). Off, the page closes as it always did.
   const pilot = () => Close.enabled();
+  // What the new way of closing left in this state: no shift open, issues sent here that wait for a shift, closures
+  // whose open issues no handover has carried yet.
+  const leftByClose = () => ({ idle: state.idle, sent: state.waiting.length, closures: Close.waiting(state).length, issues: Close.waiting(state).reduce((n, entry) => n + Close.openOf(entry.handover).length, 0) });
+  // Held: the state holds such things and the new way is off on this device (a saved file of a device where it is on
+  // was put back here). Then nothing is closed, started or taken over, by either way of closing, until the visitor
+  // turns the new way on: half of one and half of the other would lose what waits. Team sync does not share such a
+  // handover either (js/team-sync.js, closeHeld). Editing, the history, discarding and deleting stay as they are.
+  const held = () => { if (pilot()) return false; const left = leftByClose(); return left.idle || left.sent > 0 || left.closures > 0; };
+  const heldNote = () => tx("Not done: this device holds a shift closed the new way, and the new shift close is off here. Turn it on first, in the box at the top of the page.");
   // The issues that waited join a handover that opens: one whose text is already open there is not added twice.
   const foldWaiting = (h) => {
     let added = 0;
@@ -991,10 +1000,25 @@
     renderStart();
     return true;
   };
+  // The box that says the state is held, what it holds, and asks for the one decision that lets the page go on.
+  const heldBox = document.querySelector("[data-pilot-held]");
+  const renderHeld = () => {
+    if (!heldBox) return;
+    const on = held();
+    heldBox.hidden = !on;
+    if (!on) return;
+    const left = leftByClose();
+    const facts = [];
+    if (left.idle) facts.push(tx("No shift is open."));
+    if (left.issues) facts.push(counted(left.issues, "{n} open issue of a closed shift waits to be carried over.", "{n} open issues of closed shifts wait to be carried over."));
+    if (left.sent) facts.push(counted(left.sent, "{n} issue sent here waits for a shift.", "{n} issues sent here wait for a shift."));
+    heldBox.querySelector("[data-pilot-held-facts]").textContent = facts.join(" ");
+  };
   let startFilledFor = null;
   const renderStart = () => {
     if (!startBox) return;
-    startBox.hidden = !state.idle;
+    renderHeld();
+    startBox.hidden = !state.idle || held();
     setupSection.hidden = state.idle;
     output.hidden = state.idle;
     if (!state.idle) { startFilledFor = null; return; }
@@ -1018,6 +1042,7 @@
   // Starts the shift the visitor confirmed: the handover of that shift is opened, the open issues that wait for it
   // are carried, and the shift becomes the active one of this device. Asked twice, it starts once.
   const startShift = () => {
+    if (held()) { note(heldNote()); return { ok: false, reason: "held" }; }
     const target = startTarget();
     const before = snapshot();
     const result = Close.start(state, { shifts: data.shifts, ...target, make: blank, merge: Link.mergeIssues, priorities: data.priorities });
@@ -1310,6 +1335,7 @@
   };
   const closeShift = () => {
     if (state.idle) return null;
+    if (held()) { note(heldNote()); return null; }
     if (!pilot()) return closeAndStartNext();
     const h = cur();
     const written = hasContent(h);
@@ -1555,6 +1581,7 @@
   // Takes over the handover that arrived. Nothing is closed, replaced or marked as carried unless the visitor says
   // yes and the whole change is saved: on "no", or when the storage does not take it, everything is as it was.
   const takeOver = (h, { id = "", ackCode = "" } = {}) => {
+    if (held()) { note(heldNote()); return false; }
     // With no shift open there is nothing here to keep or to close: the blank handover behind the page is not work.
     const merged = Link.mergeIssues(h.issues, state.idle ? [] : openIssues(cur()), data.priorities);
     const closing = replacing();
@@ -1829,9 +1856,27 @@
     renderPilot();
     return true;
   };
+  // Turned off only when nothing the new way left would be stranded: with no shift open, closures that wait or issues
+  // sent here, it stays on and the page says what to settle first. With a handover open and nothing waiting it is
+  // turned off after the question, and the open handover stays open as it is.
   pilotNote?.querySelector("[data-pilot-off]")?.addEventListener("click", () => {
-    if (!window.confirm(tx("Turn the new shift close off on this device? Closing a shift then starts the next handover at once, as before, and team sync may share the handover again if it is ticked for it."))) return;
+    const left = leftByClose();
+    if (left.idle || left.sent || left.closures) {
+      const facts = [];
+      if (left.idle) facts.push(tx("No shift is open."));
+      if (left.issues) facts.push(counted(left.issues, "{n} open issue of a closed shift waits to be carried over.", "{n} open issues of closed shifts wait to be carried over."));
+      if (left.sent) facts.push(counted(left.sent, "{n} issue sent here waits for a shift.", "{n} issues sent here wait for a shift."));
+      window.alert([tx("The new shift close stays on: turning it off now would leave these with no way to go on."), facts.join(" "), tx("Start the shift that takes them, or delete or discard them, then turn it off.")].join("\n\n"));
+      return;
+    }
+    const said = [tx("Turn the new shift close off on this device? Closing a shift then starts the next handover at once, as before, and team sync may share the handover again if it is ticked for it.")];
+    if (hasContent(cur())) said.push(tx("The {shift} shift that is open stays open as it is.", { shift: lower(cur().shift) }));
+    if (!window.confirm(said.join("\n\n"))) return;
     if (setPilot(false)) note(tx("Turned off on this device."));
+  });
+  heldBox?.querySelector("[data-pilot-held-on]")?.addEventListener("click", () => {
+    if (!window.confirm(tx("Turn the new shift close on, on this device only? Closing a shift then starts nothing: you start the next shift here, and its open issues are carried then. Team sync stops sharing the handover and its history from this device; a handover reaches another device only when you send it."))) return;
+    if (setPilot(true)) note(tx("Turned on, on this device only."));
   });
   renderPilot();
   const pilotParam = new URLSearchParams(location.search).get("pilot");

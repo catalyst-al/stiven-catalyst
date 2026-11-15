@@ -271,7 +271,7 @@ const en = {
         "Run the handover check.",
       ],
       get: "A [[Ready to hand over]] view to copy, print or save as PDF, and send through your own channel or with [[Send to the next shift]], as a link or a QR code. [[Close shift, start the next]] carries the open issues forward and counts how often they were carried; an open issue goes on to 5 Whys or the Action Tracker. Earlier handovers stay in a history.",
-      data: "The handover stays in this browser and goes only where you send it: a link holds it after the #, which no server receives. Where the new shift close is turned on (a pilot, on one device), team sync does not share the handover or its history: it reaches another device only when you send it.",
+      data: "The handover stays in this browser and goes only where you send it: a link holds it after the #, which no server receives. Without the pilot, team sync shares the handover only where it is ticked. With the new shift close turned on (a pilot, on one device), it shares neither the handover nor its history: the handover reaches another device only when you send it.",
     },
     "/tools/action-tracker/": {
       when: "Whenever a tool gives you something to do, and once a week to close the loop: one list for every countermeasure, finding and signal.",
@@ -1086,7 +1086,7 @@ const sq = {
         "Bëj kontrollin e dorëzimit.",
       ],
       get: "Një pamje [[Ready to hand over]] për ta kopjuar, printuar ose ruajtur si PDF dhe për ta dërguar në kanalin tënd ose me [[Send to the next shift]], si link ose kod QR. [[Close shift, start the next]] i kalon çështjet e hapura më tej dhe numëron sa herë janë kaluar; një çështje e hapur vazhdon te 5 Whys ose te Lista e veprimeve. Dorëzimet e mëparshme mbeten në një histori.",
-      data: "Dorëzimi mbetet në këtë shfletues dhe shkon vetëm aty ku e dërgon ti: një link e mban pas shenjës #, që nuk e merr asnjë server. Aty ku mbyllja e re e turnit është e ndezur (një pilot, në një pajisje), Sinkronizimi i ekipit nuk e ndan dorëzimin dhe historikun e tij: ai arrin në një pajisje tjetër vetëm kur e dërgon ti.",
+      data: "Dorëzimi mbetet në këtë shfletues dhe shkon vetëm aty ku e dërgon ti: një link e mban pas shenjës #, që nuk e merr asnjë server. Pa pilotin, Sinkronizimi i ekipit e ndan dorëzimin vetëm aty ku është zgjedhur. Me mbylljen e re të turnit të ndezur (një pilot, në një pajisje), ai nuk ndan as dorëzimin, as historikun e tij: dorëzimi arrin në një pajisje tjetër vetëm kur e dërgon ti.",
     },
     "/tools/action-tracker/": {
       when: "Sa herë që një mjet të jep diçka për të bërë, dhe një herë në javë për ta mbyllur ciklin: një listë e vetme për çdo kundërmasë, gjetje dhe sinjal.",
@@ -1901,7 +1901,7 @@ const de = {
         "Machen Sie den Übergabe-Check.",
       ],
       get: "Eine Ansicht [[Ready to hand over]] zum Kopieren, Drucken oder als PDF, die Sie über Ihren eigenen Kanal verschicken oder mit [[Send to the next shift]] als Link oder QR-Code weitergeben. [[Close shift, start the next]] nimmt die offenen Punkte mit und zählt, wie oft sie übergeben wurden; ein offener Punkt geht weiter an 5 Whys oder die Maßnahmenliste. Frühere Übergaben bleiben in einem Verlauf.",
-      data: "Die Übergabe bleibt in diesem Browser und geht nur dorthin, wohin Sie sie schicken: Ein Link trägt sie hinter dem Zeichen #, das kein Server erhält. Wo der neue Schichtabschluss eingeschaltet ist (ein Pilot, auf einem Gerät), teilt die Team-Synchronisierung die Übergabe und ihren Verlauf nicht: Sie erreicht ein anderes Gerät nur, wenn Sie sie senden.",
+      data: "Die Übergabe bleibt in diesem Browser und geht nur dorthin, wohin Sie sie schicken: Ein Link trägt sie hinter dem Zeichen #, das kein Server erhält. Ohne den Piloten teilt die Team-Synchronisierung die Übergabe nur dort, wo sie angehakt ist. Mit eingeschaltetem neuem Schichtabschluss (ein Pilot, auf einem Gerät) teilt sie weder die Übergabe noch ihren Verlauf: Die Übergabe erreicht ein anderes Gerät nur, wenn Sie sie senden.",
     },
     "/tools/action-tracker/": {
       when: "Wenn ein Tool Ihnen etwas zu tun gibt, und einmal pro Woche: eine Liste für jede Gegenmaßnahme, jeden Befund und jedes Signal.",

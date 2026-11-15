@@ -8028,5 +8028,18 @@
   "Turned on, on this device only.": "U ndez vetëm në këtë pajisje.",
   "Sent here while no shift was open. These become open issues of the shift you start; discard the ones that should not.": "Dërguar këtu kur asnjë turn nuk ishte i hapur. Këto bëhen çështje të hapura të turnit që nisni; hidhni poshtë ato që nuk duhen.",
   "The new shift close is on, on this device.": "Mbyllja e re e turnit është e ndezur në këtë pajisje.",
-  "Turn it off": "Fike"
+  "Turn it off": "Fike",
+  "Not done: this device holds a shift closed the new way, and the new shift close is off here. Turn it on first, in the box at the top of the page.": "Nuk u krye: kjo pajisje mban një turn të mbyllur me mënyrën e re, dhe mbyllja e re e turnit është e fikur këtu. Ndizeni më parë, te kutia në krye të faqes.",
+  "No shift is open.": "Asnjë turn nuk është i hapur.",
+  "{n} open issue of a closed shift waits to be carried over.": "{n} çështje e hapur e një turni të mbyllur pret të mbartet.",
+  "{n} open issues of closed shifts wait to be carried over.": "{n} çështje të hapura të turneve të mbyllura presin të mbarten.",
+  "{n} issue sent here waits for a shift.": "{n} çështje e dërguar këtu pret një turn.",
+  "{n} issues sent here wait for a shift.": "{n} çështje të dërguara këtu presin një turn.",
+  "The new shift close stays on: turning it off now would leave these with no way to go on.": "Mbyllja e re e turnit mbetet e ndezur: po të fikej tani, këto do të mbeteshin pa rrugë për të vazhduar.",
+  "Start the shift that takes them, or delete or discard them, then turn it off.": "Nisni turnin që i merr, ose fshijini a hidhini poshtë, pastaj fikeni.",
+  "The {shift} shift that is open stays open as it is.": "Turni {shift} që është i hapur mbetet i hapur ashtu siç është.",
+  "Your decision is needed": "Duhet vendimi juaj",
+  "This device holds a shift closed the new way": "Kjo pajisje mban një turn të mbyllur me mënyrën e re",
+  "The new shift close is off on this device, so nothing here is closed, started or taken over, and team sync does not share this handover: handled the old way, what waits would be lost. Turn the new shift close on to go on. To leave it later, start the shift that takes what waits, or delete or discard it, then turn it off.": "Mbyllja e re e turnit është e fikur në këtë pajisje, prandaj këtu asgjë nuk mbyllet, nuk niset dhe nuk merret, dhe Sinkronizimi i ekipit nuk e ndan këtë dorëzim: po të trajtohej me mënyrën e vjetër, ajo që pret do të humbiste. Ndizni mbylljen e re të turnit për të vazhduar. Për ta lënë më vonë, nisni turnin që merr atë që pret, ose fshijeni a hidheni poshtë, pastaj fikeni.",
+  "Turn the new shift close on": "Ndiz mbylljen e re të turnit"
 }

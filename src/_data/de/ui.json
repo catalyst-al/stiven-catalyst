@@ -8028,5 +8028,18 @@
   "Turned on, on this device only.": "Nur auf diesem Gerät eingeschaltet.",
   "Sent here while no shift was open. These become open issues of the shift you start; discard the ones that should not.": "Hierher geschickt, als keine Schicht offen war. Diese Punkte werden offene Punkte der Schicht, die Sie starten; verwerfen Sie, was nicht dazugehört.",
   "The new shift close is on, on this device.": "Der neue Schichtabschluss ist auf diesem Gerät eingeschaltet.",
-  "Turn it off": "Ausschalten"
+  "Turn it off": "Ausschalten",
+  "Not done: this device holds a shift closed the new way, and the new shift close is off here. Turn it on first, in the box at the top of the page.": "Nicht ausgeführt: Dieses Gerät enthält eine Schicht, die auf die neue Art abgeschlossen wurde, und der neue Schichtabschluss ist hier ausgeschaltet. Schalten Sie ihn zuerst ein, im Feld oben auf der Seite.",
+  "No shift is open.": "Keine Schicht ist offen.",
+  "{n} open issue of a closed shift waits to be carried over.": "{n} offener Punkt einer abgeschlossenen Schicht wartet auf die Übernahme.",
+  "{n} open issues of closed shifts wait to be carried over.": "{n} offene Punkte abgeschlossener Schichten warten auf die Übernahme.",
+  "{n} issue sent here waits for a shift.": "{n} hierher geschickter Punkt wartet auf eine Schicht.",
+  "{n} issues sent here wait for a shift.": "{n} hierher geschickte Punkte warten auf eine Schicht.",
+  "The new shift close stays on: turning it off now would leave these with no way to go on.": "Der neue Schichtabschluss bleibt eingeschaltet: Jetzt ausgeschaltet, kämen diese Dinge nicht mehr weiter.",
+  "Start the shift that takes them, or delete or discard them, then turn it off.": "Starten Sie die Schicht, die sie übernimmt, oder löschen bzw. verwerfen Sie sie, dann schalten Sie ihn aus.",
+  "The {shift} shift that is open stays open as it is.": "Die offene Schicht „{shift}“ bleibt unverändert offen.",
+  "Your decision is needed": "Ihre Entscheidung ist nötig",
+  "This device holds a shift closed the new way": "Dieses Gerät enthält eine Schicht, die auf die neue Art abgeschlossen wurde",
+  "The new shift close is off on this device, so nothing here is closed, started or taken over, and team sync does not share this handover: handled the old way, what waits would be lost. Turn the new shift close on to go on. To leave it later, start the shift that takes what waits, or delete or discard it, then turn it off.": "Der neue Schichtabschluss ist auf diesem Gerät ausgeschaltet. Deshalb wird hier nichts abgeschlossen, gestartet oder übernommen, und die Team-Synchronisierung teilt diese Übergabe nicht: Auf die alte Art behandelt, ginge verloren, was wartet. Schalten Sie den neuen Schichtabschluss ein, um weiterzumachen. Um ihn später zu verlassen, starten Sie die Schicht, die das Wartende übernimmt, oder löschen bzw. verwerfen Sie es, dann schalten Sie ihn aus.",
+  "Turn the new shift close on": "Neuen Schichtabschluss einschalten"
 }

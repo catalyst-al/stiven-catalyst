@@ -117,6 +117,64 @@ test("an issue sent from 5 Whys while no shift is open waits through a reload, c
   noDouble(state);
 });
 
+test("off until a file brings the state of a device where it is on: held, nothing is started or closed, and the visitor's yes lets the page go on", async ({ page }) => {
+  // The state as a device with the new way on leaves it: a shift closed, its open issues waiting.
+  await page.addInitScript((key) => { if (!sessionStorage.getItem("seeded")) { localStorage.setItem(key, JSON.stringify({ v: 1, on: true, set: 1 })); sessionStorage.setItem("seeded", "1"); } }, PILOT);
+  await example(page);
+  await close(page);
+  const closed = await stored(page);
+  // The setting goes, as on a device that opened this state from a file (a file never carries the setting).
+  await page.evaluate((key) => localStorage.removeItem(key), PILOT);
+  await page.reload();
+  await expect(page.locator("[data-pilot-held]")).toBeVisible();
+  await expect(page.locator("[data-pilot-held-facts]")).toContainText("No shift is open.");
+  await expect(page.locator("[data-start]")).toBeHidden();
+  await expect(page.locator("[data-handover]")).toBeHidden();
+  await expectAccessible(page);
+  expect(await stored(page)).toEqual(closed);
+  // "No" leaves it held; "yes" turns the new way on and the start is offered.
+  page.once("dialog", (dialog) => dialog.dismiss());
+  await page.locator("[data-pilot-held-on]").click();
+  await expect(page.locator("[data-pilot-held]")).toBeVisible();
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.locator("[data-pilot-held-on]").click();
+  await expect(page.locator("[data-pilot-held]")).toBeHidden();
+  await expect(page.locator("[data-start]")).toBeVisible();
+  // While no shift is open the page shows the start only: the button that turns the new way off is with the handover,
+  // and is not shown (it would be refused: tests/shift-close.test.cjs).
+  await expect(page.locator("[data-pilot-off]")).toBeHidden();
+  await page.locator("[data-start-shift]").click();
+  const state = await stored(page);
+  expect(openIssues(state)).toEqual(openIssues({ current: closed.history[0].handover }));
+  noDouble(state);
+});
+
+test("the fifty-first issue from 5 Whys is refused without being used up; after a discard and a reload it is stored once", async ({ page }) => {
+  await example(page);
+  await close(page);
+  // Fifty issues already wait (put in the store as the page keeps them; the arrival below is the real one).
+  await page.evaluate((key) => {
+    const state = JSON.parse(localStorage.getItem(key));
+    state.waiting = Array.from({ length: 50 }, (_, n) => ({ text: `Waiting issue ${n + 1}`, owner: "", due: "", from: "five-whys", at: "2026-11-11T20:00:00.000Z" }));
+    localStorage.setItem(key, JSON.stringify(state));
+  }, KEY);
+  await page.goto("/tools/shift-handover/?issue=The%20fifty-first");
+  await expect(page.locator("[data-status]")).toContainText("was not kept: too many issues already wait here");
+  await expect(page).toHaveURL(/\?issue=The%20fifty-first$/);
+  expect((await stored(page)).waiting).toHaveLength(50);
+  await page.reload();
+  await expect(page).toHaveURL(/\?issue=The%20fifty-first$/);
+  expect((await stored(page)).waiting.some((item) => item.text === "The fifty-first")).toBe(false);
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.locator("[data-discard-waiting]").first().click();
+  await expect(page.locator("[data-start-waiting] li")).toHaveCount(49);
+  await page.reload();
+  await expect(page).toHaveURL(/\/tools\/shift-handover\/$/);
+  await expect(page.locator("[data-start-waiting] li")).toHaveCount(50);
+  await page.reload();
+  expect((await stored(page)).waiting.filter((item) => item.text === "The fifty-first")).toHaveLength(1);
+});
+
 test("close the shift, then start the next one here: nothing starts by itself, the open issues are carried once", async ({ page }) => {
   test.setTimeout(90_000);
   const before = await example(page);

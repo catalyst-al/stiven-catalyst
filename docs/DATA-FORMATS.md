@@ -74,8 +74,11 @@ or nothing, is "off": the page then closes as it always did (the next handover i
 carried; its history entry is `{ closedAt, handover, text }` and no more), and team sync treats the handover as it
 always did. The visitor turns it on by opening the Handover page with `?pilot=shift-close` and saying yes, and off with
 the button beside the note that says it is on; nothing else turns it on. What follows describes a device where it is
-on. A device where it is off still reads what such a state holds: with no shift open it shows the start and carries on
-it.
+on. A device where it is off and whose handover holds what the new way left (no shift open, a closure whose open
+issues no handover has carried, or issues in `waiting`: a saved file of a device where it is on, put back) is held: the
+page closes, starts and takes over nothing, by either way, and team sync does not share that handover (`closeHeld` in
+`js/team-sync.js`), until the visitor turns the setting on. A file never turns it on. Turning it off is refused while
+no shift is open or something waits. A device with no such state is never held.
 
 The handover keeps `{ current, idle, history, received, waiting }`. `idle: true` says no shift is open: the last one was closed and the next has not
 been started; `current` is then a blank handover the page does not show. Closing never starts the next shift, sends

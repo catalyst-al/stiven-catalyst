@@ -1,4 +1,20 @@
 {#- The Shift Handover. The page sets `cfg` to its data file; shift-handover.js does the rest. -#}
+{#- Held (js/shift-handover.js): the browser holds a shift closed the new way and the new shift close is off here, as
+    after a saved file of another device was put back. Nothing is closed or started until the visitor decides. -#}
+<section class="shell sh-held" data-pilot-held hidden aria-labelledby="sh-held-title">
+  <div class="tool-panel">
+    <fieldset class="dl-box">
+      <legend class="kicker">{{ "Your decision is needed" | t(lang) }}</legend>
+      <h2 id="sh-held-title">{{ "This device holds a shift closed the new way" | t(lang) }}</h2>
+      <p class="form-note" data-pilot-held-facts></p>
+      <p class="form-note">{{ "The new shift close is off on this device, so nothing here is closed, started or taken over, and team sync does not share this handover: handled the old way, what waits would be lost. Turn the new shift close on to go on. To leave it later, start the shift that takes what waits, or delete or discard it, then turn it off." | t(lang) }}</p>
+      <div class="tool-actions">
+        <button class="button-primary" type="button" data-pilot-held-on>{{ "Turn the new shift close on" | t(lang) }}</button>
+      </div>
+    </fieldset>
+  </div>
+</section>
+
 {#- No shift is open (the last one was closed): the next one is started here, by the visitor. The date and the shift are
     a proposal. js/shift-handover.js shows this in place of the handover; js/shift-close.js carries the open issues. -#}
 <section class="shell sh-start" data-start hidden aria-labelledby="sh-start-title">

@@ -225,6 +225,8 @@ Aktivizimi dhe auditimi i hapit 3 (shtuar më 15 nëntor 2026, pas auditimit):
 | K18 | Një çështje që mbërrin kur nuk ka turn ruhet derisa përdoruesi të nisë turnin ose ta hedhë poshtë shprehimisht. Nuk konsumohet para ruajtjes; rifreskimi dhe vazhdimi nuk e dyfishojnë. Asnjë përmbajtje e re nuk vihet në URL. |
 | K19 | Kufiri i historikut nuk fshin kurrë një mbyllje që ende pret mbartje, as pas më shumë se 30 mbylljesh. “Fshi historikun” e thotë kur fshihen edhe çështje në pritje; anulimi nuk ndryshon asgjë. |
 | K20 | Pas rikthimit, turni aktiv mbahet vetëm kur përputhja provohet; kur nuk përputhet ose është e paqartë pastrohet, me arsyen. Turni nga profili pastrohet sepse përputhja nuk provohet dot, jo për shkak të origjinës. |
+| K22 | Gjendja që la mbyllja e re (asnjë turn i hapur, mbyllje në pritje, çështje hyrëse të ruajtura), në një pajisje me cilësimin të fikur, nuk përpunohet nga asnjëra rrjedhë dhe nuk ndahet nga sinkronizimi, derisa përdoruesi të vendosë shprehimisht. Skedari i rikthyer nuk e ndez cilësimin. Fikja refuzohet sa kohë diçka pret. Pajisjet pa një gjendje të tillë sillen si më parë. |
+| K23 | Çështja e 51-të në pritje nuk ruhet, nuk konsumohet dhe nuk humbet: pas rifreskimit provohet sërish, dhe pasi lirohet vend ruhet një herë, edhe kur ruajtja dështon ndërkohë. |
 | K21 | Para se një dorëzim i mbërritur të zëvendësojë një të hapur, faqja thotë çfarë mbyllet. Anulimi ose dështimi i ruajtjes nuk e mbyll dorëzimin, nuk humb përmbajtje dhe nuk shënon çështje si të mbartura. |
 
 ### 3.7 Hapi 3: si u plotësuan kriteret
@@ -250,6 +252,8 @@ Bërë më 15 nëntor 2026 dhe korrigjuar po atë ditë pas auditimit (pjesa 3.8
 | K19 | Plotësuar | `tests/shift-close.test.cjs`: 35 mbyllje nëpërmjet faqes, 36 mbyllje që presin të gjitha, dhe pyetja e “Fshi historikun” |
 | K20 | Plotësuar | `tests/shift-close.test.cjs`: çdo pjesë e provës që mungon, me arsyen e vet, dhe turni i profilit |
 | K21 | Plotësuar | `tests/shift-close.test.cjs`: teksti i pyetjes, anulimi dhe dështimi i ruajtjes, bajt për bajt |
+| K22 | Plotësuar | `tests/shift-close.test.cjs`, pjesa “Held” (katër teste, me kutinë e vërtetë të skedarit dhe sinkronizimin e vërtetë); `tests/browser/shift-close.spec.mjs` |
+| K23 | Plotësuar | `tests/shift-close.test.cjs` (50 mbërritje të vërteta, pastaj e 51-ta nga CX Control Tower dhe nga 5 Whys); `tests/browser/shift-close.spec.mjs` (rifreskim i vërtetë) |
 
 **Çfarë mbetet e hapur.** Asnjë kriter. Botimi 9 i udhëzuesit është vetëm në degën e punës; del në faqe kur të publikohet dega.
 
@@ -266,9 +270,11 @@ Bërë më 15 nëntor 2026 dhe korrigjuar po atë ditë pas auditimit (pjesa 3.8
 - Historiku mban 30 mbyllje, plus ato që ende presin. Mbylljet që presin për një zonë ku nuk niset më asnjë turn mbeten aty derisa të fshihet historiku.
 - Shenja “ndryshuar pas ndarjes” punon vetëm për ndarjet e bëra pas këtij hapi.
 - Marrja e një dorëzimi me transferim nuk e vendos turnin aktiv të pajisjes.
-- Deri në 50 çështje mund të presin për turnin që niset; e 51-ta nuk ruhet dhe faqja e thotë, pa e konsumuar.
+- Deri në 50 çështje mund të presin për turnin që niset; e 51-ta nuk ruhet dhe faqja e thotë, pa e konsumuar (3.8, pika 8). Mesazhi i refuzimit shfaqet për pak sekonda; adresa e faqes e mban kërkesën derisa të ruhet.
 - Cilësimi i mbylljes së re nuk është në kopjen rezervë: pas kalimit në një pajisje tjetër ndizet sërish me dorë.
-- Një pajisje me cilësimin të fikur që merr gjendjen e një pajisjeje me të ndezur (nga një skedar) e lexon atë gjendje: kur nuk ka turn të hapur tregon nisjen dhe mbart. Mbylljet e saj të mëpasshme janë të llojit të vjetër.
+- Një pajisje me cilësimin të fikur që merr gjendjen e një pajisjeje me të ndezur (nga një skedar) nuk bën asgjë me të derisa përdoruesi ta ndezë cilësimin (3.8, pika 7). Rruga e daljes kalon nga mbyllja e re: ndiz, nis turnin ose fshi atë që pret, pastaj fik.
+- Butoni që fik cilësimin është pranë dorëzimit, ndaj nuk shfaqet kur nuk ka turn të hapur; aty fikja do të refuzohej gjithsesi.
+- Faqja 18 e udhëzuesit në gjermanisht është në shkallën më të ngushtë që lejon procedura (fit-3); një tekst më i gjatë aty do të kërkonte shkurtim.
 - “Sot” nuk ekziston ende. Mekanizmi është në `shift-close.js`, pa lidhje me faqen, që “Sot” ta thërrasë në hapin 6.
 
 ### 3.8 Korrigjimet e auditimit të hapit 3
@@ -285,7 +291,19 @@ Gjashtë pikat e auditimit, secila me atë që u ndryshua.
 
 **5. Transferimi mbi një dorëzim të hapur.** Kutia e dorëzimit të mbërritur dhe pyetja e konfirmimit thonë: cili turn mbyllet, që kalon në historik siç është, që asgjë nuk dërgohet prej tij, sa çështje të hapura të tij mbeten te dorëzimi që merret dhe që nuk mbarten sërish. I gjithë ndryshimi ruhet njëherësh; kur përdoruesi thotë “jo” ose ruajtja dështon, gjendja kthehet si ishte, dorëzimi i mbërritur mbetet i ofruar dhe asgjë nuk shënohet si e mbartur. E njëjta mbrojtje (kthim kur ruajtja dështon) u shtua te mbyllja, nisja dhe fshirja e historikut.
 
-**6. K15, udhëzuesi.** Botimi 9 i udhëzuesit (15 nëntor 2026) u përgatit sipas procedurës së projektit: botimi 8 u arkivua si PDF, teksti u ndryshua në tri gjuhët, `scripts/page-fit.mjs` e vendosi faqen 18 një shkallë më ngushtë që teksti të hyjë në kutinë e faqes, dhe `scripts/tools-guide.mjs` printoi tri PDF-të dhe kopertinat. Udhëzuesi e përshkruan butonin me emrin që ka faqja kur asgjë nuk është ndezur, dhe shton që aty ku mbyllja e re është e ndezur dorëzimi nuk sinkronizohet. Nuk është bërë merge apo deploy.
+**6. K15, udhëzuesi.** Botimi 9 i udhëzuesit (15 nëntor 2026) u përgatit sipas procedurës së projektit: botimi 8 u arkivua si PDF, teksti u ndryshua në tri gjuhët, `scripts/page-fit.mjs` e vendosi faqen 18 më ngushtë që teksti të hyjë në kutinë e faqes (shkalla 2 në anglisht dhe shqip, 3 në gjermanisht), dhe `scripts/tools-guide.mjs` printoi tri PDF-të dhe kopertinat. Udhëzuesi e përshkruan butonin me emrin që ka faqja kur asgjë nuk është ndezur, dhe shton që aty ku mbyllja e re është e ndezur dorëzimi nuk sinkronizohet. Nuk është bërë merge apo deploy.
+
+**7. Gjendja e pilotit kur aktivizimi është i fikur.** Kur cilësimi është i fikur dhe gjendja e dorëzimit mban atë që la mbyllja e re (asnjë turn i hapur, një mbyllje me çështje të pambartura, ose çështje hyrëse të ruajtura), gjendja “mbahet”:
+
+- Faqja e thotë në një kuti në krye, me atë që pret, dhe nuk mbyll, nuk nis dhe nuk merr dorëzim, as me rrjedhën e re, as me të vjetrën. Shkrimi në një dorëzim të hapur, historiku, hedhja poshtë dhe “Fshi historikun” (me paralajmërimin e vet) mbeten, sepse janë të njëjta në të dyja rrjedhat.
+- Sinkronizimi nuk e ndan atë dorëzim, as për dërgim, as për lexim, edhe kur është zgjedhur (`closeHeld` te `team-sync.js`). Pjesa tjetër e sinkronizimit vazhdon.
+- Vendimi i vetëm që e zhbllokon është ndezja e cilësimit nga përdoruesi, në atë kuti, pas pyetjes. Skedari i rikthyer nuk e ndez.
+- Fikja e cilësimit refuzohet sa kohë nuk ka turn të hapur ose diçka pret, dhe thotë çfarë duhet zgjidhur. Me një dorëzim të hapur dhe asgjë në pritje lejohet pas pyetjes, që thotë se dorëzimi mbetet i hapur siç është; prej aty faqja është e gjitha rrjedha e vjetër.
+- Një pajisje pa një gjendje të tillë nuk mbahet kurrë dhe sillet si para hapit 3.
+
+**8. Çështja e 51-të.** Kur 50 çështje presin, e 51-ta nuk ruhet. Kalimi nuk konsumohet: shënimi në `sessionStorage` dhe adresa mbeten, asnjë nga 50-ta nuk shtyhet jashtë, dhe rifreskimi e provon sërish. Pasi përdoruesi liron vend, rifreskimi e ruan një herë dhe vetëm atëherë e konsumon; kur ruajtja dështon ndërkohë, mbetet e pakonsumuar. Kodi nuk ndryshoi për këtë pikë: sjellja ishte tashmë kjo, dhe tani ka provë.
+
+**Teksti i botimit 9** u ndryshua që të thotë edhe sjelljen normale: “Without the pilot, team sync shares the handover only where it is ticked. With the new shift close turned on (a pilot, on one device), it shares neither the handover nor its history: the handover reaches another device only when you send it.” Tri PDF-të u printuan sërish.
 
 ---
 
