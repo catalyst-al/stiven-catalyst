@@ -39,6 +39,16 @@ jobs:
           grep -q '^# fail 0$' test.log
           grep -q '^# skipped 0$' test.log
       - run: node scripts/check-coaching-build.mjs
+      # The SEO audit of the built site (lib/seo-audit.js): sitemap, canonical, hreflang, noindex, internal links,
+      # duplicates. Errors fail the job; warnings and the pages excluded on purpose are only reported. The report goes
+      # to the job summary either way.
+      - name: SEO audit (no error allowed)
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/seo-audit.mjs --md seo-audit.md --json seo-audit.json > /dev/null || status=$?
+          cat seo-audit.md >> "$GITHUB_STEP_SUMMARY"
+          exit ${status:-0}
       # The reader journeys in a real browser (tests/browser): the built site at three widths, in both themes, with
       # the accessibility check. Only Chromium is installed, with the system libraries it needs: the Chrome for Testing
       # that the pinned @playwright/test brings (1.64.1: Chrome 156), so the journeys run on a current browser; the log

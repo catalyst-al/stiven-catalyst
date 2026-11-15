@@ -2,3 +2,13 @@ node_modules/
 _site/
 __pycache__/
 test-results/
+seo-audit.md
+seo-audit.json
+# Private Search Console data: exports and reports with traffic figures or queries stay out of this public
+# repository. Keep them locally (docs/seo/private/ is ignored).
+docs/seo/private/
+*Performance-on-Search*
+*Coverage-Validation*
+*search-console*
+*Search-Console*
+gsc-export*

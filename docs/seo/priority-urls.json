@@ -1,0 +1,30 @@
+{
+  "_comment": "Pages the SEO audit (scripts/seo-audit.mjs) reports on one by one: the Phase 1 backlog (docs/seo/BACKLOG.md) and the addresses Search Console listed as \"Crawled - currently not indexed\" on 2026-11-14 (13 HTML pages; the non-HTML ones for their status only). Traffic figures are kept out of this public file.",
+  "minContextualLinks": 3,
+  "urls": [
+    { "url": "/de/tools/damage-control/", "label": "Backlog: German Damage Control" },
+    { "url": "/de/tools/shift-handover/", "label": "Backlog: German Shift Handover" },
+    { "url": "/tools/damage-control/", "label": "Backlog: English Damage Control" },
+    { "url": "/tools/shift-handover/", "label": "Backlog: English Shift Handover" },
+    { "url": "/magazine/management-review-nr-61.html", "label": "Backlog: Management Review 61" },
+    { "url": "/magazine/management-review-nr-04.html", "label": "Backlog: Management Review 04" },
+    { "url": "/de/magazine/management-review-nr-96.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/sq/magazine/management-review-nr-25.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/de/magazine/management-review-nr-79.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/de/magazine/management-review-nr-21.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/sq/magazine/operational-treatise-vol-01.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/sq/magazine/operational-treatise-vol-02.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/de/magazine/management-review-nr-77.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/magazine/management-review-nr-15.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/de/magazine/management-review-nr-74.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/de/magazine/management-review-nr-07.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/insights/61-resellers/", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/de/magazine/management-review-nr-80.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/de/magazine/management-review-2026-09.html", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/media/magazine/management-review-nr-87/management-review-nr-87-sq.pdf", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/js/coaching-data.js", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/feed.xml", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/de/feed.xml", "label": "GSC validation: crawled, not indexed" },
+    { "url": "/sq/feed.xml", "label": "GSC validation: crawled, not indexed" }
+  ]
+}
