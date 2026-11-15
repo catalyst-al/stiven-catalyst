@@ -31,8 +31,8 @@ Keys that are the reader's, not a tool's: `sc-workplace` (the workplace profile)
 of imports), `sc-seen-writing` / `sc-seen-publications` (the "new" marks of the menu).
 
 Keys that are settings of the page and never travel in a file or a lock: `sc-theme`, `sc-motion`, `sc-floor-mode-ui`,
-`sc-print-guide-hidden`, `sc-persist-asked`, `sc-locked`, `sc-lock-idle` (the list `SKIP` in `js/work-backup.js` and
-`OPEN` in `js/work-lock.js`). `sc-team` (the team code) and `sc-team-state` stay on the device and out of files, but
+`sc-print-guide-hidden`, `sc-persist-asked`, `sc-locked`, `sc-lock-idle`, `sc-shift-close-ui` (the list `SKIP` in
+`js/work-backup.js` and `OPEN` in `js/work-lock.js`). `sc-team` (the team code) and `sc-team-state` stay on the device and out of files, but
 go into the locked record so team sync pauses while locked.
 
 The shift a device is working in and the forms left unfinished in it (`js/shift-context.js`; no page shows either yet).
@@ -67,8 +67,17 @@ asks which to keep before anything is changed (`WorkBackup.settleDrafts`); leavi
 draft taken from the file gets a new `rev`. A list of drafts that cannot be read is kept aside unchanged, once, under
 `sc-drafts-unreadable-ui`, and reads as empty; a record in it that is not a draft is left out the same way.
 
-Closing a shift and carrying its open issues (`js/shift-close.js`, used by the Shift Handover page). The handover keeps
-`{ current, idle, history, received }`. `idle: true` says no shift is open: the last one was closed and the next has not
+Closing a shift and carrying its open issues (`js/shift-close.js`, used by the Shift Handover page). This way of closing
+is on only where the device has it turned on: `sc-shift-close-ui`, `{ v: 1, on: true, set }`, a setting of the device
+that is in no saved file, no restore point and no team copy, and is read without the PIN. Anything else under that key,
+or nothing, is "off": the page then closes as it always did (the next handover is made at once, with the open issues
+carried; its history entry is `{ closedAt, handover, text }` and no more), and team sync treats the handover as it
+always did. The visitor turns it on by opening the Handover page with `?pilot=shift-close` and saying yes, and off with
+the button beside the note that says it is on; nothing else turns it on. What follows describes a device where it is
+on. A device where it is off still reads what such a state holds: with no shift open it shows the start and carries on
+it.
+
+The handover keeps `{ current, idle, history, received, waiting }`. `idle: true` says no shift is open: the last one was closed and the next has not
 been started; `current` is then a blank handover the page does not show. Closing never starts the next shift, sends
 nothing and marks nothing as sent. An entry of `history` is `{ closedAt, handover, text }` and, since this page,
 `closeId` (the id of the closure, `c` and fifteen letters and digits), `state` (where the handover stood, in the states
@@ -81,6 +90,18 @@ waits. A share keeps `sum`, a fingerprint of what the handover held (`shared: [{
 the page can say a handover was changed after it was shared; a share from before has none and says nothing either way.
 The state of the transfer keeps its meaning.
 
+The history keeps thirty closures, but never drops one whose open issues still wait (it has a `closeId`, no `carried`,
+no handover names it, and it has open issues): the limit drops the oldest closures that wait for nothing, and the
+history is longer than thirty by those that wait (`ShiftClose.trim`, `ShiftClose.waiting`). "Delete history" deletes
+them too, and says how many open issues go with them before it does.
+
+`waiting` holds the issues another tool sent to the page while no shift was open: `[{ text, owner, due, from
+("five-whys" | "cx-control-tower"), at }]`, at most fifty. They are shown where the shift is started, become open
+issues of the shift the visitor starts (or of a handover taken over), once, and can be discarded one by one, after a
+question. An issue that arrives is used up, the note in sessionStorage removed and the address cleaned, only after it
+is in the browser's storage; when the storage does not take it nothing is used up, and the page opened again offers it
+again.
+
 A shift is started by the visitor (`ShiftClose.start`), from the Handover page: the date and the shift after the closed
 one are a proposal to confirm or change. The start opens the handover of that shift, makes it the active shift of the
 device (`sc-shift-ui`), and carries the open issues of the closures that wait for it: those of the same workplace (the
@@ -90,7 +111,8 @@ in the page's list of shifts) and that no handover has carried yet. A shift of a
 one whose date or shift cannot be read carries nothing, and the closure goes on waiting. The history is only read. The
 handover that carries names the closures in `carriedFrom`; a shift that was closed at a workplace is not started there
 again. A handover that arrives while one is open closes the open one with a `closeId` and names it, its open issues
-going with the handover taken over. `carriedFrom` does not travel with a handover that is sent.
+going with the handover taken over; the page says so before it asks, and when the visitor says no or the change
+cannot be saved, the open handover stays open, nothing goes to the history and nothing is marked as carried. `carriedFrom` does not travel with a handover that is sent.
 
 What is kept, and what is not. On one device, with the handover out of team sync: no handover holds twice an issue
 carried from the same closure. Before anything is carried, every handover of the state, the open one and those in the
@@ -101,9 +123,12 @@ once in time: a saved file or a restore point from before the start, put back, h
 next start carries again, into a handover that does not have the issues; one from before the closure has the shift
 open again, and closing it is a closure of its own. Nothing is guaranteed between devices: each keeps its own handover
 and history, so starting and closing the shifts of a workplace is for one device, the others receiving a handover by
-transfer. After a file or a restore point is put back, the active shift is kept only when the handover that is open
-now is of that shift, the same date and the same word (`ShiftContext.keepActiveIfOpen`); otherwise it is cleared and
-the visitor starts the shift again.
+transfer. After a file or a restore point is put back, the active shift is kept only when it is proved to be the shift of
+the handover that is open now (`ShiftContext.keepActiveIfOpen`): a handover is open under the key of the list the
+shift was chosen from, of the same date and the same word. Otherwise it is cleared and the visitor starts the shift
+again; the answer names what failed (`idle`, `other-shift`, `unreadable`, `unprovable`). A shift chosen from the
+profile's list is `unprovable`: a handover keeps its shift as a word of the page's built-in list, and the profile's
+list may have another length, another order, or the same word for another shift, so an equal word proves nothing.
 
 Two shapes worth naming, because other tools read them. `sc-actions` is `{ rows: [action] }`, an action being `{ id, title,
 detail, owner, due, source, check, area, priority, status (open | doing | done | verified), created, closed, result }`
@@ -223,9 +248,11 @@ code, with the space id and the write token derived from the code by PBKDF2 too.
 revision and a hash of the token; deletions travel as tombstones kept 90 days. A space nobody writes to for 180 days
 deletes itself.
 
-The Shift Handover is not shared (`ONE_DEVICE` and `sharable` in `js/team-sync.js`): `sc-shift-handover`,
-`sc-shift-handover-de` and `sc-shift-handover-sq` are not listed among the tools of the box, not sent and not read,
-whatever a device ticked before. A shift is closed and its open issues carried on one device (below, §1 of the
+On a device where the new way of closing a shift is on (`sc-shift-close-ui`, §1; `closeOn` in `js/team-sync.js`), the
+Shift Handover is not shared (`ONE_DEVICE` and `sharable`): `sc-shift-handover`, `sc-shift-handover-de` and
+`sc-shift-handover-sq` are not listed among the tools of the box, not sent and not read, whatever the device ticked
+before. Where it is not on, the handover is shared as it always was: offered in the list, off until a device ticks
+it. A shift is closed and its open issues carried on one device (below, §1 of the
 handover), and the team's copy is merged field by field, so one device's handover would replace another's. A handover
 an older page left in the team's copy is passed on as it is, like the work of a tool the device does not share: not
 read, not changed, not deleted. The format of the copy is unchanged. A handover goes to another device only by the

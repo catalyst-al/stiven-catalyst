@@ -84,7 +84,7 @@ In a current Chrome, EN, DE and SQ:
 - a Management Review issue and its PDF: the month (October 2026 for issues 41 to 80), the colophon, a dated
   correction note (e.g. No. 6), the corrections register at the foot of the archive;
 - "How this is made": the AI paragraph (reflections and the book are Albanian originals);
-- the Tools Guide: edition 8, its PDF opens;
+- the Tools Guide: edition 9, its PDF opens;
 - printing a tool with a wide table (Andon) and an issue with charts: no column cut, no blank chart;
 - read aloud on an essay: stops at the end of the text, the privacy note;
 - the sitemap (`/sitemap.xml`): `lastmod` of an issue;

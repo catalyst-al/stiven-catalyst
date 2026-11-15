@@ -45,6 +45,78 @@ const noDouble = (state) => {
   }
 };
 
+// The new way of closing is a setting of the device (js/shift-close.js). The tests below run on a device where it is
+// on; the first one starts where it is off, as every device does.
+const PILOT = "sc-shift-close-ui";
+test.beforeEach(async ({ page }, testInfo) => {
+  if (testInfo.title.startsWith("off until")) return;
+  await page.addInitScript((key) => localStorage.setItem(key, JSON.stringify({ v: 1, on: true, set: 1 })), PILOT);
+});
+
+test("off until the visitor turns it on: the page closes as it always did, then the new way after the question, and off again by its button", async ({ page }) => {
+  await example(page);
+  expect(await page.evaluate((key) => localStorage.getItem(key), PILOT)).toBeNull();
+  await expect(page.locator("[data-close]")).toHaveText("Close shift, start the next");
+  await expect(page.locator(".sh-sync-note")).toBeHidden();
+  expect(await close(page)).toContain("carry over to the next handover.");
+  let state = await stored(page);
+  expect(state.idle).toBe(false);
+  expect(state.history[0].closeId).toBeUndefined();
+  expect(state.current.issues.every((issue) => issue.carried >= 1)).toBe(true);
+  await expect(page.locator("[data-start]")).toBeHidden();
+  // Asked once, by the address; "no" turns nothing on.
+  page.once("dialog", (dialog) => dialog.dismiss());
+  await page.goto("/tools/shift-handover/?pilot=shift-close");
+  await expect(page).toHaveURL(/\/tools\/shift-handover\/$/);
+  expect(await page.evaluate((key) => localStorage.getItem(key), PILOT)).toBeNull();
+  const question = new Promise((resolve) => page.once("dialog", async (dialog) => { const message = dialog.message(); await dialog.accept(); resolve(message); }));
+  await page.goto("/tools/shift-handover/?pilot=shift-close");
+  expect(await question).toContain("Turn the new shift close on, on this device only?");
+  await expect(page.locator("[data-close]")).toHaveText("Close the shift");
+  await expect(page.locator(".sh-sync-note")).toBeVisible();
+  await expectAccessible(page);
+  expect(await close(page)).toContain("no shift is open until you start the next one");
+  state = await stored(page);
+  expect(state.idle).toBe(true);
+  expect(state.history[0].closeId).toMatch(/^c[a-z0-9]{15}$/);
+  // A reload keeps the setting; the button turns it off.
+  await page.reload();
+  await expect(page.locator("[data-start]")).toBeVisible();
+  await page.locator("[data-start-shift]").click();
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.locator("[data-pilot-off]").click();
+  await expect(page.locator("[data-close]")).toHaveText("Close shift, start the next");
+  expect(await page.evaluate((key) => localStorage.getItem(key), PILOT)).toBeNull();
+});
+
+test("an issue sent from 5 Whys while no shift is open waits through a reload, can be discarded only when asked, and joins the started shift once", async ({ page }) => {
+  await example(page);
+  await close(page);
+  const closedIssues = openIssues({ current: (await stored(page)).history[0].handover });
+  await page.goto("/tools/shift-handover/?issue=Stacking%20rule%20as%20one%20picture&owner=Mira");
+  await expect(page).toHaveURL(/\/tools\/shift-handover\/$/);
+  await expect(page.locator("[data-start-waiting] li")).toHaveCount(1);
+  await expect(page.locator("[data-start-waiting] li")).toContainText("Stacking rule as one picture (Mira)");
+  expect((await stored(page)).idle).toBe(true);
+  await expectAccessible(page);
+  // A reload, the link opened again, and "no" to the discard: still one, still waiting.
+  await page.reload();
+  await page.goto("/tools/shift-handover/?issue=Stacking%20rule%20as%20one%20picture&owner=Mira");
+  page.once("dialog", (dialog) => dialog.dismiss());
+  await page.locator("[data-discard-waiting]").click();
+  await expect(page.locator("[data-start-waiting] li")).toHaveCount(1);
+  expect((await stored(page)).waiting).toHaveLength(1);
+  await expect(page.locator("[data-start-preview]")).toContainText("1 issue sent here while no shift was open will be added.");
+  await page.locator("[data-start-shift]").click();
+  let state = await stored(page);
+  expect(state.waiting).toEqual([]);
+  expect(openIssues(state)).toEqual([...closedIssues, "Stacking rule as one picture"].sort());
+  await page.reload();
+  state = await stored(page);
+  expect(openIssues(state)).toEqual([...closedIssues, "Stacking rule as one picture"].sort());
+  noDouble(state);
+});
+
 test("close the shift, then start the next one here: nothing starts by itself, the open issues are carried once", async ({ page }) => {
   test.setTimeout(90_000);
   const before = await example(page);

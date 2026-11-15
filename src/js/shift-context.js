@@ -136,21 +136,39 @@ window.ShiftContext = (() => {
     return { ok: true, active: stored, index: where.index, label: word(shifts[where.index]) };
   };
   // After a saved file or a restore point was put back (work-backup.js, storage-guard.js): the active shift is kept
-  // only when the handover that is open now is of that very shift, the same date and the same word, in the handover of
-  // the language the shift was chosen in. Otherwise it is cleared, and the visitor starts the shift again: a file may
-  // have brought back a shift that was closed, or taken away the one that was started. A shift chosen from the
-  // profile's list has no handover to be measured against, and is cleared too.
+  // only when it is proved to be the shift of the handover that is open now. The proof has three parts, and each must
+  // hold: a handover is open (stored, readable, not idle) under the key of the list the shift was chosen from; it has
+  // the same operative date; and its shift is the same word. Within one built-in list a word names one shift, so the
+  // three together say it is the same shift. Anything less clears the active shift, and the visitor starts the shift
+  // again: a file may have brought back a shift that was closed, or taken away the one that was started. The answer
+  // says which part failed (reason): "idle" (no handover is open there), "other-shift" (another date or another
+  // word), "unreadable" (what is stored there cannot be read), "unprovable" (below).
+  //
+  // A shift chosen from the profile's list cannot be proved, and the reason is not where it came from but what a
+  // handover holds: a handover is always written with the shifts built into the pages of a language, and keeps its
+  // shift as a word only. The profile's list is the visitor's own: it may have another number of shifts, another
+  // order, or the same word for another shift ("Night" as the second of two is not surely "Night" as the third of
+  // three). place() already says a profile shift and a built-in list cannot be compared; an equal word in an open
+  // handover is therefore a likeness, not a proof, and an unclear shift is cleared like one that does not match.
   const HANDOVER_KEYS = { en: "sc-shift-handover", de: "sc-shift-handover-de", sq: "sc-shift-handover-sq" };
+  const proveOpen = (stored) => {
+    const key = HANDOVER_KEYS[stored.list];
+    // No handover is written with this list: nothing stored can say this shift is the open one.
+    if (!key) return "unprovable";
+    let saved;
+    try { saved = JSON.parse(store().getItem(key)); } catch { return "unreadable"; }
+    if (saved === null) return "idle";
+    if (!isObject(saved) || !isObject(saved.current)) return "unreadable";
+    if (saved.idle === true) return "idle";
+    if (saved.current.date !== stored.date || word(saved.current.shift) !== stored.label) return "other-shift";
+    return "";
+  };
   const keepActiveIfOpen = () => {
     const stored = active();
-    if (!stored) return { ok: true, kept: false };
-    let open = false;
-    try {
-      const saved = JSON.parse(store().getItem(HANDOVER_KEYS[stored.list] || ""));
-      open = isObject(saved) && saved.idle !== true && isObject(saved.current) && saved.current.date === stored.date && word(saved.current.shift) === stored.label;
-    } catch { open = false; }
-    if (open) return { ok: true, kept: true };
-    return { ...clearActive(), kept: false };
+    if (!stored) return { ok: true, kept: false, reason: "none" };
+    const reason = proveOpen(stored);
+    if (!reason) return { ok: true, kept: true };
+    return { ...clearActive(), kept: false, reason };
   };
   const setActive = (value) => {
     const next = cleanActive({ ...(isObject(value) ? value : {}), v: VERSION, set: Date.now() });

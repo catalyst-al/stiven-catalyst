@@ -923,8 +923,10 @@ test('Site Compare keeps other teams\' read-only codes: its key is never offered
   assert.deepEqual(Object.keys(payload.items), ['sc-pareto']);
 });
 
-// The Shift Handover is closed and carried on one device (js/shift-close.js; docs/plan-sot-2026-11-11/PLANI.md, K4).
-test('K4: the box does not offer the Shift Handover, in any language of its key, even to a device that ticked it before', async (t) => {
+// Where the new way of closing a shift is on (the device's setting sc-shift-close-ui), the Shift Handover is closed
+// and carried on one device (js/shift-close.js; docs/plan-sot-2026-11-11/PLANI.md, K4 and K17). Where it is not on,
+// the box offers the handover and shares it when ticked, as it always did.
+const handoverBox = async (t, pilot) => {
   const server = fakeServer();
   const handover = { current: { template: 'warehouse', date: '2026-11-11', shift: 'Late', area: 'Dock A', issues: [{ text: 'Ramp 3 blocked', priority: 'High', owner: '', due: '', done: false, carried: 0 }] }, history: [], received: [] };
   const w = load({
@@ -935,6 +937,7 @@ test('K4: the box does not offer the Shift Handover, in any language of its key,
       'sc-damage-control': { rows: [{ date: '2026-11-11', shift: 'Late', stage: 'Loading', type: 'Crushed', cause: 'Stacking', units: 1, cost: null, note: '' }] },
       'sc-shift-handover': handover, 'sc-shift-handover-de': handover, 'sc-shift-handover-sq': handover,
       'sc-team-state': { choices: { 'shift-handover': true } },
+      ...(pilot ? { 'sc-shift-close-ui': { v: 1, on: true, set: 1 } } : {}),
     },
     before: (win) => { win.fetch = server.fetch; },
   });
@@ -944,10 +947,19 @@ test('K4: the box does not offer the Shift Handover, in any language of its key,
   for (let i = 0; i < 300 && !/^Synced/.test($('[data-tm-status]').textContent); i++) await new Promise((r) => setTimeout(r, 20));
   assert.match($('[data-tm-status]').textContent, /^Synced/);
   const offered = [...w.document.querySelectorAll('[data-tm-tools] input')].map((box) => box.dataset.slug);
-  assert.deepEqual(offered, ['action-tracker', 'damage-control'], 'the log and the actions, not the handover');
-  // And the first sync of the box sent none of the three.
   const keys = await w.TeamSyncMath.deriveKeys(JSON.parse(w.localStorage.getItem('sc-team')).code);
   const team = plain(await w.TeamSyncMath.unseal(server.spaces.get(keys.spaceId), keys.key));
-  assert.deepEqual(Object.keys(team.items).sort(), ['sc-actions', 'sc-damage-control']);
   assert.equal(w.localStorage.getItem('sc-shift-handover'), JSON.stringify(handover), 'the handover on the device is as it was');
+  return { offered, sent: Object.keys(team.items).sort() };
+};
+test('K4: where the new shift close is on, the box does not offer the Shift Handover, in any language of its key, even to a device that ticked it before', async (t) => {
+  const { offered, sent } = await handoverBox(t, true);
+  assert.deepEqual(offered, ['action-tracker', 'damage-control'], 'the log and the actions, not the handover');
+  // And the first sync of the box sent none of the three.
+  assert.deepEqual(sent, ['sc-actions', 'sc-damage-control']);
+});
+test('K17: where the new shift close is not on, the box offers the Shift Handover and shares it when ticked, as before', async (t) => {
+  const { offered, sent } = await handoverBox(t, false);
+  assert.deepEqual([...offered].sort(), ['action-tracker', 'damage-control', 'shift-handover']);
+  assert.deepEqual(sent, ['sc-actions', 'sc-damage-control', 'sc-shift-handover', 'sc-shift-handover-de', 'sc-shift-handover-sq']);
 });

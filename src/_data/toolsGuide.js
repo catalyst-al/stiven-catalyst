@@ -16,8 +16,8 @@ const read = (file) => JSON.parse(fs.readFileSync(new URL(file, import.meta.url)
 // on the cover, on the reader and on every tool page that shows its page of the guide; the day it came out dates it in
 // the site's feeds. Every earlier edition stays on the site as it was printed (editions below, and
 // src/media/guides/tools-guide/editions/).
-const EDITION = 8;
-const EDITION_DATE = "2026-10-27";
+const EDITION = 9;
+const EDITION_DATE = "2026-11-15";
 const families = read("./families.json");
 const toolLists = { en: read("./tools.json"), sq: read("./sq/tools.json"), de: read("./de/tools.json") };
 
@@ -47,7 +47,7 @@ pages.push("coaching", "next", "back");
 const en = {
   title: "The Tools Guide",
   subtitle: "Fifty-eight free tools and a course for the people who run the work: what they are for, how to use them, and why they look the way they do.",
-  edition: `Edition ${EDITION} · October 2026`,
+  edition: `Edition ${EDITION} · November 2026`,
   author: "Stiven Janaqi",
   labels: {
     contents: "Contents",
@@ -271,7 +271,7 @@ const en = {
         "Run the handover check.",
       ],
       get: "A [[Ready to hand over]] view to copy, print or save as PDF, and send through your own channel or with [[Send to the next shift]], as a link or a QR code. [[Close shift, start the next]] carries the open issues forward and counts how often they were carried; an open issue goes on to 5 Whys or the Action Tracker. Earlier handovers stay in a history.",
-      data: "The handover stays in this browser and goes only where you send it: a link holds it after the #, which no server receives.",
+      data: "The handover stays in this browser and goes only where you send it: a link holds it after the #, which no server receives. Where the new shift close is turned on (a pilot, on one device), team sync does not share the handover or its history: it reaches another device only when you send it.",
     },
     "/tools/action-tracker/": {
       when: "Whenever a tool gives you something to do, and once a week to close the loop: one list for every countermeasure, finding and signal.",
@@ -862,7 +862,7 @@ const en = {
 const sq = {
   title: "Udhëzuesi i mjeteve",
   subtitle: "Pesëdhjetë e tetë mjete falas dhe një kurs për ata që e drejtojnë punën: për çfarë shërbejnë, si përdoren dhe pse duken ashtu siç duken.",
-  edition: `Botimi ${EDITION} · tetor 2026`,
+  edition: `Botimi ${EDITION} · nëntor 2026`,
   author: "Stiven Janaqi",
   labels: {
     contents: "Përmbajtja",
@@ -1086,7 +1086,7 @@ const sq = {
         "Bëj kontrollin e dorëzimit.",
       ],
       get: "Një pamje [[Ready to hand over]] për ta kopjuar, printuar ose ruajtur si PDF dhe për ta dërguar në kanalin tënd ose me [[Send to the next shift]], si link ose kod QR. [[Close shift, start the next]] i kalon çështjet e hapura më tej dhe numëron sa herë janë kaluar; një çështje e hapur vazhdon te 5 Whys ose te Lista e veprimeve. Dorëzimet e mëparshme mbeten në një histori.",
-      data: "Dorëzimi mbetet në këtë shfletues dhe shkon vetëm aty ku e dërgon ti: një link e mban pas shenjës #, që nuk e merr asnjë server.",
+      data: "Dorëzimi mbetet në këtë shfletues dhe shkon vetëm aty ku e dërgon ti: një link e mban pas shenjës #, që nuk e merr asnjë server. Aty ku mbyllja e re e turnit është e ndezur (një pilot, në një pajisje), Sinkronizimi i ekipit nuk e ndan dorëzimin dhe historikun e tij: ai arrin në një pajisje tjetër vetëm kur e dërgon ti.",
     },
     "/tools/action-tracker/": {
       when: "Sa herë që një mjet të jep diçka për të bërë, dhe një herë në javë për ta mbyllur ciklin: një listë e vetme për çdo kundërmasë, gjetje dhe sinjal.",
@@ -1677,7 +1677,7 @@ const sq = {
 const de = {
   title: "Der Werkzeug-Leitfaden",
   subtitle: "Achtundfünfzig kostenlose Tools und ein Kurs für alle, die Teams und Abläufe führen: wofür sie da sind, wie Sie sie nutzen und warum sie so aussehen, wie sie aussehen.",
-  edition: `Ausgabe ${EDITION} · Oktober 2026`,
+  edition: `Ausgabe ${EDITION} · November 2026`,
   author: "Stiven Janaqi",
   labels: {
     contents: "Inhalt",
@@ -1901,7 +1901,7 @@ const de = {
         "Machen Sie den Übergabe-Check.",
       ],
       get: "Eine Ansicht [[Ready to hand over]] zum Kopieren, Drucken oder als PDF, die Sie über Ihren eigenen Kanal verschicken oder mit [[Send to the next shift]] als Link oder QR-Code weitergeben. [[Close shift, start the next]] nimmt die offenen Punkte mit und zählt, wie oft sie übergeben wurden; ein offener Punkt geht weiter an 5 Whys oder die Maßnahmenliste. Frühere Übergaben bleiben in einem Verlauf.",
-      data: "Die Übergabe bleibt in diesem Browser und geht nur dorthin, wohin Sie sie schicken: Ein Link trägt sie hinter dem Zeichen #, das kein Server erhält.",
+      data: "Die Übergabe bleibt in diesem Browser und geht nur dorthin, wohin Sie sie schicken: Ein Link trägt sie hinter dem Zeichen #, das kein Server erhält. Wo der neue Schichtabschluss eingeschaltet ist (ein Pilot, auf einem Gerät), teilt die Team-Synchronisierung die Übergabe und ihren Verlauf nicht: Sie erreicht ein anderes Gerät nur, wenn Sie sie senden.",
     },
     "/tools/action-tracker/": {
       when: "Wenn ein Tool Ihnen etwas zu tun gibt, und einmal pro Woche: eine Liste für jede Gegenmaßnahme, jeden Befund und jedes Signal.",
@@ -2520,8 +2520,24 @@ const system = families.map((item) => {
 // What changed in each edition, newest first; an earlier edition is kept as its printed PDF.
 const editions = [
   {
+    number: 9,
+    date: { en: "15 November 2026", sq: "15 nëntor 2026", de: "15. November 2026" },
+    changes: {
+      en: [
+        "Shift Handover: where the new shift close is turned on (a pilot, on one device), team sync does not share the handover or its history; it reaches another device only when you send it.",
+      ],
+      sq: [
+        "Dorëzimi i turnit: aty ku mbyllja e re e turnit është e ndezur (një pilot, në një pajisje), Sinkronizimi i ekipit nuk e ndan dorëzimin dhe historikun e tij; ai arrin në një pajisje tjetër vetëm kur e dërgon ti.",
+      ],
+      de: [
+        "Schichtübergabe: Wo der neue Schichtabschluss eingeschaltet ist (ein Pilot, auf einem Gerät), teilt die Team-Synchronisierung die Übergabe und ihren Verlauf nicht; sie erreicht ein anderes Gerät nur, wenn Sie sie senden.",
+      ],
+    },
+  },
+  {
     number: 8,
     date: { en: "27 October 2026", sq: "27 tetor 2026", de: "27. Oktober 2026" },
+    pdf: (lang) => `/media/guides/tools-guide/editions/tools-guide-8-${lang}.pdf`,
     changes: {
       en: [
         "Time Study: the standard time is the observed median × a performance rating × (1 + an allowance), both entered in step 1; left at 100\u00a0% and 0\u00a0% it is the observed median, and the tool says so.",

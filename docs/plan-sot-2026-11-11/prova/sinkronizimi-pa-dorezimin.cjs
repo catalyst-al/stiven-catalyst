@@ -1,9 +1,10 @@
 // Verifikim për planin (docs/plan-sot-2026-11-11/PLANI.md, pjesa 3.3): dorëzimi dhe historiku i tij jashtë
 // sinkronizimit të ekipit, me regjistrin e dëmeve brenda. Përdor kodin e vërtetë të sinkronizimit
 // (src/js/team-sync.js, TeamSync.syncOnce) me një server të rremë si ai i tests/team-sync.test.cjs.
-// Që nga hapi 3 rregulli është në vetë kodin e sinkronizimit (`sharable` te team-sync.js): rasti 2 dhe rasti 4 më
-// poshtë tregonin rrezikun e mëparshëm; tani tregojnë që edhe një kuti e ndezur nuk e ndan dorëzimin. Provat e hapit 3
-// janë te tests/shift-close.test.cjs; ky skript mbetet si shënim i verifikimit të bërë para tij.
+// Që nga hapi 3 rregulli i pilotit është në vetë kodin e sinkronizimit dhe varet nga cilësimi i pajisjes
+// "sc-shift-close-ui" (mbyllja e re e ndezur): këtu "pilot" është një pajisje me atë cilësim të ndezur dhe me kutinë e
+// dorëzimit të zgjedhur, pa asnjë ndërhyrje tjetër; "ticked" është një pajisje pa cilësimin, që sillet si më parë.
+// Provat e hapit 3 janë te tests/shift-close.test.cjs.
 // Nuk ndryshon asgjë në repo. Nis nga rrënja e repo-s, pas `npm ci`:
 //   node docs/plan-sot-2026-11-11/prova/sinkronizimi-pa-dorezimin.cjs
 const fs = require('node:fs');
@@ -63,13 +64,10 @@ const makeDevice = async (who, rule) => {
   const w = load({
     [DAMAGE]: { rows: [...shared, row('2026-11-11', 'Natë', who === 'A' ? 'Paketimi' : 'Pranimi', 'Ambalazhi', who === 'A' ? 2 : 3)] },
     [HANDOVER]: handover(who, who === 'A' ? { done: true } : {}),
+    ...(rule === 'pilot' ? { 'sc-shift-close-ui': { v: 1, on: true, set: 1 } } : {}),
   });
   const choices = rule === 'default' ? {} : { 'shift-handover': true };
-  const selected = (key) => {
-    const slug = w.WorkBackup.toolSlug(key);
-    if (rule === 'pilot' && slug === 'shift-handover') return false;
-    return w.TeamSyncMath.isOn(slug, choices);
-  };
+  const selected = (key) => w.TeamSyncMath.isOn(w.WorkBackup.toolSlug(key), choices);
   return { who, w, selected, keys: await w.TeamSyncMath.deriveKeys(CODE, 1000) };
 };
 const sync = (dev, server) => dev.w.TeamSync.syncOnce({ endpoint: ENDPOINT, fetch: server.fetch, storage: dev.w.localStorage, keys: dev.keys, selected: dev.selected, create: true, wait: async () => {} });
@@ -98,12 +96,10 @@ const scenario = async (label, ruleA, ruleB) => {
   assert.ok(today.handoverA && today.handoverB, 'asnjë dorëzim nuk preket');
   assert.deepEqual(today.team, [DAMAGE], 'dorëzimi nuk është në kopjen e ekipit');
 
-  // 2. Të dyja pajisjet e kanë ndezur dorëzimin me dorë. Para hapit 3 njëra e humbte dorëzimin e vet; tani kodi nuk e
-  // ndan dorëzimin as me kutinë e ndezur.
+  // 2. Rreziku: të dyja pajisjet e kanë ndezur dorëzimin me dorë. Njëra humbet dorëzimin e vet.
   const both = await scenario('2. Dorëzimi i ndezur me dorë te të dyja', 'ticked', 'ticked');
   assert.deepEqual([both.damageA, both.damageB], [3, 3]);
-  assert.ok(both.handoverA && both.handoverB, 'asnjë dorëzim nuk preket');
-  assert.deepEqual(both.team, [DAMAGE], 'dorëzimi nuk del te kopja e ekipit');
+  assert.ok(both.handoverA !== both.handoverB, 'saktësisht njëra pajisje e humbet dorëzimin e vet');
 
   // 3. Rregulli i pilotit: kutia është e ndezur te të dyja, por dorëzimi nuk ndahet. Dëmet vazhdojnë.
   const pilot = await scenario('3. Rregulli i pilotit, edhe me kutinë e ndezur', 'pilot', 'pilot');
@@ -111,11 +107,10 @@ const scenario = async (label, ruleA, ruleB) => {
   assert.ok(pilot.handoverA && pilot.handoverB, 'asnjë dorëzim nuk preket');
   assert.deepEqual(pilot.team, [DAMAGE], 'dorëzimi dhe historiku nuk dalin nga pajisja');
 
-  // 4. Një pajisje nën rregullin e pilotit, tjetra me kutinë e dorëzimit të ndezur. Me kodin e hapit 3 as e dyta nuk
-  // e dërgon. (Një dorëzim që një faqe e vjetër e ka lënë te kopja e ekipit provohet te tests/shift-close.test.cjs, K5.)
+  // 4. Një pajisje nën rregullin e pilotit, tjetra me dorëzimin të ndezur (p.sh. faqe e vjetër në memorie).
   const mixed = await scenario('4. A nën rregullin e pilotit, B me dorëzimin të ndezur', 'pilot', 'ticked');
-  assert.ok(mixed.handoverA && mixed.handoverB, 'asnjë dorëzim nuk preket');
-  assert.deepEqual(mixed.team, [DAMAGE], 'dorëzimi i B-së nuk del te kopja e ekipit');
+  assert.ok(mixed.handoverA && mixed.handoverB, 'A nuk e merr dorëzimin e B-së dhe B mban të vetin');
+  assert.deepEqual(mixed.team, [DAMAGE, HANDOVER].sort(), 'dorëzimi i B-së mbetet në kopjen e ekipit, pa u lexuar nga A');
 
   console.log('\nTë katër rastet dolën siç pritej.');
 })().catch((error) => { console.error('DËSHTOI:', error.message); process.exit(1); });

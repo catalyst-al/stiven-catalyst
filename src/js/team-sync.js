@@ -307,14 +307,26 @@
   // Settings of the page, the reader and this module, not work of a tool.
   const NOT_TOOL = /^sc-(team|book-|audio-|listen-|import-maps|persist-|restore|theme|print-guide)|-ui$/;
   const offerable = (key) => isWork(key) && !PERSONAL.test(key) && !NOT_TOOL.test(key);
-  // The Shift Handover and its history, in every language: a shift is closed and its open issues carried on one device
-  // (js/shift-close.js), and a copy merged field by field would replace one device's handover with another's. So it
-  // is not shared: not listed among the tools, not sent and not read, whatever a device ticked before. A handover an
-  // older page left in the team's copy is passed on as it is, like the work of a tool this device does not share:
-  // not read here, not changed, not deleted. A handover goes to another device by the page's own "Send to the next
-  // shift".
+  // The Shift Handover and its history, in every language, on a device where the new way of closing a shift is on
+  // (js/shift-close.js; the setting "sc-shift-close-ui", { v: 1, on: true }, read here by itself because this file
+  // also runs where that one does not). There a shift is closed and its open issues carried on one device, and a copy
+  // merged field by field would replace one device's handover with another's. So the handover is not shared from
+  // that device: not listed among the tools, not sent and not read, whatever was ticked before. A handover another
+  // device left in the team's copy is passed on as it is, like the work of a tool this device does not share: not
+  // read here, not changed, not deleted. A handover goes to another device by the page's own "Send to the next
+  // shift". Where the setting is not on (missing, damaged, or anything but on), the handover is shared as it always
+  // was: offered in the list, off until a device ticks it.
   const ONE_DEVICE = /^sc-shift-handover(-(de|sq))?$/;
-  const sharable = (key) => offerable(key) && !ONE_DEVICE.test(key);
+  const CLOSE_KEY = "sc-shift-close-ui";
+  const closeOn = () => {
+    try {
+      const value = JSON.parse(localStorage.getItem(CLOSE_KEY));
+      return value !== null && typeof value === "object" && !Array.isArray(value) && value.v === 1 && value.on === true;
+    } catch {
+      return false;
+    }
+  };
+  const sharable = (key) => offerable(key) && !(ONE_DEVICE.test(key) && closeOn());
   // Ticked unless the device says otherwise: the action list, the workplace, the timeline events, the floor logs and the hotel boards.
   const DEFAULT_ON = new Set(["action-tracker", "workplace", "annotations", "damage-control", "incomplete-control", "night-audit", "delay-analyzer", "sigma-control-chart", "lost-found", "room-inspection", "maintenance-planner", "safety-cross", "room-status", "guest-complaints"]);
   const isOn = (slug, choices = {}) => (typeof choices[slug] === "boolean" ? choices[slug] : DEFAULT_ON.has(slug));
@@ -1121,7 +1133,7 @@
     FORMAT, VERSION, SALT, ID_SALT, ITERATIONS, WORDS, BITS, DEFAULT_ON, VIEW_VERSION, TOMBSTONE_DAYS,
     newCode, parseCode, normalise, deriveKeys, seal, unseal, toBase64, fromBase64, toBase64Url, fromBase64Url,
     looksViewer, viewerCode, parseViewer, viewerKeys,
-    offerable, sharable, isOn, readPayload, withDevice, deviceFresh,
+    offerable, sharable, closeOn, isOn, readPayload, withDevice, deviceFresh,
     hash, newer, mergeRows, mergeValue, merge, baseOf, changedSince, sameItems,
     deletedHere, joinDeleted, purgeDeleted, applyDeleted,
     qrEncode, qrSvg,

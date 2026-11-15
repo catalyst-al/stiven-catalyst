@@ -217,45 +217,75 @@ Dokumentimi:
 | K15 | Faqja e Dorëzimit dhe udhëzuesi thonë që gjatë pilotit dorëzimi nuk sinkronizohet dhe kalon mes pajisjeve vetëm me transferim. |
 | K16 | Teksti i garancisë te 3.5 është në `docs/DATA-FORMATS.md`, me të dy “nuk garantohet”. |
 
+Aktivizimi dhe auditimi i hapit 3 (shtuar më 15 nëntor 2026, pas auditimit):
+
+| Nr. | Kriteri |
+| --- | --- |
+| K17 | Mbyllja e re dhe përjashtimi i dorëzimit nga sinkronizimi ndizen bashkë, vetëm nga një cilësim i pajisjes. Pa cilësimin, ose me një cilësim të dëmtuar, faqja mbyll si më parë dhe sinkronizimi e trajton dorëzimin si më parë. Asgjë tjetër nuk e ndez: as një skedar i rikthyer, as sinkronizimi. |
+| K18 | Një çështje që mbërrin kur nuk ka turn ruhet derisa përdoruesi të nisë turnin ose ta hedhë poshtë shprehimisht. Nuk konsumohet para ruajtjes; rifreskimi dhe vazhdimi nuk e dyfishojnë. Asnjë përmbajtje e re nuk vihet në URL. |
+| K19 | Kufiri i historikut nuk fshin kurrë një mbyllje që ende pret mbartje, as pas më shumë se 30 mbylljesh. “Fshi historikun” e thotë kur fshihen edhe çështje në pritje; anulimi nuk ndryshon asgjë. |
+| K20 | Pas rikthimit, turni aktiv mbahet vetëm kur përputhja provohet; kur nuk përputhet ose është e paqartë pastrohet, me arsyen. Turni nga profili pastrohet sepse përputhja nuk provohet dot, jo për shkak të origjinës. |
+| K21 | Para se një dorëzim i mbërritur të zëvendësojë një të hapur, faqja thotë çfarë mbyllet. Anulimi ose dështimi i ruajtjes nuk e mbyll dorëzimin, nuk humb përmbajtje dhe nuk shënon çështje si të mbartura. |
+
 ### 3.7 Hapi 3: si u plotësuan kriteret
 
-Bërë më 15 nëntor 2026. Çdo kriter ka provë me implementimin e vërtetë: faqja e ndërtuar e Dorëzimit me skriptet e veta, kutia e vërtetë e skedarit, sinkronizimi i vërtetë kundër një serveri të rremë, dhe pikat e rikthimit në shfletues të vërtetë. Modelet e pjesëve 3.4 dhe 3.5 (`prova/`) mbeten si shënim i projektimit; nuk përdoren si provë.
+Bërë më 15 nëntor 2026 dhe korrigjuar po atë ditë pas auditimit (pjesa 3.8). Çdo kriter ka provë me implementimin e vërtetë: faqja e ndërtuar e Dorëzimit me skriptet e veta, kutia e vërtetë e skedarit, sinkronizimi i vërtetë kundër një serveri të rremë, dhe pikat e rikthimit në shfletues të vërtetë. Modelet e pjesëve 3.4 dhe 3.5 (`prova/`) mbeten si shënim i projektimit; nuk përdoren si provë.
 
 | Nr. | Gjendja | Ku është prova |
 | --- | --- | --- |
-| K1 | Plotësuar | `tests/shift-close.test.cjs`, në të tria gjuhët |
+| K1 | Plotësuar | `tests/shift-close.test.cjs`, në të tria gjuhët, në pajisje me mbylljen e re të ndezur |
 | K2 | Plotësuar | po aty |
-| K3 | Plotësuar | po aty; edhe `tests/team-sync.test.cjs` (kutia e vërtetë) |
-| K4 | Plotësuar | `tests/team-sync.test.cjs`: lista e mjeteve nuk e ofron, edhe me zgjedhje të ruajtur |
+| K3 | Plotësuar | po aty |
+| K4 | Plotësuar | `tests/shift-close.test.cjs` dhe `tests/team-sync.test.cjs`: me cilësimin e ndezur lista nuk e ofron, edhe me zgjedhje të ruajtur; pa të e ofron si më parë |
 | K5 | Plotësuar | `tests/shift-close.test.cjs` |
 | K6 | Plotësuar | po aty; edhe `tests/shift-context.test.cjs` |
 | K7–K11 | Plotësuar | `tests/shift-close.test.cjs`, me skedarin e vërtetë |
-| K12 | Plotësuar | po aty; edhe për një gjuhë tjetër |
+| K12 | Plotësuar | po aty; shih edhe K20 |
 | K13 | Plotësuar | po aty, në çdo provë të K7–K11 |
 | K14 | Plotësuar | `tests/browser/shift-close.spec.mjs`, me pikat e vërteta të rikthimit |
-| K15 | **Pjesërisht: e hapur për udhëzuesin** | Faqja e thotë në tri gjuhët. Udhëzuesi jo: shih më poshtë. |
+| K15 | Plotësuar në degën e punës | Faqja e thotë në tri gjuhët aty ku mbyllja e re është e ndezur. Udhëzuesi e thotë që nga botimi 9, në tekst, në lexues dhe në PDF (faqja 18). Botimi nuk është publikuar: shih 3.8, pika 6. |
 | K16 | Plotësuar | `docs/DATA-FORMATS.md`, me testin që e kontrollon |
+| K17 | Plotësuar | `tests/shift-close.test.cjs`, pjesa 0 (katër teste); `tests/browser/shift-close.spec.mjs` (ndezja dhe fikja në shfletues); `tests/browser/handover-transfer.spec.mjs` i pandryshuar nga para hapit 3 |
+| K18 | Plotësuar | `tests/shift-close.test.cjs` (pesë teste, me memorie që refuzon ruajtjen); `tests/browser/shift-close.spec.mjs` (rifreskim i vërtetë) |
+| K19 | Plotësuar | `tests/shift-close.test.cjs`: 35 mbyllje nëpërmjet faqes, 36 mbyllje që presin të gjitha, dhe pyetja e “Fshi historikun” |
+| K20 | Plotësuar | `tests/shift-close.test.cjs`: çdo pjesë e provës që mungon, me arsyen e vet, dhe turni i profilit |
+| K21 | Plotësuar | `tests/shift-close.test.cjs`: teksti i pyetjes, anulimi dhe dështimi i ruajtjes, bajt për bajt |
 
-**Çfarë mbetet e hapur.**
-
-- **K15, udhëzuesi i shtypur.** Udhëzuesi i mjeteve është botim me numër (botimi 8), me PDF në tri gjuhë, dhe një test kërkon që PDF-ja të thotë atë që thotë faqja. Ndryshimi i tekstit të tij kërkon një botim të ri, që është publikim. Nuk u bë. Deri atëherë udhëzuesi nuk e thotë që dorëzimi nuk sinkronizohet, dhe e përshkruan butonin me emrin e vjetër (“Close shift, start the next”) dhe sjelljen e vjetër.
+**Çfarë mbetet e hapur.** Asnjë kriter. Botimi 9 i udhëzuesit është vetëm në degën e punës; del në faqe kur të publikohet dega.
 
 **Ku implementimi ndryshon nga teksti i mëparshëm i planit.**
 
-- **Përjashtimi nga sinkronizimi vlen për të gjithë, jo për një grup pilot.** Produkti nuk ka çelës piloti; mbyllja e re është mbyllja e faqes së Dorëzimit. Çdo ekip që e kishte ndezur dorëzimin te sinkronizimi pushon ta ndajë.
 - **Çështja e paqartë nuk shtohet.** Kur dy mbyllje që presin kanë të njëjtin tekst me përgjegjës ose afat tjetër, e dyta nuk mbartet vetë; faqja e thotë dhe ajo mbetet në historik.
-- **Turni aktiv pastrohet pas çdo rikthimi kur nuk përputhet**, edhe kur skedari nuk ka dorëzim. Rasti i një turni të zgjedhur nga lista e profilit pastrohet gjithmonë, sepse nuk ka dorëzim me të cilin të matet.
-- **Një dorëzim që mbërrin me transferim** e mbyll dorëzimin e hapur me `closeId` dhe e emërton, që çështjet e tij të mos mbarten dy herë.
+- **Turni aktiv pastrohet pas çdo rikthimi kur përputhja nuk provohet**, edhe kur skedari nuk ka dorëzim (3.8, pika 4).
+- **Një dorëzim që mbërrin me transferim** e mbyll dorëzimin e hapur me `closeId` dhe e emërton, që çështjet e tij të mos mbarten dy herë (3.8, pika 5).
 
 **Kufizimet.**
 
 - Garancia është ajo e 3.5: në një pajisje, pa dyfishim brenda një dorëzimi. Jo ndërmjet pajisjeve, dhe jo “një herë në kohë” pas një skedari të vjetër.
-- “Fshi historikun” fshin edhe mbylljet që presin; çështjet e tyre nuk mbarten më.
-- Historiku mban 30 mbylljet e fundit; një mbyllje më e vjetër që pret humbet me të.
-- Shenja “ndryshuar pas ndarjes” punon vetëm për ndarjet e bëra pas këtij hapi. Një ndarje e mëparshme nuk ka me çfarë të krahasohet dhe nuk thotë asgjë.
+- “Fshi historikun” fshin edhe mbylljet që presin, pasi e ka thënë dhe përdoruesi ka pranuar.
+- Historiku mban 30 mbyllje, plus ato që ende presin. Mbylljet që presin për një zonë ku nuk niset më asnjë turn mbeten aty derisa të fshihet historiku.
+- Shenja “ndryshuar pas ndarjes” punon vetëm për ndarjet e bëra pas këtij hapi.
 - Marrja e një dorëzimi me transferim nuk e vendos turnin aktiv të pajisjes.
-- Një çështje e dërguar nga një mjet tjetër kur asnjë turn nuk është i hapur nuk ruhet askund; faqja kërkon të niset turni dhe të dërgohet përsëri.
+- Deri në 50 çështje mund të presin për turnin që niset; e 51-ta nuk ruhet dhe faqja e thotë, pa e konsumuar.
+- Cilësimi i mbylljes së re nuk është në kopjen rezervë: pas kalimit në një pajisje tjetër ndizet sërish me dorë.
+- Një pajisje me cilësimin të fikur që merr gjendjen e një pajisjeje me të ndezur (nga një skedar) e lexon atë gjendje: kur nuk ka turn të hapur tregon nisjen dhe mbart. Mbylljet e saj të mëpasshme janë të llojit të vjetër.
 - “Sot” nuk ekziston ende. Mekanizmi është në `shift-close.js`, pa lidhje me faqen, që “Sot” ta thërrasë në hapin 6.
+
+### 3.8 Korrigjimet e auditimit të hapit 3
+
+Gjashtë pikat e auditimit, secila me atë që u ndryshua.
+
+**1. Aktivizimi i kufizuar.** Mbyllja e re nuk është më mbyllja e faqes për të gjithë. Është e ndezur vetëm aty ku pajisja ka cilësimin `sc-shift-close-ui` = `{ v: 1, on: true }`. I njëjti cilësim, i lexuar edhe nga `team-sync.js`, e nxjerr dorëzimin dhe historikun nga sinkronizimi: të dyja ndizen dhe fiken bashkë. Pa cilësimin (ose me çdo vlerë tjetër) faqja mbyll si para hapit 3, me të njëjtin tekst pyetjeje dhe të njëjtin format historiku, dhe sinkronizimi e ofron dorëzimin si më parë. Cilësimi ndizet vetëm duke hapur faqen e Dorëzimit me `?pilot=shift-close` dhe duke pranuar pyetjen; fiket me butonin pranë shënimit që thotë se është i ndezur. Nuk është në kopjen rezervë, as në pikat e rikthimit, as në kopjen e ekipit, dhe lexohet pa PIN.
+
+**2. Çështja hyrëse kur nuk ka turn.** Ruhet te gjendja e dorëzimit (`waiting`), shfaqet te paneli i nisjes dhe bëhet çështje e hapur e turnit që nis përdoruesi, një herë; ose hidhet poshtë një nga një, pas pyetjes. Kalimi konsumohet (shënimi në `sessionStorage` hiqet, adresa pastrohet) vetëm pasi çështja është ruajtur. Kur memoria nuk e pranon, asgjë nuk konsumohet dhe hapja e sërishme e faqes e ofron përsëri. Mekanizmi i kalimit është ai ekzistues; asnjë përmbajtje e re nuk shkon në URL. E njëjta rregull vlen tani edhe kur ka turn të hapur.
+
+**3. Kufiri i historikut.** Kufiri prej 30 fshin mbylljet më të vjetra që nuk presin asgjë; një mbyllje me çështje të pambartura nuk fshihet, dhe historiku rritet mbi 30 kur duhet. “Fshi historikun” thotë sa çështje të hapura në pritje do të fshihen; “jo” nuk ndryshon asgjë.
+
+**4. Turni aktiv pas rikthimit.** Mbahet vetëm kur provohen tri gjëra: ka dorëzim të hapur nën çelësin e listës nga u zgjodh turni, me të njëjtën datë operative dhe me të njëjtën fjalë turni. Përndryshe pastrohet, dhe përgjigjja thotë pse (`idle`, `other-shift`, `unreadable`, `unprovable`). Turni nga lista e profilit pastrohet si `unprovable`, dhe arsyeja nuk është origjina: dorëzimi e mban turnin si fjalë të listës së faqes, ndërsa lista e profilit mund të ketë numër tjetër turnesh, renditje tjetër ose të njëjtën fjalë për një turn tjetër (“Late” i pari nga dy nuk është domosdo “Late” i dyti nga tre). Fjala e njëjtë është ngjashmëri, jo provë.
+
+**5. Transferimi mbi një dorëzim të hapur.** Kutia e dorëzimit të mbërritur dhe pyetja e konfirmimit thonë: cili turn mbyllet, që kalon në historik siç është, që asgjë nuk dërgohet prej tij, sa çështje të hapura të tij mbeten te dorëzimi që merret dhe që nuk mbarten sërish. I gjithë ndryshimi ruhet njëherësh; kur përdoruesi thotë “jo” ose ruajtja dështon, gjendja kthehet si ishte, dorëzimi i mbërritur mbetet i ofruar dhe asgjë nuk shënohet si e mbartur. E njëjta mbrojtje (kthim kur ruajtja dështon) u shtua te mbyllja, nisja dhe fshirja e historikut.
+
+**6. K15, udhëzuesi.** Botimi 9 i udhëzuesit (15 nëntor 2026) u përgatit sipas procedurës së projektit: botimi 8 u arkivua si PDF, teksti u ndryshua në tri gjuhët, `scripts/page-fit.mjs` e vendosi faqen 18 një shkallë më ngushtë që teksti të hyjë në kutinë e faqes, dhe `scripts/tools-guide.mjs` printoi tri PDF-të dhe kopertinat. Udhëzuesi e përshkruan butonin me emrin që ka faqja kur asgjë nuk është ndezur, dhe shton që aty ku mbyllja e re është e ndezur dorëzimi nuk sinkronizohet. Nuk është bërë merge apo deploy.
 
 ---
 

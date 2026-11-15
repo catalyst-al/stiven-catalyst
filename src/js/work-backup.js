@@ -22,7 +22,7 @@
   // Settings of the page itself, not work; the team code and what team sync last saw (js/team-sync.js) stay on this
   // device too, so a saved file never carries the code.
   // The shift this device is working in (js/shift-context.js) is such a setting too: a file put back never sets it.
-  const SKIP = new Set(["sc-theme", "sc-motion", "sc-floor-mode-ui", "sc-print-guide-hidden", "sc-team", "sc-team-state", "sc-locked", "sc-lock-idle", "sc-shift-ui"]);
+  const SKIP = new Set(["sc-theme", "sc-motion", "sc-floor-mode-ui", "sc-print-guide-hidden", "sc-team", "sc-team-state", "sc-locked", "sc-lock-idle", "sc-shift-ui", "sc-shift-close-ui"]);
   // Storage names that differ from the tool's address. The unfinished forms (js/shift-context.js: sc-drafts-ui, and
   // the copy kept aside of drafts that could not be read) are one entry, "drafts".
   const ALIAS = { "sigma-chart": "sigma-control-chart", dmaic: "six-sigma-dmaic", "cx-tower": "cx-control-tower", actions: "action-tracker", "drafts-unreadable": "drafts" };

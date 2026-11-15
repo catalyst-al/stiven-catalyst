@@ -34,6 +34,10 @@
           <input id="sh-start-area" name="start-area" autocomplete="off">
         </div>
       </div>
+      <div data-start-waiting hidden>
+        <p class="form-note">{{ "Sent here while no shift was open. These become open issues of the shift you start; discard the ones that should not." | t(lang) }}</p>
+        <ul class="sh-lines"></ul>
+      </div>
       <p class="form-note" data-start-preview role="status" aria-live="polite"></p>
       <div class="tool-actions">
         <button class="button-primary" type="button" data-start-shift>{{ "Start this shift" | t(lang) }}</button>
@@ -196,12 +200,13 @@
         <button class="button-secondary" type="button" data-send>{{ "Send to the next shift" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-pdf>{{ "Save as PDF" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-print>{{ "Print" | t(lang) }}</button>
-        <button class="button-secondary" type="button" data-close>{{ "Close the shift" | t(lang) }}</button>
+        {#- The label of the page as it always was; where the new way of closing is on (js/shift-close.js), the script shows the other one. #}
+        <button class="button-secondary" type="button" data-close data-pilot-label="{{ "Close the shift" | t(lang) }}">{{ "Close shift, start the next" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-clear>{{ "Clear" | t(lang) }}</button>
       </div>
       <p class="form-note" data-status aria-live="polite"></p>
-      {#- The handover is closed and carried on one device (js/shift-close.js), so team sync leaves it out (js/team-sync.js). #}
-      <p class="form-note sh-sync-note">{{ "Team sync does not share the handover or its history: each device keeps its own. A handover reaches another device only when you send it from here." | t(lang) }}</p>
+      {#- Shown only where the new way of closing is on: there the handover is closed and carried on one device (js/shift-close.js), so team sync leaves it out (js/team-sync.js). #}
+      <p class="form-note sh-sync-note" data-pilot-note hidden>{{ "The new shift close is on, on this device." | t(lang) }} {{ "Team sync does not share the handover or its history: each device keeps its own. A handover reaches another device only when you send it from here." | t(lang) }} <button class="button-secondary" type="button" data-pilot-off>{{ "Turn it off" | t(lang) }}</button></p>
       <dialog class="sh-send" data-send-dialog aria-labelledby="sh-send-title">
         <h2 id="sh-send-title">{{ "Send this handover to another device" | t(lang) }}</h2>
         <div data-send-step="prepare">

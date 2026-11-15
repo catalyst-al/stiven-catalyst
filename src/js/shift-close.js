@@ -25,7 +25,18 @@
 // was before (no closeId) carried its issues at once: it never waits. This holds on one device. It says nothing
 // between devices, and it does not say the carrying happens once in time: a saved file from before the start, put
 // back, has the closure waiting again and the next start carries again, into a handover that does not have the issues.
+//
+// This way of closing is on only where the device has it turned on (localStorage "sc-shift-close-ui", { v: 1, on: true,
+// set }: a setting of the device, in no saved file, no restore point and no team copy). Where it is not on, the page
+// closes as it did before: the next handover is made at once with the open issues carried, and team sync treats the
+// handover as it always did. Where it is on, team sync leaves the handover and its history out (js/team-sync.js reads
+// the same key): the two go together, because a handover replaced by another device's would undo what is said above.
+// A missing setting is "off", never "on".
+//
+// A closure whose open issues still wait is never dropped by the limit of the history: the limit drops the oldest
+// closures that wait for nothing, and the history is longer than the limit by the ones that wait.
 window.ShiftClose = (() => {
+  const PILOT_KEY = "sc-shift-close-ui";
   const str = (value) => (typeof value === "string" ? value : "");
   const isObject = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
   const isDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(str(value));
@@ -37,6 +48,27 @@ window.ShiftClose = (() => {
     return `c${Array.from(bytes, (b) => "abcdefghijklmnopqrstuvwxyz0123456789"[b % 36]).join("")}`;
   };
   const key = (text) => str(text).toLowerCase().replace(/\s+/g, " ").trim();
+
+  // ---- Whether this way of closing is on, on this device ----
+  const enabled = () => {
+    try {
+      const value = JSON.parse(window.localStorage.getItem(PILOT_KEY));
+      return isObject(value) && value.v === 1 && value.on === true;
+    } catch {
+      return false;
+    }
+  };
+  // Turned on or off by the visitor only. { ok: true, on } or { ok: false, reason: "locked" | "unsaved" }.
+  const enable = (on) => {
+    if (window.WorkLock && window.WorkLock.locked) return { ok: false, reason: "locked" };
+    try {
+      if (on === true) window.localStorage.setItem(PILOT_KEY, JSON.stringify({ v: 1, on: true, set: Date.now() }));
+      else window.localStorage.removeItem(PILOT_KEY);
+    } catch {
+      return { ok: false, reason: "unsaved" };
+    }
+    return { ok: true, on: on === true };
+  };
 
   // ---- The workplace and the order of shifts ----
   const sameWorkplace = (a, b) => isObject(a) && isObject(b) && str(a.template) !== "" && a.template === b.template && key(a.area) === key(b.area);
@@ -101,6 +133,25 @@ window.ShiftClose = (() => {
     return state.history.filter((entry) => entry.closeId && !entry.carried && !taken.has(entry.closeId)
       && sameWorkplace(entry.handover, target) && compare(shifts, target, entry.handover) === 1).reverse();
   };
+  // The closures whose open issues have not been carried by any handover yet, whatever their workplace: the work the
+  // history still holds for a shift to come.
+  const waits = (entry, taken) => Boolean(entry.closeId && !entry.carried && !taken.has(entry.closeId) && openOf(entry.handover).length);
+  const waiting = (state) => {
+    const taken = carriedIds(state);
+    return state.history.filter((entry) => waits(entry, taken));
+  };
+  // Keeps the history to `max` closures by dropping the oldest ones that wait for nothing. A closure that waits stays,
+  // and so does the newest one, so the history can be longer than max by the closures that wait.
+  const trim = (state, max = 30) => {
+    const taken = carriedIds(state);
+    let over = state.history.length - max;
+    for (let at = state.history.length - 1; at >= 1 && over > 0; at -= 1) {
+      if (waits(state.history[at], taken)) continue;
+      state.history.splice(at, 1);
+      over -= 1;
+    }
+    return state.history;
+  };
   // The last closure, with or without an id: what the next shift is proposed from.
   const lastClosed = (state) => state.history[0] || null;
 
@@ -115,7 +166,7 @@ window.ShiftClose = (() => {
       closeId: newId(), state: STATES.includes(status) ? status : "draft", written: written !== false, changed: changedAfterShare(h), drafts: Number.isInteger(drafts) && drafts > 0 ? drafts : 0,
     };
     state.history.unshift(entry);
-    state.history = state.history.slice(0, max);
+    trim(state, max);
     state.current = placeholder;
     state.idle = true;
     return entry;
@@ -167,5 +218,5 @@ window.ShiftClose = (() => {
     return { ok: true, started: true, added, sources: sources.length, unclear };
   };
 
-  return { STATES, newId, idOf, sameWorkplace, compare, sum, sumOf, changedAfterShare, cleanEntry, carriedFromOf, openOf, carriedIds, closed, pending, lastClosed, close, start };
+  return { PILOT_KEY, enabled, enable, waiting, trim, STATES, newId, idOf, sameWorkplace, compare, sum, sumOf, changedAfterShare, cleanEntry, carriedFromOf, openOf, carriedIds, closed, pending, lastClosed, close, start };
 })();
