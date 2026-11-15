@@ -18,7 +18,7 @@ site is about four weeks old in Google's eyes. All conclusions below are early a
 | Clicks | 24 |
 | Impressions | 1,534 |
 | CTR | 1.6 % |
-| Average position | ~20 |
+| Average position | 20.5 (impression-weighted, from Chart.csv) |
 | Clicks to the English homepage | 14 of 24 (58 %): mostly brand/navigational |
 | Clicks from Germany | 18 of 24 (321 impressions, CTR 5.6 %) |
 | United States | 458 impressions, 1 click (position 23.5) |
@@ -47,8 +47,11 @@ Two different problems, then:
 
 `node scripts/seo-audit.mjs` (in CI since this change; report: `docs/seo/audit-2026-11-14.md`):
 
+Statuses below are modelled from the built files the way GitHub Pages serves them (folder with slash → 200, without
+→ 301, `a` → `a.html` 200, otherwise 404.html with 404). Nothing was fetched from the live site.
+
 - 908 HTML pages; 894 indexable; 894 addresses in the sitemap; exactly the indexable pages, no more, no less.
-- **0 errors.** Every sitemap address answers 200; every indexable page has one self-referencing canonical and an
+- **0 errors.** Every sitemap address resolves to a built page (modelled 200); every indexable page has one self-referencing canonical and an
   og:url equal to it; EN/DE/SQ hreflang is reciprocal everywhere, with x-default on English; JSON-LD parses; no
   internal link answers 404; robots.txt allows everything and names the sitemap.
 - **0 warnings.** No internal link goes through a 301 or an alias, no duplicate titles or descriptions between pages
@@ -61,14 +64,16 @@ loses them to ranking and to snippets. Phase 2 is therefore content and snippet 
 
 ## 3. Backlog, in order
 
-Priority = expected clicks × confidence in the evidence ÷ effort. "Measure" says what to read in Search Console
+Order: Search Console impressions and position first, then how directly the evidence ties the problem to the page,
+then effort. No third-party "SEO score" is used. The export lists queries and pages separately, so where a query is
+tied to a page below, that link is an inference from the page's text and is marked as such. "Measure" says what to read in Search Console
 28 days after the change (Pages → filter on the address → compare with the previous 28 days).
 
 ### P1. Management Review No. 61 (EN): `/magazine/management-review-nr-61.html`
 
-- Evidence: 85 impressions, 0 clicks, position 10.3, the most impressions of any page except the homepage. Topic:
-  the EU platform work directive (transposition deadline 2 December 2026) and algorithmic management: timely, with
-  rising demand until December.
+- Evidence: 85 impressions, 0 clicks, position 10.3: the most impressions of any single page in the export (the
+  homepage has 31). Topic, from the page: the EU platform work directive (due 2 December 2026) and algorithmic
+  management. No query in the export can be tied to this page with certainty.
 - Current title: "Management Review No. 61: Algorithmic management of work" (56 chars). It leads with the
   publication's name and issue number, which no one searches for; "platform work directive" is in the description
   only.
@@ -83,10 +88,11 @@ Priority = expected clicks × confidence in the evidence ÷ effort. "Measure" sa
 
 ### P2. Management Review No. 04 (EN): `/magazine/management-review-nr-04.html`
 
-- Evidence: 44 impressions, 0 clicks, position 7.4. The visible queries are citation look-ups of the meta-analysis
-  the issue cites: "frazier fainshmidt klinger pezeshkan vracheva 2017 psychological safety meta analytic review 136
-  samples" (positions 3.5 – 9.5, 8 impressions in four variants), "psychological safety: a meta-analytic review and
-  extension 136". The description already says "a meta-analysis of 136 samples".
+- Evidence: 44 impressions, 0 clicks, position 7.4. Inferred queries: citation look-ups of the meta-analysis the
+  issue cites, e.g. "frazier fainshmidt klinger pezeshkan vracheva 2017 psychological safety meta analytic review 136
+  samples": 8 impressions across five variants, positions 3.5–9. Inference: "136 samples" appears on this page only
+  (the authors are also cited in Operational Treatise vol. 07), and its description says "a meta-analysis of 136
+  samples". Confirm with the per-page query export.
 - Reading: the searcher wants the paper. The page cannot become the paper, but it can be the best summary of it.
 - Phase 2: (a) make sure the issue gives the full citation with the DOI link near the top, so the snippet can show
   it; (b) test a description that names the authors and year ("Frazier et al. 2017: the meta-analysis of 136
@@ -98,7 +104,8 @@ Priority = expected clicks × confidence in the evidence ÷ effort. "Measure" sa
 
 ### P3. German Damage Control: `/de/tools/damage-control/`
 
-- Evidence: 57 impressions, 0 clicks, position 23.4. Queries: "schadenskontrolle" 46 impressions at 26.0,
+- Evidence: 57 impressions, 0 clicks, position 23.4. Inferred queries (the German H1 is "Schadenskontrolle"):
+  "schadenskontrolle" 46 impressions at 26.0,
   "schadenkontrolle" 3 at 10.0, "vollständigkeitskontrolle" (the sister tool) 2 at 21.5.
 - Finding: the rendered title is "Schadensquote berechnen | Stiven Catalyst". The seo_title in
   `src/de/tools/damage-control.njk` is "Schadensquote berechnen: Schadensprotokoll für Lager und Zustellung", but
@@ -122,12 +129,13 @@ Priority = expected clicks × confidence in the evidence ÷ effort. "Measure" sa
 
 ### P5. German Shift Handover: `/de/tools/shift-handover/` (and English `/tools/shift-handover/`)
 
-- Evidence: DE 57 impressions at position 76.8; EN 47 at 70.0. Queries: "schichtübergabe" 40 at 83.0,
+- Evidence: DE 57 impressions at position 76.8; EN 47 at 70.0. Inferred queries: "schichtübergabe" 40 at 83.0,
   "schichtübergabe produktion" 11 at 80.6, "schichtübergabe protokoll" 88, "digitale schichtübergabe" 83, "software
   zur schichtübergabe" 43; EN "shift handover software" 84, "shift handover template" 71, "shift turnover" 80.
 - Finding: the page is not weakly linked (57 contextual links in, DE) and its title is already query-led
-  ("Schichtübergabe-Vorlage: Zahlen, offene Punkte, Hinweise"). It ranks on page 8 because the head terms are
-  competitive and dominated by software vendors and downloadable templates.
+  ("Schichtübergabe-Vorlage: Zahlen, offene Punkte, Hinweise"). So neither internal links nor the title explain
+  position ~80; the export cannot say why. Hypothesis to check by looking at the live results: the head terms
+  are served by software vendors and downloadable templates.
 - Phase 2: (a) target the long tail where the site can win: "Schichtübergabe Protokoll Vorlage" / "shift handover
   template" — offer the printable/PDF version of the empty template prominently (the print pack already exists);
   (b) a short German section "Schichtübergabe in der Produktion" with the fields a production handover needs, since
@@ -144,13 +152,13 @@ Addresses: `/de/magazine/management-review-nr-96.html`, `/sq/magazine/management
 `/insights/61-resellers/`, `/de/magazine/management-review-nr-80.html`,
 `/de/magazine/management-review-2026-09.html`.
 
-- Technical check (audit, priority table): all 13 answer 200, are indexable, in the sitemap, self-canonical, with
+- Technical check (audit, priority table): all 13 resolve to a built page (modelled 200), are indexable, in the sitemap, self-canonical, with
   reciprocal de/en/sq hreflang; titles 44–60 chars; descriptions 134–158 chars; 2,000–16,000 words of real text in
   the page's own language (checked for No. 96 DE). **There is no technical defect to fix.**
-- What the evidence points to instead:
+- What the evidence points to instead (hypotheses; Search Console does not give a reason for this status):
   - **Volume and speed.** `src/_data/online.json`: 84 publications went online between 8 and 12 October, in three
     languages, each also as a PDF: roughly 250 HTML pages and 250 PDFs from a domain Google first saw in October.
-    Google indexes a new site's pages gradually; "crawled, not indexed" for part of a burst like that is normal.
+    A burst that size on a new domain is a plausible reason for part of it to wait.
   - **Few links into each issue.** An issue has 4–5 contextual links in (the archive, the downloads page, the issue
     before and after). An issue with nothing pointing at it from an essay or a tool looks less important.
   - **PDF duplicates.** Every issue also exists as three PDFs with the same text. The PDFs are crawled and sometimes

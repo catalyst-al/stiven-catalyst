@@ -133,6 +133,16 @@ test('the command exits 1 on errors, prints Markdown and writes the JSON report'
   assert.ok(JSON.parse(fs.readFileSync(json, 'utf8')).errors.length > 0);
 });
 
+test('the report says its statuses are modelled, and marks indexing as n/a for non-HTML addresses', async () => {
+  const { audit, toMarkdown } = await load();
+  const root = fixture();
+  write(root, 'feed.xml', '<feed/>');
+  const md = toMarkdown(audit(root, { priority: [{ url: '/feed.xml' }, { url: '/tools/a/' }] }));
+  assert.match(md, /modelled from the built files/);
+  assert.match(md, /\| `\/feed\.xml` \| 200 \| n\/a \| n\/a \| n\/a \|/);
+  assert.match(md, /\| `\/tools\/a\/` \| 200 \| yes \| yes \| yes \|/);
+});
+
 test('the built site: no SEO errors, and only the pages excluded on purpose are noindex', { skip: !hasSite }, async () => {
   const { audit } = await load();
   const config = JSON.parse(fs.readFileSync('docs/seo/priority-urls.json', 'utf8'));
