@@ -149,9 +149,9 @@ Addresses: `/de/magazine/management-review-nr-96.html`, `/sq/magazine/management
 - Export the queries per page (Performance → Pages → page → Queries) for P1–P5 before changing anything, and keep
   the exports out of the repository (`docs/seo/private/` is git-ignored).
 - Re-export the same report once the property has three full months.
-- Analytics: `site.json` has `analytics.cloudflareToken` empty, so there are no visit counts besides Search
-  Console. If wanted, set the token (Cloudflare Web Analytics: no cookies; writing pages only, never tool pages,
-  as the layout already arranges).
+- Analytics: visit counts are off on the whole site on purpose (PR #387, audit P2-09: `analytics.cloudflareToken`
+  is empty until Cloudflare Web Analytics is reviewed). The SEO program does not change that: Search Console is
+  its only measurement source, and turning analytics back on is the owner's separate decision, not an SEO task.
 
 ## 4. Remaining risks
 
