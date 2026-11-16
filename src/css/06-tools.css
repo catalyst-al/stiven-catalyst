@@ -876,7 +876,7 @@ select.sh-in { cursor: pointer; }
   .has-result .tool-layout { display: none; }
   .statement, .result-card { break-inside: avoid; }
   .field input, .field textarea { border-color: #bbb; }
-  .dl-setup, .sc-hit, .sc-tooltip, .dm-nav, .dm-module-nav, .sh-side, .sh-history, .sh-output .section-heading p, .lang-switch { display: none !important; }
+  .dl-setup, .sc-hit, .sc-tooltip, .dm-nav, .dm-module-nav, .sh-side, .sh-history, .sh-guide, .sh-output .section-heading p, .lang-switch { display: none !important; }
   .sh-output { padding: 0; border: 0; }
   .sh-output-grid { display: block; }
   .print-charter main > :not(.dm-charter) { display: none !important; }
