@@ -59,7 +59,19 @@
   rotateFailed: "The team code was not changed, and the team keeps the old one. {reason}" | t(lang),
   retireFailed: "The old copy could not be deleted yet, so devices with the old code can still read it. This device tries again at every sync." | t(lang),
   retired: "The old copy of the team is now deleted." | t(lang),
-  locked: "Team sync is paused while the tools are locked." | t(lang)
+  locked: "Team sync is paused while the tools are locked." | t(lang),
+  reviewStart: "Tick the tools whose work this browser should share with the team. The work of a ticked tool is encrypted on this device with a key made from the team code, then uploaded to the sync server: the server cannot read it, every device with the code can. Unticked tools are not sent." | t(lang),
+  reviewJoin: "Tick the tools this device should share with the team. For a ticked tool, the work here is encrypted on this device and uploaded to the sync server, and the team's work comes to this device; where both hold work, the two are combined, after a restore point of this browser. Unticked tools are neither sent nor taken." | t(lang),
+  reviewViewer: "Tick the tools this device should take from the team. For a ticked tool, the team's version replaces the work here, after a restore point of this browser. A read-only device sends nothing." | t(lang),
+  reviewNone: "No tool is ticked: no work from this browser is uploaded. You can tick tools later in this box." | t(lang),
+  reviewNoneViewer: "No tool is ticked: nothing is taken from the team. You can tick tools later in this box." | t(lang),
+  reviewHere: "work here" | t(lang),
+  reviewTeam: "in the team's copy" | t(lang),
+  reviewBoth: "here and in the team's copy" | t(lang),
+  reviewConfirmStart: "Confirm and start team sync" | t(lang),
+  reviewConfirmJoin: "Confirm and join the team" | t(lang),
+  reviewCancelled: "Cancelled: nothing was sent and nothing changed here." | t(lang),
+  reviewReading: "Reading the team's copy…" | t(lang)
 } %}
 <details class="tm" data-team-sync data-endpoint="{{ site.sync.endpoint }}" data-text="{{ tmText | dump }}">
   <summary class="tm-summary"><strong>{{ "Team sync" | t(lang) }}</strong> <span class="tm-state" data-tm-summary>{{ "Off" | t(lang) }}</span></summary>
@@ -75,6 +87,22 @@
           <input id="tm-join-code" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="{{ 'six words, or a read-only code' | t(lang) }}" data-tm-join-code data-scan>
         </div>
         <button class="button-secondary" type="button" data-tm-join>{{ "Join" | t(lang) }}</button>
+      </div>
+    </div>
+    <div class="tm-review" data-tm-review hidden>
+      <p class="kicker" data-tm-review-title tabindex="-1">{{ "Before the first sync" | t(lang) }}</p>
+      <p class="form-note" data-tm-review-intro></p>
+      <p class="form-note tm-warn">{{ "Some tools hold personal data, such as guest names in Guest Complaints or Lost & Found, or the names of colleagues. Tick a tool only if everyone with the team code may see its work." | t(lang) }}</p>
+      <fieldset class="tm-tools">
+        <legend class="kicker">{{ "Choose the tools" | t(lang) }}</legend>
+        <div class="tm-tool-list" data-tm-review-list></div>
+        <p class="form-note" data-tm-review-empty hidden>{{ "No tool has work in this browser yet, so nothing of yours is uploaded now." | t(lang) }}</p>
+      </fieldset>
+      <p class="form-note" data-tm-review-none role="status" aria-live="polite"></p>
+      <p class="form-note">{{ "Leaving the team keeps the team's copy on the server for the other devices, and clearing a tool here does not necessarily remove it from that copy. Only “Delete the team's copy” removes it from the server, for every device; a copy no device has updated for 180 days is deleted." | t(lang) }}</p>
+      <div class="tm-row">
+        <button class="button-primary" type="button" data-tm-review-confirm></button>
+        <button class="button-secondary" type="button" data-tm-review-cancel>{{ "Cancel" | t(lang) }}</button>
       </div>
     </div>
     <div class="tm-new" data-tm-new hidden>
@@ -132,6 +160,7 @@
           </div>
         </div>
       </div>
+      <p class="form-note" data-tm-member-only>{{ "Leaving the team keeps the team's copy on the server for the other devices, and clearing a tool here does not necessarily remove it from that copy. Only “Delete the team's copy” removes it from the server, for every device; a copy no device has updated for 180 days is deleted." | t(lang) }}</p>
       <div class="tm-leave">
         <button class="button-ghost" type="button" data-tm-leave>{{ "Leave the team on this device" | t(lang) }}</button>
         <button class="button-ghost" type="button" data-tm-delete data-tm-member-only>{{ "Delete the team's copy" | t(lang) }}</button>

@@ -149,6 +149,11 @@ test('in the box: joining a team made before finds its copy at the old address, 
   const $ = (selector) => w.document.querySelector(selector);
   $('[data-tm-join-code]').value = CODE;
   $('[data-tm-join]').click();
+  // The review reads the copy at the old address to list its tools; ticked and confirmed, the first sync moves it.
+  assert.ok(await waitFor(() => !$('[data-tm-review]').hidden));
+  assert.deepEqual([...w.document.querySelectorAll('[data-tm-review-list] input')].map((box) => [box.dataset.slug, box.checked]), [['action-tracker', false]]);
+  w.document.querySelector('[data-tm-review-list] input').click();
+  $('[data-tm-review-confirm]').click();
   assert.ok(await waitFor(() => /^Joined\./.test($('[data-tm-message]').textContent)), $('[data-tm-message]').textContent);
   assert.deepEqual(JSON.parse(w.localStorage.getItem('sc-actions')).rows.map((r) => r.id), ['t1']);
   assert.ok(server.spaces.has(keys.spaceId) && !server.spaces.has(keys.legacy.spaceId), 'moved to the new address');
