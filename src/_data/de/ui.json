@@ -7957,5 +7957,22 @@
   "[The rest did not fit in the mail link: use “Copy message” on the page.]": "[Der Rest passte nicht in den Mail-Link: Verwenden Sie „Nachricht kopieren“ auf der Seite.]",
   "Translation": "Übersetzung",
   "with AI assistance": "mit KI-Unterstützung",
-  "revised by the author": "vom Autor durchgesehen"
+  "revised by the author": "vom Autor durchgesehen",
+  "Tick the tools whose work this browser should share with the team. The work of a ticked tool is encrypted on this device with a key made from the team code, then uploaded to the sync server: the server cannot read it, every device with the code can. Unticked tools are not sent.": "Wählen Sie die Tools aus, deren Arbeit dieser Browser mit dem Team teilen soll. Die Arbeit eines ausgewählten Tools wird auf diesem Gerät mit einem Schlüssel aus dem Team-Code verschlüsselt und dann auf den Sync-Server hochgeladen: Der Server kann sie nicht lesen, jedes Gerät mit dem Code schon. Nicht ausgewählte Tools werden nicht gesendet.",
+  "Tick the tools this device should share with the team. For a ticked tool, the work here is encrypted on this device and uploaded to the sync server, and the team's work comes to this device; where both hold work, the two are combined, after a restore point of this browser. Unticked tools are neither sent nor taken.": "Wählen Sie die Tools aus, die dieses Gerät mit dem Team teilen soll. Bei einem ausgewählten Tool wird die Arbeit hier auf diesem Gerät verschlüsselt und auf den Sync-Server hochgeladen, und die Arbeit des Teams kommt auf dieses Gerät; wo beide Arbeit enthalten, wird sie zusammengeführt, nach einem Wiederherstellungspunkt dieses Browsers. Nicht ausgewählte Tools werden weder gesendet noch übernommen.",
+  "Tick the tools this device should take from the team. For a ticked tool, the team's version replaces the work here, after a restore point of this browser. A read-only device sends nothing.": "Wählen Sie die Tools aus, die dieses Gerät vom Team übernehmen soll. Bei einem ausgewählten Tool ersetzt die Fassung des Teams die Arbeit hier, nach einem Wiederherstellungspunkt dieses Browsers. Ein Gerät mit Nur-Lese-Zugriff sendet nichts.",
+  "No tool is ticked: no work from this browser is uploaded. You can tick tools later in this box.": "Kein Tool ist ausgewählt: Es wird keine Arbeit aus diesem Browser hochgeladen. Sie können Tools später in diesem Bereich auswählen.",
+  "No tool is ticked: nothing is taken from the team. You can tick tools later in this box.": "Kein Tool ist ausgewählt: Vom Team wird nichts übernommen. Sie können Tools später in diesem Bereich auswählen.",
+  "work here": "Arbeit hier",
+  "in the team's copy": "in der Kopie des Teams",
+  "here and in the team's copy": "hier und in der Kopie des Teams",
+  "Confirm and start team sync": "Bestätigen und Team-Synchronisierung starten",
+  "Confirm and join the team": "Bestätigen und dem Team beitreten",
+  "Cancelled: nothing was sent and nothing changed here.": "Abgebrochen: Es wurde nichts gesendet und hier nichts geändert.",
+  "Reading the team's copy…": "Die Kopie des Teams wird gelesen …",
+  "Before the first sync": "Vor der ersten Synchronisierung",
+  "Some tools hold personal data, such as guest names in Guest Complaints or Lost & Found, or the names of colleagues. Tick a tool only if everyone with the team code may see its work.": "Manche Tools enthalten personenbezogene Daten, etwa Gästenamen in Gästebeschwerden oder Fundsachen oder die Namen von Kolleginnen und Kollegen. Wählen Sie ein Tool nur aus, wenn alle mit dem Team-Code seine Arbeit sehen dürfen.",
+  "Choose the tools": "Tools auswählen",
+  "No tool has work in this browser yet, so nothing of yours is uploaded now.": "In diesem Browser hat noch kein Tool Arbeit, daher wird jetzt nichts von Ihnen hochgeladen.",
+  "Leaving the team keeps the team's copy on the server for the other devices, and clearing a tool here does not necessarily remove it from that copy. Only “Delete the team's copy” removes it from the server, for every device; a copy no device has updated for 180 days is deleted.": "Wenn Sie das Team verlassen, bleibt die Kopie des Teams für die anderen Geräte auf dem Server, und wenn Sie ein Tool hier leeren, wird es nicht unbedingt aus dieser Kopie entfernt. Nur „Kopie des Teams löschen“ entfernt sie vom Server, für alle Geräte; eine Kopie, die 180 Tage lang von keinem Gerät aktualisiert wurde, wird gelöscht."
 }

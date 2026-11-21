@@ -307,9 +307,11 @@
   // Settings of the page, the reader and this module, not work of a tool.
   const NOT_TOOL = /^sc-(team|book-|audio-|listen-|import-maps|persist-|restore|theme|print-guide)|-ui$/;
   const offerable = (key) => isWork(key) && !PERSONAL.test(key) && !NOT_TOOL.test(key);
-  // Ticked unless the device says otherwise: the action list, the workplace, the timeline events, the floor logs and the hotel boards.
+  // Teams joined or started before the review step (no "consent" in sc-team-state): ticked unless the device says
+  // otherwise, the action list, the workplace, the timeline events, the floor logs and the hotel boards, as they always
+  // were. A team started or joined through the review (explicit = true) shares only what was ticked there or later.
   const DEFAULT_ON = new Set(["action-tracker", "workplace", "annotations", "damage-control", "incomplete-control", "night-audit", "delay-analyzer", "sigma-control-chart", "lost-found", "room-inspection", "maintenance-planner", "safety-cross", "room-status", "guest-complaints"]);
-  const isOn = (slug, choices = {}) => (typeof choices[slug] === "boolean" ? choices[slug] : DEFAULT_ON.has(slug));
+  const isOn = (slug, choices = {}, explicit = false) => (typeof choices[slug] === "boolean" ? choices[slug] : !explicit && DEFAULT_ON.has(slug));
   // A remote entry is taken only when it could have come from a tool here (work-backup.js checks the logs' shape).
   const soundItem = (key, value) => typeof value === "string" && offerable(key) && (!window.WorkBackup?.sound || window.WorkBackup.sound([key, value]));
   const readPayload = (payload) => {
@@ -1181,7 +1183,8 @@
     const keysHere = [...Object.keys(collect(storage, offerable)), ...(state().teamKeys || []).filter(offerable)];
     return [...new Set(keysHere.map(toolSlug))].filter((slug) => names[slug]).sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
   };
-  const selected = (key) => isOn(toolSlug(key), state().choices || {});
+  const explicit = () => state().consent === true;
+  const selected = (key) => isOn(toolSlug(key), state().choices || {}, explicit());
   const say = (message) => { $("[data-tm-message]").textContent = message || ""; };
 
   // The tool on this page, for "reload to see it" when the team changed its work.
@@ -1199,7 +1202,7 @@
       label.className = "tm-tool";
       const box = document.createElement("input");
       box.type = "checkbox";
-      box.checked = isOn(slug, choices);
+      box.checked = isOn(slug, choices, explicit());
       box.dataset.slug = slug;
       box.addEventListener("change", () => {
         setState({ choices: { ...(state().choices || {}), [slug]: box.checked } });
@@ -1346,17 +1349,121 @@
       holder.innerHTML = qrSvg(qr.matrix, label || "");
     }
   };
-  $("[data-tm-start]").addEventListener("click", async () => {
-    const code = newCode();
-    writeJson(storage, TEAM_KEY, { code, since: new Date().toISOString() });
-    setState({ rev: 0, synced: {}, teamKeys: [], devices: [], lastSync: "", gone: false });
-    showCode(code);
+  // ---- Start and join: first the review, then the first sync ----
+  // Nothing of this browser's work leaves before the person has seen which tools hold work and ticked the ones to
+  // share. Every box starts unticked, the sensitive hotel tools included; Cancel writes nothing and sends nothing.
+  // Starting asks nothing of the server until Confirm. Joining reads the team's copy (GET, decrypted here, nothing
+  // stored) so the review can list the tools it holds; the code and the choices are kept only on Confirm, as
+  // { consent: true } in sc-team-state, which makes the device share only what was ticked (isOn, explicit).
+  let review = null;
+  const reviewBox = $("[data-tm-review]");
+  const reviewList = $("[data-tm-review-list]");
+  const reviewNone = $("[data-tm-review-none]");
+  const reviewConfirm = $("[data-tm-review-confirm]");
+  const ticked = () => [...reviewList.querySelectorAll("input:checked")].map((box) => box.dataset.slug);
+  const showNone = () => {
+    reviewNone.textContent = ticked().length ? "" : review.mode === "viewer" ? text.reviewNoneViewer : text.reviewNone;
+    reviewNone.hidden = !reviewNone.textContent;
+  };
+  const toolsOf = (keys) => [...new Set(keys.filter(offerable).map(toolSlug))].filter((slug) => names[slug]);
+  const openReview = (next) => {
+    review = next;
+    const here = new Set(toolsOf(Object.keys(collect(storage, offerable))));
+    const theirs = new Set(toolsOf(next.remoteKeys || []));
+    // A read-only device sends nothing, so only what the team holds can be taken.
+    const slugs = [...new Set([...(next.mode === "viewer" ? [] : here), ...theirs])].sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
+    reviewList.replaceChildren(...slugs.map((slug) => {
+      const label = document.createElement("label");
+      label.className = "tm-tool";
+      const box = document.createElement("input");
+      box.type = "checkbox";
+      box.checked = false;
+      box.dataset.slug = slug;
+      box.addEventListener("change", showNone);
+      const where = here.has(slug) && theirs.has(slug) ? text.reviewBoth : theirs.has(slug) ? text.reviewTeam : text.reviewHere;
+      label.append(box, ` ${nameOf(slug)} `);
+      const note = document.createElement("span");
+      note.className = "form-note tm-where";
+      note.textContent = `(${where})`;
+      label.append(note);
+      return label;
+    }));
+    $("[data-tm-review-empty]").hidden = slugs.length > 0;
+    $("[data-tm-review-intro]").textContent = next.mode === "start" ? text.reviewStart : next.mode === "viewer" ? text.reviewViewer : text.reviewJoin;
+    reviewConfirm.textContent = next.mode === "start" ? text.reviewConfirmStart : text.reviewConfirmJoin;
+    reviewConfirm.disabled = false;
+    showNone();
+    $("[data-tm-off]").hidden = true;
+    reviewBox.hidden = false;
+    say("");
+    $("[data-tm-review-title]").focus();
+  };
+  const closeReview = () => {
+    const from = review?.mode === "start" ? "[data-tm-start]" : "[data-tm-join]";
+    review = null;
+    reviewBox.hidden = true;
+    reviewList.replaceChildren();
     showMode();
-    say(text.started);
-    await sync({ create: true });
+    $(from)?.focus();
+  };
+  $("[data-tm-review-cancel]").addEventListener("click", () => {
+    closeReview();
+    say(text.reviewCancelled);
+  });
+  reviewConfirm.addEventListener("click", async () => {
+    if (!review) return;
+    const chosen = ticked();
+    // Only what was ticked here: every other tool, offered now or later, stays unshared until ticked in the box.
+    const choices = Object.fromEntries(chosen.map((slug) => [slug, true]));
+    const { mode } = review;
+    reviewConfirm.disabled = true;
+    if (mode === "start") {
+      const code = newCode();
+      writeJson(storage, TEAM_KEY, { code, since: new Date().toISOString() });
+      setState({ rev: 0, synced: {}, teamKeys: [], devices: [], lastSync: "", gone: false, viewer: false, consent: true, choices });
+      review = null;
+      reviewBox.hidden = true;
+      showCode(code);
+      showMode();
+      say(text.started);
+      await sync({ create: true });
+      return;
+    }
+    const viewer = mode === "viewer";
+    writeJson(storage, TEAM_KEY, viewer ? { viewer: review.viewerText, since: new Date().toISOString() } : { code: review.code, since: new Date().toISOString() });
+    setState({ rev: 0, synced: {}, teamKeys: [], devices: [], lastSync: "", gone: false, viewer, consent: true, choices });
+    keysFor = review.keys;
+    review = null;
+    reviewBox.hidden = true;
+    $("[data-tm-join-code]").value = "";
+    showMode();
+    const result = await sync();
+    say(result?.status === "synced" ? (viewer ? text.joinedViewer : text.joined) : "");
+  });
+
+  $("[data-tm-start]").addEventListener("click", () => {
+    if (review) return;
+    openReview({ mode: "start" });
   });
   const joinField = $("[data-tm-join-code]");
+  // The team's copy, read and decrypted here, to list its tools in the review: nothing is stored and nothing sent.
+  // "none" when no copy is at the address (nor, for a team made before, at its old one), "offline" when the server
+  // did not answer, "unreadable" when the copy does not open with this code.
+  const peek = async (k) => {
+    const get = async (spaceId) => { try { return await window.fetch(spaceUrl(endpoint, spaceId), { cache: "no-store" }); } catch { return null; } };
+    let got = await get(k.spaceId);
+    if (got && got.status === 404 && k.legacy) got = await get(k.legacy.spaceId);
+    if (!got) return { status: "offline" };
+    if (got.status === 404) return { status: "none" };
+    if (!got.ok) return { status: "offline" };
+    const box = await answer(got);
+    if (!sealedBox(box)) return { status: "unreadable" };
+    let remote = null;
+    try { remote = readPayload(await unseal(box, k.key)); } catch { remote = null; }
+    return remote ? { status: "ok", keys: Object.keys(remote.items) } : { status: "unreadable" };
+  };
   $("[data-tm-join]").addEventListener("click", async () => {
+    if (review) return;
     // The same field takes both kinds: a read-only code starts with "scr" and a version, a team code is six words.
     const typed = joinField.value;
     const viewer = looksViewer(typed);
@@ -1377,28 +1484,15 @@
       }
     }
     button.disabled = true;
-    say(text.syncing);
+    say(text.reviewReading);
     const k = viewer ? await viewerKeys(view.text) : await deriveKeys(parsed.code);
     // Join only a team that exists: a mistyped code that happens to be six real words starts nothing.
-    const probe = async (spaceId) => {
-      try {
-        const response = await window.fetch(spaceUrl(endpoint, spaceId), { cache: "no-store" });
-        return response.status === 404 ? false : response.ok ? true : null;
-      } catch { return null; }
-    };
-    // A team made before may still have its copy at the old address (it moves at the next sync of a member).
-    let exists = await probe(k.spaceId);
-    if (exists === false && k.legacy) exists = await probe(k.legacy.spaceId);
+    const found = await peek(k);
     button.disabled = false;
-    if (exists === false) { say(text.noTeam); return; }
-    if (exists === null) { say(text.offline); return; }
-    writeJson(storage, TEAM_KEY, viewer ? { viewer: view.text, since: new Date().toISOString() } : { code: parsed.code, since: new Date().toISOString() });
-    setState({ rev: 0, synced: {}, teamKeys: [], devices: [], lastSync: "", gone: false, viewer });
-    keysFor = k;
-    joinField.value = "";
-    showMode();
-    const result = await sync();
-    say(result?.status === "synced" ? (viewer ? text.joinedViewer : text.joined) : "");
+    if (found.status === "none") { say(text.noTeam); return; }
+    if (found.status === "offline") { say(text.offline); return; }
+    if (found.status === "unreadable") { say(text.unreadable); return; }
+    openReview({ mode: viewer ? "viewer" : "join", keys: k, code: parsed?.code, viewerText: view?.text, remoteKeys: found.keys });
   });
   $("[data-tm-copy]").addEventListener("click", async () => {
     const code = $("[data-tm-code]").textContent;

@@ -528,8 +528,16 @@ test('in the box: start a team, the code once with a QR, a first sync; the statu
   for (let i = 0; i < 100 && !/No team/.test($('[data-tm-message]').textContent); i++) await new Promise((r) => setTimeout(r, 20));
   assert.match($('[data-tm-message]').textContent, /No team uses this code/);
   assert.equal(w.localStorage.getItem('sc-team'), null);
-  // Start.
+  // Start: first the review, nothing sent and nothing stored until Confirm; the CV is never offered, the action list
+  // is offered unticked. Ticked here, it is shared.
+  const asked = server.log.length;
   $('[data-tm-start]').click();
+  assert.equal($('[data-tm-review]').hidden, false);
+  assert.equal(server.log.length, asked, 'nothing asked of the server before Confirm');
+  assert.equal(w.localStorage.getItem('sc-team'), null);
+  assert.deepEqual([...doc.querySelectorAll('[data-tm-review-list] input')].map((box) => [box.dataset.slug, box.checked]), [['action-tracker', false]]);
+  doc.querySelector('[data-tm-review-list] input').click();
+  $('[data-tm-review-confirm]').click();
   const code = JSON.parse(w.localStorage.getItem('sc-team')).code;
   assert.ok(w.TeamSyncMath.parseCode(code).ok);
   assert.equal($('[data-tm-code]').textContent, code);
@@ -796,6 +804,13 @@ test('in the box: a read-only code made, shown with a QR; a viewer joins with it
   assert.deepEqual(calls, [], 'nothing asked of the server for a damaged code');
   v$('[data-tm-join-code]').value = `${code.slice(0, 48)}\n${code.slice(48)}`;
   v$('[data-tm-join]').click();
+  // The review lists what the team's copy holds, unticked; a read-only device is offered only the team's tools.
+  assert.ok(await waitFor(() => !v$('[data-tm-review]').hidden));
+  assert.equal(vw.localStorage.getItem('sc-team'), null, 'nothing stored before Confirm');
+  assert.deepEqual([...vw.document.querySelectorAll('[data-tm-review-list] input')].map((box) => [box.dataset.slug, box.checked]), [['action-tracker', false]]);
+  assert.match(v$('[data-tm-review-intro]').textContent, /team's version replaces the work here/);
+  vw.document.querySelector('[data-tm-review-list] input').click();
+  v$('[data-tm-review-confirm]').click();
   assert.ok(await waitFor(() => /^Joined read-only/.test(v$('[data-tm-message]').textContent)));
   assert.deepEqual(stored(vw, 'sc-team'), { viewer: code, since: stored(vw, 'sc-team').since });
   assert.match(v$('[data-tm-summary]').textContent, /^Read-only · synced today/);
@@ -920,4 +935,224 @@ test('Site Compare keeps other teams\' read-only codes: its key is never offered
   assert.ok(w.WorkBackup.isWork('sc-site-compare'));
   const payload = w.TeamSyncMath.readPayload({ format: 'stiven-catalyst-team', version: 1, items: { 'sc-site-compare': '{"sites":[]}', 'sc-pareto': '{}' } });
   assert.deepEqual(Object.keys(payload.items), ['sc-pareto']);
+});
+
+// ---- Explicit consent before the first sync (Phase 2D-B1) ----
+// Fictional work only, and only the fake server: no real guest data and no request to a real server.
+const GUEST = { rows: [{ id: 'g1', guest: 'Test Guest', room: '101', text: 'Fictional complaint' }] };
+const FOUND = { rows: [{ id: 'f1', item: 'Umbrella', guest: 'Test Guest' }] };
+const DAMAGE = { rows: [{ id: 'd1', stage: 'Picking', type: 'Crushed' }] };
+const ROOMS = { rooms: { 101: 'dirty' } };
+const box = (storage, fetch) => load({ body: render('en').html, storage, before: (win) => { win.fetch = fetch; } });
+const reviewed = (w) => [...w.document.querySelectorAll('[data-tm-review-list] input')].map((input) => [input.dataset.slug, input.checked]);
+const tick = (w, slug) => w.document.querySelector(`[data-tm-review-list] input[data-slug="${slug}"]`).click();
+const copyOf = async (server, w) => {
+  const code = stored(w, 'sc-team').code;
+  const keys = await w.TeamSyncMath.deriveKeys(code);
+  return plain(await w.TeamSyncMath.unseal(server.spaces.get(keys.spaceId), keys.key));
+};
+
+test('consent, new team: the review lists the tools with work, all unticked, the hotel tools too; nothing is sent before Confirm', async (t) => {
+  const server = fakeServer();
+  const w = box({ 'sc-guest-complaints': GUEST, 'sc-lost-found': FOUND, 'sc-damage-control': DAMAGE, 'sc-room-status': ROOMS, 'sc-cv-builder': { name: 'Ana' } }, server.fetch);
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  $('[data-tm-start]').click();
+  assert.equal($('[data-tm-review]').hidden, false);
+  assert.equal($('[data-tm-off]').hidden, true);
+  assert.equal(w.document.activeElement, $('[data-tm-review-title]'), 'focus moves to the review');
+  assert.deepEqual(reviewed(w).sort(), [['damage-control', false], ['guest-complaints', false], ['lost-found', false], ['room-status', false]]);
+  assert.match($('[data-tm-review-intro]').textContent, /encrypted on this device with a key made from the team code, then uploaded to the sync server/);
+  assert.match($('.tm-review .tm-warn').textContent, /guest names in Guest Complaints or Lost & Found/);
+  assert.match($('[data-tm-review]').textContent, /clearing a tool here does not necessarily remove it from that copy/);
+  assert.match($('[data-tm-review-none]').textContent, /no work from this browser is uploaded/);
+  assert.equal($('[data-tm-review-confirm]').textContent, 'Confirm and start team sync');
+  assert.equal(server.log.length, 0, 'not one request before Confirm');
+  assert.equal(w.localStorage.getItem('sc-team'), null);
+  // The fieldset groups the boxes under a legend, for screen readers.
+  assert.equal($('[data-tm-review-list]').closest('fieldset').querySelector('legend').textContent, 'Choose the tools');
+});
+
+test('consent, cancel: nothing sent, nothing stored, the box as before, focus back on the button', async (t) => {
+  const server = fakeServer();
+  const state = { deviceId: 'dev00001', deviceName: 'Front desk', choices: { 'damage-control': true } };
+  const w = box({ 'sc-damage-control': DAMAGE, 'sc-team-state': state }, server.fetch);
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  const before = w.localStorage.getItem('sc-team-state');
+  $('[data-tm-start]').click();
+  tick(w, 'damage-control');
+  $('[data-tm-review-cancel]').click();
+  assert.equal($('[data-tm-review]').hidden, true);
+  assert.equal($('[data-tm-off]').hidden, false);
+  assert.equal(w.document.activeElement, $('[data-tm-start]'));
+  assert.match($('[data-tm-message]').textContent, /^Cancelled: nothing was sent and nothing changed here\.$/);
+  assert.equal(server.log.length, 0);
+  assert.equal(w.localStorage.getItem('sc-team'), null);
+  assert.equal(w.localStorage.getItem('sc-team-state'), before, 'the stored state is untouched');
+  // Starting again shows the review again, unticked, even though an older choice said damage-control.
+  $('[data-tm-start]').click();
+  assert.deepEqual(reviewed(w), [['damage-control', false]]);
+});
+
+test('consent, confirm: only the ticked tool goes up; guest complaints and lost & found stay on this device', async (t) => {
+  const server = fakeServer();
+  const w = box({ 'sc-guest-complaints': GUEST, 'sc-lost-found': FOUND, 'sc-damage-control': DAMAGE }, server.fetch);
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  $('[data-tm-start]').click();
+  tick(w, 'damage-control');
+  assert.equal($('[data-tm-review-none]').hidden, true);
+  $('[data-tm-review-confirm]').click();
+  assert.ok(await waitFor(() => /^Synced/.test($('[data-tm-status]').textContent)), $('[data-tm-status]').textContent);
+  const copy = await copyOf(server, w);
+  assert.deepEqual(Object.keys(copy.items), ['sc-damage-control']);
+  assert.equal(stored(w, 'sc-team-state').consent, true);
+  assert.deepEqual(stored(w, 'sc-team-state').choices, { 'damage-control': true });
+  // In the box afterwards: what was ticked stays ticked, the hotel tools stay unticked.
+  const list = [...w.document.querySelectorAll('[data-tm-tools] input')].map((input) => [input.dataset.slug, input.checked]).sort();
+  assert.deepEqual(list, [['damage-control', true], ['guest-complaints', false], ['lost-found', false]]);
+  // The local work is untouched.
+  assert.deepEqual(stored(w, 'sc-guest-complaints'), GUEST);
+  assert.deepEqual(stored(w, 'sc-lost-found'), FOUND);
+  // Later work in an unticked tool is not sent by the next sync either.
+  w.localStorage.setItem('sc-lost-found', JSON.stringify({ rows: [...FOUND.rows, { id: 'f2', item: 'Scarf' }] }));
+  $('[data-tm-sync]').click();
+  assert.ok(await waitFor(() => !$('[data-tm-sync]').disabled));
+  assert.deepEqual(Object.keys((await copyOf(server, w)).items), ['sc-damage-control']);
+});
+
+test('consent, nothing ticked: the team is made with no work of this browser in it', async (t) => {
+  const server = fakeServer();
+  const w = box({ 'sc-guest-complaints': GUEST, 'sc-actions': { rows: [{ id: 'a1', title: 'Fix dock door' }] } }, server.fetch);
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  $('[data-tm-start]').click();
+  $('[data-tm-review-confirm]').click();
+  assert.ok(await waitFor(() => /^Synced/.test($('[data-tm-status]').textContent)));
+  assert.deepEqual((await copyOf(server, w)).items, {});
+  // The action list, ticked by default for teams made before, is not shared here.
+  assert.equal(w.document.querySelector('[data-tm-tools] input[data-slug="action-tracker"]').checked, false);
+});
+
+test('consent, join: the review shows the team\'s tools and this browser\'s, unticked; only GETs before Confirm; only the ticked tool moves', async (t) => {
+  const server = fakeServer();
+  // A member made the team with the action list and damage control (a team made before the review: defaults).
+  const mwin = load({ storage: { 'sc-actions': { rows: [{ id: 'a1', title: 'Team action' }] }, 'sc-damage-control': { rows: [{ id: 't1', stage: 'Loading' }] } } });
+  const member = { w: mwin, keys: await mwin.TeamSyncMath.deriveKeys(CODE) };
+  await run(member, server);
+  const teamBefore = (await teamCopy(server, member)).items;
+  const calls = [];
+  const watched = async (url, init = {}) => { calls.push(init.method || 'GET'); return server.fetch(url, init); };
+  const w = box({ 'sc-guest-complaints': GUEST, 'sc-damage-control': DAMAGE }, watched);
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  const localBefore = Object.fromEntries(Object.keys(w.localStorage).map((key) => [key, w.localStorage.getItem(key)]));
+  $('[data-tm-join-code]').value = CODE;
+  $('[data-tm-join]').click();
+  assert.ok(await waitFor(() => !$('[data-tm-review]').hidden));
+  const where = Object.fromEntries([...w.document.querySelectorAll('[data-tm-review-list] label')].map((label) => [label.querySelector('input').dataset.slug, label.querySelector('.tm-where').textContent]));
+  assert.deepEqual(where, { 'action-tracker': "(in the team's copy)", 'damage-control': "(here and in the team's copy)", 'guest-complaints': '(work here)' });
+  assert.ok(reviewed(w).every(([, checked]) => !checked));
+  assert.match($('[data-tm-review-intro]').textContent, /where both hold work, the two are combined, after a restore point/);
+  assert.equal($('[data-tm-review-confirm]').textContent, 'Confirm and join the team');
+  assert.deepEqual([...new Set(calls)], ['GET'], 'only reads before Confirm');
+  assert.deepEqual(Object.fromEntries(Object.keys(w.localStorage).map((key) => [key, w.localStorage.getItem(key)])), localBefore, 'nothing written here before Confirm');
+  // Tick the action list only.
+  tick(w, 'action-tracker');
+  $('[data-tm-review-confirm]').click();
+  assert.ok(await waitFor(() => /^Joined\./.test($('[data-tm-message]').textContent)), $('[data-tm-message]').textContent);
+  assert.deepEqual(stored(w, 'sc-actions').rows.map((row) => row.id), ['a1'], 'the ticked tool came from the team');
+  assert.deepEqual(stored(w, 'sc-damage-control'), DAMAGE, 'an unticked tool here is untouched by the team\'s version');
+  const teamAfter = (await teamCopy(server, member)).items;
+  assert.equal(teamAfter['sc-guest-complaints'], undefined, 'guest complaints not sent');
+  assert.equal(teamAfter['sc-damage-control'], teamBefore['sc-damage-control'], 'the team\'s damage log is not replaced by this device\'s');
+  assert.equal(teamAfter['sc-actions'], teamBefore['sc-actions'], 'nothing of the team is lost');
+});
+
+test('consent, join with nothing ticked: the team\'s copy keeps all its work; nothing of this browser goes up', async (t) => {
+  const server = fakeServer();
+  const mwin = load({ storage: { 'sc-actions': { rows: [{ id: 'a1', title: 'Team action' }] } } });
+  const member = { w: mwin, keys: await mwin.TeamSyncMath.deriveKeys(CODE) };
+  await run(member, server);
+  const teamBefore = (await teamCopy(server, member)).items;
+  const w = box({ 'sc-lost-found': FOUND }, server.fetch);
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  $('[data-tm-join-code]').value = CODE;
+  $('[data-tm-join]').click();
+  assert.ok(await waitFor(() => !$('[data-tm-review]').hidden));
+  $('[data-tm-review-confirm]').click();
+  assert.ok(await waitFor(() => /^Joined\./.test($('[data-tm-message]').textContent)));
+  assert.deepEqual((await teamCopy(server, member)).items, teamBefore);
+  assert.equal(w.localStorage.getItem('sc-actions'), null, 'nothing taken that was not ticked');
+  assert.deepEqual(stored(w, 'sc-lost-found'), FOUND);
+});
+
+test('consent, failures: a join that cannot reach the server opens no review and stores nothing; a failed first upload says so and keeps the work', async (t) => {
+  const w = box({ 'sc-damage-control': DAMAGE }, async () => { throw new TypeError('offline'); });
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  $('[data-tm-join-code]').value = CODE;
+  $('[data-tm-join]').click();
+  assert.ok(await waitFor(() => /^No connection/.test($('[data-tm-message]').textContent)));
+  assert.equal($('[data-tm-review]').hidden, true);
+  assert.equal($('[data-tm-join]').disabled, false);
+  assert.equal(w.localStorage.getItem('sc-team'), null);
+  // A first upload the server refuses: the box shows the team as not synced, the work stays, the review is closed.
+  const server = fakeServer();
+  server.hooks.putStatus.push(500, 500);
+  const v = box({ 'sc-damage-control': DAMAGE }, server.fetch);
+  t.after(() => v.close());
+  const v$ = (selector) => v.document.querySelector(selector);
+  v$('[data-tm-start]').click();
+  tick(v, 'damage-control');
+  v$('[data-tm-review-confirm]').click();
+  assert.ok(await waitFor(() => /not synced/.test(v$('[data-tm-summary]').textContent)), v$('[data-tm-summary]').textContent);
+  assert.equal(v$('[data-tm-review]').hidden, true);
+  assert.equal(v$('[data-tm-on]').hidden, false);
+  assert.deepEqual(stored(v, 'sc-damage-control'), DAMAGE);
+  assert.equal(stored(v, 'sc-team-state').consent, true);
+});
+
+test('consent, teams made before keep their settings: no review, the same defaults and saved choices as before', async (t) => {
+  const server = fakeServer();
+  const mwin = load({ storage: { 'sc-damage-control': DAMAGE } });
+  const member = { w: mwin, keys: await mwin.TeamSyncMath.deriveKeys(CODE) };
+  await run(member, server);
+  // An active team of yesterday's box: no "consent" in its state, one choice saved (lost-found off).
+  const state = { ...stored(member.w, 'sc-team-state'), choices: { 'lost-found': false } };
+  let asked = 0;
+  const w = box({ 'sc-team': { code: CODE }, 'sc-team-state': state, 'sc-damage-control': DAMAGE, 'sc-lost-found': FOUND }, async (url, init) => { asked++; return server.fetch(url, init); });
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  // The saved state already says "synced", so wait for the page's own opening sync to have run and finished.
+  assert.ok(await waitFor(() => asked > 0 && !$('[data-tm-sync]').disabled), 'the opening sync ran');
+  assert.match($('[data-tm-status]').textContent, /^Synced/);
+  assert.equal($('[data-tm-review]').hidden, true);
+  const list = Object.fromEntries([...w.document.querySelectorAll('[data-tm-tools] input')].map((input) => [input.dataset.slug, input.checked]));
+  assert.deepEqual(list, { 'damage-control': true, 'lost-found': false });
+  assert.deepEqual(stored(w, 'sc-team-state').choices, { 'lost-found': false });
+  assert.equal(stored(w, 'sc-team-state').consent, undefined);
+  assert.equal(stored(w, 'sc-team').code, CODE);
+  assert.ok(!('sc-lost-found' in (await teamCopy(server, member)).items));
+  // The math keeps both rules: defaults without consent, only what was ticked with it.
+  assert.equal(w.TeamSyncMath.isOn('lost-found'), true);
+  assert.equal(w.TeamSyncMath.isOn('lost-found', {}, true), false);
+  assert.equal(w.TeamSyncMath.isOn('lost-found', { 'lost-found': true }, true), true);
+});
+
+test('consent, translations: the review reads in German and Albanian', () => {
+  const de = render('de');
+  const sq = render('sq');
+  assert.deepEqual(de.missing, []);
+  assert.deepEqual(sq.missing, []);
+  assert.match(de.html, /Vor der ersten Synchronisierung/);
+  assert.match(de.html, /Gästenamen in Gästebeschwerden oder Fundsachen/);
+  assert.match(de.html, /wird es nicht unbedingt aus dieser Kopie entfernt/);
+  assert.match(de.html, /Bestätigen und Team-Synchronisierung starten/);
+  assert.match(sq.html, /Para sinkronizimit të parë/);
+  assert.match(sq.html, /Ankesat e mysafirëve ose Sendet e gjetura/);
+  assert.match(sq.html, /nuk e heq domosdoshmërisht atë nga kjo kopje/);
+  assert.match(sq.html, /Konfirmo dhe nis sinkronizimin e ekipit/);
 });
