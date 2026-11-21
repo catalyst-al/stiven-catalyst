@@ -3,7 +3,7 @@
 ## Core idea
 **Stiven Catalyst exists to turn clearer thinking into better action.**
 
-The visual identity is rooted in the original Catalyst Coaching mark: a hanging light bulb, strong white typography and a red-to-blue-to-dark gradient. On the site itself the mark stays recognisable, but the pages around it are quiet: dark neutrals, one blue accent, and colour that means something every time it appears.
+The mark is the circled point: the full stop of "Management without theatre.", a square in the accent blue, with a ring drawn round it by hand. The pages around it are quiet: dark neutrals, one blue accent, and colour that means something every time it appears. The name is "Stiven Catalyst", without "Coaching".
 
 ## Headline
 **Management without theatre.**
@@ -16,9 +16,13 @@ Supporting line: **Ideas that move work forward.** The homepage opens with both:
 The philosophy behind the work, on the About page.
 
 ## Meaning of the symbol
-- **The light** represents clarity: the moment a complex problem becomes understandable.
-- **Catalyst** represents movement: creating the conditions for an idea, person, team or system to change.
-- **The voice/waveform heritage** represents ideas being articulated, challenged and shared.
+- **The point** is the full stop of the headline: said, done, no performance. It is exact, a square like the full stop of the display type, and it never moves.
+- **The ring** is the pen mark a manager makes on a report: not a speech, a circle round the number that matters. It is drawn by hand, so it is not perfect, and it does not close.
+- **Together** they read as the centre of the system and its first orbit (the four families turn round it), and as the C of Catalyst.
+
+How it is drawn: one colour for the ring (the text colour of the theme), the accent blue for the point, flat, with no glow, no gradient and no shadow. In one colour the point takes the colour of the ring. The ring is always the same drawing (`--mark-ring` in `src/css/01-foundation.css`, `src/favicon.svg`); it is never redrawn, stretched or closed.
+
+The earlier mark was a hanging light bulb on a red-to-blue gradient. The header, the footer, the favicon and the app icons now carry the circled point. The small lights in the menu and in the homepage hero, and the light at the centre of the homepage system, are still the bulb; they are replaced in the steps that follow, and nothing new is drawn with it.
 
 ## Four pillars
 1. **Clarity**: Understand before reacting.
@@ -34,8 +38,8 @@ One accent, used sparingly. Hierarchy comes from typography, space and thin line
 | Deep black / charcoal, with a hint of blue | `--paper`, `--paper-2` | Backgrounds. Discipline, seriousness, authority. |
 | White and soft grey | `--ink`, `--muted`, `--line` | Text, borders, dividers. Clarity and breathing space. |
 | **Electric blue: the one accent** | `--blue`, `--blue-soft` | Links, eyebrows, numbers, the selected filter or tab, focus, progress, the main button. Clarity and analysis. |
-| Red: the signature | `--red` | Only the brand mark and its poster, and a single word in the manifesto. Never a button, a bar, a glow or a chart. |
-| Gold: the bulb | `--gold` | Only the brass base of the light-bulb mark and its warm light. |
+| Red: the signature | `--red` | Only the poster of the earlier mark and a single word in the manifesto. Not in the mark. Never a button, a bar, a glow or a chart. |
+| Gold | `--gold` | Only the small lights of the menu and the hero that are left from the earlier mark, until they are replaced. Not in the mark. |
 | State colours | `--ok`, `--warn`, `--danger` | Only inside tools, to report a result: right or wrong, better or worse, a check passed, a warning, an error. Never decoration. |
 
 Rules:
@@ -51,7 +55,7 @@ Stiven Catalyst is broader than a coaching site. It is a modern publication and 
 ## Design principles
 - Dark-first, cinematic but restrained.
 - Strong typography with large editorial headlines.
-- The red-to-blue gradient belongs to the mark only; everywhere else a page has one accent.
+- The mark has no gradient: a page has one accent, and so does the mark.
 - Colour must earn its place: if removing it loses no meaning, remove it.
-- The light-bulb motif should remain recognizable but not overwhelm content.
+- The mark is the only symbol of the brand: one drawing, the same everywhere, never beside a second symbol.
 - Content must remain fast, readable and useful on mobile.
