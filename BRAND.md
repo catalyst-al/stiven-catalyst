@@ -24,7 +24,9 @@ How it is drawn: one colour for the ring (the text colour of the theme), the acc
 
 On the homepage the mark appears twice more. The full stop of the headline is the mark itself (`.hero-stop`, `--mark-ring-display`). And the centre of the system is the mark (`src/js/cosmos.js`): the point never moves, the ring is drawn round it once as the light comes up and again when it is tapped, and the families turn round it. There it is flat too; the soft light of the system begins outside the ring.
 
-The earlier mark was a hanging light bulb on a red-to-blue gradient. The small lights in the menu and on the buttons and cards of the homepage hero are still the bulb; they are replaced in the step that follows, and nothing new is drawn with it.
+Where the site marks a place with something small, it is the point of the mark: a square, quiet at rest and in the accent where you are. The items of the menu carry it, and so do the essays button and the three cards of the homepage hero, each card's point in its own colour.
+
+The earlier mark was a hanging light bulb on a red-to-blue gradient. It is still on the About page (the poster and the paragraph that explains it), and its small light still marks the chosen topic of a list, the steps of Start here and the essays read in a series. These are replaced in the steps that follow, and nothing new is drawn with it. The light of Lumen is that planet's own and stays.
 
 ## Four pillars
 1. **Clarity**: Understand before reacting.
@@ -41,7 +43,7 @@ One accent, used sparingly. Hierarchy comes from typography, space and thin line
 | White and soft grey | `--ink`, `--muted`, `--line` | Text, borders, dividers. Clarity and breathing space. |
 | **Electric blue: the one accent** | `--blue`, `--blue-soft` | Links, eyebrows, numbers, the selected filter or tab, focus, progress, the main button. Clarity and analysis. |
 | Red: the signature | `--red` | Only the poster of the earlier mark and a single word in the manifesto. Not in the mark. Never a button, a bar, a glow or a chart. |
-| Gold | `--gold` | Only the small lights of the menu and the hero that are left from the earlier mark, until they are replaced. Not in the mark. |
+| Gold | `--gold` | The Reflections, and the small lights that are left from the earlier mark (lists, Start here, a series) until they are replaced. Not in the mark. |
 | State colours | `--ok`, `--warn`, `--danger` | Only inside tools, to report a result: right or wrong, better or worse, a check passed, a warning, an error. Never decoration. |
 
 Rules:

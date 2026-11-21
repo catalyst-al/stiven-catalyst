@@ -4,7 +4,9 @@
   <div class="shell cosmos-inner">
     <div class="cosmos-copy">
       <p class="eyebrow">{{ "Free tools and essays for people who run shifts, teams and operations" | t(lang) }}</p>
-      <h1>
+      {#- The name of the headline is said in one piece: the full stop stands in a box of its own (the mark), and a
+          screen reader would otherwise read a space before it. -#}
+      <h1 aria-label="{{ 'Management' | t(lang) }} {{ 'without theatre.' | t(lang) }}">
         <span class="line">{{ "Management" | t(lang) }}</span>
         {#- The full stop of the headline is the mark: the point, with the ring round it (.hero-stop, css/02-homepage.css).
             The stop stays in the text for a screen reader and a search engine, and never leaves its word for a line of its
@@ -16,23 +18,23 @@
       <p class="hero-copy"><strong>{{ "Free tools for the people who run the work:" | t(lang) }}</strong> {{ "damage rate, late routes, shift handover, Pareto, CV. No account, no cookies; your data stays on your device." | t(lang) }}</p>
       <div class="hero-actions">
         {#- The two first steps carry light too: a sweep of light crosses the tools button now and then, with a soft
-            blue glow and an arrow that leans forward; the essays button carries the lit bulb in a warm frame. -#}
+            blue glow and an arrow that leans forward; the essays button is the quiet second one, with the point of the mark. -#}
         <a class="button-primary hero-go" href="{{ '/tools.html' | local(lang) }}"><span class="hero-go-label">{{ "Try the tools" | t(lang) }}</span><span class="hero-go-arrow" aria-hidden="true">→</span></a>
-        <a class="button-secondary hero-read" href="{{ '/insights.html' | local(lang) }}"><i class="hero-bulb" aria-hidden="true"></i>{{ "Read the essays" | t(lang) }}</a>
-        {#- Two ways straight in, each with the lit bulb of the logo: the monthly Management Review, the site's own
+        <a class="button-secondary hero-read" href="{{ '/insights.html' | local(lang) }}"><i class="hero-point" aria-hidden="true"></i>{{ "Read the essays" | t(lang) }}</a>
+        {#- Two ways straight in, each with the point of the mark in its own colour: the monthly Management Review, the site's own
             publication (the masthead, its second word in blue, and how many issues it has), and the Reflections, the
             personal pieces (in the gold the site keeps for them, and how many there are). -#}
         {%- set wl = weekly[lang or "en"] %}
         {%- set reflectionCount = (collections["reflections" + (lang | langSuffix)] | published).length %}
         <div class="hero-cards">
           <a class="hero-review" href="{{ wl.archiveUrl | local(lang) }}">
-            <i class="hero-bulb" aria-hidden="true"></i>
+            <i class="hero-point" aria-hidden="true"></i>
             <span class="hero-review-mast">{{ wl.mast[0] }} <b>{{ wl.mast[1] }}</b></span>
             <small>{{ wl.archive.eyebrow }} · <span>{{ wl.labels.no }} 1–{{ weekly.latest.number }}</span></small>
             <span class="hero-review-arrow" aria-hidden="true">→</span>
           </a>
           <a class="hero-review hero-reflections" href="{{ '/reflections.html' | local(lang) }}">
-            <i class="hero-bulb" aria-hidden="true"></i>
+            <i class="hero-point" aria-hidden="true"></i>
             <span class="hero-review-mast">{{ "Reflections" | t(lang) }}</span>
             <small>{{ "Personal essays" | t(lang) }} · <span>{{ "{n} reflections" | t(lang) | replace("{n}", reflectionCount) }}</span></small>
             <span class="hero-review-arrow" aria-hidden="true">→</span>
@@ -40,7 +42,7 @@
           {#- And the CV, in the silver of Atlas (the career orbit), across the width under the two: it opens the CV page,
               which lists the three tools, as the CV item of the menu does. -#}
           <a class="hero-review hero-cv" href="{{ '/cv.html' | local(lang) }}">
-            <i class="hero-bulb" aria-hidden="true"></i>
+            <i class="hero-point" aria-hidden="true"></i>
             <span class="hero-review-mast">{{ "Build your CV" | t(lang) }}</span>
             <small>{{ "CV Builder" | t(lang) }} · {{ "ATS CV" | t(lang) }} · {{ "Cover Letter" | t(lang) }}</small>
             <span class="hero-review-arrow" aria-hidden="true">→</span>

@@ -41,7 +41,6 @@
 :root[data-motion="paused"] .book-shelf-item .book-object-cover,
 :root[data-motion="paused"] .hero-go,
 :root[data-motion="paused"] .hero-go::after,
-:root[data-motion="paused"] .hero-bulb,
 :root[data-motion="paused"] .pulse-cracks,
 :root[data-motion="paused"] .family-planet .zenith-radar,
 :root[data-motion="paused"] .lumen-ring ellipse,
