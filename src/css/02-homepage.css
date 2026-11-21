@@ -521,8 +521,8 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   transition: border-color .3s ease, box-shadow .35s ease, translate .3s cubic-bezier(.22, 1, .36, 1);
 }
 .hero-actions .hero-reflections { --accent: var(--gold); }
+/* Silver in both themes: the hero stays a dark stage, so the card keeps its light accent in the light theme too. */
 .hero-actions .hero-cv { --accent: #c9d3dd; grid-column: 1 / -1; }
-[data-theme="light"] .hero-actions .hero-cv { --accent: #56606b; }
 .hero-review:hover { border-color: var(--accent); box-shadow: 0 0 26px -8px color-mix(in srgb, var(--accent) 70%, transparent); translate: 0 -2px; }
 .hero-review-mast { grid-column: 2; font-weight: 800; font-size: 17px; letter-spacing: -0.01em; white-space: nowrap; }
 .hero-review-mast b { color: var(--blue); }
