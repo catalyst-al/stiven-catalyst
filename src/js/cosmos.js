@@ -1,14 +1,13 @@
-// The homepage hero: the Catalyst light in the centre, the roles as planets on its orbits
-// and a disc of light particles turning around it. Each planet has its own physics and its moons
+// The homepage hero: the mark in the centre (the point, with the ring drawn round it by hand; BRAND.md), the roles as
+// planets on its orbits and a disc of light particles turning around it. Each planet has its own physics and its moons
 // are its tools (the same drawings as the role cards, partials/family-planet.njk): Pulse cracks and
 // beats inside a heartbeat ring, Zenith is a contour map under a radar, Lumen shines inside a ring
 // of dust in five parts, Atlas is a globe with a constellation on its lit side. Dragging turns and
-// tilts the system and sets the bulb swinging on its cable (it throws a pool of light on the plane of the
-// orbits), a tap on a planet (or on its button) opens that role's tools, a tap on a moon opens that tool,
-// a tap on the light makes its filament, a sound wave, speak up. A small reader sits under the light
-// on the inner orbit; it runs to the planet that is opened, jumps to a moon that is tapped, and
-// sleeps when left alone. The filament warms up when the hero first runs (dark glass, a red glow,
-// then white light), and the system turns to show the planet that is opened and comes a little closer to it.
+// tilts the system; the point never moves. A tap on a planet (or on its button) opens that role's tools, a tap on a
+// moon opens that tool, a tap on the mark draws its ring again and hurries the system for a moment. A small reader sits
+// by the point on the inner orbit; it runs to the planet that is opened, jumps to a moon that is tapped, and
+// sleeps when left alone. When the hero first runs the room is dark and only the point is there; the ring is drawn
+// round it as the light comes up, and the system turns to show the planet that is opened and comes a little closer to it.
 (() => {
   const root = document.querySelector("[data-cosmos]");
   const canvas = root?.querySelector("canvas");
@@ -83,9 +82,6 @@
   const PARALLELS = [-60, -30, 0, 30, 60].map((lat) => (lat * Math.PI) / 180);
   const CONSTELLATION = [[-0.55, 0.45], [-0.4, 0.2], [-0.22, 0.3], [-0.05, 0.02], [0.1, 0.1], [0.22, -0.2], [0.36, -0.12], [0.42, -0.42], [0.55, -0.62]];
   const GOLD_WHITE = [255, 243, 208];
-  // The filament and glass before the light is white: an ember, and dark glass.
-  const EMBER = [255, 110, 40];
-  const COLD_GLASS = [52, 57, 64];
   const SILVER = [200, 208, 216];
   const SILVER_HALO = [140, 170, 200];
   // The spikes of the heartbeat ring, three beats around it.
@@ -97,7 +93,7 @@
   };
 
   // Particles: two spiral arms and a thin dust disc, stored flat for speed.
-  const PALETTE = [[226, 238, 255], [132, 198, 247], [246, 204, 128], [255, 104, 108]];
+  const PALETTE = [[226, 238, 255], [132, 198, 247], [246, 204, 128], [176, 156, 250]];
   const pickColour = () => {
     const x = Math.random();
     return x < 0.6 ? 0 : x < 0.8 ? 1 : x < 0.95 ? 2 : 3;
@@ -137,18 +133,15 @@
   const view = { yaw: 0.5, yawVel: DRIFT, pitch: REST_PITCH, hoverX: 0, hoverY: 0, aimX: 0, aimY: 0 };
   let time = 0;
   let flare = 0;
-  // The warm-up of the filament, 0 (off) to 1 (white); with reduced motion the light is simply on.
+  // The light of the room, 0 (dark) to 1; with the motion paused it is simply on.
   let warmT = 0;
   let warm = still ? 1 : 0;
+  // How long the ring has been drawing, in seconds: it starts with the light and again when the mark is tapped.
+  let ringT = 0;
   // The camera follows the opened planet until a drag takes over; zoom brings the system closer while open.
   let follow = false;
   let zoom = 0;
   const ZOOM = 0.08;
-  // The bulb hangs from the top of the hero and swings like a pendant lamp: a drag pushes it,
-  // gravity brings it back. bx, by is where it hangs this frame.
-  const swing = { a: 0, v: 0 };
-  let bx = 0;
-  let by = 0;
   let selected = null;
   let hovered = null;
   let hoveredMoon = null;
@@ -168,13 +161,66 @@
   let bandBottom = 0;
   let cx = 0;
   let cy = 0;
-  // Where the cable hangs from: the top of the hero, or on a phone, where the system stands under the words, the top of
-  // the system, so the cable does not run through the headline.
-  let top = 0;
   let S = 1;
   let S0 = 1;
   const D = 4;
-  const BULB = 0.16;
+  // The mark (BRAND.md): the point, a square that never moves, with the ring drawn round it by hand. MARK is the side
+  // of the mark's own box of 100, in radii of the system; the point is at (50, 52) in that box and 16 wide. The ring
+  // is the drawing of the header (--mark-ring-display, css/01-foundation.css), kept here as its centre line and its
+  // width along it, so that it can be drawn only as far as the pen has come.
+  const MARK = 0.4;
+  const POINT = { x: 50, y: 52, side: 16 };
+  const RING_TIME = 1.3;
+  const RING = (() => {
+    const widths = [[0, 0.66], [0.1, 0.94], [0.42, 1], [0.75, 0.82], [0.92, 0.5], [1, 0.22]];
+    const widthAt = (t) => {
+      for (let i = 0; i < widths.length - 1; i += 1) {
+        const [t0, w0] = widths[i];
+        const [t1, w1] = widths[i + 1];
+        if (t >= t0 && t <= t1) return 9 * (w0 + (w1 - w0) * (1 - Math.cos((Math.PI * (t - t0)) / (t1 - t0))) / 2);
+      }
+      return 9 * 0.22;
+    };
+    const n = 320;
+    const rot = (8 * Math.PI) / 180;
+    const centre = [];
+    for (let i = 0; i <= n; i += 1) {
+      const t = i / n;
+      const angle = ((250 - 398 * t) * Math.PI) / 180;
+      const grow = t < 0.64 ? 1 : 1 + 0.37 * Math.pow((t - 0.64) / 0.36, 1.7);
+      const x = 34.5 * grow * Math.cos(angle);
+      const y = 30 * grow * Math.sin(angle);
+      centre.push([POINT.x + x * Math.cos(rot) - y * Math.sin(rot), POINT.y + x * Math.sin(rot) + y * Math.cos(rot), widthAt(t) / 2]);
+    }
+    // The two edges of the stroke, a half width to each side of the centre line.
+    const left = [];
+    const right = [];
+    for (let i = 0; i <= n; i += 1) {
+      const a = centre[Math.max(i - 1, 0)];
+      const b = centre[Math.min(i + 1, n)];
+      const d = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
+      const nx = -(b[1] - a[1]) / d;
+      const ny = (b[0] - a[0]) / d;
+      const [x, y, w] = centre[i];
+      left.push([x + nx * w, y + ny * w]);
+      right.push([x - nx * w, y - ny * w]);
+    }
+    return { n, centre, left, right, full: null };
+  })();
+  // The ring as far as it is drawn (0 to 1), in the mark's box: the body of the stroke (along one edge and back along
+  // the other) and how far along the centre line the pen is; the two round ends are drawn with it (drawMark).
+  const ringShape = (upto) => {
+    if (upto >= 1 && RING.full) return RING.full;
+    const m = Math.max(2, Math.round(Math.min(1, upto) * RING.n));
+    const body = new Path2D();
+    body.moveTo(RING.left[0][0], RING.left[0][1]);
+    for (let i = 1; i <= m; i += 1) body.lineTo(RING.left[i][0], RING.left[i][1]);
+    for (let i = m; i >= 0; i -= 1) body.lineTo(RING.right[i][0], RING.right[i][1]);
+    body.closePath();
+    const shape = { body, m };
+    if (upto >= 1) RING.full = shape;
+    return shape;
+  };
 
   let cosY = 1, sinY = 0, cosP = 1, sinP = 0;
   const setAngles = () => {
@@ -238,15 +284,12 @@
     height = Math.max(1, Math.round(box.height * dpr));
     cx = (spot.left - box.left + spot.width / 2) * dpr;
     cy = (spot.top - box.top + spot.height / 2) * dpr;
-    const copy = root.querySelector(".cosmos-copy");
-    const system = anchor.parentElement.getBoundingClientRect();
-    top = copy && copy.getBoundingClientRect().bottom <= system.top ? (system.top - box.top) * dpr : 0;
     S0 = Math.min(spot.width / 2 / (spot.width < 560 ? 1.24 : 1.32), spot.height / 2 / 0.66) * dpr;
     S = S0 * (1 + ZOOM * zoom);
-    // The band: from the cable's top to where the farthest particle can reach, the system tilted and drawn closer as
-    // far as it goes (2.26 radii of the system down, 1.9 up; the glow at its brightest, 2 radii), with room to spare.
+    // The band: as far as the farthest particle can reach, the system tilted and drawn closer as far as it goes
+    // (2.26 radii of the system down, 1.9 up; the glow, 1.3 radii), with room to spare.
     const reach = 2.5 * S0 * (1 + ZOOM) + 16 * dpr;
-    bandTop = Math.max(0, Math.floor(Math.min(top, cy - reach)));
+    bandTop = Math.max(0, Math.floor(cy - reach));
     bandBottom = Math.min(height, Math.ceil(cy + reach));
     place(band, bandTop, bandBottom);
     place(skyAbove, 0, bandTop);
@@ -293,6 +336,8 @@
 
   const drawDisc = () => {
     const { n, colour, r, a, y, speed, size, tw } = disc;
+    // The inside of the ring stays clear: the point stands alone in it.
+    const clear = (S * MARK * 0.45) ** 2;
     let current = -1;
     for (let i = 0; i < n; i += 1) {
       if (colour[i] !== current) {
@@ -302,6 +347,7 @@
       const angle = a[i] + speed[i] * time;
       const p = project(r[i] * Math.cos(angle), y[i], r[i] * Math.sin(angle));
       if (p.x < -4 || p.y < bandTop - 4 || p.x > width + 4 || p.y > bandBottom + 4) continue;
+      if ((p.x - cx) ** 2 + (p.y - cy) ** 2 < clear) continue;
       const near = r[i] < 0.6 ? 1.35 : 1;
       const depth = 0.5 + 0.5 * Math.min(1, Math.max(0, (p.z + 1.4) / 2.8));
       ctx.globalAlpha = Math.min(1, depth * near * (0.55 + 0.45 * Math.sin(time * 2.2 + tw[i])));
@@ -311,42 +357,39 @@
     ctx.globalAlpha = 1;
   };
 
+  // The light of the system: cool, soft, and none of it inside the ring. It breathes a little, and dims while the
+  // reader sleeps.
   const drawGlow = () => {
     const breathe = 1 + 0.05 * Math.sin(time * 1.3) + flare * 0.55;
+    const reach = S * 1.3 * breathe;
+    const ring = (S * MARK * 0.45) / reach;
     ctx.globalCompositeOperation = "lighter";
-    ctx.globalAlpha = warm;
-    let g = ctx.createRadialGradient(cx, cy, 0, cx, cy, S * 1.25 * breathe);
-    g.addColorStop(0, "rgba(255,236,200,0.30)");
-    g.addColorStop(0.3, "rgba(74,181,247,0.10)");
-    g.addColorStop(0.62, "rgba(223,17,25,0.035)");
-    g.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.globalAlpha = warm * dim;
+    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, reach);
+    g.addColorStop(0, "rgba(214,232,255,0)");
+    g.addColorStop(ring, "rgba(214,232,255,0)");
+    g.addColorStop(Math.min(0.9, ring * 2.1), "rgba(214,232,255,0.11)");
+    g.addColorStop(Math.min(0.95, ring * 3.8), "rgba(74,181,247,0.06)");
+    g.addColorStop(1, "rgba(74,181,247,0)");
     ctx.fillStyle = g;
     // Filled as the disc of the gradient, not its square: past its radius the gradient adds nothing ("lighter" with a
     // transparent colour), so the pixels are the same and the corners cost nothing.
-    circle(cx, cy, S * 1.25 * breathe);
+    circle(cx, cy, reach);
     ctx.fill();
-    const b = S * BULB;
-    ctx.globalAlpha = dim * warm;
-    g = ctx.createRadialGradient(bx, by, 0, bx, by, b * 3 * breathe);
-    g.addColorStop(0, rgba(mix(EMBER, [255, 251, 238], warm), 0.95));
-    g.addColorStop(0.32, rgba(mix(EMBER, [255, 226, 170], warm), 0.38));
-    g.addColorStop(1, "rgba(255,200,120,0)");
-    ctx.fillStyle = g;
-    ctx.fillRect(bx - b * 3.2 * breathe, by - b * 3.2 * breathe, b * 6.4 * breathe, b * 6.4 * breathe);
     ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = "source-over";
   };
 
-  // The pool of light the bulb throws on the plane of the orbits; it moves as the bulb swings.
+  // The light that falls on the plane of the orbits, round the point.
   const drawPool = () => {
-    const p = project((bx - cx) / S, 0, 0);
+    const p = project(0, 0, 0);
     const rx = S * 0.55 * (1 + flare * 0.3);
     const ry = Math.max(rx * 0.12, rx * Math.abs(sinP));
     ctx.globalCompositeOperation = "lighter";
     const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rx);
-    g.addColorStop(0, `rgba(255,236,200,${(0.16 + flare * 0.12) * warm})`);
-    g.addColorStop(0.5, `rgba(255,226,170,${0.05 * warm})`);
-    g.addColorStop(1, "rgba(255,226,170,0)");
+    g.addColorStop(0, `rgba(214,232,255,${(0.1 + flare * 0.1) * warm})`);
+    g.addColorStop(0.5, `rgba(160,205,247,${0.04 * warm})`);
+    g.addColorStop(1, "rgba(160,205,247,0)");
     ctx.fillStyle = g;
     ctx.beginPath();
     ctx.ellipse(p.x, p.y, rx, ry, 0, 0, Math.PI * 2);
@@ -354,93 +397,28 @@
     ctx.globalCompositeOperation = "source-over";
   };
 
-  // The Catalyst bulb, hanging from its cable at the top of the hero and swinging around that point.
-  // Its filament is a sound wave, the voice of the brand: it pulses as it glows and speaks up when the bulb is tapped.
-  const drawBulb = () => {
-    const b = S * BULB;
+  // The mark: flat, in two colours, no glow of its own. The point is always there and never moves; the ring is drawn
+  // round it once as the light comes up, and again when the mark is tapped.
+  const smooth = (u) => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
+  const drawMark = () => {
+    const k = (S * MARK) / 100;
+    const drawn = still ? 1 : smooth(Math.min(1, ringT / RING_TIME));
     ctx.save();
-    ctx.translate(cx, top);
-    ctx.rotate(swing.a + view.hoverX * 0.04);
-    ctx.translate(-cx, -top);
-    const neck = cy - 0.52 * b;
-    const capTop = neck - 0.46 * b;
-
-    const cable = ctx.createLinearGradient(0, top, 0, capTop);
-    cable.addColorStop(0, "rgba(220,230,240,0)");
-    cable.addColorStop(1, "rgba(220,230,240,0.6)");
-    ctx.strokeStyle = cable;
-    ctx.lineWidth = Math.max(1.2, 0.045 * b);
-    ctx.beginPath();
-    ctx.moveTo(cx, top);
-    ctx.lineTo(cx, capTop);
-    ctx.stroke();
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(cx - 0.22 * b, neck);
-    ctx.bezierCurveTo(cx - 0.24 * b, cy - 0.28 * b, cx - 0.64 * b, cy - 0.24 * b, cx - 0.64 * b, cy + 0.16 * b);
-    ctx.bezierCurveTo(cx - 0.64 * b, cy + 0.6 * b, cx - 0.32 * b, cy + 0.84 * b, cx, cy + 0.84 * b);
-    ctx.bezierCurveTo(cx + 0.32 * b, cy + 0.84 * b, cx + 0.64 * b, cy + 0.6 * b, cx + 0.64 * b, cy + 0.16 * b);
-    ctx.bezierCurveTo(cx + 0.64 * b, cy - 0.24 * b, cx + 0.24 * b, cy - 0.28 * b, cx + 0.22 * b, neck);
-    ctx.closePath();
-    const glass = ctx.createRadialGradient(cx - 0.14 * b, cy + 0.05 * b, 0, cx, cy + 0.1 * b, 0.95 * b);
-    glass.addColorStop(0, rgba(mix(COLD_GLASS, WHITE, warm), 1));
-    glass.addColorStop(0.55, rgba(mix(COLD_GLASS, [255, 250, 240], warm), 1));
-    glass.addColorStop(1, rgba(mix(mix(COLD_GLASS, BLACK, 0.3), [255, 230, 187], warm), 1));
-    ctx.shadowColor = "rgba(255,238,205,0.95)";
-    ctx.shadowBlur = (26 + flare * 30) * dpr * dim * warm;
-    ctx.fillStyle = glass;
-    ctx.fill();
-    ctx.restore();
-
-    // The two leads, then the wave between them.
-    ctx.lineCap = "round";
-    ctx.strokeStyle = `rgba(255,150,50,${0.25 + 0.6 * warm})`;
-    ctx.lineWidth = Math.max(1, 0.035 * b);
-    ctx.beginPath();
-    ctx.moveTo(cx - 0.1 * b, neck + 0.05 * b);
-    ctx.lineTo(cx - 0.1 * b, cy - 0.02 * b);
-    ctx.moveTo(cx + 0.1 * b, neck + 0.05 * b);
-    ctx.lineTo(cx + 0.1 * b, cy - 0.02 * b);
-    ctx.stroke();
-    const bars = 11;
-    const loud = (1 + flare * 0.9) * (0.5 + 0.5 * dim);
-    ctx.lineWidth = Math.max(1.2, 0.05 * b);
-    for (let i = 0; i < bars; i += 1) {
-      const px = cx - 0.3 * b + (i * 0.6 * b) / (bars - 1);
-      const env = Math.sin((i / (bars - 1)) * Math.PI);
-      const h = (0.04 + 0.22 * env * (0.6 + 0.4 * Math.sin(time * 3 + i * 1.3))) * b * loud;
-      // A filament reddens before it whitens.
-      const red = Math.round(110 + 145 * Math.sqrt(warm));
-      ctx.strokeStyle = `rgba(${red},${Math.round((150 + 40 * env) * warm)},${Math.round(60 * warm)},${(0.55 + 0.45 * env) * (0.3 + 0.7 * warm)})`;
-      ctx.beginPath();
-      ctx.moveTo(px, cy + 0.22 * b - h);
-      ctx.lineTo(px, cy + 0.22 * b + h);
-      ctx.stroke();
+    ctx.translate(cx - POINT.x * k, cy - POINT.y * k);
+    ctx.scale(k, k);
+    if (drawn > 0.004) {
+      const { body, m } = ringShape(drawn);
+      ctx.fillStyle = "#f6f7f4";
+      ctx.fill(body);
+      for (const [x, y, w] of [RING.centre[0], RING.centre[m]]) {
+        ctx.beginPath();
+        ctx.arc(x, y, w, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
-    ctx.lineCap = "butt";
-
-    const cap = ctx.createLinearGradient(cx - 0.25 * b, 0, cx + 0.25 * b, 0);
-    cap.addColorStop(0, "#050607");
-    cap.addColorStop(0.55, "#23272a");
-    cap.addColorStop(1, "#050607");
-    ctx.fillStyle = cap;
-    ctx.beginPath();
-    if (ctx.roundRect) ctx.roundRect(cx - 0.25 * b, capTop, 0.5 * b, neck - capTop + 0.02 * b, [0.08 * b, 0.08 * b, 0.02 * b, 0.02 * b]);
-    else ctx.rect(cx - 0.25 * b, capTop, 0.5 * b, neck - capTop + 0.02 * b);
-    ctx.fill();
-    ctx.fillStyle = "rgba(255,255,255,0.08)";
-    ctx.fillRect(cx - 0.25 * b, capTop + 0.14 * b, 0.5 * b, Math.max(1, 0.025 * b));
-    ctx.fillRect(cx - 0.25 * b, capTop + 0.26 * b, 0.5 * b, Math.max(1, 0.025 * b));
-    ctx.fillStyle = "#d1a553";
-    ctx.fillRect(cx - 0.25 * b, neck - 0.04 * b, 0.5 * b, Math.max(1.5, 0.06 * b));
+    ctx.fillStyle = "#4ab5f7";
+    ctx.fillRect(POINT.x - POINT.side / 2, POINT.y - POINT.side / 2, POINT.side, POINT.side);
     ctx.restore();
-  };
-
-  const placeBulb = () => {
-    const a = swing.a + view.hoverX * 0.04;
-    bx = cx - Math.sin(a) * (cy - top);
-    by = top + Math.cos(a) * (cy - top);
   };
 
   const placePlanets = () => {
@@ -454,7 +432,7 @@
   };
 
   // ---- The planets ----
-  // All take the planet's screen position and radius; (ux, uy) points at the bulb, which lights them.
+  // All take the planet's screen position and radius; (ux, uy) points at the centre, which lights them.
   const circle = (x, y, r) => { ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); };
   const sphere = (x, y, r, rgb, ux, uy) => {
     const body = ctx.createRadialGradient(x + ux * r * 0.5, y + uy * r * 0.5, r * 0.05, x, y, r);
@@ -702,24 +680,24 @@
     const lit = hovered === planet || isOn;
 
     if (isOn) {
-      const beam = ctx.createLinearGradient(bx, by, x, y);
-      beam.addColorStop(0, "rgba(255,240,210,0.5)");
+      const beam = ctx.createLinearGradient(cx, cy, x, y);
+      beam.addColorStop(0, "rgba(226,238,255,0.5)");
       beam.addColorStop(1, rgba(rgb, 0.7));
       ctx.strokeStyle = beam;
       ctx.lineWidth = 1.2 * dpr;
       ctx.setLineDash([3 * dpr, 5 * dpr]);
       ctx.lineDashOffset = -time * 30 * dpr;
       ctx.beginPath();
-      ctx.moveTo(bx, by);
+      ctx.moveTo(cx, cy);
       ctx.lineTo(x, y);
       ctx.stroke();
       ctx.setLineDash([]);
     }
     if (lit) halo(x, y, r, rgb, 4.2, 0.4);
 
-    // Lit from the bulb's side.
-    const dx = bx - x;
-    const dy = by - y;
+    // Lit from the centre's side.
+    const dx = cx - x;
+    const dy = cy - y;
     const len = Math.hypot(dx, dy) || 1;
     (DRAWERS[planet.id] || ((p, ux, uy) => { halo(x, y, r, rgb, 3.2, 0.32); sphere(x, y, r, rgb, ux, uy); }))(planet, dx / len, dy / len);
 
@@ -741,7 +719,7 @@
     if ("letterSpacing" in ctx) ctx.letterSpacing = "0px";
   };
 
-  // ---- The reader: a small figure under the light ----
+  // ---- The reader: a small figure by the point ----
   // A pictogram, no face, sitting on two books on the inner orbit in the pool of light, reading. Now and
   // then it looks up, stretches or walks a few steps; left alone for a minute it dozes off over its book,
   // and the light dims a little. When a planet is opened it runs there along the beam and stands on it; when
@@ -753,7 +731,7 @@
   };
   let dim = 1;
   const inner = planets.reduce((a, p) => (p.r < a.r ? p : a), planets[0] || { r: 0.46, incl: 0 });
-  // The seat: the front of the inner orbit, a little to the left of the bulb, whatever the turn of the system.
+  // The seat: the front of the inner orbit, a little to the left of the mark, whatever the turn of the system.
   const seatPoint = (off = reader.walkOff) => orbitPoint(inner.r, inner.incl, Math.PI / 2 - (view.yaw + view.hoverX * 0.22) + 0.45 + off);
   const readerScale = (k) => Math.max((15 * dpr) / 34, (0.1 * S * Math.min(1.2, k)) / 34);
   const toRead = () => { reader.state = "read"; reader.t = 0; reader.next = 6 + Math.random() * 8; reader.walkOff = 0; };
@@ -797,7 +775,6 @@
     dim += ((reader.state === "sleep" ? 0.7 : 1) - dim) * ease(2, dt);
   };
 
-  const smooth = (u) => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
   const placeReader = () => {
     if (still) { reader.state = selected ? "stand" : "read"; reader.target = selected; }
     const seat = seatPoint();
@@ -832,7 +809,7 @@
     reader.bs = readerScale(home.k);
   };
 
-  // The reader is a pictogram in the bulb's light: one warm colour, thick rounded limbs and a head
+  // The reader is a pictogram in the light of the centre: one warm colour, thick rounded limbs and a head
   // apart from the body, sitting on two books with an open book in its hands. The books stay at the
   // seat while it runs to a planet.
   const FIGURE = "rgb(255,243,224)";
@@ -979,7 +956,6 @@
   const draw = (all = false) => {
     if (!disc) return;
     setAngles();
-    placeBulb();
     placePlanets();
     placeReader();
     for (const layer of [skyAbove, skyBelow]) {
@@ -1004,15 +980,15 @@
     drawDisc();
     ctx.globalCompositeOperation = "source-over";
     drawGlow();
-    drawBulb();
+    drawMark();
     for (const planet of planets) drawOrbit(planet, true);
     planets.filter((planet) => planet.sz >= 0).sort((a, b) => a.sz - b.sz).forEach(drawPlanet);
     drawReader();
     if (warm < 1) {
-      // The room is dark until the light is on; the bulb itself sits over the dark.
+      // The room is dark until the light is on; the mark itself sits over the dark.
       ctx.fillStyle = rgba(BLACK, 0.72 * (1 - warm));
       ctx.fillRect(0, bandTop, width, bandBottom - bandTop);
-      drawBulb();
+      drawMark();
     }
   };
 
@@ -1040,19 +1016,16 @@
     }
     if (warm < 1) {
       warmT += dt;
-      const u = Math.min(1, warmT / 1.3);
+      const u = Math.min(1, warmT / RING_TIME);
       warm = u * u * (3 - 2 * u);
-      // It flutters as it catches.
-      if (warmT > 0.25 && warmT < 1) warm *= 1 - 0.1 * Math.max(0, Math.sin(warmT * 46));
     }
+    ringT += dt;
     const following = Boolean(selected && follow);
     if (!dragging) {
       view.yawVel += ((following ? 0 : DRIFT) - view.yawVel) * ease(1.4, dt);
       view.pitch += (REST_PITCH - view.pitch) * ease(1.8, dt);
     }
     view.yaw += view.yawVel * dt;
-    swing.v += (-9.9 * Math.sin(swing.a) - 0.9 * swing.v) * dt;
-    swing.a = Math.max(-0.22, Math.min(0.22, swing.a + swing.v * dt));
     view.hoverX += (view.aimX - view.hoverX) * ease(3, dt);
     view.hoverY += (view.aimY - view.hoverY) * ease(3, dt);
     flare *= Math.exp(-dt * 2.4);
@@ -1135,7 +1108,7 @@
     }
     return best;
   };
-  const onBulb = ({ x, y }) => Math.hypot(x - bx, y - by) < S * BULB * 1.1;
+  const onMark = ({ x, y }) => Math.hypot(x - cx, y - cy) < S * MARK * 0.45;
   const interactive = (target) => target.closest("a, button, input, .cosmos-copy, .cosmos-family");
 
   root.addEventListener("pointerdown", (event) => {
@@ -1153,7 +1126,7 @@
       const at = local(event);
       const overMoon = interactive(event.target) ? null : moonAt(at);
       const over = interactive(event.target) ? null : planetAt(at);
-      const wantPointer = Boolean(over || overMoon) || onBulb(at);
+      const wantPointer = Boolean(over || overMoon) || onMark(at);
       if (over !== hovered || overMoon !== hoveredMoon) { hovered = over; hoveredMoon = overMoon; refresh(); }
       root.classList.toggle("is-pointing", wantPointer);
     }
@@ -1170,7 +1143,6 @@
     }
     if (!dragging.moved) return;
     view.yaw += dx * 0.006;
-    swing.v = Math.max(-1.6, Math.min(1.6, swing.v + dx * 0.008));
     view.pitch = Math.min(1.25, Math.max(0.08, view.pitch + dy * 0.004));
     view.yawVel = (dx * 0.006) / Math.max(0.008, (now - dragging.t) / 1000);
     view.yawVel = Math.max(-3, Math.min(3, view.yawVel));
@@ -1195,7 +1167,7 @@
       setTimeout(() => { window.location.href = moon.url; }, still ? 0 : 260);
     }
     else if (planet) select(planet.id);
-    else if (onBulb(at) && !still) flare = 1;
+    else if (onMark(at) && !still) { flare = 1; ringT = 0; }
   };
   root.addEventListener("pointerup", release);
   root.addEventListener("pointercancel", release);
@@ -1223,7 +1195,7 @@
   }
   document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
   // Paused or played again, here or in another tab: the loop stops, the scene settles where it is (the light on, the
-  // opened planet at the front), or the loop starts again from there.
+  // opened planet at the front, the ring whole), or the loop starts again from there.
   new MutationObserver(() => {
     const now = page.dataset.motion === "paused";
     if (now === still) return;

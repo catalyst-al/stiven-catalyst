@@ -1,4 +1,4 @@
-{#- The homepage hero: the Catalyst light in the centre, the roles on its orbits (js/cosmos.js). -#}
+{#- The homepage hero: the mark in the centre, the roles on its orbits (js/cosmos.js). -#}
 <section class="cosmos" data-cosmos>
   <canvas class="cosmos-canvas" aria-hidden="true"></canvas>
   <div class="shell cosmos-inner">
@@ -6,7 +6,12 @@
       <p class="eyebrow">{{ "Free tools and essays for people who run shifts, teams and operations" | t(lang) }}</p>
       <h1>
         <span class="line">{{ "Management" | t(lang) }}</span>
-        <span class="line act">{{ "without theatre." | t(lang) }}</span>
+        {#- The full stop of the headline is the mark: the point, with the ring round it (.hero-stop, css/02-homepage.css).
+            The stop stays in the text for a screen reader and a search engine, and never leaves its word for a line of its
+            own (.hero-last). -#}
+        {%- set act = "without theatre." | t(lang) %}
+        {%- set words = act.slice(0, -1).split(" ") %}
+        <span class="line act">{% if act.endsWith(".") %}{% for word in words %}{% if loop.last %}<span class="hero-last">{{ word }}<span class="hero-stop"><span class="visually-hidden">.</span></span></span>{% else %}{{ word }} {% endif %}{% endfor %}{% else %}{{ act }}{% endif %}</span>
       </h1>
       <p class="hero-copy"><strong>{{ "Free tools for the people who run the work:" | t(lang) }}</strong> {{ "damage rate, late routes, shift handover, Pareto, CV. No account, no cookies; your data stays on your device." | t(lang) }}</p>
       <div class="hero-actions">
