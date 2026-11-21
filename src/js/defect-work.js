@@ -17,6 +17,14 @@
 // not surely a shift of this page, there is no form: the page says so and points to the Shift Handover, where shifts
 // are started. What is typed is kept as the draft of that shift at once, and comes back after a reload. An entry that
 // is stored clears the draft; one that could not be stored leaves the form and the draft as they are, to try again.
+// An entry is made once. Before the row is written, the stored draft is marked as being entered, with the number of
+// rows the log already has that look the same (values.entering). When the row is stored and the draft then cannot be
+// cleared, what is left is told apart by that mark: the log has one more such row than before, so the form was
+// entered. It is then never shown as work that waits: the form is clean and the page says the entry is in the log.
+// The copy is cleared by the page as soon as the storage takes it when the page could also write "entered" on it;
+// when only the log says so, the page shows the copy and the visitor clears it. When the log has no more such rows than before, the row was
+// not stored, and the form waits as it was. Two real entries with the same fields stay possible: the second is typed
+// and entered as a form of its own.
 // Drafts of other shifts are listed above the form with "Back to", "Bring here" and "Discard": going back is offered
 // only for the shift the handover has open; bringing a draft here is refused while this form has work (both stay),
 // and the draft is moved in one write, so it is never lost on the way. "Start here" follows the filter, the strip
@@ -109,6 +117,32 @@ window.DefectWork = (() => {
     const resetForm = () => { form.units.value = 1; form.note.value = ""; form.cost.value = ""; setMore(false); };
     const formText = (values) => [str(values.stage), str(values.cause), plural(Math.max(1, Math.round(parseNumber(String(values.units ?? 1))) || 1), t.one, t.many), str(values.note).trim()].filter(Boolean).join(" · ");
     const shiftText = (item) => `${item.label} · ${showDate(item.date)}`;
+    // The row a form would add in a shift: the same fields the entry writes, so the two can be compared.
+    const rowOf = (values, shift) => {
+      const open = values.more === "1";
+      const cost = open ? parseNumber(String(values.cost ?? "")) : NaN;
+      return { date: shift.date, shift: shift.label, stage: str(values.stage), type: open ? str(values.type) : NOT_RECORDED, cause: str(values.cause), units: Math.round(parseNumber(String(values.units ?? ""))), cost: cost >= 0 ? cost : null, note: str(values.note).trim() };
+    };
+    const sameRows = (row) => state.rows.filter((other) => kit.rowKey(other, ["id"]) === kit.rowKey(row, ["id"])).length;
+    // A stored draft that was already entered: marked before its row was written, and the log now has more rows like
+    // it than it had then (or the mark says so itself). Such a draft is a copy to clear, not work that waits.
+    const wasEntered = (draft) => {
+      if (!draft || draft.values.entering === undefined) return false;
+      if (draft.values.entered === "1") return true;
+      const before = Number(draft.values.entering);
+      return Number.isInteger(before) && sameRows(rowOf(draft.values, draft)) > before;
+    };
+    // Sure: the page itself wrote "entered" on it after the row was stored. Otherwise the log is the evidence, and
+    // the page shows the copy and lets the visitor clear it, rather than clear it unasked.
+    const surelyEntered = (draft) => wasEntered(draft) && draft.values.entered === "1";
+    // The copy of an entered form is cleared whenever the storage takes it; true when it is gone.
+    const clearCopy = (draft) => {
+      writing = true;
+      let result = Context.drop(contextOf(draft), { base: draft.rev });
+      if (!result.ok && result.reason === "changed" && result.draft && wasEntered(result.draft)) result = Context.drop(contextOf(draft), { base: result.draft.rev });
+      writing = false;
+      return result.ok;
+    };
     const WHY = {
       locked: "The tools are locked with a PIN: nothing is kept until they are opened.",
       unsaved: "The browser's storage did not take it.",
@@ -162,8 +196,20 @@ window.DefectWork = (() => {
     const others = () => Context.drafts().filter((draft) => draft.tool === KEY && draft.form === "entry" && Context.identity(draft) !== ctxId).sort((a, b) => b.updated - a.updated);
     const contextOf = (draft) => ({ tool: draft.tool, form: draft.form, scope: draft.scope, date: draft.date, index: draft.index, of: draft.of, label: draft.label, list: draft.list });
     const button = (label, name, value) => { const node = el("button", "button-secondary", label); node.type = "button"; node.dataset[name] = value; return node; };
+    // The copy of a form that is already in the log, when it could not be cleared: said, never offered as work.
+    const copyNote = (draft, mine) => {
+      const note = el("div", "dl-box dw-draft dw-entered");
+      note.dataset.workEntered = `${draft.date}|${draft.label}`;
+      note.append(el("p", null, tx("Already in the log ({shift}): {form}. A copy of this form is still kept here; it is not waiting to be entered.", { shift: shiftText(draft), form: formText(draft.values) })));
+      const row = el("div", "tool-actions");
+      row.append(button(tx("Clear the copy"), "workCopy", mine ? "mine" : Context.identity(draft)));
+      note.append(row);
+      return note;
+    };
     const renderDrafts = () => {
       const notes = [];
+      const own = ctx && !dirty ? Context.find(ctx) : null;
+      if (own && wasEntered(own)) notes.push(copyNote(own, true));
       if (conflict) {
         const note = el("div", "dl-box dw-draft dw-conflict");
         note.append(el("p", null, tx("The unfinished form of this shift was changed somewhere else (another tab, or a file put back) while you typed here. Nothing was written over.")));
@@ -175,6 +221,8 @@ window.DefectWork = (() => {
       }
       others().forEach((draft) => {
         const id = Context.identity(draft);
+        // A form of another shift that was entered there: its copy is cleared here, or said to be one.
+        if (wasEntered(draft)) { if (!surelyEntered(draft) || !clearCopy(draft)) notes.push(copyNote(draft, false)); return; }
         const status = Close.shiftStatus(draft.list, draft.date, draft.label);
         const note = el("div", "dl-box dw-draft");
         note.dataset.workDraft = `${draft.date}|${draft.label}`;
@@ -209,6 +257,15 @@ window.DefectWork = (() => {
         syncForm();
         renderDrafts();
         form.stage.focus();
+        return;
+      }
+      if (node.dataset.workCopy) {
+        const copy = node.dataset.workCopy === "mine" ? (ctx ? Context.find(ctx) : null) : others().find((item) => Context.identity(item) === node.dataset.workCopy);
+        if (copy && wasEntered(copy)) {
+          if (clearCopy(copy)) { if (node.dataset.workCopy === "mine") rev = ""; } else say(tx("Not cleared: {why}", { why: why("unsaved") }));
+        }
+        renderDrafts();
+        (draftsBox.querySelector("button") || (entry.hidden ? noShift.querySelector("a") : form.stage))?.focus();
         return;
       }
       const id = node.dataset.workBack || node.dataset.workBring || node.dataset.workDrop;
@@ -260,6 +317,17 @@ window.DefectWork = (() => {
       rows.slice(-3).reverse().forEach((row) => list.append(el("li", null, `${row.stage} · ${row.cause}${row.note ? ` · ${row.note}` : ""} · ${int.format(row.units)}`)));
       mine.replaceChildren(el("p", "kicker", tx("In this shift: {units} in {entries}", { units: plural(units(rows), t.one, t.many), entries: entriesText(rows.length) })), rows.length ? list : el("p", "form-note", tx("None yet.")));
     };
+    // The stored draft of the form's shift. One that waits fills the form. The copy of one that was entered does not:
+    // it is cleared, or, when the storage does not take that, the form stays clean and the next thing typed is saved
+    // over it.
+    const load = (fresh) => {
+      let stored = ctx ? Context.find(ctx) : null;
+      if (stored && wasEntered(stored)) {
+        if (surelyEntered(stored) && clearCopy(stored)) stored = null;
+        else { if (fresh) resetForm(); rev = stored.rev; dirty = false; return; }
+      }
+      if (stored) { fillForm(stored.values); rev = stored.rev; dirty = true; } else if (fresh) { resetForm(); rev = ""; dirty = false; } else rev = "";
+    };
     const bind = () => {
       const found = Context.activeOn(pageShifts, LIST);
       const wanted = found.ok ? { tool: KEY, form: "entry", scope: "", date: found.active.date, index: found.index, of: pageShifts.length, label: found.label, list: LIST } : null;
@@ -270,11 +338,9 @@ window.DefectWork = (() => {
         ctx = wanted;
         ctxId = id;
         conflict = null;
-        const stored = ctx ? Context.find(ctx) : null;
-        if (stored) { fillForm(stored.values); rev = stored.rev; dirty = true; } else { resetForm(); rev = ""; dirty = false; }
+        load(true);
       } else if (ctx && !dirty) {
-        const stored = Context.find(ctx);
-        if (stored) { fillForm(stored.values); rev = stored.rev; dirty = true; }
+        load(false);
       }
       entry.hidden = !ctx;
       noShift.hidden = Boolean(ctx);
@@ -306,22 +372,47 @@ window.DefectWork = (() => {
       const open = moreOpen();
       const cost = open ? parseNumber(form.cost.value) : NaN;
       const row = { date: ctx.date, shift: ctx.label, stage: form.stage.value, type: open ? form.type.value : NOT_RECORDED, cause: form.cause.value, units: count, cost: cost >= 0 ? cost : null, note: form.note.value.trim() };
+      // The stored draft is marked first: "being entered", with the rows the log has now that look like this one. A
+      // draft that cannot be marked is not entered, or what is left of it could later be entered a second time. With
+      // no stored draft there is nothing that could be left.
+      const stored = Context.find(ctx);
+      if (stored && wasEntered(stored)) { if (surelyEntered(stored) && clearCopy(stored)) rev = ""; else rev = stored.rev; }
+      const kept = Context.find(ctx);
+      let marked = false;
+      if (kept) {
+        writing = true;
+        const mark = Context.save(ctx, { ...readForm(), entering: String(sameRows(row)) }, { base: kept.rev === rev || wasEntered(kept) ? kept.rev : rev });
+        writing = false;
+        if (!mark.ok) {
+          if (mark.reason === "changed") { conflict = { draft: mark.draft || null }; renderDrafts(); }
+          say(mark.reason === "changed"
+            ? tx("Not added: the unfinished form of this shift was changed somewhere else. Choose which one to keep, then add it.")
+            : tx("Not added, and nothing was written: the unfinished form could not be marked as being entered ({why}), and it could otherwise be entered a second time later. Try again.", { why: why(mark.reason) }));
+          submitButton.focus();
+          return;
+        }
+        rev = mark.draft.rev;
+        marked = true;
+      }
       if (!api.addNow(row)) {
+        // Not stored: the form waits as it was, and the mark goes (left behind, it changes nothing: the log has no
+        // more such rows than before).
         dirty = true;
-        saveDraft();
+        if (marked) { writing = true; const back = Context.save(ctx, readForm(), { base: rev }); writing = false; if (back.ok && back.draft) rev = back.draft.rev; } else saveDraft();
         syncForm();
         say(tx("Not added: the browser's storage did not take the entry. What you typed is still in the form; try again."));
         submitButton.focus();
         return;
       }
+      // Stored. The draft goes; when it cannot, it is at least told to be entered, and never shown as waiting.
       let cleared = { ok: true };
-      if (dirty || rev) {
+      if (marked) {
         writing = true;
         cleared = Context.drop(ctx, { base: rev });
-        if (!cleared.ok && cleared.reason === "changed") cleared = Context.drop(ctx, { base: cleared.draft ? cleared.draft.rev : "" });
+        if (!cleared.ok) { const told = Context.save(ctx, { ...readForm(), entering: String(sameRows(row) - 1), entered: "1" }, { base: rev }); if (told.ok && told.draft) rev = told.draft.rev; }
         writing = false;
       }
-      rev = "";
+      if (cleared.ok) rev = "";
       dirty = false;
       conflict = null;
       resetForm();
@@ -329,7 +420,7 @@ window.DefectWork = (() => {
       renderDrafts();
       const added = tx("Added {count} at {stage}.", { count: plural(count, t.one, t.many), stage: row.stage });
       if (cleared.ok) flash(entryStatus, added);
-      else say(`${added} ${tx("The unfinished form could not be cleared; discard it by hand if it shows again.")}`);
+      else say(`${added} ${tx("A copy of the form could not be cleared; the page shows it as already in the log.")}`);
       form.stage.focus();
     };
 

@@ -124,6 +124,50 @@ test("two shifts with unfinished forms: the closed shift offers no return, nothi
   expect((await rows(page, "en")).map((row) => row.note).filter(Boolean).sort()).toEqual(["Left in the first shift", "Of the second shift"]);
 });
 
+test("the entry is stored and its draft cannot be cleared: after a real reload the form is clean, the page says the entry is in the log, and no second row is added", async ({ page }) => {
+  const active = await startShift(page, "en");
+  await page.goto("/tools/damage-control/");
+  await page.locator('[data-entry] [name="note"]').fill("Pallet 7");
+  await page.locator('[data-entry] [name="units"]').fill("2");
+  // From here the browser refuses to remove the drafts, on this page and after a reload, until the test lifts it.
+  await page.addInitScript(() => {
+    if (sessionStorage.getItem("thawed")) return;
+    const real = Storage.prototype.removeItem;
+    Storage.prototype.removeItem = function (name) { if (name === "sc-drafts-ui") throw new DOMException("blocked", "InvalidStateError"); return real.call(this, name); };
+  });
+  await page.evaluate(() => {
+    const real = Storage.prototype.removeItem;
+    Storage.prototype.removeItem = function (name) { if (name === "sc-drafts-ui") throw new DOMException("blocked", "InvalidStateError"); return real.call(this, name); };
+  });
+  await page.locator('[data-entry] [type="submit"]').click();
+  const pallets = async () => (await rows(page, "en")).filter((row) => row.note === "Pallet 7");
+  expect(await pallets()).toEqual([expect.objectContaining({ date: active.date, shift: active.label, units: 2 })]);
+  await expect(page.locator("[data-entry-status]")).toContainText("A copy of the form could not be cleared");
+  await expect(page.locator('[data-entry] [name="note"]')).toHaveValue("");
+  await expect(page.locator("[data-work-entered]")).toContainText("Already in the log");
+  await expect(page.locator("[data-work-entered]")).toContainText("Pallet 7");
+  await expect(page.locator("[data-work-draft]")).toHaveCount(0);
+  await expectAccessible(page);
+  await page.reload();
+  await expect(page.locator('[data-entry] [name="note"]')).toHaveValue("");
+  await expect(page.locator('[data-entry] [name="units"]')).toHaveValue("1");
+  await expect(page.locator("[data-work-saved-with]")).not.toContainText("Unfinished form");
+  await expect(page.locator("[data-work-entered]")).toHaveCount(1);
+  expect(await pallets()).toHaveLength(1);
+  // The same fields typed again are a second, real entry.
+  await page.locator('[data-entry] [name="note"]').fill("Pallet 7");
+  await page.locator('[data-entry] [name="units"]').fill("2");
+  await expect(page.locator("[data-work-entered]")).toHaveCount(0);
+  await page.locator('[data-entry] [type="submit"]').click();
+  expect(await pallets()).toHaveLength(2);
+  // The storage works again: the page clears what is left by itself.
+  await page.evaluate(() => sessionStorage.setItem("thawed", "1"));
+  await page.reload();
+  await expect(page.locator("[data-work-entered]")).toHaveCount(0);
+  expect(await drafts(page)).toEqual([]);
+  expect(await pallets()).toHaveLength(2);
+});
+
 test("without the pilot the page is the page it always was", async ({ page }) => {
   await page.goto("/tools/damage-control/");
   await expect(page.locator("[data-work-head]")).toBeHidden();

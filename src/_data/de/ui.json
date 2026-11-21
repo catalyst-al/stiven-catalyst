@@ -8080,7 +8080,6 @@
   "The shift this device is working in ({shift}) is not surely one of this page's shifts ({page}), so an entry has nowhere to go. Close that shift, or start one, on the Shift Handover page.": "Die Schicht, in der dieses Gerät arbeitet ({shift}), ist nicht sicher eine der Schichten dieser Seite ({page}), deshalb hat ein Eintrag keinen Platz. Schließen Sie diese Schicht ab oder starten Sie eine auf der Seite Schichtübergabe.",
   "No shift is active on this device, so an entry has nowhere to go. A shift is started on the Shift Handover page, with its date.": "Auf diesem Gerät ist keine Schicht aktiv, deshalb hat ein Eintrag keinen Platz. Eine Schicht wird auf der Seite Schichtübergabe gestartet, mit ihrem Datum.",
   "Not added: the browser's storage did not take the entry. What you typed is still in the form; try again.": "Nicht hinzugefügt: Der Speicher des Browsers hat den Eintrag nicht angenommen. Was Sie eingegeben haben, steht noch im Formular; versuchen Sie es erneut.",
-  "The unfinished form could not be cleared; discard it by hand if it shows again.": "Das unfertige Formular konnte nicht geleert werden; verwerfen Sie es von Hand, falls es wieder erscheint.",
   "most at {stage} ({a} of {b})": "am meisten bei {stage} ({a} von {b})",
   "mostly {cause} ({a} of {b})": "meist {cause} ({a} von {b})",
   "{field} {value}: {a} of {b} {many} ({pct})": "{field} {value}: {a} von {b} {many} ({pct})",
@@ -8109,5 +8108,11 @@
   "Next step, as the situation asks": "Nächster Schritt, je nach Lage",
   "One file of all your work, the restore points and the PIN lock": "Eine Datei mit Ihrer ganzen Arbeit, die Wiederherstellungspunkte und die PIN-Sperre",
   "are further down this page.": "stehen weiter unten auf dieser Seite.",
-  "Export and clear": "Exportieren und leeren"
+  "Export and clear": "Exportieren und leeren",
+  "Clear the copy": "Kopie leeren",
+  "Not cleared: {why}": "Nicht geleert: {why}",
+  "Not added: the unfinished form of this shift was changed somewhere else. Choose which one to keep, then add it.": "Nicht hinzugefügt: Das unfertige Formular dieser Schicht wurde anderswo geändert. Wählen Sie, welches bleiben soll, dann fügen Sie es hinzu.",
+  "Not added, and nothing was written: the unfinished form could not be marked as being entered ({why}), and it could otherwise be entered a second time later. Try again.": "Nicht hinzugefügt, und nichts wurde geschrieben: Das unfertige Formular konnte nicht als „wird eingetragen“ markiert werden ({why}), und es könnte sonst später ein zweites Mal eingetragen werden. Versuchen Sie es erneut.",
+  "A copy of the form could not be cleared; the page shows it as already in the log.": "Eine Kopie des Formulars konnte nicht geleert werden; die Seite zeigt sie als bereits im Protokoll.",
+  "Already in the log ({shift}): {form}. A copy of this form is still kept here; it is not waiting to be entered.": "Bereits im Protokoll ({shift}): {form}. Eine Kopie dieses Formulars ist hier noch gespeichert; sie wartet nicht darauf, eingetragen zu werden."
 }

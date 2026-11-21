@@ -267,6 +267,140 @@ test('a draft that cannot be kept is said at once, and what was typed stays in t
   assert.match(status(locked), /The tools are locked with a PIN/);
 });
 
+// ---- 3b. The entry is stored and its draft cannot be cleared ----
+
+// The storage stops taking changes to the drafts: removals at once, writes after `writes` more (the mark that a form
+// is being entered is a write; "0" lets none through).
+const freezeDrafts = (w, writes = Infinity) => {
+  const proto = w.Storage.prototype;
+  const real = { set: proto.setItem, remove: proto.removeItem };
+  let left = writes;
+  proto.removeItem = function (name) { if (name === DRAFTS) throw new w.DOMException('blocked', 'InvalidStateError'); return real.remove.call(this, name); };
+  proto.setItem = function (name, value) { if (name === DRAFTS && (left -= 1) < 0) throw new w.DOMException('full', 'QuotaExceededError'); return real.set.call(this, name, value); };
+  return () => { proto.setItem = real.set; proto.removeItem = real.remove; };
+};
+const typePallet = (w) => { type(w, form(w).note, 'Pallet 7'); type(w, form(w).units, '2'); };
+const copies = (w) => $$(w, '[data-work-entered]');
+const pallets = (w) => rowsOf(w).filter((item) => item.note === 'Pallet 7').length;
+const waitingText = /Unfinished form of this shift/;
+
+test('the row is stored and the draft cannot be cleared: the form is clean at once and after a reload, the page says the entry is in the log, and the same form adds no second row', { skip: !hasSite }, () => {
+  const w = page('en', pilotStorage('en'));
+  typePallet(w);
+  // The mark and the word "entered" can be written; the draft cannot be removed.
+  const thaw = freezeDrafts(w);
+  add(w);
+  assert.equal(pallets(w), 1, 'the row is stored');
+  assert.equal(status(w), 'Added 2 damaged units at Receiving. A copy of the form could not be cleared; the page shows it as already in the log.');
+  assert.deepEqual([form(w).note.value, form(w).units.value], ['', '1'], 'the form is clean');
+  assert.doesNotMatch($(w, '[data-work-saved-with]').textContent, waitingText, 'and does not say that work waits');
+  assert.ok(!shown($(w, '[data-work-clear]')));
+  assert.equal(copies(w).length, 1);
+  assert.match(copies(w)[0].textContent, /^Already in the log \(Late · [^)]+\): Receiving · Stacking · 2 damaged units · Pallet 7\. A copy of this form is still kept here; it is not waiting to be entered\./);
+  assert.equal($$(w, '[data-work-draft]').length, 0, 'it is not listed as an unfinished form either');
+  assert.equal(draftsOf(w)[0].values.entered, '1', 'the stored copy says it was entered');
+  // After a reload, with the drafts still frozen: the same.
+  let again = reload(w, { before: (next) => freezeDrafts(next) });
+  assert.deepEqual([form(again).note.value, form(again).units.value], ['', '1'], 'the form is clean after a reload');
+  assert.doesNotMatch($(again, '[data-work-saved-with]').textContent, waitingText);
+  assert.equal(copies(again).length, 1);
+  assert.equal(pallets(again), 1);
+  // The storage works again: the page clears the copy by itself, and nothing is left to enter.
+  thaw();
+  again = reload(w);
+  assert.equal(copies(again).length, 0);
+  assert.equal(again.localStorage.getItem(DRAFTS), null);
+  assert.equal(form(again).note.value, '');
+  assert.equal(pallets(again), 1, 'one row, through all of it');
+});
+
+test('when even the word "entered" cannot be written, the log is the evidence: the copy is shown, not offered as work, and cleared when the visitor says so', { skip: !hasSite }, () => {
+  const w = page('en', pilotStorage('en', { rows: [row('en')] }));
+  typePallet(w);
+  // One more write is taken (the mark, made before the row); then nothing.
+  const thaw = freezeDrafts(w, 1);
+  add(w);
+  assert.equal(pallets(w), 1);
+  assert.deepEqual([draftsOf(w)[0].values.entering, draftsOf(w)[0].values.entered], ['0', undefined], 'only the mark made before the row is stored: there were no such rows then');
+  assert.equal(form(w).note.value, '');
+  assert.equal(copies(w).length, 1, 'said at once');
+  thaw();
+  const again = reload(w);
+  assert.equal(form(again).note.value, '', 'not put back in the form');
+  assert.doesNotMatch($(again, '[data-work-saved-with]').textContent, waitingText);
+  assert.equal(copies(again).length, 1, 'shown, and not cleared unasked: only the log says it was entered');
+  assert.equal(draftsOf(again).length, 1);
+  click(again, copies(again)[0].querySelector('[data-work-copy]'));
+  assert.equal(again.localStorage.getItem(DRAFTS), null);
+  assert.equal(copies(again).length, 0);
+  assert.equal(pallets(again), 1);
+  // A copy left by another shift is told the same way there, with no "Bring" and no "Back to".
+  const stale = page('en', { ...pilotStorage('en', { index: 2, rows: rowsOf(w) }), [DRAFTS]: w.localStorage.getItem(DRAFTS) });
+  assert.equal($$(stale, '[data-work-draft]').length, 0);
+  assert.equal(copies(stale).length, 1);
+  assert.equal(copies(stale)[0].querySelector('[data-work-bring], [data-work-back]'), null);
+});
+
+test('two real entries with the same fields are still two rows; a copy left behind does not stand in the way', { skip: !hasSite }, () => {
+  const w = page('en', pilotStorage('en'));
+  typePallet(w);
+  add(w);
+  typePallet(w);
+  add(w);
+  assert.equal(pallets(w), 2, 'typed twice, entered twice');
+  assert.equal(w.localStorage.getItem(DRAFTS), null);
+  assert.equal(copies(w).length, 0);
+  // With a copy of the first one left behind (only the log says it was entered), the second is typed and entered.
+  const left = page('en', pilotStorage('en'));
+  typePallet(left);
+  const thaw = freezeDrafts(left, 1);
+  add(left);
+  thaw();
+  const again = reload(left);
+  assert.equal(copies(again).length, 1);
+  typePallet(again);
+  assert.equal(copies(again).length, 0, 'what is typed now is the form of this shift, saved over the copy');
+  assert.deepEqual([draftsOf(again)[0].values.note, draftsOf(again)[0].values.entering], ['Pallet 7', undefined]);
+  add(again);
+  assert.equal(pallets(again), 2);
+  assert.equal(again.localStorage.getItem(DRAFTS), null);
+  assert.equal(pallets(reload(again)), 2, 'and a reload adds nothing');
+});
+
+test('a draft that cannot be marked as being entered is not entered; an entry that is not stored leaves the form waiting, mark or no mark', { skip: !hasSite }, () => {
+  // The mark cannot be written: nothing is written at all.
+  const w = page('en', pilotStorage('en'));
+  typePallet(w);
+  let thaw = freezeDrafts(w, 0);
+  add(w);
+  assert.equal(pallets(w), 0);
+  assert.match(status(w), /^Not added, and nothing was written: the unfinished form could not be marked as being entered \(The browser's storage did not take it\.\)/);
+  assert.equal(form(w).note.value, 'Pallet 7');
+  assert.equal(draftsOf(w)[0].values.entering, undefined);
+  thaw();
+  add(w);
+  assert.equal(pallets(w), 1);
+  assert.equal(w.localStorage.getItem(DRAFTS), null);
+  // The row is not stored, and the mark cannot be taken back either: after a reload the form waits, it is not "in the log".
+  const failed = page('en', pilotStorage('en'));
+  typePallet(failed);
+  thaw = freezeDrafts(failed, 1);
+  const restore = refuse(failed, KEY.en);
+  add(failed);
+  assert.equal(pallets(failed), 0);
+  assert.equal(draftsOf(failed)[0].values.entering, '0', 'the mark is still there');
+  assert.equal(form(failed).note.value, 'Pallet 7');
+  thaw();
+  restore();
+  const again = reload(failed);
+  assert.equal(copies(again).length, 0, 'the log has no such row: the form was not entered');
+  assert.deepEqual([form(again).note.value, form(again).units.value], ['Pallet 7', '2'], 'and waits, as it was');
+  assert.match($(again, '[data-work-saved-with]').textContent, waitingText);
+  add(again);
+  assert.equal(pallets(again), 1);
+  assert.equal(again.localStorage.getItem(DRAFTS), null);
+});
+
 // ---- 4. Drafts of other shifts: Back to, Bring here, Discard ----
 
 // The draft another shift left, as the page itself writes it: typed on the page while that shift was active.

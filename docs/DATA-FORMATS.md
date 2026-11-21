@@ -71,7 +71,10 @@ The work view of Damage Control (`js/defect-work.js`; `workUi: true` in `damageC
 shifts of its own in the workplace profile) is the first page that writes a draft and sends `origin`. Its draft is
 `{ tool: "sc-damage-control[-de|-sq]", form: "entry", scope: "", date, index, of, label, list, values: { stage, cause,
 units, note } }`, with `more: "1"`, `type` and `cost` when the type and the cost were opened; it is written at each
-keystroke and removed once the entry is stored. A row it adds is the row the log always wrote (`date` the operative
+keystroke and removed once the entry is stored. Before the row is written the stored draft is marked `entering`
+(the number of rows the log has then that look the same, as text), and `entered: "1"` is added when the row was stored
+and the draft could not be removed: a draft so marked, with more such rows in the log than it names, is a copy of an
+entry already made and is never offered as work that waits. A row it adds is the row the log always wrote (`date` the operative
 date of the active shift, `shift` its word on this page, `type` "Not recorded" when the type was not opened), with no
 `id`. Its actions carry `origin` of the kinds `period`, `filter` and `row`; a row without an `id` goes as a copy of its
 fields with `twins`. Incomplete Control and the Night Audit Log, which share the template, have none of this.

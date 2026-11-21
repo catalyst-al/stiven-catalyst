@@ -8080,7 +8080,6 @@
   "The shift this device is working in ({shift}) is not surely one of this page's shifts ({page}), so an entry has nowhere to go. Close that shift, or start one, on the Shift Handover page.": "Turni në të cilin punon kjo pajisje ({shift}) nuk është me siguri një nga turnet e kësaj faqeje ({page}), prandaj një regjistrim nuk ka ku të shkojë. Mbylleni atë turn, ose nisni një, te faqja e Dorëzimit të turnit.",
   "No shift is active on this device, so an entry has nowhere to go. A shift is started on the Shift Handover page, with its date.": "Asnjë turn nuk është aktiv në këtë pajisje, prandaj një regjistrim nuk ka ku të shkojë. Turni niset te faqja e Dorëzimit të turnit, me datën e tij.",
   "Not added: the browser's storage did not take the entry. What you typed is still in the form; try again.": "Nuk u shtua: memoria e shfletuesit nuk e pranoi regjistrimin. Ajo që shkruat është ende në formular; provoni sërish.",
-  "The unfinished form could not be cleared; discard it by hand if it shows again.": "Formulari i papërfunduar nuk u pastrua dot; hidheni poshtë me dorë nëse shfaqet sërish.",
   "most at {stage} ({a} of {b})": "më shumë te {stage} ({a} nga {b})",
   "mostly {cause} ({a} of {b})": "kryesisht {cause} ({a} nga {b})",
   "{field} {value}: {a} of {b} {many} ({pct})": "{field} {value}: {a} nga {b} {many} ({pct})",
@@ -8109,5 +8108,11 @@
   "Next step, as the situation asks": "Hapi tjetër, sipas situatës",
   "One file of all your work, the restore points and the PIN lock": "Një skedar me gjithë punën tuaj, pikat e rikthimit dhe kyçja me PIN",
   "are further down this page.": "janë më poshtë në këtë faqe.",
-  "Export and clear": "Eksporto dhe pastro"
+  "Export and clear": "Eksporto dhe pastro",
+  "Clear the copy": "Pastro kopjen",
+  "Not cleared: {why}": "Nuk u pastrua: {why}",
+  "Not added: the unfinished form of this shift was changed somewhere else. Choose which one to keep, then add it.": "Nuk u shtua: formulari i papërfunduar i këtij turni u ndryshua diku tjetër. Zgjidhni cilin të mbani, pastaj shtojeni.",
+  "Not added, and nothing was written: the unfinished form could not be marked as being entered ({why}), and it could otherwise be entered a second time later. Try again.": "Nuk u shtua dhe asgjë nuk u shkrua: formulari i papërfunduar nuk u shënua dot si “po regjistrohet” ({why}), dhe përndryshe mund të regjistrohej më vonë për herë të dytë. Provoni sërish.",
+  "A copy of the form could not be cleared; the page shows it as already in the log.": "Një kopje e formularit nuk u pastrua dot; faqja e tregon si tashmë në regjistër.",
+  "Already in the log ({shift}): {form}. A copy of this form is still kept here; it is not waiting to be entered.": "Tashmë në regjistër ({shift}): {form}. Një kopje e këtij formulari është ende e ruajtur këtu; ajo nuk pret të regjistrohet."
 }
