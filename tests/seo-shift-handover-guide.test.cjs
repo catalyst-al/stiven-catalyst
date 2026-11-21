@@ -52,6 +52,21 @@ test('English names the template, handoff and turnover; German explains producti
   for (const term of ['model', 'çështje', 'përgjegjës', 'PDF', 'kod transferimi']) assert.ok(sq.includes(term), `SQ: ${term}`);
 });
 
+test('what the guide says about privacy matches the tool: no absolute promise, team sync and sharing named', { skip: !hasSite }, () => {
+  // A handover leaves the device when it is printed, copied, saved or sent, and as an encrypted copy when a team uses
+  // team sync (js/team-sync.js); what is shared through another service passes through it.
+  const claims = {
+    en: { must: [/encrypted with a transfer code/, /team sync/, /passes through that service/, /left out unless you choose to include them/], never: /nothing is uploaded|never leaves|completely private/i },
+    de: { must: [/verschlüsselt mit einem Übergabecode/, /Team-Synchronisierung/, /läuft über diesen Dienst/, /nur mitgesendet, wenn Sie dies auswählen/], never: /hochgeladen wird nichts|verlässt nie/i },
+    sq: { must: [/të enkriptuar me një kod transferimi/, /sinkronizimin e ekipit/, /kalon përmes atij shërbimi/, /nuk përfshihen, përveç nëse/], never: /asgjë nuk ngarkohet|nuk largohet kurrë/i },
+  };
+  for (const [lang, { must, never }] of Object.entries(claims)) {
+    const guide = text(guideOf(fs.readFileSync(file(PAGES[lang].url), 'utf8')));
+    for (const pattern of must) assert.match(guide, pattern, `${lang}: ${pattern}`);
+    assert.doesNotMatch(guide, never, `${lang}: no absolute privacy promise`);
+  }
+});
+
 test('metadata, canonical, hreflang, sitemap and the tool controls are unchanged', { skip: !hasSite }, async () => {
   const { parsePage } = await import('../lib/seo-audit.js');
   const sitemap = fs.readFileSync('_site/sitemap.xml', 'utf8');
