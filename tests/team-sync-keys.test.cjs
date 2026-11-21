@@ -149,6 +149,10 @@ test('in the box: joining a team made before finds its copy at the old address, 
   const $ = (selector) => w.document.querySelector(selector);
   $('[data-tm-join-code]').value = CODE;
   $('[data-tm-join]').click();
+  // Nothing is read or moved before the confirmation (js/team-sync.js, consented).
+  assert.ok(await waitFor(() => $('[data-tm-consent]') && !$('[data-tm-consent]').hidden));
+  assert.ok(server.spaces.has(keys.legacy.spaceId) && !server.spaces.has(keys.spaceId), 'not moved before the confirmation');
+  $('[data-tm-consent-go]').click();
   assert.ok(await waitFor(() => /^Joined\./.test($('[data-tm-message]').textContent)), $('[data-tm-message]').textContent);
   assert.deepEqual(JSON.parse(w.localStorage.getItem('sc-actions')).rows.map((r) => r.id), ['t1']);
   assert.ok(server.spaces.has(keys.spaceId) && !server.spaces.has(keys.legacy.spaceId), 'moved to the new address');

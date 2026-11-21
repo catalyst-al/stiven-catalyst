@@ -534,6 +534,10 @@ test('in the box: start a team, the code once with a QR, a first sync; the statu
   assert.ok(w.TeamSyncMath.parseCode(code).ok);
   assert.equal($('[data-tm-code]').textContent, code);
   assert.match($('[data-tm-qr]').innerHTML, /^<svg/);
+  // The panel first: nothing is sent before the confirmation.
+  assert.equal($('[data-tm-consent]').hidden, false);
+  assert.equal(server.spaces.size, 0);
+  $('[data-tm-consent-go]').click();
   for (let i = 0; i < 300 && !/^Synced/.test($('[data-tm-status]').textContent); i++) await new Promise((r) => setTimeout(r, 20));
   assert.match($('[data-tm-status]').textContent, /^Synced today \d\d:\d\d · version 1 · \d+ KB · 1 device\.$/);
   assert.match($('[data-tm-summary]').textContent, /^On · synced today/);
@@ -796,6 +800,9 @@ test('in the box: a read-only code made, shown with a QR; a viewer joins with it
   assert.deepEqual(calls, [], 'nothing asked of the server for a damaged code');
   v$('[data-tm-join-code]').value = `${code.slice(0, 48)}\n${code.slice(48)}`;
   v$('[data-tm-join]').click();
+  assert.ok(await waitFor(() => !v$('[data-tm-consent]').hidden && !v$('[data-tm-consent-viewer]').hidden));
+  assert.deepEqual(stored(vw, 'sc-actions'), { rows: [{ id: 'v1', title: 'Mine' }] }, 'nothing taken before the confirmation');
+  v$('[data-tm-consent-go]').click();
   assert.ok(await waitFor(() => /^Joined read-only/.test(v$('[data-tm-message]').textContent)));
   assert.deepEqual(stored(vw, 'sc-team'), { viewer: code, since: stored(vw, 'sc-team').since });
   assert.match(v$('[data-tm-summary]').textContent, /^Read-only · synced today/);
@@ -920,4 +927,148 @@ test('Site Compare keeps other teams\' read-only codes: its key is never offered
   assert.ok(w.WorkBackup.isWork('sc-site-compare'));
   const payload = w.TeamSyncMath.readPayload({ format: 'stiven-catalyst-team', version: 1, items: { 'sc-site-compare': '{"sites":[]}', 'sc-pareto': '{}' } });
   assert.deepEqual(Object.keys(payload.items), ['sc-pareto']);
+});
+
+// ---- Consent before the first sync (js/team-sync.js, consented) ----
+// Fictional work: an action, a guest complaint (default-on) and an FMEA (shared only when ticked).
+const FICTIONAL = {
+  'sc-actions': { rows: [{ id: 'a1', title: 'Fictional: fix dock door 9' }] },
+  'sc-guest-complaints': { rows: [{ id: 'g1', guest: 'Fictional Guest', room: '999', text: 'Fictional noise complaint' }] },
+  'sc-fmea': { rows: [{ id: 'f1', item: 'Fictional conveyor' }] },
+};
+// A box with a fake server whose every request is logged with its method; PUT bodies are kept to open them.
+const consentBox = (t, { storage = FICTIONAL, server = fakeServer() } = {}) => {
+  const calls = [];
+  const fetch = async (url, init = {}) => { calls.push(init.method || 'GET'); return server.fetch(url, init); };
+  const w = load({ body: render('en').html, storage, before: (win) => { win.fetch = fetch; } });
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  const ticks = () => Object.fromEntries([...w.document.querySelectorAll('[data-tm-tools] input')].map((box) => [box.dataset.slug, box.checked]));
+  const tick = (slug, on) => { const box = w.document.querySelector(`[data-tm-tools] input[data-slug="${slug}"]`); box.checked = on; box.dispatchEvent(new w.Event('change')); };
+  return { w, $, calls, server, ticks, tick };
+};
+const pause = (ms) => new Promise((r) => setTimeout(r, ms));
+
+test('consent, start: the tools and their default ticks are shown and nothing is sent; after the confirmation only the ticked tools go', async (t) => {
+  const { w, $, calls, server, ticks, tick } = consentBox(t);
+  $('[data-tm-start]').click();
+  assert.equal($('[data-tm-consent]').hidden, false);
+  assert.equal($('[data-tm-consent-start]').hidden, false);
+  assert.match($('[data-tm-consent-start]').textContent, /encrypted copy on the team's server/);
+  assert.match($('[data-tm-consent]').textContent, /does not delete what the team's copy already holds/);
+  assert.match($('[data-tm-status]').textContent, /nothing has been read or sent yet/);
+  // The default ticks: the action list and the guest complaints (default-on), not the FMEA.
+  assert.deepEqual(ticks(), { 'action-tracker': true, fmea: false, 'guest-complaints': true });
+  // What waits for the confirmation is not offered yet: no sync button, no read-only code, no new code, no delete.
+  for (const selector of ['[data-tm-sync]', '[data-tm-viewer-make]', '[data-tm-rotate]', '[data-tm-delete]']) assert.ok($(selector).hidden || $(selector).closest('[hidden]'), selector);
+  await pause(400);
+  assert.deepEqual(calls, [], 'not one request before the confirmation');
+  // The person changes the ticks, then confirms.
+  tick('guest-complaints', false);
+  tick('fmea', true);
+  $('[data-tm-consent-go]').click();
+  assert.ok(await waitFor(() => /^Synced/.test($('[data-tm-status]').textContent)), $('[data-tm-status]').textContent);
+  assert.ok(calls.includes('PUT'));
+  assert.equal($('[data-tm-consent]').hidden, true);
+  assert.match($('[data-tm-message]').textContent, /^Team started/);
+  const keys = await w.TeamSyncMath.deriveKeys(JSON.parse(w.localStorage.getItem('sc-team')).code);
+  const copy = plain(await w.TeamSyncMath.unseal(server.spaces.get(keys.spaceId), keys.key));
+  assert.deepEqual(Object.keys(copy.items).sort(), ['sc-actions', 'sc-fmea'], 'only the ticked tools, the guest complaint stays here');
+  assert.ok(!JSON.stringify(copy).includes('Fictional Guest'));
+});
+
+test('consent, cancel: the team is forgotten, nothing was read or sent, the work here is untouched', async (t) => {
+  const { w, $, calls } = consentBox(t);
+  $('[data-tm-start]').click();
+  $('[data-tm-consent-cancel]').click();
+  assert.equal(w.localStorage.getItem('sc-team'), null);
+  assert.equal($('[data-tm-off]').hidden, false);
+  assert.equal($('[data-tm-new]').hidden, true, 'the code is not shown any more');
+  assert.match($('[data-tm-message]').textContent, /^Cancelled\. Nothing was read or sent\./);
+  await pause(300);
+  assert.deepEqual(calls, []);
+  for (const [key, value] of Object.entries(FICTIONAL)) assert.deepEqual(stored(w, key), value, key);
+});
+
+test('consent, join: before the confirmation the team is only found, nothing is taken or sent; after it, the ticked tools meet', async (t) => {
+  const server = fakeServer();
+  // A member's team copy with its own action (same team code, the real derivation of the box).
+  const mwin = load({ storage: { 'sc-actions': { rows: [{ id: 't1', title: 'Fictional: team action' }] } } });
+  const member = { w: mwin, keys: await mwin.TeamSyncMath.deriveKeys(CODE) };
+  await run(member, server);
+  const { w, $, calls, ticks, tick } = consentBox(t, { server });
+  $('[data-tm-join-code]').value = CODE;
+  $('[data-tm-join]').click();
+  assert.ok(await waitFor(() => !$('[data-tm-consent]').hidden));
+  assert.equal($('[data-tm-consent-join]').hidden, false);
+  assert.match($('[data-tm-consent-join]').textContent, /merges it into the work here, after a restore point/);
+  await pause(300);
+  assert.deepEqual([...new Set(calls)], ['GET'], 'only whether the team exists');
+  for (const [key, value] of Object.entries(FICTIONAL)) assert.deepEqual(stored(w, key), value, `${key} unchanged before the confirmation`);
+  assert.deepEqual(ticks(), { 'action-tracker': true, fmea: false, 'guest-complaints': true });
+  tick('guest-complaints', false);
+  $('[data-tm-consent-go]').click();
+  assert.ok(await waitFor(() => /^Joined\./.test($('[data-tm-message]').textContent)), $('[data-tm-message]').textContent);
+  assert.deepEqual(stored(w, 'sc-actions').rows.map((r) => r.id).sort(), ['a1', 't1'], 'the team\'s action merged with the one here');
+  const copy = await teamCopy(server, member);
+  assert.deepEqual(Object.keys(copy.items).sort(), ['sc-actions']);
+  assert.deepEqual(JSON.parse(copy.items['sc-actions']).rows.map((r) => r.id).sort(), ['a1', 't1']);
+  assert.ok(!JSON.stringify(copy).includes('Fictional Guest'), 'the unticked guest complaint was not sent');
+});
+
+test('consent, read-only: the viewer panel says what is replaced; nothing is taken before the confirmation and nothing is ever sent', async (t) => {
+  const server = fakeServer();
+  const mwin = load({ storage: { 'sc-actions': { rows: [{ id: 't1', title: 'Fictional: team action' }] } } });
+  const member = { w: mwin, keys: await mwin.TeamSyncMath.deriveKeys(CODE) };
+  await run(member, server);
+  const code = await mwin.TeamSyncMath.viewerCode(CODE);
+  const { w, $, calls } = consentBox(t, { server });
+  $('[data-tm-join-code]').value = code;
+  $('[data-tm-join]').click();
+  assert.ok(await waitFor(() => !$('[data-tm-consent]').hidden));
+  assert.equal($('[data-tm-consent-viewer]').hidden, false);
+  assert.match($('[data-tm-consent-viewer]').textContent, /its own version of those tools is replaced\. It sends nothing\./);
+  assert.deepEqual(stored(w, 'sc-actions'), FICTIONAL['sc-actions'], 'not replaced before the confirmation');
+  $('[data-tm-consent-go]').click();
+  assert.ok(await waitFor(() => /^Joined read-only/.test($('[data-tm-message]').textContent)));
+  assert.deepEqual(stored(w, 'sc-actions'), stored(mwin, 'sc-actions'), 'the team\'s version after the confirmation');
+  assert.deepEqual([...new Set(calls)], ['GET'], 'a viewer only ever GETs');
+});
+
+test('consent survives a reload: an unconfirmed team syncs nothing at opening; a team that synced before goes on as before', async (t) => {
+  // Started or joined but not confirmed: the page opens on the panel and asks nothing of the server.
+  const waiting = consentBox(t, { storage: { ...FICTIONAL, 'sc-team': { code: CODE }, 'sc-team-state': { rev: 0, consented: false, origin: 'join' } } });
+  assert.equal(waiting.$('[data-tm-consent]').hidden, false);
+  assert.equal(waiting.$('[data-tm-summary]').textContent, 'Not started · confirm below');
+  await pause(600);
+  assert.deepEqual(waiting.calls, []);
+  // A team from before this change (a revision, a last sync, no flag) is confirmed already and syncs at opening.
+  const server = fakeServer();
+  const mwin = load({ storage: { 'sc-actions': { rows: [{ id: 't1', title: 'Fictional: team action' }] } } });
+  const member = { w: mwin, keys: await mwin.TeamSyncMath.deriveKeys(CODE) };
+  await run(member, server);
+  const old = consentBox(t, { server, storage: { 'sc-team': { code: CODE }, 'sc-team-state': stored(mwin, 'sc-team-state'), 'sc-actions': stored(mwin, 'sc-actions') } });
+  assert.equal(old.$('[data-tm-consent]').hidden, true);
+  // Its sync at opening (after the day's restore point, at most 3 s): the team's copy is read as before.
+  assert.ok(await waitFor(() => old.calls.length > 0, 400), 'a request at opening');
+  assert.ok(await waitFor(() => !old.$('[data-tm-sync]').disabled && /^Synced/.test(old.$('[data-tm-status]').textContent), 400), old.$('[data-tm-status]').textContent);
+});
+
+test('consent, failure: confirmed while offline, the confirmation is kept and the next sync goes through as before', async (t) => {
+  const server = fakeServer();
+  let offline = true;
+  const calls = [];
+  const w = load({ body: render('en').html, storage: FICTIONAL, before: (win) => { win.fetch = async (url, init = {}) => { calls.push(init.method || 'GET'); if (offline) throw new TypeError('offline'); return server.fetch(url, init); }; } });
+  t.after(() => w.close());
+  const $ = (selector) => w.document.querySelector(selector);
+  $('[data-tm-start]').click();
+  $('[data-tm-consent-go]').click();
+  assert.ok(await waitFor(() => /^No connection/.test($('[data-tm-status]').textContent)), $('[data-tm-status]').textContent);
+  assert.equal(stored(w, 'sc-team-state').consented, true, 'the confirmation stays');
+  assert.equal($('[data-tm-consent]').hidden, true);
+  assert.equal(server.spaces.size, 0);
+  offline = false;
+  $('[data-tm-sync]').click();
+  assert.ok(await waitFor(() => /^Synced/.test($('[data-tm-status]').textContent)), $('[data-tm-status]').textContent);
+  assert.equal(server.spaces.size, 1);
 });
