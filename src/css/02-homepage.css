@@ -1,4 +1,4 @@
-/* Homepage hero: the Catalyst light and the tool families on its orbits (js/cosmos.js).
+/* Homepage hero: the mark and the tool families on its orbits (js/cosmos.js).
    It stays a dark stage in both themes. */
 .cosmos {
   --ink: #f6f7f4;
@@ -395,6 +395,46 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+/* The full stop of the headline is the mark (BRAND.md): the point, a square on the baseline in the accent, with the
+   ring drawn round it. The stop itself stays in the text, hidden from the eye (partials/cosmos-hero.njk); the box
+   stands on the baseline because it has no line of its own, so the point sits where the type's full stop would,
+   whatever the face. The ring is paint only: it takes no room in the line. */
+.hero-last { white-space: nowrap; }
+.hero-stop {
+  position: relative;
+  display: inline-block;
+  /* With its margin, as wide as the type's own full stop, so the line breaks where it did. */
+  width: .19em;
+  height: .19em;
+  margin-left: .1em;
+  letter-spacing: 0;
+}
+.hero-stop::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: .19em;
+  height: .19em;
+  background: var(--blue);
+}
+.hero-stop::after {
+  content: "";
+  position: absolute;
+  left: calc(.095em - .594em);
+  top: calc(.095em - .618em);
+  width: 1.188em;
+  height: 1.188em;
+  background: var(--ink);
+  -webkit-mask: var(--mark-ring-display) center / contain no-repeat;
+  mask: var(--mark-ring-display) center / contain no-repeat;
+  pointer-events: none;
+}
+/* Where the words take the whole width (one column), the ring keeps its room at the end of the line, so it is never cut
+   at the edge of the screen: a line that is full ("OHNE THEATER.") lets its last word go to the next. */
+@media (max-width: 900px) {
+  .hero-stop { margin-right: .37em; }
 }
 /* "PA TEATËR.": the dots of Ë reach up to the line above at .88; in Albanian the second line sits a little lower. */
 .cosmos h1:lang(sq) .act { margin-top: -.08em; }
