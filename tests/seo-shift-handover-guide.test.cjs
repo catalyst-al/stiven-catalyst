@@ -56,7 +56,7 @@ test('what the guide says about privacy matches the tool: no absolute promise, t
   // A handover leaves the device when it is printed, copied, saved or sent, and as an encrypted copy when a team uses
   // team sync (js/team-sync.js); what is shared through another service passes through it.
   const claims = {
-    en: { must: [/encrypted with a transfer code/, /team sync/, /passes through that service/, /left out unless you choose to include them/], never: /nothing is uploaded|never leaves|completely private/i },
+    en: { must: [/encrypted with a transfer code/, /team sync/, /passes through that service/, /left out unless you include them/], never: /nothing is uploaded|never leaves|completely private/i },
     de: { must: [/verschlüsselt mit einem Übergabecode/, /Team-Synchronisierung/, /läuft über diesen Dienst/, /nur mitgesendet, wenn Sie dies auswählen/], never: /hochgeladen wird nichts|verlässt nie/i },
     sq: { must: [/të enkriptuar me një kod transferimi/, /sinkronizimin e ekipit/, /kalon përmes atij shërbimi/, /nuk përfshihen, përveç nëse/], never: /asgjë nuk ngarkohet|nuk largohet kurrë/i },
   };
@@ -64,6 +64,40 @@ test('what the guide says about privacy matches the tool: no absolute promise, t
     const guide = text(guideOf(fs.readFileSync(file(PAGES[lang].url), 'utf8')));
     for (const pattern of must) assert.match(guide, pattern, `${lang}: ${pattern}`);
     assert.doesNotMatch(guide, never, `${lang}: no absolute privacy promise`);
+  }
+});
+
+test('the whole page: the side note and the names in a sent handover are described as the tool behaves', { skip: !hasSite }, () => {
+  // Send (js/shift-handover.js forTransfer) leaves out the name fields unless "include names" is ticked; the free text
+  // travels as typed, and the warning in the Send dialog looks for e-mail addresses, IBANs, card and phone numbers
+  // only. Team sync (js/team-sync.js) keeps an encrypted copy of a tool's work on the sync server.
+  const pages = {
+    en: {
+      note: 'Handovers are stored in this browser. They leave it only when you copy, print, save or send them, or as an encrypted copy if your team uses team sync. Check names and guest details before you share.',
+      names: [/name fields \(who hands over, who takes over, each issue’s owner\) are left out unless you include them/, /can contain names or other personal details/, /does not detect names or remove anything/, /read those fields before sending/],
+    },
+    de: {
+      note: 'Übergaben werden in diesem Browser gespeichert. Sie verlassen ihn nur, wenn Sie sie kopieren, drucken, speichern oder senden, oder als verschlüsselte Kopie, wenn Ihr Team die Team-Synchronisierung nutzt. Prüfen Sie Namen und Gästedaten, bevor Sie etwas teilen.',
+      names: [/Namensfelder \(wer übergibt, wer übernimmt und die verantwortliche Person jedes Punkts\) nur mitgesendet, wenn Sie dies auswählen/, /können Namen oder andere personenbezogene Angaben enthalten/, /erkennt aber keine Namen und entfernt nichts/, /vor dem Senden durch/],
+    },
+    sq: {
+      note: 'Dorëzimet ruhen në këtë shfletues. Ato largohen prej tij vetëm kur i kopjoni, i printoni, i ruani ose i dërgoni, ose si kopje e enkriptuar nëse ekipi juaj përdor sinkronizimin e ekipit. Kontrolloni emrat dhe të dhënat e mysafirëve para se të ndani diçka.',
+      names: [/fushat e emrave \(kush e dorëzon, kush e merr dhe përgjegjësi i çdo çështjeje\) nuk përfshihen, përveç nëse/, /mund të përmbajë emra ose të dhëna të tjera personale/, /nuk dallon emra dhe nuk heq asgjë/, /lexojini këto fusha para dërgimit/],
+    },
+  };
+  // The side note's old sentence is gone from the whole page. The stricter check (no "nothing is uploaded", no
+  // automatic anonymising) covers this tool's own text: the side note and the guide. The shared "All your work in one
+  // file" box on every tool page has its own wording, outside this page's scope.
+  const oldNote = /Nothing is sent or uploaded|Nichts wird gesendet oder hochgeladen|Asgjë nuk dërgohet apo ngarkohet/;
+  const absolute = /nothing is uploaded|hochgeladen wird nichts|asgjë nuk ngarkohet|automatically anonymi[sz]ed|automatisch anonymisiert|anonimizohet automatikisht/i;
+  for (const [lang, { note, names }] of Object.entries(pages)) {
+    const html = fs.readFileSync(file(PAGES[lang].url), 'utf8');
+    const side = html.match(/<p class="privacy-note">([\s\S]*?)<\/p>/)?.[1] ?? '';
+    assert.equal(text(side).trim(), note, `${lang}: the side note`);
+    const page = text(html);
+    for (const pattern of names) assert.match(page, pattern, `${lang}: ${pattern}`);
+    assert.doesNotMatch(page, oldNote, `${lang}: the old side note is gone from the page`);
+    assert.doesNotMatch(text(side) + ' ' + text(guideOf(html)), absolute, `${lang}: no absolute promise in the tool's own text`);
   }
 });
 
