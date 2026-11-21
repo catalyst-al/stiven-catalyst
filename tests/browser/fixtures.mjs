@@ -38,3 +38,25 @@ export const expectAccessible = async (page) => {
   const report = grave.map((v) => `${v.impact} ${v.id}: ${v.help}\n${v.nodes.slice(0, 5).map((n) => `  ${n.target.join(" ")}${n.failureSummary ? ` (${n.failureSummary.split("\n").slice(1).join(" ").trim()})` : ""}`).join("\n")}`);
   expect(report, `accessibility on ${new URL(page.url()).pathname}`).toEqual([]);
 };
+
+// Resolves when the element has stopped moving: its box is the same for `frames` animation frames in a row (layout
+// settled, a hover lift or a scroll finished). Rejects after `timeout` ms if it never settles, so an element that
+// keeps moving fails the test instead of being clicked mid-move. Unlike waiting for a quiet network, it does not
+// depend on requests the page does not need to draw this element (the service worker keeps fetching in the
+// background on a first visit).
+export const untilSettled = (locator, { frames = 5, timeout = 10_000 } = {}) =>
+  locator.evaluate((el, { frames, timeout }) => new Promise((resolve, reject) => {
+    const started = performance.now();
+    let last = null;
+    let same = 0;
+    const step = () => {
+      const r = el.getBoundingClientRect();
+      const box = [r.x, r.y, r.width, r.height].map((v) => Math.round(v * 10) / 10).join(",");
+      same = box === last ? same + 1 : 0;
+      last = box;
+      if (same >= frames) return resolve({ x: r.x, y: r.y, width: r.width, height: r.height });
+      if (performance.now() - started > timeout) return reject(new Error(`still moving after ${timeout} ms (last box ${box})`));
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }), { frames, timeout });

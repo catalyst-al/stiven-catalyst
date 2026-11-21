@@ -3,7 +3,7 @@
 // main pages of each journey also go through axe-core (fixtures.mjs). Selectors are the data-* hooks the scripts
 // themselves use, so a change of wording or design does not break them.
 import { readFile } from "node:fs/promises";
-import { test, expect, expectTheme, expectAccessible } from "./fixtures.mjs";
+import { test, expect, expectTheme, expectAccessible, untilSettled } from "./fixtures.mjs";
 
 // What the browser keeps under a key, parsed.
 const stored = (page, key) => page.evaluate((k) => JSON.parse(localStorage.getItem(k) || "null"), key);
@@ -14,14 +14,20 @@ test("homepage → an essay, read to the end", async ({ page, theme }) => {
   await expectAccessible(page);
 
   // The first essay featured on the homepage. On a cold runner the homepage can still be laying itself out when the
-  // first journey reaches it (fonts and covers arriving, the treatise and the hero settling), and a link that moves
-  // between the hit check and the click does not navigate: wait for the network to go quiet, bring the card into
-  // view the way a reader would, and only then click.
+  // first journey reaches it (fonts and covers arriving, the treatise and the hero settling), and the card lifts
+  // under the pointer (.feature-card:hover, 0.45 s): a link that moves between the hit check and the click does not
+  // navigate. So: styles, images and fonts in, the card brought into view and pointed at the way a reader does, and
+  // the click only once the link has stopped moving (bounded; a link that never settles fails here). Not a quiet
+  // network: on a first visit the service worker keeps fetching in the background, and on a loaded runner that
+  // outlasted the 30 s of the test (CI run 43681864179, attempt 1).
   const link = page.locator('.feature-card a[href^="/insights/"]').first();
   const href = await link.getAttribute("href");
-  await page.waitForLoadState("networkidle");
+  await page.waitForLoadState("load");
+  await page.evaluate(() => document.fonts.ready.then(() => undefined));
   await link.scrollIntoViewIfNeeded();
   await expect(link).toBeInViewport();
+  await link.hover();
+  await untilSettled(link);
   await link.click();
   await expect(page).toHaveURL(href);
   const article = page.locator("[data-article]");
