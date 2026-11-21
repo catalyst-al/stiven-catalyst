@@ -221,7 +221,8 @@
       sourceLink.setAttribute("aria-label", `${tx("Open the source")}: ${a.title}`);
       const where = a.origin.kind === "row" ? tx("one entry of {date}", { date: showDate(a.origin.row.date) })
         : `${showDate(a.origin.from)} – ${showDate(a.origin.to)}${a.origin.kind === "filter" ? ` · ${a.origin.filter.value}` : ""}`;
-      sourceLine.append(sourceLink, ` · ${sourceName(a.source)}, ${where}`);
+      // Marked done, the source also sets the days before the action beside the days after it.
+      sourceLine.append(sourceLink, ` · ${sourceName(a.source)}, ${where}${a.closed ? ` · ${tx("with before and after")}` : ""}`);
       main.append(sourceLine);
     }
     if (a.caseId) {

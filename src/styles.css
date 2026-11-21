@@ -3922,6 +3922,9 @@ select.sh-in { cursor: pointer; }
 .td-handover .sh-setup, .td-handover .sh-output { display: none !important; }
 @media print { .wn { display: none !important; } }
 .td-handover { margin-top: 16px; }
+.dw-compare { display: grid; gap: 8px; }
+.dw-compare-table th[scope="row"] { text-align: left; }
+.dw-measured { font-size: 16px; }
 /* Search and filters */
 html:not(.js) .filter-bar { display: none; }
 .filter-bar {

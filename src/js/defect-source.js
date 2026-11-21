@@ -13,6 +13,16 @@
 // the ones the action kept. One row is the source; when the action was made among several rows alike and one is
 // left, it is shown as the candidate that is left; several are shown together as candidates, and none is chosen; none
 // opens the period and says the row is no longer found. An example the page loaded by itself is never the source.
+//
+// Before and after (step 7). When the action is marked done, the list keeps the day (closed). The view then sets two
+// periods side by side, with the same filter: before, the stored period up to the day before that day; after, the same
+// number of days from the day after it, as far as today. The day itself is in neither: the log is kept by day, and
+// that day is partly before the action and partly after it. For each period the view shows its dates, the damage
+// and the volume that is recorded for it. A rate is given only where a volume is recorded and the damage is not
+// more than it, and the two rates are compared only when both volumes were counted the same way (both the sum of the
+// daily volumes: a total typed for a period is another count). No damage with a volume recorded is a zero; no damage
+// and no volume is no data, and the view says which. What it shows is what was measured: it never says the action
+// caused it, and it changes nothing on the action.
 window.DefectSource = (() => {
   const LANGS = { en: "English", de: "Deutsch", sq: "Shqip" };
   const FIELDS = ["cause", "stage", "shift"];
@@ -57,14 +67,130 @@ window.DefectSource = (() => {
     return { rows: found, state: !found.length ? "gone" : found.length > 1 ? "several" : row.twins > 1 ? "left" : "found" };
   };
 
+  // ---- Before and after ----
+  const addDays = (iso, n) => { const day = new Date(`${iso}T00:00:00Z`); day.setUTCDate(day.getUTCDate() + n); return day.toISOString().slice(0, 10); };
+  const daysOf = (range) => Math.round((new Date(`${range.to}T00:00:00Z`) - new Date(`${range.from}T00:00:00Z`)) / 86400000) + 1;
+  // Which rows count: all of them for a period, the filter's for a filter, the rows of the same stage and cause for a row.
+  const scopeOf = (origin) => (origin.kind === "filter" ? (row) => row[origin.filter.field] === origin.filter.value
+    : origin.kind === "row" ? (row) => row.stage === origin.row.stage && row.cause === origin.row.cause : () => true);
+  // One period: its damage in scope, and the volume recorded for it. typed is the total the visitor typed for a
+  // period, { value, from, to }; it counts only for exactly those days.
+  const measure = (range, { rows, volumes, typed, scope }) => {
+    const inside = rows.filter((row) => row.date && row.date >= range.from && row.date <= range.to);
+    const counted = inside.filter(scope);
+    const units = counted.reduce((sum, row) => sum + row.units, 0);
+    const daily = volumes.filter((item) => item.date >= range.from && item.date <= range.to && item.volume > 0);
+    const withVolume = new Set(daily.map((item) => item.date));
+    const missing = [...new Set(inside.map((row) => row.date))].filter((date) => !withVolume.has(date)).sort();
+    const volume = typed && typed.value > 0 && typed.from === range.from && typed.to === range.to ? { value: typed.value, rule: "typed" }
+      : daily.length && !missing.length ? { value: daily.reduce((sum, item) => sum + item.volume, 0), rule: "days" }
+        : { value: null, rule: daily.length ? "partial" : "none", missing };
+    const rate = volume.value > 0 && units <= volume.value ? units / volume.value : null;
+    return { ...range, days: daysOf(range), units, entries: counted.length, rowsInPeriod: inside.length, volume, rate, hasData: inside.length > 0 || volume.value !== null };
+  };
+  // The two periods of an action done on `implemented` (a day), from its origin. { ok: false, reason } when there is
+  // nothing to set side by side: "before-empty" (done on or before the first stored day) or "after-not-started".
+  const compare = (origin, implemented, { rows, volumes, typed = null, today }) => {
+    const beforeRange = { from: origin.from, to: implemented <= origin.to ? addDays(implemented, -1) : origin.to };
+    if (beforeRange.from > beforeRange.to) return { ok: false, reason: "before-empty", implemented };
+    const length = daysOf(beforeRange);
+    const wanted = addDays(implemented, length);
+    const afterRange = { from: addDays(implemented, 1), to: wanted < today ? wanted : today };
+    if (afterRange.from > afterRange.to) return { ok: false, reason: "after-not-started", implemented, before: measure(beforeRange, { rows, volumes, typed, scope: scopeOf(origin) }) };
+    const input = { rows, volumes, typed, scope: scopeOf(origin) };
+    const before = measure(beforeRange, input);
+    const after = measure(afterRange, input);
+    const comparable = before.rate !== null && after.rate !== null && before.volume.rule === after.volume.rule;
+    return {
+      ok: true, implemented, before, after,
+      // The stored period was cut short, because the action was done inside it.
+      cut: beforeRange.to !== origin.to,
+      running: wanted > today,
+      sameLength: before.days === after.days,
+      comparable,
+      change: comparable ? after.rate - before.rate : null,
+    };
+  };
+
   const mount = (api) => {
     const { state, field, kit, t } = api;
-    const { tx, el, int, plural, showDate, spanText, LANG } = kit;
+    const { tx, el, int, plural, showDate, spanText, LANG, pct, parseNumber, today } = kit;
     const box = document.querySelector("[data-source-note]");
     const id = idOf(new URLSearchParams(window.location.search).get("source"));
     if (!box || !id) return null;
 
     const trackerUrl = () => new URL("../action-tracker/", window.location.href).href;
+    // The comparison as the page shows it: a table of the two periods, what was measured, and what it does not say.
+    const beforeAfter = (action, origin, rows) => {
+      const done = (action.status === "done" || action.status === "verified") && isDate(str(action.closed)) ? action.closed : "";
+      const out = [el("p", "kicker dw-compare-head", tx("Before and after"))];
+      if (!done) { out.push(el("p", "form-note", tx("The action is not marked done on the list, so there is no day to compare from."))); return out; }
+      // The total the visitor typed belongs to the days it was typed for, which are their own period, not this view's.
+      const stamp = str(state.totalsFor && state.totalsFor.volume).split("|");
+      const typedValue = parseNumber(str(state.volume));
+      const typed = typedValue > 0 && stamp.length === 2 && isDate(stamp[0]) && isDate(stamp[1]) ? { value: typedValue, from: stamp[0], to: stamp[1] } : null;
+      const result = compare(origin, done, { rows, volumes: Array.isArray(state.volumes) ? state.volumes : [], typed, today: today() });
+      const box = el("div", "dw-compare");
+      box.dataset.sourceCompare = result.ok ? "ok" : result.reason;
+      out.push(box);
+      box.append(el("p", "form-note", tx("The action was marked done on {date}. That day is in neither period: the log is kept by day, and that day is partly before the action and partly after it.", { date: showDate(done) })));
+      if (!result.ok) {
+        box.append(el("p", "dl-warning", result.reason === "before-empty"
+          ? tx("The action was marked done on or before the first day of its stored period, so no day of that period is before it. There is nothing to compare.")
+          : tx("No day after the action has passed yet. Come back when there are days to compare.")));
+        return out;
+      }
+      const volumeText = (period) => (period.volume.value !== null ? int.format(period.volume.value)
+        : period.volume.rule === "partial" ? tx("not for every day") : tx("not recorded"));
+      // A rate is shown only when the two can be set side by side: both volumes recorded, and counted the same way.
+      const rateText = (period) => (result.comparable ? pct(period.rate, 2) : "–");
+      const table = el("table", "dl-table dw-compare-table");
+      const head = el("tr");
+      [["", ""], [tx("Period"), ""], [t.many.charAt(0).toUpperCase() + t.many.slice(1), "num"], [t.volumeLabel, "num"], [t.rateLabel, "num"]].forEach(([text, className]) => { const th = el("th", className || null, text); th.scope = "col"; head.append(th); });
+      const thead = el("thead");
+      thead.append(head);
+      const body = el("tbody");
+      [["before", tx("Before"), result.before], ["after", tx("After"), result.after]].forEach(([name, label, period]) => {
+        const tr = el("tr");
+        tr.dataset.sourcePeriod = name;
+        const th = el("th", null, label);
+        th.scope = "row";
+        tr.append(th, el("td", null, `${spanText(period)} · ${plural(period.days, tx("day"), tx("days"))}`), el("td", "num", period.hasData ? int.format(period.units) : "–"), el("td", "num", volumeText(period)), el("td", "num", rateText(period)));
+        body.append(tr);
+      });
+      table.append(thead, body);
+      const wrap = el("div", "dl-table-wrap");
+      wrap.tabIndex = 0;
+      wrap.append(table);
+      box.append(wrap);
+      // What was measured.
+      const measured = el("p", "dw-measured");
+      measured.dataset.sourceMeasured = result.comparable ? "rate" : "none";
+      if (result.comparable) {
+        const points = Math.abs(result.change) * 100;
+        const size = kit.num ? kit.num(points, 2) : points.toFixed(2);
+        measured.append(el("strong", null, tx("Measured: {rate} went from {a} to {b}.", { rate: t.rateLabel.toLowerCase(), a: pct(result.before.rate, 2), b: pct(result.after.rate, 2) })), ` ${result.change === 0 ? tx("No change.") : tx(result.change < 0 ? "That is {n} percentage points lower." : "That is {n} percentage points higher.", { n: size })}`);
+      } else {
+        measured.append(el("strong", null, tx("No measured change in the rate can be given.")));
+      }
+      box.append(measured);
+      const notes = [];
+      const noData = (period, label) => { if (!period.hasData) notes.push(tx("{period}: nothing is recorded for these days, neither damage nor volume. That is no data, not zero damage.", { period: label })); else if (!period.units && period.volume.value !== null) notes.push(tx("{period}: no damage with {volume} recorded as handled. That is a measured zero.", { period: label, volume: int.format(period.volume.value) })); else if (!period.units && period.rowsInPeriod) notes.push(tx("{period}: the log has entries in these days, and none of them is in this scope.", { period: label })); };
+      noData(result.before, tx("Before"));
+      noData(result.after, tx("After"));
+      if (!result.comparable) {
+        const [b, a] = [result.before, result.after];
+        if (b.volume.value !== null && a.volume.value !== null && b.volume.rule !== a.volume.rule) notes.push(tx("The two volumes were not counted the same way: one is a total typed for its period, the other the sum of the daily volumes. Rates from them are not compared."));
+        else if (b.volume.value === null || a.volume.value === null) notes.push(tx("A rate needs the volume of each period, recorded day by day (Data, volume per day). Without it only the counts are shown, and counts of periods with other volumes do not compare."));
+        else if (b.rate === null || a.rate === null) notes.push(tx("A period holds more damage than its recorded volume: check the volume."));
+      }
+      if (result.cut) notes.push(tx("The action was done inside its stored period, so “before” ends the day before it."));
+      if (result.running) notes.push(tx("“After” is still running: it has {a} of {b} days.", { a: int.format(result.after.days), b: int.format(result.before.days) }));
+      else if (!result.sameLength) notes.push(tx("The two periods are not of the same length."));
+      notes.push(tx("This is what was measured, with the same filter in both periods. It does not show that the action caused it: other things may have changed in the same days."));
+      notes.forEach((text) => box.append(el("p", "form-note", text)));
+      return out;
+    };
     const own = () => state.rows.filter((row) => row.example !== true);
     let on = false;
     let rowTest = null;
@@ -118,6 +244,7 @@ window.DefectSource = (() => {
         else say(tx("The entry is no longer found in the log: it was changed or removed. The period it belonged to is shown instead."), "dl-warning");
       }
       if (state.rows.length && nowhere) say(tx("What the page shows below is its example, not your log."), "form-note");
+      lines.push(...beforeAfter(found.action, origin, mine));
       say(tx("This is a view only: your own period, the active shift and unfinished forms are as they were."), "form-note");
     }
 
@@ -158,5 +285,5 @@ window.DefectSource = (() => {
       rowFilter: () => (on && rowTest ? { label: tx("the source of the action"), test: rowTest, clear: () => leave(false) } : null),
     };
   };
-  return { mount, originOf, find, candidates };
+  return { mount, originOf, find, candidates, compare, measure };
 })();

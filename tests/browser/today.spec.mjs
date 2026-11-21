@@ -22,6 +22,8 @@ const pilotOn = (page) => page.addInitScript(() => { if (!sessionStorage.getItem
 
 for (const lang of ["en", "de", "sq"]) {
   test(`${lang}: the first shift is started on Today by keyboard, two shifts leave forms, and the shift closed here is closed on the Handover page`, async ({ page }) => {
+    // A long journey over four pages: on a loaded machine it ran out of the usual thirty seconds once.
+    test.setTimeout(90_000);
     page.on("dialog", (dialog) => dialog.accept());
     await pilotOn(page);
     await page.goto(`${prefix(lang)}/tools/today/`);

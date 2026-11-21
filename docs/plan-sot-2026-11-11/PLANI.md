@@ -523,7 +523,7 @@ Këto nuk janë implementuar, sepse varen nga mbyllja e përbashkët ose nga nd�
 | 4. Kontrolli i dëmeve · **bërë** | Pamja e punës vetëm për këtë mjet, vetëm magazina, vetëm me pilotin të ndezur (7.1). | `defect-work.js`, `defect-log.njk`, `defect-log.js`, `tool-kit.js`, `shift-close.js`, `damageControl.json`, `tests/defect-work.test.cjs`, `tests/browser/damage-work.spec.mjs` |
 | 5. “Hap burimin” · **bërë** | Lista e veprimeve hap Kontrollin e dëmeve te periudha, filtri ose rreshti i ruajtur, vetëm për lexim (7.2). | `defect-source.js`, `action-tracker.js`, `defect-log.js`, `defect-work.js`, `partials/defect-log.njk`, `tests/open-source.test.cjs`, `tests/browser/open-source.spec.mjs` |
 | 6. Faqja “Sot” · **bërë** | Faqja e punës e pilotit, mbi të njëjtën nisje dhe mbyllje si Dorëzimi, dhe shiriti i hyrjeve (7.3). | `today.js`, `work-nav.js`, `partials/today.njk`, `partials/work-nav.njk`, `tools/today.njk` (tri gjuhë), `layouts/base.njk`, `shift-handover.js`, `shift-close.js`, `defect-work.js`, `tests/today.test.cjs`, `tests/browser/today.spec.mjs` |
-| 7. Verifikimi para/pas | Krahasimi i periudhës së ruajtur me atë pas veprimit, me vëllimet e vërteta. | `action-tracker.js`, `defect-log.js` |
+| 7. Verifikimi para/pas · **bërë** | Pamja e burimit vë periudhën para veprimit pranë asaj pas tij, me dëmet dhe vëllimin e regjistruar të secilës (7.4). | `defect-source.js`, `action-tracker.js`, `tests/before-after.test.cjs`, `tests/browser/before-after.spec.mjs` |
 
 ### 7.1 Hapi 4: pamja e punës e Kontrollit të dëmeve
 
@@ -663,6 +663,46 @@ Poshtë tyre është historiku i vetë Dorëzimit (turnet e mbyllura).
 - Kutia e punës që ka çdo faqe mjeti (me zgjedhësin e kyçjes me PIN) hyn me zbehje kur rrëshqitet në pamje. Në një faqe të shkurtër si “Sot” ajo rri në buzë të dritares, dhe kontrolli automatik i kontrastit e kapte në mes të zbehjes. Është sjellje ekzistuese e faqes, jo e këtij hapi; testi i “Sot” mat faqen e qetësuar.
 - Faqja nuk është në udhëzuesin e mjeteve dhe as në listën e mjeteve; shtimi atje është punë botimi.
 - Shqipja e teksteve të reja të pilotit përdor herë “ti” e herë “ju”. Kërkon një kalim redaktimi para publikimit.
+
+### 7.4 Hapi 7: para dhe pas
+
+Bërë më 21 nëntor 2026. Krahasimi është pjesë e pamjes “Hap burimin” (7.2): shfaqet kur veprimi është shënuar i kryer në listë. Nuk shkruan asgjë dhe nuk e ndryshon veprimin.
+
+**Dy periudhat.**
+
+- **Data e zbatimit** është dita kur veprimi u shënua i kryer në listë (`closed`): e vetmja datë e zbatimit që lista mban.
+- **Para:** periudha e ruajtur te `origin`, deri një ditë para datës së zbatimit.
+- **Pas:** po aq ditë, nga dita pas datës së zbatimit, deri sot.
+- **Dita e zbatimit nuk është në asnjërën.** Regjistri mbahet sipas ditëve, dhe ajo ditë është pjesërisht para veprimit e pjesërisht pas tij.
+- Kur veprimi kryhet brenda periudhës së ruajtur, “Para” shkurtohet dhe faqja e thotë. Kur kryhet në ditën e parë ose më herët, nuk ka “Para” dhe faqja thotë që nuk ka çfarë të krahasohet. Kur “Pas” ende vazhdon, faqja thotë sa ditë ka.
+
+**Fusha** është ajo e `origin`: të gjitha dëmet për një periudhë, dëmet e filtrit për një filtër, dëmet e të njëjtit hap dhe shkak për një rresht. Vëllimi është gjithmonë ai i gjithë punës së atyre ditëve.
+
+**Çfarë tregohet për secilën periudhë:** datat dhe numri i ditëve, njësitë e dëmtuara, vëllimi i regjistruar, dhe shkalla kur lejohet.
+
+**Kur llogaritet shkalla.** Vetëm kur të dyja periudhat kanë vëllim pozitiv, dëmet nuk e kalojnë vëllimin, dhe të dy vëllimet janë numëruar në të njëjtën mënyrë. Ka dy mënyra numërimi dhe nuk përzihen: shuma e vëllimeve ditore (vetëm kur çdo ditë me regjistrime ka vëllim) dhe totali i shkruar për një periudhë (vlen vetëm për pikërisht ato ditë). Kur një nga kushtet mungon, tregohen numrat dhe vëllimet që ka, pa shkallë, dhe faqja thotë çfarë mungon.
+
+**Zero dhe mungesë të dhënash.** Asnjë dëm me vëllim të regjistruar është zero e matur. Asnjë dëm dhe asnjë vëllim është mungesë të dhënash: në vend të numrit del vizë, dhe faqja e thotë. Kur regjistri ka regjistrime në ato ditë por asnjë në fushën e filtrit, thuhet edhe kjo.
+
+**Pa atribuim.** Faqja thotë “E matur: shkalla shkoi nga … në …” me ndryshimin në pikë përqindjeje, dhe mbyll me fjalinë që kjo nuk tregon se e shkaktoi veprimi. Nuk e shënon veprimin si të verifikuar dhe nuk propozon rezultat.
+
+**Kufizimet.**
+
+- Data e zbatimit është dita kur veprimi u shënua i kryer. Nëse kundërmasa u zbatua një ditë dhe u shënua një ditë tjetër, dita e përjashtuar nuk është ajo e duhura. Lista nuk mban një datë zbatimi më vete; shtimi i saj do të ndryshonte formatin e listës së sinkronizuar.
+- Krahasimi është sipas ditëve: nuk dallon turnet brenda një dite.
+- “Pas” ka po aq ditë sa “Para”, pa marrë parasysh ditët e javës ose ditët pa punë.
+- Dita e sotme hyn te “Pas” edhe pse mund të mos ketë mbaruar.
+- Vetëm Kontrolli i dëmeve, dhe vetëm për veprime me `origin`.
+
+### 7.5 Para publikimit
+
+Punë që presin vendim dhe nuk janë pjesë e hapave:
+
+- **Redaktimi i shqipes.** Tekstet e reja të pilotit (hapat 3–7) përdorin herë “ti” e herë “ju”. Duhet një kalim redaktimi në një regjistër, në `src/_data/sq/ui.json`.
+- **Udhëzuesi i mjeteve.** Botimi 9 mbulon vetëm fjalinë e sinkronizimit të dorëzimit. Pamja e punës e Kontrollit të dëmeve, “Hap burimin”, “Sot” dhe para/pas nuk janë në udhëzues; kërkojnë botim të ri sipas procedurës (tekst, `page-fit`, PDF në tri gjuhë).
+- **Data e botimit 9** (15 nëntor 2026) duhet përshtatur me ditën e publikimit.
+- **Hapi 1c** (`id` për rreshtat e rinj) mbetet në pritje, me kushtin e pjesës 5.1.
+- **Ndryshimet e `main`** që nga baza e degës nuk janë përzier në degë.
 
 Hapat 1 dhe 2 nuk varen nga njëri-tjetri. Hapi 3 kërkon hapin 2. Hapat 5 dhe 7 kërkojnë hapat 1a dhe 4. Hapi 1c nuk bllokon asnjë hap tjetër: pa të, veprimet nga një rresht përdorin kopjen e fushave.
 
