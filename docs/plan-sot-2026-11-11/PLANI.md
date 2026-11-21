@@ -659,7 +659,7 @@ Poshtë tyre është historiku i vetë Dorëzimit (turnet e mbyllura).
 - Hapi “Dorëzimi” te faza “Fund” është lidhje; gjendja e dorëzimit (gati, dërguar) nuk tregohet te “Sot”.
 - Faza e zgjedhur mbahet vetëm për skedën e hapur të shfletuesit.
 - Faqja mban brenda gjithë shënjimin e Dorëzimit, të pashfaqur: është çmimi i një mekanizmi të vetëm.
-- Një pajisje pilot pa dorëzim të ruajtur e hap Dorëzimin te paneli i nisjes; formulari (edhe butoni i shembullit) shfaqet pasi niset turni. Kur piloti ndizet nga adresa në një pajisje të tillë, formulari mbetet i dukshëm deri në rifreskimin e parë.
+- Një pajisje pilot pa dorëzim të ruajtur e hap Dorëzimin te paneli i nisjes; formulari (edhe butoni i shembullit) shfaqet pasi niset turni. Kur piloti ndizet nga adresa në një pajisje të tillë, paneli i nisjes shfaqet menjëherë pas konfirmimit, pa rifreskim (korrigjuar më 21 nëntor 2026); turni niset vetëm kur e nis përdoruesi. Në atë gjendje butoni që e fik pilotin nuk shihet, sepse është pranë dorëzimit: piloti fiket pasi të jetë nisur një turn.
 - Kutia e punës që ka çdo faqe mjeti (me zgjedhësin e kyçjes me PIN) hyn me zbehje kur rrëshqitet në pamje. Në një faqe të shkurtër si “Sot” ajo rri në buzë të dritares, dhe kontrolli automatik i kontrastit e kapte në mes të zbehjes. Është sjellje ekzistuese e faqes, jo e këtij hapi; testi i “Sot” mat faqen e qetësuar.
 - Faqja nuk është në udhëzuesin e mjeteve dhe as në listën e mjeteve; shtimi atje është punë botimi.
 - Shqipja e teksteve të reja të pilotit përdor herë “ti” e herë “ju”. Kërkon një kalim redaktimi para publikimit.

@@ -1854,6 +1854,11 @@
   const setPilot = (on) => {
     const result = Close.enable(on);
     if (!result.ok) { note(tx("Not saved: the browser's storage did not take it. Nothing was changed.")); return false; }
+    // Turned on where nothing of a handover is stored and nothing is written yet: no shift is open there, as on the
+    // next visit, so the start panel is shown at once. Nothing is started and nothing is written: the visitor starts
+    // the shift. Turned off again before any start, the page is the blank handover it was.
+    const stored = read(KEY, null);
+    if (!(isObject(stored) && isObject(stored.current)) && !hasContent(cur()) && !state.history.length) state.idle = on === true;
     renderAll();
     renderPilot();
     return true;

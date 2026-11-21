@@ -14,6 +14,8 @@ const noSideScroll = async (page) => expect(await page.evaluate(() => document.s
 const startShift = async (page, lang) => {
   page.on("dialog", (dialog) => dialog.accept());
   await page.goto(`${prefix(lang)}/tools/shift-handover/?pilot=shift-close`);
+  // The pilot is on and no shift is open: the first shift is started, then the example fills its handover.
+  await page.locator("[data-start-shift]").click();
   await page.locator("[data-example]").click();
   await page.locator("[data-close]").click();
   await page.locator("[data-start-shift]").click();

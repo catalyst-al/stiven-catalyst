@@ -119,6 +119,25 @@ test("an issue sent from 5 Whys while no shift is open waits through a reload, c
   noDouble(state);
 });
 
+test("off until turned on where no shift is open: after the yes the start panel is there at once, and the shift starts only when the visitor starts it", async ({ page }) => {
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.goto("/tools/shift-handover/?pilot=shift-close");
+  // No reload: the same visit.
+  await expect(page.locator("[data-start]")).toBeVisible();
+  await expect(page.locator("[data-handover]")).toBeHidden();
+  await expect(page).toHaveURL(/\/tools\/shift-handover\/$/);
+  expect(await stored(page)).toBeNull();
+  expect(await active(page)).toBeNull();
+  await expectAccessible(page);
+  // By keyboard: the visitor starts the shift.
+  await page.locator("[data-start-shift]").focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("[data-handover]")).toBeVisible();
+  await expect(page.locator("[data-start]")).toBeHidden();
+  expect((await stored(page)).idle).toBe(false);
+  expect(await active(page)).not.toBeNull();
+});
+
 test("off until a file brings the state of a device where it is on: held, nothing is started or closed, and the visitor's yes lets the page go on", async ({ page }) => {
   // The state as a device with the new way on leaves it: a shift closed, its open issues waiting.
   await page.addInitScript((key) => { if (!sessionStorage.getItem("seeded")) { localStorage.setItem(key, JSON.stringify({ v: 1, on: true, set: 1 })); sessionStorage.setItem("seeded", "1"); } }, PILOT);

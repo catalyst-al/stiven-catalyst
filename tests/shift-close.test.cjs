@@ -349,6 +349,37 @@ test('the fifty-first issue sent while no shift is open is not kept, not used up
   assert.equal(new Set(texts).size, 51);
 });
 
+test('turned on where no shift is open: the start panel is shown at once, without a reload, and nothing starts until the visitor starts it', { skip: !hasSite }, () => {
+  for (const lang of ['en', 'de', 'sq']) {
+    // A device that has never kept a handover, asked by the address; the answer is yes.
+    const w = open({ lang, pilot: false, search: '?pilot=shift-close' });
+    assert.equal(w.ShiftClose.enabled(), true, `${lang}: on`);
+    assert.equal($(w, '[data-start]').hidden, false, `${lang}: the start panel, in the same visit`);
+    assert.equal($(w, '[data-handover]').closest('section').hidden, true, `${lang}: not a blank handover to write in`);
+    assert.equal($(w, '[data-output]').hidden, true);
+    assert.equal(w.localStorage.getItem(KEYS[lang]), null, `${lang}: nothing of a handover was written`);
+    assert.equal(w.ShiftContext.active(), null, `${lang}: and no shift was started or made active`);
+    // The same on the next visit.
+    const again = reload(w);
+    assert.equal($(again, '[data-start]').hidden, false);
+    assert.equal(again.localStorage.getItem(KEYS[lang]), null);
+    // The shift starts when the visitor starts it, with the date and the shift they choose.
+    $(w, '[name="start-date"]').value = '2026-11-10';
+    $(w, '[name="start-shift"]').value = SHIFTS[lang][2];
+    $(w, '[data-start-shift]').click();
+    assert.deepEqual([saved(w).idle, saved(w).current.date, saved(w).current.shift], [false, '2026-11-10', SHIFTS[lang][2]]);
+    assert.deepEqual([w.ShiftContext.active().date, w.ShiftContext.active().label], ['2026-11-10', SHIFTS[lang][2]]);
+    assert.equal($(w, '[data-start]').hidden, true);
+  }
+  // Answered no: the page is the blank handover it always was.
+  const no = open({ pilot: false, search: '?pilot=shift-close', before: (w) => { w.answer = false; } });
+  assert.equal($(no, '[data-start]').hidden, true);
+  assert.equal($(no, '[data-handover]').closest('section').hidden, false);
+  // A handover that is open, stored or only typed so far, stays open when the pilot is turned on.
+  const openOne = open({ pilot: false, search: '?pilot=shift-close', storage: withHandover('en') });
+  assert.deepEqual([openOne.ShiftClose.enabled(), $(openOne, '[data-start]').hidden], [true, true]);
+});
+
 test('where it is not on, team sync shares the handover as before: offered, sent when ticked, and merged', { skip: !hasSite }, async () => {
   const device = async (who, pilot, ticked = true) => {
     const w = open({ pilot, scripts: SYNC_SCRIPTS, storage: {
