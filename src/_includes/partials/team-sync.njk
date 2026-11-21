@@ -59,7 +59,11 @@
   rotateFailed: "The team code was not changed, and the team keeps the old one. {reason}" | t(lang),
   retireFailed: "The old copy could not be deleted yet, so devices with the old code can still read it. This device tries again at every sync." | t(lang),
   retired: "The old copy of the team is now deleted." | t(lang),
-  locked: "Team sync is paused while the tools are locked." | t(lang)
+  locked: "Team sync is paused while the tools are locked." | t(lang),
+  awaiting: "Waiting for your confirmation: nothing has been read or sent yet." | t(lang),
+  summaryAwaiting: "Not started · confirm below" | t(lang),
+  review: "Check the ticked tools below, then confirm. Nothing is read or sent before you do." | t(lang),
+  cancelled: "Cancelled. Nothing was read or sent." | t(lang)
 } %}
 <details class="tm" data-team-sync data-endpoint="{{ site.sync.endpoint }}" data-text="{{ tmText | dump }}">
   <summary class="tm-summary"><strong>{{ "Team sync" | t(lang) }}</strong> <span class="tm-state" data-tm-summary>{{ "Off" | t(lang) }}</span></summary>
@@ -89,6 +93,19 @@
       </div>
     </div>
     <div class="tm-on" data-tm-on hidden>
+      {#- Before the first sync of a team started or joined here, nothing is read or sent: the device shows what it
+          would share and waits for a confirmation (js/team-sync.js, consented). -#}
+      <div class="tm-consent" data-tm-consent hidden>
+        <p class="kicker">{{ "Before anything is shared" | t(lang) }}</p>
+        <p class="form-note" data-tm-consent-start>{{ "When you confirm, the work of the tools ticked below is encrypted on this device and stored as an encrypted copy on the team's server, which cannot read it. Only then does the team exist for the other devices." | t(lang) }}</p>
+        <p class="form-note" data-tm-consent-join hidden>{{ "When you confirm, this device takes the team's work for the tools ticked below and merges it into the work here, after a restore point, and sends its own work for those tools to the team's server as an encrypted copy." | t(lang) }}</p>
+        <p class="form-note" data-tm-consent-viewer hidden>{{ "When you confirm, this device takes the team's work for the tools ticked below, after a restore point, and its own version of those tools is replaced. It sends nothing." | t(lang) }}</p>
+        <p class="form-note">{{ "The ticks show what is shared unless you change them. Unticking a tool later stops sharing it from then on; it does not delete what the team's copy already holds." | t(lang) }}</p>
+        <div class="tm-row">
+          <button class="button-primary" type="button" data-tm-consent-go>{{ "Confirm and sync" | t(lang) }}</button>
+          <button class="button-ghost" type="button" data-tm-consent-cancel>{{ "Cancel" | t(lang) }}</button>
+        </div>
+      </div>
       <p class="form-note tm-status" data-tm-status role="status" aria-live="polite"></p>
       <p class="form-note tm-devices" data-tm-devices hidden></p>
       <p class="form-note tm-readonly" data-tm-viewer-only hidden>{{ "Read-only: this device takes the team's work and sends nothing, so it can neither change nor delete the team's copy. Changes made here to the shared tools are not sent, and the next sync replaces them with the team's copy." | t(lang) }}</p>
@@ -100,7 +117,7 @@
         <p class="form-note" data-tm-member-only>{{ "Unticking a tool stops this device sharing it; what the team already has stays. The career tools, your shelf, reading and coaching are personal and never shared." | t(lang) }} {{ "A row deleted on one device is deleted on every device of the team at the next sync, and does not come back." | t(lang) }}</p>
         <p class="form-note" data-tm-viewer-only hidden>{{ "Unticking a tool stops this device taking the team's version of it; the work here then stays as it is. The career tools, your shelf, reading and coaching are personal and never shared." | t(lang) }}</p>
       </fieldset>
-      <div class="field tm-device" data-tm-member-only>
+      <div class="field tm-device" data-tm-member-only data-tm-after-consent>
         <label for="tm-device">{{ "Name of this device" | t(lang) }} ({{ "optional" | t(lang) }})</label>
         <input id="tm-device" type="text" maxlength="60" autocomplete="off" placeholder="{{ 'Phone of …' | t(lang) }}" data-tm-device>
       </div>
@@ -108,7 +125,7 @@
         <button class="button-primary" type="button" data-tm-sync>{{ "Sync now" | t(lang) }}</button>
         <button class="button-secondary" type="button" data-tm-again hidden>{{ "Send this device's work again" | t(lang) }}</button>
       </div>
-      <div class="tm-more" data-tm-member-only>
+      <div class="tm-more" data-tm-member-only data-tm-after-consent>
         <div class="tm-more-item">
           <button class="button-secondary" type="button" data-tm-viewer-make>{{ "Create a read-only code" | t(lang) }}</button>
           <p class="form-note">{{ "For someone who should see the team's work but not change it, such as a manager or a screen on the wall. It cannot change or delete anything." | t(lang) }}</p>
@@ -134,7 +151,7 @@
       </div>
       <div class="tm-leave">
         <button class="button-ghost" type="button" data-tm-leave>{{ "Leave the team on this device" | t(lang) }}</button>
-        <button class="button-ghost" type="button" data-tm-delete data-tm-member-only>{{ "Delete the team's copy" | t(lang) }}</button>
+        <button class="button-ghost" type="button" data-tm-delete data-tm-member-only data-tm-after-consent>{{ "Delete the team's copy" | t(lang) }}</button>
       </div>
     </div>
     <p class="form-note tm-message" data-tm-message role="status" aria-live="polite"></p>

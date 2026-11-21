@@ -1177,6 +1177,13 @@
   };
   const state = () => readState(storage);
   const setState = (patch) => writeJson(storage, STATE_KEY, { ...state(), ...patch });
+  // Nothing is read from or sent to the team before the person here confirms what is shared (the panel
+  // [data-tm-consent]). A team started or joined from now on is saved with consented: false until then; one that synced
+  // before this existed (it has a revision or a last sync and no flag) counts as confirmed, so it goes on as it was.
+  const consented = () => {
+    const s = state();
+    return s.consented === true || (s.consented === undefined && Boolean(s.lastSync || s.rev > 0));
+  };
   const slugsHere = () => {
     const keysHere = [...Object.keys(collect(storage, offerable)), ...(state().teamKeys || []).filter(offerable)];
     return [...new Set(keysHere.map(toolSlug))].filter((slug) => names[slug]).sort((a, b) => nameOf(a).localeCompare(nameOf(b)));
@@ -1250,10 +1257,14 @@
     // A copy that is gone is not synced again by a click on "Sync now": the team may have moved to a new code, and
     // whoever has the old one could have put a copy of their own there since.
     $("[data-tm-again]").hidden = !s.gone || viewer;
-    $("[data-tm-sync]").hidden = Boolean(s.gone);
+    $("[data-tm-sync]").hidden = Boolean(s.gone) || !consented();
     $("[data-tm-summary]").textContent = viewer
       ? (problem ? text.readOnlyError : s.lastSync ? fill(text.readOnlySynced, { when: when(s.lastSync) }) : text.readOnly)
       : (problem ? text.onError : s.lastSync ? fill(text.onSynced, { when: when(s.lastSync) }) : text.on);
+    if (!consented()) {
+      $("[data-tm-status]").textContent = text.awaiting;
+      $("[data-tm-summary]").textContent = text.summaryAwaiting;
+    }
     showPending();
   };
   const showMode = () => {
@@ -1261,8 +1272,12 @@
     const viewer = isViewer();
     $("[data-tm-off]").hidden = on;
     $("[data-tm-on]").hidden = !on;
-    root.querySelectorAll("[data-tm-member-only]").forEach((node) => { node.hidden = viewer; });
+    const waiting = on && !consented();
+    root.querySelectorAll("[data-tm-member-only]").forEach((node) => { node.hidden = viewer || (waiting && node.hasAttribute("data-tm-after-consent")); });
     root.querySelectorAll("[data-tm-viewer-only]").forEach((node) => { node.hidden = !viewer; });
+    $("[data-tm-consent]").hidden = !waiting;
+    const kind = viewer ? "viewer" : state().origin === "start" ? "start" : "join";
+    ["start", "join", "viewer"].forEach((name) => { $(`[data-tm-consent-${name}]`).hidden = name !== kind; });
     if (!on || viewer) $("[data-tm-view]").hidden = true;
     if (on) {
       showTools();
@@ -1281,6 +1296,8 @@
     ? Promise.race([window.StorageGuard.makePoint("before-sync").catch(() => null), new Promise((resolve) => setTimeout(resolve, 2000))])
     : null);
   const sync = async ({ create = false, quiet = false } = {}) => {
+    // Every sync goes through here: at opening, when idle, online again, the buttons. None before the confirmation.
+    if (!consented()) return null;
     if (running) { again = true; return running; }
     running = (async () => {
       const k = await keys();
@@ -1349,11 +1366,10 @@
   $("[data-tm-start]").addEventListener("click", async () => {
     const code = newCode();
     writeJson(storage, TEAM_KEY, { code, since: new Date().toISOString() });
-    setState({ rev: 0, synced: {}, teamKeys: [], devices: [], lastSync: "", gone: false });
+    setState({ rev: 0, synced: {}, teamKeys: [], devices: [], lastSync: "", gone: false, consented: false, origin: "start" });
     showCode(code);
     showMode();
-    say(text.started);
-    await sync({ create: true });
+    say(text.review);
   });
   const joinField = $("[data-tm-join-code]");
   $("[data-tm-join]").addEventListener("click", async () => {
@@ -1393,12 +1409,25 @@
     if (exists === false) { say(text.noTeam); return; }
     if (exists === null) { say(text.offline); return; }
     writeJson(storage, TEAM_KEY, viewer ? { viewer: view.text, since: new Date().toISOString() } : { code: parsed.code, since: new Date().toISOString() });
-    setState({ rev: 0, synced: {}, teamKeys: [], devices: [], lastSync: "", gone: false, viewer });
+    setState({ rev: 0, synced: {}, teamKeys: [], devices: [], lastSync: "", gone: false, viewer, consented: false, origin: "join" });
     keysFor = k;
     joinField.value = "";
     showMode();
-    const result = await sync();
-    say(result?.status === "synced" ? (viewer ? text.joinedViewer : text.joined) : "");
+    say(text.review);
+  });
+  // The confirmation: from here the team syncs as it always has. Cancel forgets the team, having read and sent nothing.
+  $("[data-tm-consent-go]").addEventListener("click", async () => {
+    if (!team() || consented()) return;
+    const started = state().origin === "start";
+    setState({ consented: true });
+    showMode();
+    const result = await sync({ create: started });
+    say(result?.status === "synced" ? (started ? text.started : isViewer() ? text.joinedViewer : text.joined) : "");
+  });
+  $("[data-tm-consent-cancel]").addEventListener("click", () => {
+    if (!team() || consented()) return;
+    forget();
+    say(text.cancelled);
   });
   $("[data-tm-copy]").addEventListener("click", async () => {
     const code = $("[data-tm-code]").textContent;
@@ -1410,7 +1439,7 @@
   // ---- A read-only code, and a new team code ----
   $("[data-tm-viewer-make]").addEventListener("click", async () => {
     const current = team();
-    if (!current || current.viewer) return;
+    if (!current || current.viewer || !consented()) return;
     const button = $("[data-tm-viewer-make]");
     button.disabled = true;
     say(text.viewerMaking);
@@ -1433,7 +1462,7 @@
     $("[data-tm-view-qr]").replaceChildren();
   });
   $("[data-tm-rotate]").addEventListener("click", async () => {
-    if (!team() || isViewer() || !window.confirm(text.rotateConfirm)) return;
+    if (!team() || isViewer() || !consented() || !window.confirm(text.rotateConfirm)) return;
     // Never alongside a sync of the old team.
     if (running) { try { await running; } catch { /* it said so */ } }
     const k = await keys();
@@ -1484,7 +1513,7 @@
     say(text.left);
   });
   $("[data-tm-delete]").addEventListener("click", async () => {
-    if (isViewer() || !window.confirm(text.deleteConfirm)) return;
+    if (isViewer() || !consented() || !window.confirm(text.deleteConfirm)) return;
     const k = await keys();
     if (!k || !k.writeToken) return;
     const result = await deleteCopy({ endpoint, fetch: (...args) => window.fetch(...args), keys: k });
