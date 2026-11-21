@@ -13,5 +13,7 @@ permalink: /sq/tools/action-tracker/
   <p class="lede">Çdo kundërmasë, gjetje dhe sinjal nga mjetet e tjera vjen këtu me një përgjegjës, një datë dhe një mënyrë kontrolli. Të vonuarat në fillim, pastaj kjo javë, pastaj çfarë u verifikua. Lista është shqyrtimi javor.</p>
 </section>
 
+{#- The bar of the pilot, not the tool's own partial (src/_data/workKeys.js reads the first plain include). -#}
+{%- include "partials/work-nav.njk" -%}
 {% set cfg = sq.actionTracker %}
 {% include "partials/action-tracker.njk" %}

@@ -1,0 +1,11 @@
+{#- The pilot's way between its pages (js/work-nav.js shows it where the pilot is on; hidden everywhere else). -#}
+{%- set navShifts = (sq.shiftHandover if lang == "sq" else (de.shiftHandover if lang == "de" else shiftHandover)).shifts -%}
+<nav class="shell wn" data-work-nav hidden aria-label="{{ "Pages of the pilot" | t(lang) }}" data-shifts="{{ navShifts | dump | escape }}">
+  <a data-wn="today" href="{{ '/tools/today/' | local(lang) }}">{{ "Today" | t(lang) }}</a>
+  <a data-wn="log" href="{{ '/tools/damage-control/' | local(lang) }}">+ {{ "Log an entry" | t(lang) }}</a>
+  <a data-wn="actions" data-label="{{ "Actions" | t(lang) }}" href="{{ '/tools/action-tracker/' | local(lang) }}">{{ "Actions" | t(lang) }} <span class="wn-count" data-wn-count hidden></span></a>
+  <a data-wn="handover" href="{{ '/tools/shift-handover/' | local(lang) }}">{{ "Handover" | t(lang) }}</a>
+  <a data-wn="catalyst" href="{{ '/tools.html' | local(lang) }}">Catalyst</a>
+  <a class="wn-chip" data-wn-shift data-none="{{ "No shift is active" | t(lang) }}" href="{{ '/tools/today/' | local(lang) }}"></a>
+</nav>
+<script src="{{ '/js/work-nav.js' | assetUrl }}" defer></script>

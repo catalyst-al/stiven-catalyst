@@ -80,6 +80,12 @@ date of the active shift, `shift` its word on this page, `type` "Not recorded" w
 `id`. Its actions carry `origin` of the kinds `period`, `filter` and `row`; a row without an `id` goes as a copy of its
 fields with `twins`. Incomplete Control and the Night Audit Log, which share the template, have none of this.
 
+"Today" (`js/today.js`, `/tools/today/`) and the pilot's bar (`js/work-nav.js`) store nothing of their own. They read
+the pilot's setting, the active shift, the drafts, the handover (`ShiftClose.overview`), the damage log and the action
+list; the page carries the Shift Handover itself, so a shift started or closed there is the handover's own start and
+close. The one key the page writes by itself is `sc-shift-ui`, when the visitor says to work in the shift the handover
+has open. The phase the visitor chooses is kept for the tab only (sessionStorage `sc-today-phase`).
+
 "Open the source" (`js/defect-source.js`) is the way back: the Action Tracker links an action that has an `origin` of
 Damage Control to the log of `origin.lang` with `?source=<the action's id>` and nothing else, and the log reads the
 action from `sc-actions`. The view only reads: the period it shows is lent to the page and never stored (`from` and

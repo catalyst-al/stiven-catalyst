@@ -165,6 +165,19 @@ window.ShiftClose = (() => {
     if (saved.idle !== true && is(saved.current)) return "open";
     return Array.isArray(saved.history) && saved.history.some((entry) => isObject(entry) && is(entry.handover)) ? "closed" : "none";
   };
+  // The shift the handover of a language's pages has open now, and its last closure, read from the browser's storage
+  // for a page that shows them without being the Handover page (js/today.js). Read only.
+  const overview = (list) => {
+    let saved = null;
+    try { saved = JSON.parse(window.localStorage.getItem(HANDOVER_KEYS[list] || "")); } catch { saved = null; }
+    if (!isObject(saved)) return { open: null, last: null };
+    const shiftOf = (h) => (isObject(h) && isDate(h.date) && str(h.shift).trim() ? { date: h.date, shift: str(h.shift).trim(), area: str(h.area) } : null);
+    const entry = Array.isArray(saved.history) ? saved.history.find(isObject) : null;
+    return {
+      open: saved.idle === true ? null : shiftOf(saved.current),
+      last: entry && shiftOf(entry.handover) ? { ...shiftOf(entry.handover), closedAt: str(entry.closedAt) } : null,
+    };
+  };
   // The last closure, with or without an id: what the next shift is proposed from.
   const lastClosed = (state) => state.history[0] || null;
 
@@ -231,5 +244,5 @@ window.ShiftClose = (() => {
     return { ok: true, started: true, added, sources: sources.length, unclear };
   };
 
-  return { PILOT_KEY, enabled, enable, waiting, trim, shiftStatus, STATES, newId, idOf, sameWorkplace, compare, sum, sumOf, changedAfterShare, cleanEntry, carriedFromOf, openOf, carriedIds, closed, pending, lastClosed, close, start };
+  return { PILOT_KEY, enabled, enable, waiting, trim, shiftStatus, overview, STATES, newId, idOf, sameWorkplace, compare, sum, sumOf, changedAfterShare, cleanEntry, carriedFromOf, openOf, carriedIds, closed, pending, lastClosed, close, start };
 })();

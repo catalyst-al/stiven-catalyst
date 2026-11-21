@@ -10,6 +10,8 @@ const active = (page) => page.evaluate(() => window.ShiftContext.active());
 const openIssues = (state) => state.current.issues.filter((issue) => !issue.done).map((issue) => issue.text).sort();
 const example = async (page) => {
   await page.goto("/tools/shift-handover/");
+  // A device with the pilot on and no handover stored has no shift open: the first one is started like every other.
+  if (await page.locator("[data-start]").isVisible()) await page.locator("[data-start-shift]").click();
   await page.locator("[data-example]").click();
   return stored(page);
 };
@@ -320,6 +322,8 @@ test("K14 with K10 and K11: a restore point without the handover leaves it alone
   await page.evaluate(() => localStorage.setItem("sc-damage-control", JSON.stringify({ rows: [{ date: "2026-11-10", shift: "Late", stage: "Loading", type: "Crushed", cause: "Stacking", units: 1, cost: null, note: "" }] })));
   await page.reload();
   await makePoint(page);
+  // No handover is stored here yet, so no shift is open: the first one is started, then the example is loaded.
+  await page.locator("[data-start-shift]").click();
   const before = await (async () => { await page.locator("[data-example]").click(); return stored(page); })();
   await close(page);
   await page.locator("[data-start-shift]").click();

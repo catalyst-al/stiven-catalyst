@@ -1,0 +1,22 @@
+{#- "Today", the pilot's work page (js/today.js). The page sets `cfg` to the handover's data and `dmg` to Damage
+    Control's. The handover itself is carried below, so that starting and closing a shift here is the handover's own
+    code; its form and its sheet are not shown (css: .td-handover). -#}
+{% include "partials/work-nav.njk" %}
+<section class="shell td" data-today>
+  <p class="form-note td-status" data-today-status role="status" aria-live="polite"></p>
+  <div class="dl-box td-off" data-today-off hidden></div>
+  <div class="td-grid" data-today-cards hidden>
+    <section class="dl-box td-card" data-today-now aria-label="{{ "Now" | t(lang) }}"></section>
+    <section class="dl-box td-card" data-today-attention aria-label="{{ "Needs attention" | t(lang) }}"></section>
+    <section class="dl-box td-card" data-today-sofar aria-label="{{ "The shift so far" | t(lang) }}"></section>
+    <section class="dl-box td-card" data-today-continue aria-label="{{ "Continue" | t(lang) }}"></section>
+  </div>
+</section>
+<div class="td-handover" data-today-handover hidden>
+{% include "partials/shift-handover.njk" %}
+</div>
+<script type="application/json" id="today-data">{{ { damageKey: dmg.storageKey, tool: dmg.text.tool, one: dmg.text.one, many: dmg.text.many, shifts: cfg.shifts } | scriptJson | safe }}</script>
+<script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/actions-store.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/defect-work.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/today.js' | assetUrl }}" defer></script>

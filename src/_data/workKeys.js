@@ -13,7 +13,7 @@ const read = (file) => {
 // Pages without a data file of their own name their key here.
 const EXTRA = { "five-whys": "sc-five-whys" };
 // Pages that show the work of the other tools keep only how they are viewed (a period, what is dismissed): no work.
-const VIEWS = new Set(["shift-pulse", "signals", "ops-report", "print-pack"]);
+const VIEWS = new Set(["shift-pulse", "signals", "ops-report", "print-pack", "today"]);
 
 // The log tools (ToolKit.logBook) say where the work is in their own log, when it is empty: their pages are left to it.
 const js = new URL("../js/", import.meta.url);

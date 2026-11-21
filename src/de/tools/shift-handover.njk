@@ -13,5 +13,7 @@ permalink: /de/tools/shift-handover/
   <p class="lede">Die meisten Probleme gehen nicht in der Schicht verloren, sondern zwischen den Schichten. Schreiben Sie die Übergabe in fünf Minuten, geben Sie jedem offenen Punkt einen Verantwortlichen, und lassen Sie die ungelösten von selbst in die nächste Schicht übergehen.</p>
 </section>
 
+{#- The bar of the pilot, not the tool's own partial (src/_data/workKeys.js reads the first plain include). -#}
+{%- include "partials/work-nav.njk" -%}
 {% set cfg = de.shiftHandover %}
 {% include "partials/shift-handover.njk" %}

@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+lang: sq
+title: Sot
+description: "Faqja e punës së pilotit: ku është turni, çfarë kërkon vëmendje, dhe rruga te regjistri i dëmeve, veprimet dhe dorëzimi."
+activeNav: /sq/tools.html
+permalink: /sq/tools/today/
+noindex: true
+workOf: /tools/shift-handover/
+eleventyExcludeFromCollections: true
+---
+<section class="shell page-hero tool-hero td-hero">
+  <p class="eyebrow">Pilot · Shef turni</p>
+  <h1>Sot</h1>
+</section>
+
+{% set cfg = sq.shiftHandover %}
+{% set dmg = sq.damageControl %}
+{% include "partials/today.njk" %}

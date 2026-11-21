@@ -12,5 +12,7 @@ permalink: /tools/damage-control/
   <p class="lede">Log every damaged unit with the stage where it was found and the cause behind it. The tool shows your damage rate, the few causes behind most of it, and where in the process to start.</p>
 </section>
 
+{#- The bar of the pilot, not the tool's own partial (src/_data/workKeys.js reads the first plain include). -#}
+{%- include "partials/work-nav.njk" -%}
 {% set cfg = damageControl %}
 {% include "partials/defect-log.njk" %}

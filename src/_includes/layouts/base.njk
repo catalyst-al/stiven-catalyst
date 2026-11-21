@@ -57,7 +57,9 @@
   ["/about.html" | local(lang), "About" | t(lang), ["/about.html" | local(lang), "/projects.html" | local(lang), "/contact.html" | local(lang)], null, null, null, aboutMenu]
 ] -%}
 {%- set hasLegal = legal.name and legal.city -%}
-{%- set toolFamily = page.url | familyOf(families) -%}
+{#- A work page that is not one of the listed tools (the pilot's "Today") names the tool whose family and work scripts
+    it shares (workOf in its front matter): the PIN lock, the file box and the modules they load. #}
+{%- set toolFamily = (workOf or page.url) | familyOf(families) -%}
 {%- set rolePage = toolFamily and "/roles/" in page.url -%}
 {#- Anonymous visit counts (Cloudflare Web Analytics: no cookies, nothing stored in the browser) on the writing
     pages only; the tools and the role pages, where people type their own work, load nothing from outside. -#}

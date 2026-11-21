@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+lang: de
+title: Heute
+description: "Die Arbeitsseite des Piloten: wo die Schicht steht, was Aufmerksamkeit braucht, und der Weg zum Schadensprotokoll, zu den Maßnahmen und zur Übergabe."
+activeNav: /de/tools.html
+permalink: /de/tools/today/
+noindex: true
+workOf: /tools/shift-handover/
+eleventyExcludeFromCollections: true
+---
+<section class="shell page-hero tool-hero td-hero">
+  <p class="eyebrow">Pilot · Schichtleitung</p>
+  <h1>Heute</h1>
+</section>
+
+{% set cfg = de.shiftHandover %}
+{% set dmg = de.damageControl %}
+{% include "partials/today.njk" %}

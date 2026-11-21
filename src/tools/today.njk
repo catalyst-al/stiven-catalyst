@@ -1,0 +1,18 @@
+---
+layout: layouts/base.njk
+title: Today
+description: "The work page of the pilot: where the shift stands, what needs attention, and the way on to the damage log, the actions and the handover."
+activeNav: /tools.html
+permalink: /tools/today/
+noindex: true
+workOf: /tools/shift-handover/
+eleventyExcludeFromCollections: true
+---
+<section class="shell page-hero tool-hero td-hero">
+  <p class="eyebrow">Pilot · Shift lead</p>
+  <h1>Today</h1>
+</section>
+
+{% set cfg = shiftHandover %}
+{% set dmg = damageControl %}
+{% include "partials/today.njk" %}

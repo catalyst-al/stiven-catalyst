@@ -13,5 +13,7 @@ permalink: /de/tools/damage-control/
   <p class="lede">Erfassen Sie jede beschädigte Einheit mit dem Prozessschritt, in dem sie gefunden wurde, und der Ursache dahinter. Das Tool zeigt Ihre Schadensquote, die wenigen Ursachen hinter den meisten Schäden und wo Sie anfangen sollten.</p>
 </section>
 
+{#- The bar of the pilot, not the tool's own partial (src/_data/workKeys.js reads the first plain include). -#}
+{%- include "partials/work-nav.njk" -%}
 {% set cfg = de.damageControl %}
 {% include "partials/defect-log.njk" %}

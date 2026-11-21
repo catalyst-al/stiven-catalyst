@@ -12,5 +12,7 @@ permalink: /sq/tools/shift-handover/
   <p class="lede">Shumica e problemeve nuk humbasin gjatë turnit, por mes turneve. Shkruaje dorëzimin në pesë minuta, jepi çdo çështjeje të hapur një përgjegjës dhe lëri të pazgjidhurat të kalojnë vetë te turni i ardhshëm.</p>
 </section>
 
+{#- The bar of the pilot, not the tool's own partial (src/_data/workKeys.js reads the first plain include). -#}
+{%- include "partials/work-nav.njk" -%}
 {% set cfg = sq.shiftHandover %}
 {% include "partials/shift-handover.njk" %}

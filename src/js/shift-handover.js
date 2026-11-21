@@ -411,7 +411,9 @@
       : [],
     // No shift is open: the last one was closed and the next has not been started (js/shift-close.js). `current` is
     // then a blank handover the page does not show.
-    idle: isObject(saved) && saved.idle === true,
+    // A device where the new way of closing is on and nothing of a handover is stored yet has no shift open either:
+    // the first shift is started by the visitor like every other (nothing is written until they do).
+    idle: isObject(saved) && isObject(saved.current) ? saved.idle === true : Close.enabled(),
     received: isObject(saved) && Array.isArray(saved.received)
       ? saved.received.filter(isObject).map((entry) => ({ id: str(entry.id), at: str(entry.at) })).filter((entry) => entry.id).slice(-50)
       : [],

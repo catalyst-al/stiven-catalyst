@@ -13,5 +13,7 @@ permalink: /de/tools/action-tracker/
   <p class="lede">Jede Maßnahme, jeder Befund und jedes Signal aus den anderen Tools landet hier mit Verantwortlichem, Termin und Nachweis. Zuerst das Überfällige, dann die Woche, dann das Bestätigte. Die Liste ist die Wochenprüfung.</p>
 </section>
 
+{#- The bar of the pilot, not the tool's own partial (src/_data/workKeys.js reads the first plain include). -#}
+{%- include "partials/work-nav.njk" -%}
 {% set cfg = de.actionTracker %}
 {% include "partials/action-tracker.njk" %}

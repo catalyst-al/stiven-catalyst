@@ -522,7 +522,7 @@ Këto nuk janë implementuar, sepse varen nga mbyllja e përbashkët ose nga nd�
 | 3. Mbyllja e përbashkët · **bërë, K15 pjesërisht** | Mbyllje pa dorëzim, pa turn aktiv pas saj, nisje e shprehur, mbartje sipas 3.5, “ndryshuar pas ndarjes”, dorëzimi jashtë sinkronizimit. Gjendja e kritereve te 3.7. | `shift-close.js`, `shift-handover.js`, `partials/shift-handover.njk`, `team-sync.js`, `shift-context.js`, `work-backup.js`, `storage-guard.js`, `tests/shift-close.test.cjs`, `tests/browser/shift-close.spec.mjs` |
 | 4. Kontrolli i dëmeve · **bërë** | Pamja e punës vetëm për këtë mjet, vetëm magazina, vetëm me pilotin të ndezur (7.1). | `defect-work.js`, `defect-log.njk`, `defect-log.js`, `tool-kit.js`, `shift-close.js`, `damageControl.json`, `tests/defect-work.test.cjs`, `tests/browser/damage-work.spec.mjs` |
 | 5. “Hap burimin” · **bërë** | Lista e veprimeve hap Kontrollin e dëmeve te periudha, filtri ose rreshti i ruajtur, vetëm për lexim (7.2). | `defect-source.js`, `action-tracker.js`, `defect-log.js`, `defect-work.js`, `partials/defect-log.njk`, `tests/open-source.test.cjs`, `tests/browser/open-source.spec.mjs` |
-| 6. Faqja “Sot” | Faqja e punës, mbi të njëjtën mbyllje. Hyrja te Catalyst. | faqe e re, `families.json`, `signals.js` |
+| 6. Faqja “Sot” · **bërë** | Faqja e punës e pilotit, mbi të njëjtën nisje dhe mbyllje si Dorëzimi, dhe shiriti i hyrjeve (7.3). | `today.js`, `work-nav.js`, `partials/today.njk`, `partials/work-nav.njk`, `tools/today.njk` (tri gjuhë), `layouts/base.njk`, `shift-handover.js`, `shift-close.js`, `defect-work.js`, `tests/today.test.cjs`, `tests/browser/today.spec.mjs` |
 | 7. Verifikimi para/pas | Krahasimi i periudhës së ruajtur me atë pas veprimit, me vëllimet e vërteta. | `action-tracker.js`, `defect-log.js` |
 
 ### 7.1 Hapi 4: pamja e punës e Kontrollit të dëmeve
@@ -620,6 +620,49 @@ Përputhja për një rresht pa `id` bëhet me fushat që veprimi ka ruajtur (dat
 - Kur lista e veprimeve është e kyçur me PIN, veprimi nuk lexohet dhe faqja thotë që nuk është në listë.
 - Banderola “Erdhe nga…” e prototipit për kalimet e tjera (5 Whys, Pareto, karta) nuk është bërë: ky hap mbulon vetëm kthimin nga lista e veprimeve.
 - Vetëm Kontrolli i dëmeve hap burimin; Kontrolli i plotësisë dhe Regjistri i Night Audit nuk dërgojnë `origin`.
+
+### 7.3 Hapi 6: faqja “Sot”
+
+Bërë më 21 nëntor 2026.
+
+**Faqja.** `/tools/today/` në tri gjuhët. Nuk është në listën e mjeteve dhe nuk u ofrohet motorëve të kërkimit (`noindex`); merr familjen dhe skriptet e punës së Dorëzimit (kyçja me PIN, kopja rezervë, turni aktiv) me `workOf` te koka e faqes. Hyrja është shiriti i pilotit.
+
+**Shiriti i hyrjeve** (`work-nav.js`): Sot · + Regjistro · Veprime (me numrin e veprimeve të hapura) · Dorëzimi · Catalyst, dhe çipi i turnit aktiv me datën operative. Është në shënjimin e katër faqeve të pilotit (Sot, Kontrolli i dëmeve, Dorëzimi, lista e veprimeve), i fshehur; shfaqet vetëm aty ku piloti është i ndezur dhe profili nuk ka turne të vetat. “+ Regjistro” hap formularin ekzistues të Kontrollit të dëmeve. Numri i veprimeve numërohet me rregullën e listës (të hapura dhe në punë, pa shembullin).
+
+**Një mekanizëm nisjeje dhe mbylljeje.** “Sot” nuk ka kod të vetin për to: mban brenda vetë Dorëzimin (të njëjtin shënjim dhe të njëjtin skript), me formularin dhe fletën të pashfaqura. Kur nuk ka turn të hapur, paneli ku zgjidhen turni dhe data është paneli i nisjes i Dorëzimit; “Mbyll turnin” shtyp butonin e vetë Dorëzimit, me pyetjen e tij. Prandaj ajo që mbyllet këtu gjendet e mbyllur te Dorëzimi, me `closeId`, dhe mbartja ndodh te nisja pasuese si për çdo mbyllje.
+
+**Katër kartat.**
+
+| Karta | Çfarë tregon |
+| --- | --- |
+| Tani | Faza që zgjedh përdoruesi (Fillim, Gjatë, Fund) me hapin e radhës; në “Fund” tre hapat dhe mbyllja. Pa turn: zgjedhja e shprehur. |
+| Kërkon vëmendje | Veprimet e vonuara dhe ato pa përgjegjës (nga lista), formularët që nuk konfirmohen si të ruajtur, dhe lidhja te Signals. |
+| Turni deri tani | Dëmet e turnit aktiv, nga regjistri. |
+| Vazhdo | Kontrolli i dëmeve me numrin e regjistrimeve, dhe çdo formular i papërfunduar me turnin dhe gjendjen e tij. |
+
+Poshtë tyre është historiku i vetë Dorëzimit (turnet e mbyllura).
+
+**Pa turn aktiv** faqja kërkon zgjedhje të shprehur, në tri mënyra sipas gjendjes: Dorëzimi nuk ka turn të hapur (paneli i nisjes); Dorëzimi ka një turn të hapur që nuk është turni aktiv i pajisjes (butoni “Puno në {turni}”, i vetmi shkrim që bën faqja vetë, dhe vetëm për turnin që Dorëzimi e ka të hapur); turni aktiv është i paqartë ose tjetër (thuhet, pa u ndjekur). Asgjë nuk hamendësohet nga ora.
+
+**Pas mesnatës** data operative mbetet ajo e turnit aktiv: faqja e thotë, nuk propozon turn tjetër, dhe një regjistrim merr datën operative.
+
+**Draftet te “Vazhdo”** renditen me rregullat ekzistuese, pa i kopjuar: vendi i turnit nga `ShiftContext.place`, gjendja e turnit nga `ShiftClose.shiftStatus` (i këtij turni, i hapur, i mbyllur, jo i hapur, i paqartë), dhe gjendja e regjistrimit nga `DefectWork.entryState` (pret, tashmë në regjistër, e pakonfirmuar). Nga “Sot” nuk sillet, nuk regjistrohet dhe nuk hidhet asgjë: çdo rresht çon te Kontrolli i dëmeve.
+
+**Vetëm lexim në hapje.** Hapja e “Sot” nuk ndez pilotin, nuk nis turn, nuk vendos turn aktiv dhe nuk zhvendos drafte; testet krahasojnë gjithçka që mban shfletuesi para dhe pas. Pa pilot, ose me profil me turne të vetat, faqja e thotë dhe nuk tregon asgjë tjetër.
+
+**Ndryshim te Dorëzimi.** Një pajisje me pilotin të ndezur dhe pa asnjë dorëzim të ruajtur nuk kishte si ta niste turnin e parë shprehimisht: Dorëzimi hapej me një fletë bosh, pa turn aktiv. Tani ajo gjendje lexohet si “asnjë turn i hapur” dhe turni i parë niset si çdo tjetër. Vlen vetëm me pilotin të ndezur; asgjë nuk shkruhet derisa përdoruesi të nisë turnin. Fjalia e panelit të nisjes nuk thotë më “turni i fundit u mbyll”.
+
+**Kufizimet.**
+
+- “Kërkon vëmendje” numëron vetëm nga lista e veprimeve dhe nga draftet. Sinjalet e tjera të prototipit ishin tekst demonstrimi; faqja çon te mjeti Signals.
+- “Turni deri tani” tregon vetëm dëmet. Numrat e tjerë mbushen te Dorëzimi.
+- Hapi “Dorëzimi” te faza “Fund” është lidhje; gjendja e dorëzimit (gati, dërguar) nuk tregohet te “Sot”.
+- Faza e zgjedhur mbahet vetëm për skedën e hapur të shfletuesit.
+- Faqja mban brenda gjithë shënjimin e Dorëzimit, të pashfaqur: është çmimi i një mekanizmi të vetëm.
+- Një pajisje pilot pa dorëzim të ruajtur e hap Dorëzimin te paneli i nisjes; formulari (edhe butoni i shembullit) shfaqet pasi niset turni. Kur piloti ndizet nga adresa në një pajisje të tillë, formulari mbetet i dukshëm deri në rifreskimin e parë.
+- Kutia e punës që ka çdo faqe mjeti (me zgjedhësin e kyçjes me PIN) hyn me zbehje kur rrëshqitet në pamje. Në një faqe të shkurtër si “Sot” ajo rri në buzë të dritares, dhe kontrolli automatik i kontrastit e kapte në mes të zbehjes. Është sjellje ekzistuese e faqes, jo e këtij hapi; testi i “Sot” mat faqen e qetësuar.
+- Faqja nuk është në udhëzuesin e mjeteve dhe as në listën e mjeteve; shtimi atje është punë botimi.
+- Shqipja e teksteve të reja të pilotit përdor herë “ti” e herë “ju”. Kërkon një kalim redaktimi para publikimit.
 
 Hapat 1 dhe 2 nuk varen nga njëri-tjetri. Hapi 3 kërkon hapin 2. Hapat 5 dhe 7 kërkojnë hapat 1a dhe 4. Hapi 1c nuk bllokon asnjë hap tjetër: pa të, veprimet nga një rresht përdorin kopjen e fushave.
 

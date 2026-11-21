@@ -19,6 +19,7 @@ for (const lang of ["en", "de", "sq"]) {
   test(`${lang}: an entry becomes an action, and the action opens its source in the log: the row, read only`, async ({ page }) => {
     await startShift(page, lang);
     await page.goto(`${prefix(lang)}/tools/damage-control/`);
+    await expect(page.locator("[data-work-head]")).toBeVisible();
     await page.locator('[data-entry] [name="note"]').fill("Cage 4");
     await page.locator('[data-entry] [type="submit"]').click();
     await page.locator('[data-entry] [name="note"]').fill("Half typed");
@@ -60,6 +61,7 @@ for (const lang of ["en", "de", "sq"]) {
 test("a period and a filter open as they were stored; an action without an origin has no link; another device is told the source is not there", async ({ page, browser }) => {
   await startShift(page, "en");
   await page.goto("/tools/damage-control/");
+  await expect(page.locator("[data-work-head]")).toBeVisible();
   for (const text of ["First", "Second"]) {
     await page.locator('[data-entry] [name="note"]').fill(text);
     await page.locator('[data-entry] [type="submit"]').click();

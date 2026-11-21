@@ -12,5 +12,7 @@ permalink: /tools/action-tracker/
   <p class="lede">Every countermeasure, finding and signal from the other tools lands here with an owner, a date and a way to check it. Overdue first, then this week, then what was verified. The list is the weekly review.</p>
 </section>
 
+{#- The bar of the pilot, not the tool's own partial (src/_data/workKeys.js reads the first plain include). -#}
+{%- include "partials/work-nav.njk" -%}
 {% set cfg = actionTracker %}
 {% include "partials/action-tracker.njk" %}

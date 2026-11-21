@@ -31,6 +31,25 @@
 // A reload never adds a row. Two real entries with the same fields stay possible: the second is typed and entered
 // as a form of its own.
 window.DefectWork = (() => {
+  // The row a form would add in a shift: the same fields the entry writes, so the two can be compared.
+  const entryRow = (values, shift, kit, notRecorded) => {
+    const text = (value) => (typeof value === "string" ? value : "");
+    const open = values.more === "1";
+    const cost = open ? kit.parseNumber(String(values.cost ?? "")) : NaN;
+    return { date: shift.date, shift: shift.label, stage: text(values.stage), type: open ? text(values.type) : notRecorded, cause: text(values.cause), units: Math.round(kit.parseNumber(String(values.units ?? ""))), cost: cost >= 0 ? cost : null, note: text(values.note).trim() };
+  };
+  // What a stored draft of the entry form is, from what is stored alone (the page that shows drafts without being
+  // the log, js/today.js, asks the same question): "entered" when the page wrote so on it after its row was stored;
+  // "unconfirmed" when it is only marked as being entered and the log has more rows like it than it had then;
+  // "waiting" otherwise, also when it carries a mark and the log has no more such rows (its row was not stored).
+  const entryState = (draft, rows, kit, notRecorded) => {
+    if (!draft || draft.values.entering === undefined) return "waiting";
+    if (draft.values.entered === "1") return "entered";
+    const before = Number(draft.values.entering);
+    const row = entryRow(draft.values, draft, kit, notRecorded);
+    const same = rows.filter((other) => kit.rowKey(other, ["id"]) === kit.rowKey(row, ["id"])).length;
+    return Number.isInteger(before) && same > before ? "unconfirmed" : "waiting";
+  };
   const mount = (api) => {
     const { root, data, KEY, state, field, t, kit, entry, entryStatus, results, Workplace, UNKNOWN, NOT_RECORDED } = api;
     const { tx, el, int, pct, plural, lower, showDate, str, flash, parseNumber, dateSpan, trackerLink } = kit;
@@ -117,24 +136,16 @@ window.DefectWork = (() => {
     const formText = (values) => [str(values.stage), str(values.cause), plural(Math.max(1, Math.round(parseNumber(String(values.units ?? 1))) || 1), t.one, t.many), str(values.note).trim()].filter(Boolean).join(" · ");
     const shiftText = (item) => `${item.label} · ${showDate(item.date)}`;
     // The row a form would add in a shift: the same fields the entry writes, so the two can be compared.
-    const rowOf = (values, shift) => {
-      const open = values.more === "1";
-      const cost = open ? parseNumber(String(values.cost ?? "")) : NaN;
-      return { date: shift.date, shift: shift.label, stage: str(values.stage), type: open ? str(values.type) : NOT_RECORDED, cause: str(values.cause), units: Math.round(parseNumber(String(values.units ?? ""))), cost: cost >= 0 ? cost : null, note: str(values.note).trim() };
-    };
+    const rowOf = (values, shift) => entryRow(values, shift, kit, NOT_RECORDED);
     const sameRows = (row) => state.rows.filter((other) => kit.rowKey(other, ["id"]) === kit.rowKey(row, ["id"])).length;
-    // A stored draft that was marked as being entered, and what can be said of it.
+    // A stored draft that was marked as being entered, and what can be said of it (entryState, below the view).
     const known = new Set(); // revs of drafts whose row this page stored itself, in this visit
     const marked = (draft) => Boolean(draft) && draft.values.entering !== undefined;
     // Confirmed: the page wrote "entered" on it after the row was stored, or stored the row in this visit.
-    const confirmed = (draft) => marked(draft) && (draft.values.entered === "1" || known.has(draft.rev));
+    const confirmed = (draft) => marked(draft) && (known.has(draft.rev) || entryState(draft, state.rows, kit, NOT_RECORDED) === "entered");
     // Not confirmed, and the log has more rows like it than when it was marked: its row may be the one that was
     // stored, or one that came from elsewhere. Nobody can tell from here.
-    const unconfirmed = (draft) => {
-      if (!marked(draft) || confirmed(draft)) return false;
-      const before = Number(draft.values.entering);
-      return Number.isInteger(before) && sameRows(rowOf(draft.values, draft)) > before;
-    };
+    const unconfirmed = (draft) => marked(draft) && !confirmed(draft) && entryState(draft, state.rows, kit, NOT_RECORDED) === "unconfirmed";
     const wasEntered = (draft) => confirmed(draft) || unconfirmed(draft);
     // What was typed, without the marks.
     const plain = (values) => { const { entering, entered, ...rest } = values; return rest; };
@@ -682,5 +693,5 @@ window.DefectWork = (() => {
   };
   // The modules the view stands on are on the page (the one for the active shift is loaded after the tool's own).
   const ready = () => Boolean(window.ShiftContext && window.ShiftClose);
-  return { mount, ready };
+  return { mount, ready, entryState };
 })();

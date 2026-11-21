@@ -556,10 +556,11 @@ test('the built pages load the script before the file box, show nothing of it, a
     else assert.ok(dialog[0].includes(english));
   }
   // Who uses the context: the handover (the active shift is set when a shift is started and cleared when it is closed),
-  // the file box and the restore points (the drafts of a file, the active shift after it), and the work view of
-  // Damage Control (js/defect-work.js, step 4). The log script the three logs share does not.
+  // the file box and the restore points (the drafts of a file, the active shift after it), the work view of Damage
+  // Control (js/defect-work.js, step 4), and the pilot's page "Today" with its bar, which read it (step 6). The log
+  // script the three logs share does not.
   const users = fs.readdirSync('src/js').filter((file) => file.endsWith('.js') && file !== 'shift-context.js' && fs.readFileSync(`src/js/${file}`, 'utf8').includes('ShiftContext')).sort();
-  assert.deepEqual(users, ['defect-work.js', 'shift-handover.js', 'storage-guard.js', 'work-backup.js']);
+  assert.deepEqual(users, ['defect-work.js', 'shift-handover.js', 'storage-guard.js', 'today.js', 'work-backup.js', 'work-nav.js']);
   assert.ok(!fs.readFileSync('src/js/defect-log.js', 'utf8').includes('ShiftContext'));
 });
 

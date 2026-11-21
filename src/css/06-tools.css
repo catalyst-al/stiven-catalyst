@@ -960,3 +960,30 @@ select.sh-in { cursor: pointer; }
 .dw-source p { margin: 0; }
 .dw-source-title { font-weight: 700; font-size: 17px; }
 @media print { .dw-source { display: none !important; } }
+
+/* The pilot's bar between its pages (js/work-nav.js) and its work page "Today" (js/today.js). */
+.wn { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-bottom: 12px; }
+.wn a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-size: 14px; font-weight: 700; text-decoration: none; }
+.wn a[aria-current="page"] { border-color: var(--blue); background: color-mix(in srgb, var(--blue) 14%, transparent); }
+.wn-count { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--blue); color: var(--on-blue); font-size: 12px; }
+.wn .wn-chip { margin-left: auto; border-style: dashed; font-weight: 600; }
+.wn .wn-chip.is-unset { color: var(--muted); }
+.td { display: grid; gap: 12px; }
+.td-status:empty { display: none; }
+.td-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+.td-card, .td-off { gap: 10px; align-content: start; }
+.td-card p, .td-card h2, .td-off p, .td-off h2 { margin: 0; }
+.td-card h2, .td-off h2 { font-size: clamp(20px, 2.4vw, 26px); }
+.td-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.td-phase { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.td-phase button { min-height: 40px; padding: 6px 14px; border: 0; background: none; color: var(--muted); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.td-phase button[aria-pressed="true"] { background: color-mix(in srgb, var(--blue) 18%, transparent); color: var(--ink); }
+.td-list, .td-steps { display: grid; gap: 8px; margin: 0; padding-left: 20px; }
+.td-bad::marker { color: var(--danger); }
+.td-warn::marker { color: var(--warn); }
+.td-stat strong { font-size: 30px; }
+.td-hero .eyebrow { margin-bottom: 4px; }
+.td-hero h1 { font-size: clamp(30px, 5vw, 52px); }
+.td-handover .sh-setup, .td-handover .sh-output { display: none !important; }
+@media print { .wn { display: none !important; } }
+.td-handover { margin-top: 16px; }

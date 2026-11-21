@@ -93,12 +93,14 @@ for (const lang of ["en", "de", "sq"]) {
 test("two shifts with unfinished forms: the closed shift offers no return, nothing is written over, and the form is brought only once this one is clean", async ({ page }) => {
   await startShift(page, "en");
   await page.goto("/tools/damage-control/");
+  await expect(page.locator("[data-work-head]")).toBeVisible();
   await page.locator('[data-entry] [name="note"]').fill("Left in the first shift");
   // That shift is closed with its form unfinished, and the next one is started.
   await page.goto("/tools/shift-handover/");
   await page.locator("[data-close]").click();
   await page.locator("[data-start-shift]").click();
   await page.goto("/tools/damage-control/");
+  await expect(page.locator("[data-work-head]")).toBeVisible();
   const note = page.locator("[data-work-draft]");
   await expect(note).toHaveCount(1);
   await expect(note).toContainText("Left in the first shift");
@@ -127,6 +129,7 @@ test("two shifts with unfinished forms: the closed shift offers no return, nothi
 test("the entry is stored and its draft cannot be cleared: after a real reload the form is clean, the page says the entry is in the log, and no second row is added", async ({ page }) => {
   const active = await startShift(page, "en");
   await page.goto("/tools/damage-control/");
+  await expect(page.locator("[data-work-head]")).toBeVisible();
   await page.locator('[data-entry] [name="note"]').fill("Pallet 7");
   await page.locator('[data-entry] [name="units"]').fill("2");
   // From here the browser refuses to remove the drafts, on this page and after a reload, until the test lifts it.
@@ -171,6 +174,7 @@ test("the entry is stored and its draft cannot be cleared: after a real reload t
 test("a form that cannot be confirmed as stored: the page says so, enters nothing through reloads, and the form is put back whole when the visitor asks", async ({ page }) => {
   const active = await startShift(page, "en");
   await page.goto("/tools/damage-control/");
+  await expect(page.locator("[data-work-head]")).toBeVisible();
   await page.locator('[data-entry] [name="note"]').fill("Pallet 7");
   await page.locator('[data-entry] [name="units"]').fill("2");
   // As after an entry that failed with its mark left behind, and a row with the same fields that came by team sync:
@@ -187,6 +191,7 @@ test("a form that cannot be confirmed as stored: the page says so, enters nothin
   }, active);
   const pallets = async () => (await rows(page, "en")).filter((row) => row.note === "Pallet 7").length;
   await page.goto("/tools/damage-control/");
+  await expect(page.locator("[data-work-head]")).toBeVisible();
   for (let visit = 0; visit < 2; visit += 1) {
     if (visit) await page.reload();
     await expect(page.locator("[data-work-unconfirmed]")).toContainText("It cannot be confirmed that this form was stored.");
