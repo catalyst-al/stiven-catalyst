@@ -8114,5 +8114,14 @@
   "Not added: the unfinished form of this shift was changed somewhere else. Choose which one to keep, then add it.": "Nicht hinzugefügt: Das unfertige Formular dieser Schicht wurde anderswo geändert. Wählen Sie, welches bleiben soll, dann fügen Sie es hinzu.",
   "Not added, and nothing was written: the unfinished form could not be marked as being entered ({why}), and it could otherwise be entered a second time later. Try again.": "Nicht hinzugefügt, und nichts wurde geschrieben: Das unfertige Formular konnte nicht als „wird eingetragen“ markiert werden ({why}), und es könnte sonst später ein zweites Mal eingetragen werden. Versuchen Sie es erneut.",
   "A copy of the form could not be cleared; the page shows it as already in the log.": "Eine Kopie des Formulars konnte nicht geleert werden; die Seite zeigt sie als bereits im Protokoll.",
-  "Already in the log ({shift}): {form}. A copy of this form is still kept here; it is not waiting to be entered.": "Bereits im Protokoll ({shift}): {form}. Eine Kopie dieses Formulars ist hier noch gespeichert; sie wartet nicht darauf, eingetragen zu werden."
+  "Already in the log ({shift}): {form}. A copy of this form is still kept here; it is not waiting to be entered.": "Bereits im Protokoll ({shift}): {form}. Eine Kopie dieses Formulars ist hier noch gespeichert; sie wartet nicht darauf, eingetragen zu werden.",
+  "It cannot be confirmed that this form was stored.": "Es lässt sich nicht bestätigen, dass dieses Formular gespeichert wurde.",
+  "A row with the same fields is in the log ({shift}), but it may be another entry: {form}.": "Im Protokoll steht eine Zeile mit denselben Feldern ({shift}), aber es kann ein anderer Eintrag sein: {form}.",
+  "Nothing was entered again and nothing was removed. Look at the log below, then put the form back to enter it, or remove it. The entry form is off until you decide.": "Nichts wurde erneut eingetragen und nichts entfernt. Sehen Sie im Protokoll unten nach, dann holen Sie das Formular zurück, um es einzutragen, oder entfernen Sie es. Das Eingabeformular ist aus, bis Sie entschieden haben.",
+  "Put it back in the form": "Zurück ins Formular",
+  "Remove it": "Entfernen",
+  "A row with the same fields is in the log of that shift, and it cannot be confirmed that this form was stored. Look at the log before you bring it here or discard it.": "Im Protokoll jener Schicht steht eine Zeile mit denselben Feldern, und es lässt sich nicht bestätigen, dass dieses Formular gespeichert wurde. Sehen Sie im Protokoll nach, bevor Sie es hierher holen oder verwerfen.",
+  "Remove this form? What was typed in it is gone: {form}.": "Dieses Formular entfernen? Was darin eingegeben wurde, ist dann weg: {form}.",
+  "Not removed: {why}": "Nicht entfernt: {why}",
+  "Decide first about the form above: put it back, or remove it.": "Entscheiden Sie zuerst über das Formular oben: zurückholen oder entfernen."
 }

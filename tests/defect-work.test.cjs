@@ -79,7 +79,7 @@ test('off by default: without the pilot the Damage Control page is as it always 
     form(w).shift.value = SHIFTS[lang][2];
     add(w);
     await settle(w);
-    const added = rowsOf(w).at(-1);
+    const added = keep(w)[KEY[lang]].rows.at(-1);
     assert.deepEqual([added.date, added.shift, added.type], ['2026-11-09', SHIFTS[lang][2], fieldsOf(lang).type.options[0]]);
     assert.equal(w.localStorage.getItem(DRAFTS), null, `${lang}: no draft is written`);
     assert.equal($$(w, '[data-log] tr')[0].children.length, 9, `${lang}: the log has the columns it had`);
@@ -104,7 +104,8 @@ test('Incomplete Control and the Night Audit Log do not have the view at all, wi
     pilot.document.querySelector('[data-entry]').elements.date.value = '2026-11-08';
     submit(pilot, pilot.document.querySelector('[data-entry]'));
     await settle(pilot);
-    assert.equal(JSON.parse(pilot.localStorage.getItem(key)).rows.at(-1).date, '2026-11-08');
+    // The page writes right after it has drawn; keep() has it write what still waits, as leaving the page does.
+    assert.equal(keep(pilot)[key].rows.at(-1).date, '2026-11-08');
     assert.equal(pilot.localStorage.getItem(DRAFTS), null);
   }
 });
@@ -314,7 +315,10 @@ test('the row is stored and the draft cannot be cleared: the form is clean at on
   assert.equal(pallets(again), 1, 'one row, through all of it');
 });
 
-test('when even the word "entered" cannot be written, the log is the evidence: the copy is shown, not offered as work, and cleared when the visitor says so', { skip: !hasSite }, () => {
+const unconfirmed = (w) => $$(w, '[data-work-unconfirmed]');
+const formOff = (w) => $(w, '[data-entry] fieldset').disabled;
+
+test('when even the word "entered" cannot be written: in this visit the page knows it stored the row; after a reload it cannot confirm it, says so, enters nothing, and the visitor decides', { skip: !hasSite }, () => {
   const w = page('en', pilotStorage('en', { rows: [row('en')] }));
   typePallet(w);
   // One more write is taken (the mark, made before the row); then nothing.
@@ -323,25 +327,42 @@ test('when even the word "entered" cannot be written, the log is the evidence: t
   assert.equal(pallets(w), 1);
   assert.deepEqual([draftsOf(w)[0].values.entering, draftsOf(w)[0].values.entered], ['0', undefined], 'only the mark made before the row is stored: there were no such rows then');
   assert.equal(form(w).note.value, '');
-  assert.equal(copies(w).length, 1, 'said at once');
+  assert.equal(copies(w).length, 1, 'this page stored the row itself: "Already in the log"');
+  assert.equal(unconfirmed(w).length, 0);
   thaw();
+  // After a reload nothing stored says the row was this form's: only that the log has such a row.
   const again = reload(w);
-  assert.equal(form(again).note.value, '', 'not put back in the form');
+  assert.equal(copies(again).length, 0, 'not called "Already in the log"');
+  assert.equal(unconfirmed(again).length, 1);
+  assert.match(unconfirmed(again)[0].textContent, /^It cannot be confirmed that this form was stored\. A row with the same fields is in the log \(Late · [^)]+\), but it may be another entry: Receiving · Stacking · 2 damaged units · Pallet 7\.Nothing was entered again and nothing was removed\./);
+  assert.equal(form(again).note.value, '', 'not put back in the form unasked');
+  assert.equal(formOff(again), true, 'the entry form is off until the visitor decides');
   assert.doesNotMatch($(again, '[data-work-saved-with]').textContent, waitingText);
-  assert.equal(copies(again).length, 1, 'shown, and not cleared unasked: only the log says it was entered');
+  add(again);
+  assert.equal(rowsOf(again).length, 2, 'a submit all the same adds nothing');
+  assert.match(status(again), /Decide first about the form above/);
+  assert.equal(draftsOf(again)[0].values.note, 'Pallet 7', 'the content is kept');
+  // Removed, after a question; "no" changes nothing.
+  again.answer = false;
+  click(again, unconfirmed(again)[0].querySelector('[data-work-held="drop"]'));
+  assert.match(again.asked.at(-1), /^Remove this form\? What was typed in it is gone: Receiving · Stacking · 2 damaged units · Pallet 7\.$/);
   assert.equal(draftsOf(again).length, 1);
-  click(again, copies(again)[0].querySelector('[data-work-copy]'));
+  again.answer = true;
+  click(again, unconfirmed(again)[0].querySelector('[data-work-held="drop"]'));
   assert.equal(again.localStorage.getItem(DRAFTS), null);
-  assert.equal(copies(again).length, 0);
+  assert.equal(unconfirmed(again).length, 0);
+  assert.equal(formOff(again), false);
   assert.equal(pallets(again), 1);
-  // A copy left by another shift is told the same way there, with no "Bring" and no "Back to".
+  // Such a form left by another shift is listed there as an unfinished form, with the warning; it can be brought or discarded.
   const stale = page('en', { ...pilotStorage('en', { index: 2, rows: rowsOf(w) }), [DRAFTS]: w.localStorage.getItem(DRAFTS) });
-  assert.equal($$(stale, '[data-work-draft]').length, 0);
-  assert.equal(copies(stale).length, 1);
-  assert.equal(copies(stale)[0].querySelector('[data-work-bring], [data-work-back]'), null);
+  assert.equal(copies(stale).length, 0);
+  assert.equal(draftNotes(stale).length, 1);
+  assert.match(draftNotes(stale)[0].textContent, /A row with the same fields is in the log of that shift, and it cannot be confirmed that this form was stored\./);
+  click(stale, noteButton(draftNotes(stale)[0], 'bring'));
+  assert.deepEqual([form(stale).note.value, draftsOf(stale)[0].label, draftsOf(stale)[0].values.entering], ['Pallet 7', 'Night', undefined], 'brought here it is work that waits, without the mark of the other shift');
 });
 
-test('two real entries with the same fields are still two rows; a copy left behind does not stand in the way', { skip: !hasSite }, () => {
+test('two real entries with the same fields are still two rows, also after an entry that could not be confirmed', { skip: !hasSite }, () => {
   const w = page('en', pilotStorage('en'));
   typePallet(w);
   add(w);
@@ -349,22 +370,108 @@ test('two real entries with the same fields are still two rows; a copy left behi
   add(w);
   assert.equal(pallets(w), 2, 'typed twice, entered twice');
   assert.equal(w.localStorage.getItem(DRAFTS), null);
-  assert.equal(copies(w).length, 0);
-  // With a copy of the first one left behind (only the log says it was entered), the second is typed and entered.
+  assert.equal(copies(w).length + unconfirmed(w).length, 0);
+  // The first one could not be confirmed. The visitor sees it in the log and removes the form; the second is typed and entered.
   const left = page('en', pilotStorage('en'));
   typePallet(left);
   const thaw = freezeDrafts(left, 1);
   add(left);
   thaw();
   const again = reload(left);
-  assert.equal(copies(again).length, 1);
+  assert.equal(unconfirmed(again).length, 1);
+  type(again, form(again).note, 'typed while the form is off');
+  assert.equal(draftsOf(again)[0].values.note, 'Pallet 7', 'what is typed meanwhile does not write over the form that waits for the decision');
+  click(again, unconfirmed(again)[0].querySelector('[data-work-held="drop"]'));
   typePallet(again);
-  assert.equal(copies(again).length, 0, 'what is typed now is the form of this shift, saved over the copy');
-  assert.deepEqual([draftsOf(again)[0].values.note, draftsOf(again)[0].values.entering], ['Pallet 7', undefined]);
   add(again);
   assert.equal(pallets(again), 2);
   assert.equal(again.localStorage.getItem(DRAFTS), null);
   assert.equal(pallets(reload(again)), 2, 'and a reload adds nothing');
+});
+
+// The real team sync, against a fake of its server: another device of the team has a row with the very same fields.
+const CODE = 'acid-acorn-acre-acts-afar-affix';
+const fakeServer = () => {
+  const spaces = new Map();
+  const reply = (code, body) => ({ status: code, ok: code >= 200 && code < 300, json: async () => (body === undefined ? null : JSON.parse(JSON.stringify(body))) });
+  let updated = 1_000_000;
+  const fetch = async (url, init = {}) => {
+    const id = (/\/v1\/spaces\/([0-9a-f]{64})$/.exec(url) || [])[1];
+    if (!id) return reply(404, { error: 'not-found' });
+    const meta = spaces.get(id);
+    if ((init.method || 'GET') === 'GET') return meta ? reply(200, { rev: meta.rev, updated: meta.updated, iv: meta.iv, data: meta.data }) : reply(404, { error: 'empty' });
+    const token = (/^Bearer ([0-9a-f]{64})$/.exec(init.headers?.Authorization || '') || [])[1];
+    if (!token || (meta && meta.token !== token)) return reply(403, { error: 'token' });
+    const body = JSON.parse(init.body);
+    const rev = meta ? meta.rev : 0;
+    if (body.rev !== rev) return reply(409, { rev });
+    updated += 5000;
+    spaces.set(id, { rev: rev + 1, updated, iv: body.iv, data: body.data, token });
+    return reply(200, { rev: rev + 1, updated });
+  };
+  return { fetch };
+};
+const syncNow = async (w, server) => {
+  if (!w.TeamSync) {
+    Object.assign(w, { CompressionStream, DecompressionStream, Blob, Response, TextEncoder, TextDecoder });
+    Object.defineProperty(w, 'crypto', { value: globalThis.crypto, configurable: true });
+    for (const file of ['storage-guard', 'work-backup', 'team-sync']) w.eval(fs.readFileSync(`src/js/${file}.js`, 'utf8'));
+  }
+  const keys = await w.TeamSyncMath.deriveKeys(CODE, 1000);
+  const result = await w.TeamSync.syncOnce({ endpoint: 'https://sync.example.test', fetch: server.fetch, storage: w.localStorage, keys, selected: (key) => w.TeamSyncMath.isOn(w.WorkBackup.toolSlug(key), {}), create: true, wait: async () => {} });
+  assert.ok(['synced', 'unchanged'].includes(result.status), `sync: ${result.status}`);
+};
+
+test('the row is not stored, the mark cannot be taken back, and team sync brings a row with the same fields: the page claims nothing, the form can be recovered, and a reload adds no row', { skip: !hasSite }, async () => {
+  // This device: the entry fails (the log's key is refused), and so does taking the mark back.
+  const w = page('en', pilotStorage('en'));
+  typePallet(w);
+  const thaw = freezeDrafts(w, 1);
+  const restore = refuse(w, KEY.en);
+  add(w);
+  assert.equal(pallets(w), 0, 'the row is not stored');
+  assert.match(status(w), /^Not added: the browser's storage did not take the entry/);
+  assert.deepEqual([draftsOf(w)[0].values.entering, draftsOf(w)[0].values.entered], ['0', undefined]);
+  thaw();
+  restore();
+  // Another device of the team logged a damage with the very same fields in the same shift, and syncs first.
+  const server = fakeServer();
+  const mate = page('en', { [KEY.en]: { rows: [{ date: '2026-11-11', shift: 'Late', stage: 'Receiving', type: 'Not recorded', cause: 'Stacking', units: 2, cost: null, note: 'Pallet 7' }] } });
+  await syncNow(mate, server);
+  await syncNow(w, server);
+  assert.equal(pallets(w), 1, 'team sync brought the other device\'s row: one row, and it is not this form\'s');
+  // The page opened again.
+  let again = reload(w);
+  assert.equal(pallets(again), 1, 'the reload added nothing');
+  assert.equal(copies(again).length, 0, 'the page does not say "Already in the log": it stored nothing');
+  assert.equal(unconfirmed(again).length, 1);
+  assert.match(unconfirmed(again)[0].textContent, /^It cannot be confirmed that this form was stored\. A row with the same fields is in the log .*but it may be another entry: Receiving · Stacking · 2 damaged units · Pallet 7\./);
+  assert.equal(draftsOf(again)[0].values.note, 'Pallet 7', 'the form\'s content is kept');
+  assert.equal(formOff(again), true);
+  assert.ok(shown($(again, '[data-log]')), 'the log is on the same view, to be looked at');
+  assert.equal($$(again, '[data-log] tr').length, 1);
+  // Once more: still nothing added, still recoverable.
+  again = reload(again);
+  assert.equal(pallets(again), 1);
+  assert.equal(unconfirmed(again).length, 1);
+  // The visitor checks the log, sees the row is the other device's, and puts the form back: it waits as it did.
+  click(again, unconfirmed(again)[0].querySelector('[data-work-held="back"]'));
+  assert.deepEqual([form(again).note.value, form(again).units.value], ['Pallet 7', '2'], 'recovered whole');
+  assert.equal(formOff(again), false);
+  assert.match($(again, '[data-work-saved-with]').textContent, waitingText);
+  assert.equal(draftsOf(again)[0].values.entering, undefined, 'as work that waits, without the old mark');
+  assert.equal(pallets(again), 1, 'putting it back enters nothing');
+  assert.equal(pallets(reload(again)), 1, 'nor does a reload after it');
+  // Entered now, by the visitor's own press: this device's damage beside the other device's.
+  add(again);
+  assert.equal(pallets(again), 2);
+  assert.equal(again.localStorage.getItem(DRAFTS), null);
+  assert.equal(unconfirmed(again).length + copies(again).length, 0);
+  // The other choice: the visitor judges it the same damage and removes the form. One row stays.
+  const other = reload(w);
+  click(other, unconfirmed(other)[0].querySelector('[data-work-held="drop"]'));
+  assert.equal(other.localStorage.getItem(DRAFTS), null);
+  assert.equal(pallets(other), 1);
 });
 
 test('a draft that cannot be marked as being entered is not entered; an entry that is not stored leaves the form waiting, mark or no mark', { skip: !hasSite }, () => {

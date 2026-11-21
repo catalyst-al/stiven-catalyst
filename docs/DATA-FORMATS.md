@@ -73,8 +73,9 @@ shifts of its own in the workplace profile) is the first page that writes a draf
 units, note } }`, with `more: "1"`, `type` and `cost` when the type and the cost were opened; it is written at each
 keystroke and removed once the entry is stored. Before the row is written the stored draft is marked `entering`
 (the number of rows the log has then that look the same, as text), and `entered: "1"` is added when the row was stored
-and the draft could not be removed: a draft so marked, with more such rows in the log than it names, is a copy of an
-entry already made and is never offered as work that waits. A row it adds is the row the log always wrote (`date` the operative
+and the draft could not be removed: that one is a copy of an entry already made, and the page clears it. A draft
+with `entering` alone and more such rows in the log than it names may or may not have been entered (the row may have
+come from another device): the page says it cannot confirm it, enters and clears nothing, and the visitor decides. A row it adds is the row the log always wrote (`date` the operative
 date of the active shift, `shift` its word on this page, `type` "Not recorded" when the type was not opened), with no
 `id`. Its actions carry `origin` of the kinds `period`, `filter` and `row`; a row without an `id` goes as a copy of its
 fields with `twins`. Incomplete Control and the Night Audit Log, which share the template, have none of this.

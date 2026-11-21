@@ -168,6 +168,53 @@ test("the entry is stored and its draft cannot be cleared: after a real reload t
   expect(await pallets()).toHaveLength(2);
 });
 
+test("a form that cannot be confirmed as stored: the page says so, enters nothing through reloads, and the form is put back whole when the visitor asks", async ({ page }) => {
+  const active = await startShift(page, "en");
+  await page.goto("/tools/damage-control/");
+  await page.locator('[data-entry] [name="note"]').fill("Pallet 7");
+  await page.locator('[data-entry] [name="units"]').fill("2");
+  // As after an entry that failed with its mark left behind, and a row with the same fields that came by team sync:
+  // the draft carries the mark "0 such rows", and the log has one. Written from another page, as sync or another tab
+  // would (the open form would write its own draft again as it is left).
+  await page.goto("/tools/shift-handover/");
+  await page.evaluate(({ date, label }) => {
+    const drafts = JSON.parse(localStorage.getItem("sc-drafts-ui"));
+    drafts.drafts[0].values.entering = "0";
+    localStorage.setItem("sc-drafts-ui", JSON.stringify(drafts));
+    const log = JSON.parse(localStorage.getItem("sc-damage-control")) || { rows: [] };
+    log.rows = [{ date, shift: label, stage: drafts.drafts[0].values.stage, type: "Not recorded", cause: drafts.drafts[0].values.cause, units: 2, cost: null, note: "Pallet 7" }];
+    localStorage.setItem("sc-damage-control", JSON.stringify(log));
+  }, active);
+  const pallets = async () => (await rows(page, "en")).filter((row) => row.note === "Pallet 7").length;
+  await page.goto("/tools/damage-control/");
+  for (let visit = 0; visit < 2; visit += 1) {
+    if (visit) await page.reload();
+    await expect(page.locator("[data-work-unconfirmed]")).toContainText("It cannot be confirmed that this form was stored.");
+    await expect(page.locator("[data-work-unconfirmed]")).toContainText("Pallet 7");
+    await expect(page.locator("[data-work-entered]")).toHaveCount(0);
+    await expect(page.locator('[data-entry] [name="note"]')).toBeDisabled();
+    await expect(page.locator('[data-entry] [type="submit"]')).toBeDisabled();
+    await expect(page.locator("[data-log] tr")).toHaveCount(1);
+    expect(await pallets()).toBe(1);
+  }
+  await expectAccessible(page);
+  await noSideScroll(page);
+  // By keyboard: the first decision is reached and taken with Enter.
+  await page.locator('[data-work-held="back"]').focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator('[data-entry] [name="note"]')).toHaveValue("Pallet 7");
+  await expect(page.locator('[data-entry] [name="units"]')).toHaveValue("2");
+  await expect(page.locator('[data-entry] [name="note"]')).toBeEnabled();
+  await expect(page.locator("[data-work-unconfirmed]")).toHaveCount(0);
+  expect(await pallets()).toBe(1);
+  await page.reload();
+  await expect(page.locator('[data-entry] [name="note"]')).toHaveValue("Pallet 7");
+  expect(await pallets()).toBe(1);
+  await page.locator('[data-entry] [type="submit"]').click();
+  expect(await pallets()).toBe(2);
+  expect(await drafts(page)).toEqual([]);
+});
+
 test("without the pilot the page is the page it always was", async ({ page }) => {
   await page.goto("/tools/damage-control/");
   await expect(page.locator("[data-work-head]")).toBeHidden();

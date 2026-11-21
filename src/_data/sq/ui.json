@@ -8114,5 +8114,14 @@
   "Not added: the unfinished form of this shift was changed somewhere else. Choose which one to keep, then add it.": "Nuk u shtua: formulari i papërfunduar i këtij turni u ndryshua diku tjetër. Zgjidhni cilin të mbani, pastaj shtojeni.",
   "Not added, and nothing was written: the unfinished form could not be marked as being entered ({why}), and it could otherwise be entered a second time later. Try again.": "Nuk u shtua dhe asgjë nuk u shkrua: formulari i papërfunduar nuk u shënua dot si “po regjistrohet” ({why}), dhe përndryshe mund të regjistrohej më vonë për herë të dytë. Provoni sërish.",
   "A copy of the form could not be cleared; the page shows it as already in the log.": "Një kopje e formularit nuk u pastrua dot; faqja e tregon si tashmë në regjistër.",
-  "Already in the log ({shift}): {form}. A copy of this form is still kept here; it is not waiting to be entered.": "Tashmë në regjistër ({shift}): {form}. Një kopje e këtij formulari është ende e ruajtur këtu; ajo nuk pret të regjistrohet."
+  "Already in the log ({shift}): {form}. A copy of this form is still kept here; it is not waiting to be entered.": "Tashmë në regjistër ({shift}): {form}. Një kopje e këtij formulari është ende e ruajtur këtu; ajo nuk pret të regjistrohet.",
+  "It cannot be confirmed that this form was stored.": "Nuk mund të konfirmohet që ky formular u ruajt.",
+  "A row with the same fields is in the log ({shift}), but it may be another entry: {form}.": "Në regjistër ka një rresht me të njëjtat fusha ({shift}), por mund të jetë një regjistrim tjetër: {form}.",
+  "Nothing was entered again and nothing was removed. Look at the log below, then put the form back to enter it, or remove it. The entry form is off until you decide.": "Asgjë nuk u regjistrua sërish dhe asgjë nuk u hoq. Shihni regjistrin më poshtë, pastaj kthejeni formularin për ta regjistruar, ose hiqeni. Formulari i regjistrimit është i fikur derisa të vendosni.",
+  "Put it back in the form": "Ktheje në formular",
+  "Remove it": "Hiqe",
+  "A row with the same fields is in the log of that shift, and it cannot be confirmed that this form was stored. Look at the log before you bring it here or discard it.": "Në regjistrin e atij turni ka një rresht me të njëjtat fusha, dhe nuk mund të konfirmohet që ky formular u ruajt. Shihni regjistrin para se ta sillni këtu ose ta hidhni poshtë.",
+  "Remove this form? What was typed in it is gone: {form}.": "Ta heq këtë formular? Ajo që u shkrua në të humbet: {form}.",
+  "Not removed: {why}": "Nuk u hoq: {why}",
+  "Decide first about the form above: put it back, or remove it.": "Vendosni më parë për formularin më sipër: kthejeni, ose hiqeni."
 }
