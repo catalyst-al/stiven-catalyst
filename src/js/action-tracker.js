@@ -210,6 +210,20 @@
       ? tx("Checked in the room on {date}: {item} passes.", { date: `${showDate(a.proof.date)}${a.proof.time ? ` ${a.proof.time}` : ""}`, item: a.proof.item })
       : tx("Checked in the room on {date}: {item} fails again.", { date: `${showDate(a.proof.date)}${a.proof.time ? ` ${a.proof.time}` : ""}`, item: a.proof.item })));
     else if (S.byRecheckOnly(a) && a.status !== "verified") main.append(el("p", "at-detail at-proof", tx("Verified by a re-inspection of the room, once the fix is checked there.")));
+    // An action that keeps where in a log it came from (origin) opens that place: the log of its language, with the
+    // id of the action in the address and nothing else. The log reads the rest from this list.
+    if (a.origin && a.origin.tool === "damage-control") {
+      const sourceLine = el("p", "at-detail at-source");
+      const sourceLink = el("a", null, tx("Open the source"));
+      const sourcePath = `${a.origin.lang === "en" ? "" : `/${a.origin.lang}`}${window.location.pathname.replace(/^\/(de|sq)(?=\/)/, "").replace(/action-tracker\/?$/, "damage-control/")}`;
+      sourceLink.href = `${sourcePath}?source=${encodeURIComponent(a.id)}`;
+      sourceLink.dataset.openSource = a.id;
+      sourceLink.setAttribute("aria-label", `${tx("Open the source")}: ${a.title}`);
+      const where = a.origin.kind === "row" ? tx("one entry of {date}", { date: showDate(a.origin.row.date) })
+        : `${showDate(a.origin.from)} – ${showDate(a.origin.to)}${a.origin.kind === "filter" ? ` · ${a.origin.filter.value}` : ""}`;
+      sourceLine.append(sourceLink, ` · ${sourceName(a.source)}, ${where}`);
+      main.append(sourceLine);
+    }
     if (a.caseId) {
       const caseLine = el("p", "at-detail at-case");
       const caseLink = el("a", null, `${tx("Investigation")} ${a.caseId}`);

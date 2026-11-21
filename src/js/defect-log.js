@@ -74,7 +74,11 @@
       ...(rowIdOf(row.id) ? { id: rowIdOf(row.id) } : {}),
     };
   });
-  const save = () => write(KEY, state);
+  // The period of a source view (js/defect-source.js) is lent to the page, never stored: while it is on, `lent` holds
+  // the visitor's own period, and that is what every save writes.
+  let lent = null;
+  let source = null;
+  const save = () => write(KEY, lent ? { ...state, from: lent.from, to: lent.to } : state);
   // The work view of the pilot (js/defect-work.js), on the one page that has it and only where it is on: null
   // everywhere else, and then nothing below does anything it did not do before.
   let work = null;
@@ -136,7 +140,8 @@
   const periodRows = () => inRange(state.rows, state.from, state.to);
   // "Week 38" when the period has a name, else the days the rows cover.
   const periodName = (rows) => {
-    if (state.period) return state.period;
+    // The name the visitor gave their own period does not name a period that was lent.
+    if (state.period && !lent) return state.period;
     const span = dateSpan(rows);
     return span ? spanText(span) : "";
   };
@@ -563,7 +568,7 @@
       ],
     }),
     renderResults,
-    filter: () => (picked ? { label: picked.value, test: pickTest(), clear: clearPick } : null),
+    filter: () => source?.rowFilter() || (picked ? { label: picked.value, test: pickTest(), clear: clearPick } : null),
   });
   rerender = () => book.render();
 
@@ -712,6 +717,17 @@
   }
 
   checkSummary = floorCheck(document.querySelector("[data-floor-check]"), `${KEY}-check`);
+  // "Open the source" of an action (js/defect-source.js): a view that only reads. It borrows the page's period and
+  // filter and gives them back; nothing of it is stored.
+  if (data.workUi && window.DefectSource) source = window.DefectSource.mount({
+    state, field, kit, t,
+    lend: (from, to) => { if (!lent) lent = { from: state.from, to: state.to }; state.from = from; state.to = to; },
+    unlend: () => { if (lent) { state.from = lent.from; state.to = lent.to; lent = null; } },
+    // The visitor chose a period of their own while the view was on: it is theirs from here.
+    keep: () => { lent = null; },
+    pick: (value) => { picked = value; },
+    render: () => book.render(),
+  });
   // The work view asks for what it needs of this page; it changes nothing of the log's format.
   // The modules it stands on are loaded for every page further down the page, so it is mounted once
   // they are there: at once when they are, otherwise when the page's scripts have all run.
@@ -725,7 +741,7 @@
     addNow: (row) => {
       book.ownWork();
       state.rows.push(row);
-      const stored = write(KEY, state);
+      const stored = save();
       if (!stored) state.rows.pop();
       book.render();
       return stored;

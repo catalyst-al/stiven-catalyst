@@ -2,6 +2,8 @@
 {%- set t = cfg.text -%}
 {%- if cfg.workUi %}
 {#- The work view of the pilot (js/defect-work.js): hidden unless the device has the pilot on and the shifts fit. -#}
+{#- "Open the source" of an action (js/defect-source.js): filled only when the page is opened with ?source=<id>. -#}
+<section class="shell" hidden><div class="dl-box dw-source" data-source-note hidden></div></section>
 <p class="shell form-note dw-off-note" data-work-off hidden></p>
 <section class="shell dw-head" data-work-head hidden>
   <div class="dw-chips" data-work-chips></div>
@@ -195,6 +197,7 @@
 <script src="{{ '/js/workplace.js' | assetUrl }}" defer></script>
 {%- if cfg.workUi %}
 <script src="{{ '/js/shift-close.js' | assetUrl }}" defer></script>
+<script src="{{ '/js/defect-source.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/defect-work.js' | assetUrl }}" defer></script>
 {%- endif %}
 <script src="{{ '/js/defect-log.js' | assetUrl }}" defer></script>

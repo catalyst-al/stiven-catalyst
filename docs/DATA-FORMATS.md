@@ -80,6 +80,11 @@ date of the active shift, `shift` its word on this page, `type` "Not recorded" w
 `id`. Its actions carry `origin` of the kinds `period`, `filter` and `row`; a row without an `id` goes as a copy of its
 fields with `twins`. Incomplete Control and the Night Audit Log, which share the template, have none of this.
 
+"Open the source" (`js/defect-source.js`) is the way back: the Action Tracker links an action that has an `origin` of
+Damage Control to the log of `origin.lang` with `?source=<the action's id>` and nothing else, and the log reads the
+action from `sc-actions`. The view only reads: the period it shows is lent to the page and never stored (`from` and
+`to` of the log keep the visitor's own), and it writes nothing when it opens or closes.
+
 Closing a shift and carrying its open issues (`js/shift-close.js`, used by the Shift Handover page). This way of closing
 is on only where the device has it turned on: `sc-shift-close-ui`, `{ v: 1, on: true, set }`, a setting of the device
 that is in no saved file, no restore point and no team copy, and is read without the PIN. Anything else under that key,

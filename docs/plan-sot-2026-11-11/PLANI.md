@@ -521,7 +521,7 @@ Këto nuk janë implementuar, sepse varen nga mbyllja e përbashkët ose nga nd�
 | 2. Turni aktiv dhe draftet · **bërë** | Ruajtja e turnit aktiv dhe e drafteve, rregullat e kopjes rezervë dhe pyetja për përplasjet (pjesa 6). Asnjë faqe nuk i shfaq ende. | `shift-context.js`, `work-backup.js`, `storage-guard.js`, `partials/work-backup.njk`, `tests/shift-context.test.cjs`, `tests/browser/work-backup-drafts.spec.mjs` |
 | 3. Mbyllja e përbashkët · **bërë, K15 pjesërisht** | Mbyllje pa dorëzim, pa turn aktiv pas saj, nisje e shprehur, mbartje sipas 3.5, “ndryshuar pas ndarjes”, dorëzimi jashtë sinkronizimit. Gjendja e kritereve te 3.7. | `shift-close.js`, `shift-handover.js`, `partials/shift-handover.njk`, `team-sync.js`, `shift-context.js`, `work-backup.js`, `storage-guard.js`, `tests/shift-close.test.cjs`, `tests/browser/shift-close.spec.mjs` |
 | 4. Kontrolli i dëmeve · **bërë** | Pamja e punës vetëm për këtë mjet, vetëm magazina, vetëm me pilotin të ndezur (7.1). | `defect-work.js`, `defect-log.njk`, `defect-log.js`, `tool-kit.js`, `shift-close.js`, `damageControl.json`, `tests/defect-work.test.cjs`, `tests/browser/damage-work.spec.mjs` |
-| 5. “Hap burimin” | Lista e veprimeve rikthen periudhën, filtrin ose rreshtin. | `action-tracker.js`, `defect-log.js` |
+| 5. “Hap burimin” · **bërë** | Lista e veprimeve hap Kontrollin e dëmeve te periudha, filtri ose rreshti i ruajtur, vetëm për lexim (7.2). | `defect-source.js`, `action-tracker.js`, `defect-log.js`, `defect-work.js`, `partials/defect-log.njk`, `tests/open-source.test.cjs`, `tests/browser/open-source.spec.mjs` |
 | 6. Faqja “Sot” | Faqja e punës, mbi të njëjtën mbyllje. Hyrja te Catalyst. | faqe e re, `families.json`, `signals.js` |
 | 7. Verifikimi para/pas | Krahasimi i periudhës së ruajtur me atë pas veprimit, me vëllimet e vërteta. | `action-tracker.js`, `defect-log.js` |
 
@@ -581,6 +581,45 @@ Bërë më 15 nëntor 2026. Pamja është një shtresë mbi faqen ekzistuese: i 
 - Listat e “Fillo këtu” dhe ato të rezultatit më poshtë filtrojnë njësoj; pas një klikimi në listën e poshtme fokusi kalon te e njëjta vlerë në listën e sipërme.
 - Rezultati i plotë ekzistues (trendi, matrica, përmbledhja) mbetet në skedën Puno, poshtë regjistrit; prototipi nuk e tregonte.
 - Një rresht pa datë (i importuar dikur) dërgon veprimin pa `origin`.
+
+### 7.2 Hapi 5: “Hap burimin”
+
+Bërë më 21 nëntor 2026.
+
+**Rruga.** Një veprim që ka `origin` të Kontrollit të dëmeve merr te lista e veprimeve lidhjen “Hap burimin”. Lidhja çon te Kontrolli i dëmeve i gjuhës së ruajtur te `origin.lang`, me `?source=<id e veprimit>` dhe asgjë tjetër në adresë. Faqja e dëmeve e lexon veprimin nga lista e ruajtur në shfletues (`sc-actions`) dhe prej tij `origin`, me të njëjtat rregulla vlefshmërie si lista (një test i krahason të dyja). Lista e veprimeve është një për tri gjuhët, ndaj edhe faqja angleze e listës çon te regjistri shqip kur veprimi erdhi prej tij.
+
+**Çfarë hapet.**
+
+| Burimi | Çfarë tregon faqja |
+| --- | --- |
+| Periudhë | Datat e ruajtura. |
+| Filtër | Datat e ruajtura dhe filtri i ruajtur. |
+| Rresht me `id` | Rreshti me atë `id`. Kur nuk është këtu: periudha, me fjalët që rreshti nuk gjendet në këtë pajisje. |
+| Rresht pa `id`, një përputhje | Rreshti, si burimi. |
+| Rresht pa `id`, disa përputhje | Të gjithë, si kandidatë; asnjë nuk zgjidhet. |
+| Rresht pa `id`, në krijim disa identikë, tani një | Ai që ka mbetur, si “kandidati i mbetur”: mund të jetë ai vetë, ose jo. |
+| Rresht pa `id`, asnjë përputhje | Periudha, me fjalët që rreshti nuk gjendet më. |
+
+Përputhja për një rresht pa `id` bëhet me fushat që veprimi ka ruajtur (data, turni, hapi, shkaku, njësitë), vetëm mes rreshtave pa `id`.
+
+**Vetëm për lexim.** Periudha e burimit i huazohet faqes: periudha e vetë përdoruesit mbetet ajo që është ruajtur, shkruhet e pandryshuar nga çdo ruajtje sa kohë pamja është e hapur, dhe kthehet kur pamja lihet. Hapja dhe mbyllja e pamjes nuk shkruajnë asgjë. Turni aktiv, draftet dhe cilësimi i pilotit nuk preken; pamja punon njësoj edhe aty ku piloti është i fikur. Kur përdoruesi zgjedh vetë një periudhë gjatë pamjes, pamja mbyllet dhe ajo zgjedhje është e tija.
+
+**Kur burimi mungon.**
+
+- Veprim i vjetër pa `origin`: lista nuk i jep lidhje. I hapur me dorë, faqja thotë që veprimi nuk e thotë nga erdhi dhe nuk huazon asgjë.
+- Regjistër i pastruar, ose pajisje që ka listën e veprimeve por jo regjistrin: faqja hapet, emërton burimin dhe thotë “Burimi nuk gjendet në këtë pajisje”. Shembulli që faqja ngarkon vetë në një pajisje pa regjistër nuk merret kurrë për regjistër, dhe faqja e thotë.
+- `id` që lista nuk e ka: faqja thotë që veprimi nuk është në listën e kësaj pajisjeje.
+- Faqja e një gjuhe tjetër: thotë në cilën gjuhë është regjistri burim dhe çon atje.
+
+**Ndryshim jashtë pamjes.** Pamja e punës (hapi 4) e rishkruante draftin e pandryshuar kur faqja largohej. Tani nuk shkruan kur drafti i ruajtur është i njëjtë me formularin, që një faqe që vetëm shihet të mos shkruajë asgjë.
+
+**Kufizimet.**
+
+- “Hap periudhën” ndryshon rezultatin dhe kokën e faqes. Tabela e regjistrit, si gjithmonë, tregon regjistrimet më të fundit pa i kufizuar sipas periudhës; ajo ngushtohet vetëm kur burimi është një rresht, te kandidatët.
+- Vëllimi i shkruar për periudhën e vetë përdoruesit nuk vlen për periudhën e huazuar, ndaj shkalla mund të mos dalë në pamjen e burimit; faqja e thotë me shënimin e saj të zakonshëm.
+- Kur lista e veprimeve është e kyçur me PIN, veprimi nuk lexohet dhe faqja thotë që nuk është në listë.
+- Banderola “Erdhe nga…” e prototipit për kalimet e tjera (5 Whys, Pareto, karta) nuk është bërë: ky hap mbulon vetëm kthimin nga lista e veprimeve.
+- Vetëm Kontrolli i dëmeve hap burimin; Kontrolli i plotësisë dhe Regjistri i Night Audit nuk dërgojnë `origin`.
 
 Hapat 1 dhe 2 nuk varen nga njëri-tjetri. Hapi 3 kërkon hapin 2. Hapat 5 dhe 7 kërkojnë hapat 1a dhe 4. Hapi 1c nuk bllokon asnjë hap tjetër: pa të, veprimet nga një rresht përdorin kopjen e fushave.
 

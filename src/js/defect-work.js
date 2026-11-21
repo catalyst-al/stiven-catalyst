@@ -159,6 +159,9 @@ window.DefectWork = (() => {
 
     const saveDraft = () => {
       if (!ctx || !dirty || conflict) return true;
+      // Nothing to write when the stored draft is this very form: a page that is only looked at writes nothing.
+      const same = rev ? Context.find(ctx) : null;
+      if (same && same.rev === rev && !marked(same) && Context.sameValues(same.values, readForm())) return true;
       writing = true;
       const result = Context.save(ctx, readForm(), { base: rev });
       writing = false;

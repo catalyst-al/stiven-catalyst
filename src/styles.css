@@ -3891,6 +3891,10 @@ select.sh-in { cursor: pointer; }
 .dw-row-action { font-weight: 700; white-space: nowrap; }
 @media print { .dw-head, .dw-drafts, .dw-next, .dw-noshift { display: none !important; } }
 .dw-on .tool-hero h1 { font-size: clamp(30px, 5vw, 52px); }
+.dw-source { gap: 8px; margin-bottom: 16px; border-color: var(--blue); }
+.dw-source p { margin: 0; }
+.dw-source-title { font-weight: 700; font-size: 17px; }
+@media print { .dw-source { display: none !important; } }
 /* Search and filters */
 html:not(.js) .filter-bar { display: none; }
 .filter-bar {
