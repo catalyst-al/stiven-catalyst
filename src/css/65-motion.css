@@ -47,7 +47,7 @@
 :root[data-motion="paused"] .reflection-hero::before,
 :root[data-motion="paused"] .about-portrait,
 :root[data-motion="paused"] .about-timeline li:first-child .about-when::before,
-:root[data-motion="paused"] .about-brand-poster .brand-bulb::after,
+:root[data-motion="paused"] .about-brand-poster .brand-planet,
 :root[data-motion="paused"] .book-onward.is-shown,
 :root[data-motion="paused"] .book-onward.is-shown .book-onward-arrow svg,
 :root[data-motion="paused"] .family-sky *,

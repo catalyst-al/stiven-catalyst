@@ -3,10 +3,10 @@ const WORDS_PER_MINUTE = 200;
 export default {
   layout: "layouts/article.njk",
   kind: "Reflection",
-  // Every reflection opens with the Stiven Catalyst Coaching logo beside its title, faded into the page like the
-  // photo of an essay (layouts/article.njk, .article-hero-media.is-logo).
-  image: "/media/stiven-catalyst-coaching-hero.jpg",
-  image_alt: "Stiven Catalyst Coaching",
+  // Every reflection opens with the mark beside its title, at the centre of its small system, faded into the page
+  // like the photo of an essay (layouts/article.njk, .article-hero-media.is-logo; scripts/mark-hero.py).
+  image: "/media/stiven-catalyst-mark-hero.jpg",
+  image_alt: "Stiven Catalyst",
   image_logo: true,
   activeNav: "/reflections.html",
   // Reflections marked "soon" get no page of their own yet.

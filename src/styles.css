@@ -1008,17 +1008,21 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   gap: 22px;
 }
 
+/* The poster of the identity (About): the mark at the centre of its small system, with the name under it. Like the
+   homepage hero it is a night stage in both themes. The mark is flat: the ring in the colour of the text, the point
+   in the accent; the soft light, the orbits and the four families begin outside the ring. */
 .brand-poster {
+  --ink: #f6f7f4;
+  --blue: #4ab5f7;
   position: relative;
   min-height: 520px;
   overflow: hidden;
+  border: 1px solid rgba(255,255,255,.1);
   border-radius: 30px;
   background:
-    linear-gradient(90deg,
-      color-mix(in srgb, var(--red) 93%, #000) 0%,
-      color-mix(in srgb, var(--blue) 76%, #fff) 38%,
-      #07131b 66%,
-      color-mix(in srgb, #fff 76%, #5b5757) 100%);
+    radial-gradient(ellipse 96% 44% at 50% 35%, rgba(22,44,64,.9), transparent 74%),
+    radial-gradient(circle at 94% 3%, rgba(74,181,247,.15), transparent 44%),
+    #05080b;
   box-shadow: var(--shadow);
   isolation: isolate;
   container-type: inline-size;
@@ -1028,48 +1032,42 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 38%, rgba(0,0,0,.15) 100%);
+  background: linear-gradient(180deg, transparent 52%, rgba(0,0,0,.34) 100%);
   pointer-events: none;
 }
 
-.brand-cable {
+/* The system is wider than the poster, so the outer orbit runs off its edges. */
+.brand-system {
   position: absolute;
   z-index: 2;
-  top: 0;
   left: 50%;
-  width: 5px;
-  height: 145px;
-  background: #030506;
-  transform: translateX(-50%);
+  top: 35%;
+  width: 118%;
+  height: auto;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  overflow: visible;
+  pointer-events: none;
 }
-
-.brand-bulb {
-  position: absolute;
-  z-index: 3;
-  left: 50%;
-  top: 136px;
-  width: 62px;
-  height: 78px;
-  transform: translateX(-50%);
-  border-radius: 48% 48% 52% 52%;
-  background: #fff;
-  box-shadow:
-    0 0 14px #fff,
-    0 0 48px rgba(255,255,255,.9),
-    0 0 95px rgba(82,184,247,.72);
+.brand-ring { fill: var(--ink); }
+.brand-point { fill: var(--blue); }
+/* The pen that uncovers the ring: a stroke along its middle, wide enough for the widest part of the line. */
+.brand-pen { fill: none; stroke: #fff; stroke-width: 11; stroke-linecap: round; stroke-dasharray: 1 2; }
+.brand-orbit { fill: none; stroke: rgba(190,214,236,.2); stroke-width: .45; }
+.brand-dust { fill: #e2eeff; }
+/* Each family is a small planet set on its orbit (offset-path), with a faint halo of its own colour. */
+.brand-planet {
+  fill: var(--planet);
+  stroke: var(--planet);
+  stroke-width: 4.5;
+  stroke-opacity: .2;
+  offset-rotate: 0deg;
+  offset-distance: var(--at);
 }
-
-.brand-bulb::before {
-  content: "";
-  position: absolute;
-  left: 17px;
-  top: -24px;
-  width: 28px;
-  height: 27px;
-  border-radius: 5px 5px 2px 2px;
-  background: linear-gradient(#050607, #17191a);
-  border-bottom: 3px solid var(--gold);
-}
+.brand-planet.is-pulse { --planet: #b09cfa; --at: 4%; --year: 54s; offset-path: path("M182 120A62 27 0 1 1 58 120A62 27 0 1 1 182 120Z"); }
+.brand-planet.is-zenith { --planet: #84c6f7; --at: 56%; --year: 88s; offset-path: path("M206 120A86 38 0 1 1 34 120A86 38 0 1 1 206 120Z"); }
+.brand-planet.is-lumen { --planet: #f6cc80; --at: 88%; --year: 88s; offset-path: path("M206 120A86 38 0 1 1 34 120A86 38 0 1 1 206 120Z"); }
+.brand-planet.is-atlas { --planet: #d6dee6; --at: 34%; --year: 128s; offset-path: path("M232 120A112 50 0 1 1 8 120A112 50 0 1 1 232 120Z"); }
 
 .brand-wordmark {
   position: absolute;
@@ -4522,9 +4520,9 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   background: linear-gradient(120deg, color-mix(in srgb, var(--blue) 22%, transparent), transparent 60%);
   mix-blend-mode: soft-light;
 }
-/* The logo of a reflection takes the photo's place and fade, its colours kept: only a little dimmed, so the white
-   of its background glows softly instead of glaring on the dark page. */
-.article-hero-media.is-logo img { filter: brightness(.9); }
+/* The mark of a reflection takes the photo's place and fade, its colours kept as they are: the ring in the colour of
+   the text, the point in the accent. */
+.article-hero-media.is-logo img { filter: none; }
 .article-hero-media.is-logo::after { content: none; }
 .has-image .article-hero-text {
   position: relative;
@@ -4620,24 +4618,18 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 .about-timeline h3 { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
 .about-timeline li:hover h3 { translate: 5px 0; }
 @media (max-width: 620px) { .about-timeline li::before { inset: 4px -10px; } }
-/* The bulb on the About poster breathes, and glows brighter under the pointer. */
-.about-brand-poster .brand-bulb { transition: filter .5s ease; }
-/* The bulb breathes: a pseudo-element with the brighter glow, faded in and out by the compositor. */
-.about-brand-poster .brand-bulb::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: 0 0 18px rgba(255, 255, 255, .7), 0 0 64px rgba(255, 255, 255, .55), 0 0 130px rgba(82, 184, 247, .6);
-  opacity: 0;
-  pointer-events: none;
-  animation: bulb-breathe 4.5s ease-in-out infinite;
+/* The About poster in motion: the ring is drawn round the point each time the poster comes into view (script.js
+   takes .is-offscreen away as it does; without scripts it is drawn once as the page opens), and the four families
+   turn on their orbits, each at its own pace. Still, the ring is whole and the planets rest where they are set. */
+@media (prefers-reduced-motion: no-preference) {
+  .about-brand-poster .brand-pen { animation: brand-draw 1.5s cubic-bezier(.45, 0, .2, 1) .35s both; }
+  .about-brand-poster.is-offscreen .brand-pen { animation: none; }
+  .about-brand-poster .brand-planet { animation: brand-orbit var(--year) linear infinite; }
 }
-.about-brand-poster:hover .brand-bulb { filter: brightness(1.12) drop-shadow(0 0 22px rgba(82, 184, 247, .8)); }
-@keyframes bulb-breathe { 50% { opacity: 1; } }
+@keyframes brand-draw { from { stroke-dashoffset: 1.06; } }
+@keyframes brand-orbit { to { offset-distance: calc(var(--at) + 100%); } }
 @media (prefers-reduced-motion: reduce) {
   .about-portrait,
-  .about-brand-poster .brand-bulb::after,
   .about-timeline li:first-child .about-when::before { animation: none; }
 }
 .about-timeline h3 {
@@ -4888,6 +4880,8 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   .about-timeline li { grid-template-columns: minmax(0, 1fr); }
   .about-more { grid-template-columns: minmax(0, 1fr); }
   .brand-poster { min-height: 430px; border-radius: 22px; }
+  /* The lower poster of a phone: the system is kept clear of the name under it. */
+  .brand-system { top: 32%; width: min(118%, 390px); }
   .meta-strip { grid-template-columns: 1fr; }
   .meta-strip > div,
   .meta-strip > div:not(:first-child) {
@@ -9449,26 +9443,26 @@ a.essay-series-next:hover em { translate: 5px 0; }
 @keyframes home-heading { from { opacity: 0; translate: 0 28px; filter: blur(5px); } }
 
 /* The heading of every page (.page-hero; not the tool and role pages, which open on their planet) is quieter: a
-   smaller title and the Stiven Catalyst Coaching logo beside it, faded into the page like the logo of a reflection,
-   so the eye goes to what the page holds rather than to a title the width of the screen. The logo is a pseudo
-   element, so no page has to carry it; the title is fitted to the column it has left (--measure). */
+   smaller title and the mark beside it, at the centre of its small system (scripts/mark-hero.py), faded into the
+   page like the mark of a reflection, so the eye goes to what the page holds rather than to a title the width of
+   the screen. The picture is a pseudo element, so no page has to carry it; the title is fitted to the column it has
+   left (--measure). */
 .page-hero:not(.tool-hero)::after {
   content: "";
   display: block;
   aspect-ratio: 720 / 612;
-  background: url("/media/stiven-catalyst-coaching-hero.jpg") center / cover no-repeat;
-  filter: brightness(.92);
+  background: url("/media/stiven-catalyst-mark-hero.jpg") center / cover no-repeat;
   pointer-events: none;
   -webkit-mask-image: var(--logo-fade);
   mask-image: var(--logo-fade);
 }
-/* The logo's picture fades out on every side, an oval with the logo in its middle, so no edge of it shows and it
-   reads as part of the page's own background (the reflections use the same fade). */
+/* The picture fades out on every side, an oval with the mark in its middle, so no edge of it shows and it reads as
+   part of the page's own background (the reflections use the same fade). */
 :root { --logo-fade: radial-gradient(ellipse 46% 47% at 55% 48%, #000 58%, rgba(0, 0, 0, .55) 78%, transparent 100%); }
 .article-hero-media.is-logo { border-radius: 0; -webkit-mask-image: var(--logo-fade); mask-image: var(--logo-fade); }
-/* On the dark page the logo's near-black background gives way to the page itself (lighten keeps whichever is
-   brighter), so only the bulb, its glow and the letters show, and no box is drawn against the page's blue glow. The
-   light page keeps the picture as it is, faded. */
+/* On the dark page the picture's night ground gives way to the page itself (lighten keeps whichever is brighter),
+   so only the mark, the orbits and the planets show, and no box is drawn against the page's blue glow. The light
+   page keeps the picture as it is, faded. */
 :root:not([data-theme="light"]) .page-hero:not(.tool-hero)::after,
 :root:not([data-theme="light"]) .article-hero-media.is-logo { mix-blend-mode: lighten; }
 @media (min-width: 901px) {
@@ -9487,7 +9481,7 @@ a.essay-series-next:hover em { translate: 5px 0; }
   .page-hero:not(.tool-hero):not(.treatise-hero) h1.hero-long { font-size: min(clamp(34px, 7.4cqi, 88px), var(--fit-d, 1000px)); }
   .page-hero:not(.tool-hero) .lede { max-width: 560px; margin: 24px 0 0; font-size: 18px; }
 }
-/* Phones and small tablets: the logo sits above the title as a low band that fades into the page, and the title
+/* Phones and small tablets: the mark sits above the title as a low band that fades into the page, and the title
    is set smaller. */
 @media (max-width: 900px) {
   .page-hero:not(.tool-hero) { display: flex; flex-direction: column; padding-top: 28px; }
@@ -14981,7 +14975,7 @@ details[open] > .rs-setup-summary::after { content: "−"; }
 :root[data-motion="paused"] .reflection-hero::before,
 :root[data-motion="paused"] .about-portrait,
 :root[data-motion="paused"] .about-timeline li:first-child .about-when::before,
-:root[data-motion="paused"] .about-brand-poster .brand-bulb::after,
+:root[data-motion="paused"] .about-brand-poster .brand-planet,
 :root[data-motion="paused"] .book-onward.is-shown,
 :root[data-motion="paused"] .book-onward.is-shown .book-onward-arrow svg,
 :root[data-motion="paused"] .family-sky *,

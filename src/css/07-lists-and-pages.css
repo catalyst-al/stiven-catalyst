@@ -707,9 +707,9 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   background: linear-gradient(120deg, color-mix(in srgb, var(--blue) 22%, transparent), transparent 60%);
   mix-blend-mode: soft-light;
 }
-/* The logo of a reflection takes the photo's place and fade, its colours kept: only a little dimmed, so the white
-   of its background glows softly instead of glaring on the dark page. */
-.article-hero-media.is-logo img { filter: brightness(.9); }
+/* The mark of a reflection takes the photo's place and fade, its colours kept as they are: the ring in the colour of
+   the text, the point in the accent. */
+.article-hero-media.is-logo img { filter: none; }
 .article-hero-media.is-logo::after { content: none; }
 .has-image .article-hero-text {
   position: relative;
@@ -805,24 +805,18 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 .about-timeline h3 { transition: translate .45s cubic-bezier(.22, 1, .36, 1); }
 .about-timeline li:hover h3 { translate: 5px 0; }
 @media (max-width: 620px) { .about-timeline li::before { inset: 4px -10px; } }
-/* The bulb on the About poster breathes, and glows brighter under the pointer. */
-.about-brand-poster .brand-bulb { transition: filter .5s ease; }
-/* The bulb breathes: a pseudo-element with the brighter glow, faded in and out by the compositor. */
-.about-brand-poster .brand-bulb::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: 0 0 18px rgba(255, 255, 255, .7), 0 0 64px rgba(255, 255, 255, .55), 0 0 130px rgba(82, 184, 247, .6);
-  opacity: 0;
-  pointer-events: none;
-  animation: bulb-breathe 4.5s ease-in-out infinite;
+/* The About poster in motion: the ring is drawn round the point each time the poster comes into view (script.js
+   takes .is-offscreen away as it does; without scripts it is drawn once as the page opens), and the four families
+   turn on their orbits, each at its own pace. Still, the ring is whole and the planets rest where they are set. */
+@media (prefers-reduced-motion: no-preference) {
+  .about-brand-poster .brand-pen { animation: brand-draw 1.5s cubic-bezier(.45, 0, .2, 1) .35s both; }
+  .about-brand-poster.is-offscreen .brand-pen { animation: none; }
+  .about-brand-poster .brand-planet { animation: brand-orbit var(--year) linear infinite; }
 }
-.about-brand-poster:hover .brand-bulb { filter: brightness(1.12) drop-shadow(0 0 22px rgba(82, 184, 247, .8)); }
-@keyframes bulb-breathe { 50% { opacity: 1; } }
+@keyframes brand-draw { from { stroke-dashoffset: 1.06; } }
+@keyframes brand-orbit { to { offset-distance: calc(var(--at) + 100%); } }
 @media (prefers-reduced-motion: reduce) {
   .about-portrait,
-  .about-brand-poster .brand-bulb::after,
   .about-timeline li:first-child .about-when::before { animation: none; }
 }
 .about-timeline h3 {
@@ -1073,6 +1067,8 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
   .about-timeline li { grid-template-columns: minmax(0, 1fr); }
   .about-more { grid-template-columns: minmax(0, 1fr); }
   .brand-poster { min-height: 430px; border-radius: 22px; }
+  /* The lower poster of a phone: the system is kept clear of the name under it. */
+  .brand-system { top: 32%; width: min(118%, 390px); }
   .meta-strip { grid-template-columns: 1fr; }
   .meta-strip > div,
   .meta-strip > div:not(:first-child) {

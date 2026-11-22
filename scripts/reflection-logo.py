@@ -1,11 +1,9 @@
 # Run from the repository root: python3 scripts/reflection-logo.py (Pillow and NumPy).
-# Makes src/media/stiven-catalyst-coaching-hero.jpg: the logo on the site's dark ground, for the side of a
-# reflection's hero and of every page heading. The logo is kept inside the middle of the picture, so the page can
-# fade the picture out on every side and it melts into the background. It also writes scripts/note-card-logo.png,
-# the same logo on a transparent ground, for the banner at the foot of the field note cards (scripts/note-cards.mjs).
-# The white background becomes transparent, the black (STIVEN, the cord) turns light, the bulb is lit, the colours
-# of CATALYST and COACHING stay as they are.
-from PIL import Image, ImageFilter, ImageDraw
+# Makes scripts/note-card-logo.png: the earlier logo on a transparent ground, for the banner at the foot of the field
+# note cards (scripts/note-cards.mjs), until those cards are drawn again with the mark. The white background becomes
+# transparent, the black (STIVEN, the cord) turns light, the bulb is lit, the colours of CATALYST and COACHING stay
+# as they are. The picture beside the page headings and the reflections is the mark now: scripts/mark-hero.py.
+from PIL import Image
 import numpy as np
 from collections import deque
 img=Image.open('src/media/stiven-catalyst-coaching.jpg').convert('RGB')
@@ -46,19 +44,4 @@ bm=blur(body*255.0,1.0)/255
 col=col*(1-bm[...,None])+np.array([255,247,228])*bm[...,None]
 a=np.maximum(a,bm)
 logo=Image.fromarray(np.dstack([col,a*255]).clip(0,255).astype('uint8'),'RGBA').crop((380,0,1010,290))
-W,H=1440,1224; s=1.3
 logo.save('scripts/note-card-logo.png',optimize=True)
-logo=logo.resize((int(logo.width*s),int(logo.height*s)),Image.LANCZOS)
-x=int(W*0.35-(cx-380)*s); y=int(H*0.47-cy*s)
-bg=Image.new('RGB',(W,H),(6,10,16))
-bx,by=x+int((cx-380)*s),y+int(cy*s)
-glow=Image.new('L',(W,H),0); ImageDraw.Draw(glow).ellipse((bx-240,by-240,bx+240,by+240),fill=105); glow=glow.filter(ImageFilter.GaussianBlur(120))
-bg=Image.composite(Image.new('RGB',(W,H),(255,212,150)),bg,glow)
-core=Image.new('L',(W,H),0); ImageDraw.Draw(core).ellipse((bx-70,by-60,bx+70,by+80),fill=150); core=core.filter(ImageFilter.GaussianBlur(40))
-bg=Image.composite(Image.new('RGB',(W,H),(255,236,200)),bg,core)
-blue=Image.new('L',(W,H),0); ImageDraw.Draw(blue).ellipse((W*0.5,-H*0.35,W*1.35,H*0.55),fill=60); blue=blue.filter(ImageFilter.GaussianBlur(170))
-bg=Image.composite(Image.new('RGB',(W,H),(10,106,176)),bg,blue)
-row=logo.crop((0,0,logo.width,1))
-for y2 in range(y): bg.paste(row,(x,y2),row)
-bg.paste(logo,(x,y),logo)
-bg.save('src/media/stiven-catalyst-coaching-hero.jpg',quality=88,optimize=True)

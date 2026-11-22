@@ -75,8 +75,26 @@
 <section class="shell about-grid">
   <aside class="about-aside">
     <div class="brand-poster about-brand-poster" role="img" aria-label="{{ 'Stiven Catalyst visual identity' | t(lang) }}">
-      <span class="brand-cable"></span>
-      <span class="brand-bulb"></span>
+      {#- The mark at the centre of its system: the ring (the one drawing of the mark, as in --mark-ring-display) is
+          shown through a mask that a pen stroke along its middle uncovers, so it is drawn round the point as the
+          poster comes into view; the four families turn on their orbits (css/02-homepage.css). #}
+      <svg class="brand-system" viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+        <defs><mask id="brand-pen" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><path class="brand-pen" pathLength="1" d="M42.2 22.4L39.8 22.9L37.5 23.6L35.2 24.4L33 25.3L30.9 26.4L28.9 27.6L26.9 28.9L25.2 30.3L23.5 31.9L22 33.6L20.6 35.4L19.4 37.2L18.3 39.1L17.4 41.1L16.7 43.2L16.2 45.3L15.8 47.4L15.6 49.6L15.6 51.8L15.8 54L16.1 56.1L16.6 58.3L17.3 60.4L18.2 62.4L19.2 64.5L20.4 66.4L21.8 68.3L23.3 70.1L24.9 71.8L26.7 73.4L28.6 74.8L30.6 76.2L32.7 77.4L34.9 78.5L37.2 79.5L39.5 80.3L41.9 81L44.4 81.5L46.8 81.8L49.3 82L51.8 82.1L54.3 82L56.7 81.7L59.2 81.3L61.5 80.7L63.9 80L66.1 79.1L68.3 78.1L70.3 77L72.3 75.7L74.1 74.3L75.8 72.8L77.4 71.1L78.8 69.4L80.1 67.6L81.2 65.7L82.2 63.7L83 61.7L83.6 59.6L84.1 57.4L84.3 55.3L84.4 53.1L84.4 50.9L84.2 48.8L83.9 46.6L83.4 44.4L82.7 42.2L81.9 40.1L80.9 38L79.8 36L78.5 33.9L77 32L75.4 30.1L73.7 28.3L71.8 26.6L69.7 25L67.5 23.4L65.2 22L62.8 20.8L60.3 19.6L57.6 18.6L54.8 17.7L52 17.1L49.1 16.5L46.1 16.2L43.1 16L40 16L36.9 16.2L33.9 16.6L30.8 17.1L27.7 17.9L24.7 18.9L21.7 20.1L18.8 21.5L16 23.1L13.3 24.9"/></mask></defs>
+        <g transform="rotate(-9 120 120)">
+          <g class="brand-dust"><circle cx="40.7" cy="111.3" r="0.45" opacity="0.45"/><circle cx="8.6" cy="125" r="0.45" opacity="0.3"/><circle cx="173.3" cy="138.7" r="0.35" opacity="0.8"/><circle cx="48.9" cy="64.9" r="0.45" opacity="0.3"/><circle cx="225.9" cy="156.2" r="0.35" opacity="0.8"/><circle cx="56.5" cy="102.8" r="0.45" opacity="0.45"/><circle cx="20.1" cy="116" r="0.45" opacity="0.8"/><circle cx="247.8" cy="111.7" r="0.35" opacity="0.6"/><circle cx="31" cy="154.7" r="0.45" opacity="0.8"/><circle cx="174.9" cy="121" r="0.35" opacity="0.8"/><circle cx="99.8" cy="77.2" r="0.6" opacity="0.3"/><circle cx="149.9" cy="161.8" r="0.45" opacity="0.6"/><circle cx="200.9" cy="165.4" r="0.6" opacity="0.8"/><circle cx="60.5" cy="107.4" r="0.6" opacity="0.45"/><circle cx="135.5" cy="51" r="0.6" opacity="0.8"/><circle cx="247.2" cy="123.5" r="0.45" opacity="0.3"/><circle cx="67.7" cy="146.6" r="0.35" opacity="0.3"/><circle cx="149.1" cy="173.9" r="0.45" opacity="0.3"/><circle cx="67.5" cy="167.7" r="0.35" opacity="0.45"/><circle cx="124.2" cy="170.3" r="0.45" opacity="0.6"/><circle cx="188.7" cy="144" r="0.45" opacity="0.8"/><circle cx="169.9" cy="65" r="0.45" opacity="0.8"/><circle cx="25.5" cy="88.6" r="0.6" opacity="0.3"/><circle cx="176.4" cy="132" r="0.6" opacity="0.6"/><circle cx="188.5" cy="95.5" r="0.6" opacity="0.6"/><circle cx="201.8" cy="104.1" r="0.6" opacity="0.3"/></g>
+          <ellipse class="brand-orbit" cx="120" cy="120" rx="62" ry="27"/>
+          <ellipse class="brand-orbit" cx="120" cy="120" rx="86" ry="38"/>
+          <ellipse class="brand-orbit" cx="120" cy="120" rx="112" ry="50"/>
+          <circle class="brand-planet is-pulse" r="2.6"/>
+          <circle class="brand-planet is-zenith" r="3"/>
+          <circle class="brand-planet is-lumen" r="3.4"/>
+          <circle class="brand-planet is-atlas" r="2.8"/>
+        </g>
+        <g transform="translate(70 68)">
+          <path class="brand-ring" mask="url(#brand-pen)" d="M41.7 19.5L39.4 20L37.1 20.5L34.8 21.1L32.5 21.8L30.3 22.6L28.2 23.6L26.1 24.7L24.1 26L22.2 27.4L20.5 29L18.9 30.7L17.5 32.5L16.2 34.4L15 36.4L14 38.4L13.1 40.5L12.4 42.7L11.9 44.9L11.5 47.1L11.3 49.4L11.3 51.7L11.4 54L11.7 56.2L12.2 58.5L12.9 60.7L13.7 62.9L14.6 65L15.7 67.1L16.9 69.1L18.3 71L19.8 72.8L21.5 74.6L23.3 76.2L25.1 77.8L27.1 79.2L29.2 80.5L31.3 81.7L33.5 82.8L35.8 83.8L38.2 84.6L40.6 85.3L43 85.8L45.5 86.2L48 86.5L50.5 86.6L53 86.6L55.5 86.4L57.9 86.1L60.3 85.6L62.7 85L65.1 84.3L67.3 83.4L69.5 82.4L71.7 81.2L73.7 80L75.6 78.6L77.4 77.1L79.1 75.5L80.7 73.7L82.2 71.9L83.5 70L84.6 68.1L85.6 66L86.5 63.9L87.2 61.8L87.7 59.6L88.1 57.4L88.3 55.1L88.3 52.9L88.2 50.7L88 48.5L87.7 46.4L87.2 44.2L86.6 42L85.8 39.8L84.9 37.7L83.9 35.6L82.7 33.6L81.4 31.6L79.9 29.7L78.3 27.8L76.6 26.1L74.7 24.4L72.7 22.8L70.6 21.4L68.4 20L66.1 18.8L63.6 17.7L61.1 16.7L58.5 15.9L55.9 15.2L53.2 14.6L50.4 14.2L47.6 13.9L44.8 13.7L41.9 13.7L39 13.8L36.1 14L33.2 14.4L30.3 15.1L27.5 16L24.7 17.1L22 18.3L19.4 19.8L16.9 21.3L14.4 22.9L12.8 24A1.0 1.0 0 0 0 13.9 25.7L15.5 24.6L18 23.2L20.5 22L23.2 21.1L25.8 20.3L28.5 19.7L31.2 19.2L33.9 18.8L36.6 18.5L39.2 18.3L41.9 18.3L44.5 18.4L47 18.7L49.5 19.1L52 19.7L54.4 20.5L56.7 21.3L58.9 22.3L61 23.3L63 24.5L64.9 25.7L66.7 27L68.4 28.4L70 29.8L71.5 31.2L72.9 32.8L74.1 34.3L75.3 35.9L76.4 37.5L77.3 39.1L78.1 40.8L78.8 42.5L79.4 44.2L79.9 45.9L80.2 47.7L80.4 49.4L80.6 51.1L80.6 52.9L80.5 54.6L80.3 56.3L79.9 57.9L79.5 59.5L78.9 61L78.2 62.6L77.4 64L76.5 65.5L75.5 66.9L74.4 68.2L73.2 69.4L71.8 70.6L70.4 71.7L68.9 72.7L67.3 73.6L65.7 74.5L64 75.2L62.2 75.9L60.4 76.4L58.5 76.9L56.6 77.2L54.6 77.4L52.6 77.6L50.7 77.6L48.7 77.5L46.7 77.3L44.7 77L42.8 76.5L40.9 76L39 75.4L37.2 74.6L35.4 73.8L33.7 72.9L32.1 71.8L30.5 70.7L29.1 69.5L27.7 68.3L26.4 67L25.3 65.6L24.2 64.1L23.2 62.7L22.4 61.1L21.7 59.6L21.1 58L20.6 56.4L20.2 54.7L20 53.1L19.9 51.4L19.9 49.8L20 48.2L20.3 46.6L20.6 45L21.1 43.4L21.7 41.9L22.5 40.4L23.3 38.9L24.3 37.5L25.3 36.2L26.5 34.9L27.8 33.6L29.1 32.4L30.5 31.2L31.9 30L33.5 29L35.2 28L37 27.1L38.8 26.4L40.7 25.8L42.8 25.4A3.0 3.0 0 0 0 41.7 19.5Z"/>
+          <rect class="brand-point" x="42" y="44" width="16" height="16"/>
+        </g>
+      </svg>
       <div class="brand-wordmark">
         <small>STIVEN</small>
         <strong>CATALYST</strong>
@@ -86,10 +104,10 @@
   </aside>
 
   <div class="about-copy">
-    <h2>{{ "The light is clarity. The catalyst is movement." | t(lang) }}</h2>
+    <h2>{{ "The point is clarity. The catalyst is movement." | t(lang) }}</h2>
     <p class="large-copy">{{ "Stiven Catalyst exists to turn observation into insight, insight into action and action into progress." | t(lang) }}</p>
-    <p>{{ "The light bulb at the heart of the identity represents the moment when a complex problem becomes clear. But clarity alone is not enough. The meaning of" | t(lang) }} <em>{{ "Catalyst" | t(lang) }}</em> {{ "is what follows: creating the conditions for an idea, a person, a team or a system to move forward." | t(lang) }}</p>
-    <p>{{ "The red and blue visual language reflects that tension. Blue stands for clarity, analysis and perspective. Red brings urgency, energy and change. Black gives the work discipline and seriousness; white creates space to think; gold is reserved for small moments of value and emphasis." | t(lang) }}</p>
+    <p>{{ "The mark at the heart of the identity is the full stop of “Management without theatre.”, with a ring drawn round it by hand. The point is the moment a complex problem becomes clear: said, done, no performance. The ring is the pen mark a manager makes on a report, a circle round the number that matters. But clarity alone is not enough. The meaning of" | t(lang) }} <em>{{ "Catalyst" | t(lang) }}</em> {{ "is what follows: creating the conditions for an idea, a person, a team or a system to move forward." | t(lang) }}</p>
+    <p>{{ "The colours are few on purpose. Black gives the work discipline and seriousness; white creates space to think. Blue is the one accent: clarity, analysis and perspective, and the colour of the point. Gold is reserved for small moments of value and emphasis." | t(lang) }}</p>
 
     <div class="pillars">
       <div class="pillar"><strong>{{ "Clarity" | t(lang) }}</strong><span>{{ "Understand the problem before reacting to the symptom." | t(lang) }}</span></div>
