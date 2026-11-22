@@ -26,7 +26,9 @@ On the homepage the mark appears twice more. The full stop of the headline is th
 
 Where the site marks a place with something small, it is the point of the mark: a square, quiet at rest and in the accent where you are. The items of the menu carry it, and so do the essays button and the three cards of the homepage hero, each card's point in its own colour.
 
-The earlier mark was a hanging light bulb on a red-to-blue gradient. It is still on the About page (the poster and the paragraph that explains it), and its small light still marks the chosen topic of a list, the steps of Start here and the essays read in a series. These are replaced in the steps that follow, and nothing new is drawn with it. The light of Lumen is that planet's own and stays.
+Beside the heading of every page, beside the title of every reflection and on the poster of the About page, the mark stands at the centre of a small system: three thin orbits and the four families as small planets in their own colours. Beside the headings and the reflections it is one picture (`src/media/stiven-catalyst-mark-hero.jpg`, made by `scripts/mark-hero.py`); on the poster it is drawn in the page itself, the ring is drawn round the point as the poster comes into view and the planets turn. In both the mark stays flat, and the soft light begins outside the ring.
+
+The earlier mark was a hanging light bulb on a red-to-blue gradient, with the name "Stiven Catalyst Coaching". Its small light still marks the chosen topic of a list, the steps of Start here and the essays read in a series, and the earlier logo is still printed in pictures made before the change: the banner at the foot of the field note cards (`scripts/note-cards.mjs`) and the link previews (`src/social.png`, `scripts/page-cards.mjs`). These are replaced in the steps that follow, and nothing new is drawn with it. The light of Lumen is that planet's own and stays.
 
 ## Four pillars
 1. **Clarity**: Understand before reacting.
@@ -42,7 +44,7 @@ One accent, used sparingly. Hierarchy comes from typography, space and thin line
 | Deep black / charcoal, with a hint of blue | `--paper`, `--paper-2` | Backgrounds. Discipline, seriousness, authority. |
 | White and soft grey | `--ink`, `--muted`, `--line` | Text, borders, dividers. Clarity and breathing space. |
 | **Electric blue: the one accent** | `--blue`, `--blue-soft` | Links, eyebrows, numbers, the selected filter or tab, focus, progress, the main button. Clarity and analysis. |
-| Red: the signature | `--red` | Only the poster of the earlier mark and a single word in the manifesto. Not in the mark. Never a button, a bar, a glow or a chart. |
+| Red: the signature | `--red` | Only a single word in the manifesto. Not in the mark. Never a button, a bar, a glow or a chart. |
 | Gold | `--gold` | The Reflections, and the small lights that are left from the earlier mark (lists, Start here, a series) until they are replaced. Not in the mark. |
 | State colours | `--ok`, `--warn`, `--danger` | Only inside tools, to report a result: right or wrong, better or worse, a check passed, a warning, an error. Never decoration. |
 

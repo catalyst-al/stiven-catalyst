@@ -1609,26 +1609,26 @@ a.essay-series-next:hover em { translate: 5px 0; }
 @keyframes home-heading { from { opacity: 0; translate: 0 28px; filter: blur(5px); } }
 
 /* The heading of every page (.page-hero; not the tool and role pages, which open on their planet) is quieter: a
-   smaller title and the Stiven Catalyst Coaching logo beside it, faded into the page like the logo of a reflection,
-   so the eye goes to what the page holds rather than to a title the width of the screen. The logo is a pseudo
-   element, so no page has to carry it; the title is fitted to the column it has left (--measure). */
+   smaller title and the mark beside it, at the centre of its small system (scripts/mark-hero.py), faded into the
+   page like the mark of a reflection, so the eye goes to what the page holds rather than to a title the width of
+   the screen. The picture is a pseudo element, so no page has to carry it; the title is fitted to the column it has
+   left (--measure). */
 .page-hero:not(.tool-hero)::after {
   content: "";
   display: block;
   aspect-ratio: 720 / 612;
-  background: url("/media/stiven-catalyst-coaching-hero.jpg") center / cover no-repeat;
-  filter: brightness(.92);
+  background: url("/media/stiven-catalyst-mark-hero.jpg") center / cover no-repeat;
   pointer-events: none;
   -webkit-mask-image: var(--logo-fade);
   mask-image: var(--logo-fade);
 }
-/* The logo's picture fades out on every side, an oval with the logo in its middle, so no edge of it shows and it
-   reads as part of the page's own background (the reflections use the same fade). */
+/* The picture fades out on every side, an oval with the mark in its middle, so no edge of it shows and it reads as
+   part of the page's own background (the reflections use the same fade). */
 :root { --logo-fade: radial-gradient(ellipse 46% 47% at 55% 48%, #000 58%, rgba(0, 0, 0, .55) 78%, transparent 100%); }
 .article-hero-media.is-logo { border-radius: 0; -webkit-mask-image: var(--logo-fade); mask-image: var(--logo-fade); }
-/* On the dark page the logo's near-black background gives way to the page itself (lighten keeps whichever is
-   brighter), so only the bulb, its glow and the letters show, and no box is drawn against the page's blue glow. The
-   light page keeps the picture as it is, faded. */
+/* On the dark page the picture's night ground gives way to the page itself (lighten keeps whichever is brighter),
+   so only the mark, the orbits and the planets show, and no box is drawn against the page's blue glow. The light
+   page keeps the picture as it is, faded. */
 :root:not([data-theme="light"]) .page-hero:not(.tool-hero)::after,
 :root:not([data-theme="light"]) .article-hero-media.is-logo { mix-blend-mode: lighten; }
 @media (min-width: 901px) {
@@ -1647,7 +1647,7 @@ a.essay-series-next:hover em { translate: 5px 0; }
   .page-hero:not(.tool-hero):not(.treatise-hero) h1.hero-long { font-size: min(clamp(34px, 7.4cqi, 88px), var(--fit-d, 1000px)); }
   .page-hero:not(.tool-hero) .lede { max-width: 560px; margin: 24px 0 0; font-size: 18px; }
 }
-/* Phones and small tablets: the logo sits above the title as a low band that fades into the page, and the title
+/* Phones and small tablets: the mark sits above the title as a low band that fades into the page, and the title
    is set smaller. */
 @media (max-width: 900px) {
   .page-hero:not(.tool-hero) { display: flex; flex-direction: column; padding-top: 28px; }
