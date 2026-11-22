@@ -20,9 +20,13 @@ The philosophy behind the work, on the About page.
 - **The ring** is the pen mark a manager makes on a report: not a speech, a circle round the number that matters. It is drawn by hand, so it is not perfect, and it does not close.
 - **Together** they read as the centre of the system and its first orbit (the four families turn round it), and as the C of Catalyst.
 
-How it is drawn: one colour for the ring (the text colour of the theme), the accent blue for the point, flat, with no glow, no gradient and no shadow. In one colour the point takes the colour of the ring. The ring is always the same drawing (`--mark-ring` in `src/css/01-foundation.css`, `src/favicon.svg`); it is never redrawn, stretched or closed.
+How it is drawn: one colour for the ring (the text colour of the theme), the accent blue for the point, flat, with no glow, no gradient and no shadow. In one colour the point takes the colour of the ring. The ring is always the same drawing, in two weights: the heavier for small sizes (`--mark-ring` in `src/css/01-foundation.css`, `src/favicon.svg`), the lighter for display sizes (`--mark-ring-display`, and the same line in `src/js/cosmos.js`). It is never redrawn, stretched or closed.
 
-The earlier mark was a hanging light bulb on a red-to-blue gradient. The header, the footer, the favicon and the app icons now carry the circled point. The small lights in the menu and in the homepage hero, and the light at the centre of the homepage system, are still the bulb; they are replaced in the steps that follow, and nothing new is drawn with it.
+On the homepage the mark appears twice more. The full stop of the headline is the mark itself (`.hero-stop`, `--mark-ring-display`). And the centre of the system is the mark (`src/js/cosmos.js`): the point never moves, the ring is drawn round it once as the light comes up and again when it is tapped, and the families turn round it. There it is flat too; the soft light of the system begins outside the ring.
+
+Where the site marks a place with something small, it is the point of the mark: a square, quiet at rest and in the accent where you are. The items of the menu carry it, and so do the essays button and the three cards of the homepage hero, each card's point in its own colour.
+
+The earlier mark was a hanging light bulb on a red-to-blue gradient. It is still on the About page (the poster and the paragraph that explains it), and its small light still marks the chosen topic of a list, the steps of Start here and the essays read in a series. These are replaced in the steps that follow, and nothing new is drawn with it. The light of Lumen is that planet's own and stays.
 
 ## Four pillars
 1. **Clarity**: Understand before reacting.
@@ -39,7 +43,7 @@ One accent, used sparingly. Hierarchy comes from typography, space and thin line
 | White and soft grey | `--ink`, `--muted`, `--line` | Text, borders, dividers. Clarity and breathing space. |
 | **Electric blue: the one accent** | `--blue`, `--blue-soft` | Links, eyebrows, numbers, the selected filter or tab, focus, progress, the main button. Clarity and analysis. |
 | Red: the signature | `--red` | Only the poster of the earlier mark and a single word in the manifesto. Not in the mark. Never a button, a bar, a glow or a chart. |
-| Gold | `--gold` | Only the small lights of the menu and the hero that are left from the earlier mark, until they are replaced. Not in the mark. |
+| Gold | `--gold` | The Reflections, and the small lights that are left from the earlier mark (lists, Start here, a series) until they are replaced. Not in the mark. |
 | State colours | `--ok`, `--warn`, `--danger` | Only inside tools, to report a result: right or wrong, better or worse, a check passed, a warning, an error. Never decoration. |
 
 Rules:
