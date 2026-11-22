@@ -40,7 +40,9 @@
 <style>
 /* preview only: what scripts/social-cards.mjs adds before it photographs the hero */
 html { overflow: hidden !important; }
-.site-header, .skip-link, .hero-actions, .cosmos-hint, .cosmos-families, .share-orbit { display: none !important; }
+.site-header, .skip-link, .hero-actions, .cosmos-hint, .cosmos-families, .cosmos [data-motion-toggle], .share-orbit { display: none !important; }
+/* preview only: nothing under the hero, so the page's outline stays short */
+main > :not(:first-child), .site-footer { display: none !important; }
 .cosmos { height: 630px; }
 .cosmos-inner { width: 1090px; min-height: 630px; padding: 56px 0 44px; align-items: center; }
 .cosmos-system { align-self: center; }
