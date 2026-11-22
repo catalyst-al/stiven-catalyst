@@ -52,7 +52,7 @@ export const piecesOf = (lang, section) => {
     .sort((a, b) => new Date(a.data.date) - new Date(b.data.date) || a.slug.localeCompare(b.slug, "en", { numeric: true }));
 };
 
-const card = ({ kicker, number, title, sub }) => `<!doctype html><html><head><meta charset="utf-8"><style>
+export const card = ({ kicker, number, title, sub }) => `<!doctype html><html><head><meta charset="utf-8"><style>
   @font-face { font-family: Gelasio; src: url(data:font/woff2;base64,${SERIF}) format("woff2"); }
   @font-face { font-family: Inter; font-weight: 600; src: url(data:font/woff2;base64,${SANS}) format("woff2"); }
   @font-face { font-family: Inter; font-weight: 400; src: url(data:font/woff2;base64,${SANS_REGULAR}) format("woff2"); }

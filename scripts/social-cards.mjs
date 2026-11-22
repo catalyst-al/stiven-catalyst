@@ -1,6 +1,6 @@
 // Makes the social preview images (1200 × 630) of every tool page, every role page, the Tools page and
 // the homepage, in English, German and Albanian: src/media/social/<lang>/<tool>.jpg, role-<slug>.jpg,
-// tools.jpg and home.jpg. Each card carries the name, its family (role) and the family's drawing (the
+// tools.jpg and home.jpg. Each card carries the mark and the name, its family (role) and the family's drawing (the
 // same shapes as the background on the page, from src/_data/familySky.js); a training module has moons.
 //
 // Run it after changing a tool's name, summary or family, or a role:  node scripts/social-cards.mjs
@@ -27,6 +27,12 @@ const slugOf = (url) => url.split("/").filter(Boolean).pop();
 // A mix of two #rrggbb colours, t of the way from a to b (SVG attributes take no CSS functions).
 const mix = (a, b, t) => "#" + [1, 3, 5].map((i) => Math.round(parseInt(a.slice(i, i + 2), 16) * (1 - t) + parseInt(b.slice(i, i + 2), 16) * t).toString(16).padStart(2, "0")).join("");
 const DISPLAY = fs.readFileSync(path.join(ROOT, "src/fonts/archivo-black-latin-400-normal.woff2")).toString("base64");
+// The ring of the mark, the one drawing of it, read from the stylesheet (src/css/01-foundation.css): its display
+// weight for the centre of the Tools card, its bold weight for the small mark beside the name.
+const FOUNDATION = fs.readFileSync(path.join(ROOT, "src/css/01-foundation.css"), "utf8");
+const ring = (name) => decodeURIComponent(FOUNDATION.match(new RegExp(`--${name}: url\\("data:image/svg\\+xml,(.*?)"\\)`))[1]).match(/d='([^']+)'/)[1];
+const RING = ring("mark-ring-display");
+const RING_BOLD = ring("mark-ring");
 
 // ---- The family drawings, on the right of a 1200 × 630 card ----------------------------
 const bulb = (x, y, s = 1) => `
@@ -36,6 +42,13 @@ const bulb = (x, y, s = 1) => `
     <rect x="-9" y="-27" width="18" height="3" fill="#d1a553"/>
     <path d="M-8 -24 C-9 -14 -24 -12 -24 4 C-24 20 -12 30 0 30 C12 30 24 20 24 4 C24 -12 9 -14 8 -24 Z" fill="url(#glass)" filter="url(#glow)"/>
   </g>`;
+
+// The mark (the circled point), its point at x, y: flat, the ring in the colour of the text and the point in the
+// accent, with the soft light of the system beginning outside the ring.
+const mark = (x, y, s = 1) => `
+  <ellipse cx="${x}" cy="${y}" rx="${250 * s}" ry="${130 * s}" fill="url(#cool)"/>
+  <ellipse cx="${x}" cy="${y}" rx="${46 * s}" ry="${41 * s}" fill="url(#still)"/>
+  <g transform="translate(${x - 50 * s} ${y - 52 * s}) scale(${s})"><path d="${RING}" fill="#f6f7f4"/><rect x="42" y="44" width="16" height="16" fill="#4ab5f7"/></g>`;
 
 const art = {
   lumen: () => {
@@ -116,19 +129,19 @@ const art = {
   },
 };
 
-// The Tools page: the Catalyst light with the families on their orbits.
+// The Tools page: the mark with the families on their orbits.
 const system = () => {
   const cx = 910;
   const cy = 318;
   const angles = [200, 320, 40, 145, 250];
   return `
     ${families.map((f) => `<ellipse cx="${cx}" cy="${cy}" rx="${f.orbit * 230}" ry="${f.orbit * 230 * 0.42}" fill="none" stroke="${f.color}" stroke-opacity=".32"/>`).join("")}
-    ${bulb(cx, cy, 1.15)}
+    ${mark(cx, cy, 1.05)}
     ${families.map((f, i) => {
       const a = (angles[i] * Math.PI) / 180;
       const x = cx + Math.cos(a) * f.orbit * 230;
       const y = cy + Math.sin(a) * f.orbit * 230 * 0.42;
-      // Labels point away from the light, so none runs into the bulb.
+      // Labels point away from the centre, so none runs into the mark.
       const left = x < cx;
       return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${13 + i}" fill="${f.color}" filter="url(#glow)"/><text x="${(left ? x - 22 - i : x + 22 + i).toFixed(1)}" y="${(y + 5).toFixed(1)}" text-anchor="${left ? "end" : "start"}" class="planet">${f.name.toUpperCase()}</text>`;
     }).join("")}`;
@@ -153,8 +166,8 @@ svg { position: absolute; inset: 0; }
 .planet { fill: #e9eef3; font: 700 15px "Liberation Sans", Arial, sans-serif; letter-spacing: .18em; }
 .copy { position: absolute; left: 72px; top: 60px; bottom: 56px; width: 590px; display: flex; flex-direction: column; }
 .brand { display: flex; align-items: center; gap: 14px; font-size: 17px; font-weight: 700; letter-spacing: .34em; }
-.brand i { position: relative; width: 17px; height: 21px; border-radius: 48% 48% 52% 52%; background: #fff; box-shadow: 0 0 10px #fff, 0 0 26px rgba(120, 190, 247, .8); }
-.brand i::before { content: ""; position: absolute; left: 4px; top: -7px; width: 9px; height: 7px; border-radius: 2px 2px 0 0; background: #111; border-bottom: 2px solid #d1a553; }
+/* The small mark beside the name; its negative margins keep the row as high as the letters, so nothing under it moves. */
+.brand svg { position: static; flex: none; width: 36px; height: 36px; margin: -8px 0 -7px; }
 .middle { margin-top: auto; }
 .badge { display: inline-flex; align-items: center; gap: 12px; padding: 9px 18px 9px 13px; border: 1.5px solid color-mix(in srgb, var(--family) 55%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--family) 12%, transparent); font-size: 16px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
 .badge b { width: 12px; height: 12px; border-radius: 50%; background: var(--family); box-shadow: 0 0 12px var(--family); }
@@ -167,6 +180,8 @@ p { margin: 20px 0 0; color: #b4bec6; font-size: 23px; line-height: 1.38; displa
 <svg width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <radialGradient id="halo"><stop offset="0" stop-color="#fff4d8" stop-opacity=".55"/><stop offset=".45" stop-color="#f5c86a" stop-opacity=".16"/><stop offset="1" stop-color="#f5c86a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="cool"><stop offset="0" stop-color="#1e68a8" stop-opacity=".42"/><stop offset="1" stop-color="#1e68a8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="still"><stop offset=".55" stop-color="#05080b"/><stop offset="1" stop-color="#05080b" stop-opacity="0"/></radialGradient>
     <radialGradient id="glass" cx=".42" cy=".45"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#fff8ea"/><stop offset="1" stop-color="#ffe2a8"/></radialGradient>
     <radialGradient id="planet" cx=".36" cy=".32"><stop offset="0" stop-color="${mix(color, "#ffffff", 0.7)}"/><stop offset=".45" stop-color="var(--family)"/><stop offset="1" stop-color="${mix(color, "#000000", 0.75)}"/></radialGradient>
     <radialGradient id="moonlight" cx=".38" cy=".34"><stop offset="0" stop-color="#fffaf2"/><stop offset=".5" stop-color="#ffe1c8"/><stop offset="1" stop-color="${mix(color, "#ffffff", 0.4)}"/></radialGradient>
@@ -185,7 +200,7 @@ p { margin: 20px 0 0; color: #b4bec6; font-size: 23px; line-height: 1.38; displa
   ${drawing}
 </svg>
 <div class="copy">
-  <div class="brand"><i></i>STIVEN CATALYST</div>
+  <div class="brand"><svg viewBox="0 0 100 100"><path d="${RING_BOLD}" fill="#f6f7f4"/><rect x="40" y="42" width="20" height="20" fill="#4ab5f7"/></svg>STIVEN CATALYST</div>
   <div class="middle">
     <span class="badge"><b></b>${esc(badge.name)}<small>${esc(badge.role)}</small></span>
     <h1>${title}</h1>
@@ -271,8 +286,8 @@ for (const [lang, { tools }] of Object.entries(LANGS)) {
   }), path.join(dir, "tools.jpg"));
   made += 1;
 }
-// The homepage (and every page without its own image): the real hero, the Catalyst light with the
-// families on their orbits, photographed from the built site at 1200 × 630 without the header and buttons.
+// The homepage (and every page without its own image): the real hero, the mark with the families on their
+// orbits, photographed from the built site at 1200 × 630 without the header and buttons.
 if (wanted) { await browser.close(); console.log(`${made} cards written to src/media/social/`); process.exit(0); }
 execSync("npx @11ty/eleventy --quiet", { cwd: ROOT, stdio: "inherit" });
 const SITE = path.join(ROOT, "_site");
@@ -291,7 +306,7 @@ await hero.addInitScript(() => { try { localStorage.setItem("sc-theme", "dark");
 for (const lang of Object.keys(LANGS)) {
   await hero.goto(`http://localhost:${server.address().port}${lang === "en" ? "/" : `/${lang}/`}`, { waitUntil: "networkidle" });
   await hero.addStyleTag({ content: `
-    .site-header, .skip-link, .hero-actions, .cosmos-hint, .cosmos-families, .share-orbit { display: none !important; }
+    .site-header, .skip-link, .hero-actions, .cosmos-hint, .cosmos-families, .cosmos [data-motion-toggle], .share-orbit { display: none !important; }
     .cosmos { height: 630px; }
     .cosmos-inner { width: 1090px; min-height: 630px; padding: 56px 0 44px; align-items: center; }
     .cosmos-system { align-self: center; }
