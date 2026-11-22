@@ -742,7 +742,7 @@ a.list-row:hover .number { text-shadow: 0 0 18px color-mix(in srgb, var(--blue) 
 }
 .about-portrait img { display: block; width: 100%; height: auto; transition: scale .8s cubic-bezier(.22, 1, .36, 1); }
 .about-portrait:hover img { scale: 1.04; }
-/* The portrait breathes slowly, like the bulb of the brand: a gentle change of size, drawn by the compositor, with its
+/* The portrait breathes slowly: a gentle change of size, drawn by the compositor, with its
    ring of light. */
 @keyframes portrait-breathe { 50% { scale: 1.015; } }
 
