@@ -121,6 +121,13 @@ test('no shift open: the page asks for the shift and its date in the handover\'s
     assert.equal(shown($(w, '[data-start]')), false);
     assert.ok($(w, '[data-wn-shift]').textContent.startsWith(`${SHIFTS[lang][2]} · `), `${lang}: the bar names the shift`);
   }
+  // A device that just turned the pilot on and wants out: the start panel's own way out works here too, and the page
+  // then says the pilot is off.
+  const out = today('en', { ...PILOT, [KEY.en]: { rows: [] } });
+  assert.equal(shown($(out, '[data-pilot-start-off]')), true);
+  click(out, $(out, '[data-pilot-off-start]'));
+  assert.equal(out.ShiftClose.enabled(), false);
+  assert.equal(out.ShiftContext.active(), null);
   // After a closed shift: the page says which shift is closed, and proposes nothing by the clock.
   const closed = today('en', { ...PILOT, ...handover('en', { open: null, closed: [['2026-11-11', 0]] }), [KEY.en]: { rows: [] } });
   assert.match(text(closed, 'now'), /^The shift is closedEarly · [^ ]+ is closed\./);

@@ -60,7 +60,18 @@ const actionDone = async (lang, { doneOn, pick = null, rows = week(lang) } = {})
   return { storage: keep(later), id: action.id, tracker: open('action-tracker', { lang, storage: keep(later), now: at(doneOn) }) };
 };
 // The source of the action, opened on `today` with the log as it is then.
-const source = (lang, done, { today = 18, log }) => open('damage-control', { lang, storage: { ...done.storage, [KEY[lang]]: log }, now: at(today), search: `?source=${done.id}` });
+// Nothing is compared before the visitor confirms the day: `day` is the day they give (the proposal when left out),
+// `confirm: false` leaves the question unanswered.
+const confirmDay = (w, day) => {
+  const form = $(w, '[data-source-day]');
+  if (day !== undefined) form.elements.day.value = iso(day);
+  submit(w, form);
+  return w;
+};
+const source = (lang, done, { today = 18, log, day, confirm = true }) => {
+  const w = open('damage-control', { lang, storage: { ...done.storage, [KEY[lang]]: log }, now: at(today), search: `?source=${done.id}` });
+  return confirm && $(w, '[data-source-day]') ? confirmDay(w, day) : w;
+};
 const compareBox = (w) => $(w, '[data-source-compare]');
 const cells = (w, name) => $$(w, `[data-source-period="${name}"] td`).map((node) => node.textContent);
 const notes = (w) => $$(w, '[data-source-compare] p').map((node) => node.textContent);
@@ -85,7 +96,7 @@ test('a valid comparison: both periods with their dates, their damage, their vol
     assert.deepEqual([before[3].replace(/\s/g, ''), afterCells[3].replace(/\s/g, '')].map((text) => text.replace(',', '.')), ['0.23%', '0.10%'], `${lang}: the rates`);
     assert.equal(measured(w).dataset.sourceMeasured, 'rate');
     assert.ok(measured(w).textContent.includes(word(lang, 'That is {n} percentage points lower.').split('{n}')[1].trim()), `${lang}: lower, in its language`);
-    assert.ok(new RegExp(shownDay(10)).test(notes(w)[0]) && notes(w)[0].includes(word(lang, 'The action was marked done on {date}. That day is in neither period: the log is kept by day, and that day is partly before the action and partly after it.').split('{date}')[1].trim()), `${lang}: the day in between is said`);
+    assert.ok(new RegExp(shownDay(10)).test(notes(w)[0]) && notes(w)[0].includes(word(lang, 'That day is in neither period: the log is kept by day, and that day is partly before the action and partly after it.')), `${lang}: the day in between is said`);
     assert.equal(notes(w).at(-1), word(lang, 'This is what was measured, with the same filter in both periods. It does not show that the action caused it: other things may have changed in the same days.'), `${lang}: nothing is attributed`);
     // Nothing is decided for the visitor: the action is as it was, and nothing the browser holds was written.
     w.dispatchEvent(new w.Event('pagehide'));
@@ -169,10 +180,80 @@ test('an action done in the middle of its period: "before" ends the day before i
   // Opened on the day it was done: no day after has passed.
   const done = await actionDone('en', { doneOn: 10 });
   assert.equal(compareBox(source('en', done, { today: 10, log: { rows: week('en') } })).dataset.sourceCompare, 'after-not-started');
-  // Opened three days after: "after" is still running, and says so.
-  const running = source('en', done, { today: 13, log: { rows: [...week('en'), row('en', 12, 2)], volumes: [...volumes([3, 5, 9], 2000), ...volumes([12], 1500)] } });
-  assert.match(cells(running, 'after')[0], span(11, 13, 3));
-  assert.ok(notes(running).includes('“After” is still running: it has 3 of 7 days.'));
+});
+
+test('the day is asked first: the day the action was marked done is a proposal, nothing is compared before it is confirmed, and a corrected day moves both periods', { skip: !hasSite }, async () => {
+  for (const lang of LANGS) {
+    // Put in place on the 6th; marked done on the list four days later, on the 10th.
+    const done = await actionDone(lang, { doneOn: 10, rows: [row(lang, 3, 4), row(lang, 5, 6), row(lang, 6, 30), row(lang, 9, 4)] });
+    const listBefore = JSON.stringify(done.storage['sc-actions']);
+    const log = { rows: [row(lang, 3, 4), row(lang, 5, 6), row(lang, 6, 30), row(lang, 8, 1), row(lang, 9, 4), row(lang, 10, 9), row(lang, 12, 2)], volumes: volumes([3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 1000) };
+    const w = source(lang, done, { log, confirm: false });
+    // Asked, with the proposal; nothing is compared yet.
+    const form = $(w, '[data-source-day]');
+    assert.ok(form, `${lang}: the day is asked`);
+    assert.equal(form.elements.day.value, iso(10), `${lang}: the day it was marked done is the proposal`);
+    assert.equal(form.elements.day.max, iso(18));
+    assert.equal(compareBox(w), null, `${lang}: nothing is compared before the day is confirmed`);
+    assert.equal($$(w, '.dw-compare-table').length, 0);
+    assert.equal($(w, 'label[for="dw-source-day"]').textContent, word(lang, 'The day the countermeasure was really in place'));
+    // A day after today is refused.
+    form.elements.day.value = iso(19);
+    submit(w, form);
+    assert.equal(compareBox(w), null);
+    assert.equal(form.querySelector('[role="status"]').textContent, word(lang, 'Give a day, today at the latest.'));
+    // Confirmed as proposed: the 10th is left out, the heavy 6th counts as "before".
+    confirmDay(w, 10);
+    assert.equal(compareBox(w).dataset.sourceImplemented, iso(10));
+    assert.match(cells(w, 'before')[0], span(3, 9, 7));
+    assert.match(cells(w, 'after')[0], span(11, 17, 7));
+    assert.deepEqual([cells(w, 'before')[1], cells(w, 'after')[1]], ['45', '2'], `${lang}: with the day it was marked done, the 30 of the 6th is "before"`);
+    // Corrected to the real day: the 6th is left out, and both periods move.
+    click(w, $(w, '[data-source-change-day]'));
+    assert.equal(compareBox(w), null, `${lang}: asked again`);
+    confirmDay(w, 6);
+    assert.equal(compareBox(w).dataset.sourceImplemented, iso(6));
+    assert.match(cells(w, 'before')[0], span(3, 5, 3));
+    assert.match(cells(w, 'after')[0], span(7, 9, 3));
+    assert.deepEqual([cells(w, 'before')[1], cells(w, 'after')[1]], ['10', '5'], `${lang}: the 30 of the 6th is in neither, the 9 of the 10th is outside`);
+    assert.ok(notes(w)[0].startsWith(word(lang, 'Compared from {date}, the day you gave (the list has the action marked done on {done}).').split('{date}')[0]) && new RegExp(shownDay(6)).test(notes(w)[0]) && new RegExp(shownDay(10)).test(notes(w)[0]), `${lang}: both days are named`);
+    assert.equal(measured(w).dataset.sourceMeasured, 'rate');
+    // The day stays with the view: the same tab, opened again, compares from it. The list is as it was.
+    const again = open('damage-control', { lang, storage: keep(w), now: at(18), search: `?source=${done.id}`, before: (next) => next.sessionStorage.setItem('sc-source-day', w.sessionStorage.getItem('sc-source-day')) });
+    assert.equal(compareBox(again).dataset.sourceImplemented, iso(6), `${lang}: kept for the tab`);
+    assert.equal(w.localStorage.getItem('sc-actions'), listBefore, `${lang}: the list is not written`);
+    assert.equal(actionsOf(w)[0].closed, iso(10), `${lang}: the day it was marked done is still that day`);
+    assert.ok(Object.keys(actionsOf(w)[0]).every((name) => !/implement/i.test(name)), `${lang}: and the action has no new field`);
+    // Another tab, or another device, is asked again.
+    assert.ok($(open('damage-control', { lang, storage: keep(w), now: at(18), search: `?source=${done.id}` }), '[data-source-day]'), `${lang}: not kept anywhere that is shared`);
+  }
+});
+
+test('"after" that has not had all its days is pending: the page says from which day it can be compared, and gives no change in the rate, also when today already has a volume', { skip: !hasSite }, async () => {
+  for (const lang of LANGS) {
+    const done = await actionDone(lang, { doneOn: 10 });
+    const full = { rows: [...week(lang), row(lang, 12, 2), row(lang, 17, 1)], volumes: [...volumes([3, 5, 9], 2000), ...volumes([11, 12, 13, 14, 15, 16, 17], 1000)] };
+    // Three days in.
+    const early = source(lang, done, { today: 13, log: full });
+    assert.match(cells(early, 'after')[0], span(11, 13, 3));
+    assert.equal(measured(early).dataset.sourceMeasured, 'pending', `${lang}: pending`);
+    assert.equal($(early, '[data-source-period="after"] th').textContent, `${word(lang, 'After')} · ${word(lang, 'pending')}`);
+    assert.deepEqual([cells(early, 'before')[3], cells(early, 'after')[3]], ['–', '–'], `${lang}: no rate is set beside another`);
+    // The last day itself, the 17th, with its volume already written and an entry made: still running, still pending.
+    const last = source(lang, done, { today: 17, log: full });
+    assert.match(cells(last, 'after')[0], span(11, 17, 7), `${lang}: every day is there`);
+    assert.equal(cells(last, 'after')[2].replace(/\D/g, ''), '7000', `${lang}: and every day has a volume, the 17th too`);
+    assert.equal(measured(last).dataset.sourceMeasured, 'pending', `${lang}: the 17th is not over`);
+    assert.equal(measured(last).textContent, word(lang, 'Pending: “after” is not complete, so no change in the rate is given yet.'));
+    assert.deepEqual([cells(last, 'before')[3], cells(last, 'after')[3]], ['–', '–']);
+    const said = notes(last).find((text) => new RegExp(shownDay(18)).test(text));
+    assert.ok(said && new RegExp(shownDay(17)).test(said), `${lang}: it runs until the 17th and can be compared from the 18th`);
+    // The day after: complete, and compared.
+    const complete = source(lang, done, { today: 18, log: full });
+    assert.equal(measured(complete).dataset.sourceMeasured, 'rate', `${lang}: compared once the last day is over`);
+    assert.equal($(complete, '[data-source-period="after"] th').textContent, word(lang, 'After'));
+    assert.deepEqual([cells(complete, 'before')[3], cells(complete, 'after')[3]].map((text) => text.replace(/\s/g, '').replace(',', '.')), ['0.23%', '0.04%']);
+  }
 });
 
 test('the filter of the action is the filter of both periods; an action not marked done has nothing to compare from', { skip: !hasSite }, async () => {
@@ -188,6 +269,7 @@ test('the filter of the action is the filter of both periods; an action not mark
   const open1 = await actionDone('en', {});
   const waiting = source('en', open1, { log: { rows: week('en') } });
   assert.equal(compareBox(waiting), null);
+  assert.equal($(waiting, '[data-source-day]'), null, 'and no day is asked for');
   assert.ok($$(waiting, '[data-source-note] p').some((node) => node.textContent === 'The action is not marked done on the list, so there is no day to compare from.'));
   assert.ok(!$(open1.tracker, '.at-source').textContent.includes('with before and after'));
 });
@@ -203,6 +285,8 @@ test('the arithmetic by itself: periods, the day left out, and when a rate may b
   assert.equal(result.change, 0);
   assert.equal(plain(w.DefectSource.compare(origin, iso(3), { rows, volumes: [], today: iso(18) })).reason, 'before-empty');
   assert.equal(plain(w.DefectSource.compare(origin, iso(10), { rows, volumes: [], today: iso(10) })).reason, 'after-not-started');
+  const lastDay = plain(w.DefectSource.compare(origin, iso(10), { rows, volumes: [{ date: iso(3), volume: 1000 }, { date: iso(12), volume: 500 }], today: iso(17) }));
+  assert.deepEqual([lastDay.running, lastDay.until, lastDay.fullFrom, lastDay.comparable, lastDay.change], [true, iso(17), iso(18), false, null]);
   const typed = plain(w.DefectSource.compare(origin, iso(10), { rows, volumes: [{ date: iso(12), volume: 500 }], typed: { value: 1000, from: iso(3), to: iso(9) }, today: iso(18) }));
   assert.deepEqual([typed.before.volume.rule, typed.after.volume.rule, typed.comparable, typed.change], ['typed', 'days', false, null]);
 });

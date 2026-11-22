@@ -58,6 +58,9 @@
       <div class="tool-actions">
         <button class="button-primary" type="button" data-start-shift>{{ "Start this shift" | t(lang) }}</button>
       </div>
+      {#- A device where the new way of closing was just turned on and nothing was started or waits: it can be turned
+          off here, without starting a shift only to reach the button beside the handover (js/shift-handover.js). #}
+      <p class="form-note" data-pilot-start-off hidden>{{ "The new shift close is on, on this device, and no shift has been started with it. If you do not want it, turn it off here; nothing has to be started first." | t(lang) }} <button class="button-secondary" type="button" data-pilot-off-start>{{ "Turn it off" | t(lang) }}</button></p>
     </fieldset>
   </div>
 </section>

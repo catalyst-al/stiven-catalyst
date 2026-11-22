@@ -57,8 +57,19 @@ for (const lang of ["en", "de", "sq"]) {
       await page.keyboard.press("Enter");
     } else await page.goto(`${prefix(lang)}/tools/damage-control/?source=${id}`);
     await expect(page).toHaveURL(new RegExp(`${prefix(lang)}/tools/damage-control/\\?source=${id}$`));
+    // The day is asked first, with the day it was marked done as the proposal; nothing is compared before the answer.
+    const ask = page.locator("[data-source-day]");
+    await expect(ask).toBeVisible();
+    await expect(ask.locator('[name="day"]')).toHaveValue(iso(10));
+    await expect(page.locator("[data-source-compare]")).toHaveCount(0);
+    await expectAccessible(page);
+    // By keyboard: Enter in the date field confirms it.
+    await ask.locator('[name="day"]').focus();
+    await page.keyboard.press("Enter");
     const box = page.locator("[data-source-compare]");
     await expect(box).toHaveAttribute("data-source-compare", "ok");
+    await expect(box).toHaveAttribute("data-source-implemented", iso(10));
+    await expect(page.locator("[data-source-change-day]")).toBeFocused();
     const cells = (name) => page.locator(`[data-source-period="${name}"] td`).allTextContents();
     expect((await cells("before"))[1]).toBe("14");
     expect((await cells("after"))[1]).toBe("6");
@@ -73,5 +84,23 @@ for (const lang of ["en", "de", "sq"]) {
     await page.locator(".dw-compare .dl-table-wrap").focus();
     await expect(page.locator(".dw-compare .dl-table-wrap")).toBeFocused();
     expect(await page.evaluate(() => Object.fromEntries(Object.keys(localStorage).sort().map((key) => [key, localStorage.getItem(key)])))).toEqual(before);
+    // The day stays with the view through a reload; corrected to the 9th, both periods move, and the list is as it was.
+    await page.reload();
+    await expect(page.locator("[data-source-compare]")).toHaveAttribute("data-source-implemented", iso(10));
+    await page.locator("[data-source-change-day]").click();
+    await page.locator('[data-source-day] [name="day"]').fill(iso(9));
+    await page.locator('[data-source-day] [type="submit"]').click();
+    await expect(page.locator("[data-source-compare]")).toHaveAttribute("data-source-implemented", iso(9));
+    expect((await cells("before"))[1]).toBe("10");
+    expect(await page.evaluate(() => Object.fromEntries(Object.keys(localStorage).sort().map((key) => [key, localStorage.getItem(key)])))).toEqual(before);
+    // The 17th is the last day of "after": on that day it is pending, with the day it can be compared from.
+    await page.locator("[data-source-change-day]").click();
+    await page.locator('[data-source-day] [name="day"]').fill(iso(10));
+    await page.locator('[data-source-day] [type="submit"]').click();
+    await page.clock.setFixedTime(day(17));
+    await page.reload();
+    await expect(page.locator("[data-source-measured]")).toHaveAttribute("data-source-measured", "pending");
+    expect((await cells("after"))[3]).toBe("–");
+    await expectAccessible(page);
   });
 }

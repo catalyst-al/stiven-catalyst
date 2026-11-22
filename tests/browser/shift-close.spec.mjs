@@ -129,6 +129,20 @@ test("off until turned on where no shift is open: after the yes the start panel 
   expect(await stored(page)).toBeNull();
   expect(await active(page)).toBeNull();
   await expectAccessible(page);
+  // The way out is in the same panel: no shift has to be started only to turn the pilot off again.
+  await expect(page.locator("[data-pilot-start-off]")).toBeVisible();
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.locator("[data-pilot-off-start]").focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("[data-start]")).toBeHidden();
+  await expect(page.locator("[data-handover]")).toBeVisible();
+  expect(await page.evaluate((key) => localStorage.getItem(key), PILOT)).toBeNull();
+  expect(await stored(page)).toBeNull();
+  expect(await active(page)).toBeNull();
+  // Turned on again, and this time kept.
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.goto("/tools/shift-handover/?pilot=shift-close");
+  await expect(page.locator("[data-start]")).toBeVisible();
   // By keyboard: the visitor starts the shift.
   await page.locator("[data-start-shift]").focus();
   await page.keyboard.press("Enter");

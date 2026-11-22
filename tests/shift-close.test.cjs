@@ -380,6 +380,59 @@ test('turned on where no shift is open: the start panel is shown at once, withou
   assert.deepEqual([openOne.ShiftClose.enabled(), $(openOne, '[data-start]').hidden], [true, true]);
 });
 
+test('before a first shift the pilot can be turned off from the start panel; where something is stored or waits, that way out is not there', { skip: !hasSite }, () => {
+  const startOff = (w) => $(w, '[data-pilot-start-off]');
+  for (const lang of ['en', 'de', 'sq']) {
+    const ui = lang === 'en' ? null : JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'));
+    const word = (text) => (ui ? ui[text] : text);
+    // A device that has just turned the pilot on: nothing started, nothing stored.
+    const w = open({ lang, pilot: false, search: '?pilot=shift-close' });
+    assert.equal($(w, '[data-start]').hidden, false);
+    assert.equal(startOff(w).hidden, false, `${lang}: the way out is in the start panel`);
+    assert.ok(startOff(w).textContent.startsWith(word('The new shift close is on, on this device, and no shift has been started with it. If you do not want it, turn it off here; nothing has to be started first.')), lang);
+    assert.equal($(w, '[data-pilot-off-start]').textContent, word('Turn it off'));
+    // "No" leaves it on.
+    w.answer = false;
+    $(w, '[data-pilot-off-start]').click();
+    // (This file runs the page's scripts without the texts of its language: what a script asks is in English here.)
+    assert.ok(w.asked.at(-1).startsWith('Turn the new shift close off on this device? Closing a shift then starts the next handover at once, as before'), `${lang}: asked first`);
+    assert.equal(w.ShiftClose.enabled(), true);
+    // "Yes": off, without a shift having been started, and the page is the blank handover it was.
+    w.answer = true;
+    $(w, '[data-pilot-off-start]').click();
+    assert.equal(w.ShiftClose.enabled(), false, `${lang}: off`);
+    assert.equal(w.localStorage.getItem(PILOT), null);
+    assert.equal(w.localStorage.getItem(KEYS[lang]), null, `${lang}: no handover was written`);
+    assert.equal(w.ShiftContext.active(), null, `${lang}: no shift was started to get out`);
+    assert.equal($(w, '[data-start]').hidden, true);
+    assert.equal($(w, '[data-handover]').closest('section').hidden, false, `${lang}: the page as it always was`);
+    assert.equal($(w, '[data-pilot-held]').hidden, true, `${lang}: and nothing is held`);
+    // The same on a later visit, as long as nothing was started.
+    const later = open({ lang });
+    assert.equal(startOff(later).hidden, false, `${lang}: still there on the next visit`);
+    // Once a shift is started the way out is the button beside the handover, with its own rule.
+    $(later, '[data-start-shift]').click();
+    assert.equal($(later, '[data-start]').hidden, true);
+    assert.equal(startOff(reload(later, { pilot: true })).closest('[data-start]').hidden, true);
+  }
+  // A closed shift whose open issue waits: no way out from the start panel, and the click does nothing.
+  const waiting = idlePage();
+  assert.equal(startOff(waiting).hidden, true);
+  $(waiting, '[data-pilot-off-start]').click();
+  assert.equal(waiting.ShiftClose.enabled(), true);
+  assert.deepEqual(waiting.asked.filter((text) => text.startsWith('Turn the new shift close off')), []);
+  // A new device on which an issue sent from another tool already waits: the same.
+  const sent = open({ search: sentSearch });
+  assert.equal(saved(sent).waiting.length, 1);
+  assert.equal(startOff(sent).hidden, true, 'an issue that waits is work that waits');
+  $(sent, '[data-pilot-off-start]').click();
+  assert.equal(sent.ShiftClose.enabled(), true);
+  // A closed shift with nothing waiting is still something stored: the handover's own state decides, as before.
+  const closed = open({ storage: withHandover('en', { issues: [] }) });
+  closeShift(closed);
+  assert.equal(startOff(closed).hidden, true);
+});
+
 test('where it is not on, team sync shares the handover as before: offered, sent when ticked, and merged', { skip: !hasSite }, async () => {
   const device = async (who, pilot, ticked = true) => {
     const w = open({ pilot, scripts: SYNC_SCRIPTS, storage: {

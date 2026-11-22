@@ -14,10 +14,14 @@
 // left, it is shown as the candidate that is left; several are shown together as candidates, and none is chosen; none
 // opens the period and says the row is no longer found. An example the page loaded by itself is never the source.
 //
-// Before and after (step 7). When the action is marked done, the list keeps the day (closed). The view then sets two
-// periods side by side, with the same filter: before, the stored period up to the day before that day; after, the same
-// number of days from the day after it, as far as today. The day itself is in neither: the log is kept by day, and
-// that day is partly before the action and partly after it. For each period the view shows its dates, the damage
+// Before and after (step 7). When the action is marked done, the list keeps the day (closed). That day is only a
+// proposal for the day the countermeasure was really in place: the visitor confirms it or puts the right one before
+// anything is compared, and the day they confirm is kept with this view (for the tab, by the action's id), never on
+// the action. The view then sets two periods side by side, with the same filter: before, the stored period up to
+// the day before that day; after, the same number of days from the day after it. The day itself is in neither: the
+// log is kept by day, and that day is partly before the action and partly after it. While "after" has not had all
+// its days, the last of them included, it is pending: the view says from which day it can be compared in full, and
+// gives no change in the rate until then, whatever is already recorded for the day that is still running. For each period the view shows its dates, the damage
 // and the volume that is recorded for it. A rate is given only where a volume is recorded and the damage is not
 // more than it, and the two rates are compared only when both volumes were counted the same way (both the sum of the
 // daily volumes: a total typed for a period is another count). No damage with a volume recorded is a zero; no damage
@@ -100,12 +104,17 @@ window.DefectSource = (() => {
     const input = { rows, volumes, typed, scope: scopeOf(origin) };
     const before = measure(beforeRange, input);
     const after = measure(afterRange, input);
-    const comparable = before.rate !== null && after.rate !== null && before.volume.rule === after.volume.rule;
+    // Pending until the last day of "after" is over: today itself is a day that is still running.
+    const running = today <= wanted;
+    const comparable = !running && before.rate !== null && after.rate !== null && before.volume.rule === after.volume.rule;
     return {
       ok: true, implemented, before, after,
       // The stored period was cut short, because the action was done inside it.
       cut: beforeRange.to !== origin.to,
-      running: wanted > today,
+      running,
+      // The last day "after" will have, and the first day on which it can be compared whole.
+      until: wanted,
+      fullFrom: addDays(wanted, 1),
       sameLength: before.days === after.days,
       comparable,
       change: comparable ? after.rate - before.rate : null,
@@ -121,23 +130,83 @@ window.DefectSource = (() => {
 
     const trackerUrl = () => new URL("../action-tracker/", window.location.href).href;
     // The comparison as the page shows it: a table of the two periods, what was measured, and what it does not say.
+    // The day the visitor confirmed for an action, kept for this tab only (never on the action, which is shared).
+    const DAY_KEY = "sc-source-day";
+    const days = () => { try { const saved = JSON.parse(window.sessionStorage.getItem(DAY_KEY)); return isObject(saved) ? saved : {}; } catch { return {}; } };
+    const confirmedDay = (actionId) => { const day = days()[actionId]; return isDate(str(day)) && day <= today() ? day : ""; };
+    const keepDay = (actionId, day) => { const all = days(); if (day) all[actionId] = day; else delete all[actionId]; try { window.sessionStorage.setItem(DAY_KEY, JSON.stringify(all)); } catch { /* the choice lasts while the page is open */ } };
+    let shownDay = "";
     const beforeAfter = (action, origin, rows) => {
       const done = (action.status === "done" || action.status === "verified") && isDate(str(action.closed)) ? action.closed : "";
       const out = [el("p", "kicker dw-compare-head", tx("Before and after"))];
       if (!done) { out.push(el("p", "form-note", tx("The action is not marked done on the list, so there is no day to compare from."))); return out; }
+      const host = el("div", "dw-compare-host");
+      out.push(host);
+      shownDay = confirmedDay(action.id);
+      const draw = () => {
+        host.replaceChildren(...(shownDay ? compared(action, origin, rows, done, shownDay, draw) : asked(action, done, draw)));
+      };
+      draw();
+      return out;
+    };
+    // Before anything is compared: the day the countermeasure was really in place, proposed and then confirmed.
+    const asked = (action, done, draw) => {
+      const form = el("form", "dw-compare-ask");
+      form.dataset.sourceDay = "";
+      form.noValidate = true;
+      const label = el("label", null, tx("The day the countermeasure was really in place"));
+      label.htmlFor = "dw-source-day";
+      const input = el("input");
+      input.type = "date";
+      input.id = "dw-source-day";
+      input.name = "day";
+      input.max = today();
+      input.value = done;
+      const field = el("div", "field");
+      field.append(label, input);
+      const button = el("button", "button-primary", tx("Confirm the day and compare"));
+      button.type = "submit";
+      const status = el("p", "form-note");
+      status.setAttribute("role", "status");
+      const row = el("div", "tool-actions");
+      row.append(button);
+      form.append(
+        el("p", null, tx("The list has the action marked done on {date}. That may not be the day the countermeasure was in place: confirm the day, or put the right one. Nothing is compared before you do, and the day you give is kept with this view, not on the action.", { date: showDate(done) })),
+        field, row, status,
+      );
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const day = str(input.value);
+        if (!isDate(day) || day > today()) { status.textContent = tx("Give a day, today at the latest."); input.focus(); return; }
+        shownDay = day;
+        keepDay(action.id, day);
+        draw();
+        document.querySelector("[data-source-change-day]")?.focus();
+      });
+      return [form];
+    };
+    const compared = (action, origin, rows, done, implemented, draw) => {
+      const out = [];
       // The total the visitor typed belongs to the days it was typed for, which are their own period, not this view's.
       const stamp = str(state.totalsFor && state.totalsFor.volume).split("|");
       const typedValue = parseNumber(str(state.volume));
       const typed = typedValue > 0 && stamp.length === 2 && isDate(stamp[0]) && isDate(stamp[1]) ? { value: typedValue, from: stamp[0], to: stamp[1] } : null;
-      const result = compare(origin, done, { rows, volumes: Array.isArray(state.volumes) ? state.volumes : [], typed, today: today() });
+      const result = compare(origin, implemented, { rows, volumes: Array.isArray(state.volumes) ? state.volumes : [], typed, today: today() });
       const box = el("div", "dw-compare");
       box.dataset.sourceCompare = result.ok ? "ok" : result.reason;
+      box.dataset.sourceImplemented = implemented;
       out.push(box);
-      box.append(el("p", "form-note", tx("The action was marked done on {date}. That day is in neither period: the log is kept by day, and that day is partly before the action and partly after it.", { date: showDate(done) })));
+      const change = el("button", "button-secondary", tx("Change the day"));
+      change.type = "button";
+      change.dataset.sourceChangeDay = "";
+      change.addEventListener("click", () => { shownDay = ""; keepDay(action.id, ""); draw(); document.getElementById("dw-source-day")?.focus(); });
+      const first = el("p", "form-note", `${tx(implemented === done ? "Compared from {date}, the day you confirmed (the day the action was marked done)." : "Compared from {date}, the day you gave (the list has the action marked done on {done}).", { date: showDate(implemented), done: showDate(done) })} ${tx("That day is in neither period: the log is kept by day, and that day is partly before the action and partly after it.")} `);
+      first.append(change);
+      box.append(first);
       if (!result.ok) {
         box.append(el("p", "dl-warning", result.reason === "before-empty"
-          ? tx("The action was marked done on or before the first day of its stored period, so no day of that period is before it. There is nothing to compare.")
-          : tx("No day after the action has passed yet. Come back when there are days to compare.")));
+          ? tx("That day is on or before the first day of the stored period, so no day of that period is before it. There is nothing to compare.")
+          : tx("No day after that day has passed yet. Come back when there are days to compare.")));
         return out;
       }
       const volumeText = (period) => (period.volume.value !== null ? int.format(period.volume.value)
@@ -150,7 +219,7 @@ window.DefectSource = (() => {
       const thead = el("thead");
       thead.append(head);
       const body = el("tbody");
-      [["before", tx("Before"), result.before], ["after", tx("After"), result.after]].forEach(([name, label, period]) => {
+      [["before", tx("Before"), result.before], ["after", result.running ? `${tx("After")} · ${tx("pending")}` : tx("After"), result.after]].forEach(([name, label, period]) => {
         const tr = el("tr");
         tr.dataset.sourcePeriod = name;
         const th = el("th", null, label);
@@ -165,11 +234,13 @@ window.DefectSource = (() => {
       box.append(wrap);
       // What was measured.
       const measured = el("p", "dw-measured");
-      measured.dataset.sourceMeasured = result.comparable ? "rate" : "none";
+      measured.dataset.sourceMeasured = result.comparable ? "rate" : result.running ? "pending" : "none";
       if (result.comparable) {
         const points = Math.abs(result.change) * 100;
         const size = kit.num ? kit.num(points, 2) : points.toFixed(2);
         measured.append(el("strong", null, tx("Measured: {rate} went from {a} to {b}.", { rate: t.rateLabel.toLowerCase(), a: pct(result.before.rate, 2), b: pct(result.after.rate, 2) })), ` ${result.change === 0 ? tx("No change.") : tx(result.change < 0 ? "That is {n} percentage points lower." : "That is {n} percentage points higher.", { n: size })}`);
+      } else if (result.running) {
+        measured.append(el("strong", null, tx("Pending: “after” is not complete, so no change in the rate is given yet.")));
       } else {
         measured.append(el("strong", null, tx("No measured change in the rate can be given.")));
       }
@@ -178,15 +249,15 @@ window.DefectSource = (() => {
       const noData = (period, label) => { if (!period.hasData) notes.push(tx("{period}: nothing is recorded for these days, neither damage nor volume. That is no data, not zero damage.", { period: label })); else if (!period.units && period.volume.value !== null) notes.push(tx("{period}: no damage with {volume} recorded as handled. That is a measured zero.", { period: label, volume: int.format(period.volume.value) })); else if (!period.units && period.rowsInPeriod) notes.push(tx("{period}: the log has entries in these days, and none of them is in this scope.", { period: label })); };
       noData(result.before, tx("Before"));
       noData(result.after, tx("After"));
-      if (!result.comparable) {
+      if (result.running) notes.push(tx("“After” runs until {until} and can be compared in full from {from}. So far it has {a} of {b} days, and the last of them is still running.", { until: showDate(result.until), from: showDate(result.fullFrom), a: int.format(result.after.days), b: int.format(result.before.days) }));
+      if (!result.comparable && !result.running) {
         const [b, a] = [result.before, result.after];
         if (b.volume.value !== null && a.volume.value !== null && b.volume.rule !== a.volume.rule) notes.push(tx("The two volumes were not counted the same way: one is a total typed for its period, the other the sum of the daily volumes. Rates from them are not compared."));
         else if (b.volume.value === null || a.volume.value === null) notes.push(tx("A rate needs the volume of each period, recorded day by day (Data, volume per day). Without it only the counts are shown, and counts of periods with other volumes do not compare."));
         else if (b.rate === null || a.rate === null) notes.push(tx("A period holds more damage than its recorded volume: check the volume."));
       }
       if (result.cut) notes.push(tx("The action was done inside its stored period, so “before” ends the day before it."));
-      if (result.running) notes.push(tx("“After” is still running: it has {a} of {b} days.", { a: int.format(result.after.days), b: int.format(result.before.days) }));
-      else if (!result.sameLength) notes.push(tx("The two periods are not of the same length."));
+      if (!result.running && !result.sameLength) notes.push(tx("The two periods are not of the same length."));
       notes.push(tx("This is what was measured, with the same filter in both periods. It does not show that the action caused it: other things may have changed in the same days."));
       notes.forEach((text) => box.append(el("p", "form-note", text)));
       return out;

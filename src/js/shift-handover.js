@@ -1845,8 +1845,17 @@
   const pilotNote = output.querySelector("[data-pilot-note]");
   const closeButton = output.querySelector("[data-close]");
   const closeLabels = { off: closeButton.textContent, on: closeButton.dataset.pilotLabel || closeButton.textContent };
+  // Nothing of the new way is on this device yet: no handover stored, no closed shift, nothing that waits, nothing
+  // written. Only then may it be turned off from the start panel, before a first shift.
+  const untouched = () => {
+    const stored = read(KEY, null);
+    const left = leftByClose();
+    return !(isObject(stored) && isObject(stored.current)) && !state.history.length && !left.sent && !left.closures && !hasContent(cur());
+  };
+  const startOff = document.querySelector("[data-pilot-start-off]");
   const renderPilot = () => {
     const on = pilot();
+    if (startOff) startOff.hidden = !(on && state.idle && untouched());
     closeButton.textContent = on ? closeLabels.on : closeLabels.off;
     if (pilotNote) pilotNote.hidden = !on;
     document.querySelectorAll("[data-pilot-on]").forEach((node) => { node.hidden = !on; });
@@ -1879,6 +1888,13 @@
     const said = [tx("Turn the new shift close off on this device? Closing a shift then starts the next handover at once, as before, and team sync may share the handover again if it is ticked for it.")];
     if (hasContent(cur())) said.push(tx("The {shift} shift that is open stays open as it is.", { shift: lower(cur().shift) }));
     if (!window.confirm(said.join("\n\n"))) return;
+    if (setPilot(false)) note(tx("Turned off on this device."));
+  });
+  // From the start panel, before a first shift: allowed only while nothing is stored and nothing waits. Otherwise the
+  // rule of the button beside the handover holds, and this one is not shown.
+  startOff?.querySelector("[data-pilot-off-start]")?.addEventListener("click", () => {
+    if (!pilot() || !state.idle || !untouched()) { renderPilot(); return; }
+    if (!window.confirm(tx("Turn the new shift close off on this device? Closing a shift then starts the next handover at once, as before, and team sync may share the handover again if it is ticked for it."))) return;
     if (setPilot(false)) note(tx("Turned off on this device."));
   });
   heldBox?.querySelector("[data-pilot-held-on]")?.addEventListener("click", () => {

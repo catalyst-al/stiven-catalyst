@@ -659,22 +659,23 @@ Poshtë tyre është historiku i vetë Dorëzimit (turnet e mbyllura).
 - Hapi “Dorëzimi” te faza “Fund” është lidhje; gjendja e dorëzimit (gati, dërguar) nuk tregohet te “Sot”.
 - Faza e zgjedhur mbahet vetëm për skedën e hapur të shfletuesit.
 - Faqja mban brenda gjithë shënjimin e Dorëzimit, të pashfaqur: është çmimi i një mekanizmi të vetëm.
-- Një pajisje pilot pa dorëzim të ruajtur e hap Dorëzimin te paneli i nisjes; formulari (edhe butoni i shembullit) shfaqet pasi niset turni. Kur piloti ndizet nga adresa në një pajisje të tillë, paneli i nisjes shfaqet menjëherë pas konfirmimit, pa rifreskim (korrigjuar më 21 nëntor 2026); turni niset vetëm kur e nis përdoruesi. Në atë gjendje butoni që e fik pilotin nuk shihet, sepse është pranë dorëzimit: piloti fiket pasi të jetë nisur një turn.
+- Një pajisje pilot pa dorëzim të ruajtur e hap Dorëzimin te paneli i nisjes; formulari (edhe butoni i shembullit) shfaqet pasi niset turni. Kur piloti ndizet nga adresa në një pajisje të tillë, paneli i nisjes shfaqet menjëherë pas konfirmimit, pa rifreskim (korrigjuar më 21 nëntor 2026); turni niset vetëm kur e nis përdoruesi. Në atë gjendje butoni që e fik pilotin pranë dorëzimit nuk shihet; prandaj paneli i nisjes ka daljen e vet (korrigjuar më 22 nëntor 2026): “Fike” e fik pilotin pa nisur turn, me të njëjtën pyetje konfirmimi. Dalja shfaqet vetëm kur pajisja nuk ka asgjë të ruajtur nga një dorëzim, asnjë turn të mbyllur dhe asnjë çështje që pret; kur ka, vlen mbrojtja ekzistuese e butonit pranë dorëzimit.
 - Kutia e punës që ka çdo faqe mjeti (me zgjedhësin e kyçjes me PIN) hyn me zbehje kur rrëshqitet në pamje. Në një faqe të shkurtër si “Sot” ajo rri në buzë të dritares, dhe kontrolli automatik i kontrastit e kapte në mes të zbehjes. Është sjellje ekzistuese e faqes, jo e këtij hapi; testi i “Sot” mat faqen e qetësuar.
 - Faqja nuk është në udhëzuesin e mjeteve dhe as në listën e mjeteve; shtimi atje është punë botimi.
 - Shqipja e teksteve të reja të pilotit përdor herë “ti” e herë “ju”. Kërkon një kalim redaktimi para publikimit.
 
 ### 7.4 Hapi 7: para dhe pas
 
-Bërë më 21 nëntor 2026. Krahasimi është pjesë e pamjes “Hap burimin” (7.2): shfaqet kur veprimi është shënuar i kryer në listë. Nuk shkruan asgjë dhe nuk e ndryshon veprimin.
+Bërë më 21 nëntor 2026; dita e zbatimit dhe periudha në pritje u korrigjuan më 22 nëntor 2026. Krahasimi është pjesë e pamjes “Hap burimin” (7.2): shfaqet kur veprimi është shënuar i kryer në listë. Nuk shkruan asgjë në listë ose në regjistër dhe nuk e ndryshon veprimin.
 
 **Dy periudhat.**
 
-- **Data e zbatimit** është dita kur veprimi u shënua i kryer në listë (`closed`): e vetmja datë e zbatimit që lista mban.
-- **Para:** periudha e ruajtur te `origin`, deri një ditë para datës së zbatimit.
-- **Pas:** po aq ditë, nga dita pas datës së zbatimit, deri sot.
-- **Dita e zbatimit nuk është në asnjërën.** Regjistri mbahet sipas ditëve, dhe ajo ditë është pjesërisht para veprimit e pjesërisht pas tij.
-- Kur veprimi kryhet brenda periudhës së ruajtur, “Para” shkurtohet dhe faqja e thotë. Kur kryhet në ditën e parë ose më herët, nuk ka “Para” dhe faqja thotë që nuk ka çfarë të krahasohet. Kur “Pas” ende vazhdon, faqja thotë sa ditë ka.
+- **Dita e zbatimit konfirmohet nga përdoruesi.** Faqja propozon ditën kur veprimi u shënua i kryer (`closed`) dhe pyet; krahasimi nuk shfaqet para përgjigjes. Dita mund të korrigjohet (jo më vonë se sot) dhe të ndryshohet më pas me “Ndrysho ditën”. Zgjedhja mbahet vetëm në pamjen e krahasimit (`sessionStorage`, `sc-source-day`, sipas ID-së së veprimit): mbijeton rifreskimin në të njëjtën skedë, nuk hyn në listën e veprimeve, në kopjen rezervë ose në sinkronizim.
+- **Para:** periudha e ruajtur te `origin`, deri një ditë para ditës së konfirmuar.
+- **Pas:** po aq ditë, nga dita pas ditës së konfirmuar.
+- **Dita e konfirmuar nuk është në asnjërën.** Regjistri mbahet sipas ditëve, dhe ajo ditë është pjesërisht para veprimit e pjesërisht pas tij.
+- Kur veprimi kryhet brenda periudhës së ruajtur, “Para” shkurtohet dhe faqja e thotë. Kur kryhet në ditën e parë ose më herët, nuk ka “Para” dhe faqja thotë që nuk ka çfarë të krahasohet. 
+- **“Pas” në pritje.** Derisa dita e fundit e “Pas” të ketë mbaruar (edhe kur ajo ditë është sot), rreshti shënohet “në pritje”, faqja tregon datën kur periudha mbaron dhe datën nga e cila krahasohet e plotë, dhe nuk nxjerr ndryshim të shkallës, edhe nëse për ditën në vazhdim është shkruar tashmë një vëllim pozitiv. Numrat e deritanishëm tregohen.
 
 **Fusha** është ajo e `origin`: të gjitha dëmet për një periudhë, dëmet e filtrit për një filtër, dëmet e të njëjtit hap dhe shkak për një rresht. Vëllimi është gjithmonë ai i gjithë punës së atyre ditëve.
 
@@ -688,10 +689,10 @@ Bërë më 21 nëntor 2026. Krahasimi është pjesë e pamjes “Hap burimin” 
 
 **Kufizimet.**
 
-- Data e zbatimit është dita kur veprimi u shënua i kryer. Nëse kundërmasa u zbatua një ditë dhe u shënua një ditë tjetër, dita e përjashtuar nuk është ajo e duhura. Lista nuk mban një datë zbatimi më vete; shtimi i saj do të ndryshonte formatin e listës së sinkronizuar.
+- Dita e konfirmuar e zbatimit nuk ruhet në listë: shtimi i saj do të ndryshonte formatin e listës së sinkronizuar. Mbahet për skedën e hapur; në një skedë ose pajisje tjetër faqja pyet sërish, me të njëjtin propozim.
 - Krahasimi është sipas ditëve: nuk dallon turnet brenda një dite.
 - “Pas” ka po aq ditë sa “Para”, pa marrë parasysh ditët e javës ose ditët pa punë.
-- Dita e sotme hyn te “Pas” edhe pse mund të mos ketë mbaruar.
+- “Dita mbaroi” gjykohet nga data kalendarike e pajisjes: një turn nate që vazhdon pas mesnatës nuk dallohet.
 - Vetëm Kontrolli i dëmeve, dhe vetëm për veprime me `origin`.
 
 ### 7.5 Para publikimit

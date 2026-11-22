@@ -90,8 +90,10 @@ has open. The phase the visitor chooses is kept for the tab only (sessionStorage
 Damage Control to the log of `origin.lang` with `?source=<the action's id>` and nothing else, and the log reads the
 action from `sc-actions`. The view only reads: the period it shows is lent to the page and never stored (`from` and
 `to` of the log keep the visitor's own), and it writes nothing when it opens or closes. For an action marked done it also sets
-two periods side by side: before, the stored period up to the day before `closed`; after, as many days from the day
-after it. It reads the log's `rows` and `volumes` (and `volume` with `totalsFor.volume`, a total typed for exactly
+two periods side by side, once the visitor has confirmed the day the action was implemented (`closed` is the proposal;
+the confirmed day is kept for the tab only, sessionStorage `sc-source-day`, `{ <action id>: "YYYY-MM-DD" }`, and never
+enters the action list, a backup or team sync): before, the stored period up to the day before that day; after, as
+many days from the day after it. Until the last day of "after" is over the period is pending and no change is given. It reads the log's `rows` and `volumes` (and `volume` with `totalsFor.volume`, a total typed for exactly
 those days) and gives a rate only when both periods have a volume counted the same way. It stores nothing.
 
 Closing a shift and carrying its open issues (`js/shift-close.js`, used by the Shift Handover page). This way of closing
