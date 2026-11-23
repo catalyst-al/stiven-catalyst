@@ -1,7 +1,7 @@
 // The artwork of the podcast (src/_data/podcast.js): the show's cover, 3000 × 3000, and one square picture per
 // episode, 1400 × 1400, the sizes Apple Podcasts and Spotify ask for. Both are drawn here as HTML and photographed
-// with Chromium: the Catalyst light hanging from its cable, its filament a sound wave (the voice of the brand), the
-// masthead of the Management Review with its second word in red, and the word PODCAST in blue. An episode adds its
+// with Chromium: the mark (the circled point) at the centre of its small system, the masthead of the Management
+// Review with its second word in red, and the word PODCAST in blue beside a sound wave. An episode adds its
 // number and title. Written to src/media/podcast/cover.jpg and src/media/podcast/<slug>-<lang>.jpg, with a small
 // WebP of each for the podcast page.
 //
@@ -22,46 +22,37 @@ const INTER = { 600: font("inter-latin-600-normal.woff2"), 700: font("inter-lati
 const esc = (text) => String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const OUT = path.join(ROOT, "src/media/podcast");
 
-// The light, in a 1000 × 1000 square: the cable from the top edge, the black cap with its brass ring, the glass
-// glowing warm, and inside it a sound wave of eleven bars, loudest in the middle.
-const bulb = (cx, cy, b) => {
-  const neck = cy - 0.52 * b;
-  const capTop = neck - 0.46 * b;
-  const bars = Array.from({ length: 11 }, (_, i) => {
-    const px = cx - 0.3 * b + (i * 0.6 * b) / 10;
-    const env = Math.sin((i / 10) * Math.PI);
-    const h = (0.05 + 0.2 * env * (0.72 + 0.28 * Math.sin(i * 1.7 + 0.6))) * b;
-    return `<line x1="${px}" y1="${cy + 0.22 * b - h}" x2="${px}" y2="${cy + 0.22 * b + h}" stroke-opacity="${0.6 + 0.4 * env}"/>`;
-  }).join("");
+// The ring of the mark, in its display weight: the one drawing of it, read from the stylesheet.
+const RING = decodeURIComponent(fs.readFileSync(path.join(ROOT, "src/css/01-foundation.css"), "utf8")
+  .match(/--mark-ring-display: url\("data:image\/svg\+xml,(.*?)"\)/)[1]).match(/d='([^']+)'/)[1];
+
+// The mark, in a 1000 × 1000 square: the circled point at cx, cy at the centre of its small system, three thin orbits
+// with the four families on them. The mark is flat (the ring in the colour of the text, the point in the accent); the
+// cool light begins outside the ring. b sets the size, as it did for the light the artwork carried before.
+const mark = (cx, cy, b) => {
+  const m = b / 50;
+  const orbits = [1.3, 1.85, 2.4].map((k) => [k * b, k * b * 0.42]);
+  const at = (orbit, degrees) => {
+    const [rx, ry] = orbits[orbit];
+    return [cx + rx * Math.cos((degrees * Math.PI) / 180), cy + ry * Math.sin((degrees * Math.PI) / 180)];
+  };
+  const planets = [["#b09cfa", 0, 28, 0.05], ["#84c6f7", 1, 205, 0.058], ["#f6cc80", 1, 318, 0.066], ["#d6dee6", 2, 112, 0.054]]
+    .map(([colour, orbit, degrees, r]) => {
+      const [x, y] = at(orbit, degrees);
+      return `<circle cx="${x}" cy="${y}" r="${r * b * 2.6}" fill="${colour}" opacity=".16"/><circle cx="${x}" cy="${y}" r="${r * b}" fill="${colour}"/>`;
+    }).join("");
   return `
   <defs>
-    <radialGradient id="halo" cx="${cx}" cy="${cy + 0.1 * b}" r="${2.6 * b}" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ffe2b0" stop-opacity=".42"/><stop offset=".35" stop-color="#ffcf8a" stop-opacity=".12"/><stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glass" cx="${cx - 0.14 * b}" cy="${cy + 0.05 * b}" r="${0.95 * b}" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#fffaf0"/><stop offset="1" stop-color="#ffe6bb"/>
-    </radialGradient>
-    <linearGradient id="cable" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dce6f0" stop-opacity="0"/><stop offset="1" stop-color="#dce6f0" stop-opacity=".65"/></linearGradient>
-    <linearGradient id="cap" x1="0" x2="1"><stop offset="0" stop-color="#050607"/><stop offset=".55" stop-color="#23272a"/><stop offset="1" stop-color="#050607"/></linearGradient>
-    <filter id="glow" x="-1" y="-1" width="3" height="3"><feGaussianBlur stdDeviation="${0.09 * b}" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="spark" x="-1" y="-1" width="3" height="3"><feGaussianBlur stdDeviation="${0.012 * b}" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <radialGradient id="cool"><stop offset="0" stop-color="#1e68a8" stop-opacity=".5"/><stop offset="1" stop-color="#1e68a8" stop-opacity="0"/></radialGradient>
+    <radialGradient id="still"><stop offset=".55" stop-color="#060a10"/><stop offset="1" stop-color="#060a10" stop-opacity="0"/></radialGradient>
   </defs>
-  <circle cx="${cx}" cy="${cy + 0.1 * b}" r="${2.6 * b}" fill="url(#halo)"/>
-  <rect x="${cx - 0.02 * b}" y="0" width="${0.04 * b}" height="${capTop}" fill="url(#cable)"/>
-  <path filter="url(#glow)" fill="url(#glass)" d="M${cx - 0.22 * b} ${neck}
-    C${cx - 0.24 * b} ${cy - 0.28 * b} ${cx - 0.64 * b} ${cy - 0.24 * b} ${cx - 0.64 * b} ${cy + 0.16 * b}
-    C${cx - 0.64 * b} ${cy + 0.6 * b} ${cx - 0.32 * b} ${cy + 0.84 * b} ${cx} ${cy + 0.84 * b}
-    C${cx + 0.32 * b} ${cy + 0.84 * b} ${cx + 0.64 * b} ${cy + 0.6 * b} ${cx + 0.64 * b} ${cy + 0.16 * b}
-    C${cx + 0.64 * b} ${cy - 0.24 * b} ${cx + 0.24 * b} ${cy - 0.28 * b} ${cx + 0.22 * b} ${neck} Z"/>
-  <g stroke="#ff9632" stroke-opacity=".75" stroke-width="${0.03 * b}" stroke-linecap="round">
-    <line x1="${cx - 0.1 * b}" y1="${neck + 0.05 * b}" x2="${cx - 0.1 * b}" y2="${cy - 0.02 * b}"/>
-    <line x1="${cx + 0.1 * b}" y1="${neck + 0.05 * b}" x2="${cx + 0.1 * b}" y2="${cy - 0.02 * b}"/>
+  <ellipse cx="${cx}" cy="${cy}" rx="${2.9 * b}" ry="${1.7 * b}" fill="url(#cool)"/>
+  <ellipse cx="${cx}" cy="${cy}" rx="${0.96 * b}" ry="${0.86 * b}" fill="url(#still)"/>
+  <g transform="rotate(-9 ${cx} ${cy})">
+    ${orbits.map(([rx, ry], i) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="none" stroke="#bed6ec" stroke-opacity="${0.26 - i * 0.05}" stroke-width="${0.008 * b}"/>`).join("")}
+    ${planets}
   </g>
-  <g stroke="#ff8a1e" stroke-width="${0.05 * b}" stroke-linecap="round" filter="url(#spark)">${bars}</g>
-  <rect x="${cx - 0.25 * b}" y="${capTop}" width="${0.5 * b}" height="${neck - capTop + 0.02 * b}" rx="${0.05 * b}" fill="url(#cap)"/>
-  <rect x="${cx - 0.25 * b}" y="${capTop + 0.14 * b}" width="${0.5 * b}" height="${0.022 * b}" fill="#fff" fill-opacity=".08"/>
-  <rect x="${cx - 0.25 * b}" y="${capTop + 0.26 * b}" width="${0.5 * b}" height="${0.022 * b}" fill="#fff" fill-opacity=".08"/>
-  <rect x="${cx - 0.25 * b}" y="${neck - 0.04 * b}" width="${0.5 * b}" height="${0.06 * b}" fill="#d1a553"/>`;
+  <g transform="translate(${cx - 50 * m} ${cy - 52 * m}) scale(${m})"><path d="${RING}" fill="#f6f7f4"/><rect x="42" y="44" width="16" height="16" fill="#4ab5f7"/></g>`;
 };
 
 const page = (body, light) => `<!doctype html><html><head><meta charset="utf-8"><style>
@@ -81,7 +72,7 @@ svg.light { position: absolute; inset: 0; width: 1000px; height: 1000px; }
 .tag svg { flex: none; }
 .foot { position: absolute; left: 80px; right: 80px; bottom: 80px; }
 </style></head><body>
-<svg class="light" viewBox="0 0 1000 1000">${bulb(light.x, light.y, light.b)}</svg>
+<svg class="light" viewBox="0 0 1000 1000">${mark(light.x, light.y, light.b)}</svg>
 ${body}
 <script>
   // The longest word of a line must stay inside the square: the size comes down until it fits.

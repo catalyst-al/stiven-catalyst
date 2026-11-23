@@ -479,7 +479,7 @@ const common = {
   ],
   theme: x("The manager in the age of AI", "Menaxheri në epokën e AI-së", "Die Führungskraft im Zeitalter der KI"),
   sub: x("How work is being redesigned, and what leaders must keep human.", "Si po riorganizohet puna dhe çfarë duhet ta ruajnë drejtuesit si punë të njeriut.", "Wie Arbeit neu gestaltet wird und was Führung menschlich halten muss."),
-  cover: { src: `/media/magazine/${slug}/art/bulb.jpg`, width: 350, height: 700 },
+  cover: { src: `/media/magazine/${slug}/art/mark.jpg`, width: 350, height: 700 },
   inside: ["trends", "numbers", "human", "kpi", "review"],
   editor: {
     kicker: x("From the editor", "Nga redaktori", "Aus der Redaktion"),
