@@ -30,7 +30,7 @@ Beside the heading of every page, beside the title of every reflection and on th
 
 The pictures a reader takes away carry the mark too. The card of a field note (`src/media/notes/`, `scripts/note-cards.mjs`) has it in the banner at its foot, at the centre of its system with the name beside it. The link previews (`src/media/social/`) have it beside the name on the cards of the tools and the roles, at the centre of the Tools card and of the homepage card (`scripts/social-cards.mjs`), and in the corner of the cards of the essays, the reflections and the writing pages (`scripts/page-cards.mjs`, from `src/favicon.svg`). `src/social.png` is the card of the site itself, the mark with the name and the motto (`scripts/social-default.mjs`).
 
-The earlier mark was a hanging light bulb on a red-to-blue gradient, with the name "Stiven Catalyst Coaching". Its small light still marks the chosen topic of a list, the steps of Start here and the essays read in a series; these are replaced in a step that follows, and nothing new is drawn with it. A bulb is also the cover art of the publications (the magazine covers and their link previews, the podcast cover): that is the picture of those covers, not the mark. The light of Lumen is that planet's own and stays.
+The earlier mark was a hanging light bulb on a red-to-blue gradient, with the name "Stiven Catalyst Coaching". Nothing new is drawn with it. Where its small light used to mark things, the point does now: the chosen topic of a list, a project's tag and "Read" beside an essay carry the small square; the numbers of Start here stand in a ring that fills with the accent as the step is reached; a series is a row of small rings, an essay read has its point set inside, and the essay open now is the mark itself, the point with its ring drawn by hand. A bulb is also the cover art of the publications (the magazine covers and their link previews, the podcast cover): that is the picture of those covers, not the mark. The light of Lumen is that planet's own and stays.
 
 ## Four pillars
 1. **Clarity**: Understand before reacting.
@@ -47,7 +47,7 @@ One accent, used sparingly. Hierarchy comes from typography, space and thin line
 | White and soft grey | `--ink`, `--muted`, `--line` | Text, borders, dividers. Clarity and breathing space. |
 | **Electric blue: the one accent** | `--blue`, `--blue-soft` | Links, eyebrows, numbers, the selected filter or tab, focus, progress, the main button. Clarity and analysis. |
 | Red: the signature | `--red` | Only a single word in the manifesto. Not in the mark. Never a button, a bar, a glow or a chart. |
-| Gold | `--gold` | The Reflections, and the small lights that are left from the earlier mark (lists, Start here, a series) until they are replaced. Not in the mark. |
+| Gold | `--gold` | The Reflections, and Lumen's own light. Not in the mark. |
 | State colours | `--ok`, `--warn`, `--danger` | Only inside tools, to report a result: right or wrong, better or worse, a check passed, a warning, an error. Never decoration. |
 
 Rules:
