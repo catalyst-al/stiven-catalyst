@@ -41,7 +41,7 @@ export default defineConfig({
     name: `${width}px ${theme}`,
     testIgnore: [
       ...(width === 1440 && theme === "light" ? [] : [/work-backup-photos\.spec\.mjs$/, /work-backup-sealed\.spec\.mjs$/, /case-flow\.spec\.mjs$/, /room-inspection-actions\.spec\.mjs$/, /room-inspection-recheck\.spec\.mjs$/, /sw-offline\.spec\.mjs$/, /action-handoff\.spec\.mjs$/]),
-      ...(width === 1440 && theme === "dark" ? [] : [/tool-pages\.spec\.mjs$/]),
+      ...(width === 1440 && theme === "dark" ? [] : [/tool-pages\.spec\.mjs$/, /download-all\.spec\.mjs$/]),
       ...(width === 390 ? [] : [/chart-labels\.spec\.mjs$/]),
       ...(width === 1440 && theme === "dark" ? [] : [/print\.spec\.mjs$/]),
       ...(width === 1440 ? [] : [/a11y-pages\.spec\.mjs$/]),

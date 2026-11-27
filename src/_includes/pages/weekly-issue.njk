@@ -36,6 +36,13 @@
   of: "of {total}" | t(lang),
   resume: "Continue from page {n}" | t(lang)
 } -%}
+{#- Above the title, the same way on as at the end of the reader, in one slim line (partials/top-pager.njk). #}
+{%- set pager = {
+  prev: { url: ("/magazine/" + older.slug + ".html") | local(lang), label: "Previous issue" | t(lang), title: older[lang].heading } if older else null,
+  next: ({ url: ("/magazine/" + newer.slug + ".html") | local(lang), label: "Next issue" | t(lang), title: newer[lang].heading } if newer else ({ url: nextPub.url, label: "Next publication" | t(lang), title: nextPub.title } if nextPub else null)),
+  all: { url: archive, label: L.all }
+} %}
+{%- include "partials/top-pager.njk" %}
   <section class="shell book-hero">
     <div class="book-hero-copy">
       <p class="eyebrow">{{ W.name }} · {{ I.edition }} · {{ I.date }} · {{ L.no }} {{ issue.no }}</p>
@@ -56,6 +63,9 @@
         <a class="button-primary" href="#reader" data-book-open>{{ L.open_issue }}</a>
         <a class="button-secondary" href="#text" data-book-text>{{ "Read it as text" | t(lang) }}</a>
         <a class="button-secondary" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
+        {#- Every publication and all the writing at once (partials/download-all.njk). #}
+        {%- set daSection = null %}{% set daLabel = null %}{% set daClass = "button-secondary" %}{% set daSize = null %}
+        {% include "partials/download-all.njk" %}
       </div>
       {%- if track %}
       {%- set key = issue.slug + "-" + lang %}

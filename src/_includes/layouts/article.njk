@@ -4,6 +4,24 @@ ogType: article
 ---
 {%- set pageUrl = page.url | absoluteUrl %}
 <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
+{%- set isEssay = "/insights/" in page.inputPath %}
+{%- set isReflection = "/reflections/" in page.inputPath %}
+{#- All the reading in one line (essays series by series, then the reflections, newest first): what comes before and
+    after this text, above the title and when its own series or list has run out at the end. -#}
+{%- set reading = collections["insights" + (lang | langSuffix)] | readingOrder(essaySeries, collections["reflections" + (lang | langSuffix)]) | seriesNeighbours(page.url) if (isEssay or isReflection) else null %}
+{#- Above the title, the same way on as at the end, in one slim line (partials/top-pager.njk): the text before and
+    after this one in the reading order (after the last, the first again) and the list it belongs to. -#}
+{%- if reading %}
+{%- set pagerNext = reading.next or reading.first %}
+{%- set pagerNextIsReflection = pagerNext and "/reflections/" in pagerNext.inputPath %}
+{%- set pagerPrevIsReflection = reading.prev and "/reflections/" in reading.prev.inputPath %}
+{%- set pager = {
+  prev: { url: reading.prev.url, label: ("Previous reflection" if pagerPrevIsReflection else "Previous essay") | t(lang), title: reading.prev.data.title } if reading.prev else null,
+  next: { url: pagerNext.url, label: ("Next reflection" if pagerNextIsReflection else "Next essay") | t(lang), title: pagerNext.data.title } if (pagerNext and pagerNext.url != page.url) else null,
+  all: { url: ("/reflections.html" if isReflection else "/insights.html") | local(lang), label: ("All reflections" if isReflection else "All essays") | t(lang) }
+} %}
+{%- include "partials/top-pager.njk" %}
+{%- endif %}
 <section class="shell article-hero{% if image %} has-image{% endif %}">
   {%- if image %}
   {%- set heroSize = image | imageSize %}
@@ -22,6 +40,9 @@ ogType: article
       {%- set editedDay = edited[page.inputPath | replace("./", "")] %}{% if editedDay and editedDay > (page.date | isoDate) %} · {{ "revised" | t(lang) }} <time datetime="{{ editedDay }}">{{ editedDay | readableDate(lang) }}</time>{% endif %}{% if readingTime %} · {{ "{t} read" | t(lang) | replace("{t}", readingTime) }}{% endif %}</span></span>
       {#- Save for later: on "My shelf", in this browser only (js/shelf.js). -#}
       <button type="button" class="essay-save" data-shelf-save data-save-label="{{ 'Save for later' | t(lang) }}" data-saved-label="{{ 'Saved' | t(lang) }}" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10a1 1 0 0 1 1 1V20l-6-3.6L6 20V4.5a1 1 0 0 1 1-1z"/></svg><span data-shelf-label>{{ "Save for later" | t(lang) }}</span></button>
+      {#- Every publication and all the writing at once (partials/download-all.njk), in the same small shape. -#}
+      {%- set daSection = null %}{% set daLabel = null %}{% set daClass = "essay-save" %}{% set daSize = null %}
+      {% include "partials/download-all.njk" %}
     </p>
     {#- How the essays are written, said once here instead of in every paragraph: from the author's own work, with
         what he would do today marked as such in the text. #}
@@ -37,17 +58,12 @@ ogType: article
 {%- set body = content | withDiagram(diagram, lang or "en") | essayBody %}
 {%- set sections = content | essayContents %}
 {%- set hasContents = sections.length >= 3 %}
-{%- set isEssay = "/insights/" in page.inputPath %}
 {#- The essay's series (src/_data/essaySeries.json): its name, its essays and this one's place among them. -#}
 {%- set seriesInfo = essaySeries | seriesById(series) if isEssay else null %}
 {%- set seriesName = seriesInfo.name[lang or "en"] if seriesInfo else "" %}
 {%- set allEssays = collections["insights" + (lang | langSuffix)] | published if isEssay else [] %}
 {%- set seriesItems = allEssays | inSeries(seriesInfo.id) if seriesInfo else [] %}
 {%- set series = seriesItems | seriesNeighbours(page.url, seriesInfo.planned) if seriesInfo else null %}
-{#- All the reading in one line (essays series by series, then the reflections, newest first): what comes before and
-    after this text when its own series or list has run out, so no essay or reflection ends without a way on. -#}
-{%- set isReflection = "/reflections/" in page.inputPath %}
-{%- set reading = collections["insights" + (lang | langSuffix)] | readingOrder(essaySeries, collections["reflections" + (lang | langSuffix)]) | seriesNeighbours(page.url) if (isEssay or isReflection) else null %}
 {%- set contentsTitle = "In this essay" | t(lang) %}
 <section class="shell article-body{% if not (series or hasContents) %} no-aside{% endif %}">
   {%- if series or hasContents %}

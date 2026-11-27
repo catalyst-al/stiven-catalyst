@@ -1,0 +1,15 @@
+{#- Above the title of a text or a publication, right under the menu: the one before, the list it belongs to and the one after, in one
+    slim line, so the reader can move on without scrolling to the end (where the large card for the next one stays).
+    Needs pager: { prev, next, all }, each { url, label, title } or null (all has no title). On a phone the two titles
+    give way to their labels. -#}
+{%- if pager and (pager.prev or pager.next) %}
+<nav class="shell top-pager" aria-label="{{ pager.all.label if pager.all else ('Next' | t(lang)) }}">
+  {%- if pager.prev %}
+  <a class="top-pager-prev" href="{{ pager.prev.url }}" rel="prev"><span aria-hidden="true">←</span><span class="top-pager-copy"><small>{{ pager.prev.label }}</small><span class="top-pager-title">{{ pager.prev.title }}</span></span></a>
+  {%- else %}<span class="top-pager-prev" aria-hidden="true"></span>{% endif %}
+  {%- if pager.all %}<a class="top-pager-all" href="{{ pager.all.url }}">{{ pager.all.label }}</a>{% endif %}
+  {%- if pager.next %}
+  <a class="top-pager-next" href="{{ pager.next.url }}" rel="next"><span class="top-pager-copy"><small>{{ pager.next.label }}</small><span class="top-pager-title">{{ pager.next.title }}</span></span><span aria-hidden="true">→</span></a>
+  {%- else %}<span class="top-pager-next" aria-hidden="true"></span>{% endif %}
+</nav>
+{%- endif %}

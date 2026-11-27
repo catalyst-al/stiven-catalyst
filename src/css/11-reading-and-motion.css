@@ -1735,3 +1735,36 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
 .wb-dialog input { width: 100%; box-sizing: border-box; }
 .wb-dialog .tool-actions { margin: 4px 0 0; }
 .wb-error { min-height: 1.4em; margin: 10px 0 0 !important; color: var(--danger); }
+
+/* Above the title of an essay, a reflection or a publication: the one before, the list, the one after
+   (partials/top-pager.njk). One slim line; the titles shorten with an ellipsis, and on a phone give way to labels. */
+.top-pager { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 14px; margin-top: 18px; margin-bottom: 8px; padding-block: 12px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-family: var(--sans); font-size: 14px; }
+.top-pager a { display: flex; align-items: center; gap: 10px; min-width: 0; color: var(--muted); text-decoration: none; }
+.top-pager a:hover, .top-pager a:focus-visible { color: var(--ink); }
+.top-pager a > span[aria-hidden="true"] { flex: none; color: var(--blue); font-size: 18px; }
+.top-pager-next { justify-content: flex-end; text-align: right; }
+.top-pager-copy { display: grid; min-width: 0; }
+.top-pager small { color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.top-pager-title { overflow: hidden; color: var(--ink); white-space: nowrap; text-overflow: ellipsis; }
+.top-pager .top-pager-all { padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-weight: 600; white-space: nowrap; }
+.top-pager .top-pager-all:hover { border-color: var(--blue); }
+@media (max-width: 640px) {
+  .top-pager { gap: 8px; }
+  .top-pager-title { display: none; }
+  .top-pager .top-pager-all { padding: 5px 10px; font-size: 13px; }
+}
+@media print { .top-pager { display: none !important; } }
+
+/* "Download all" (partials/download-all.njk, js/download-all.js): the icon, the size, the progress said under it. */
+.download-all { display: inline-flex; align-items: center; gap: 8px; }
+.download-all svg { flex: none; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.download-all small { opacity: .75; font-size: .85em; font-weight: 600; }
+.download-all[disabled] { cursor: progress; opacity: .8; }
+.download-all-status { display: block; margin-top: 8px; color: var(--muted); font-family: var(--sans); font-size: 14px; }
+.download-all-status:empty { display: none; }
+.article-byline .download-all-status { margin: 6px 0 0; font-size: 13px; }
+.download-all-box { display: grid; justify-items: start; gap: 10px; max-width: 640px; margin-top: 28px; padding: 22px; border: 1px solid var(--line); border-radius: 20px; background: var(--card); }
+.download-all-box .kicker, .download-all-box p { margin: 0; }
+.downloads-head .download-all { padding: 8px 14px; font-size: 14px; }
+@media print { .download-all, .download-all-status { display: none !important; } }
+.essay-save.download-all svg { width: 13px; height: 13px; }

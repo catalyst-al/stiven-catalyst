@@ -18,6 +18,13 @@
   of: "of {total}" | t(lang),
   resume: "Continue from page {n}" | t(lang)
 } -%}
+{#- Above the title, the next publication and the list of all of them, in one slim line (partials/top-pager.njk). #}
+{%- set pager = {
+  prev: null,
+  next: { url: nextPub.url, label: "Next publication" | t(lang), title: nextPub.title } if nextPub else null,
+  all: { url: "/publications.html" | local(lang), label: "All publications" | t(lang) }
+} %}
+{%- include "partials/top-pager.njk" %}
   <section class="shell book-hero">
     <div class="book-hero-copy">
       <p class="eyebrow">{{ ("A book by Stiven Janaqi · in Albanian" if book.language == "sq" else "A book by Stiven Janaqi · translated from the Albanian") | t(lang) }}</p>
@@ -36,6 +43,9 @@
         <a class="button-primary" href="#reader" data-book-open>{{ "Open the book" | t(lang) }}</a>
         <a class="button-secondary" href="#text" data-book-text>{{ "Read it as text" | t(lang) }}</a>
         <a class="button-secondary" href="{{ book.pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
+        {#- Every publication and all the writing at once (partials/download-all.njk). #}
+        {%- set daSection = null %}{% set daLabel = null %}{% set daClass = "button-secondary" %}{% set daSize = null %}
+        {% include "partials/download-all.njk" %}
       </div>
       {#- The same book in the other languages, each named in its own language; the page is the same in each, so the
           reader's place (sc-book-<slug>) carries over. -#}

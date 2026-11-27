@@ -3,6 +3,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
+const path = require('node:path');
 const { JSDOM } = require('jsdom');
 
 const episode = (slug) => `<li class="podcast-episode" id="episode-${slug}"><div data-audio><audio data-audio-media></audio>
@@ -123,4 +124,35 @@ test('the publications page offers the publication left unfinished, in its langu
   assert.deepEqual(page('https://example.test/sq/publications.html', recent), { hidden: false, href: '/sq/magazine/management-review-nr-45.html#faqe-7', meta: 'Management Review · Nr. 45 · Page 7 of 10', title: 'Puna me turne' });
   assert.equal(page('https://example.test/publications.html', recent).href, '/magazine/management-review-nr-12.html#faqe-4', 'English: the English one, not the finished one');
   assert.equal(page('https://example.test/de/publications.html', recent).hidden, true, 'German: none read in German');
+});
+
+test('the slim line above the title leads to the one before, the list and the one after', { skip: !fs.existsSync('_site/sq/magazine/management-review-nr-20.html') }, () => {
+  const pager = (file) => fs.readFileSync(`_site/${file}`, 'utf8').match(/<nav class="shell top-pager"[\s\S]*?<\/nav>/)?.[0] || '';
+  const links = (html) => [...html.matchAll(/<a class="top-pager-(\w+)" href="([^"]+)"/g)].map((m) => `${m[1]} ${m[2]}`);
+  // Above the title: the bar comes before the hero.
+  const reflection = fs.readFileSync('_site/sq/reflections/cut-off-from-the-ground/index.html', 'utf8');
+  assert.ok(reflection.indexOf('class="shell top-pager"') < reflection.indexOf('class="shell article-hero'));
+  assert.deepEqual(links(pager('sq/magazine/management-review-nr-20.html')), ['prev /sq/magazine/management-review-nr-19.html', 'all /sq/magazine/management-review.html', 'next /sq/magazine/management-review-nr-21.html']);
+  assert.match(pager('sq/reflections/cut-off-from-the-ground/index.html'), /class="top-pager-all" href="\/sq\/reflections.html"/);
+  assert.match(pager('insights/starting-from-zero/index.html'), /class="top-pager-next" href="\/insights\/[^"]+\/" rel="next"/);
+  assert.match(pager('sq/books/mall-per-durresin.html'), /class="top-pager-next" href="\/sq\/magazine\/management-review-2026-09.html"/);
+});
+
+test('download all: the list names every file of the Downloads page, each one built, and the file with all the writing', { skip: !fs.existsSync('_site/downloads/all-sq.json') }, async () => {
+  const downloads = (await import(path.resolve('src/_data/downloads.js'))).default;
+  for (const lang of ['en', 'sq', 'de']) {
+    const manifest = JSON.parse(fs.readFileSync(`_site/downloads/all-${lang}.json`, 'utf8'));
+    const files = manifest.sections.flatMap((s) => s.files);
+    assert.equal(files.length + 1, downloads[lang].allCount, `${lang}: every file and the writing`);
+    for (const f of [...files, manifest.writing]) assert.ok(fs.existsSync(`_site${f.href}`), `${lang}: ${f.href} is built`);
+    assert.equal(new Set(files.map((f) => f.name)).size, files.length, `${lang}: no two files share a name in the archive`);
+    const writing = fs.readFileSync(`_site${manifest.writing.href}`, 'utf8');
+    assert.match(writing, /<meta name="robots" content="noindex">/);
+    assert.ok((writing.match(/<article id="essay-/g) || []).length >= 40, `${lang}: the essays`);
+    assert.ok((writing.match(/<article id="reflection-/g) || []).length >= 40, `${lang}: the reflections`);
+    assert.doesNotMatch(writing, /<script/);
+  }
+  // The button is beside "Download PDF" on a publication and in the byline of an essay.
+  assert.match(fs.readFileSync('_site/sq/magazine/management-review-nr-20.html', 'utf8'), /data-download-all data-download="\/downloads\/all-sq.json"/);
+  assert.match(fs.readFileSync('_site/de/insights/starting-from-zero/index.html', 'utf8'), /data-download-all data-download="\/downloads\/all-de.json"/);
 });

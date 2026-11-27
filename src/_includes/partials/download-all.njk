@@ -1,0 +1,8 @@
+{#- "Download all": one ZIP with every file of the site in this language and all the writing, made in the browser
+    (js/download-all.js, which shows the button; without the script it stays hidden, and the files stay one by one on
+    the Downloads page). Optional: daSection (one section of the Downloads page only), daLabel, daClass, daSize. -#}
+{%- set DA = downloads[lang or "en"] %}
+{%- set daId = "download-all-status-" + (daSection or "all") %}
+<button type="button" class="{{ daClass or 'button-secondary' }} download-all" data-download-all data-download="/downloads/all-{{ lang or 'en' }}.json"{% if daSection %} data-section="{{ daSection }}"{% endif %} data-status="{{ daId }}" data-busy="{{ DA.allBusy }}" data-done="{{ DA.allDone }}" data-failed="{{ DA.allFailed }}" data-error="{{ DA.allError }}" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14"/></svg><span>{{ daLabel or DA.all }}</span>{% if daSize %}<small>ZIP · {{ daSize }}</small>{% endif %}</button>
+<span class="download-all-status" id="{{ daId }}" role="status" aria-live="polite"></span>
+<script src="{{ '/js/download-all.js' | assetUrl }}" defer></script>
