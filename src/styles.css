@@ -12301,7 +12301,7 @@ td > .fc-row-photos { margin-left: 8px; }
 .tm-state { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
 .tm-body { display: grid; gap: 14px; margin-top: 12px; max-width: 760px; }
 .tm-body .form-note { margin: 0; }
-.tm-off { display: grid; gap: 14px; }
+.tm-off, .tm-review { display: grid; gap: 14px; }
 .tm-row, .tm-leave { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
 .tm-join { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; }
 .tm-join-field { flex: 1 1 260px; min-width: 0; }
