@@ -216,14 +216,17 @@ test('merge: plain objects field by field, the team\'s value only where this dev
   assert.deepEqual(JSON.parse(M.mergeValue(local, remote, base)), { areas: ['Dock', 'Yard'], shifts: ['Early', 'Late'], target: 3, teams: ['A'] });
   // Both changed the same field: this device's stays.
   assert.deepEqual(JSON.parse(M.mergeValue(JSON.stringify({ target: 4 }), JSON.stringify({ target: 3 }), base)), { target: 4 });
-  // Never synced: this device's fields win, the team's new fields come in, nothing is deleted.
-  assert.deepEqual(JSON.parse(M.mergeValue(local, remote)), { areas: ['Dock', 'Yard'], shifts: ['Early'], target: 2, teams: ['A'] });
+  // Never synced (a device that joins, or ticks the tool for the first time): the team's value of a field both
+  // hold, so a joining device does not replace the team's board on every device; the fields only one side has stay,
+  // and an empty value of the team's does not empty this device's.
+  assert.deepEqual(JSON.parse(M.mergeValue(local, remote)), { areas: ['Dock'], shifts: ['Early', 'Late'], target: 3, teams: ['A'] });
+  assert.deepEqual(JSON.parse(M.mergeValue(JSON.stringify({ areas: ['Dock'], mine: 1 }), JSON.stringify({ areas: [], theirs: 2 }))), { areas: ['Dock'], mine: 1, theirs: 2 });
   assert.deepEqual(JSON.parse(M.mergeValue(JSON.stringify({ a: 1 }), JSON.stringify({ b: 2 }), M.baseOf({ k: JSON.stringify({ a: 1, b: 2 }) }).k)), { a: 1, b: 2 }, 'a field one side lacks is never dropped');
   // Values that are not objects: whole, the team's when this device has not changed it.
   const wordBase = M.baseOf({ k: 'two' }).k;
   assert.equal(M.mergeValue('two', 'one', wordBase), 'one');
   assert.equal(M.mergeValue('three', 'one', wordBase), 'three');
-  assert.equal(M.mergeValue('three', 'one'), 'three');
+  assert.equal(M.mergeValue('"three"', '"one"'), '"one"', 'never synced: the team\'s');
   assert.equal(M.mergeValue('[1,2]', '{"rows":[]}'), '[1,2]', 'a different shape is not merged');
   assert.equal(M.mergeValue('not json', 'other'), 'not json');
 });
@@ -321,7 +324,8 @@ test('a full sync between two devices: rows meet, only changed keys are written,
   // Back on the first device: B's rows arrive; the state says what was seen.
   const third = await run(a, server);
   assert.equal(third.status, 'synced');
-  assert.deepEqual(stored(a.w, 'sc-actions').rows.map((row) => row.id), ['a1', 'b1']);
+  // A changed nothing since its last sync: the team's list as it is, in the team's order.
+  assert.deepEqual(stored(a.w, 'sc-actions').rows.map((row) => row.id).sort(), ['a1', 'b1']);
   assert.deepEqual(stored(a.w, 'sc-night-audit').rows, [{ date: '2026-10-23', note: 'All rooms checked' }]);
   const state = stored(a.w, 'sc-team-state');
   assert.equal(state.rev, third.rev);

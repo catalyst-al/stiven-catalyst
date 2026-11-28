@@ -29,9 +29,15 @@
 // from the team. The device that changed it keeps its version in the restore point made before the sync. Tombstones
 // are kept 90 days (TOMBSTONE_DAYS); after that, a device that was away and still holds the row drops it all the
 // same when it has not changed it since its last sync (the team's copy no longer has it), and brings it back only
-// when it has changed it. Rows without an id, and a whole tool's key, are never deleted by a sync. A copy written
-// before tombstones (version 1) is read as one without any; a restore point or a file put back is not a deletion
-// (rebase). This device keeps the tombstones it knows in "sc-team-state" too.
+// when it has changed it. A whole tool's key is never deleted by a sync. A row without an id (the floor logs keep
+// none) has no tombstone: it is told by its content, and one that this device held at the last sync and one side no
+// longer holds was changed or removed there, so it goes (mergeRows); a device that has not synced since this was
+// added brings such a row back once. A copy written before tombstones (version 1) is read as one without any; a
+// restore point or a file put back is not a deletion (rebase), and a deleted row it brings back is "revived": the
+// copy carries revived: { key: { row id: ms } } beside the tombstones, and a tombstone older than its row's revival
+// no longer counts on any device. This device keeps the tombstones and revivals it knows in "sc-team-state" too.
+// A tool kept as one object (a board, not a log) is merged field by field, and inside a field both devices changed
+// (mergeInside): two rooms of one board changed on two devices both stay.
 // It runs on page load, after "Sync now", and when the page has been idle for 30 s after a change. A device that
 // found the team's copy gone (deleted, or the team changed its code) no longer syncs by itself.
 //
@@ -55,6 +61,8 @@
   const TEAM_KEY = "sc-team";
   const STATE_KEY = "sc-team-state";
   const MAX_BYTES = 4 * 1024 * 1024;
+  // What a copy may unpack to: far above any team's work (the browser's own storage holds about 10 MB of text).
+  const MAX_UNPACKED = 64 * 1024 * 1024;
   const MAX_DEVICES = 10;
   const IDLE_MS = 30000;
   // A device that saw the team within a day does not upload only to say so.
@@ -203,9 +211,12 @@
     parts.forEach((part) => { out.set(part, at); at += part.length; });
     return out;
   };
-  const through = async (bytes, stream) => {
+  // limit: reading stops with an error past that many bytes, so a small copy that unpacks to gigabytes (anyone holding
+  // the team code can write one) is given up on instead of filling the memory of every device of the team.
+  const through = async (bytes, stream, limit = Infinity) => {
     const writer = stream.writable.getWriter();
     const written = writer.write(bytes).then(() => writer.close());
+    written.catch(() => {});
     const reader = stream.readable.getReader();
     const chunks = [];
     let total = 0;
@@ -214,6 +225,11 @@
       if (done) break;
       chunks.push(value);
       total += value.length;
+      if (total > limit) {
+        reader.cancel().catch(() => {});
+        writer.abort().catch(() => {});
+        throw new Error("too-large");
+      }
     }
     await written;
     const out = new Uint8Array(total);
@@ -247,7 +263,7 @@
     let json;
     if (body[0] === 1) {
       if (typeof globalThis.DecompressionStream !== "function") throw new Error("gzip");
-      json = await through(body.subarray(1), new globalThis.DecompressionStream("gzip"));
+      json = await through(body.subarray(1), new globalThis.DecompressionStream("gzip"), MAX_UNPACKED);
     } else if (body[0] === 0) json = body.subarray(1);
     else throw new Error("format");
     return JSON.parse(new TextDecoder().decode(json));
@@ -322,6 +338,7 @@
       devices: cleanDevices(payload.devices),
       items: Object.fromEntries(Object.entries(items).filter(([key, value]) => soundItem(key, value))),
       deleted: cleanDeleted(payload.deleted),
+      revived: cleanDeleted(payload.revived),
     };
   };
   // Tombstones as they may come from a team copy: keys that may be shared, ids of up to 200 characters, times in ms.
@@ -399,10 +416,17 @@
   // Every row of both, once: by id where rows have one, by their whole content where they do not. A row one side lacks
   // is kept, except a row with a tombstone (dead: { id: ms }, deleted on some device) and a row this device holds as it
   // was last synced that the team's copy no longer has (deleted on the team, its tombstone perhaps gone by now).
-  const mergeRows = (localRows, remoteRows, synced = {}, dead = {}) => {
+  // A row without an id (the floor logs keep none) is told by its whole content. known: the fingerprints of the id-less
+  // rows of the last sync (base.c), when both sides are logs. Such a row that one side no longer holds was changed or
+  // removed there since, so it goes, and the changed row (new content) stays: without this a correction made here came
+  // back beside the old row at this device's own next sync, and a removed row returned.
+  const mergeRows = (localRows, remoteRows, synced = {}, dead = {}, known = null) => {
     const out = [];
     const ids = new Set();
     const contents = new Set();
+    const textsOf = (rows) => new Set(rows.filter((row) => rowId(row) === null).map((row) => JSON.stringify(row)));
+    const localTexts = known ? textsOf(localRows) : null;
+    const remoteTexts = known ? textsOf(remoteRows) : null;
     const remoteById = new Map();
     remoteRows.forEach((row) => {
       const id = rowId(row);
@@ -414,6 +438,7 @@
         const text = JSON.stringify(row);
         if (contents.has(text)) return;
         contents.add(text);
+        if (known && !(here ? remoteTexts : localTexts).has(text) && known.has(hash(text))) return;
         out.push(row);
         return;
       }
@@ -444,6 +469,58 @@
     const here = new Set(value.rows.map(rowId).filter((id) => id !== null));
     return Object.keys(base.r).filter((id) => !here.has(id));
   };
+  // What a device keeps of one field of an object, to merge inside it: a fingerprint of each entry of an object (one
+  // level down; a list inside it by its entries), of each entry of a list.
+  const nodeOf = (value, depth = 1) => {
+    if (Array.isArray(value)) return { a: value.map((entry) => hash(JSON.stringify(entry))) };
+    if (depth > 0 && isObject(value)) return { o: Object.fromEntries(Object.entries(value).map(([key, entry]) => [key, nodeOf(entry, depth - 1)])) };
+    return hash(JSON.stringify(value));
+  };
+  const own = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
+  // Whether a value is still what the fingerprint was taken of.
+  const matches = (value, node) => {
+    if (typeof node === "string") return hash(JSON.stringify(value)) === node;
+    if (!isObject(node)) return false;
+    if (Array.isArray(node.a)) return Array.isArray(value) && value.length === node.a.length && value.every((entry, i) => hash(JSON.stringify(entry)) === node.a[i]);
+    if (!isObject(node.o) || !isObject(value)) return false;
+    const keys = Object.keys(value);
+    return keys.length === Object.keys(node.o).length && keys.every((key) => own(node.o, key) && matches(value[key], node.o[key]));
+  };
+  // One field both devices changed since the last sync (node: its fingerprints then, undefined when the field is new
+  // on both). Inside an object each entry is taken from the side that changed it (two rooms of one board changed on two
+  // devices both stay); an entry one side removed stays removed unless the other changed it. A list both sides only
+  // added records to (a day's events) keeps the additions of both. Anything else both changed: this device's, as before.
+  const mergeInside = (local, remote, node, depth = 2) => {
+    if (JSON.stringify(local) === JSON.stringify(remote)) return local;
+    if (node !== undefined) {
+      if (matches(local, node)) return remote;
+      if (matches(remote, node)) return local;
+    }
+    if (depth > 0 && isObject(local) && isObject(remote) && (node === undefined || isObject(node?.o))) {
+      const was = node?.o || {};
+      const out = {};
+      fieldsOf(local, remote).forEach((key) => {
+        const inLocal = own(local, key);
+        const inRemote = own(remote, key);
+        if (inLocal && inRemote) out[key] = mergeInside(local[key], remote[key], own(was, key) ? was[key] : undefined, depth - 1);
+        else if (inLocal) { if (!(own(was, key) && matches(local[key], was[key]))) out[key] = local[key]; }
+        else if (!own(was, key)) out[key] = remote[key];
+      });
+      return out;
+    }
+    if (Array.isArray(local) && Array.isArray(remote) && (node === undefined || Array.isArray(node?.a))) {
+      const was = node?.a || [];
+      const prints = (list) => list.map((entry) => hash(JSON.stringify(entry)));
+      const lp = prints(local);
+      const rp = prints(remote);
+      const added = (list, p) => list.length >= was.length && was.every((print, i) => p[i] === print) && list.slice(was.length).every(isObject);
+      if (added(local, lp) && added(remote, rp)) {
+        const have = new Set(lp);
+        return [...local, ...remote.slice(was.length).filter((entry, i) => !have.has(rp[was.length + i]))];
+      }
+    }
+    return local;
+  };
   // The fields of both, in this device's order first.
   const fieldsOf = (a, b) => [...new Set([...Object.keys(a), ...Object.keys(b)])];
   // One storage key. local / remote are the stored texts (undefined when that side has none), base what was last
@@ -460,25 +537,40 @@
       const gone = { ...dead };
       goneHere(l, base).forEach((id) => { gone[id] = gone[id] || 1; });
       out = {};
-      fieldsOf(l, r).forEach((field) => {
+      // Nothing changed here since the last sync: the team's log as it is (its rows in its order, its settings), with
+      // the fields only this device has. Otherwise two devices that hold the same rows in another order, or another
+      // setting of the log, each sent "their" version at every sync, for ever.
+      if (hasRows(l) && hasRows(r) && base?.h !== undefined && hash(local) === base.h) {
+        const kept = parse(dropDead(remote, gone));
+        fieldsOf(kept, l).forEach((field) => { out[field] = field in kept ? kept[field] : l[field]; });
+      } else fieldsOf(l, r).forEach((field) => {
         // What the team's copy lacks counts as deleted on the team only where that copy is a log.
-        if (field === "rows") out.rows = mergeRows(Array.isArray(l.rows) ? l.rows : [], Array.isArray(r.rows) ? r.rows : [], hasRows(r) ? base?.r || {} : {}, gone);
+        if (field === "rows") out.rows = mergeRows(Array.isArray(l.rows) ? l.rows : [], Array.isArray(r.rows) ? r.rows : [], hasRows(r) ? base?.r || {} : {}, gone, hasRows(l) && hasRows(r) && Array.isArray(base?.c) ? new Set(base.c) : null);
         else out[field] = isEmpty(l[field]) && r[field] !== undefined ? r[field] : l[field];
       });
     } else if (isObject(l) && isObject(r)) {
-      // Field by field: the team's value where this device has not changed the field since the last sync.
+      // Field by field: the team's value where this device has not changed the field since the last sync; where both
+      // changed it, merged inside (mergeInside). A device that has never synced this tool (it joins the team, or ticks
+      // the tool for the first time) takes the team's value of a field both hold: its own board must not replace the
+      // team's on every device. What it held is in the restore point made before the sync.
       out = {};
       fieldsOf(l, r).forEach((field) => {
         if (!(field in l)) out[field] = r[field];
         else if (!(field in r)) out[field] = l[field];
         else {
           const lj = JSON.stringify(l[field]);
-          out[field] = lj !== JSON.stringify(r[field]) && base?.f?.[field] !== undefined && hash(lj) === base.f[field] ? r[field] : l[field];
+          if (lj === JSON.stringify(r[field])) out[field] = l[field];
+          else if (!base) out[field] = isEmpty(r[field]) ? l[field] : r[field];
+          else if (base.f?.[field] !== undefined && hash(lj) === base.f[field]) out[field] = r[field];
+          else out[field] = isObject(base.n) ? mergeInside(l[field], r[field], own(base.n, field) ? base.n[field] : undefined) : l[field];
         }
       });
     } else {
-      // A word, a number, a list: whole, the team's when this device has not changed it since the last sync.
-      return base?.h !== undefined && hash(local) === base.h ? remote : local;
+      // A word, a number, a list: whole. The team's when this device has not changed it since the last sync, or has
+      // never synced it and holds a value of the same kind; a text that cannot be read, or another shape, is not merged.
+      if (base) return base.h !== undefined && hash(local) === base.h ? remote : local;
+      const kind = (value) => (value === undefined ? "" : Array.isArray(value) ? "list" : typeof value);
+      return kind(l) && kind(l) === kind(r) ? remote : local;
     }
     const text = JSON.stringify(out);
     if (text === JSON.stringify(l)) return local;
@@ -534,6 +626,16 @@
     const flat = (list) => Object.entries(list).flatMap(([key, rows]) => Object.entries(rows).map(([id, at]) => `${key}\n${id}\n${at}`)).sort().join("\n\n");
     return flat(a) === flat(b);
   };
+  // The tombstones that still count: without those of rows put back since (revived: { key: { row id: ms } }, written
+  // by rebase when a restore point or a saved file brings a deleted row back).
+  const liveDeleted = (deleted = {}, revived = {}) => {
+    const out = {};
+    Object.entries(deleted).forEach(([key, rows]) => {
+      const kept = Object.entries(rows).filter(([id, at]) => !(revived[key] && revived[key][id] >= at));
+      if (kept.length) out[key] = Object.fromEntries(kept);
+    });
+    return out;
+  };
   // What a device keeps of the synced texts: a fingerprint of each, of each field of an object, of each row of a log.
   const baseOf = (items) => Object.fromEntries(Object.entries(items).map(([key, text]) => {
     const value = parse(text);
@@ -544,8 +646,11 @@
         const id = rowId(row);
         if (id !== null && !(id in base.r)) base.r[id] = hash(JSON.stringify(row));
       });
+      const plain = value.rows.filter((row) => rowId(row) === null).map((row) => hash(JSON.stringify(row)));
+      if (plain.length) base.c = [...new Set(plain)];
     } else if (isObject(value)) {
       base.f = Object.fromEntries(Object.entries(value).map(([field, v]) => [field, hash(JSON.stringify(v))]));
+      base.n = Object.fromEntries(Object.entries(value).filter(([, v]) => isObject(v) || Array.isArray(v)).map(([field, v]) => [field, nodeOf(v)]));
     }
     return [key, base];
   }));
@@ -882,6 +987,10 @@
       } else if (got.ok) {
         const box = await body(got);
         if (!box || typeof box.data !== "string" || typeof box.iv !== "string" || !Number.isInteger(box.rev)) return { status: "unreadable" };
+        // The revision of a copy only grows. A lower one than this device last saw at this address is another copy:
+        // the team's was deleted (or ran out) and something was written in its place. Nothing of it is merged in by
+        // itself; the box says the copy is gone, and "Send again" is the person's decision.
+        if (!moving && !ctx.create && !state.gone && state.space === keys.spaceId && Number.isInteger(state.rev) && box.rev < state.rev) return { status: "gone" };
         rev = moving ? 0 : box.rev;
         size = box.data.length;
         try { remote = readPayload(await unseal(box, keys.key)); } catch { remote = null; }
@@ -897,7 +1006,11 @@
       // A copy that was gone and is back may be another team's start: nothing here is measured against the old one.
       const base = state.gone ? {} : state.synced || {};
       const at = now().getTime();
-      const deleted = purgeDeleted(joinDeleted(remote?.deleted, state.deleted, deletedHere(local, base, at)), at);
+      const revived = purgeDeleted(joinDeleted(remote?.revived, state.revived), at);
+      // A row deleted here now is deleted after anything that put it back before, whatever the clocks say.
+      const here = deletedHere(local, base, at);
+      Object.entries(here).forEach(([key, rows]) => Object.keys(rows).forEach((id) => { if (revived[key]?.[id] >= rows[id]) rows[id] = revived[key][id] + 1; }));
+      const deleted = liveDeleted(purgeDeleted(joinDeleted(remote?.deleted, state.deleted, here), at), revived);
       const merged = merge(local, remoteShared, base, deleted);
       const changed = Object.keys(merged).filter((key) => merged[key] !== local[key]);
       if (changed.length) {
@@ -910,14 +1023,14 @@
       // The tools this device does not share lose their deleted rows in the team's copy too.
       const out = applyDeleted({ ...remoteItems, ...merged }, deleted);
       const devices = withDevice(remote?.devices, device, now());
-      const keep = (extra) => writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced, deleted, teamKeys: Object.keys(out), ...extra });
+      const keep = (extra) => writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced, deleted, revived, teamKeys: Object.keys(out), ...extra });
       const space = keys.spaceId;
-      if (!moving && remote && sameItems(out, remoteItems) && sameDeleted(deleted, remote.deleted) && deviceFresh(remote.devices, device, now())) {
+      if (!moving && remote && sameItems(out, remoteItems) && sameDeleted(deleted, remote.deleted) && sameDeleted(revived, remote.revived) && deviceFresh(remote.devices, device, now())) {
         keep({ rev, size, devices: remote.devices, lastSync: now().toISOString(), gone: false, space });
         return { status: "synced", changed, rev, size, devices: remote.devices, uploaded: false };
       }
       keep({ gone: false });
-      const payload = { format: FORMAT, version: VERSION, sent: now().toISOString(), device, devices, items: out, deleted };
+      const payload = { format: FORMAT, version: VERSION, sent: now().toISOString(), device, devices, items: out, deleted, ...(Object.keys(revived).length ? { revived } : {}) };
       const sealed = await seal(payload, keys.key);
       if (sealed.data.length > MAX_BYTES) return { status: "too-large", changed };
       const put = () => call({ method: "PUT", headers: { Authorization: `Bearer ${keys.writeToken}`, "Content-Type": "application/json" }, body: JSON.stringify({ rev, ...sealed }) });
@@ -934,7 +1047,7 @@
       if (!response.ok) return { status: "error", code: response.status, changed };
       const saved = (await body(response)) || {};
       const newRev = Number.isInteger(saved.rev) ? saved.rev : rev + 1;
-      writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced: { ...base, ...baseOf(merged) }, deleted, teamKeys: Object.keys(out), rev: newRev, size: sealed.data.length, devices, lastSync: now().toISOString(), gone: false, space });
+      writeJson(storage, STATE_KEY, { ...readState(storage), deviceId, synced: { ...base, ...baseOf(merged) }, deleted, revived, teamKeys: Object.keys(out), rev: newRev, size: sealed.data.length, devices, lastSync: now().toISOString(), gone: false, space });
       if (moving) {
         // The copy is at its new address: the old one goes, now or at a later sync (retireOld).
         const outcome = await deleteCopy({ endpoint: ctx.endpoint, fetch: ctx.fetch, keys: keys.legacy });
@@ -958,6 +1071,9 @@
     if (!got.ok) return { status: got.status === 403 || got.status === 401 ? "refused" : "error", code: got.status };
     const box = await answer(got);
     if (!sealedBox(box)) return { status: "unreadable" };
+    // As in syncOnce: a lower revision than last seen is not the copy this device was reading.
+    const before = readState(storage);
+    if (!before.gone && Number.isInteger(before.rev) && box.rev < before.rev) return { status: "gone" };
     let remote = null;
     try { remote = readPayload(await unseal(box, keys.key)); } catch { remote = null; }
     if (!remote) return { status: "unreadable" };
@@ -1069,7 +1185,7 @@
     const device = { id: state.deviceId || newDeviceId(), name: state.deviceName || "" };
     // Only this device: the others are on the list again once they have joined with the new code.
     const devices = withDevice([], device, now());
-    const sealed = await seal({ format: FORMAT, version: VERSION, sent: now().toISOString(), device, devices, items: remote.items, deleted: remote.deleted }, next.key);
+    const sealed = await seal({ format: FORMAT, version: VERSION, sent: now().toISOString(), device, devices, items: remote.items, deleted: remote.deleted, ...(Object.keys(remote.revived || {}).length ? { revived: remote.revived } : {}) }, next.key);
     if (sealed.data.length > MAX_BYTES) return fail({ status: "too-large", stage: "upload" });
     let put = null;
     try {
@@ -1093,20 +1209,36 @@
   // Work put back by hand (a restore point, a saved file) for these keys: the rows it lacks were not deleted here, so
   // the next sync takes them from the team again instead of deleting them on every device. What was last synced
   // forgets them; the tombstones this device knows stay.
-  const rebase = (storage, keys) => {
+  // A row put back that this device knows a tombstone of was deleted by mistake: the tombstone no longer counts here,
+  // and "revived" (the row id, when it was put back, never before its tombstone) goes to the team with the next sync
+  // so it no longer counts anywhere. Before, the next sync deleted the row again, here and on every device.
+  const rebase = (storage, keys, now = Date.now()) => {
     const state = readState(storage);
     if (!isObject(state.synced)) return false;
     const synced = { ...state.synced };
+    const deleted = cleanDeleted(state.deleted);
+    const revived = cleanDeleted(state.revived);
     let changed = false;
     keys.forEach((key) => {
-      const ids = goneHere(parse(storage.getItem(key)) ?? { rows: [] }, synced[key]);
+      const value = parse(storage.getItem(key));
+      if (hasRows(value) && deleted[key]) {
+        value.rows.forEach((row) => {
+          const id = rowId(row);
+          if (id === null || !own(deleted[key], id)) return;
+          revived[key] = { ...revived[key], [id]: Math.max(now, deleted[key][id] + 1) };
+          delete deleted[key][id];
+          changed = true;
+        });
+        if (!Object.keys(deleted[key]).length) delete deleted[key];
+      }
+      const ids = goneHere(value ?? { rows: [] }, synced[key]);
       if (!ids.length) return;
       const r = { ...synced[key].r };
       ids.forEach((id) => { delete r[id]; });
       synced[key] = { ...synced[key], r };
       changed = true;
     });
-    return changed ? writeJson(storage, STATE_KEY, { ...state, synced }) : false;
+    return changed ? writeJson(storage, STATE_KEY, { ...state, synced, deleted, revived }) : false;
   };
 
   window.TeamSyncMath = {
@@ -1115,7 +1247,7 @@
     looksViewer, viewerCode, parseViewer, viewerKeys,
     offerable, isOn, readPayload, withDevice, deviceFresh,
     hash, newer, mergeRows, mergeValue, merge, baseOf, changedSince, sameItems,
-    deletedHere, joinDeleted, purgeDeleted, applyDeleted,
+    deletedHere, joinDeleted, purgeDeleted, applyDeleted, liveDeleted, mergeInside, nodeOf,
     qrEncode, qrSvg,
   };
   window.TeamSync = { syncOnce, pullOnce, readTeamCopy, deleteCopy, rotate, retireOld, retireList, rebase, TEAM_KEY, STATE_KEY };
