@@ -243,7 +243,8 @@ rules.
 | The audit's journeys in English, German and Albanian (CX Control Tower, Action Tracker, Guest Complaints, Lost & Found, paste import) | 9 of 9 | 9 of 9 | 9 of 9 |
 | Team sync between two devices, full key derivation (310 000 rounds), encryption, gzip, merge (own script, the service worker out of the way) | synced, sealed | synced, sealed | synced, sealed |
 | The service worker keeps a tool's pages and opens one with the network refused | yes | yes | kept; opening could not be driven |
-| The motion switch stops the drawing | at once | after one last frame | after one last frame |
+| The motion switch stops the drawing | yes | yes | yes |
+| The repository's journeys that do not depend on Chromium (198 chosen: the reader journeys, the tool pages, axe, hand-offs, cases, room inspection, sealed backup, filter, transitions, motion, and the audit's own) | 321 of 321 (the whole suite) | 194 of 198 | 190 of 198 |
 
 What failed in the other engines and why (the repository's own journeys, written for Chromium):
 - **Print (12 tests)**: they ask the browser for a PDF, which only Chromium offers to a test. Not run elsewhere.
@@ -252,14 +253,22 @@ What failed in the other engines and why (the repository's own journeys, written
   worker itself works in both (row three).
 - **Chart labels on a phone (Firefox, 3 tests)**: Firefox measures a label one pixel left of its chart's box, at the
   test's tolerance; nothing is cut (measured: the labels end 60 px inside the chart).
-- **Motion (timing)**: both engines draw one more frame after the switch, inside the test's first measuring window;
-  the drawing stops (measured over three seconds). WebKit on Linux animates a turn of the wheel and a programmatic
-  scroll itself, which two tests take for the page's own motion.
+- **Motion**: every engine draws the scene once more, still, when the motion is paused; the test counted that frame
+  as motion when it came late (also in Chromium, about one run in twenty, with the hero script of `main` too). The
+  test now starts its count after that frame (36 of 36 in Chromium; passes in Firefox and WebKit). What still fails
+  there: these builds animate a turn of the wheel and a programmatic scroll themselves, which two tests take for the
+  page's own motion (Firefox 1, WebKit 3).
 - **Photos (WebKit, 2 tests)**: "Error preparing Blob/File data to be stored in object store". Playwright's WebKit
   runs every context without lasting storage, where WebKit refuses pictures in IndexedDB; the same is known of
   Safari's private windows. Whether a 5S or Safety Cross photo is kept in a normal Safari window was **not
   verified** (TD-07).
-- **The share button over a focused field (WebKit, Damage Control at 412 px)**: fields reached by Tab sat under the
+- **Team sync through the test's fake server (WebKit, 1 test)**: with the service worker in control, this build does
+  not hand the page's requests to the test, so the fake server is never reached ("offline"). The same journey with
+  the service worker out of the way passes in the three engines (row two).
+- **The footer-clearance test (WebKit, 1 test)**: the timing fault of the test that draft pull request #418 corrects;
+  it also failed once in this branch's CI in Chromium (run on `63742393`, −83 px, the signature #418 describes) and
+  passed on the next two runs.
+- **The share button over a focused field (WebKit, Damage Control and one magazine issue at 412 px)**: fields reached by Tab sat under the
   floating share button in this build. Not reproduced in Chromium or Firefox; **not verified in Safari**, whose
   keyboard focus differs from this build's.
 
@@ -296,3 +305,30 @@ Checked on 28 November 2026 against `main` at 198b83b4.
   `main` as the only entry (not "No restriction"). And Settings → Branches (or Rules → Rulesets): a rule for `main`
   that requires a pull request and the check `build` before merging, with "Allow force pushes" off.
 - The Worker is not deployed by any workflow; `workers/sync/deploy.mjs` is run by hand with a Cloudflare token.
+
+### 5.8 Final verification of the closure phase (branch at `7d7cda22`, from an empty `_site`)
+
+| Check | Result |
+| --- | --- |
+| `npm run build` | passes, 44 s, 934 files written |
+| `npm test` | **1 545 tests, 1 545 pass, 0 fail, 0 skipped**; the run ends by itself (no test file calls `process.exit`, no forced exit in `package.json`) |
+| `node scripts/check-coaching-build.mjs` | 54 pages, 9 journeys pass |
+| `node scripts/seo-audit.mjs` | 911 pages, 894 indexable, 894 in the sitemap, 17 intentional exclusions; 0 errors, 0 warnings |
+| `npm run test:browser` (Chromium) | **321 passed**, 0 failed, 0 skipped (311 before the audit's ten journeys) |
+| The same journeys in Firefox 157 and WebKit 27.2 | 194 of 198 and 190 of 198; every failure is explained in 5.5, none is a fault of the site that could be shown |
+| `workers/sync/local-check.mjs` (the Worker in workerd) | 25 of 25 |
+| The sync tests with each consent pull request merged in | 75 of 75 (#415), 78 of 78 (#414) |
+| CI on the pull request | success on `bc646660` and on `7d7cda22`; one earlier run failed on the test #418 corrects (5.5), one on a test this phase had to update (the Albanian privacy sentence), fixed in the next commit |
+
+Earlier failures and timeouts, and where they stand:
+- The unit test that asserts two seconds of wall-clock time (CI-01): passes when the machine is not saturated; it
+  passed in every run of this phase, here and in CI. Unchanged, by intent.
+- The click-through of the tools that ran into its time limit: it was the harness; the five tools it had not reached
+  were traced one by one without an error (section 4).
+- The new tool tests that did not end: they left pages open; they close them now, and the suite ends by itself.
+- The motion-switch journey: a fault of the test's timing, corrected (5.5).
+- The footer-clearance journey: a fault of the test's timing, corrected in #418, which is not part of this branch.
+
+What is still not verified: section 5.5 (Safari itself, a phone, photos in Safari, the share button over a focused
+field in Safari), the Worker on Cloudflare itself, a screen reader by ear, and field performance
+(`docs/audits/technical-debt.md`, TD-07).

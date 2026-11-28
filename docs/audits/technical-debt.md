@@ -66,6 +66,21 @@ a safe change would need, and what it costs meanwhile. Nothing here blocks the r
 - The Worker on Cloudflare: alarms after 180 days, the limits under real traffic.
 - Field performance (Core Web Vitals from real visits): the site collects none, by its own decision.
 
+## TD-09 · Two things seen only in Playwright's WebKit, to check in Safari itself
+
+- A photo could not be stored ("Error preparing Blob/File data to be stored in object store"): this build keeps no
+  lasting storage, where WebKit refuses pictures in IndexedDB, as Safari's private windows are known to. To check in
+  a normal Safari window: add a photo to a 5S audit, reload, and see it there. If a private window is to be
+  supported, the photo store needs a fallback (the picture kept as bytes, not as a Blob) and a message when it fails.
+- Fields reached by Tab on Damage Control (and one magazine issue) at 412 px sat under the floating share button.
+  Safari's own keyboard focus differs from this build's; to check there with "Press Tab to highlight each item" on.
+
+## TD-10 · The Albanian guide under the Shift Handover says "ju"
+
+- `src/sq/tools/shift-handover.njk` (eight sentences, reviewed in SEO phase 2C) addresses the reader as "ju"
+  throughout; the tool's own texts say "ti" since this audit. It is the author's prose, and
+  `tests/seo-shift-handover-guide.test.cjs` pins one of its sentences. The author's wording.
+
 ## TD-08 · Small things
 
 - `tests/zip-limits.test.cjs` asserts wall-clock time (2 s); it fails on a saturated machine (CI-01).
