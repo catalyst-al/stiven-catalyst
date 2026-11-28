@@ -60,7 +60,7 @@
     "Green: audited. Red: overdue, planned for today. The other days with a number are planned; point at a day to see who audits where.": "E gjelbër: audituar. E kuqe: me afat të kaluar, e planifikuar për sot. Ditët e tjera me një numër janë të planifikuara; prekni një ditë për të parë kush auditon ku.",
     "Download calendar (.ics)": "Shkarko kalendarin (.ics)",
     "The calendar file holds the next eight weeks of the plan, one all-day entry per audit, for a phone or Outlook.": "Skedari i kalendarit mban tetë javët e ardhshme të planit, një shënim për gjithë ditën për çdo audit, për telefonin ose Outlook.",
-    "Name the area to plan it.": "Shkruani zonën për ta planifikuar.",
+    "Name the area to plan it.": "Shkruaj zonën për ta planifikuar.",
     "Last audit {date}": "Auditi i fundit më {date}",
     "Not audited yet": "Ende pa u audituar",
     "Overdue by {n} days, due {date}": "Me {n} ditë vonesë, afati {date}",

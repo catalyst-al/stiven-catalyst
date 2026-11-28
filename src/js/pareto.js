@@ -61,7 +61,33 @@
     const get = (name) => unzip(buffer, name).catch((error) => { if (error?.message === "zip-size") throw error; return ""; });
     const workbook = await get("xl/workbook.xml");
     const rels = await get("xl/_rels/workbook.xml.rels");
-    const targetOf = (id) => (rels.match(new RegExp(`<Relationship\\b[^>]*Id="${id}"[^>]*Target="([^"]+)"`)) || rels.match(new RegExp(`<Relationship\\b[^>]*Target="([^"]+)"[^>]*Id="${id}"`)) || [])[1];
+    // Each <tag …>…</tag> (or <tag …/>) of an XML text, in order, as [attributes, what is inside]: one pass with
+    // indexOf, and it stops at an element that is never closed. The patterns used before looked ahead to the end of
+    // the text for every element left open, so a crafted file of half a megabyte (a kilobyte zipped, far inside the
+    // limits of unzip) froze the page for ten seconds and more.
+    const elements = function* (xml, tag) {
+      const open = `<${tag}`;
+      const close = `</${tag}>`;
+      let at = 0;
+      for (;;) {
+        const start = xml.indexOf(open, at);
+        if (start < 0) return;
+        const next = xml[start + open.length];
+        if (next !== ">" && next !== "/" && !/\s/.test(next || "")) { at = start + open.length; continue; }
+        const end = xml.indexOf(">", start);
+        if (end < 0) return;
+        if (xml[end - 1] === "/") { yield [xml.slice(start + open.length, end - 1), ""]; at = end + 1; continue; }
+        const stop = xml.indexOf(close, end);
+        if (stop < 0) return;
+        yield [xml.slice(start + open.length, end), xml.slice(end + 1, stop)];
+        at = stop + close.length;
+      }
+    };
+    const textOf = (xml) => xmlText([...elements(xml, "t")].map(([, inner]) => inner).join(""));
+    // The target of each relationship by its id, read once: the id of a sheet comes from the file, and used to be
+    // put into a pattern as it was (an id written as a pattern took seconds, then minutes, to try).
+    const targets = new Map([...rels.matchAll(/<Relationship\b([^>]*)>/g)].map((m) => [(m[1].match(/\bId="([^"]*)"/) || [])[1], (m[1].match(/\bTarget="([^"]+)"/) || [])[1]]));
+    const targetOf = (id) => targets.get(id);
     const sheets = [...workbook.matchAll(/<sheet\b([^>]*)\/?>/g)].map((m, i) => {
       const attrs = m[1];
       const target = targetOf((attrs.match(/\br:id="([^"]+)"/) || [])[1]);
@@ -73,25 +99,25 @@
     });
     if (!sheets.length) sheets.push({ name: "Sheet 1", hidden: false, path: "xl/worksheets/sheet1.xml" });
     const shared = (await get("xl/sharedStrings.xml")).split(/<si\b[^>]*>/).slice(1)
-      .map((si) => xmlText([...si.split("</si>")[0].matchAll(/<t\b[^>]*>([\s\S]*?)<\/t>/g)].map((m) => m[1]).join("")));
+      .map((si) => textOf(si.split("</si>")[0]));
     const out = [];
     for (const sheet of sheets) {
       const xml = await get(sheet.path);
       const rows = [];
       // Rows sit at their Excel row number (an empty row, written as <row .../>, stays empty), so that
       // "Row 5" in a note is row 5 of the sheet.
-      for (const rowMatch of xml.matchAll(/<row\b([^>]*?)(?:\/>|>([\s\S]*?)<\/row>)/g)) {
-        const number = Number((rowMatch[1].match(/\br="(\d+)"/) || [])[1]);
+      for (const rowMatch of elements(xml, "row")) {
+        const number = Number((rowMatch[0].match(/\br="(\d+)"/) || [])[1]);
         const row = [];
-        for (const cell of (rowMatch[2] || "").matchAll(/<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g)) {
-          const attrs = cell[1];
-          const inner = cell[2] || "";
+        for (const cell of elements(rowMatch[1], "c")) {
+          const attrs = cell[0];
+          const inner = cell[1];
           const ref = (attrs.match(/\br="([A-Z]+)\d+"/) || [])[1];
           const type = (attrs.match(/\bt="(\w+)"/) || [])[1];
-          const raw = (inner.match(/<v>([\s\S]*?)<\/v>/) || [])[1];
+          const raw = ([...elements(inner, "v")][0] || [])[1];
           let value = "";
           if (type === "s") value = shared[Number(raw)] ?? "";
-          else if (type === "inlineStr") value = xmlText([...inner.matchAll(/<t\b[^>]*>([\s\S]*?)<\/t>/g)].map((m) => m[1]).join(""));
+          else if (type === "inlineStr") value = textOf(inner);
           else if (raw !== undefined) value = type === "str" || type === "e" || type === "b" ? xmlText(raw) : numberCell(xmlText(raw));
           row[ref ? columnIndex(ref) : row.length] = value;
         }

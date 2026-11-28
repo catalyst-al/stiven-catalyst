@@ -460,9 +460,11 @@ main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
 .dl-check-item:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .dl-check-item input {
   flex: 0 0 auto;
-  width: 20px;
-  height: 20px;
-  margin: 2px 0 0;
+  /* The whole card is the label, so a tap anywhere on it ticks the box. The box itself is 24 px (it was 20): with
+     20 the automatic check still found it too small next to its neighbours on some pages (WCAG 2.5.8). */
+  width: 24px;
+  height: 24px;
+  margin: 0;
   accent-color: var(--blue);
 }
 .dl-check-item:has(input:checked) { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
@@ -925,3 +927,8 @@ select.sh-in { cursor: pointer; }
 .cv-steps strong { font-size: 15px; line-height: 1.25; }
 @media (max-width: 640px) { .cv-steps a { flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px; } .cv-steps strong { font-size: 13px; } }
 @media print { .cv-steps { display: none !important; } }
+/* A field in a column of the two-column grid is never wider than its column: a long hint beside the label
+   ("personal needs, fatigue, unavoidable delay", kept on one line elsewhere) wraps instead of pushing the page
+   sideways on a phone (Time Study at 390 px, in every language). */
+.dl-grid .field { grid-template-columns: minmax(0, 1fr); }
+.dl-grid .field label .optional { white-space: normal; }

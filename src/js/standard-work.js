@@ -353,7 +353,7 @@
       up.disabled = i === 0;
       const down = smallButton("↓", { stepAction: "down" }, `${tx("Move down")}: ${tx("Step {n}", { n })}`);
       down.disabled = i === steps.length - 1;
-      tools.append(up, down, smallButton(tx("Insert below"), { stepAction: "insert" }, `${tx("Insert a step below")} ${tx("Step {n}", { n })}`), smallButton(tx("Remove"), { stepAction: "remove" }, `${tx("Remove")}: ${tx("Step {n}", { n })}`));
+      tools.append(up, down, smallButton(tx("Insert below"), { stepAction: "insert" }, `${tx("Insert below")}: ${tx("Step {n}", { n })}`), smallButton(tx("Remove"), { stepAction: "remove" }, `${tx("Remove")}: ${tx("Step {n}", { n })}`));
       head.append(tools);
       const grid = el("div", "sw-step-grid");
       const time = input("time", s.time, cfg.fields?.time);

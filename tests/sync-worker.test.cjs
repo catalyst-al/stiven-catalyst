@@ -132,3 +132,45 @@ test('new spaces: a cap for everyone a day, set by a variable', async () => {
   for (let n = 0; n < 3; n++) assert.equal((await put(id(300 + n), 0, { ip: `192.0.2.${n}` })).status, 200);
   assert.equal((await put(id(399), 0, { ip: '192.0.2.99' })).status, 429);
 });
+
+test('a deleted space stays its token\'s: another token cannot write there, the same one can, and the revision goes on', async () => {
+  const { call, put, objects } = await world();
+  const other = 'b'.repeat(64);
+  assert.equal((await put(id(7), 0)).status, 200);
+  assert.equal((await put(id(7), 0, { auth: other })).status, 403, 'while the space exists');
+  assert.equal((await call('DELETE', id(7))).status, 204);
+  assert.equal((await call('GET', id(7))).status, 404, 'the copy is gone');
+  const storage = objects.get(id(7)).storage;
+  assert.deepEqual([...storage.map.keys()], ['closed'], 'only the token\'s hash and the revision are kept');
+  assert.deepEqual(Object.keys(storage.map.get('closed')).sort(), ['at', 'rev', 'tokenHash']);
+  assert.equal((await put(id(7), 0, { auth: other })).status, 403, 'not with another token (before the audit: 200)');
+  assert.equal((await call('DELETE', id(7), { auth: other })).status, 403);
+  const again = await put(id(7), 0);
+  assert.equal(again.status, 200);
+  assert.equal((await again.json()).rev, 2, 'the revision goes on from the deleted copy\'s');
+  assert.equal(storage.map.has('closed'), false);
+  // A space that never existed belongs to nobody: deleting it leaves nothing behind.
+  assert.equal((await call('DELETE', id(8), { auth: other })).status, 204);
+  assert.equal(objects.get(id(8)).storage.map.size, 0);
+});
+
+test('a space that ran out stays its token\'s for 180 days more, then nothing of it is left', async () => {
+  const { put, objects } = await world();
+  const DAYS = 24 * 60 * 60 * 1000;
+  assert.equal((await put(id(9), 0)).status, 200);
+  const space = objects.get(id(9));
+  const real = Date.now;
+  try {
+    const start = real();
+    Date.now = () => start + 181 * DAYS;
+    await space.alarm();
+    assert.deepEqual([...space.storage.map.keys()], ['closed']);
+    assert.equal((await put(id(9), 0, { auth: 'b'.repeat(64) })).status, 403);
+    Date.now = () => start + 200 * DAYS;
+    await space.alarm();
+    assert.deepEqual([...space.storage.map.keys()], ['closed'], 'not yet');
+    Date.now = () => start + 362 * DAYS;
+    await space.alarm();
+    assert.equal(space.storage.map.size, 0);
+  } finally { Date.now = real; }
+});

@@ -155,7 +155,7 @@
     "one per line": "një për rresht",
     "Pass mark (%)": "Pragu i kalimit (%)",
     "A room passes at the pass mark or above, and only when no critical item failed.": "Dhoma kalon kur arrin pragun ose më shumë, dhe vetëm kur asnjë pikë kritike nuk ka defekt.",
-    "Own checklists": "Listat tuaja të kontrollit",
+    "Own checklists": "Listat e tua të kontrollit",
     "Copy the chosen checklist to change its items. The weight is 1 to 3; C marks a critical item, which fails the room on its own.": "Kopjo listën e zgjedhur për të ndryshuar pikat e saj. Pesha është 1 deri 3; C shënon një pikë kritike, që e rrëzon dhomën vetëm.",
     "Inspect the room": "Inspekto dhomën",
     "Room attendant": "Pastruesi i dhomës",

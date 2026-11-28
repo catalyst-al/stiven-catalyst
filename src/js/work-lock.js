@@ -24,6 +24,8 @@
   const VERSION = 1;
   const FLAG = "sc-locked";
   const IDLE_KEY = "sc-lock-idle";
+  // The name of the service worker's cache (sw.js, CACHE); tests/work-lock.test.cjs holds the two together.
+  const OFFLINE_CACHE = "sc-offline-v1";
   const SESSION_KEY = "sc-lock-key";
   // Set for the tab after a device locked with a PIN shorter than MIN_PIN was opened: the next lock needs a new PIN.
   const RENEW_KEY = "sc-lock-renew";
@@ -224,8 +226,9 @@
     await transact(RESTORE_DB, RESTORE_STORE, "readwrite", (store) => done(store.clear())).catch(() => null);
     if (photos.length) await transact(MEDIA_DB, MEDIA_STORE, "readwrite", (store) => done(store.clear())).catch(() => null);
     storage.setItem(FLAG, "1");
-    await rememberKey(key, salt);
-    try { session?.removeItem(RENEW_KEY); } catch { /* nothing kept */ }
+    // The key of this tab goes with the lock: kept, it opened the record without the PIN for anyone at this desk who
+    // read it from the tab's session storage. The next unlock, with the PIN, keeps it again for the tab.
+    try { session?.removeItem(SESSION_KEY); session?.removeItem(RENEW_KEY); } catch { /* nothing kept */ }
     window.WorkLock.locked = true;
     return "locked";
   };
@@ -249,13 +252,20 @@
       const point = { id: `${created} before-unlock`, created, reason: "before-unlock", items: written, bytes: Object.entries(written).reduce((sum, [k, v]) => sum + k.length + v.length, 0) };
       try { await transact(RESTORE_DB, RESTORE_STORE, "readwrite", (store) => done(store.put(point))); } catch { return "failed"; }
     }
+    // The restore points and the photos first, the work after them, and the record goes only once all three are back:
+    // when one cannot be written (the device is full), the tools stay locked and the record keeps everything. Before,
+    // the record was deleted all the same, and the photos and restore points it held were lost for good.
+    try {
+      if (payload.points.length) await transact(RESTORE_DB, RESTORE_STORE, "readwrite", async (store) => { for (const p of payload.points) await done(store.put(p)); });
+      if (payload.media.length) await transact(MEDIA_DB, MEDIA_STORE, "readwrite", async (store) => { for (const p of payload.media) await done(store.put(p)); });
+    } catch {
+      return "failed";
+    }
     try {
       Object.entries(payload.items).forEach(([k, v]) => storage.setItem(k, v));
     } catch {
       return "failed";
     }
-    if (payload.points.length) await transact(RESTORE_DB, RESTORE_STORE, "readwrite", async (store) => { for (const p of payload.points) await done(store.put(p)); }).catch(() => null);
-    if (payload.media.length) await transact(MEDIA_DB, MEDIA_STORE, "readwrite", async (store) => { for (const p of payload.media) await done(store.put(p)); }).catch(() => null);
     await transact(DB, STORE, "readwrite", (store) => done(store.delete(RECORD))).catch(() => null);
     storage.removeItem(FLAG);
     if (kept) { try { session?.setItem(KEPT_KEY, "1"); } catch { /* the restore point is there all the same */ } }
@@ -272,7 +282,11 @@
     for (const key of Object.keys(gather(storage))) storage.removeItem(key);
     storage.removeItem(FLAG);
     storage.removeItem(IDLE_KEY);
-    try { session?.removeItem(SESSION_KEY); } catch { /* nothing kept */ }
+    // What this tab keeps of the tools (the lock's key, a hand-off on its way to another tool).
+    try { Object.keys(session || {}).filter((key) => key.startsWith("sc-")).forEach((key) => session.removeItem(key)); } catch { /* nothing kept */ }
+    // The offline copy of the pages (sw.js): the address of a page opened from another tool can carry typed words.
+    // The service worker fills it again as pages are visited.
+    try { await globalThis.caches?.delete(OFFLINE_CACHE); } catch { /* no copy, or none that can be reached */ }
     await Promise.all([deleteDb(DB), deleteDb(RESTORE_DB), deleteDb(REMINDERS_DB), deleteDb(MEDIA_DB)]);
     window.WorkLock.locked = false;
   };

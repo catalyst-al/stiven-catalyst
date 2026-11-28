@@ -585,6 +585,13 @@
     fillSelect(filterFloor, [["", tx("All floors")], ...floors.map((f) => [f, floorLabel(f)])], state.filters.floor);
     const people = [...new Set([...assignees(), ...Object.values(state.board).map((e) => e.attendant).filter(Boolean)])].sort(numeric);
     fillSelect(filterAttendant, [["", tx("All attendants")], ...people.map((p) => [p, p])], state.filters.attendant);
+    // A filter on a floor or an attendant that the board no longer has is cleared, not only shown as "All": it used
+    // to go on hiding every room, across reloads and on the team's other devices.
+    if (state.filters.floor !== filterFloor.value || state.filters.attendant !== filterAttendant.value) {
+      state.filters.floor = filterFloor.value;
+      state.filters.attendant = filterAttendant.value;
+      write(KEY, state);
+    }
     filterStatus.value = state.filters.status;
     filterPriority.checked = state.filters.priority;
   };
@@ -1073,7 +1080,8 @@
     setupBox.open = true;
     renderAll();
   });
-  attendantsInput.addEventListener("input", () => { state.attendants = parseNames(attendantsInput.value); save(); renderSetup(); if (state.rooms.length) renderFilters(); });
+  // The board is drawn again, not only its filters: a filter on a name just taken off the list is cleared there.
+  attendantsInput.addEventListener("input", () => { state.attendants = parseNames(attendantsInput.value); save(); renderSetup(); if (state.rooms.length) renderBoard(); });
   arrivalsInput.addEventListener("change", () => {
     const n = Number(arrivalsInput.value);
     state.arrivals = arrivalsInput.value.trim() !== "" && Number.isInteger(n) && n >= 0 ? { date: today(), n: Math.min(n, 9999) } : {};

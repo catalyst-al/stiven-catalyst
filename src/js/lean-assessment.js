@@ -116,7 +116,7 @@
   // To the Action Tracker: one action per weak dimension, to be checked at the next assessment a quarter later.
   const actionPayload = (dim, row, a, rank) => ({
     title: str(dim.action).replace("{area}", a.area.trim() || "–"),
-    detail: `${dim.name}: ${row.mean === null ? "–" : round1(row.mean).toFixed(1)} / 5`,
+    detail: `${dim.name}: ${row.mean === null ? "–" : num(round1(row.mean), 1)} / 5`,
     owner: "",
     due: isDate(a.date) ? addDays(a.date, 91) : "",
     source: "lean-assessment",

@@ -532,7 +532,7 @@
   const renderTotals = () => {
     if (!state.elements.length) { totalsLine.textContent = ""; return; }
     const r = analyse(state.elements, options());
-    const parts = [tx("{n} elements", { n: int.format(state.elements.length) }), `${tx("Before")}: ${clock(r.before.downtime)} ${tx("machine stopped")}`];
+    const parts = [tx(state.elements.length === 1 ? "{n} element" : "{n} elements", { n: int.format(state.elements.length) }), `${tx("Before")}: ${clock(r.before.downtime)} ${tx("machine stopped")}`];
     if (state.step >= 2) parts.push(`${tx("Separated")}: ${clock(r.separated.internal)}`);
     if (state.step >= 3) parts.push(`${tx("After")}: ${clock(r.after.downtime)} (${tx("{p} less", { p: pct(r.savingShare, 0) })})`);
     totalsLine.textContent = parts.join(" · ");

@@ -488,7 +488,12 @@ button, input, select { font: inherit; }
   width: 100%;
   height: 100%;
   display: block;
+  /* Empty until cosmos.js draws on it, and unseen until the script has cut it to its band of the hero (place): the
+     browser otherwise counts the empty canvas shrinking from the whole hero to its band as the page jumping (a layout
+     shift of 0.52 on a phone whose script runs after the first paint), though nothing visible moved. */
+  visibility: hidden;
 }
+.cosmos-canvas.is-placed { visibility: visible; }
 
 .cosmos-inner {
   position: relative;
@@ -2243,7 +2248,9 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .essay-listen-play:hover { filter: brightness(1.08); }
 .essay-listen-play svg { width: 13px; height: 13px; fill: currentColor; }
 .essay-listen-play[aria-pressed="true"] svg path { d: path("M6 4h4v16H6zM14 4h4v16h-4z"); }
-.essay-listen-play small { font-size: .8rem; font-weight: 600; opacity: .8; }
+/* .9, not .8: at .8 the small text on the blue of the light theme stood at 4.2 to 1, under the 4.5 that small text
+   needs (found by axe in WebKit; in Chromium the check could not judge it). At .9 it is 4.9 to 1. */
+.essay-listen-play small { font-size: .8rem; font-weight: 600; opacity: .9; }
 .essay-listen-play[disabled] { opacity: .45; cursor: default; filter: none; }
 .essay-listen-stop { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: .85rem; line-height: 1; cursor: pointer; }
 .essay-listen-stop:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
@@ -3346,9 +3353,11 @@ main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
 .dl-check-item:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .dl-check-item input {
   flex: 0 0 auto;
-  width: 20px;
-  height: 20px;
-  margin: 2px 0 0;
+  /* The whole card is the label, so a tap anywhere on it ticks the box. The box itself is 24 px (it was 20): with
+     20 the automatic check still found it too small next to its neighbours on some pages (WCAG 2.5.8). */
+  width: 24px;
+  height: 24px;
+  margin: 0;
   accent-color: var(--blue);
 }
 .dl-check-item:has(input:checked) { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
@@ -3811,6 +3820,11 @@ select.sh-in { cursor: pointer; }
 .cv-steps strong { font-size: 15px; line-height: 1.25; }
 @media (max-width: 640px) { .cv-steps a { flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px; } .cv-steps strong { font-size: 13px; } }
 @media print { .cv-steps { display: none !important; } }
+/* A field in a column of the two-column grid is never wider than its column: a long hint beside the label
+   ("personal needs, fatigue, unavoidable delay", kept on one line elsewhere) wraps instead of pushing the page
+   sideways on a phone (Time Study at 390 px, in every language). */
+.dl-grid .field { grid-template-columns: minmax(0, 1fr); }
+.dl-grid .field label .optional { white-space: normal; }
 /* Search and filters */
 html:not(.js) .filter-bar { display: none; }
 .filter-bar {
@@ -8400,6 +8414,8 @@ a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var
 /* Beside "All essays" / "All reflections": the other kind of reading, so the reader can cross over without a list. */
 .essay-series-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-left: auto; }
 .essay-series-links .essay-series-all { margin-left: 0; }
+/* A target of 24 px at least (it measured 22.8). */
+.essay-series-all { display: inline-block; min-height: 24px; }
 
 @media (max-width: 900px) {
   .article-aside { display: none; }
@@ -9560,6 +9576,10 @@ body:not(.in-family) .filter-chips .chip[aria-pressed="true"]::before {
 
 /* A work file sealed with a password (partials/work-backup.njk, js/work-backup.js): the choice beside the buttons and the password dialog. */
 .work-backup-seal { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; cursor: pointer; }
+/* A small box with its words: the label is the target, 32 px high, and the box keeps 24 px free around its centre
+   (WCAG 2.5.8) at the size it is drawn. Floor mode draws the boxes larger itself (52-floor-mode.css). */
+.work-backup-seal { min-height: 32px; }
+.work-backup-seal input { flex: 0 0 auto; margin: 6px; }
 .wb-dialog { width: min(calc(100% - 32px), 440px); padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: var(--ink); box-shadow: var(--shadow); }
 .wb-dialog::backdrop { background: rgba(10, 14, 24, .62); }
 .wb-dialog .kicker { margin: 0 0 6px; }
@@ -10541,7 +10561,9 @@ textarea.kb-in { min-height: 56px; resize: vertical; line-height: 1.4; }
 .sm-head h2 { margin-bottom: 12px; }
 .sm-head h2 span { color: var(--muted); font-weight: 400; }
 .sm-anon { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; }
-.sm-anon input { width: 18px; height: 18px; accent-color: var(--blue); }
+.sm-anon input { flex: 0 0 auto; width: 18px; height: 18px; margin: 3px; accent-color: var(--blue); }
+/* The label is the target, 32 px high; the box keeps 24 px free around its centre at the size it is drawn. */
+.sm-anon { min-height: 32px; }
 
 /* The ILU icon: a ring, filled by quarters; level 4 is full with a dot. */
 .sm-icon { display: block; width: 26px; height: 26px; }
@@ -12278,7 +12300,7 @@ td > .fc-row-photos { margin-left: 8px; }
 .work-backup-copy .sg .sg-full-text { margin: 0; color: var(--ink); font-weight: 700; }
 .sg-points { display: grid; gap: 8px; justify-items: start; }
 .sg-points-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
-.sg-toggle, .sg-make { padding: 0; font-size: inherit; }
+.sg-toggle, .sg-make { min-height: 24px; padding: 0; font-size: inherit; }
 .sg-list { display: grid; gap: 8px; width: 100%; margin: 0; padding: 0; list-style: none; }
 .sg-point { display: grid; gap: 4px; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-2); }
 .sg-point-head { margin: 0; color: var(--muted); font-variant-numeric: tabular-nums; }

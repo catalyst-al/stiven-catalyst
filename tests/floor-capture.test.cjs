@@ -414,3 +414,36 @@ test('5S Audit: photos of the walk move to the saved audit, and a new audit remo
   assert.equal(asked, 1, 'asked because of the photo');
   assert.deepEqual(plain(w.MediaStore.rows.map((r) => r.ref)), [`${audit.id}|sort-0`], 'the draft photo is gone, the saved one stays');
 });
+
+// Found in WebKit without lasting storage (a private window of Safari's engine): the picture is made, the browser
+// refuses to keep it, and the page blamed the space on the device or the file.
+test('a photo the browser refuses to keep: the control says so and names the private window; a file that is no picture does not', async () => {
+  const w = bare('<div id="box"></div>', { files: [] });
+  stubUrls(w);
+  w.eval(FAKE_STORE);
+  w.eval(script('floor-capture'));
+  w.FloorCapture.attach(w.document.querySelector('#box'), { tool: 'five-s-audit', ref: 'draft' });
+  await wait(w, 20);
+  const box = w.document.querySelector('#box');
+  const input = box.querySelector('input[type="file"]');
+  const choose = async () => {
+    Object.defineProperty(input, 'files', { value: [new w.File(['x'], 'p.jpg', { type: 'image/jpeg' })], configurable: true });
+    input.dispatchEvent(new w.Event('change'));
+    await wait(w, 20);
+    return box.querySelector('.fc-photo-status').textContent;
+  };
+  // The keeping fails, as media-store.js reports it (error.storage).
+  w.MediaStore.add = async () => { throw Object.assign(new Error('This photo could not be kept'), { storage: true }); };
+  const refused = await choose();
+  assert.match(refused, /1 photos could not be saved/);
+  assert.match(refused, /A private window does not keep photos: open this page in a normal window\./);
+  assert.equal(w.MediaStore.rows.length, 0);
+  // The picture itself could not be made: the earlier words alone.
+  w.MediaStore.add = async () => { throw new Error('This photo could not be saved'); };
+  assert.doesNotMatch(await choose(), /private window/);
+  // media-store.js marks exactly the failure of the keeping.
+  const source = script('media-store');
+  assert.match(source, /catch \(cause\) \{\n\s+throw Object\.assign\(new Error\("This photo could not be kept"\), \{ storage: true, cause \}\);/);
+  // The words exist in German and Albanian.
+  for (const lang of ['de', 'sq']) assert.ok(JSON.parse(fs.readFileSync(`src/_data/${lang}/ui.json`, 'utf8'))['A private window does not keep photos: open this page in a normal window.'], lang);
+});

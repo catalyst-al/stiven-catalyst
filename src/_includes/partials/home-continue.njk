@@ -13,5 +13,5 @@
     <span data-home-continue-summary></span>
     <em aria-hidden="true">→</em>
   </a>
-  <script type="application/json" data-home-continue-data>{{ continueOrder | readingList(lang) | dump | safe }}</script>
+  <script type="application/json" data-home-continue-data>{{ continueOrder | readingList(lang) | scriptJson | safe }}</script>
 </section>

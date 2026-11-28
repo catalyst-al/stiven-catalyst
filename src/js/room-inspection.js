@@ -882,7 +882,7 @@
     const t = overall(rows);
     const head = el("div", "ri-print-head");
     head.append(el("p", "kicker", cfg.text.tool), el("h2", null, tx("Daily summary · {date}", { date: showDate(day) })));
-    head.append(el("p", "ri-print-meta", [tx("{n} inspections", { n: int.format(rows.length) }), `${tx("First-time pass rate")} ${t.rate === null ? "–" : pct(t.rate, 0)}`, `${tx("Average score")} ${t.avg === null ? "–" : pct(t.avg, 0)}`, `${tx("Re-cleans")} ${int.format(rows.filter((row) => row.recleans > 0).length)}`, t.incomplete ? incompleteText(t.incomplete) : ""].filter(Boolean).join(" · ")));
+    head.append(el("p", "ri-print-meta", [tx(rows.length === 1 ? "{n} inspection" : "{n} inspections", { n: int.format(rows.length) }), `${tx("First-time pass rate")} ${t.rate === null ? "–" : pct(t.rate, 0)}`, `${tx("Average score")} ${t.avg === null ? "–" : pct(t.avg, 0)}`, `${tx("Re-cleans")} ${int.format(rows.filter((row) => row.recleans > 0).length)}`, t.incomplete ? incompleteText(t.incomplete) : ""].filter(Boolean).join(" · ")));
     const table = el("table", "ri-print-table");
     const thead = el("thead");
     const htr = el("tr");
@@ -1089,7 +1089,8 @@
       const print = el("button", "button-ghost ri-row-print", tx("Sheet"));
       print.type = "button";
       print.dataset.printRow = row.id;
-      print.setAttribute("aria-label", tx("Print the sheet of room {room} on {date}", { room: row.room, date: showDate(row.date) }));
+      // The name begins with the word on the button, so a voice command that says what is seen finds it.
+      print.setAttribute("aria-label", `${tx("Sheet")}: ${tx("Print the sheet of room {room} on {date}", { room: row.room, date: showDate(row.date) })}`);
       const remove = el("button", "dl-remove", "×");
       remove.type = "button";
       remove.dataset.remove = row.id;
@@ -1100,7 +1101,7 @@
     });
     logWrap.hidden = !state.rows.length;
     logEmpty.hidden = state.rows.length > 0;
-    logCount.textContent = state.rows.length ? `${tx("{n} inspections", { n: int.format(state.rows.length) })}${state.rows.length > LOG_ROWS ? tx(" · newest {n} shown, CSV has all", { n: LOG_ROWS }) : ""}` : "";
+    logCount.textContent = state.rows.length ? `${tx(state.rows.length === 1 ? "{n} inspection" : "{n} inspections", { n: int.format(state.rows.length) })}${state.rows.length > LOG_ROWS ? tx(" · newest {n} shown, CSV has all", { n: LOG_ROWS }) : ""}` : "";
     decorateLog();
   };
   // A saved inspection with photos gets a button that opens them.

@@ -271,7 +271,7 @@
     ],
     [
       "Kufijtë janë marrëveshje.",
-      "80/95 % për ABC dhe një koeficient variacioni 0,5/1,0 për XYZ janë më të përhapurit. Të tjerë përdorin 70/90 % ose 75/95 % për ABC, dhe 0,25/0,5 ose 0,2/0,5 për XYZ. Zgjidh një grup dhe mbaje, që klasat të krahasohen nga muaji në muaj."
+      "80/95% për ABC dhe një koeficient variacioni 0,5/1,0 për XYZ janë më të përhapurit. Të tjerë përdorin 70/90% ose 75/95% për ABC, dhe 0,25/0,5 ose 0,2/0,5 për XYZ. Zgjidh një grup dhe mbaje, që klasat të krahasohen nga muaji në muaj."
     ],
     [
       "Stoku i sigurisë supozon kërkesë normale.",
@@ -283,7 +283,7 @@
     ],
     [
       "Niveli i shërbimit është për cikël.",
-      "95 % do të thotë afërsisht një mungesë në njëzet cikle rimbushjeje, jo 95 % e sasisë së dorëzuar. Shumë magazina u japin artikujve A një nivel më të lartë se artikujve C."
+      "95% do të thotë afërsisht një mungesë në njëzet cikle rimbushjeje, jo 95% e sasisë së dorëzuar. Shumë magazina u japin artikujve A një nivel më të lartë se artikujve C."
     ]
   ],
   "example": {
@@ -306,7 +306,7 @@
       {"sku":"PK-1015","name":"Xhep dokumentesh C5, kuti me 1000","cost":21,"lt":null,"ltSd":null,"stock":51,"picks":337,"demand":[41,34,44,47,4,18,26,26,47,12,31,34]},
       {"sku":"PK-1016","name":"Qese dërgese 320×420, pako me 250","cost":16.4,"lt":14,"ltSd":null,"stock":432,"picks":981,"demand":[113,90,112,99,98,119,107,100,105,180,306,417]},
       {"sku":"PK-1017","name":"Kuti dhurate me motiv Krishtlindjesh","cost":2.1,"lt":28,"ltSd":6,"stock":3374,"picks":158,"demand":[0,0,0,0,0,0,0,0,0,270,1260,2340]},
-      {"sku":"PK-1018","name":"Shirit „Kujdes, i thyeshëm“","cost":2.4,"lt":null,"ltSd":null,"stock":376,"picks":314,"demand":[118,164,89,193,103,113,100,258,240,184,126,176]},
+      {"sku":"PK-1018","name":"Shirit “Kujdes, i thyeshëm”","cost":2.4,"lt":null,"ltSd":null,"stock":376,"picks":314,"demand":[118,164,89,193,103,113,100,258,240,184,126,176]},
       {"sku":"PK-1019","name":"Shirit termik transferimi 110 mm","cost":8.9,"lt":10,"ltSd":null,"stock":125,"picks":507,"demand":[193,226,232,194,253,173,205,213,214,231,179,180]},
       {"sku":"PK-1020","name":"Rrotull etiketash 57×32 për printerin e vjetër","cost":4.6,"lt":null,"ltSd":null,"stock":140,"picks":0,"demand":[0,0,0,0,0,0,0,0,0,0,0,0]},
       {"sku":"PK-1021","name":"Kuti kartoni 500×350×250, format i vjetër","cost":0.95,"lt":null,"ltSd":null,"stock":1800,"picks":0,"demand":[0,0,0,0,0,0,0,0,0,0,0,0]},

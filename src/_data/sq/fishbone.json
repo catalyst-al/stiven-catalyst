@@ -16,9 +16,9 @@
     { "key": "service5", "name": "Service 5 · hotele", "categories": ["Njerëzit", "Procesi", "Vendi", "Pajisjet", "Informacioni"] }
   ],
   "tips": [
-    ["Shkruaje efektin si fakt.", "„Linjat nisen me vonesë nga rampa“, me numrin nëse e ke. Jo „ngarkim i keq“: një gjykim i fsheh shkaqet."],
+    ["Shkruaje efektin si fakt.", "“Linjat nisen me vonesë nga rampa”, me numrin nëse e ke. Jo “ngarkim i keq”: një gjykim i fsheh shkaqet."],
     ["Mbushi kockat me ekipin.", "Ata që e bëjnë punën i njohin shkaqet. Dhjetë minuta para tabelës vlejnë më shumë se një orë në zyrë."],
-    ["Pyet pse për çdo shkak.", "Një nënshkak është përgjigjja e pyetjes „pse ndodh kjo?“. Këtu mjafton një nivel; më thellë vazhdo me 5 Whys."],
+    ["Pyet pse për çdo shkak.", "Një nënshkak është përgjigjja e pyetjes “pse ndodh kjo?”. Këtu mjafton një nivel; më thellë vazhdo me 5 Whys."],
     ["Voto, pastaj shëno çfarë është e mundshme.", "Çdo person ka tre vota. Shkaqet me më shumë vota kontrollohen të parat, nuk rregullohen të parat."],
     ["Verifiko para se të rregullosh.", "Një shkak i mundshëm mbetet hamendje derisa dikush ta ketë parë në terren. Secili bëhet një veprim verifikimi, me përgjegjës dhe afat."]
   ],

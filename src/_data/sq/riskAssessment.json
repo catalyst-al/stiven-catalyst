@@ -172,7 +172,7 @@
     "medium": {
       "name": "Mesatar",
       "meaning": "Duhen masa: planifikoji me përgjegjës dhe afat, dhe ule rrezikun sa më shumë që është e arsyeshme.",
-      "moves": ["Planifiko të paktën një masë mbi P në rendin STOP, me përgjegjës dhe afat.", "Bini dakord si dhe kur do të kontrollohet efekti.", "Vlerëso rrezikun e mbetur kur masa të jetë në vend."],
+      "moves": ["Planifiko të paktën një masë mbi P në rendin STOP, me përgjegjës dhe afat.", "Bjer dakord si dhe kur do të kontrollohet efekti.", "Vlerëso rrezikun e mbetur kur masa të jetë në vend."],
       "question": "Cila masë do ta zhdukte këtë burim rreziku, jo vetëm ta bënte më pak të gjasshëm?"
     },
     "high": {
@@ -184,7 +184,7 @@
     "very-high": {
       "name": "Shumë i lartë",
       "meaning": "Mos vazhdo kështu: ndalo ose kufizo punën derisa masat ta kenë ulur rrezikun.",
-      "moves": ["Ndalo ose kufizo punën tani dhe njofto drejtuesin përgjegjës dhe specialistin e sigurisë.", "Bini dakord për masat që duhet të jenë në vend para se puna të rifillojë.", "Vlerëso rrezikun përsëri me masat në vend, dhe vetëm atëherë lejo punën."],
+      "moves": ["Ndalo ose kufizo punën tani dhe njofto drejtuesin përgjegjës dhe specialistin e sigurisë.", "Bjer dakord për masat që duhet të jenë në vend para se puna të rifillojë.", "Vlerëso rrezikun përsëri me masat në vend, dhe vetëm atëherë lejo punën."],
       "question": "Çfarë duhet të jetë e vërtetë para se dikush ta bëjë sërish këtë punë?"
     }
   },

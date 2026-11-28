@@ -103,27 +103,27 @@
     "quality": {
       "meaning": "Dyshime për mallin ose porosinë: puna pret derisa dikush të vendosë.",
       "moves": [
-        "Jepini përgjegjësit të ekipit rregulla të qarta për të vendosur në vend: foto, zonë e bllokuar, lirim.",
-        "Vendosini dyshimet më të shpeshta në një mësim me një pikë, me foto të së mirës dhe të së keqes.",
-        "Kthejini defektet e konfirmuara te pranimi i mallit ose te furnitori po atë ditë."
+        "Jepi përgjegjësit të ekipit rregulla të qarta për të vendosur në vend: foto, zonë e bllokuar, lirim.",
+        "Vendosi dyshimet më të shpeshta në një mësim me një pikë, me foto të së mirës dhe të së keqes.",
+        "Ktheji defektet e konfirmuara te pranimi i mallit ose te furnitori po atë ditë."
       ],
       "question": "Për cilin vendim priti punonjësi, dhe a mund të jetë rregulli te stacioni?"
     },
     "material": {
       "meaning": "Shumica e thirrjeve janë për material që duhej të ishte tashmë aty: sinjali i rimbushjes vjen vonë ose nuk vjen fare.",
       "moves": [
-        "Caktoni një minimum në çdo vend mbledhjeje dhe rimbusheni te minimumi, jo kur është bosh.",
+        "Cakto një minimum në çdo vend mbledhjeje dhe rimbushe te minimumi, jo kur është bosh.",
         "Ecni me shoferin e rimbushjes nëpër pesë thirrjet e fundit dhe shihni ku humbi sinjali.",
-        "Mbajini etiketat, paletat dhe materialin e paketimit me kanban, me një pikë porositjeje që duket."
+        "Mbaji etiketat, paletat dhe materialin e paketimit me kanban, me një pikë porositjeje që duket."
       ],
       "question": "Çfarë na tregoi që vendi po mbaronte, dhe pse erdhi vetëm kur mbledhësi ishte tashmë aty?"
     },
     "machine": {
       "meaning": "Pajisjet ndalin punën: riparimi është i shpejtë sapo vjen ndihma, por të njëjtat defekte kthehen.",
       "moves": [
-        "Listoni defektet që përsëriten sipas pajisjes dhe kontrolloni shkakun e më të shpeshtit me mirëmbajtjen.",
-        "Shtoni kontrollet e para në fillim të turnit: karikuesit, sensorët e rripit, kokat e printerit.",
-        "Mbajini pjesët e këmbimit për tre defektet më të shpeshta te linja, me një stok minimal."
+        "Listo defektet që përsëriten sipas pajisjes dhe kontrollo shkakun e më të shpeshtit me mirëmbajtjen.",
+        "Shto kontrollet e para në fillim të turnit: karikuesit, sensorët e rripit, kokat e printerit.",
+        "Mbaji pjesët e këmbimit për tre defektet më të shpeshta te linja, me një stok minimal."
       ],
       "question": "Cilin defekt e kemi rregulluar më shumë se dy herë këtë muaj, dhe çfarë do ta ndalte përgjithmonë?"
     },
@@ -139,8 +139,8 @@
     "people": {
       "meaning": "Thirrje për njerëz: një pyetje, një mungesë në turn ose dikush që nuk e njeh ende detyrën.",
       "moves": [
-        "Kontrolloni matricën e aftësive për stacionet me më shumë thirrje dhe trajnoni një person të dytë.",
-        "Planifikoni pushimet dhe personelin sipas orëve kur thirrjet janë më të shumta.",
+        "Kontrollo matricën e aftësive për stacionet me më shumë thirrje dhe trajno një person të dytë.",
+        "Planifiko pushimet dhe personelin sipas orëve kur thirrjet janë më të shumta.",
         "Përgjigjjuni pyetjes më të shpeshtë një herë, në një kartë te stacioni."
       ],
       "question": "Çfarë duhej të dinte personi që nuk gjendej te stacioni?"
@@ -150,15 +150,15 @@
       "moves": [
         "Bini dakord me IT-në për një kohë reagimi kur ndalet linja dhe vendoseni numrin në çdo stacion.",
         "Mbani skanerë rezervë të karikuar dhe një printer etiketash rezervë në zyrën e turnit.",
-        "Shkruani një plan rezervë prej një faqeje për kur WMS nuk punon: listë mbledhjeje në letër, etiketa me dorë."
+        "Shkruaj një plan rezervë prej një faqeje për kur WMS nuk punon: listë mbledhjeje në letër, etiketa me dorë."
       ],
       "question": "Çfarë mund të bëjë salla në pesë minutat e para, ndërsa IT-ja është rrugës?"
     },
     "other": {
       "meaning": "Thirrje që nuk hyjnë në asnjë kategori: lexoni shënimet e tyre për të parë nëse duhet një kategori e re.",
       "moves": [
-        "Lexoni shënimet e këtyre thirrjeve dhe grupojini.",
-        "Shtoni një kategori kur një grup vazhdon të kthehet.",
+        "Lexo shënimet e këtyre thirrjeve dhe grupoji.",
+        "Shto një kategori kur një grup vazhdon të kthehet.",
         "Pyetni ata që thirrën çfarë do ta kishte bërë thirrjen të panevojshme."
       ],
       "question": "Çfarë kanë të përbashkët këto thirrje?"
@@ -166,9 +166,9 @@
     "default": {
       "meaning": "Arsyeja me më shumë thirrje është aty ku nevojitet më shpesh ndihmë.",
       "moves": [
-        "Lexoni shënimet e thirrjeve për këtë arsye dhe grupojini.",
+        "Lexo shënimet e thirrjeve për këtë arsye dhe grupoji.",
         "Bini dakord me ekipin për një kundërmasë dhe jepini një përgjegjës dhe një datë.",
-        "Kontrolloni pas dy javësh nëse thirrjet për këtë arsye janë ulur."
+        "Kontrollo pas dy javësh nëse thirrjet për këtë arsye janë ulur."
       ],
       "question": "Çfarë do t'i kishte bërë këto thirrje të panevojshme?"
     }
@@ -179,7 +179,7 @@
       "Një thirrje Andon nuk është ankesë. Një thirrje e hershme kushton më pak se një ndalesë më vonë; regjistri tregon ku ndihma është e ngadaltë, jo kush thirri."
     ],
     [
-      "Shtyp „Ndihma mbërriti“ kur dikush është aty.",
+      "Shtyp “Ndihma mbërriti” kur dikush është aty.",
       "Koha e reagimit shkon nga thirrja deri te ndihma në vend; koha e zgjidhjes deri në çastin kur puna rifillon."
     ],
     [

@@ -1261,6 +1261,7 @@
     const task = taskById(logAsset(), logForm.task.value);
     if (kind === "done" && task && !logForm.minutes.value) logForm.minutes.value = String(task.minutes || "");
   });
+  const secondTap = window.ToolKit.doubleTap(q("[data-log-save]").closest("form") || root);
   q("[data-log-save]").addEventListener("click", async () => {
     const asset = logAsset();
     if (!asset) { flash(logStatus, tx("Pick the asset: scan its code or type its tag.")); logForm.asset.focus(); return; }
@@ -1284,6 +1285,7 @@
       if (before && hours < before.hours) { flash(logStatus, tx("The meter showed {h} on {date}; a reading cannot be lower.", { h: hoursText(before.hours), date: showDate(before.date) })); logForm.hours.focus(); return; }
       row = { ...base, hours };
     }
+    if (secondTap()) return;
     const clean = cleanRow(row);
     state.rows.push(clean);
     state.rows.sort(byDate);

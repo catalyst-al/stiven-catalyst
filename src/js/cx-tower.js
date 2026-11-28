@@ -424,7 +424,7 @@
   const isRepeat = (row) => YES.has(fold(row.Repeat_Flag));
   const severityRank = (value) => {
     const f = fold(value);
-    return /critical|kritisch|kritik/.test(f) ? 3 : /high|hoch|larte/.test(f) ? 2 : /medium|mittel|mesatar/.test(f) ? 1 : 0;
+    return /critical|kritisch|kritik/.test(f) ? 3 : /high|hoch|larte/.test(f) ? 2 : /medium|mittel|mesatar|mesem/.test(f) ? 1 : 0;
   };
 
   // ---------- Example ----------
@@ -441,11 +441,14 @@
       return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
   };
-  const example = (end) => {
+  // tr: the page's translator (tx), so the example speaks the page's language: its zones, incident types, causes,
+  // owners and the texts of its actions. The values the tool reads (the status of an action, its type, whether it is
+  // verified, the yes and no of a delivery) stay as they are; the page names those itself.
+  const example = (end, tr = (text) => text) => {
     const rand = random(20260927);
     const pick = (list) => list[Math.floor(rand() * list.length)];
     const dsps = ["DSP A", "DSP B", "DSP C", "DSP D", "DSP E"];
-    const zones = ["North", "South", "East", "West", "Centre"];
+    const zones = [tr("North"), tr("South"), tr("East"), tr("West"), tr("Centre")];
     // Six regular drivers per partner and one new driver with few routes.
     const drivers = Object.fromEntries(dsps.map((dsp, i) => [dsp, Array.from({ length: 6 }, (_, j) => `D${String(i * 6 + j + 1).padStart(2, "0")}`)]));
     const driverFor = (dsp, i) => (rand() < 0.04 ? `D${31 + i}` : pick(drivers[dsp]));
@@ -458,9 +461,9 @@
     const incident = (row, type, cause, owner, severity) => {
       incidents.push({
         Incident_ID: `INC${String(incidents.length + 1).padStart(5, "0")}`, Date: row.Date, DSP: row.DSP, Shift: row.Shift, Zone: row.Zone,
-        Route_ID: row.Route_ID, Driver_ID: row.Driver_ID, Delivery_ID: row.Delivery_ID || "", Incident_Type: type, Root_Cause_Category: cause,
-        Root_Cause_Detail: "", Department_Owner: owner, Severity: severity, Customer_Impact: type, Customer_Notified: "",
-        Status: row.Date < addDays(end, -6) ? (rand() < 0.9 ? "Closed" : "In Progress") : pick(["Open", "In Progress", "Closed"]), Repeat_Flag: rand() < 0.1 ? "Yes" : "No",
+        Route_ID: row.Route_ID, Driver_ID: row.Driver_ID, Delivery_ID: row.Delivery_ID || "", Incident_Type: tr(type), Root_Cause_Category: tr(cause),
+        Root_Cause_Detail: "", Department_Owner: tr(owner), Severity: tr(severity), Customer_Impact: tr(type), Customer_Notified: "",
+        Status: row.Date < addDays(end, -6) ? (rand() < 0.9 ? tr("Closed") : tr("In Progress")) : pick([tr("Open"), tr("In Progress"), tr("Closed")]), Repeat_Flag: rand() < 0.1 ? tr("Yes") : tr("No"),
       });
     };
     for (let day = 0; day < 28; day++) {
@@ -518,11 +521,11 @@
       }
     }
     const actions = [
-      { Action_ID: "ACT001", Linked_Incident: "", Problem: "Damage from stacking heavy bags on light ones", Evidence: "Damage incidents: loading sequence / stacking is the largest cause in weeks 1–2", Root_Cause: "No loading sequence standard for heavy items", Action_Type: "Corrective", Action: "Heavy-first loading sequence, marked shelf zones in vans, briefing at every ramp", Owner: "Shift Leader", Start_Date: addDays(start, 13), Deadline: addDays(start, 15), Status: "Completed", Verification_Metric: "Damage Rate", Baseline: "1.1%", Target: "<=0.8%", Result: "0.4%", Verification_Status: "Effective", Notes: "" },
-      { Action_ID: "ACT002", Linked_Incident: "", Problem: "DSP C routes load 6 minutes slower and lose bags", Evidence: "Average loading and missing-bag events by partner", Root_Cause: "Scanners fetched from the office; bags staged after the driver arrives", Action_Type: "Corrective", Action: "Keep scanners at the ramp, pre-stage bags per route before arrival", Owner: "DSP C Lead", Start_Date: addDays(start, 20), Deadline: addDays(end, -2), Status: "In Progress", Verification_Metric: "Average Loading Time", Baseline: "24 min", Target: "<=20 min", Result: "", Verification_Status: "Pending", Notes: "" },
-      { Action_ID: "ACT003", Linked_Incident: "", Problem: "Customers are not told before their window is missed", Evidence: "Proactive notification rate about 55%", Root_Cause: "Notification depends on the driver remembering to call", Action_Type: "Preventive", Action: "Automatic delay message when ETA moves past the window", Owner: "Customer Care", Start_Date: addDays(start, 22), Deadline: addDays(end, 10), Status: "Open", Verification_Metric: "Proactive Notification Rate", Baseline: "55%", Target: "", Result: "", Verification_Status: "Pending", Notes: "Target to be agreed" },
-      { Action_ID: "ACT004", Linked_Incident: "", Problem: "Gates left open after loading", Evidence: "Gate close compliance about 93%", Root_Cause: "Closing the gate is not part of the release check", Action_Type: "Containment", Action: "Add gate check to the release sign-off; Shift Leader walk at each wave", Owner: "Shift Leader", Start_Date: addDays(start, 8), Deadline: addDays(start, 12), Status: "Completed", Verification_Metric: "Gate Close Compliance", Baseline: "93%", Target: "100%", Result: "", Verification_Status: "Pending", Notes: "Result not yet measured" },
-      { Action_ID: "ACT005", Linked_Incident: "", Problem: "PM wave leaves late", Evidence: "Late route rate AM vs PM", Root_Cause: "PM volume arrives from the warehouse after the planned loading start", Action_Type: "Corrective", Action: "Agree a PM cut-off with outbound; move two routes to the AM wave", Owner: "Station Manager", Start_Date: addDays(start, 18), Deadline: addDays(end, -4), Status: "Open", Verification_Metric: "Late Route Rate", Baseline: "", Target: "", Result: "", Verification_Status: "Pending", Notes: "" },
+      { Action_ID: "ACT001", Linked_Incident: "", Problem: tr("Damage from stacking heavy bags on light ones"), Evidence: tr("Damage incidents: loading sequence / stacking is the largest cause in weeks 1–2"), Root_Cause: tr("No loading sequence standard for heavy items"), Action_Type: "Corrective", Action: tr("Heavy-first loading sequence, marked shelf zones in vans, briefing at every ramp"), Owner: tr("Shift Leader"), Start_Date: addDays(start, 13), Deadline: addDays(start, 15), Status: "Completed", Verification_Metric: tr("Damage Rate"), Baseline: tr("1.1%"), Target: tr("<=0.8%"), Result: tr("0.4%"), Verification_Status: "Effective", Notes: "" },
+      { Action_ID: "ACT002", Linked_Incident: "", Problem: tr("DSP C routes load 6 minutes slower and lose bags"), Evidence: tr("Average loading and missing-bag events by partner"), Root_Cause: tr("Scanners fetched from the office; bags staged after the driver arrives"), Action_Type: "Corrective", Action: tr("Keep scanners at the ramp, pre-stage bags per route before arrival"), Owner: tr("DSP C Lead"), Start_Date: addDays(start, 20), Deadline: addDays(end, -2), Status: "In Progress", Verification_Metric: tr("Average Loading Time"), Baseline: tr("24 min"), Target: tr("<=20 min"), Result: "", Verification_Status: "Pending", Notes: "" },
+      { Action_ID: "ACT003", Linked_Incident: "", Problem: tr("Customers are not told before their window is missed"), Evidence: tr("Proactive notification rate about 55%"), Root_Cause: tr("Notification depends on the driver remembering to call"), Action_Type: "Preventive", Action: tr("Automatic delay message when ETA moves past the window"), Owner: tr("Customer Care"), Start_Date: addDays(start, 22), Deadline: addDays(end, 10), Status: "Open", Verification_Metric: tr("Proactive Notification Rate"), Baseline: tr("55%"), Target: "", Result: "", Verification_Status: "Pending", Notes: tr("Target to be agreed") },
+      { Action_ID: "ACT004", Linked_Incident: "", Problem: tr("Gates left open after loading"), Evidence: tr("Gate close compliance about 93%"), Root_Cause: tr("Closing the gate is not part of the release check"), Action_Type: "Containment", Action: tr("Add gate check to the release sign-off; Shift Leader walk at each wave"), Owner: tr("Shift Leader"), Start_Date: addDays(start, 8), Deadline: addDays(start, 12), Status: "Completed", Verification_Metric: tr("Gate Close Compliance"), Baseline: tr("93%"), Target: tr("100%"), Result: "", Verification_Status: "Pending", Notes: tr("Result not yet measured") },
+      { Action_ID: "ACT005", Linked_Incident: "", Problem: tr("PM wave leaves late"), Evidence: tr("Late route rate AM vs PM"), Root_Cause: tr("PM volume arrives from the warehouse after the planned loading start"), Action_Type: "Corrective", Action: tr("Agree a PM cut-off with outbound; move two routes to the AM wave"), Owner: tr("Station Manager"), Start_Date: addDays(start, 18), Deadline: addDays(end, -4), Status: "Open", Verification_Metric: tr("Late Route Rate"), Baseline: "", Target: "", Result: "", Verification_Status: "Pending", Notes: "" },
     ];
     return { deliveries, routes, incidents, actions };
   };
@@ -988,7 +991,7 @@
 
   // The example in memory only; loadExample also writes it, once the visitor asks for it.
   const showExample = () => {
-    const ex = C.example(cfg.exampleEnd);
+    const ex = C.example(cfg.exampleEnd, tx);
     NAMES.forEach((name) => {
       state[name] = ex[name];
       state.columns[name] = [...C.FIELDS[name]];
@@ -1594,7 +1597,7 @@
         goTo("actions");
       });
       actions.append(whys, plan);
-      if (TK.trackerLink) actions.append(TK.trackerLink(tx("Add to actions"), { title: tx("Act on “{cause}”: {n} incidents, {p} of the total", { cause: top.key, n: int.format(top.amount), p: pct(top.share, 0) }), source: "cx-control-tower", priority: "High" }));
+      if (window.ToolKit.trackerLink) actions.append(window.ToolKit.trackerLink(tx("Add to actions"), { title: tx("Act on “{cause}”: {n} incidents, {p} of the total", { cause: top.key, n: int.format(top.amount), p: pct(top.share, 0) }), source: "cx-control-tower", priority: "High" }));
     }
     chartBox.append(actions);
     out.push(chartBox);
@@ -2396,7 +2399,8 @@
     const causes = signals.records.length ? causeAnalysis(signals.records, "Root_Cause_Category").items.slice(0, 8) : [];
     if (causes.length) { lines.push("", `## ${tx("Recorded root causes (a classification, not proof)")}`); causes.forEach((item) => lines.push(`- ${item.key}: ${int.format(item.amount)}`)); }
     lines.push("", `## ${tx("Investigation")}${state.caseId ? ` ${state.caseId}` : ""}`);
-    CASE_FORM.forEach(([field, label]) => lines.push(`- ${label}: ${String(state.draft[field] || "").trim() || tx("not entered")}`));
+    // The stage and the state of the root cause are kept in English; the summary names them in the page's language.
+    CASE_FORM.forEach(([field, label]) => lines.push(`- ${label}: ${CASE_TEXT[state.draft[field]] ?? (String(state.draft[field] || "").trim() || tx("not entered"))}`));
     lines.push("", `## ${tx("Rules")}`, `- ${tx("A cause stays a hypothesis until the process and the records confirm it.")}`, `- ${tx("Incident counts and failure counts have different denominators.")}`, `- ${tx("A small sample is not evidence for escalation.")}`, "", `${tx("Generated")}: ${showDate(window.ToolKit.today())}`);
     return lines.join("\n");
   };

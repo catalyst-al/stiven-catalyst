@@ -53,7 +53,7 @@
     },
     "tight": {
       "title": "Nivelo, por mbro kohën e lirë",
-      "meaning": "Përzierja përshtatet, por koha e prodhimit zë më shumë se rreth 85 % të ditës. Çdo defekt apo problem cilësie ha nga koha e ndërrimeve, dhe plani i niveluar prishet i pari.",
+      "meaning": "Përzierja përshtatet, por koha e prodhimit zë më shumë se rreth 85% të ditës. Çdo defekt apo problem cilësie ha nga koha e ndërrimeve, dhe plani i niveluar prishet i pari.",
       "moves": [
         "Mbaje numrin e prodhimeve në ditë një më pak se maksimumi që përshtatet, që një orë e keqe të mund të rikuperohet.",
         "Ndiq pitch-in: në çdo interval pitch-i, a është gati karta? Pitch-et e humbura i tregojnë humbjet herët.",

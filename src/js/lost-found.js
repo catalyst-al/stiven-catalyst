@@ -781,7 +781,7 @@
     const open = el("button", "button-ghost lf-open", tx("Open it"));
     open.type = "button";
     open.dataset.pick = row.id;
-    open.setAttribute("aria-label", `${tx("Open item")} ${row.id}`);
+    open.setAttribute("aria-label", `${tx("Open it")}: ${row.id}`);
     cell.append(open);
     return cell;
   };
@@ -845,8 +845,7 @@
   fillChoices();
   window.addEventListener("workplace:changed", fillChoices);
   const form = entry.elements;
-  form.date.value = today();
-  form.time.value = new Date().toTimeString().slice(0, 5);
+  const stamp = window.ToolKit.keepNow(entry, { date: form.date, time: form.time });
   showPendingId();
   // A category brings its usual value, and high value goes to the safe.
   form.category.addEventListener("change", () => {
@@ -857,6 +856,7 @@
   form.category.dispatchEvent(new Event("change"));
   entry.addEventListener("submit", (event) => {
     event.preventDefault();
+    stamp.fresh();
     const date = parseDate(form.date.value);
     if (!date) {
       form.date.focus();
@@ -890,6 +890,7 @@
     form.what.value = "";
     form.tag.value = "";
     form.guest.value = "";
+    stamp.reset();
     state.selected = row.id;
     shownId = "";
     book.add(row);

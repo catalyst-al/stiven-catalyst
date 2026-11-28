@@ -473,7 +473,8 @@
   // browser when it has every night of the period, else the number typed for the period.
   const roomNights = (from, to) => {
     const example = exampleMatches(state);
-    const map = example ? state.nights : M.hotelNights(read(HOTEL_KEY, null));
+    // Hotel KPIs read as data: its example, once saved there, is not this hotel's nights (ToolKit readOwn).
+    const map = example ? state.nights : M.hotelNights(window.ToolKit.readOwn(HOTEL_KEY, null));
     const n = M.nightsTotal(map, from, to);
     if (n.complete && n.sold > 0) return { ...n, value: n.sold, source: example ? "example" : "kpis" };
     const typed = periodTotal(state, "roomNights");
@@ -592,7 +593,7 @@
     const button = el("button", "button-ghost gc-open", tx("Open it"));
     button.type = "button";
     button.dataset.pick = row.id;
-    button.setAttribute("aria-label", `${tx("Open complaint")} ${row.id}`);
+    button.setAttribute("aria-label", `${tx("Open it")}: ${row.id}`);
     return button;
   };
 
@@ -1036,12 +1037,12 @@
     const severity = M.severityOf(data, form.severity.value);
     severityNote.textContent = `${severity.means} ${tx("Escalate to")}: ${severity.escalate}.`;
   };
-  form.date.value = today();
-  form.time.value = clock();
+  const stamp = window.ToolKit.keepNow(entry, { date: form.date, time: form.time });
   form.severity.addEventListener("change", showSeverity);
   showSeverity();
   entry.addEventListener("submit", (event) => {
     event.preventDefault();
+    stamp.fresh();
     const date = parseDate(form.date.value);
     if (!date) {
       form.date.focus();
@@ -1074,7 +1075,7 @@
     form.room.value = "";
     form.what.value = "";
     form.guest.value = "";
-    form.time.value = clock();
+    stamp.reset();
     state.selected = row.id;
     shownId = "";
     book.add(row);

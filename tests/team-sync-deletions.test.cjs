@@ -281,7 +281,8 @@ test('a saved file put back (or a restore point) is not a deletion: the team kee
   const theirs = b.w.ActionsStore.add({ title: 'Theirs' });
   await sync(b, server);
   await sync(a, server);
-  assert.deepEqual(actionIds(aw), [mine.id, theirs.id]);
+  // A changed nothing since its last sync, so it takes the team's list as it is, in the team's order.
+  assert.deepEqual(actionIds(aw).sort(), [mine.id, theirs.id].sort());
   // A opens the file saved before B's action arrived.
   await openFile(aw, file);
   assert.deepEqual(actionIds(aw), [mine.id]);

@@ -23,7 +23,9 @@
 .sm-head h2 { margin-bottom: 12px; }
 .sm-head h2 span { color: var(--muted); font-weight: 400; }
 .sm-anon { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; }
-.sm-anon input { width: 18px; height: 18px; accent-color: var(--blue); }
+.sm-anon input { flex: 0 0 auto; width: 18px; height: 18px; margin: 3px; accent-color: var(--blue); }
+/* The label is the target, 32 px high; the box keeps 24 px free around its centre at the size it is drawn. */
+.sm-anon { min-height: 32px; }
 
 /* The ILU icon: a ring, filled by quarters; level 4 is full with a dot. */
 .sm-icon { display: block; width: 26px; height: 26px; }

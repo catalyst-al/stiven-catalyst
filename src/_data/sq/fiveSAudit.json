@@ -140,7 +140,7 @@
       "japanese": "Seiketsu",
       "meaning": "Pa një standard të dukshëm çdo turn shpik të vetin, dhe pikët luhaten me njerëzit.",
       "moves": [
-        "Një foto e „mirës“ në hyrjen e zonës, e rënë dakord me ekipin.",
+        "Një foto e “mirës” në hyrjen e zonës, e rënë dakord me ekipin.",
         "Bëje devijimin të dukshëm: tabela me hije, kode me ngjyra, një vijë që nuk kalohet.",
         "Fute kontrollin e zonës në dorëzimin e turnit, që të shihet dy herë në ditë."
       ],
@@ -229,7 +229,7 @@
       ],
       "questions": {
         "sort": [
-          "Në zonë janë vetëm sendet për punën e sotme; asgjë e lënë „për më vonë“.",
+          "Në zonë janë vetëm sendet për punën e sotme; asgjë e lënë “për më vonë”.",
           "Asnjë pajisje e prishur, paletë bosh ose mbeturinë në korridore apo te rampa.",
           "Çdo send i dyshimtë mban etiketë të kuqe me datë dhe vendim.",
           "Dokumentet dhe etiketat në mure janë të përditësuara; asgjë e vjetruar ose e dyfishuar."
@@ -247,7 +247,7 @@
           "Rrjedhjet, dëmet dhe llambat e prishura raportohen, nuk anashkalohen."
         ],
         "standardize": [
-          "Standardi 5S i zonës është varur si një foto e vetme e asaj si duket „mirë“.",
+          "Standardi 5S i zonës është varur si një foto e vetme e asaj si duket “mirë”.",
           "Çdokush në turn mund të thotë për cilin rend është përgjegjës.",
           "Kontrollet vizuale (tabela me hije, min/max, kode me ngjyra) i bëjnë devijimet të dukshme me një shikim.",
           "Dorëzimi i turnit kontrollon gjendjen e zonës; devijimet shkojnë në tabelën e turnit."
@@ -305,7 +305,7 @@
           "Defektet (llamba, bravë, rrjedhje) raportohen në sistem, nuk i lihen turnit tjetër."
         ],
         "standardize": [
-          "Rregullimi i recepsionit dhe i karrocës tregohen si një foto e vetme e „mirës“.",
+          "Rregullimi i recepsionit dhe i karrocës tregohen si një foto e vetme e “mirës”.",
           "Çdokush e di cilat kontrolle i përkasin turnit të tij: kasa, kasaforta, ditari, temperaturat e frigoriferit.",
           "Kontrolle vizuale: lecka dhe kimikate me kode ngjyrash, rafte të etiketuara, karta të nivelit.",
           "Dorëzimi i turnit kontrollon gjendjen e zonës dhe regjistron devijimet."
@@ -318,7 +318,7 @@
         ],
         "safety": [
           "Daljet e emergjencës, fikëset dhe planet e evakuimit janë të lira dhe të dukshme.",
-          "Tabelat „dysheme e lagur“, tapetet kundër rrëshqitjes dhe ruajtja e sigurt e thikave janë në përdorim.",
+          "Tabelat “dysheme e lagur”, tapetet kundër rrëshqitjes dhe ruajtja e sigurt e thikave janë në përdorim.",
           "Kimikatet ruhen të mbyllura, me fletët e sigurisë pranë.",
           "Gati-aksidentet dhe incidentet me mysafirë regjistrohen dhe shqyrtohen."
         ],
@@ -418,7 +418,7 @@
       "Nuk je i sigurt nëse i përket kësaj zone? Vëri etiketë me datë. Vendimi vjen brenda një jave."
     ],
     [
-      "Planifikoni auditet.",
+      "Planifiko auditet.",
       "Çdo zone jepini një ritëm dhe dy ose tre auditorë që ndërrohen: sytë e rinj shohin atë që ekipi i zonës nuk e sheh më."
     ]
   ],

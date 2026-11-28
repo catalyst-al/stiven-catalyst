@@ -15,6 +15,9 @@
 // :id and the token are 64 hex characters, which the browser derives from the team code with PBKDF2 (310 000 rounds,
 // src/js/team-sync.js); spaces of teams made before have SHA-256 ids, and the browser moves them. A space that nobody
 // writes to for 180 days deletes itself. The ciphertext may be up to 4 MB.
+// A deleted space (by DELETE, or after the 180 days) keeps one record, "closed": the hash of its token and its last
+// revision, for 180 days, nothing of the team's copy. Only that token may write there again, and the revision goes on
+// from where it was: an address the team gave out in a read-only code cannot be taken over once the team has left it.
 //
 // Storage: one SQLite-backed Durable Object per space (class Space), so writes to one space are serialised.
 //
@@ -168,9 +171,21 @@ export class Space {
     if (!token) return reply(401, { error: "token" });
     const tokenHash = await sha256(`write:${token}`);
     if (meta && meta.tokenHash !== tokenHash) return reply(403, { error: "token" });
+    // A space that was deleted (or ran out) still belongs to its token: "closed" keeps the token's hash and the last
+    // revision, nothing of the team's copy. Without it anyone who knew the address (a read-only code carries it, and
+    // the key) could write a copy of their own there once the team had deleted or moved theirs, and a device of the
+    // team that had been away would have taken it for the team's.
+    const closed = meta ? null : (await this.storage.get("closed")) || null;
+    if (closed && closed.tokenHash !== tokenHash) return reply(403, { error: "token" });
     if (method === "DELETE") {
       await this.storage.deleteAll();
       await this.storage.deleteAlarm();
+      const last = meta || closed;
+      if (last) {
+        const now = Date.now();
+        await this.storage.put("closed", { tokenHash: last.tokenHash, rev: last.rev, at: now });
+        await this.storage.setAlarm(now + IDLE_MS);
+      }
       return reply(204, null);
     }
     // PUT
@@ -182,6 +197,9 @@ export class Space {
     if (body.data.length > MAX_BYTES) return reply(413, { error: "too-large" });
     const current = meta ? meta.rev : 0;
     if (body.rev !== current) return reply(409, { rev: current });
+    // A copy written again where one was deleted goes on from the last revision: a revision never comes twice, so a
+    // device can tell the copy it knew from another.
+    const from = meta ? meta.rev : closed ? closed.rev : 0;
     // A new space: within the limits for the address it comes from, and for everyone.
     if (!meta) {
       const client = request.headers.get(CLIENT) || "unknown";
@@ -194,8 +212,9 @@ export class Space {
     const chunks = Math.max(1, Math.ceil(body.data.length / CHUNK));
     const entries = {};
     for (let i = 0; i < chunks; i++) entries[`chunk:${i}`] = body.data.slice(i * CHUNK, (i + 1) * CHUNK);
-    const next = { rev: current + 1, updated: now, iv: body.iv, chunks, tokenHash };
+    const next = { rev: from + 1, updated: now, iv: body.iv, chunks, tokenHash };
     await this.storage.put({ ...entries, meta: next });
+    if (closed) await this.storage.delete("closed");
     if (meta && meta.chunks > chunks) await this.storage.delete([...Array(meta.chunks - chunks).keys()].map((i) => `chunk:${chunks + i}`));
     await this.storage.setAlarm(now + IDLE_MS);
     return reply(200, { rev: next.rev, updated: next.updated });
@@ -205,6 +224,14 @@ export class Space {
   async alarm() {
     const meta = await this.storage.get("meta");
     if (meta && Date.now() - meta.updated < IDLE_MS) { await this.storage.setAlarm(meta.updated + IDLE_MS); return; }
+    const closed = meta ? null : await this.storage.get("closed");
+    if (closed && Date.now() - closed.at < IDLE_MS) { await this.storage.setAlarm(closed.at + IDLE_MS); return; }
     await this.storage.deleteAll();
+    // The copy ran out: its address stays the token's for another 180 days, then that goes too.
+    if (meta) {
+      const now = Date.now();
+      await this.storage.put("closed", { tokenHash: meta.tokenHash, rev: meta.rev, at: now });
+      await this.storage.setAlarm(now + IDLE_MS);
+    }
   }
 }

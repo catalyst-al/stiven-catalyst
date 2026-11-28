@@ -5,7 +5,7 @@
     "tool": "Inspektimi i dhomës",
     "roomPlaceholder": "p.sh. 412",
     "attendantPlaceholder": "Kush e pastroi dhomën",
-    "inspectorPlaceholder": "Emri juaj",
+    "inspectorPlaceholder": "Emri yt",
     "notePlaceholder": "Çfarë saktësisht, ku",
     "roomsPlaceholder": "412; 4; suitë\n413\n414 dyshe",
     "attendantsPlaceholder": "Marta; 1\nIlir; 2, 3",
@@ -689,7 +689,7 @@
       "Një shkallë e ulët kalimi herën e parë e një pastruesi kërkon një kalim së bashku nëpër dhomë, një standard më të qartë ose më shumë minuta për dhomë, kurrë një emër në mur."
     ],
     [
-      "Lista juaj e kontrollit.",
+      "Lista jote e kontrollit.",
       "Kopjo një listë kontrolli dhe përshtat pikat dhe peshat me standardin e markës; ruaje si skedar modeli për hotelet e tjera të grupit."
     ]
   ],
