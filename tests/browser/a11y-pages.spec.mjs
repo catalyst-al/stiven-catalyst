@@ -149,6 +149,51 @@ for (const [url, width] of [["/tools/a3-report/", 1440], ["/tools/eight-d/", 390
   });
 }
 
+// The true end of a page: there once nothing can change the page's height any more. Parts with
+// content-visibility: auto (css/11-reading-and-motion.css: a tool's results and check, the work box, "more tools", the
+// footer) keep a placeholder height (contain-intrinsic-size) until they come near the view and take their real size a
+// frame or more later, by hundreds of pixels on /tools/damage-control/ at 412 px, and the view does not stay at the
+// end through that. A single "at the end" right after the jump was therefore not enough: on a busy runner the related
+// tools above the footer were drawn after it, the page grew by 78 px and the footer slid under the view before the
+// positions were read (CI 921 and 923; the frames of their traces show the end clear first). So each look goes to
+// the end, lets two frames be drawn and reads the height, the position, whether a deferred part in view still shows
+// its placeholder (its content is skipped: checkVisibility({ contentVisibilityAuto: true }) is false) and whether the
+// fonts are in (the footer's line breaks depend on them), and with them the positions of the footer and the planet.
+// The end counts only after LOOKS such looks in a row agree, at the end, with nothing in view deferred and the fonts
+// loaded; the positions are those of that last look, read in the same step. Bounded by the expect timeout: a page
+// that never settles fails here, with the last look in the message.
+const LOOKS = 3;
+const lookAtEnd = (page) => page.evaluate(async () => {
+  const root = document.documentElement;
+  window.scrollTo({ top: root.scrollHeight, behavior: "instant" });
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  const inView = (el) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
+  const deferred = [...document.querySelectorAll("body *")].filter((el) => getComputedStyle(el).contentVisibility === "auto");
+  const placeholders = deferred.filter((el) => inView(el) && el.firstElementChild && !el.firstElementChild.checkVisibility({ contentVisibilityAuto: true }));
+  const controls = [...document.querySelectorAll(".site-footer a, .site-footer button")].filter((el) => el.getBoundingClientRect().height > 0);
+  const lowest = Math.max(...controls.map((el) => el.getBoundingClientRect().bottom));
+  return {
+    height: root.scrollHeight,
+    top: Math.round(scrollY),
+    atEnd: Math.ceil(scrollY + innerHeight) >= root.scrollHeight - 1,
+    placeholders: placeholders.length,
+    fonts: document.fonts.status,
+    gap: document.querySelector(".share-orbit-button").getBoundingClientRect().top - (lowest + 2),
+  };
+});
+const settleAtEnd = async (page) => {
+  let last = null;
+  let agreeing = 0;
+  await expect.poll(async () => {
+    const now = await lookAtEnd(page);
+    const same = last && now.height === last.height && now.top === last.top;
+    agreeing = now.atEnd && now.placeholders === 0 && now.fonts === "loaded" && same ? agreeing + 1 : 0;
+    last = now;
+    return agreeing >= LOOKS - 1 ? "settled" : JSON.stringify(now);
+  }, { message: "the end of the page settles (same height and position, at the end, nothing in view deferred, fonts loaded)" }).toBe("settled");
+  return last;
+};
+
 // PM-10 at the end of a page: there the page cannot scroll any further, so a footer link or button on the last line
 // stays where it is, and whether it lands under the share planet depends on how the footer's line breaks, that is on
 // the fonts of the device (GitHub's runner put "Kontakt" there, this container did not). The footer's last control
@@ -157,18 +202,13 @@ for (const url of ["/sq/insights/the-tools-you-build-yourself/", "/de/magazine/m
   test(`phone: the end of ${url} leaves the footer clear of the share planet`, async ({ page }) => {
     await page.setViewportSize({ width: 412, height: 800 });
     await page.goto(url);
-    // To the very end, at once (the page glides to anchors by default), until the height stops growing (parts drawn
-    // only near the view take their real size as they come).
-    await expect.poll(() => page.evaluate(() => {
-      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" });
-      return Math.ceil(window.scrollY + innerHeight) >= document.documentElement.scrollHeight - 1;
-    })).toBe(true);
+    // To the true end, at once (the page glides to anchors by default), once nothing changes its height any more.
+    await settleAtEnd(page);
     await expect(page.locator(".share-orbit")).not.toHaveClass(/is-resting/);
-    const gap = await page.evaluate(() => {
-      const controls = [...document.querySelectorAll(".site-footer a, .site-footer button")].filter((el) => el.getBoundingClientRect().height > 0);
-      const lowest = Math.max(...controls.map((el) => el.getBoundingClientRect().bottom));
-      return document.querySelector(".share-orbit-button").getBoundingClientRect().top - (lowest + 2);
-    });
-    expect(gap, "space between the footer's lowest control and the share planet").toBeGreaterThanOrEqual(0);
+    // The planet woke, which the page may have answered: settle again. The positions are those of the last look, read
+    // in the same step that found the page settled at its end.
+    const at = await settleAtEnd(page);
+    expect(at.atEnd, "at the end of the page when the positions are read").toBe(true);
+    expect(at.gap, "space between the footer's lowest control and the share planet").toBeGreaterThanOrEqual(0);
   });
 }
