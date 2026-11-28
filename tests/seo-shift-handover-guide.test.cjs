@@ -82,7 +82,7 @@ test('the whole page: the side note and the names in a sent handover are describ
     },
     sq: {
       note: 'Dorëzimet ruhen në këtë shfletues. Ato largohen prej tij vetëm kur i kopjon, i printon, i ruan ose i dërgon, ose si kopje e enkriptuar nëse ekipi yt përdor sinkronizimin e ekipit. Kontrollo emrat dhe të dhënat e mysafirëve para se të ndash diçka.',
-      names: [/fushat e emrave \(kush e dorëzon, kush e merr dhe përgjegjësi i çdo çështjeje\) nuk përfshihen, përveç nëse/, /mund të përmbajë emra ose të dhëna të tjera personale/, /nuk dallon emra dhe nuk heq asgjë/, /lexojini këto fusha para dërgimit/],
+      names: [/fushat e emrave \(kush e dorëzon, kush e merr dhe përgjegjësi i çdo çështjeje\) nuk përfshihen, përveç nëse/, /mund të përmbajë emra ose të dhëna të tjera personale/, /nuk dallon emra dhe nuk heq asgjë/, /lexoji këto fusha para dërgimit/],
     },
   };
   // The side note's old sentence is gone from the whole page. The stricter check (no "nothing is uploaded", no
