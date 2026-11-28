@@ -31,7 +31,12 @@
   width: 100%;
   height: 100%;
   display: block;
+  /* Empty until cosmos.js draws on it, and unseen until the script has cut it to its band of the hero (place): the
+     browser otherwise counts the empty canvas shrinking from the whole hero to its band as the page jumping (a layout
+     shift of 0.52 on a phone whose script runs after the first paint), though nothing visible moved. */
+  visibility: hidden;
 }
+.cosmos-canvas.is-placed { visibility: visible; }
 
 .cosmos-inner {
   position: relative;

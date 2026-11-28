@@ -274,6 +274,8 @@
     layer.canvas.height = rows;
     layer.canvas.style.top = `${y0 / dpr}px`;
     layer.canvas.style.height = `${rows / dpr}px`;
+    // Seen from here on (02-homepage.css keeps the empty, unplaced canvas out of sight).
+    layer.canvas.classList.add("is-placed");
   };
 
   const resize = () => {

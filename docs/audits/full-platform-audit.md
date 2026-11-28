@@ -120,7 +120,28 @@ hreflang and switcher targets exist and are reciprocal; no `toLocale*` / `Intl` 
 | A11Y-04 | P3 | Small checkboxes outside floor mode (13 to 20 px) where another target is close: the seal box of the backup, the Skills Matrix, the floor-check list of the logs. | **open**: larger boxes change the look of five tools; floor mode already gives 26 px. The author's choice. |
 | A11Y-05 | — | axe also reported 21 contrast failures "against #ffffff" and about 40 targets "partially obscured" on the dark theme. | **not defects**: measured in the page, the text is #f6f7f4 on the dark page background; axe judged them while the sticky header or the share button lay over the element during its scan. The project's own axe checks (78 in CI) pass. |
 
-### 2.6 Build and CI
+### 2.6 Performance (laboratory measurements, not field data)
+
+Chromium on the local build, 390 × 844, CPU slowed four times, the median of three loads. The local server sends
+files uncompressed, so the sizes are larger than what GitHub Pages sends (gzip); no real-user data was available.
+
+| Page | LCP | CLS | Blocking time | Requests | Bytes, uncompressed (scripts, styles) |
+| --- | --- | --- | --- | --- | --- |
+| `/` | 348 ms | **0.521 → 0.000** (PERF-01) | 154 ms | 18 | 392 KB (120, 129) |
+| `/tools.html` | 492 ms | 0.000 | 40 ms | 15 | 540 KB (101, 183) |
+| `/tools/lost-found/` | 388 ms | 0.000 | 237 ms | 26 | 802 KB (238, 448) |
+| `/tools/room-status/` | 296 ms | 0.000 | 119 ms | 24 | 783 KB (227, 448) |
+| `/tools/cx-control-tower/` | 396 ms | 0.000 | 218 ms | 23 | 897 KB (337, 448) |
+| `/insights.html` | 488 ms | 0.000 | 0 ms | 11 | 401 KB (21, 183) |
+| `/de/tools/shift-handover/` | 376 ms | 0.000 | 67 ms | 23 | 1 217 KB (656, 448) |
+| `/magazine/management-review.html` | 316 ms | 0.000 | 12 ms | 13 | 490 KB (19, 149) |
+
+| ID | Sev. | Finding | Status |
+| --- | --- | --- | --- |
+| PERF-01 | P2 | **The homepage counted a layout shift of 0.52 on a phone whose script runs after the first paint** (390 px, CPU slowed four times; 0 on a fast machine and at 1440 px): the hero's empty canvas, laid over the whole hero, was cut to its band by `cosmos.js`. Nothing visible moved, but the browser reports it, and 0.1 is the limit of "good" in the Core Web Vitals. | **fixed**: the canvas is out of sight until the script has placed it (`02-homepage.css`, one class in `cosmos.js`; the drawing and the motion are unchanged). Measured after: 0.000 in English, German and Albanian, with and without reduced motion. |
+| PERF-02 | P3 | A tool page loads one stylesheet for all 59 tools (448 KB before compression) and a German or Albanian tool page the texts of all tools (about 530 KB before compression). Both are cached after the first tool. | **open**, by design (`lib/css-split.js`, `src/ui-strings.njk`); no measured problem (LCP under 0.5 s in the lab). |
+
+### 2.7 Build and CI
 
 | ID | Sev. | Finding | Status |
 | --- | --- | --- | --- |
