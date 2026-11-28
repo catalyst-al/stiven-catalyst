@@ -462,7 +462,9 @@ main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
   flex: 0 0 auto;
   width: 20px;
   height: 20px;
-  margin: 2px 0 0;
+  /* The whole card is the label, so a tap anywhere on it ticks the box; the two pixels around the box keep 24 px
+     free of any other target (WCAG 2.5.8), without drawing the box larger. */
+  margin: 2px;
   accent-color: var(--blue);
 }
 .dl-check-item:has(input:checked) { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
