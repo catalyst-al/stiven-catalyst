@@ -30,6 +30,26 @@ Decisions of the author (28 November 2026):
 | Branch protection, required checks, the `github-pages` environment's branch rule | **not readable from this session** | to check by hand, below |
 | Working tree | clean, in step with the remote | `git status` |
 
+The release candidate, verified from an empty `_site` at `3176953f`:
+
+| Check | Result |
+| --- | --- |
+| `npm run build` | passes |
+| `npm test` | 1 546 tests, 1 546 pass, 0 fail, 0 skipped |
+| `node scripts/check-coaching-build.mjs` | 54 pages, 9 journeys pass |
+| `node scripts/seo-audit.mjs` | 911 pages, 894 indexable, 0 errors, 0 warnings |
+| `npm run test:browser` (Chromium) | 321 passed, 0 failed |
+| CI on `3176953f` | `build` success, `deploy` skipped (a pull request never publishes) |
+| The journeys that do not depend on Chromium, in Playwright's WebKit 27.2 and Firefox 157 (not Safari, not a phone) | 191 of 198 and 195 of 198 |
+
+What still fails in the other engines, none of it a fault of the site that could be shown: the offline handover test
+(Firefox, 3: the test switches the browser offline, which does not reach a service worker there); a turn of the wheel
+and a programmatic scroll that these builds animate themselves (WebKit, 4); the footer-clearance test whose timing
+#418 corrects (WebKit, 2); the team sync journey through the test's fake server, which WebKit does not hand over while
+a service worker controls the page (1; the same path without the service worker passes in the three engines).
+Corrected since the audit's closure: a focused field under the share button (WebKit, was 3), and the reason given
+when a window without lasting storage refuses a photo.
+
 To check by hand before the merges (GitHub, the repository's Settings):
 1. **Environments → `github-pages` → Deployment branches and tags**: "Selected branches and tags", with `main` as
    the only entry.
