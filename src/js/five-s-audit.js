@@ -595,7 +595,7 @@
     });
     logWrap.hidden = !state.rows.length;
     logEmpty.hidden = state.rows.length > 0;
-    logCount.textContent = state.rows.length ? `${tx("{n} audits", { n: int.format(state.rows.length) })}${state.rows.length > LOG_ROWS ? tx(" · newest {n} shown, CSV has all", { n: LOG_ROWS }) : ""}` : "";
+    logCount.textContent = state.rows.length ? `${tx(state.rows.length === 1 ? "{n} audit" : "{n} audits", { n: int.format(state.rows.length) })}${state.rows.length > LOG_ROWS ? tx(" · newest {n} shown, CSV has all", { n: LOG_ROWS }) : ""}` : "";
   };
 
   // The red tag register.

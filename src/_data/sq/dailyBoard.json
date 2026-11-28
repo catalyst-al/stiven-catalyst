@@ -16,8 +16,8 @@
       "key": "Q",
       "name": "Cilësia",
       "sources": "Kontrolli i dëmeve, Kontrolli i plotësisë, Regjistri i Night Audit, Inspektimi i dhomës",
-      "red": "Dëme, porosi të paplota ose përjashtime auditi mbi shkallën objektiv. Pa volum: një numër dukshëm mbi ditën e zakonshme. Inspektimi i dhomës: kalimi herën e parë nën 75 %.",
-      "amber": "Brenda 20 % të objektivit, ose mbi numrin e zakonshëm. Inspektimi i dhomës: kalimi herën e parë nën pragun e kalimit.",
+      "red": "Dëme, porosi të paplota ose përjashtime auditi mbi shkallën objektiv. Pa volum: një numër dukshëm mbi ditën e zakonshme. Inspektimi i dhomës: kalimi herën e parë nën 75%.",
+      "amber": "Brenda 20% të objektivit, ose mbi numrin e zakonshëm. Inspektimi i dhomës: kalimi herën e parë nën pragun e kalimit.",
       "green": "Asgjë e regjistruar, ose një shkallë nën objektiv. Inspektimi i dhomës: kalimi herën e parë në pragun e kalimit ose mbi të."
     },
     {
@@ -74,7 +74,7 @@
     ["E kuqja është pyetje, jo faj.", "Një ditë e kuqe pyet çfarë ndodhi dhe kush e merr hapin tjetër. Kurrë nuk pyet kush e kishte fajin."],
     ["Një e kuqe pa veprim është gënjeshtër.", "Çdo ditë e kuqe merr një veprim me përgjegjës dhe afat në Listën e veprimeve, përndryshe tabela zbukuron murin."],
     ["Lëri regjistrat të punojnë.", "Siguria, Cilësia dhe Dorëzimi mbushen vetë nga Kontrolli i dëmeve, Kontrolli i plotësisë, Analiza e vonesave, Kryqi i sigurisë, Inspektimi i dhomës dhe Planifikuesi i mirëmbajtjes në këtë shfletues. Shtyp vetëm Koston dhe Njerëzit."],
-    ["Edhe dhomat dhe pajisjet llogariten.", "Cilësia merr kalimin herën e parë të ditës nga Inspektimi i dhomës: e gjelbër në pragun e kalimit ose mbi të, e verdhë nën të, e kuqe nën 75 %. Këtë vijë e vendos vetë tabela, sepse inspektimi nuk shënon nëse një dhomë që nuk kaloi iu dha një mysafiri. Dorëzimi merr prishjet nga Planifikuesi i mirëmbajtjes: e verdhë për një prishje, e kuqe për më shumë se 60 minuta ndalesë në një ditë. Detyrat e vonuara në pajisjet A lexohen në takim bashkë me veprimet."],
+    ["Edhe dhomat dhe pajisjet llogariten.", "Cilësia merr kalimin herën e parë të ditës nga Inspektimi i dhomës: e gjelbër në pragun e kalimit ose mbi të, e verdhë nën të, e kuqe nën 75%. Këtë vijë e vendos vetë tabela, sepse inspektimi nuk shënon nëse një dhomë që nuk kaloi iu dha një mysafiri. Dorëzimi merr prishjet nga Planifikuesi i mirëmbajtjes: e verdhë për një prishje, e kuqe për më shumë se 60 minuta ndalesë në një ditë. Detyrat e vonuara në pajisjet A lexohen në takim bashkë me veprimet."],
     ["Vendos objektivat një herë.", "Profili i vendit të punës mban vendin, turnet, zonat me përgjegjësit e tyre dhe objektivat. Çdo mjet i lexon."]
   ],
   "example": {
@@ -92,28 +92,28 @@
       "targets": { "damage": 0.3, "incomplete": 0.5, "ontime": 95, "fives": 80, "cost": 8, "absence": 5 }
     },
     "rows": [
-      { "ago": 1, "shift": "Pasdite", "letter": "Q", "state": "red", "note": "Dëme 0,5 %: 14 njësi të shtypura në ngarkim, objektivi 0,3 %" },
-      { "ago": 1, "shift": "Mëngjes", "letter": "D", "state": "amber", "note": "Në kohë 93 %: dy linja u nisën me vonesë nga rampa 3" },
+      { "ago": 1, "shift": "Pasdite", "letter": "Q", "state": "red", "note": "Dëme 0,5%: 14 njësi të shtypura në ngarkim, objektivi 0,3%" },
+      { "ago": 1, "shift": "Mëngjes", "letter": "D", "state": "amber", "note": "Në kohë 93%: dy linja u nisën me vonesë nga rampa 3" },
       { "ago": 1, "shift": "Mëngjes", "letter": "P", "state": "amber", "note": "Dy mungesa në Komisionim, një punonjës agjencie i konfirmuar" },
       { "ago": 2, "shift": "Pasdite", "letter": "C", "state": "amber", "note": "Orë shtesë 9 h në Paketim për të mbyllur prapambetjen" },
       { "ago": 3, "shift": "Mëngjes", "letter": "S", "state": "amber", "note": "Incident i shmangur për pak te rampa 2: transpaletë dhe këmbësor, pa lëndim" },
-      { "ago": 5, "shift": "Pasdite", "letter": "Q", "state": "amber", "note": "Të paplota 0,45 %: tri porosi dolën pa pakon e dytë" },
-      { "ago": 6, "shift": "Mëngjes", "letter": "D", "state": "red", "note": "Në kohë 88 %: borë në A5, katër linja me vonesë" },
+      { "ago": 5, "shift": "Pasdite", "letter": "Q", "state": "amber", "note": "Të paplota 0,45%: tri porosi dolën pa pakon e dytë" },
+      { "ago": 6, "shift": "Mëngjes", "letter": "D", "state": "red", "note": "Në kohë 88%: borë në A5, katër linja me vonesë" },
       { "ago": 8, "shift": "Pasdite", "letter": "C", "state": "red", "note": "Orë shtesë 14 h: turni i pasdites qëndroi për tërheqjen e dytë të transportuesit" },
       { "ago": 8, "shift": "Natë", "letter": "P", "state": "amber", "note": "Një mungesë, pa zëvendësim në turnin e natës" },
       { "ago": 9, "shift": "Mëngjes", "letter": "C", "state": "amber", "note": "Dy ngarkues agjencie të paplanifikuar" },
-      { "ago": 12, "shift": "Pasdite", "letter": "Q", "state": "amber", "note": "Dëme 0,26 %, afër objektivit" },
+      { "ago": 12, "shift": "Pasdite", "letter": "Q", "state": "amber", "note": "Dëme 0,26%, afër objektivit" },
       { "ago": 13, "shift": "Pasdite", "letter": "P", "state": "red", "note": "Katër mungesa në Ngarkim, turni i pasdites punoi me dy veta më pak" },
       { "ago": 15, "shift": "Mëngjes", "letter": "S", "state": "amber", "note": "Gjendje e pasigurt: dysheme e lagur te dera e hyrjes, u pastrua dhe u shënua" },
-      { "ago": 16, "shift": "Mëngjes", "letter": "D", "state": "amber", "note": "Në kohë 94 %: një rimorkio mbërriti me vonesë" },
+      { "ago": 16, "shift": "Mëngjes", "letter": "D", "state": "amber", "note": "Në kohë 94%: një rimorkio mbërriti me vonesë" },
       { "ago": 19, "shift": "Pasdite", "letter": "C", "state": "amber", "note": "Orë shtesë 8 h në ditën e pikut" },
-      { "ago": 22, "shift": "Pasdite", "letter": "Q", "state": "red", "note": "Dëme 0,6 %: një mur paletash i shembur në rimorkion 7" },
-      { "ago": 23, "shift": "Mëngjes", "letter": "D", "state": "amber", "note": "Në kohë 93 %" },
+      { "ago": 22, "shift": "Pasdite", "letter": "Q", "state": "red", "note": "Dëme 0,6%: një mur paletash i shembur në rimorkion 7" },
+      { "ago": 23, "shift": "Mëngjes", "letter": "D", "state": "amber", "note": "Në kohë 93%" },
       { "ago": 26, "shift": "Mëngjes", "letter": "P", "state": "amber", "note": "Punonjës i ri në Paketim, i trajnuar nga Clara" },
       { "ago": 27, "shift": "Pasdite", "letter": "S", "state": "red", "note": "Rast ndihme të parë: dorë e prerë te stacioni i paketimit, leukoplast, u kthye në punë" },
       { "ago": 29, "shift": "Mëngjes", "letter": "C", "state": "red", "note": "Orë shtesë 12 h, dy veta të shtunën" },
-      { "ago": 30, "shift": "Pasdite", "letter": "Q", "state": "amber", "note": "Të paplota 0,4 %" },
-      { "ago": 33, "shift": "Mëngjes", "letter": "D", "state": "red", "note": "Në kohë 87 %: dera e rampës 4 e prishur, ngarkimi me vonesë" },
+      { "ago": 30, "shift": "Pasdite", "letter": "Q", "state": "amber", "note": "Të paplota 0,4%" },
+      { "ago": 33, "shift": "Mëngjes", "letter": "D", "state": "red", "note": "Në kohë 87%: dera e rampës 4 e prishur, ngarkimi me vonesë" },
       { "ago": 34, "shift": "Natë", "letter": "P", "state": "amber", "note": "Një mungesë" }
     ]
   }

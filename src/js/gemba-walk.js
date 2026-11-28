@@ -408,7 +408,7 @@
       return c.pct === null ? "–" : `${pct(c.pct, 0)} · ${tx("{n} no", { n: int.format(c.no) })}`;
     }
     const total = WASTES.reduce((sum, key) => sum + row.tallies[key], 0);
-    return tx("{n} wastes", { n: int.format(total) });
+    return tx(total === 1 ? "{n} waste" : "{n} wastes", { n: int.format(total) });
   };
   // What was added, already open or not saved (ActionsStore.lastAdd); sent(i) says whether item i reached the list.
   const handOver = (items) => {

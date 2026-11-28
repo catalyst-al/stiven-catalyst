@@ -101,7 +101,7 @@
    "meaning": "Makina punon, por më ngadalë se ritmi i saj ideal: e ulur pas një problemi dhe e pakthyer më, ose me ritmin e produktit më të ngadaltë.",
    "moves": [
     "Krahaso shpejtësinë e vendosur me ritmin ideal në tabelën e makinës dhe në parametra; shëno pse ndryshojnë.",
-    "Rrite shpejtësinë me hapa prej 5 % në një turn dhe ndiq skartet dhe bllokimet.",
+    "Rrite shpejtësinë me hapa prej 5% në një turn dhe ndiq skartet dhe bllokimet.",
     "Gjej se çfarë pret makina: hyrjen, daljen apo operatorin."
    ],
    "question": "Pse punon makina me këtë shpejtësi, dhe kush e vendosi?"
@@ -130,19 +130,19 @@
  "verdicts": [
   {
    "name": "Klasë botërore",
-   "note": "85 % ose më shumë: disponueshmëria, performanca dhe cilësia pranë më të mirës."
+   "note": "85% ose më shumë: disponueshmëria, performanca dhe cilësia pranë më të mirës."
   },
   {
    "name": "E zakonshme",
-   "note": "60 deri në 85 %: rezultat i zakonshëm, me humbje të qarta për t'u rifituar."
+   "note": "60 deri në 85%: rezultat i zakonshëm, me humbje të qarta për t'u rifituar."
   },
   {
    "name": "E ulët",
-   "note": "40 deri në 60 %: humbje të mëdha; më e madhja vlen një projekt më vete."
+   "note": "40 deri në 60%: humbje të mëdha; më e madhja vlen një projekt më vete."
   },
   {
    "name": "E dobët",
-   "note": "Nën 40 %: kontrollo fillimisht të dhënat, pastaj humbjen më të madhe."
+   "note": "Nën 40%: kontrollo fillimisht të dhënat, pastaj humbjen më të madhe."
   }
  ],
  "placeholders": {
@@ -162,7 +162,7 @@
   ],
   [
    "Merr ritmin ideal nga tabela e makinës.",
-   "Jo shpejtësinë me të cilën punon zakonisht. Kur performanca tregon 100 %, ritmi ideal ka gjasa të jetë vendosur shumë i ulët."
+   "Jo shpejtësinë me të cilën punon zakonisht. Kur performanca tregon 100%, ritmi ideal ka gjasa të jetë vendosur shumë i ulët."
   ],
   [
    "Ndalesat e planifikuara nuk janë humbje.",

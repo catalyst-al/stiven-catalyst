@@ -450,7 +450,7 @@
     const head = el("div", "result-head");
     head.append(el("p", "result-label", `${data.text.tool}${state.process ? ` · ${state.process}` : ""}`));
     const h2 = el("h2");
-    h2.append(el("span", null, int.format(sum.H)), ` ${tx("high priority")} · ${tx("{n} failure modes", { n: int.format(sum.modes) })}`);
+    h2.append(el("span", null, int.format(sum.H)), ` ${tx("high priority")} · ${tx(sum.modes === 1 ? "{n} failure mode" : "{n} failure modes", { n: int.format(sum.modes) })}`);
     head.append(h2);
     const meta = [state.revision && `${tx("Revision")} ${state.revision}`, state.date && showDate(state.date), state.owner].filter(Boolean).join(" · ");
     if (meta) head.append(el("p", "fm-meta", meta));

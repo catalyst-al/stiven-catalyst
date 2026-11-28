@@ -332,7 +332,7 @@
     const who = row.owner || row.by;
     const when = row.status === "act" ? tx("adopted {date}", { date: showDate(row.adopted) })
       : row.status === "dropped" ? tx("dropped {date}", { date: showDate(row.moved) })
-      : tx("{n} days here", { n: int.format(math.daysInColumn(row, today())) });
+      : ((days) => tx(days === 1 ? "{n} day here" : "{n} days here", { n: int.format(days) }))(math.daysInColumn(row, today()));
     node.append(el("p", "kb-card-people", `${who ? `${who} · ` : ""}${when}`));
     if (row.status === "dropped" && row.reason) node.append(el("p", "kb-card-note", row.reason));
     if (row.status === "act" && row.result) node.append(el("p", "kb-card-note", row.result));
@@ -366,7 +366,7 @@
     }
     if (row.status === "plan" && window.ActionsStore) {
       // The next step of a planned idea is an action with an owner and a date; the tracker keeps it with the others.
-      actions.append(button("action", tx("Add to actions"), tx("Add the next step to the Action Tracker: {title}", { title: row.title }), () => {
+      actions.append(button("action", tx("Add to actions"), `${tx("Add to actions")}: ${row.title}`, () => {
         const added = window.ActionsStore.add({ title: row.next || row.title, detail: `${tx("Kaizen idea")}: ${row.title}${row.by ? ` (${row.by})` : ""}`, owner: row.owner || row.by, due: row.due, example: row.example === true, source: "kaizen-board", check: row.result, area: row.area, priority: score >= 5 ? "High" : "Medium" });
         const link = el("a", "inline-link", tx("Open the Action Tracker"));
         link.href = window.ActionsStore.trackerUrl().href;

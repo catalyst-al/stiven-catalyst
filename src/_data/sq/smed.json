@@ -45,7 +45,7 @@
   ],
   "steps": [
     { "title": "Vëzhgo dhe regjistro", "what": "Mat një ndërrim të vërtetë, nga copa e fundit e mirë e produktit të vjetër te copa e parë e mirë e produktit të ri. Çdo xhiro mbyll një element. Shkruaj çfarë ndodhi, jo çfarë duhej të ndodhte.", "tip": "Filmoje nëse ekipi pajtohet: një video tregon ecjet dhe kërkimet që kronometri i humbet." },
-    { "title": "Ndaj të brendshmen nga e jashtmja", "what": "Shëno çdo element: i brendshëm nëse bëhet vetëm me makinën të ndalur, i jashtëm nëse mund të bëhet ndërsa makina punon. Që sot bëhet me makinën të ndalur nuk e bën elementin të brendshëm.", "tip": "Vetëm ndarja zakonisht e ul kohën e brendshme me 30 deri 50 % (Shingo): marrja dhe kontrolli kalojnë para ndalesës." },
+    { "title": "Ndaj të brendshmen nga e jashtmja", "what": "Shëno çdo element: i brendshëm nëse bëhet vetëm me makinën të ndalur, i jashtëm nëse mund të bëhet ndërsa makina punon. Që sot bëhet me makinën të ndalur nuk e bën elementin të brendshëm.", "tip": "Vetëm ndarja zakonisht e ul kohën e brendshme me 30 deri 50% (Shingo): marrja dhe kontrolli kalojnë para ndalesës." },
     { "title": "Shndërro të brendshmen në të jashtme", "what": "Shiko përsëri çdo element të brendshëm dhe pyet çfarë do ta lejonte të bëhej ndërsa makina punon: ngrohja paraprake, përgatitja, paramontimi, njësimi i pjesëve që prekin makinën.", "tip": "Shiko për çfarë shërben elementi, jo mënyrën si bëhet sot." },
     { "title": "Thjeshto të dyja", "what": "Shkurto atë që mbetet e brendshme (shtrëngim i shpejtë, kunja pozicionimi, pa korrigjime, dy veta paralelisht) dhe edhe punën e jashtme (vendosje te vendi i përdorimit, lista kontrolli). Jepi çdo elementi kohën e planifikuar pas ndryshimit dhe personin që e bën.", "tip": "Korrigjimet janë fitimi më i madh: hiq nevojën për to, në vend që t'i bësh më shpejt." },
     { "title": "Standardizo", "what": "Shkruaje ndërrimin e ri si standard: çfarë bëhet para ndalesës, me makinën të ndalur dhe pas rinisjes, nga kush, për sa kohë dhe me cilin kontroll. Trajno ekipin dhe mat ndërrimin e ardhshëm kundrejt tij.", "tip": "Standardi është baza e raundit tjetër: mat përsëri një ndërrim pas një muaji." }
@@ -61,7 +61,7 @@
       "question": "Çfarë mori apo kërkoi dikush ndërsa makina ishte e ndalur?"
     },
     "mount": {
-      "meaning": "Pjesët ende hiqen dhe vendosen me dorë, vidë pas vide. Shingo gjeti këtu vetëm rreth 5 % të një ndërrimi tradicional; më shumë do të thotë që shtrëngimet janë të ngadalta.",
+      "meaning": "Pjesët ende hiqen dhe vendosen me dorë, vidë pas vide. Shingo gjeti këtu vetëm rreth 5% të një ndërrimi tradicional; më shumë do të thotë që shtrëngimet janë të ngadalta.",
       "moves": [
         "Zëvendëso bulonat me kapëse me një rrotullim ose një lëvizje; një bulon që vetëm lirohet merr një vrimë në formë U.",
         "Jepu pjesëve kunja pozicionimi dhe një lartësi, që të vendosen vetëm në një pozicion.",

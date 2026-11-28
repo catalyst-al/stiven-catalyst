@@ -1,0 +1,49 @@
+## andon.json 15
+  $.advice.quality.moves[0] | Jepini | Jepini përgjegjësit të ekipit rregulla të qarta për të vendosur në vend: foto, zonë e bllokuar, lirim.
+  $.advice.quality.moves[1] | Vendosini | Vendosini dyshimet më të shpeshta në një mësim me një pikë, me foto të së mirës dhe të së keqes.
+  $.advice.quality.moves[2] | Kthejini | Kthejini defektet e konfirmuara te pranimi i mallit ose te furnitori po atë ditë.
+  $.advice.material.moves[0] | Caktoni | Caktoni një minimum në çdo vend mbledhjeje dhe rimbusheni te minimumi, jo kur është bosh.
+  $.advice.material.moves[2] | Mbajini | Mbajini etiketat, paletat dhe materialin e paketimit me kanban, me një pikë porositjeje që duket.
+  $.advice.machine.moves[0] | Listoni | Listoni defektet që përsëriten sipas pajisjes dhe kontrolloni shkakun e më të shpeshtit me mirëmbajtjen.
+  $.advice.machine.moves[1] | Shtoni | Shtoni kontrollet e para në fillim të turnit: karikuesit, sensorët e rripit, kokat e printerit.
+  $.advice.machine.moves[2] | Mbajini | Mbajini pjesët e këmbimit për tre defektet më të shpeshta te linja, me një stok minimal.
+  $.advice.people.moves[0] | Kontrolloni | Kontrolloni matricën e aftësive për stacionet me më shumë thirrje dhe trajnoni një person të dytë.
+  $.advice.people.moves[1] | Planifikoni | Planifikoni pushimet dhe personelin sipas orëve kur thirrjet janë më të shumta.
+  $.advice.it.moves[2] | Shkruani | Shkruani një plan rezervë prej një faqeje për kur WMS nuk punon: listë mbledhjeje në letër, etiketa me dorë.
+  $.advice.other.moves[0] | Lexoni | Lexoni shënimet e këtyre thirrjeve dhe grupojini.
+  $.advice.other.moves[1] | Shtoni | Shtoni një kategori kur një grup vazhdon të kthehet.
+  $.advice.default.moves[0] | Lexoni | Lexoni shënimet e thirrjeve për këtë arsye dhe grupojini.
+  $.advice.default.moves[2] | Kontrolloni | Kontrolloni pas dy javësh nëse thirrjet për këtë arsye janë ulur.
+## fiveSAudit.json 1
+  $.tips[5][0] | Planifikoni | Planifikoni auditet.
+## guestComplaints.json 10
+## hoshinKanri.json 1
+## lostFound.json 5
+## riskAssessment.json 1
+## roomInspection.json 2
+  $.text.inspectorPlaceholder | juaj | Emri juaj
+  $.tips[4][0] | juaj | Lista juaj e kontrollit.
+## ui.json 22
+  $.Handovers are stored in this browser. They leave it only when you co | kur i kopjoni | Dorëzimet ruhen në këtë shfletues. Ato largohen prej tij vetëm kur i kopjoni, i printoni, i ruani ose i dërgoni, ose si kopje e enkriptuar nëse ekipi 
+  $.Enter the date and what changed. | Shkruani | Shkruani datën dhe çfarë ndryshoi.
+  $.Not enough days for a trend. Choose Day, or a longer period. | Zgjidhni | Nuk ka mjaft ditë për një ecuri. Zgjidhni Dita ose një periudhë më të gjatë.
+  $.Choose a {cause}, {stage} or {shift} in the lists below to see only  | Zgjidhni | Zgjidhni në listat më poshtë një vlerë për {cause}, {stage} ose {shift}, që të shihni vetëm regjistrimet e saj këtu dhe në regjistër.
+  $.Choose a reason or a shift in the lists below to see only its routes | Zgjidhni | Zgjidhni në listat më poshtë një arsye ose një turn, që të shihni vetëm linjat e tij këtu dhe në regjistër.
+  $.A new standard, a new layout, a new team: mark the day it started, a | që të shihni | Një standard i ri, një paraqitje e re, një ekip i ri: shënoni ditën kur filloi. Grafikët tregojnë aty një vijë, që të shihni nëse shifrat lëvizën pas 
+  $.Your own copy is ready: edit its questions below. | juaj | Kopja juaj është gati: ndryshoni pyetjet më poshtë.
+  $.Own checklists | tuaja | Listat tuaja të kontrollit
+  $.Name the area to plan it. | Shkruani | Shkruani zonën për ta planifikuar.
+  $.Team started. Give the code to your team now: it is shown only this  | tuaj | Ekipi u krijua. Jepjani kodin ekipit tuaj tani: ai shfaqet vetëm këtë herë.
+  $.Check these words of the code: {words}. | Kontrolloni | Kontrolloni këto fjalë të kodit: {words}.
+  $.No team uses this code. Check the words, or start a team. | Kontrolloni | Asnjë ekip nuk e përdor këtë kod. Kontrolloni fjalët ose krijoni një ekip.
+  $.No connection: your work is safe here; it will sync later. | juaj | Nuk ka lidhje: puna juaj është e sigurt këtu dhe do të sinkronizohet më vonë.
+  $.The sync did not go through (error {code}). Your work is safe here. | juaj | Sinkronizimi nuk u krye (gabim {code}). Puna juaj është e sigurt këtu.
+  $.Share the tools you choose with your team: every device keeps workin | tuaj | Ndani me ekipin tuaj mjetet që zgjidhni: çdo pajisje vazhdon të punojë edhe pa lidhje dhe sinkronizohet kur mundet. Puna enkriptohet në këtë pajisje m
+  $.Your team code | tuaj | Kodi i ekipit tuaj
+  $.On another device, open this box and scan the code or type the six w | tuaj | Në një pajisje tjetër, hapni këtë kuti dhe skanoni kodin ose shkruani gjashtë fjalët te “Bashkohu me një ekip”. Jepjani vetëm ekipit tuaj: kushdo që e
+  $.Unticking a tool stops this device sharing it; what the team already | juaj | Kur hiqni shenjën nga një mjet, kjo pajisje nuk e ndan më; ajo që ekipi e ka tashmë mbetet. Mjetet e karrierës, rafti juaj, leximi dhe coaching-u janë
+  $.If your team changed its code, leave the team on this device and joi | juaj | Nëse ekipi juaj e ndryshoi kodin, largohuni nga ekipi në këtë pajisje dhe bashkohuni përsëri me kodin e ri.
+  $.If your team changed its code, ask for a new read-only code. | juaj | Nëse ekipi juaj e ndryshoi kodin, kërkoni një kod të ri vetëm për lexim.
+  $.Unticking a tool stops this device taking the team's version of it;  | juaj | Kur hiqni shenjën nga një mjet, kjo pajisje nuk merr më versionin e ekipit për të; puna këtu mbetet ashtu siç është. Mjetet e karrierës, rafti juaj, l
+  $.On another device, open this box and scan the code or type the six w | tuaj | Në një pajisje tjetër, hapni këtë kuti dhe skanoni kodin ose shkruani gjashtë fjalët te “Bashkohu me një ekip”. Jepjani vetëm ekipit tuaj: kushdo që e
+## wasteLog.json 1

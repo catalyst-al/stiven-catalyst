@@ -258,10 +258,11 @@ test('the board\'s own lines are in its data file, the same in every language, a
     assert.deepEqual(d.rules, RULES, `${lang} rules`);
     const q = d.letters.find((l) => l.key === 'Q');
     const dl = d.letters.find((l) => l.key === 'D');
-    assert.match(q.red, new RegExp(`${RULES.roomRed} %`), `${lang}: the red line of Room Inspection is written out`);
+    // Albanian writes the percent sign without the space (tool-kit.js, pct), as the board's own numbers do.
+    assert.match(q.red, new RegExp(`${RULES.roomRed}${lang === 'sq' ? '' : ' '}%`), `${lang}: the red line of Room Inspection is written out`);
     assert.match(dl.red, new RegExp(`${RULES.downtimeRed} `), `${lang}: the downtime line is written out`);
     const tips = d.tips.map((tip) => tip.join(' ')).join(' ');
-    assert.match(tips, new RegExp(`${RULES.roomRed} %`), `${lang}: the tips explain the room line`);
+    assert.match(tips, new RegExp(`${RULES.roomRed}${lang === 'sq' ? '' : ' '}%`), `${lang}: the tips explain the room line`);
     assert.match(tips, new RegExp(`${RULES.downtimeRed} `), `${lang}: and the downtime line`);
   }
   assert.match(data.en.letters[1].sources, /Room Inspection/);

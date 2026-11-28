@@ -1741,7 +1741,7 @@
   "{n} essays": "{n} Essays",
   "The last essay of the series.": "Der letzte Essay der Reihe.",
   "Start again with essay 1": "Noch einmal mit Essay 1 beginnen",
-  "Feedback": "Feedback",
+  "Feedback": "Rückmeldung",
   "Did this tool help you?": "Hat Ihnen dieses Tool geholfen?",
   "Yes": "Ja",
   "No": "Nein",
@@ -2195,7 +2195,7 @@
   "Not the newest, but three that show the work with its evidence and its limits.": "Nicht die neuesten, sondern drei, die die Arbeit mit ihren Belegen und ihren Grenzen zeigen.",
   "Why this one": "Warum dieser",
   "Everything I write": "Alles, was ich schreibe",
-  "Four ways in: the longer essays, the same essays by the problem you face, the personal reflections and the short notes from the floor.": "Vier Wege hinein: die längeren Essays, dieselben Essays nach dem Problem, vor dem du stehst, die persönlichen Reflexionen und die kurzen Notizen aus dem Betrieb.",
+  "Four ways in: the longer essays, the same essays by the problem you face, the personal reflections and the short notes from the floor.": "Vier Wege hinein: die längeren Essays, dieselben Essays nach dem Problem, vor dem Sie stehen, die persönlichen Reflexionen und die kurzen Notizen aus dem Betrieb.",
   "{n} situations": "{n} Situationen",
   "{n} reflections": "{n} Reflexionen",
   "{n} notes": "{n} Notizen",
@@ -7957,5 +7957,11 @@
   "[The rest did not fit in the mail link: use “Copy message” on the page.]": "[Der Rest passte nicht in den Mail-Link: Verwenden Sie „Nachricht kopieren“ auf der Seite.]",
   "Translation": "Übersetzung",
   "with AI assistance": "mit KI-Unterstützung",
-  "revised by the author": "vom Autor durchgesehen"
+  "revised by the author": "vom Autor durchgesehen",
+  "{n} day here": "seit {n} Tag hier",
+  "{n} audit": "{n} Audit",
+  "{n} failure mode": "{n} Fehlerart",
+  "{n} inspection": "{n} Kontrolle",
+  "{n} element": "{n} Element",
+  "{n} waste": "{n} Verschwendung"
 }

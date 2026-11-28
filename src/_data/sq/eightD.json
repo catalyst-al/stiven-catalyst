@@ -67,7 +67,7 @@
     "person": "Emri, funksioni",
     "eraText": "p.sh. Asnjë kafaz me rrota i linjës nuk niset pa kontroll; klienti merret në telefon sot.",
     "statement": "Një ose dy fjali: çfarë nuk shkon me çfarë, ku, që kur dhe sa. Pa shkak, pa faj.",
-    "containment": "p.sh. Skanim 100 % i çdo kafazi me rrota të linjës para ngarkimit",
+    "containment": "p.sh. Skanim 100% i çdo kafazi me rrota të linjës para ngarkimit",
     "verification": "p.sh. 0 rreshta të gabuar në kontrollin e pranimit te klienti që nga",
     "cleanMark": "p.sh. Pikë jeshile në etiketën e çdo kafazi të kontrolluar",
     "occurrence": "Pse ndodhi? Shkaku në proces që, kur është i pranishëm, e shfaq problemin.",
@@ -130,24 +130,24 @@
     "d2": {
       "w": {
         "what": "Dyqanet marrin një variant të gabuar të artikullit të porositur: një madhësi ose shije tjetër të së njëjtës linjë produkti, p.sh. 1 l në vend të 0,5 l të së njëjtës pije.",
-        "why": "Artikulli i porositur mungon në raft dhe një tjetër është tepër. Klienti faturon 15 € për çdo rresht të gabuar (2.160 € në pesë ditë) dhe 99,5 % rreshta të saktë që janë rënë dakord nuk arrihen.",
+        "why": "Artikulli i porositur mungon në raft dhe një tjetër është tepër. Klienti faturon 15 € për çdo rresht të gabuar (2.160 € në pesë ditë) dhe 99,5% rreshta të saktë që janë rënë dakord nuk arrihen.",
         "where": "Linja R7, 12 dyqanet e klientit në rajonin verior. Rreshtat mblidhen në zonën C të qendrës së shpërndarjes.",
         "when": "Që nga rivendosja e artikujve në zonën C, një javë para ankesës, në të dy turnet. U gjet në kontrollin e pranimit të klientit.",
         "who": "E gjetën ekipet e dyqaneve dhe kontrolli i pranimit të klientit; ankesa i erdhi menaxheres sonë të klientit.",
         "how": "Mbledhësi konfirmon shifrën e kontrollit të vendit dhe merr variantin e ngjashëm nga vendi fqinj. Kontrolli në nisje numëron kafazet dhe etiketat e dyqaneve, jo artikujt.",
-        "howMany": "144 nga 4.800 rreshta (3,0 %) në pesë ditë dorëzimi në R7; linjat e tjera 0,2 % (42 nga 21.000)."
+        "howMany": "144 nga 4.800 rreshta (3,0%) në pesë ditë dorëzimi në R7; linjat e tjera 0,2% (42 nga 21.000)."
       },
       "isNot": {
         "what": { "is": "Një variant i gabuar i artikullit të porositur (madhësi ose shije tjetër, e njëjta linjë produkti)", "isNot": "Rreshta që mungojnë, mall i dëmtuar, sasi të gabuara, artikuj të një linje tjetër", "diff": "Variante të ngjashme me të njëjtën ngjyrë etikete" },
-        "where": { "is": "Linja R7, 12 dyqane; rreshta të mbledhur në zonën C", "isNot": "Linjat e tjera (0,2 %); zonat A, B dhe D", "diff": "Vetëm dyqanet e R7 porositin të dy variantet (gamë rajonale); zona C u rivendos" },
-        "when": { "is": "Që nga rivendosja e zonës C, në të dy turnet", "isNot": "Para rivendosjes (edhe R7 në 0,2 %)", "diff": "Rivendosja i vuri variantet e ngjashme në vende fqinje" },
-        "extent": { "is": "144 nga 4.800 rreshta (3,0 %), i qëndrueshëm nga dita në ditë; 9 çifte të ngjashme", "isNot": "Nuk po rritet; jo artikujt e tjerë të zonës C", "diff": "9 çiftet janë krah për krah që nga rivendosja" }
+        "where": { "is": "Linja R7, 12 dyqane; rreshta të mbledhur në zonën C", "isNot": "Linjat e tjera (0,2%); zonat A, B dhe D", "diff": "Vetëm dyqanet e R7 porositin të dy variantet (gamë rajonale); zona C u rivendos" },
+        "when": { "is": "Që nga rivendosja e zonës C, në të dy turnet", "isNot": "Para rivendosjes (edhe R7 në 0,2%)", "diff": "Rivendosja i vuri variantet e ngjashme në vende fqinje" },
+        "extent": { "is": "144 nga 4.800 rreshta (3,0%), i qëndrueshëm nga dita në ditë; 9 çifte të ngjashme", "isNot": "Nuk po rritet; jo artikujt e tjerë të zonës C", "diff": "9 çiftet janë krah për krah që nga rivendosja" }
       },
-      "statement": "Që nga rivendosja e zonës C, 3,0 % e rreshtave të porosive që dorëzohen në linjën R7 te 12 dyqanet e klientit janë një variant i gabuar i artikullit të porositur (144 nga 4.800 rreshta në pesë ditë dorëzimi), kundrejt 0,2 % në linjat e tjera."
+      "statement": "Që nga rivendosja e zonës C, 3,0% e rreshtave të porosive që dorëzohen në linjën R7 te 12 dyqanet e klientit janë një variant i gabuar i artikullit të porositur (144 nga 4.800 rreshta në pesë ditë dorëzimi), kundrejt 0,2% në linjat e tjera."
     },
     "d3": {
       "actions": [
-        { "text": "Skanim 100 % i artikujve të çdo kafazi të R7 në nisje para ngarkimit; rreshtat e gabuar korrigjohen në vend", "owner": "Jonas B.", "date": -38, "where": "warehouse", "sorted": "2880", "found": "84", "verified": "84 rreshta të gabuar u korrigjuan në tri ditët e para; një rikontroll i 200 rreshtave të skanuar nuk gjeti asnjë", "status": "done" },
+        { "text": "Skanim 100% i artikujve të çdo kafazi të R7 në nisje para ngarkimit; rreshtat e gabuar korrigjohen në vend", "owner": "Jonas B.", "date": -38, "where": "warehouse", "sorted": "2880", "found": "84", "verified": "84 rreshta të gabuar u korrigjuan në tri ditët e para; një rikontroll i 200 rreshtave të skanuar nuk gjeti asnjë", "status": "done" },
         { "text": "Kontrollo dy kamionët e R7 që ishin tashmë në rrugë kur mbërrijnë në dyqan dhe zëvendëso rreshtat e gabuar", "owner": "Sara K.", "date": -38, "where": "transit", "sorted": "960", "found": "31", "verified": "Të 31 u zëvendësuan po atë ditë; ekipet e dyqaneve e konfirmuan me email", "status": "done" },
         { "text": "Rinumëro me dyqanet dorëzimet e pesë ditëve të fundit; një dorëzim zëvendësimi për rreshtat e gabuar", "owner": "Sara K.", "date": -37, "where": "customer", "sorted": "4800", "found": "144", "verified": "144 rreshta u zëvendësuan në një dorëzim; nota e kreditit e klientit përputhet me 144", "status": "done" }
       ],
@@ -155,28 +155,28 @@
       "cleanMark": "Pikë jeshile në etiketën e çdo kafazi të skanuar; kontrolli i pranimit të klientit gjeti 0 rreshta të gabuar në R7 që nga dorëzimi i parë me pikë jeshile."
     },
     "d4": {
-      "occurrence": { "text": "Rivendosja e zonës C i vuri variantet e ngjashme të të njëjtit artikull (e njëjta ngjyrë etikete, madhësi 0,5 l dhe 1 l) në vende fqinje: 9 çifte. Vetëm dyqanet e R7 porositin të dy variantet, prandaj preken vetëm rreshtat e R7.", "verified": true, "how": "U ndez dhe u fik në një provë mbledhjeje: 400 mbledhje nga vendet fqinje të ngjashme, 11 të gabuara (2,75 %); të njëjtat 400 mbledhje me variantet tri vende larg, 0 të gabuara." },
+      "occurrence": { "text": "Rivendosja e zonës C i vuri variantet e ngjashme të të njëjtit artikull (e njëjta ngjyrë etikete, madhësi 0,5 l dhe 1 l) në vende fqinje: 9 çifte. Vetëm dyqanet e R7 porositin të dy variantet, prandaj preken vetëm rreshtat e R7.", "verified": true, "how": "U ndez dhe u fik në një provë mbledhjeje: 400 mbledhje nga vendet fqinje të ngjashme, 11 të gabuara (2,75%); të njëjtat 400 mbledhje me variantet tri vende larg, 0 të gabuara." },
       "escape": { "point": "Konfirmimi i mbledhjes në zonën C, pastaj kontrolli në nisje", "text": "Mbledhja konfirmohet vetëm me shifrën e kontrollit të vendit, jo me barkodin e artikullit; kontrolli në nisje numëron kafazet dhe etiketat, jo artikujt. Një variant i gabuar nga vendi i duhur kalon të dy kontrollet.", "verified": true, "how": "Në provë të 11 mbledhjet e gabuara kaluan shifrën e kontrollit dhe kontrollin në nisje; me skanimin e artikullit (EAN) në mbledhje, të 11 u ndalën." },
       "notes": "Kurrizi i peshkut me turnin e pasdites: Metoda (asnjë rregull vendosjeje për artikujt e ngjashëm), Materiali (e njëjta ngjyrë etikete), Matja (shifra e kontrollit, jo artikulli). 5 Whys: variant i gabuar, sepse vendi fqinj, sepse rivendosja vetëm sipas shpejtësisë së shitjes, sepse asnjë rregull për artikujt e ngjashëm."
     },
     "d5": {
       "actions": [
         { "text": "Rivendos zonën C: variantet e ngjashme të paktën tri vende larg dhe në nivele të ndryshme; rregulli u shtua në kontrollin e vendosjes në WMS", "addresses": "occurrence", "owner": "Elena P.", "due": -27, "verification": "Provë mbledhjeje: 0 gabime në 400 mbledhje", "verified": true, "status": "done" },
-        { "text": "Konfirmo çdo mbledhje në zonën C me skanimin e artikullit (EAN) në vend të shifrës së kontrollit të vendit", "addresses": "escape", "owner": "Tom W.", "due": -25, "verification": "Provë: 11 nga 11 mbledhje të gabuara u ndalën; ritmi i mbledhjes −2 %, i pranuar", "verified": true, "status": "done" }
+        { "text": "Konfirmo çdo mbledhje në zonën C me skanimin e artikullit (EAN) në vend të shifrës së kontrollit të vendit", "addresses": "escape", "owner": "Tom W.", "due": -25, "verification": "Provë: 11 nga 11 mbledhje të gabuara u ndalën; ritmi i mbledhjes −2%, i pranuar", "verified": true, "status": "done" }
       ]
     },
     "d6": {
       "actions": [
         { "text": "Zona C u rivendos, 9 çiftet e ngjashme u ndanë", "owner": "Elena P.", "due": -27, "status": "done" },
         { "text": "Skanimi EAN në mbledhje aktiv në zonën C në të gjitha turnet", "owner": "Tom W.", "due": -25, "status": "done" },
-        { "text": "Ndalo skanimin 100 % në nisje për R7 pas dy javësh pa gabime", "owner": "Jonas B.", "due": -10, "status": "done" }
+        { "text": "Ndalo skanimin 100% në nisje për R7 pas dy javësh pa gabime", "owner": "Jonas B.", "due": -10, "status": "done" }
       ],
       "beforeBad": "144",
       "beforeTotal": "4800",
       "afterBad": "9",
       "afterTotal": "9600",
       "period": "Dy javë pasi nisi skanimi EAN, matur te skanimi në nisje",
-      "result": "Rreshtat e gabuar në R7 ranë nga 3,0 % në 0,09 % (9 nga 9.600), nën 0,2 % të linjave të tjera. Kontrolli i pranimit të klientit nuk gjeti asnjë.",
+      "result": "Rreshtat e gabuar në R7 ranë nga 3,0% në 0,09% (9 nga 9.600), nën 0,2% të linjave të tjera. Kontrolli i pranimit të klientit nuk gjeti asnjë.",
       "containmentRemoved": -10
     },
     "d7": {

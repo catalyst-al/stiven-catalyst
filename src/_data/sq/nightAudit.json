@@ -98,7 +98,7 @@
       "meaning": "Një përjashtim që gjendet te rezervimi ka lindur para se mysafiri të mbërrinte: një tarifë, një datë ose një garanci ishte gabim në rezervim dhe askush nuk e lexoi para natës.",
       "moves": [
         "Kontrollo mbërritjet e nesërme gjatë turnit të pasdites: tarifën, garancinë, kërkesat e veçanta, dhe rregullo çfarë është gabim sa burimi i rezervimit ende arrihet.",
-        "Mbaji veç në regjistër „mbërriti me rezervim të gabuar“ dhe „u rezervua gabim këtu“, që kanalit ose agjentit që dërgon gabimet t'i tregohen numrat e tij.",
+        "Mbaji veç në regjistër “mbërriti me rezervim të gabuar” dhe “u rezervua gabim këtu”, që kanalit ose agjentit që dërgon gabimet t'i tregohen numrat e tij.",
         "Ndaji gabimet e rezervimit me rezervimet dhe shitjet çdo javë, me numrat e rezervimeve."
       ],
       "question": "Kush i lexon mbërritjet e nesërme para natës, dhe çfarë kontrollon?"
@@ -108,7 +108,7 @@
       "moves": [
         "Bëji kartën e regjistrimit dhe garancinë me kartë dy hapat e parë të çdo check-in-i, para se të pritet çelësi.",
         "Liroji no-show-et në një orë fikse, me politikën e anulimit të zbatuar njësoj çdo natë.",
-        "Shiko listën e mbërritjeve në fund të turnit të pasdites: çdo mysafir i pritur është ose in-house, ose no-show, ose anulim, kurrë ende „i pritur“."
+        "Shiko listën e mbërritjeve në fund të turnit të pasdites: çdo mysafir i pritur është ose in-house, ose no-show, ose anulim, kurrë ende “i pritur”."
       ],
       "question": "Çfarë bën recepsioni kur një mysafir mbërrin pa kartë të vlefshme në orën e pikut të mbrëmjes?"
     },
@@ -156,11 +156,11 @@
     "Sistemi": "Kodet e tarifave, ndërfaqet dhe vetë auditi dështojnë sipas modeleve. Shkruaj gabimin e saktë dhe dhomën; një furnitor rregullon atë që është dokumentuar.",
     "Mysafiri": "Mysafiri nuk erdhi, nuk pagoi ose kundërshtoi një faturim. Shëno çfarë u ra dakord me të, që turni tjetër të mos e nisë bisedën nga e para.",
     "Trajnimi": "Postimi u bë me dorë dhe u bë gabim. Shikoje hapin një herë bashkë me personin, pastaj rregullo hapin: një listë kontrolli në banak vlen më shumë se një kujtesë në mbledhje.",
-    "E panjohur": "Një pjesë e madhe „E panjohur“ do të thotë se regjistri nuk është ende mjaft i mirë. Shëno hapin dhe shkakun në momentin që gjendet përjashtimi, gjatë auditit."
+    "E panjohur": "Një pjesë e madhe “E panjohur” do të thotë se regjistri nuk është ende mjaft i mirë. Shëno hapin dhe shkakun në momentin që gjendet përjashtimi, gjatë auditit."
   },
   "checklist": [
     "Mbërritjet e nesërme u kontrolluan në mbrëmje: tarifa, garancia dhe kërkesat e veçanta.",
-    "Çdo mysafir i pritur është in-house, no-show ose anulim; askush nuk është ende „i pritur“.",
+    "Çdo mysafir i pritur është in-house, no-show ose anulim; askush nuk është ende “i pritur”.",
     "No-show-et u liruan në orën e rënë dakord, me politikën e anulimit të zbatuar njësoj.",
     "Çdo dhomë e zënë ka një kod tarife të vlefshëm dhe një kartë regjistrimi në dosje.",
     "Çdo kartë u para-autorizua në check-in dhe autorizimi është në rezervim.",

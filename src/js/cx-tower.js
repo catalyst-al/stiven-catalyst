@@ -2396,7 +2396,8 @@
     const causes = signals.records.length ? causeAnalysis(signals.records, "Root_Cause_Category").items.slice(0, 8) : [];
     if (causes.length) { lines.push("", `## ${tx("Recorded root causes (a classification, not proof)")}`); causes.forEach((item) => lines.push(`- ${item.key}: ${int.format(item.amount)}`)); }
     lines.push("", `## ${tx("Investigation")}${state.caseId ? ` ${state.caseId}` : ""}`);
-    CASE_FORM.forEach(([field, label]) => lines.push(`- ${label}: ${String(state.draft[field] || "").trim() || tx("not entered")}`));
+    // The stage and the state of the root cause are kept in English; the summary names them in the page's language.
+    CASE_FORM.forEach(([field, label]) => lines.push(`- ${label}: ${CASE_TEXT[state.draft[field]] ?? (String(state.draft[field] || "").trim() || tx("not entered"))}`));
     lines.push("", `## ${tx("Rules")}`, `- ${tx("A cause stays a hypothesis until the process and the records confirm it.")}`, `- ${tx("Incident counts and failure counts have different denominators.")}`, `- ${tx("A small sample is not evidence for escalation.")}`, "", `${tx("Generated")}: ${showDate(window.ToolKit.today())}`);
     return lines.join("\n");
   };
