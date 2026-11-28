@@ -3811,6 +3811,11 @@ select.sh-in { cursor: pointer; }
 .cv-steps strong { font-size: 15px; line-height: 1.25; }
 @media (max-width: 640px) { .cv-steps a { flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px; } .cv-steps strong { font-size: 13px; } }
 @media print { .cv-steps { display: none !important; } }
+/* A field in a column of the two-column grid is never wider than its column: a long hint beside the label
+   ("personal needs, fatigue, unavoidable delay", kept on one line elsewhere) wraps instead of pushing the page
+   sideways on a phone (Time Study at 390 px, in every language). */
+.dl-grid .field { grid-template-columns: minmax(0, 1fr); }
+.dl-grid .field label .optional { white-space: normal; }
 /* Search and filters */
 html:not(.js) .filter-bar { display: none; }
 .filter-bar {
@@ -8400,6 +8405,8 @@ a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var
 /* Beside "All essays" / "All reflections": the other kind of reading, so the reader can cross over without a list. */
 .essay-series-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-left: auto; }
 .essay-series-links .essay-series-all { margin-left: 0; }
+/* A target of 24 px at least (it measured 22.8). */
+.essay-series-all { display: inline-block; min-height: 24px; }
 
 @media (max-width: 900px) {
   .article-aside { display: none; }
@@ -12278,7 +12285,7 @@ td > .fc-row-photos { margin-left: 8px; }
 .work-backup-copy .sg .sg-full-text { margin: 0; color: var(--ink); font-weight: 700; }
 .sg-points { display: grid; gap: 8px; justify-items: start; }
 .sg-points-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
-.sg-toggle, .sg-make { padding: 0; font-size: inherit; }
+.sg-toggle, .sg-make { min-height: 24px; padding: 0; font-size: inherit; }
 .sg-list { display: grid; gap: 8px; width: 100%; margin: 0; padding: 0; list-style: none; }
 .sg-point { display: grid; gap: 4px; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper-2); }
 .sg-point-head { margin: 0; color: var(--muted); font-variant-numeric: tabular-nums; }

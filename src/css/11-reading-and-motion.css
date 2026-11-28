@@ -566,6 +566,8 @@ a.essay-series-next:hover, a.essay-series-next:focus-visible { border-color: var
 /* Beside "All essays" / "All reflections": the other kind of reading, so the reader can cross over without a list. */
 .essay-series-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-left: auto; }
 .essay-series-links .essay-series-all { margin-left: 0; }
+/* A target of 24 px at least (it measured 22.8). */
+.essay-series-all { display: inline-block; min-height: 24px; }
 
 @media (max-width: 900px) {
   .article-aside { display: none; }

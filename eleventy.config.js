@@ -130,16 +130,40 @@ export default function (eleventyConfig) {
   // tables, such as the KPI names of the CX Control Tower). Texts used only in templates are already in the HTML.
   const scriptSource = () => fs.readdirSync("src/js").filter((file) => file.endsWith(".js"))
     .map((file) => fs.readFileSync(`src/js/${file}`, "utf8")).join("\n");
-  const inScripts = (source, text) => source.includes(JSON.stringify(text))
-    || source.includes(`'${text.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'`)
-    || source.includes(`\`${text}\``);
+  // A text is in the scripts when it stands there whole between quotes of one kind. Looking for each of 8 000 texts
+  // three times in 4 MB of source took 32 of the build's 72 seconds, so the starts of everything that follows a quote
+  // are gathered once (the first 16 characters, or fewer for a shorter text): a text whose start is not among them is
+  // not in the scripts, and only the others are looked for whole. The answer is the same as before.
+  const START = 16;
+  const startsAfter = (source, quote) => {
+    const sets = Array.from({ length: START + 1 }, () => new Set());
+    for (let at = source.indexOf(quote); at >= 0; at = source.indexOf(quote, at + 1)) {
+      for (let n = 1; n <= START; n++) sets[n].add(source.slice(at + 1, at + 1 + n));
+    }
+    return sets;
+  };
+  const scriptIndex = (source) => ({ source, known: new Map(), starts: { '"': startsAfter(source, '"'), "'": startsAfter(source, "'"), "`": startsAfter(source, "`") } });
+  const quotedIn = ({ source, starts }, quote, inner) => {
+    if (inner.length && !starts[quote][Math.min(inner.length, START)].has(inner.slice(0, START))) return false;
+    return source.includes(`${quote}${inner}${quote}`);
+  };
+  // The answer for a text is kept: the German and the Albanian texts have the same English keys.
+  const inScripts = (index, text) => {
+    if (!index.known.has(text)) {
+      index.known.set(text, quotedIn(index, '"', JSON.stringify(text).slice(1, -1))
+        || quotedIn(index, "'", text.replace(/\\/g, "\\\\").replace(/'/g, "\\'"))
+        || quotedIn(index, "`", text));
+    }
+    return index.known.get(text);
+  };
   const scriptStringsCache = new Map();
-  eleventyConfig.on("eleventy.before", () => scriptStringsCache.clear());
+  let scriptIndexCache = null;
+  eleventyConfig.on("eleventy.before", () => { scriptStringsCache.clear(); scriptIndexCache = null; });
   const scriptStrings = (lang) => {
     if (!TRANSLATED.has(lang)) return {};
     if (!scriptStringsCache.has(lang)) {
-      const source = scriptSource();
-      scriptStringsCache.set(lang, Object.fromEntries(Object.entries(readUi(lang)).filter(([text]) => inScripts(source, text))));
+      scriptIndexCache = scriptIndexCache || scriptIndex(scriptSource());
+      scriptStringsCache.set(lang, Object.fromEntries(Object.entries(readUi(lang)).filter(([text]) => inScripts(scriptIndexCache, text))));
     }
     return scriptStringsCache.get(lang);
   };

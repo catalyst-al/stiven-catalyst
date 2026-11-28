@@ -217,6 +217,40 @@
     node.textContent = new Date().getFullYear();
   });
 
+  // A box that scrolls sideways (a wide table, a chart on a phone, a sheet of the Print Pack) and holds nothing a key
+  // can reach gets a place in the tab order, so the arrow keys scroll it for someone without a mouse or a touch
+  // screen; it gives the place back once it no longer scrolls. Charts and tables are drawn after the page loads, so
+  // the boxes are looked for again when the page changes.
+  const SCROLL_BOXES = ".ck-scroll, .dl-table-wrap, .pk-sheet";
+  const REACHABLE = "a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex='-1'])";
+  const reachBoxes = () => {
+    document.querySelectorAll(SCROLL_BOXES).forEach((box) => {
+      const needs = box.scrollWidth > box.clientWidth + 1 && ![...box.querySelectorAll(REACHABLE)].some((node) => node !== box);
+      if (needs && !box.hasAttribute("tabindex")) {
+        box.tabIndex = 0;
+        box.dataset.scrollReach = "";
+        const name = (box.querySelector("caption") || box.closest("figure")?.querySelector("figcaption") || box.querySelector("svg title"))?.textContent.trim().replace(/\s+/g, " ")
+          || box.querySelector("svg[aria-label]")?.getAttribute("aria-label");
+        if (name && !box.hasAttribute("role")) { box.setAttribute("role", "group"); box.setAttribute("aria-label", name.slice(0, 150)); box.dataset.scrollReach = "named"; }
+      } else if (!needs && "scrollReach" in box.dataset) {
+        if (box.dataset.scrollReach === "named") { box.removeAttribute("role"); box.removeAttribute("aria-label"); }
+        box.removeAttribute("tabindex");
+        delete box.dataset.scrollReach;
+      }
+    });
+  };
+  if (document.querySelector("main") && "MutationObserver" in window) {
+    let queued = false;
+    const later = () => {
+      if (queued) return;
+      queued = true;
+      (window.requestAnimationFrame || window.setTimeout)(() => { queued = false; reachBoxes(); });
+    };
+    later();
+    new MutationObserver(later).observe(document.querySelector("main"), { childList: true, subtree: true });
+    window.addEventListener("resize", later, { passive: true });
+  }
+
   // The wheel scrolls the page the browser's own way, on the compositor, whatever the page is drawing (audit PM-6: the
   // page used to cancel the wheel and move itself frame by frame, which took a third of a second a notch, and a second
   // on a busy homepage). Links to a place on the page still glide (html { scroll-behavior: smooth }), and the cards and

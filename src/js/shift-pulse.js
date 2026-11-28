@@ -511,7 +511,11 @@
     const safetyLog = logOf("safety-cross");
     const oeeLog = logOf("oee");
     const fiveLog = logOf("five-s-audit");
-    const acts = actions(read("sc-actions", {}), today());
+    // The visitor's own actions: the Action Tracker's example (marked on each action, or by its ids beside a list
+    // saved before the mark) is not work that is open or overdue.
+    const exampleIds = (() => { const ui = read("sc-actions-ui", null); return isObject(ui) && Array.isArray(ui.exampleIds) ? ui.exampleIds : []; })();
+    const ownActions = readOwn("sc-actions", {});
+    const acts = actions(isObject(ownActions) && Array.isArray(ownActions.rows) ? { ...ownActions, rows: ownActions.rows.filter((row) => !exampleIds.includes(row?.id)) } : ownActions, today());
     const saved = (tool) => { const value = readOwn(`sc-${tool}${SUFFIX}`, {}); return isObject(value) ? value : {}; };
     return {
       safety: safetyLog.rows.length ? safety(safetyLog, options) : null,

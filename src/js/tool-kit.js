@@ -1149,8 +1149,10 @@ window.ToolKit = (() => {
   };
 
   // The rows of a paste that are not in the log yet: a row equal to one already there, field for field (its example
-  // mark aside), is left out once for each such row, so a paste of two identical events adds two.
-  const rowKey = (row) => JSON.stringify(Object.keys(row).filter((name) => name !== "example").sort().map((name) => [name, row[name] ?? ""]));
+  // mark aside), is left out once for each such row, so a paste of two identical events adds two. The id is left out
+  // too: Lost & Found and Guest Complaints give every pasted row a new one, so with it no row ever matched and the
+  // same paste, imported twice, doubled the log.
+  const rowKey = (row) => JSON.stringify(Object.keys(row).filter((name) => name !== "example" && name !== "id").sort().map((name) => [name, row[name] ?? ""]));
   const newRows = (rows, added) => {
     const left = new Map();
     ownRows(rows).forEach((row) => { const k = rowKey(row); left.set(k, (left.get(k) || 0) + 1); });
@@ -1423,6 +1425,43 @@ window.ToolKit = (() => {
     unsaved ? tx("{n} could not be saved: this browser's storage is full, blocked or locked.", { n: int.format(unsaved) }) : "",
     example ? tx("The example's actions stay out of your own list.") : "",
   ].filter(Boolean).join(" ") || tx("Nothing new to add.");
+  // The date and the time of an entry form are "now" until someone sets them. A page stays open through a shift: the
+  // fields used to keep the minute the page was opened, so a complaint taken at 14:30 was logged at 08:00 and shown at
+  // once as open for six hours. They follow the clock when the form is entered, when the page comes back to the front
+  // and when the entry is added (fresh()); a field the person changed is left alone. reset(): after an entry, the time
+  // is "now" again for the next one.
+  const keepNow = (entry, { date = null, time = null } = {}) => {
+    // A field still holding what was written here last has not been set by anyone.
+    const written = new Map();
+    const put = (field, value) => {
+      if (!field || (written.has(field) && field.value !== written.get(field))) return;
+      field.value = value;
+      written.set(field, field.value);
+    };
+    const fresh = () => {
+      put(date, today());
+      put(time, new Date().toTimeString().slice(0, 5));
+    };
+    entry.addEventListener("focusin", (event) => { if (event.target !== date && event.target !== time) fresh(); });
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) fresh(); });
+    fresh();
+    return { fresh, reset: () => { written.delete(time); fresh(); } };
+  };
+  // An accidental second tap on "Add" or "Save": the form is valid again the moment an entry is added (its fields keep
+  // their values, or go back to a default), so the second tap logged the entry twice. guard() is true when an entry
+  // was added less than `ms` ago and nothing in the form was changed since; the tool then ignores the tap.
+  const doubleTap = (form, ms = 600) => {
+    let last = -Infinity;
+    let touched = true;
+    ["input", "change"].forEach((type) => form.addEventListener(type, () => { touched = true; }, true));
+    return () => {
+      const now = performance.now();
+      if (!touched && now - last < ms) return true;
+      last = now;
+      touched = false;
+      return false;
+    };
+  };
   // One action (ActionsStore.add) that gave null: why, from ActionsStore.lastAdd.
   const actionRefused = (reason) => tx(reason === "duplicate" ? "Already on the list."
     : reason === "unsaved" ? "The action could not be saved: this browser's storage is full, blocked or locked."
@@ -1629,7 +1668,7 @@ window.ToolKit = (() => {
 
   return {
     LANG, LOCALE, DECIMAL_COMMA, tx, num, showDate, dayMonth, lower,
-    read, write, warnNotSaved, actionsNote, actionRefused, newRows, keepDamaged, fiveSScore, fiveSShare, FIVE_S_COMPLETE, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
+    read, write, warnNotSaved, actionsNote, actionRefused, keepNow, doubleTap, newRows, keepDamaged, fiveSScore, fiveSShare, FIVE_S_COMPLETE, isObject, str, loadState, el, int, euro, pct, plural, capital, today, addDays, recentExample,
     parseNumber, parseDate, parseDateTime, parseRows, canon, sigma, sigmaText,
     inRange, partialRouteLog, periodTotal, rangeText, dateSpan, rangePreset, spanText, rangeControl, logBook, firstVisit, exampleStamp, exampleMatches, exampleNote, isExampleRow, isExampleState, markExample, ownRows, readOwn, resultLayout, otherLogs, cleanVolumes, importVolumes, dayVolumes, mondayOf, shareText,
     panel, stat, barList, trendBuckets, trendShares, trendFigure, chartTooltip, monthYear, monthStart, previousRange, trendTotal, periodChange, changeText, compareText, filterChip, keepFocus, trendControls, trackerUrl, trackerLink, actionHandoff, focusCard, resultActions, copy, flash, undoNote, csvSafe, downloadCsv, downloadXlsx, xlsxFile, zipStore, excelDate, columnName, floorCheck, LOG_LIMIT, shownNote, renderOnPause,

@@ -36,7 +36,11 @@
     try {
       const saved = JSON.parse(storage.getItem(ACTIONS_KEY));
       const rows = saved && typeof saved === "object" && Array.isArray(saved.rows) ? saved.rows : Array.isArray(saved) ? saved : [];
-      return rows.filter((row) => row && typeof row === "object" && !Array.isArray(row));
+      // Without the Action Tracker's example (marked on each action, or by its ids beside a list saved before the
+      // mark, as actions-store.js reads it): an example is never due.
+      let ids = [];
+      try { const ui = JSON.parse(storage.getItem(`${ACTIONS_KEY}-ui`)); ids = ui && typeof ui === "object" && Array.isArray(ui.exampleIds) ? ui.exampleIds : []; } catch { ids = []; }
+      return rows.filter((row) => row && typeof row === "object" && !Array.isArray(row) && row.example !== true && !ids.includes(row.id));
     } catch { return []; }
   };
   // Open actions with a title and a due date, the soonest first, then the older, as the tracker sorts them.

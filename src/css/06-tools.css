@@ -925,3 +925,8 @@ select.sh-in { cursor: pointer; }
 .cv-steps strong { font-size: 15px; line-height: 1.25; }
 @media (max-width: 640px) { .cv-steps a { flex-direction: column; align-items: flex-start; gap: 8px; padding: 10px; } .cv-steps strong { font-size: 13px; } }
 @media print { .cv-steps { display: none !important; } }
+/* A field in a column of the two-column grid is never wider than its column: a long hint beside the label
+   ("personal needs, fatigue, unavoidable delay", kept on one line elsewhere) wraps instead of pushing the page
+   sideways on a phone (Time Study at 390 px, in every language). */
+.dl-grid .field { grid-template-columns: minmax(0, 1fr); }
+.dl-grid .field label .optional { white-space: normal; }

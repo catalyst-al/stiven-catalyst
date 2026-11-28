@@ -215,6 +215,10 @@
 </section>
 
 <script type="application/json" id="shift-handover-data">{{ cfg | scriptJson | safe }}</script>
+{#- The names of the shifts and the priorities in every language, in the same order: a handover written on the German
+    page and opened on the English one (a handover file, or the page's language changed) keeps its shift and its
+    priorities (shift-handover.js, clean). -#}
+<script type="application/json" id="shift-handover-names">{{ { shifts: [shiftHandover.shifts, de.shiftHandover.shifts, sq.shiftHandover.shifts], priorities: [shiftHandover.priorities, de.shiftHandover.priorities, sq.shiftHandover.priorities] } | scriptJson | safe }}</script>
 <script src="{{ '/js/tool-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/pdf-kit.js' | assetUrl }}" defer></script>
 <script src="{{ '/js/shift-handover.js' | assetUrl }}" defer></script>

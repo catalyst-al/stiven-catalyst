@@ -457,7 +457,7 @@
       box.append(grid);
       const remove = el("button", "button-ghost et-remove-meter", tx("Remove meter"));
       remove.type = "button";
-      remove.setAttribute("aria-label", tx("Remove the meter {name}", { name: meter.name }));
+      remove.setAttribute("aria-label", `${tx("Remove meter")}: ${meter.name}`);
       remove.addEventListener("click", () => {
         const count = state.rows.filter((row) => row.meter === meter.id).length;
         if (count && !window.confirm(tx("Remove the meter {name} and its {n} readings?", { name: meter.name, n: int.format(count) }))) return;

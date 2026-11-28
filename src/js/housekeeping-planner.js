@@ -446,7 +446,8 @@
   results.before(exampleBox);
 
   // ---- Room Status in this browser ----
-  const rsRead = () => { const saved = read(RS_KEY, null); return isObject(saved) ? saved : null; };
+  // Read as data: the example board of Room Status, once touched there, is not this hotel's board (ToolKit readOwn).
+  const rsRead = () => { const saved = window.ToolKit.readOwn(RS_KEY, null); return isObject(saved) ? saved : null; };
   const rsRooms = () => { const rs = rsRead(); return rs && Array.isArray(rs.rooms) ? rs.rooms.length : 0; };
   const rsNames = () => { const rs = rsRead(); return rs && Array.isArray(rs.attendants) ? rs.attendants.map((a) => str(a?.name).trim()).filter(Boolean) : []; };
 

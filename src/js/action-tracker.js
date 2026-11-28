@@ -243,7 +243,17 @@
       const patch = Object.fromEntries(Object.entries(fields).map(([name, node]) => [name, node.value]));
       if (!patch.title.trim()) { fields.title.focus(); return; }
       if (pending?.id === a.id && patch.result.trim()) patch.status = pending.status;
-      S.update(a.id, patch);
+      const updated = S.update(a.id, patch);
+      // A verified action keeps its result: with the result emptied the store refuses the whole change. The other
+      // fields are saved all the same, and the form stays open with the note that asks for the result (before, the
+      // form closed and the changes to owner and date were dropped without a word).
+      if (!updated && S.lastUpdate === "needs-result") {
+        S.update(a.id, { ...patch, result: a.result });
+        pending = { id: a.id, status: "verified" };
+        editing = a.id;
+        render();
+        return;
+      }
       if (pending?.id === a.id) pending = null;
       editing = null;
       render();
@@ -286,6 +296,13 @@
     };
     keep(ownerFilter, [...new Set(rows.map((a) => a.owner).filter(Boolean))].sort(), (v) => v, ui.owner);
     keep(sourceFilter, [...new Set(rows.map((a) => a.source || "manual"))].sort(), sourceName, ui.source);
+    // A filter on an owner or a source that no action has any more (the owner was renamed, the last such action
+    // removed) is cleared, not only shown as "All": it used to go on hiding the whole list, across reloads.
+    if ((ui.owner && ownerFilter.value !== ui.owner) || (ui.source && sourceFilter.value !== ui.source)) {
+      ui.owner = ownerFilter.value;
+      ui.source = sourceFilter.value;
+      saveUi();
+    }
     const owners = root.querySelector("#at-owners");
     owners.replaceChildren(...[...new Set(rows.map((a) => a.owner).filter(Boolean))].sort().map((v) => { const o = el("option"); o.value = v; return o; }));
     const areas = root.querySelector("#at-areas");
@@ -399,7 +416,10 @@
     const value = (name) => entry.elements[name]?.value.trim() || "";
     if (!value("title")) { entry.elements.title.focus(); flash(entryStatus, tx("Write the action first.")); return; }
     if (exampleOn()) dropExample();
-    S.add({ title: value("title"), owner: value("owner"), due: value("due"), area: value("area"), priority: entry.elements.priority.value, check: value("check"), detail: value("detail"), source: "manual" });
+    const added = S.add({ title: value("title"), owner: value("owner"), due: value("due"), area: value("area"), priority: entry.elements.priority.value, check: value("check"), detail: value("detail"), source: "manual" });
+    // Refused (the same action is already open, or the browser could not save): the page says so and keeps what was
+    // typed. Before, it said "Added." and cleared the title though nothing had been added.
+    if (!added) { flash(entryStatus, window.ToolKit.actionRefused(S.lastAdd)); render(); entry.elements.title.focus(); return; }
     ["title", "check", "detail"].forEach((name) => { entry.elements[name].value = ""; });
     flash(entryStatus, tx("Added."));
     render();

@@ -643,6 +643,7 @@
 
   // Log an entry.
   entry.elements.date.value = today();
+  const secondTap = window.ToolKit.doubleTap(entry);
   entry.addEventListener("submit", (event) => {
     event.preventDefault();
     const form = entry.elements;
@@ -652,6 +653,7 @@
       flash(entryStatus, tx("Enter at least one {one}.", { one: t.one }));
       return;
     }
+    if (secondTap()) return;
     const cost = parseNumber(form.cost.value);
     const row = {
       date: form.date.value,

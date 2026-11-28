@@ -379,14 +379,26 @@
     received: null,
   });
 
+  // A shift or a priority named in another language of the site (a handover written on the German page, opened on
+  // the English one) is the one at the same place in this page's list; null when no language knows the name. Before,
+  // every such handover became an early shift with medium priorities.
+  const NAMES = (() => { try { return JSON.parse(document.getElementById("shift-handover-names").textContent); } catch { return { shifts: [], priorities: [] }; } })();
+  const named = (lists, own, value) => {
+    if (own.includes(value)) return value;
+    for (const list of Array.isArray(lists) ? lists : []) {
+      const at = Array.isArray(list) ? list.indexOf(value) : -1;
+      if (at >= 0 && own[at] !== undefined) return own[at];
+    }
+    return null;
+  };
   // Rebuild a saved handover field by field, so damaged data cannot break the page.
   const clean = (h) => {
     const key = data.templates[h.template] ? h.template : Object.keys(data.templates)[0];
-    const base = blank(key, parseDate(str(h.date)) || today(), data.shifts.includes(h.shift) ? h.shift : data.shifts[0]);
+    const base = blank(key, parseDate(str(h.date)) || today(), named(NAMES.shifts, data.shifts, h.shift) ?? data.shifts[0]);
     const metrics = Array.isArray(h.metrics) ? h.metrics.filter(Array.isArray).map((m) => [str(m[0]), str(m[1]), str(m[2])]) : base.metrics;
     const issues = Array.isArray(h.issues) ? h.issues.filter(isObject).map((issue) => ({
       text: str(issue.text),
-      priority: data.priorities.includes(issue.priority) ? issue.priority : MEDIUM,
+      priority: named(NAMES.priorities, data.priorities, issue.priority) ?? MEDIUM,
       owner: str(issue.owner),
       due: str(issue.due),
       done: issue.done === true,
