@@ -28,6 +28,10 @@ const watchFirstPaint = (page) => page.addInitScript(() => {
 const runningLoops = (page) => page.evaluate(() => document.getAnimations()
   .filter((a) => a.playState === "running" && a.effect?.getTiming().iterations === Infinity)
   .map((a) => `${a.animationName} on ${a.effect.target?.className || a.effect.target?.tagName}${a.effect.pseudoElement || ""}`));
+// When the motion is paused the scene is drawn once more, still (cosmos.js, refresh: one animation frame). On a quick
+// machine that frame came after the checks before the count and was counted as motion: about one run in twenty failed,
+// with the hero script of main as well. The count starts once that frame is done; from then on nothing may be drawn.
+const afterStillFrame = (page) => page.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(done)))));
 const drawsDuring = async (page, ms) => {
   const before = await page.evaluate(() => window.__draws);
   await page.waitForTimeout(ms);
@@ -48,6 +52,7 @@ test("the motion switch stops every loop and the planets, and the browser keeps 
     expect(await page.evaluate(() => window.__motionBeforeBody)).toBe(true);
     await expect(toggle).toHaveAccessibleName("Play the motion");
     expect(await runningLoops(page)).toEqual([]);
+    await afterStillFrame(page);
     expect(await drawsDuring(page, 600)).toBe(0);
     // The reader may still choose the motion: the planets turn, and the choice is kept. (With the switch beside the
     // planets, the same switch: the one at the foot of the page would scroll the planets out of view, where they are
@@ -74,6 +79,7 @@ test("the motion switch stops every loop and the planets, and the browser keeps 
   await expect(toggle).toHaveAccessibleName("Play the motion");
   await expect(page.locator("[data-cosmos] [data-motion-toggle]")).toHaveAccessibleName("Play the motion");
   expect(await runningLoops(page)).toEqual([]);
+  await afterStillFrame(page);
   expect(await drawsDuring(page, 600)).toBe(0);
   expect(await page.evaluate(() => localStorage.getItem("sc-motion"))).toBe("paused");
 
@@ -83,6 +89,7 @@ test("the motion switch stops every loop and the planets, and the browser keeps 
   expect(await page.evaluate(() => window.__motionBeforeBody)).toBe(true);
   await expect(page.locator("footer [data-motion-toggle]")).toHaveAccessibleName("Play the motion");
   expect(await runningLoops(page)).toEqual([]);
+  await afterStillFrame(page);
   expect(await drawsDuring(page, 600)).toBe(0);
   for (const url of ["/tools/cx-control-tower/", "/tools/shift-pulse/", "/tools.html", "/books/mall-per-durresin.html", "/magazine/management-review-nr-80.html"]) {
     await page.goto(url);
