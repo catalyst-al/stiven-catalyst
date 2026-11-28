@@ -16,7 +16,9 @@ const SITE = 'https://stivencatalyst.com';
 const CODE = 'acid-acorn-acre-acts-afar-affix';
 const ITERATIONS = 1000;
 const WORKER = { v1: path.join(__dirname, 'fixtures', 'sync-v1', 'worker.js'), v2: path.join(__dirname, '..', 'workers', 'sync', 'worker.js') };
-const CLIENT = { v1: fs.readFileSync(path.join(__dirname, 'fixtures', 'sync-v1', 'team-sync.js'), 'utf8'), v2: fs.readFileSync('src/js/team-sync.js', 'utf8') };
+// site: the box the site publishes on 28 November 2026 (main at 198b83b4), between the two: ids from PBKDF2 and
+// tombstones already, none of the changes of the audit of that day.
+const CLIENT = { v1: fs.readFileSync(path.join(__dirname, 'fixtures', 'sync-v1', 'team-sync.js'), 'utf8'), site: fs.readFileSync(path.join(__dirname, 'fixtures', 'sync-site-2026-11-28', 'team-sync.js'), 'utf8'), v2: fs.readFileSync('src/js/team-sync.js', 'utf8') };
 
 // Today's Worker hands the request's body stream on to its Durable Object as Cloudflare allows; node's Request wants
 // the `duplex` option for that, which the Workers runtime does not.
@@ -214,4 +216,93 @@ test('rollback of the site after teams moved: the old page finds no copy and wri
   await pause();
   assert.equal((await sync(forward, server)).status, 'synced');
   assert.deepEqual(ids(forward), ['a1']);
+});
+
+// ---- The release of 28 November 2026: the Worker keeps a deleted space for its token (workers/sync/worker.js) ----
+// The Worker goes first. These say why, and that every order and each way back is safe.
+const send = (w, server) => sync(w, server, { create: true });
+const drop = async (w, server) => w.TeamSync.deleteCopy({ endpoint: ENDPOINT, fetch: server.fetch, keys: await keysOf(w) });
+const stored = (server, id) => [...(server.storages.get(id)?.map.keys() || [])].sort();
+
+test('release, step 1: the page published today keeps working on the new Worker, a deleted copy included', async () => {
+  const server = cloud();
+  await server.deploy('v2');
+  const a = tab('site', { 'sc-actions': actions('a1') });
+  const b = tab('site', { 'sc-actions': actions('b1') });
+  assert.equal((await send(a, server)).status, 'synced');
+  await pause();
+  assert.equal((await sync(b, server)).status, 'synced');
+  await pause();
+  assert.equal((await sync(a, server)).status, 'synced');
+  assert.deepEqual([ids(a), ids(b)], [['a1', 'b1'], ['a1', 'b1']]);
+  const id = (await keysOf(a)).spaceId;
+  const before = server.space(id).rev;
+  assert.equal(await drop(a, server), 'deleted');
+  assert.deepEqual(stored(server, id), ['closed'], 'nothing of the team\'s work is kept, only the record of its token');
+  assert.equal((await sync(b, server)).status, 'gone');
+  // "Send again" on a member's device: the team's own token writes there again, and the revision goes on.
+  assert.equal((await send(b, server)).status, 'synced');
+  assert.equal(server.space(id).rev, before + 1);
+  await pause();
+  assert.equal((await sync(a, server)).status, 'synced');
+});
+
+test('release, step 2: the new page on the new Worker: a copy deleted and sent again is the team\'s, and no device takes it for another', async () => {
+  const server = cloud();
+  await server.deploy('v2');
+  const a = tab('v2', { 'sc-actions': actions('a1') });
+  const b = tab('v2', { 'sc-actions': actions('b1') });
+  await send(a, server); await pause();
+  await sync(b, server); await pause();
+  await sync(a, server);
+  assert.equal(await drop(a, server), 'deleted');
+  assert.equal((await send(a, server)).status, 'synced');
+  await pause();
+  assert.equal((await sync(b, server)).status, 'synced', 'the revision went on, so the copy is the one this device knew');
+  assert.deepEqual(ids(b), ['a1', 'b1']);
+  // Someone with the address and the key but another token (a read-only code holds no token at all) is refused.
+  const id = (await keysOf(a)).spaceId;
+  assert.equal(await drop(a, server), 'deleted');
+  const planted = await server.fetch(`${ENDPOINT}/v1/spaces/${id}`, { method: 'PUT', headers: { Authorization: `Bearer ${'f'.repeat(64)}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ rev: 0, iv: 'AAAAAAAAAAAAAAAA', data: 'Y2lwaGVy' }) });
+  assert.equal(planted.status, 403);
+});
+
+test('why the Worker goes first: the new page on today\'s Worker takes a copy that was deleted and sent again for another, until the person sends again', async () => {
+  const server = cloud();
+  await server.deploy('v1');
+  const a = tab('v2', { 'sc-actions': actions('a1') });
+  const b = tab('v2', { 'sc-actions': actions('b1') });
+  await send(a, server); await pause();
+  await sync(b, server); await pause();
+  await sync(a, server);
+  assert.equal(await drop(a, server), 'deleted');
+  assert.equal((await send(a, server)).status, 'synced');
+  // Today's Worker starts the revisions at 1 again: lower than the one this device saw. Nothing is merged, nothing lost.
+  const before = b.localStorage.getItem('sc-actions');
+  assert.equal((await sync(b, server)).status, 'gone');
+  assert.equal(b.localStorage.getItem('sc-actions'), before);
+  await pause();
+  assert.equal((await send(b, server)).status, 'synced', '"Send again" brings the device back');
+  assert.deepEqual(ids(b), ['a1', 'b1']);
+});
+
+test('the way back: today\'s Worker over what the new one stored, and the new one again', async () => {
+  const server = cloud();
+  await server.deploy('v2');
+  const a = tab('v2', { 'sc-actions': actions('a1') });
+  await send(a, server);
+  const id = (await keysOf(a)).spaceId;
+  assert.equal(await drop(a, server), 'deleted');
+  assert.deepEqual(stored(server, id), ['closed']);
+  // The Worker is rolled back: the record of the deleted space is out of its reach and harms nothing.
+  await server.deploy('v1');
+  assert.equal((await sync(a, server)).status, 'gone');
+  assert.equal((await send(a, server)).status, 'synced');
+  assert.equal(server.space(id).rev, 1, 'as today: the revisions start again');
+  // And forward again: the space made meanwhile is the team's and is written on.
+  await server.deploy('v2');
+  a.localStorage.setItem('sc-actions', JSON.stringify(actions('a1', 'a2')));
+  await pause();
+  assert.equal((await sync(a, server)).status, 'synced');
+  assert.equal(server.space(id).rev, 2);
 });

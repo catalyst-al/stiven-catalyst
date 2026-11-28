@@ -287,3 +287,29 @@ test('SEC-03: a copy that unpacks to far more than any team\'s work is given up 
   const sealed = await M.seal({ format: 'stiven-catalyst-team', version: 2, items: { 'sc-actions': '{"rows":[]}' } }, keys.key);
   assert.equal(plain(await M.unseal(sealed, keys.key)).items['sc-actions'], '{"rows":[]}');
 });
+
+// The rules the author approved on 28 November 2026, each named here so a later change has to face it:
+//   1. a device that joins takes the team's value and keeps what it held in the restore point (the TS-02 test above);
+//   2. a log this device has not changed takes the team's order (below);
+//   3. the Worker keeps the hash of a deleted space's token for 180 days, nothing of the team's work, and lets it go
+//      by itself (tests/sync-worker.test.cjs, tests/sync-compat.test.cjs).
+test('approved rule 2: a log this device has not changed since its last sync takes the team\'s order; one it has changed keeps its own', async () => {
+  const server = fakeServer();
+  const rows = ['a', 'b', 'c'].map((id) => ({ id, title: `Action ${id}` }));
+  const a = await device(blank({ storage: { 'sc-actions': { rows } } }));
+  const b = await device(blank());
+  await sync(a, server); await sync(b, server);
+  // B puts the list in another order and syncs; A has changed nothing.
+  set(b, 'sc-actions', { rows: [rows[2], rows[0], rows[1]] });
+  await sync(b, server);
+  await sync(a, server);
+  assert.deepEqual(get(a, 'sc-actions').rows.map((row) => row.id), ['c', 'a', 'b'], 'unchanged here: the team\'s order');
+  // Both change: A adds a row, B reorders again. Nothing is lost, and A keeps its own order with its change.
+  set(a, 'sc-actions', { rows: [...get(a, 'sc-actions').rows, { id: 'd', title: 'Action d' }] });
+  set(b, 'sc-actions', { rows: [rows[1], rows[2], rows[0]] });
+  await sync(b, server);
+  await sync(a, server);
+  assert.deepEqual(get(a, 'sc-actions').rows.map((row) => row.id), ['c', 'a', 'b', 'd'], 'changed here: this device\'s order, every row kept');
+  await sync(b, server);
+  assert.deepEqual(get(b, 'sc-actions').rows.map((row) => row.id).sort(), ['a', 'b', 'c', 'd']);
+});
