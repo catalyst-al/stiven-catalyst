@@ -460,11 +460,11 @@ main:lang(de) .dl-stat-value { hyphenate-limit-chars: 8 4 4; }
 .dl-check-item:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
 .dl-check-item input {
   flex: 0 0 auto;
-  width: 20px;
-  height: 20px;
-  /* The whole card is the label, so a tap anywhere on it ticks the box; the two pixels around the box keep 24 px
-     free of any other target (WCAG 2.5.8), without drawing the box larger. */
-  margin: 2px;
+  /* The whole card is the label, so a tap anywhere on it ticks the box. The box itself is 24 px (it was 20): with
+     20 the automatic check still found it too small next to its neighbours on some pages (WCAG 2.5.8). */
+  width: 24px;
+  height: 24px;
+  margin: 0;
   accent-color: var(--blue);
 }
 .dl-check-item:has(input:checked) { border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
