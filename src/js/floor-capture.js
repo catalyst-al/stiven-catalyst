@@ -227,12 +227,13 @@ window.FloorCapture = (() => {
         input.value = "";
         if (!files.length) return;
         say(status, tx("Saving the photo…"));
-        let saved = 0, failed = 0;
+        let saved = 0, failed = 0, unkept = false;
         for (const file of files) {
-          try { await media.add(file, { tool, ref: current }); saved++; } catch { failed++; }
+          try { await media.add(file, { tool, ref: current }); saved++; } catch (error) { failed++; if (error?.storage) unkept = true; }
         }
         await refresh();
-        say(status, failed ? tx("{n} photos could not be saved. The device may be out of space, or the file is not a picture.", { n: failed })
+        // When it was the keeping that failed, the likeliest reason is named too: a private window keeps no photos.
+        say(status, failed ? `${tx("{n} photos could not be saved. The device may be out of space, or the file is not a picture.", { n: failed })}${unkept ? ` ${tx("A private window does not keep photos: open this page in a normal window.")}` : ""}`
           : saved === 1 ? tx("Photo saved on this device.") : tx("{n} photos saved on this device.", { n: saved }));
       });
       return wrap;

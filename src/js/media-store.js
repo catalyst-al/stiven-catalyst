@@ -110,7 +110,14 @@ window.MediaStore = (() => {
   const add = async (file, { tool, ref } = {}) => {
     const { blob, width, height } = await compress(file);
     const record = { id: newId(), created: new Date().toISOString(), tool: String(tool || ""), ref: String(ref ?? ""), blob, width, height };
-    await transact("readwrite", (store) => done(store.put(record)));
+    // The picture was made; if it cannot be kept, the caller is told that it is the keeping that failed (error.storage):
+    // a browser window without lasting storage refuses pictures (Safari's engine in a private window answers "Error
+    // preparing Blob/File data to be stored in object store"), and "the device may be out of space" would mislead.
+    try {
+      await transact("readwrite", (store) => done(store.put(record)));
+    } catch (cause) {
+      throw Object.assign(new Error("This photo could not be kept"), { storage: true, cause });
+    }
     keepPhotos();
     return record;
   };

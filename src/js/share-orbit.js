@@ -34,6 +34,28 @@
   phone.addEventListener("change", rest);
   rest();
 
+  // On a phone a control reached with Tab stops above the planet: the stylesheet asks for it (scroll-padding-bottom,
+  // 11-reading-and-motion.css), and Chromium and Firefox follow. Safari's engine brings a focused control into view
+  // without that margin, so a field could come to rest under the planet. Where that happened, the page moves by the
+  // few pixels that are missing; where the browser already left the room, nothing moves.
+  document.addEventListener("focusin", (event) => {
+    const target = event.target;
+    if (!phone.matches || !(target instanceof Element) || root.contains(target)) return;
+    const clear = () => {
+      if (document.activeElement !== target || root.classList.contains("is-resting") || !target.matches(":focus-visible")) return;
+      const box = target.getBoundingClientRect();
+      const planet = toggle.getBoundingClientRect();
+      // A tall control (a text area, a table that scrolls) may run behind the planet while its top is clear of it.
+      const bottom = box.height > 64 ? box.top + 24 : box.bottom;
+      const under = box.width > 0 && box.right + 2 > planet.left && box.left - 2 < planet.right && bottom + 2 > planet.top && box.top - 2 < planet.bottom;
+      if (under) scrollBy({ top: bottom + 4 - planet.top, behavior: "instant" });
+    };
+    // Looked at twice: after the next frame, and once the browser's own move to the control has ended (Safari's engine
+    // makes that move after the frame).
+    requestAnimationFrame(clear);
+    setTimeout(clear, 250);
+  });
+
   toggle.addEventListener("click", () => setOpen(!root.classList.contains("is-open")));
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && root.classList.contains("is-open")) {
