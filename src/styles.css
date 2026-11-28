@@ -2248,7 +2248,9 @@ a.book-shelf-item:hover .book-shelf-text strong { color: var(--blue-soft, var(--
 .essay-listen-play:hover { filter: brightness(1.08); }
 .essay-listen-play svg { width: 13px; height: 13px; fill: currentColor; }
 .essay-listen-play[aria-pressed="true"] svg path { d: path("M6 4h4v16H6zM14 4h4v16h-4z"); }
-.essay-listen-play small { font-size: .8rem; font-weight: 600; opacity: .8; }
+/* .9, not .8: at .8 the small text on the blue of the light theme stood at 4.2 to 1, under the 4.5 that small text
+   needs (found by axe in WebKit; in Chromium the check could not judge it). At .9 it is 4.9 to 1. */
+.essay-listen-play small { font-size: .8rem; font-weight: 600; opacity: .9; }
 .essay-listen-play[disabled] { opacity: .45; cursor: default; filter: none; }
 .essay-listen-stop { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: .85rem; line-height: 1; cursor: pointer; }
 .essay-listen-stop:hover { color: var(--ink); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
