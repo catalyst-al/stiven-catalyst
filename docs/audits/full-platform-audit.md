@@ -156,3 +156,28 @@ files uncompressed, so the sizes are larger than what GitHub Pages sends (gzip);
 - No dependency: `npm audit` is clean and `docs/DEPENDENCIES.md` is current.
 - The service worker (SEC-05) and the legacy-address clean-up (TS-07): each contradicts a recorded design and needs
   its own decision.
+
+## 4. Final verification (branch at `42885713`)
+
+| Check | Baseline (`198b83b4`) | This branch |
+| --- | --- | --- |
+| `npm run build` | passes, 78 s | passes, 46 to 50 s |
+| `npm test` | 1 514 tests, 1 513 pass, 1 fail (CI-01, under load) | **1 538 tests, 1 538 pass, 0 fail, 0 skipped** |
+| `node scripts/check-coaching-build.mjs` | 54 pages, 9 journeys | 54 pages, 9 journeys |
+| `node scripts/seo-audit.mjs` | 911 / 894 / 894 / 17, 0 errors, 0 warnings | the same |
+| `npm run test:browser` (Chromium, 3 widths, 2 themes) | not run locally (CI: green) | **311 passed**, 0 failed, 0 skipped |
+| Sideways overflow, 212 pages (every tool in three languages, the main templates) at 320, 375, 768, 1024, 1440, 1920 px | 4 pages at 390 px | 0 at every width; no console error, script error or failed request |
+| axe on the 177 tool pages at 390 px | 21 pages with a scroll box no key reaches; 17 with a button name without its visible text | 0 and 0, except the room tiles of Room Status (reviewed, A11Y-02). The contrast and "obscured" reports are A11Y-05. |
+| Every button and input of the 59 tools (English, 390 px, a double click on each button, junk and markup typed into each field) | 1 script error (TL-09) | 0 script errors; no typed markup ran. 54 tools in one pass, the other five traced one by one. |
+| Homepage layout shift, 390 px, CPU slowed four times | 0.521 | 0.000 |
+| CI on the pull request (catalyst-al/stiven-catalyst#424) | — | success on `08c22576` and `dc307c3b` |
+
+Not verified, and why:
+- **Real devices and browsers other than Chromium** (Safari, Firefox, a real phone): only Chromium is installed here.
+- **The Worker on Cloudflare** (alarms, real Durable Object storage): tested against a fake of its storage only; not
+  deployed.
+- **Screen readers**: the names and roles were checked in the accessibility tree by axe and by reading, not listened to.
+- **Field performance**: no real-user data; the numbers of section 2.6 are laboratory numbers.
+- **PDF, Word and Excel files the tools write**: covered by the existing tests, not opened again by hand.
+- **The tools under German and Albanian in the click-through**: the click-through ran in English; the other languages
+  were crawled, scanned by axe and covered by the tests named above.
