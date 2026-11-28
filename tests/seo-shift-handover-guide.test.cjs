@@ -81,7 +81,7 @@ test('the whole page: the side note and the names in a sent handover are describ
       names: [/Namensfelder \(wer übergibt, wer übernimmt und die verantwortliche Person jedes Punkts\) nur mitgesendet, wenn Sie dies auswählen/, /können Namen oder andere personenbezogene Angaben enthalten/, /erkennt aber keine Namen und entfernt nichts/, /vor dem Senden durch/],
     },
     sq: {
-      note: 'Dorëzimet ruhen në këtë shfletues. Ato largohen prej tij vetëm kur i kopjoni, i printoni, i ruani ose i dërgoni, ose si kopje e enkriptuar nëse ekipi juaj përdor sinkronizimin e ekipit. Kontrolloni emrat dhe të dhënat e mysafirëve para se të ndani diçka.',
+      note: 'Dorëzimet ruhen në këtë shfletues. Ato largohen prej tij vetëm kur i kopjon, i printon, i ruan ose i dërgon, ose si kopje e enkriptuar nëse ekipi yt përdor sinkronizimin e ekipit. Kontrollo emrat dhe të dhënat e mysafirëve para se të ndash diçka.',
       names: [/fushat e emrave \(kush e dorëzon, kush e merr dhe përgjegjësi i çdo çështjeje\) nuk përfshihen, përveç nëse/, /mund të përmbajë emra ose të dhëna të tjera personale/, /nuk dallon emra dhe nuk heq asgjë/, /lexojini këto fusha para dërgimit/],
     },
   };
