@@ -364,6 +364,10 @@
   const drawGlow = () => {
     const breathe = 1 + 0.05 * Math.sin(time * 1.3) + flare * 0.55;
     const reach = S * 1.3 * breathe;
+    // Before the hero has a size (WebKit draws a first frame while its anchor still measures nothing) there is no
+    // glow to draw: the ring below would be 0 / 0, and a colour stop at "not a number" is an error in every browser
+    // (it showed in Safari's engine on every visit of the homepage, once).
+    if (!(reach > 0)) return;
     const ring = (S * MARK * 0.45) / reach;
     ctx.globalCompositeOperation = "lighter";
     ctx.globalAlpha = warm * dim;
