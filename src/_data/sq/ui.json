@@ -7957,5 +7957,15 @@
   "[The rest did not fit in the mail link: use “Copy message” on the page.]": "[Pjesa tjetër nuk u fut në lidhjen e emailit: përdor “Kopjo mesazhin” në faqe.]",
   "Translation": "Përkthimi",
   "with AI assistance": "me ndihmën e AI",
-  "revised by the author": "i rishikuar nga autori"
+  "revised by the author": "i rishikuar nga autori",
+  "Waiting for your confirmation: nothing has been read or sent yet.": "Në pritje të konfirmimit tuaj: ende nuk është lexuar e as dërguar asgjë.",
+  "Not started · confirm below": "Nuk ka nisur · konfirmoni më poshtë",
+  "Check the ticked tools below, then confirm. Nothing is read or sent before you do.": "Kontrolloni mjetet e shënuara më poshtë, pastaj konfirmoni. Para kësaj nuk lexohet e as dërgohet asgjë.",
+  "Cancelled. Nothing was read or sent.": "U anulua. Nuk u lexua e as u dërgua asgjë.",
+  "Before anything is shared": "Para se të ndahet ndonjë gjë",
+  "When you confirm, the work of the tools ticked below is encrypted on this device and stored as an encrypted copy on the team's server, which cannot read it. Only then does the team exist for the other devices.": "Kur konfirmoni, puna e mjeteve të shënuara më poshtë enkriptohet në këtë pajisje dhe ruhet si kopje e enkriptuar në serverin e ekipit, i cili nuk mund ta lexojë. Vetëm atëherë ekipi ekziston për pajisjet e tjera.",
+  "When you confirm, this device takes the team's work for the tools ticked below and merges it into the work here, after a restore point, and sends its own work for those tools to the team's server as an encrypted copy.": "Kur konfirmoni, kjo pajisje merr punën e ekipit për mjetet e shënuara më poshtë dhe e bashkon me punën këtu, pas një pike rikthimi, dhe e dërgon punën e vet për këto mjete në serverin e ekipit si kopje të enkriptuar.",
+  "When you confirm, this device takes the team's work for the tools ticked below, after a restore point, and its own version of those tools is replaced. It sends nothing.": "Kur konfirmoni, kjo pajisje merr punën e ekipit për mjetet e shënuara më poshtë, pas një pike rikthimi, dhe versioni i saj i këtyre mjeteve zëvendësohet. Nuk dërgon asgjë.",
+  "The ticks show what is shared unless you change them. Unticking a tool later stops sharing it from then on; it does not delete what the team's copy already holds.": "Shenjat tregojnë çfarë ndahet, nëse nuk i ndryshoni. Kur hiqni më vonë shenjën nga një mjet, ai nuk ndahet më që nga ai moment; kjo nuk fshin atë që kopja e ekipit e ka tashmë.",
+  "Confirm and sync": "Konfirmo dhe sinkronizo"
 }
