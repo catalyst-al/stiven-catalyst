@@ -265,3 +265,19 @@ test('TL-08: a handover written on the German page and opened on the English one
   assert.equal(current.shift, 'Night');
   assert.deepEqual(current.issues.map((issue) => issue.priority), ['High', 'Medium'], 'a name no language knows is medium, as before');
 });
+
+// TL-09, found by clicking every button of every tool in Chromium: the Root causes tab of the CX Control Tower
+// threw "TK is not defined" (a name of the script's first part used in its second) as soon as it had a cause to show,
+// so the tab stayed on the page before and its hand-off to the Action Tracker was never drawn.
+test('TL-09: the Root causes tab of the CX Control Tower opens, with its hand-off to the Action Tracker', { skip: !built }, async () => {
+  for (const lang of ['en', 'de', 'sq']) {
+    const w = H.openTool('cx-control-tower', { lang });
+    const errors = [];
+    w.addEventListener('error', (event) => errors.push(event.message));
+    await H.settle(w, 100);
+    H.click(w, w.document.querySelector('[data-tab="causes"]'));
+    await H.settle(w, 100);
+    assert.deepEqual(errors, [], lang);
+    assert.ok(w.document.querySelector('main a[href*="action-tracker"]'), `${lang}: the link that takes the top cause to the Action Tracker`);
+  }
+});
