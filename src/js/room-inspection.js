@@ -1089,7 +1089,8 @@
       const print = el("button", "button-ghost ri-row-print", tx("Sheet"));
       print.type = "button";
       print.dataset.printRow = row.id;
-      print.setAttribute("aria-label", tx("Print the sheet of room {room} on {date}", { room: row.room, date: showDate(row.date) }));
+      // The name begins with the word on the button, so a voice command that says what is seen finds it.
+      print.setAttribute("aria-label", `${tx("Sheet")}: ${tx("Print the sheet of room {room} on {date}", { room: row.room, date: showDate(row.date) })}`);
       const remove = el("button", "dl-remove", "×");
       remove.type = "button";
       remove.dataset.remove = row.id;

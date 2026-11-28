@@ -48,7 +48,7 @@ test('the arithmetic: coverage makes an audit complete or partial, and only comp
 for (const [lang, word, note] of [
   ['en', 'partial', /1 partial audit .*left out of the trend and the league table.*80 %/],
   ['de', 'unvollständig', /1 unvollständiges Audit .*nicht im Trend und nicht in der Rangliste.*80 %/],
-  ['sq', 'i pjesshëm', /1 auditim i pjesshëm .*nuk hyn në trend dhe në renditje.*80 %/],
+  ['sq', 'i pjesshëm', /1 auditim i pjesshëm .*nuk hyn në trend dhe në renditje.*80%/],
 ]) {
   test(`${lang}: the page marks the partial audit and leaves it out of the trend and the league table`, () => {
     const key = lang === 'en' ? 'sc-five-s-audit' : `sc-five-s-audit-${lang}`;
