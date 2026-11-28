@@ -114,3 +114,94 @@ moved; rolling back the Worker alone is the first choice when the trouble is on 
 When both have run for 90 days (the life of a tombstone) without a rollback, `tests/fixtures/sync-v1/` and
 `tests/sync-compat.test.cjs` can be removed together, and the move from the old address can stay as it is (a team
 not synced for 180 days has lost its old space anyway).
+
+## 7. The release of 28 November 2026 (pull request catalyst-al/stiven-catalyst#424)
+
+Prepared on 28 November 2026. **Nothing here has been deployed.** The Worker is deployed by the author, by hand, with
+`node workers/sync/deploy.mjs`; no workflow of this repository deploys it.
+
+### 7.1 What runs today (read back on 28 November 2026, read only)
+
+| Part | State | How it was checked |
+| --- | --- | --- |
+| Cloudflare account | `6bf56de63354f2b14587870ee30941f9`, the one `deploy.mjs` names; it holds two Workers, `stiven-catalyst-sync` and one that is not of this project | `GET /accounts/<account>/workers/scripts` |
+| Worker `stiven-catalyst-sync` | **still version `cc107fc4-5863-49e6-af56-c17948fac8a7` of 24 October 2026**: the Worker of sections 1 to 6 (limits on new spaces, the body cap, no localhost) **was never deployed**. The script read back equals `tests/fixtures/sync-v1/worker.js`. | `GET …/scripts/stiven-catalyst-sync`, `…/deployments` |
+| Its settings | one binding, `SPACES` (Durable Object `Space`); no variable (`DEV_ORIGINS`, `CREATE_LIMIT_*` are not set, so a new upload loses nothing); compatibility date 2026-09-14; `workers.dev` address on, previews off | `GET …/settings`, `…/subdomain` |
+| The address the site calls | `https://stiven-catalyst-sync.stivenjanaqi1.workers.dev` (`src/_data/site.json`, and the page's Content Security Policy); it answers `{"service":"stiven-catalyst-sync","version":1}` | `curl` |
+| The site | `main` at 198b83b4: the box with PBKDF2 addresses and tombstones (step 3 of section 4 happened; step 1 did not) | frozen as `tests/fixtures/sync-site-2026-11-28/team-sync.js` |
+
+So one deployment of the Worker now brings two things at once: the limits of section 2, and the rule of this release.
+
+### 7.2 What this release adds to the Worker
+
+A deleted space (by `DELETE`, or after 180 days without a write) keeps one record, `closed`: `{ tokenHash, rev, at }`.
+- Only the same token may write there again (403 for any other, on `PUT` and on `DELETE`); a space that never
+  existed can still be started by anyone, within the limits.
+- The revision of a copy written again goes on from the last one, so a device can tell the copy it knew.
+- Nothing of the team's work is kept: the chunks and `meta` are deleted as before. The record goes by itself 180 days
+  after the deletion (the alarm), and at once when the team writes again.
+- No new binding, no new class, no migration; the storage of existing spaces is read as it is.
+
+### 7.3 Compatibility, verified
+
+| Combination | Result | Where |
+| --- | --- | --- |
+| The page published today, the new Worker | create, sync, merge, delete the copy, send again: all work; after a deletion only `closed` is stored | `tests/sync-compat.test.cjs`, "release, step 1" |
+| The new page, the new Worker | a copy deleted and sent again is taken as the team's by every device; another token is refused | "release, step 2" |
+| The new page, the Worker live today | everything works, with one roughness: a copy deleted and sent again starts at revision 1, which the new page takes for another copy ("gone") until the person presses "Send again". Nothing is merged wrongly and nothing is lost. | "why the Worker goes first" |
+| The Worker rolled back, then forward | today's Worker ignores `closed` and behaves as today; the new one then writes on | "the way back" |
+| The real runtime, on this machine | the new code opens a space the live code stored (same revision, same data); 401 without a token, 403 with another, 409, 429, 413; the deleted-space rule; rollback and forward over the same SQLite storage: 25 of 25 | `workers/sync/local-check.mjs` (workerd through miniflare) |
+| Authorization of a read-only code | it holds the address and the key, no token: every write is 401 or 403, on a live and on a deleted space | `tests/sync-worker.test.cjs`, the local check |
+| The record's expiry | kept for 180 days after a deletion or an expiry, then nothing is left | `tests/sync-worker.test.cjs` (the clock moved in the test) |
+
+Not verified, because it needs the live account: alarms firing on Cloudflare itself after 180 days, and the limits
+on new spaces under real traffic.
+
+### 7.4 The order: the Worker before the site
+
+**Deploy the Worker first, then merge the site.** The reason is the third row above: with the new page on today's
+Worker, a team that deletes its copy and sends it again makes its other devices say "the copy is gone" until someone
+presses "Send again" there. With the Worker deployed first that case never arises, and the page published today
+works on the new Worker unchanged (first row). The fault TS-03 itself (a copy planted where the team's was deleted)
+is closed only by the Worker; the new page alone makes it harder, not impossible.
+
+1. Before: `npm test` green on the commit to deploy (`sync-worker`, `sync-compat` included); note the version live
+   then (today `cc107fc4-5863-49e6-af56-c17948fac8a7`).
+2. `node workers/sync/deploy.mjs` from a checkout of the merged commit (or of the branch of #424: the Worker file is
+   the same). It needs `CLOUDFLARE_API_TOKEN` with "Workers Scripts: Edit" on the account above.
+3. The smoke tests of 7.5.
+4. Watch the Worker's errors for a day (section 4, step 2), then merge #424; GitHub Pages publishes the site.
+5. The checks of the site in 7.5.
+
+### 7.5 Smoke tests after the deployment
+
+With made-up ids of 64 hex characters that no team uses (`ID`, and tokens `T1`, `T2` of 64 hex characters); each
+call with `-H "Origin: https://stivencatalyst.com"`:
+- `GET /` → `{"service":"stiven-catalyst-sync","version":1}`
+- `GET /v1/spaces/ID` → 404, with `Access-Control-Allow-Origin: https://stivencatalyst.com`
+- the same with `Origin: http://localhost:8080` → 403
+- `PUT /v1/spaces/ID` with `T1`, body `{"rev":0,"iv":"AAAAAAAAAAAAAAAA","data":"Y2lwaGVy"}` → 200 `{"rev":1,…}`
+- `PUT` with `T2` → 403; `DELETE` with `T2` → 403
+- `DELETE` with `T1` → 204; `GET` → 404
+- `PUT` (rev 0) with `T2` → **403** (before this release: 200)
+- `PUT` (rev 0) with `T1` → 200 `{"rev":2,…}`; then `DELETE` with `T1` → 204, to leave nothing behind but the record
+- a `PUT` of 5 MB → 413
+- on the published site, two browsers: start a team, join, change a row on each, sync both; "Delete the team's
+  copy" on one, "Send again" on the other: both sync again without "the copy is gone".
+
+After the site is published: an existing team syncs on a reloaded page; a correction in Damage Control stays after
+"Sync now"; two rooms changed on two devices in Room Status are both there after both sync.
+
+### 7.6 The way back, and its limits
+
+- **The Worker**: Cloudflare dashboard → Workers & Pages → `stiven-catalyst-sync` → Deployments → the version noted
+  in step 1 → Rollback (or the API call of section 5). Minutes; the spaces stay. Limits: the `closed` records stay in
+  storage, unreachable and harmless, until a later deployment of the new code or the storage of an unused object is
+  reclaimed; while the old Worker runs, a deleted space can again be written by any token (today's behaviour), and
+  with the new page the roughness of the third row of 7.3 returns.
+- **The site**: revert the merge of #424 on `main`. The state a device keeps (`sc-team-state`) gained fields the
+  page of today ignores (`revived`, fingerprints of rows without ids and inside fields); a copy written by the new
+  page may carry `revived`, which the page of today ignores too: a row put back from a restore point may then be
+  deleted again by a device on the old page, as before this release. Nothing else is lost.
+- **What cannot be undone**: a merge the new page made on a device (a joining device taking the team's board) is not
+  reverted by rolling back code; the device's own restore point "before the sync" holds what it had.

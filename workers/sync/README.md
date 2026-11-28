@@ -18,7 +18,9 @@ A deleted space keeps one small record for a further 180 days: the hash of its w
 number, nothing of the team's work. Only the same token may write there again (a read-only code carries the address
 and the key, and could otherwise plant a copy of its own once the team had deleted or moved theirs), and revisions go
 on from where they were. This rule is in the code since the audit of 28 November 2026 and takes effect once the
-Worker is deployed again (`node workers/sync/deploy.mjs`, the author's step).
+Worker is deployed again (`node workers/sync/deploy.mjs`, the author's step). The plan, the order (the Worker before
+the site), the smoke tests and the way back are in `docs/SYNC-WORKER-MIGRATION.md`, section 7. `local-check.mjs`
+runs the Worker in Cloudflare's own runtime on this machine, without deploying anything.
 
 Limits (see the top of `worker.js`; tests in `tests/sync-worker.test.cjs`, run by `npm test` without deploying):
 a body is refused past 4 MB, with or without a Content-Length; at most 10 new spaces an hour from one address (an
