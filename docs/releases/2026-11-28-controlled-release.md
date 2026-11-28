@@ -58,19 +58,65 @@ To check by hand before the merges (GitHub, the repository's Settings):
    deletions" off.
 3. **Actions → General → Workflow permissions**: "Read repository contents and packages permissions".
 
-## Gate 1 · The Worker (waits for the author's authorization)
+## Gate 1 · The Worker (done, 28 November 2026; authorized by the author for this gate only)
 
-The candidate: `workers/sync/worker.js` at the head of #424 (SHA-256 above). Command, from a checkout of that head:
-`node workers/sync/deploy.mjs`.
+| Step | What happened |
+| --- | --- |
+| Before | `workers/sync/deploy.mjs` hardened as the author asked (commit `436f0172`): it uploads only when the Worker is confirmed to exist with its `SPACES` binding and nothing else an upload would remove; an unreadable answer stops it; a first install (the migration that creates the Durable Object class) needs Cloudflare's own "does not exist" and `SYNC_FIRST_INSTALL=1`. Both ways of stopping were run first (an account that cannot be read; a wrong expected hash): nothing uploaded, the live version unchanged. |
+| A space for the proof | with the Worker of 24 October still live, a made-up space was written through the public address (revision 1, made-up bytes), to be read again after the upgrade. |
+| Deployed | 16:03:35 UTC, from commit `436f0172`, `SYNC_EXPECT_SHA256=de647fcb…ae0e node workers/sync/deploy.mjs`. No migration was sent. |
+| The version live now | **`eb696f36-eb10-42e7-b860-59a0ca402cfc`** (number 3), deployment `69c0e675-d182-4e5b-9867-df41e1a80f24`, at 100 %. The script read back equals `workers/sync/worker.js`. |
+| Unchanged | the binding `SPACES` to the class `Space`, the same Durable Object namespace (`e7c5f649…bc2`), compatibility date 2026-09-14, the `workers.dev` address. |
+| Way back kept | version `cc107fc4-5863-49e6-af56-c17948fac8a7` (number 2) is still listed; Cloudflare → Workers & Pages → `stiven-catalyst-sync` → Deployments → that version → Rollback. |
 
-To record here when done: the time, the new version id, the output of each smoke test of section 7.5 of the
-migration document, the published site still syncing, the test spaces deleted, the Worker's error count.
+Smoke tests against production, 16:04 UTC, made-up ids and tokens (64 hex characters each), `Origin:
+https://stivencatalyst.com` unless said: **25 of 25**.
 
-Way back: Cloudflare → Workers & Pages → `stiven-catalyst-sync` → Deployments → `cc107fc4-…` → Rollback.
+| Check | Answer |
+| --- | --- |
+| `GET /` | `{"service":"stiven-catalyst-sync","version":1}` |
+| The space written before the upgrade | 200, revision 1, the same bytes; CORS for the site |
+| An unknown space | 404, with CORS |
+| `Origin: http://localhost:8080`; another site | 403; 403 |
+| `PUT` without a token | 401 |
+| `PUT` with token 1 (create) | 200, revision 1 |
+| `PUT` and `DELETE` with token 2 on that space | 403; 403 |
+| A stale revision; a second write at once; 5 MB | 409; 429; 413 |
+| `PUT` with token 1 again | 200, revision 2 |
+| `DELETE` with token 1; `GET` | 204; 404 |
+| **`PUT` with token 2 where the copy was deleted** | **403** (the Worker of before answered 200: the fault TS-03) |
+| `DELETE` with token 2 on the deleted space | 403 |
+| `PUT` with token 1 there | 200, **revision 3** (the revisions go on) |
+| The space written before the upgrade: token 2; its own token | 403; 200, revision 2 |
+| A space that never existed, `DELETE` with any token | 204 |
+| Clean up | both test spaces deleted with their token; both read 404 |
 
-## Gate 2 · Observation (24 hours after gate 1)
+The published site (`main` at `198b83b4`, unchanged) against the new Worker, in Chromium, 16:04 to 16:05 UTC: the
+page's own sync code, a made-up team code, two browser contexts, two made-up actions.
 
-To record: when it began and ended, what was looked at (the Worker's requests and errors by status), what was seen.
+| Step | Result |
+| --- | --- |
+| The address the live page calls | `https://stiven-catalyst-sync.stivenjanaqi1.workers.dev` |
+| Device 1 starts the team; device 2 joins; device 1 syncs | synced (revisions 1, 2, 3); both hold both actions |
+| Device 1 deletes the team's copy; device 2 syncs | deleted; "gone" |
+| Device 2 sends again; device 1 syncs | synced, **revision 4** then 5 (with the Worker of before it would have begun at 1 again); both hold both actions |
+| Clean up | the team's copy deleted; no script error on either page |
+
+Error signals right after (Cloudflare's analytics, `workers/sync/signals.sh`, read only), 15:00 to 16:05 UTC: 26
+requests on the new version and 4 on the old, all "success", **0 errors**.
+
+What is left on the server by these tests: three `closed` records (the hash of a made-up token and a revision
+number each), which go by themselves after 180 days; and the counters of new spaces, which empty after their hour
+and day.
+
+## Gate 2 · Observation (began 28 November 2026, 16:05 UTC; ends 29 November 2026, 16:05 UTC)
+
+What is looked at: the Worker's requests by status and its errors (`workers/sync/signals.sh <since>`), and the live
+address answering. Each look is written here with its time; a look that was not made is not written.
+
+| Time (UTC) | Requests since 16:03 on the new version | Errors | The address |
+| --- | --- | --- | --- |
+| 28 Nov 16:05 | 26 | 0 | answers |
 
 ## Gate 3 · #418, then #424 (waits for the author's authorization)
 
