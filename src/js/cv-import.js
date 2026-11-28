@@ -306,7 +306,21 @@ window.CvImport = (() => {
   // Paragraphs of document.xml, with their bullet, heading and size. Text boxes
   // hold paragraphs inside paragraphs, so a stack keeps them apart.
   const docxLines = (xml) => {
-    const body = xml.replace(/<mc:Fallback>[\s\S]*?<\/mc:Fallback>/g, "").replace(/<w:instrText[\s\S]*?<\/w:instrText>/g, "");
+    // Without the fallback copies of drawings and the field codes: each <open …>…</close> taken out in one pass, and
+    // an element that is never closed stays as it is. (A pattern that looked ahead to the end of the text for every
+    // element left open froze the page for ten seconds and more on a crafted file of half a megabyte.)
+    const without = (text, open, close) => {
+      let out = "";
+      let at = 0;
+      for (;;) {
+        const start = text.indexOf(open, at);
+        const stop = start < 0 ? -1 : text.indexOf(close, start + open.length);
+        if (stop < 0) return out + text.slice(at);
+        out += text.slice(at, start);
+        at = stop + close.length;
+      }
+    };
+    const body = without(without(xml, "<mc:Fallback>", "</mc:Fallback>"), "<w:instrText", "</w:instrText>");
     const out = [];
     const stack = [];
     let inText = false;

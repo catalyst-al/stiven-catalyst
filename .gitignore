@@ -28,3 +28,10 @@ Metadata.csv
 Search?appearance.csv
 Critical?issues.csv
 Non-critical?issues.csv
+# Credentials and local settings of the tools around the site (the sync Worker's deploy reads its token from the
+# environment), and a work file saved from the tools: none belongs in this public repository.
+.env
+.env.*
+.dev.vars
+*.pem
+stiven-catalyst-work*.json
