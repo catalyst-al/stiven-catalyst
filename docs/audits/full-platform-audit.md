@@ -101,7 +101,7 @@ Permissions-Policy, COOP/CORP (headers only).
 | L-04 | P3 | German glossary: "Feedback" where `docs/FJALORI.md` sets "Rückmeldung" (2 strings). | **fixed**. |
 | L-05 | P3 | The CX Control Tower's summary printed the stage and the state of the root cause in English on the German and Albanian pages; the Lean Assessment sent "3.4 / 5" to the Action Tracker in every language. | **fixed**. |
 | L-06 | P2 | The CX Control Tower's example (zones, incident types, causes, actions: about 40 strings) is English on the German and Albanian pages; every other tool has a translated example. | **fixed** in the closure phase (section 5): 55 strings per language through the page's translator, in the vocabulary the site already uses. `tests/browser/audit-journeys.spec.mjs`. |
-| L-07 | P3 | Albanian "ju" where the glossary sets "ti": 49 strings (15 in the Andon advice, the team sync box, several hints). | **fixed** in the closure phase (section 5): 59 strings addressed to the person using the tool say "ti"; replies written for a guest and words between colleagues in an example keep "ju". The list the review started from is `docs/audits/2026-11-28-sq-ju-forms.txt`. |
+| L-07 | P3 | Albanian "ju" where the glossary sets "ti": 49 strings (15 in the Andon advice, the team sync box, several hints). | **fixed** in the closure phase (section 5): 52 strings addressed to the person using the tool say "ti"; replies written for a guest and words between colleagues in an example keep "ju". The list the review started from is `docs/audits/2026-11-28-sq-ju-forms.txt`. |
 | L-08 | P3 | Smaller: the placeholder "YYYY-MM" and one Excel sheet name are not translated; Albanian apostrophes are mixed (183 straight, 22 curly). | **open**. |
 
 Verified clean: `de/ui.json` and `sq/ui.json` hold the same 7 959 keys (7 965 now); the 54 per-tool data files match in
@@ -181,3 +181,118 @@ Not verified, and why:
 - **PDF, Word and Excel files the tools write**: covered by the existing tests, not opened again by hand.
 - **The tools under German and Albanian in the click-through**: the click-through ran in English; the other languages
   were crawled, scanned by axe and covered by the tests named above.
+
+## 5. Closure phase (28 November 2026, after the author's review)
+
+The author approved the three Team Sync rules, asked for the remaining localization and accessibility work, for
+other browser engines, for the order of the open pull requests, for the Worker's release plan and for the
+protection of the production deployment. Nothing was merged or deployed.
+
+### 5.1 The approved Team Sync rules, each with its test
+
+| Rule | Test |
+| --- | --- |
+| A device that joins takes the team's value of a field both hold; what it held is in the restore point made first. | `tests/team-sync-integrity.test.cjs`, "TS-02: a device that joins…" (the restore point is asked for before anything is written, and holds the device's own board) |
+| A log this device has not changed takes the team's order; one it has changed keeps its own, and no row is lost. | the same file, "approved rule 2" (added in this phase) |
+| The Worker keeps the hash of a deleted space's token and its last revision for 180 days, nothing of the team's work, and lets it go by itself. | `tests/sync-worker.test.cjs` (what is stored after a deletion: `closed` only, with `tokenHash`, `rev`, `at`; gone after 180 days, the clock moved); `tests/sync-compat.test.cjs`, "release, step 1"; `workers/sync/local-check.mjs` in Cloudflare's runtime |
+
+### 5.2 New findings of this phase
+
+| ID | Sev. | Finding | Status |
+| --- | --- | --- | --- |
+| XB-01 | P2 | **Safari's engine threw a script error on every visit of the homepage** ("The provided value is non-finite"), also on the live site: WebKit draws a first frame while the hero still measures nothing, and the glow's ring was 0 / 0. Found by running the journeys in Playwright's WebKit. | **fixed** (`cosmos.js`: no glow before the hero has a size). After the fix the homepage, the search and the transition journeys pass in WebKit. |
+| XB-02 | P2 | **The small text of the "Listen" button stood at 4.2 to 1 on the blue of the light theme** (4.5 is needed): its opacity of .8. Reported by axe in WebKit; in Chromium the check could not judge it, so CI never saw it. The number is the same in every browser. | **fixed** (.9: 4.9 to 1). |
+| L-09 | P3 | A medium severity written in Albanian ("I mesëm") was ranked as low by the CX Control Tower (the pattern knew "mesatar" only). Found while translating the example. | **fixed**. |
+| REL-01 | — | **The Worker live on Cloudflare is still the one of 24 October** (version `cc107fc4`): the Worker with limits prepared on 27 October was never deployed. Read back through the Cloudflare API, read only. | recorded; `docs/SYNC-WORKER-MIGRATION.md`, section 7. One deployment now brings both changes. |
+| L-10 | P3 | The guide text under the Albanian Shift Handover (`src/sq/tools/shift-handover.njk`, eight sentences reviewed in SEO phase 2C) addresses the reader as "ju" throughout, while the tool's own texts now say "ti". | **needs the author**: it is the author's prose, consistent in itself, and a test pins one of its sentences. |
+
+### 5.3 Localization
+
+- **The CX Control Tower's example** speaks the page's language: zones, incident types, causes, owners, the status
+  and the severity of its incidents, and the texts of its five actions (55 new strings in German and in Albanian,
+  in the words the site already uses: Tour / linja, Tasche / çantë, Rampe / rampë, Welle / valë, Warenausgang /
+  dalja e mallit). The values the tool itself reads stay as they are. Verified in the page in the three languages
+  (`tests/browser/audit-journeys.spec.mjs`).
+- **"ti" in Albanian**: 52 strings that speak to the person using the tool were changed (32 in `sq/ui.json`, 20 in
+  four data files): those of the list of 49 that address the user, and others of the same kind found beyond it.
+  (The commit message says 59; 52 is the count of the strings that differ.) Left as they
+  are, on purpose: the replies a hotel writes to a guest in Guest Complaints and Lost & Found (a guest is "ju"),
+  a question quoted to a guest, a sign for a buffet, a line between colleagues in the Hoshin example, and
+  "Diskutoni" where it speaks to a group of raters.
+- The three languages after the changes: the same 8 020 keys in `de/ui.json` and `sq/ui.json`; every literal text
+  of the scripts has both entries; `tests/ui-strings-build.test.cjs` reads the built files.
+
+### 5.4 Accessibility: the small boxes
+
+- "Protect the file with a password" and "Anonymise names": the label is the target (32 px high) and the box, drawn
+  at the size it was, keeps 24 px free around its centre.
+- The floor-check cards of the logs: the whole card is the label; the box is drawn at 24 px (it was 20), because the
+  automatic check still found 20 px too small beside its neighbours on some pages.
+- Floor mode is unchanged (it draws its own, larger boxes).
+- After: axe finds no undersized target on the 177 tool pages at 390 px; at 1440 px one text link inside a
+  sentence (16 px high), which the criterion excepts.
+
+### 5.5 Other browser engines (Playwright's builds on Linux; not Safari, not a phone)
+
+Firefox 157 and WebKit 27.2 as Playwright ships them. **This is not a test in Safari on a Mac or an iPhone, nor on
+any physical device**: the WebKit build shares Safari's engine, not its application, its settings or its storage
+rules.
+
+| Check | Chromium | Firefox | WebKit |
+| --- | --- | --- | --- |
+| The audit's journeys in English, German and Albanian (CX Control Tower, Action Tracker, Guest Complaints, Lost & Found, paste import) | 9 of 9 | 9 of 9 | 9 of 9 |
+| Team sync between two devices, full key derivation (310 000 rounds), encryption, gzip, merge (own script, the service worker out of the way) | synced, sealed | synced, sealed | synced, sealed |
+| The service worker keeps a tool's pages and opens one with the network refused | yes | yes | kept; opening could not be driven |
+| The motion switch stops the drawing | at once | after one last frame | after one last frame |
+
+What failed in the other engines and why (the repository's own journeys, written for Chromium):
+- **Print (12 tests)**: they ask the browser for a PDF, which only Chromium offers to a test. Not run elsewhere.
+- **Offline (handover link, action hand-off, deploy simulation)**: the tests switch the browser offline, or play
+  three deployments through intercepted requests; neither reaches a service worker outside Chromium. The service
+  worker itself works in both (row three).
+- **Chart labels on a phone (Firefox, 3 tests)**: Firefox measures a label one pixel left of its chart's box, at the
+  test's tolerance; nothing is cut (measured: the labels end 60 px inside the chart).
+- **Motion (timing)**: both engines draw one more frame after the switch, inside the test's first measuring window;
+  the drawing stops (measured over three seconds). WebKit on Linux animates a turn of the wheel and a programmatic
+  scroll itself, which two tests take for the page's own motion.
+- **Photos (WebKit, 2 tests)**: "Error preparing Blob/File data to be stored in object store". Playwright's WebKit
+  runs every context without lasting storage, where WebKit refuses pictures in IndexedDB; the same is known of
+  Safari's private windows. Whether a 5S or Safety Cross photo is kept in a normal Safari window was **not
+  verified** (TD-07).
+- **The share button over a focused field (WebKit, Damage Control at 412 px)**: fields reached by Tab sat under the
+  floating share button in this build. Not reproduced in Chromium or Firefox; **not verified in Safari**, whose
+  keyboard focus differs from this build's.
+
+### 5.6 The open pull requests, and the order to merge
+
+Checked on 28 November 2026 against `main` at 198b83b4.
+
+- **#414 and #415 are two answers to the same question** (no sync before the person has confirmed). #414 adds a
+  review step with every tool unticked and reads the team's copy to list its tools; #415 adds a consent flag and
+  keeps the default ticks. They change the same lines and conflict in seven files. **Only one of them can be
+  merged; the other is closed.** Which one is the author's product decision.
+- **Each of them merges with this branch** apart from three translation files (`de/ui.json`, `sq/ui.json`,
+  `i18n-parts/team-sync-2.json`), where both sides add texts at the same place; merged three-way by key, no text
+  was changed by both sides. `src/js/team-sync.js` merges without a conflict: they change the box and its flow,
+  this branch the merge and the sync.
+- **Tested together**, in throwaway worktrees: this branch with #415: 75 of 75 sync tests pass (its own consent
+  tests and this branch's integrity tests); with #414: 78 of 78.
+- **Order**: 1. #424 (this branch): it fixes two faults that are live (the Root causes tab, the script error in
+  Safari's engine) and changes the merge both consent branches are tested against. 2. The consent pull request the
+  author chooses, after `main` is merged into it (a merge commit, the three translation files resolved by key) and
+  its CI is green; its Albanian texts then follow the "ti" wording of this branch. 3. The other is closed.
+- **One wording to align when the consent branch is updated**: #414's review says the team's work and this
+  device's are "combined"; since this branch a device that has never synced a board takes the team's version of a
+  field both hold (its own is in the restore point).
+
+### 5.7 The production deployment
+
+- `.github/workflows/deploy.yml` now publishes for `refs/heads/main` only (the deploy job and the two steps that
+  prepare the Pages artifact). Before, a run started by hand on any branch went on to the deploy job.
+- The other triggers: `push` to `main` (publishes), `pull_request` (never publishes), `workflow_dispatch` (now
+  publishes from `main` only). There is no other workflow in the repository.
+- **To check by hand**, since repository settings cannot be read from here: GitHub → the repository → Settings →
+  Environments → `github-pages` → "Deployment branches and tags": it should read "Selected branches and tags" with
+  `main` as the only entry (not "No restriction"). And Settings → Branches (or Rules → Rulesets): a rule for `main`
+  that requires a pull request and the check `build` before merging, with "Allow force pushes" off.
+- The Worker is not deployed by any workflow; `workers/sync/deploy.mjs` is run by hand with a Cloudflare token.
