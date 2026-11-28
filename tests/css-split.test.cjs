@@ -87,6 +87,9 @@ test('every built page loads the stylesheet of its kind, and no other', () => {
       const url = '/' + path.relative('_site', file).split(path.sep).join('/');
       // The page the service worker shows without a connection carries its few styles itself (src/offline.njk).
       if (url === '/offline.html') continue;
+      // The file with all the writing for "Download all" (src/downloads-writing.njk) is made to be kept and read
+      // offline, so it carries its few styles itself too.
+      if (/^\/downloads\/stiven-catalyst-writing-(en|de|sq)\.html$/.test(url)) continue;
       const html = fs.readFileSync(file, 'utf8');
       const links = [...html.matchAll(/<link rel="stylesheet" href="\/(styles[a-z-]*\.css)\?v=([0-9a-f]+)"/g)].map((m) => m[1]);
       assert.deepEqual(links, [`styles-${groupOf(url)}.css`], url);

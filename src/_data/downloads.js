@@ -27,7 +27,7 @@ const sizeIn = (bytes, lang) => {
 };
 const file = (kind, href, lang, label) => {
   const bytes = bytesOf(href);
-  return bytes === null ? null : { kind, href, size: sizeIn(bytes, lang), ...(label ? { label } : {}) };
+  return bytes === null ? null : { kind, href, name: href.split("/").pop(), bytes, size: sizeIn(bytes, lang), ...(label ? { label } : {}) };
 };
 const pdfOf = (slug, lang) => `/media/magazine/${slug}/${slug}-${lang}.pdf`;
 const issueFiles = (slug, lang) => [file("PDF", pdfOf(slug, lang), lang), audio[slug]?.[lang] ? file("MP3", audio[slug][lang].src, lang) : null].filter(Boolean);
@@ -40,6 +40,7 @@ const labels = {
     bookMeta: "A book · translated from the Albanian", original: "the Albanian original", guideMeta: `Edition ${toolsGuide.edition} · ${toolsGuide.editions[0].date.en}`, earlier: "Edition {n}",
     special: "Special edition", no: "No.", volume: "Volume", issue: "Issue", open: "Open", more: "All {n} issues",
     files: "{n} files", note: "The PDFs are the printed pages; the MP3s are AI conversations about an issue, the issue is the reference.",
+    all: "Download all", allTitle: "Everything at once", allLede: "Every file of this page and all the writing (essays, reflections, field notes) in one ZIP, put together in your browser from the files of the site. Nothing is sent.", allSection: "Download all {n}", allWriting: "All the writing", allBusy: "Downloading {a} of {b}…", allDone: "Ready: {name}", allFailed: "{n} files could not be fetched and are not in the archive.", allError: "The archive could not be made here. Download the files one by one below.",
   },
   sq: {
     eyebrow: "Gjithçka për ta mbajtur", heading: "Shkarkime",
@@ -48,6 +49,7 @@ const labels = {
     bookMeta: "Libër · në shqip", original: "origjinali shqip", guideMeta: `Botimi ${toolsGuide.edition} · ${toolsGuide.editions[0].date.sq}`, earlier: "Botimi {n}",
     special: "Botim i veçantë", no: "Nr.", volume: "Vëllimi", issue: "Numri", open: "Hape", more: "Të gjithë {n} numrat",
     files: "{n} skedarë", note: "PDF-të janë faqet e printuara; MP3-të janë biseda me AI për një numër, referenca mbetet numri.",
+    all: "Shkarko të gjitha", allTitle: "Gjithçka njëherësh", allLede: "Çdo skedar i kësaj faqeje dhe gjithë shkrimet (esetë, reflektimet, shënimet nga terreni) në një ZIP, i mbledhur në shfletuesin tënd nga skedarët e faqes. Nuk dërgohet asgjë.", allSection: "Shkarko të gjithë {n}", allWriting: "Gjithë shkrimet", allBusy: "Po shkarkohet {a} nga {b}…", allDone: "Gati: {name}", allFailed: "{n} skedarë nuk u morën dhe nuk janë në arkiv.", allError: "Arkivi nuk u krijua dot këtu. Shkarko skedarët një nga një më poshtë.",
   },
   de: {
     eyebrow: "Alles zum Behalten", heading: "Downloads",
@@ -56,6 +58,7 @@ const labels = {
     bookMeta: "Ein Buch · aus dem Albanischen", original: "das albanische Original", guideMeta: `Ausgabe ${toolsGuide.edition} · ${toolsGuide.editions[0].date.de}`, earlier: "Ausgabe {n}",
     special: "Sonderausgabe", no: "Nr.", volume: "Band", issue: "Ausgabe", open: "Öffnen", more: "Alle {n} Ausgaben",
     files: "{n} Dateien", note: "Die PDFs sind die gedruckten Seiten; die MP3s sind KI-Gespräche über eine Ausgabe, maßgeblich ist die Ausgabe.",
+    all: "Alles herunterladen", allTitle: "Alles auf einmal", allLede: "Jede Datei dieser Seite und alle Texte (Essays, Reflexionen, Field Notes) in einem ZIP, in deinem Browser aus den Dateien der Seite zusammengestellt. Es wird nichts gesendet.", allSection: "Alle {n} herunterladen", allWriting: "Alle Texte", allBusy: "Wird heruntergeladen: {a} von {b} …", allDone: "Fertig: {name}", allFailed: "{n} Dateien konnten nicht geladen werden und fehlen im Archiv.", allError: "Das Archiv konnte hier nicht erstellt werden. Lade die Dateien unten einzeln herunter.",
   },
 };
 
@@ -93,7 +96,18 @@ const sectionsFor = (lang) => {
   ]
     .map((section) => ({ ...section, items: section.items.filter((item) => item.files.length) }))
     .filter((section) => section.items.length)
-    .map((section) => ({ ...section, count: section.items.reduce((n, item) => n + item.files.length, 0) }));
+    .map((section) => ({
+      ...section,
+      count: section.items.reduce((n, item) => n + item.files.length, 0),
+      // For "Download all" (js/download-all.js): the bytes of the section and its size as the page writes sizes.
+      bytes: section.items.reduce((n, item) => n + item.files.reduce((m, f) => m + f.bytes, 0), 0),
+    }))
+    .map((section) => ({ ...section, size: sizeIn(section.bytes, lang) }));
 };
 
-export default Object.fromEntries(langs.map((lang) => [lang, { ...labels[lang], sections: sectionsFor(lang) }]));
+export default Object.fromEntries(langs.map((lang) => {
+  const sections = sectionsFor(lang);
+  // Everything at once ("Download all"): every file of the page, and its size as the page writes sizes.
+  const bytes = sections.reduce((n, section) => n + section.bytes, 0);
+  return [lang, { ...labels[lang], sections, allCount: sections.reduce((n, section) => n + section.count, 0) + 1, allSize: sizeIn(bytes, lang) }];
+}));

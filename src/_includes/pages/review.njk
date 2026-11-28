@@ -24,6 +24,13 @@
   of: "of {total}" | t(lang),
   resume: "Continue from page {n}" | t(lang)
 } -%}
+{#- Above the title, the next publication and the list of all of them, in one slim line (partials/top-pager.njk). #}
+{%- set pager = {
+  prev: null,
+  next: { url: nextPub.url, label: "Next publication" | t(lang), title: nextPub.title } if nextPub else null,
+  all: { url: "/publications.html" | local(lang), label: "All publications" | t(lang) }
+} %}
+{%- include "partials/top-pager.njk" %}
   <section class="shell book-hero">
     <div class="book-hero-copy">
       <p class="eyebrow">{{ R.name }} · {{ R.date }}</p>
@@ -43,6 +50,9 @@
         <a class="button-primary" href="#reader" data-book-open>{{ L.open_edition }}</a>
         <a class="button-secondary" href="#text" data-book-text>{{ "Read it as text" | t(lang) }}</a>
         <a class="button-secondary" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
+        {#- Every publication and all the writing at once (partials/download-all.njk). #}
+        {%- set daSection = null %}{% set daLabel = null %}{% set daClass = "button-secondary" %}{% set daSize = null %}
+        {% include "partials/download-all.njk" %}
       </div>
     </div>
     <a class="book-object" href="#reader" data-book-open aria-label="{{ L.open_edition }}">

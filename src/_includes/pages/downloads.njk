@@ -25,12 +25,23 @@
     <a href="#{{ s.id }}">{{ s.name }}<span>{{ s.count }}</span></a>
     {%- endfor %}
   </nav>
+  {#- Everything at once: one ZIP with every file below and all the writing (partials/download-all.njk). #}
+  <div class="download-all-box">
+    <p class="kicker">{{ D.allTitle }}</p>
+    <p>{{ D.allLede }}</p>
+    {%- set daSection = null %}{% set daLabel = null %}{% set daClass = "button-primary" %}{% set daSize = D.allSize %}
+    {% include "partials/download-all.njk" %}
+  </div>
 </section>
 {%- for s in D.sections %}
 <section class="shell downloads-section" id="{{ s.id }}" aria-labelledby="{{ s.id }}-title">
   <header class="downloads-head">
     <h2 id="{{ s.id }}-title">{{ s.name }}</h2>
     <span>{{ D.files | replace("{n}", s.count) }}</span>
+    {%- if s.count > 1 %}
+    {%- set daSection = s.id %}{% set daLabel = D.allSection | replace("{n}", s.count) %}{% set daClass = "button-secondary" %}{% set daSize = s.size %}
+    {% include "partials/download-all.njk" %}
+    {%- endif %}
   </header>
   <ol class="downloads-list">
     {%- for item in s.items %}{% if loop.index <= 8 %}

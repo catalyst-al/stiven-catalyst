@@ -31,6 +31,9 @@
         <a class="button-primary" href="#reader" data-book-open>{{ "Open the guide" | t(lang) }}</a>
         <a class="button-secondary" href="#text" data-book-text>{{ "Read it as text" | t(lang) }}</a>
         <a class="button-secondary" href="{{ pdf }}" download>{{ "Download PDF" | t(lang) }}</a>
+        {#- Every publication and all the writing at once (partials/download-all.njk). #}
+        {%- set daSection = null %}{% set daLabel = null %}{% set daClass = "button-secondary" %}{% set daSize = null %}
+        {% include "partials/download-all.njk" %}
       </div>
     </div>
     <a class="book-object" href="#reader" data-book-open aria-label="{{ 'Open the guide' | t(lang) }}">

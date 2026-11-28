@@ -1,0 +1,72 @@
+---
+pagination:
+  data: writingLangs
+  size: 1
+  alias: writingLang
+writingLangs: ["en", "de", "sq"]
+permalink: "/downloads/stiven-catalyst-writing-{{ writingLang }}.html"
+eleventyExcludeFromCollections: true
+---
+{#- All the writing of one language in one file to keep, for "Download all" (js/download-all.js, the archive of
+    /downloads/all-<lang>.json): the essays series by series, the reflections and the field notes, newest first,
+    each with its date and its address on the site. A plain page that reads offline: no scripts, no fonts, no
+    pictures, its few styles inline. Not in the sitemap, and not for search engines. -#}
+{%- set lang = writingLang if writingLang != "en" else "" -%}
+{%- set suffix = "" if writingLang == "en" else ("_" + writingLang) -%}
+{%- set essays = collections["insights" + (lang | langSuffix)] | readingOrder(essaySeries, []) -%}
+{%- set reflections = collections["reflections" + (lang | langSuffix)] | published -%}
+{%- set notes = collections["notes" + (lang | langSuffix)] -%}
+<!doctype html>
+<html lang="{{ writingLang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Stiven Catalyst · {{ "Essays" | t(lang) }} · {{ "Reflections" | t(lang) }} · {{ "Field Notes" | t(lang) }}</title>
+<style>
+  body { max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; font: 18px/1.65 Georgia, "Times New Roman", serif; color: #1b1f24; background: #fff; }
+  h1, h2, h3, h4, nav, .meta, .kicker { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  h1 { font-size: 34px; line-height: 1.15; } h2.part { margin-top: 64px; padding-top: 24px; border-top: 3px solid #1b1f24; font-size: 26px; }
+  article { margin-top: 48px; padding-top: 24px; border-top: 1px solid #d5d9de; page-break-before: always; }
+  article > h3 { margin: 4px 0 8px; font-size: 26px; line-height: 1.2; }
+  .meta, .kicker { color: #5b6470; font-size: 13px; } .kicker { text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+  nav ol { padding-left: 22px; font-size: 15px; } a { color: #1557a0; } img, svg, figure { display: none; }
+  blockquote { margin: 0 0 12px; padding-left: 14px; border-left: 3px solid #d5d9de; font-style: italic; }
+  @media (prefers-color-scheme: dark) { body { color: #e6e9ed; background: #0b0e12; } .meta, .kicker { color: #9aa4b0; } a { color: #7db6ff; } article, h2.part { border-color: #2b313a; } }
+</style>
+</head>
+<body>
+<p class="kicker">Stiven Catalyst · {{ site.url | replace("https://", "") | replace("/", "") }}</p>
+<h1>{{ "Essays" | t(lang) }}, {{ "Reflections" | t(lang) | lc(writingLang) }} {{ "and" | t(lang) }} {{ "Field Notes" | t(lang) | lc(writingLang) }}</h1>
+<p class="meta">{{ essays.length }} · {{ reflections.length }} · {{ notes.length }}</p>
+<nav>
+  <ol>
+    <li><a href="#essays">{{ "Essays" | t(lang) }}</a> ({{ essays.length }})</li>
+    <li><a href="#reflections">{{ "Reflections" | t(lang) }}</a> ({{ reflections.length }})</li>
+    <li><a href="#notes">{{ "Field Notes" | t(lang) }}</a> ({{ notes.length }})</li>
+  </ol>
+</nav>
+<h2 class="part" id="essays">{{ "Essays" | t(lang) }}</h2>
+{%- for item in essays %}
+<article id="essay-{{ item.fileSlug }}">
+  <p class="kicker">{{ (essaySeries | seriesById(item.data.series)).name[writingLang] }}{% if item.data.category %} · {{ item.data.category }}{% endif %}</p>
+  <h3>{{ item.data.title }}</h3>
+  <p class="meta">{{ item.date | readableDate(lang) }} · <a href="{{ item.url | absoluteUrl }}">{{ item.url | absoluteUrl }}</a></p>
+  {{ item.content | safe }}
+</article>
+{%- endfor %}
+<h2 class="part" id="reflections">{{ "Reflections" | t(lang) }}</h2>
+{%- for item in reflections %}
+<article id="reflection-{{ item.fileSlug }}">
+  <h3>{{ item.data.title }}</h3>
+  <p class="meta">{{ item.date | readableDate(lang) }} · <a href="{{ item.url | absoluteUrl }}">{{ item.url | absoluteUrl }}</a></p>
+  {{ item.content | safe }}
+</article>
+{%- endfor %}
+<h2 class="part" id="notes">{{ "Field Notes" | t(lang) }}</h2>
+{%- for note in notes %}
+<blockquote>{{ note.data.quote | quoted(lang) }}</blockquote>
+<p class="meta">{{ note.date | readableDate(lang) }}{% if note.data.topic %} · {{ note.data.topic }}{% endif %}</p>
+{%- endfor %}
+</body>
+</html>

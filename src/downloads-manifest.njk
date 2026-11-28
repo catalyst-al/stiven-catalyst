@@ -1,0 +1,21 @@
+---
+pagination:
+  data: manifestLangs
+  size: 1
+  alias: manifestLang
+manifestLangs: ["en", "de", "sq"]
+permalink: "/downloads/all-{{ manifestLang }}.json"
+eleventyExcludeFromCollections: true
+---
+{#- What "Download all" puts in the archive for one language (js/download-all.js): every file of the Downloads page
+    (src/_data/downloads.js), section by section, each in a folder named after its section, and the file with all
+    the writing (src/downloads-writing.njk). A list only: the browser fetches the files and makes the ZIP. -#}
+{%- set D = downloads[manifestLang] -%}
+{%- set sections = [] -%}
+{%- for s in D.sections -%}
+{%- set files = [] -%}
+{%- for item in s.items %}{% for f in item.files %}{% set files = (files.push({ href: f.href, name: s.name + "/" + f.name, bytes: f.bytes }), files) %}{% endfor %}{% endfor -%}
+{%- set sections = (sections.push({ id: s.id, name: s.name, bytes: s.bytes, files: files }), sections) -%}
+{%- endfor -%}
+{%- set writing = { href: "/downloads/stiven-catalyst-writing-" + manifestLang + ".html", name: D.allWriting + ".html" } -%}
+{{ { lang: manifestLang, archive: "stiven-catalyst-" + manifestLang, sections: sections, writing: writing } | dump | safe }}

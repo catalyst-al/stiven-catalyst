@@ -151,6 +151,8 @@ test('the built site: no SEO errors, and only the pages excluded on purpose are 
   const excluded = report.intentional.map((i) => i.url).sort();
   assert.deepEqual(excluded, [
     '/404.html', '/datenschutz.html', '/de/datenschutz.html', '/de/impressum.html', '/de/search.html', '/de/shelf.html',
+    // All the writing in one file for "Download all" (src/downloads-writing.njk): a copy, the pages are the originals.
+    '/downloads/stiven-catalyst-writing-de.html', '/downloads/stiven-catalyst-writing-en.html', '/downloads/stiven-catalyst-writing-sq.html',
     '/impressum.html', '/offline.html', '/search.html', '/shelf.html', '/sq/datenschutz.html', '/sq/impressum.html',
     '/sq/search.html', '/sq/shelf.html',
   ]);
